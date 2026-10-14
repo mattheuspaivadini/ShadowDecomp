@@ -1,0 +1,61 @@
+# ============================================================================
+# Copyrighted game material — NEVER commit (see AGENTS.md, hard rule 2)
+# ============================================================================
+*.iso
+*.ISO
+*.bin
+*.BIN
+*.cue
+*.CUE
+*.img
+SHADOWDECOMP/
+
+# Extracted game data (from the ISO) and generated build outputs
+extracted/
+build/
+
+# Original binaries and game modules (copyrighted)
+*.elf
+*.ELF
+*.irx
+*.IRX
+*.pss
+*.CNF
+*.sdb
+*.bin.gd
+*.pak
+*.dat
+
+# ============================================================================
+# Toolchains / large tools (installed locally, not part of the repo)
+# ============================================================================
+tools/ghidra/
+tools/binutils/
+.tools/
+
+# ============================================================================
+# Analysis artifacts (large, regenerable)
+# ============================================================================
+*.gpr
+*.rep/
+*.prp
+*.lock
+*.lock~
+ghidra_project/
+
+# ============================================================================
+# Python
+# ============================================================================
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# ============================================================================
+# OS / editor
+# ============================================================================
+Thumbs.db
+Desktop.ini
+.DS_Store
+*.swp
+*~
