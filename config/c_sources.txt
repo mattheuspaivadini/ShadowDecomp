@@ -289,3 +289,12 @@
 023180 = src/cod/023180.c        # func_00107010(a0); sync; ei
 021058 = src/cod/021058.c        # func_00107010(D_00163CC0[0]); sync; ei
 007C48 = src/cod/007C48.c        # func_00107010(a3); sync; ei; return 0
+
+# --- Session 6, step 3: func_0010FB20-gated wrapper family (cc=29) -----------
+010EA0 = src/cod/010EA0.c cc=29   # a=guard(); b=target(a0); if(a) guard2(); return b
+011050 = src/cod/011050.c cc=29   # same family (func_00110FA0)
+011168 = src/cod/011168.c cc=29   # same family (func_001110A0)
+0112D0 = src/cod/0112D0.c cc=29   # same family (func_00111288)
+011390 = src/cod/011390.c cc=29   # same family (func_00111320)
+010DB8 = src/cod/010DB8.c cc=29   # same family, second call takes no argument
+00F118 = src/cod/00F118.c cc=29   # func_001073F0(4) & 0x40000 gate + two calls
