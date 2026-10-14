@@ -309,3 +309,8 @@
 002FE8 = src/cod/002FE8.c        # printf("%s", a0) through the .sdata format
 0199A0 = src/cod/0199A0.c cc=29   # once-only guard + bare tail j (2.9)
 026298 = src/cod/026298.c        # node lookup by key, then framed tail call
+
+# --- Session 7, wave 1d (subagent drafts, verified here) ---------------------
+00FDD8 = src/cod/00FDD8.c        # timer start-up: 8 calls + framed tail call
+022E18 = src/cod/022E18.c cc=29   # D_00167F00 transfer (022D68/022DA0 family)
+025768 = src/cod/025768.c        # double compare: two part-block decompositions
