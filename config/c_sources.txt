@@ -416,3 +416,6 @@
 00E138 = src/cod/00E138.c cc=29               # cmd 8; clone of 00DE60 + unsigned-return fix; R1
 00E1B8 = src/cod/00E1B8.c cc=29               # cmd 9; clone of 00E138 + unsigned-return fix; R1
 00DDE0 = src/cod/00DDE0.c cc=29               # cmd 4 of the func_00109980 command family; template clone; R1
+00AB90 = src/cod/00AB90.c cc=29               # 3-way validation, err/ok block layout; w45a_2 (R2)
+00ACD0 = src/cod/00ACD0.c cc=29               # 3-way validation, inverted last test; w45a_2 (R2)
+00FCC8 = src/cod/00FCC8.c cc=29               # two-list walk + sltu sentinel store; w45a_3 (R2)
