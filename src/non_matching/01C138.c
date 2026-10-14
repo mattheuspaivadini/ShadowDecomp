@@ -1,3 +1,6 @@
+/* STATUS (Session 4, 2026-10-14): NON_MATCHING. record init; the original's several uncoalesced base-pointer copies are not reproduced.
+ * The original .s stays in the build (asm/cod/01C138.s); this C
+ * attempt is kept for the record. */
 /* asm/cod/01C138.s -> func_0011C138 @ 0x0011C138 (0x60 bytes)
  *   lui   $v0, %hi(D_0015DF48)
  *   addiu $a0, $zero, -0x1

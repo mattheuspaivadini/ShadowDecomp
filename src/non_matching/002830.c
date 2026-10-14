@@ -1,3 +1,6 @@
+/* STATUS (Session 4, 2026-10-14): NON_MATCHING. same pipelined table-scan family (first zero entry).
+ * The original .s stays in the build (asm/cod/002830.s); this C
+ * attempt is kept for the record. */
 /* asm/cod/002830.s -> func_00102830 @ 0x00102830 (0x70 bytes)
  *   beqz  $a0, .L00102898             ; value == 0 -> return -1
  *    lui  $a2, %hi(D_0013C790)

@@ -1,3 +1,6 @@
+/* STATUS (Session 4, 2026-10-14): NON_MATCHING. ee-gcc software-pipelines the 256-entry table scan (the value is loaded one iteration ahead and the index is saved before the increment). Plain for/while/do-while + break yields a bounds-first loop; both revisions and -g0 tried.
+ * The original .s stays in the build (asm/cod/002790.s); this C
+ * attempt is kept for the record. */
 /* asm/cod/002790.s -> func_00102790 @ 0x00102790 (0x4C bytes)
  *   lui   $v1, %hi(D_0013B790)
  *   daddu $a2, $zero, $zero

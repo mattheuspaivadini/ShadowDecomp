@@ -101,3 +101,38 @@
 02D7F0 = src/cod/02D7F0.c         # handler-struct init (4 function pointers)
 014020 = src/cod/014020.c         # 64-bit transfer list + sync
 006B58 = src/cod/006B58.c         # 60-column table record store
+
+# --- Session 4, step 2: call wrappers ----------------------------------------
+# These translation units were compiled with sibling-call optimisation disabled:
+# the original emits `jal` + a real epilogue where ee-gcc would otherwise turn
+# `call; return` into a `j` tail call (evidence: -fno-optimize-sibling-calls
+# reproduces the bytes; without it the object is 8-20 bytes shorter). The rest of
+# the image does use tail calls (107 `j func_*`), so this is a per-TU flag, like
+# the per-TU `-g` level.
+
+00DED8 = src/cod/00DED8.c -fno-optimize-sibling-calls   # call func_0010DE60
+020470 = src/cod/020470.c -fno-optimize-sibling-calls   # call func_001211F8
+020490 = src/cod/020490.c -fno-optimize-sibling-calls   # call func_001213D0
+0204B0 = src/cod/0204B0.c -fno-optimize-sibling-calls   # call func_001215A8
+020CD0 = src/cod/020CD0.c -fno-optimize-sibling-calls   # call func_00120B90
+020CF0 = src/cod/020CF0.c -fno-optimize-sibling-calls   # call func_001207F8
+022338 = src/cod/022338.c -fno-optimize-sibling-calls   # call func_001232F0
+022358 = src/cod/022358.c -fno-optimize-sibling-calls   # call func_001232F0(1)
+00E9F0 = src/cod/00E9F0.c -fno-optimize-sibling-calls   # forward a0-a3
+00C058 = src/cod/00C058.c -fno-optimize-sibling-calls   # func_0010BEA8(a0, 6)
+00C230 = src/cod/00C230.c -fno-optimize-sibling-calls   # func_0010BEA8(a0, 8)
+00C600 = src/cod/00C600.c -fno-optimize-sibling-calls   # func_0010BEA8(a0, 0x10)
+00CFB8 = src/cod/00CFB8.c -fno-optimize-sibling-calls   # func_0010BEA8(a0, 0x12)
+00D408 = src/cod/00D408.c -fno-optimize-sibling-calls   # func_0010BEA8(a0, 0x15)
+017588 = src/cod/017588.c -fno-optimize-sibling-calls   # func_00117288(a0,a1,0)
+019528 = src/cod/019528.c -fno-optimize-sibling-calls   # func_00119498(...,0x21)
+019548 = src/cod/019548.c -fno-optimize-sibling-calls   # func_00119498(...,0x22)
+00EC58 = src/cod/00EC58.c -fno-optimize-sibling-calls   # func_0010EA10(...,0)
+00ED80 = src/cod/00ED80.c -fno-optimize-sibling-calls   # func_0010EC78(...,1)
+007610 = src/cod/007610.c -fno-optimize-sibling-calls   # call + sync
+007630 = src/cod/007630.c -fno-optimize-sibling-calls   # call + sync
+007650 = src/cod/007650.c -fno-optimize-sibling-calls   # call + sync
+007670 = src/cod/007670.c -fno-optimize-sibling-calls   # call + sync
+00E9D0 = src/cod/00E9D0.c -fno-optimize-sibling-calls   # call with stack buffer
+00EC38 = src/cod/00EC38.c -fno-optimize-sibling-calls   # call with stack buffer
+0120A8 = src/cod/0120A8.c -fno-optimize-sibling-calls   # guarded call

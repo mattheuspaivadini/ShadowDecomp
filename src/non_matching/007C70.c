@@ -1,3 +1,6 @@
+/* STATUS (Session 4, 2026-10-14): NON_MATCHING. only the final store placement differs: the original puts `sb` in the `jr ra` delay slot; ours emits `sb` before `jr ra`. Tested -g0/-g2 and both revisions.
+ * The original .s stays in the build (asm/cod/007C70.s); this C
+ * attempt is kept for the record. */
 /* asm/cod/007C70.s -> func_00107C70 @ 0x00107C70 (0x38 bytes)
  *   lui   $v1, 0x1000F130
  *   ori   $v1, $v1, 0xF130

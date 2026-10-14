@@ -1,3 +1,6 @@
+/* STATUS (Session 4, 2026-10-14): NON_MATCHING. loop peel + branch-likely (beql/bnel) + movz exit; GCC does not rotate/peel our loop the same way.
+ * The original .s stays in the build (asm/cod/00FC40.s); this C
+ * attempt is kept for the record. */
 /* asm/cod/00FC40.s -> func_0010FC40 @ 0x0010FC40 (0x40 bytes)
  *   lw    $v0, 0x0($a0)
  *   beq   $v0, $a2, .L0010FC74

@@ -1,3 +1,6 @@
+/* STATUS (Session 4, 2026-10-14): NON_MATCHING. strchr-with-offset; load order and register roles differ.
+ * The original .s stays in the build (asm/cod/01BAE8.s); this C
+ * attempt is kept for the record. */
 /* asm/cod/01BAE8.s -> func_0011BAE8 @ 0x0011BAE8 (0x5C bytes)
  *   sll   $a1, $a1, 24
  *   lb    $v1, 0x0($a0)

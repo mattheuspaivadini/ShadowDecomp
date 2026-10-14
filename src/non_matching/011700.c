@@ -1,3 +1,6 @@
+/* STATUS (Session 4, 2026-10-14): NON_MATCHING. loop rotation / nop padding of the free-list init differs.
+ * The original .s stays in the build (asm/cod/011700.s); this C
+ * attempt is kept for the record. */
 /* asm/cod/011700.s -> func_00111700 @ 0x00111700 (0x4C bytes)
  *   lui   $a1, %hi(D_0014A880)
  *   lui   $v1, %hi(D_0014AC80)

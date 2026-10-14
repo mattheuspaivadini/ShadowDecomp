@@ -1,3 +1,6 @@
+/* STATUS (Session 4, 2026-10-14): NON_MATCHING. 64-bit split store; register allocation differs.
+ * The original .s stays in the build (asm/cod/013368.s); this C
+ * attempt is kept for the record. */
 /* asm/cod/013368.s -> func_00113368 @ 0x00113368 (0x28 bytes)
  *   lw    $v0, 0x0($a0)          ; p = *pp
  *   dsll32 $v1, $a1, 0

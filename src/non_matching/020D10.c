@@ -1,3 +1,6 @@
+/* STATUS (Session 4, 2026-10-14): NON_MATCHING. record key search; only the order of `+0xD0` vs the base add differs (3 instructions).
+ * The original .s stays in the build (asm/cod/020D10.s); this C
+ * attempt is kept for the record. */
 /* asm/cod/020D10.s -> func_00120D10 @ 0x00120D10 (0x48 bytes)
  *   addiu $v1, $zero, 0x184
  *   lui   $v0, %hi(D_00135638)

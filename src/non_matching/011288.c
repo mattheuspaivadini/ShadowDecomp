@@ -1,3 +1,6 @@
+/* STATUS (Session 4, 2026-10-14): NON_MATCHING. 64-bit guarded record access; register allocation and `ld` scheduling differ.
+ * The original .s stays in the build (asm/cod/011288.s); this C
+ * attempt is kept for the record. */
 /* asm/cod/011288.s -> func_00111288 @ 0x00111288 (0x48 bytes)
  *   srl   $v0, $a0, 10
  *   bltz  $a0, .L001112A4

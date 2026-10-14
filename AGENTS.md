@@ -58,6 +58,7 @@ Fill in the table during DISCOVERY and keep it current.
 | Phase-3 flag pinning | Pin compiler flags | **`tools/phase3_pin.py`** + `tools/matchcheck.py` — `docs/compiler.md` |
 | Small-data audit | gp-relative vs absolute | **`tools/scan_sdata_access.py`** — `docs/compiler.md` §3 |
 | Phase-6 loop | Per-function compile/diff | **`tools/eegcc.py`** (shared staging/flags, `cflags_for`: per-TU `-g` override), `tools/verify_c.py` (`--flags=` to try a per-TU level before listing), `tools/diff_func.py`, `tools/report.py`, `tools/gen_objdiff.py`, `tools/cc/show_compiled.sh` — `docs/progress.md` |
+| Candidate ranking | Pick the next tier | **`tools/find_candidates.py`**, `tools/dump_candidates.py`, `tools/list_unmatched.py` (leaf pool), `tools/list_callers.py` (1–2-call wrappers), `tools/archive_extra_c.py` (move a failed attempt to `src/non_matching/` with a `STATUS:` note) — `docs/progress.md` |
 | Split-build internals | Constant multiply / padding | **`tools/cc/probe_mult.sh`** (R5900 `mult` vs shift/add, `docs/compiler.md` §4.2); `tools/build.py` pads a C object to its exact original span (`. = . + (span - size)`) — `docs/rebuild.md` |
 | Phase-5 naming | Strings -> functions | **`tools/find_string_refs.py`** — `docs/naming-candidates.md` |
 | IOP inventory | IRX modules (R3000) | **`tools/iop_inventory.py`** → `manifest/iop_modules.txt` |
@@ -148,21 +149,52 @@ Tips: use a function's constants, string references, and call patterns to infer 
 
 | Metric | Value |
 |--------|-------|
-| Current phase | Phases 1–4 done; **Phase 3 revision question resolved**; Phase 5 in progress; **Phase 6 started: 47 functions matched** |
-| ELF rebuild hash match | **YES — 237,952 bytes, SHA-1 `6f853f64…` (flat load image), still green with 47 functions from C** |
+| Current phase | Phases 1–4 done; **Phase 3 revision question resolved**; Phase 5 in progress; **Phase 6: 92 functions matched** |
+| ELF rebuild hash match | **YES — 237,952 bytes, SHA-1 `6f853f64…` (flat load image), still green with 92 functions from C** |
 | Functions named | 3 (`entry`, `LoaderSysDumpIopModuleIdentifiers`, `OutputLinkerScriptFile`) + 66 string-reference candidates |
-| Functions matched (C) | **47 / 1037** (38 with `ee-gcc2.96`, 9 with `ee-gcc2.9-991111-01`) |
-| Matched bytes | 1148 / 203,692 `.text` bytes = **0.564 %** (verified) |
-| Compiler flags | `-O2 -g2 -G8` (per-TU `-g0` override) |
+| Functions matched (C) | **92 / 1037** (68 with `ee-gcc2.96`, 24 with `ee-gcc2.9-991111-01`; 26 wrappers use a per-TU `-fno-optimize-sibling-calls`) |
+| Matched bytes | 3308 / 203,692 `.text` bytes = **1.624 %** (verified) |
+| Compiler flags | `-O2 -g2 -G8` (per-TU `-g0` and `-fno-optimize-sibling-calls` overrides) |
 | Compilers | `ee-gcc2.96` (default) + `ee-gcc2.9-991111-01` (`cc=29`); matrix in `docs/compiler.md` §4.3 |
 | `.text` disassembly (splat R5900) | accurate; **1037 per-function `.s`** |
 | Ghidra EE-extension decode | **100 %** of `.text` (50,923/50,923) |
 | splat split coverage | 203 KB / 85.6 % of ROM |
 | Functions detected | 1037 (spimdisasm) |
-| Non-matching attempts tracked | 12 (`src/non_matching/`, none explained by any EE-GCC revision) |
+| Non-matching attempts tracked | 34 (`src/non_matching/`, none explained by any EE-GCC revision) |
 | IOP modules inventoried | 11 IRX (ELF32 MIPS-I, R3000A) |
 
 ### Session log
+
+- **2026-10-14 (Session 4, step 2)** — Phase 6 batch: 47 → **92 functions**
+  (1148 → 3308 bytes, 0.564 % → 1.624 %), image SHA-1 unchanged.
+  - **New tooling.** `tools/list_unmatched.py` (un-matched leaf pool),
+    `tools/list_callers.py` (small functions with 1–2 calls — the wrapper tier),
+    `tools/archive_extra_c.py` (moves a failed `src/cod` attempt into
+    `src/non_matching/` with a `STATUS:` header), `tools/gen_progress_table.py`.
+  - **Leaf tier (19).** Word-copy family (`_0010F370`, `_0010FC08`,
+    `_0010FE50`, `_00110270`, all `cc=29`); list/table code (`_00110998`
+    unlink, `_001028A0` pair search, `_00109640` nested list search,
+    `_00106B58` 60-column record store); strings (`_0011BF68`, `_00129578`);
+    byte/LEB128 (`_001148E0`, `_00125998`, `_001259E0`); struct stores
+    (`_00119AA0`, `_001220B0`, `_00121EC0`, `_00120438`, `_0012D7F0`,
+    `_00114020` with an inline `sync`).
+  - **Call wrappers (26).** `tools/list_callers.py` found ~100 small callers.
+    26 of them matched once the per-TU `-fno-optimize-sibling-calls` flag was
+    added: ee-gcc folds `call; return` into a `j` tail call, but the original
+    emits `jal` + epilogue. The image itself contains 107 `j func_*` tail calls,
+    so sibling-call optimisation is a per-TU flag (like the per-TU `-g`).
+  - **Archived attempts (22).** `src/non_matching/` grew to 34. The dominant
+    new family is the **pipelined 256-entry table scan**
+    (`_00102790`/`_001027E0`/`_00102830`/`_00102970`): ee-gcc loads the value
+    one iteration ahead and saves the index before the increment; no plain
+    `for`/`while`/`do-while` reproduces it under either revision. Other
+    families: loop peel + branch-likely (`_0010FC40`), delay-slot placement
+    (`_00107C70`, `_00111F90`, `_001120D0`), block layout (`_00110EF0`),
+    register allocation (`_0011288`, `_0013368`, `_0012C78`, `_0011BAE8`,
+    `_0011BBB8`, `_0011C50`, `_0013098`, `_0011C138`, `_0011C198`,
+    `_0027048`, `_0020D10`), if-chain lowering (`_00117A00`).
+  - **Evidence.** `tools/verify_c.py` is 92/92 byte-exact; `tools/build.py` →
+    HASH MATCH (237,952 B, `6f853f64…`).
 
 - **2026-10-14 (Session 4, revision resolution)** — the compiler-revision
   question, end to end.

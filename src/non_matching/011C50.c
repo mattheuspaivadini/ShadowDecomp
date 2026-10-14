@@ -1,3 +1,6 @@
+/* STATUS (Session 4, 2026-10-14): NON_MATCHING. table lookup; the `bgezl` layout and register roles differ.
+ * The original .s stays in the build (asm/cod/011C50.s); this C
+ * attempt is kept for the record. */
 /* asm/cod/011C50.s -> func_00111C50 @ 0x00111C50 (0x54 bytes)
  *   bgezl $a0, .L00111C74
  *    lui  $v0, %hi(D_00133938)

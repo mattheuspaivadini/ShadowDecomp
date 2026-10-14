@@ -1,3 +1,6 @@
+/* STATUS (Session 4, 2026-10-14): NON_MATCHING. string validator; the `lbu`+sign-extend spelling and delay-slot scheduling differ.
+ * The original .s stays in the build (asm/cod/01BBB8.s); this C
+ * attempt is kept for the record. */
 /* asm/cod/01BBB8.s -> func_0011BBB8 @ 0x0011BBB8 (0x54 bytes)
  *   lb    $v0, 0x0($a0)
  *   beqz  $v0, .L0011BC04

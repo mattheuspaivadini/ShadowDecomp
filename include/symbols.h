@@ -54,4 +54,9 @@ extern int  D_0013BB90[256];  /* .bss    0x0013BB90  func_00102930/_00102A00 (_0
 /* ---- hardware registers (uncached EE addresses) */
 #define HWREG(addr) (*(volatile unsigned int *)(addr))
 
+/* ---- Session 4, step 2: newly confirmed data objects --------------------- */
+/* .data doubly-linked list head used by func_00110998 (next at 0x0, prev at
+ * 0x4). Declared as an array so the access is absolute, not %gp_rel. */
+extern void *D_00133930[];
+
 #endif /* SYMBOLS_H */

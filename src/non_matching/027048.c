@@ -1,3 +1,6 @@
+/* STATUS (Session 4, 2026-10-14): NON_MATCHING. float decompose; `mant << 7` placement and register roles differ.
+ * The original .s stays in the build (asm/cod/027048.s); this C
+ * attempt is kept for the record. */
 /* asm/cod/027048.s -> func_00127048 @ 0x00127048 (0x5C bytes)
  *   lw    $v1, 0x0($a0)                ; bits = *in
  *   lui   $a0, 0x7FFFFF

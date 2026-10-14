@@ -1,3 +1,6 @@
+/* STATUS (Session 4, 2026-10-14): NON_MATCHING. same record-init family as func_0011C138.
+ * The original .s stays in the build (asm/cod/01C198.s); this C
+ * attempt is kept for the record. */
 /* asm/cod/01C198.s -> func_0011C198 @ 0x0011C198 (0x68 bytes)
  *   addiu $v0, $zero, 0x898
  *   mult  $a0, $a0, $v0                ; index * 0x898

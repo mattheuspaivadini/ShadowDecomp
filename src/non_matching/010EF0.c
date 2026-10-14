@@ -1,3 +1,6 @@
+/* STATUS (Session 4, 2026-10-14): NON_MATCHING. block layout: the original branches `bgez` to the normal path with the error return inline; ours inlines the normal path and branches to the error.
+ * The original .s stays in the build (asm/cod/010EF0.s); this C
+ * attempt is kept for the record. */
 /* asm/cod/010EF0.s -> func_00110EF0 @ 0x00110EF0 (0x50 bytes)
  *   lui   $v0, %hi(D_00133918)
  *   addiu $v1, $v0, %lo(D_00133918)   ; base
