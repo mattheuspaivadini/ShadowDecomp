@@ -70,7 +70,11 @@ standard MIPS32r2 + `SHT_MIPS_ABIFLAGS`, which the R5900/PS2 ELF lacks.
 artifact inventory + evidence bundles. Primary disassembly = splat (per-function,
 1037 files). Secondary view = Ghidra + Emotion Engine extension (100 % decode).
 Reassembly toolchain = Debian `mips-linux-gnu` binutils in WSL2 (no Sony
-`ee-as`/`ee-ld` needed). Matching C compiler (`ee-gcc2.96`) pending user approval.
+`ee-as`/`ee-ld` needed). **Build environment = WSL2 (Ubuntu 26.04)**; Windows has
+objdiff-cli 3.8.2, ninja 1.13.2, make 4.4.1. Matching C compiler
+**`ee-gcc2.96` installed** under `tools/cc/ee-gcc2.96/` (gitignored, user-approved
+download). **Phase 4 byte-exact rebuild PASSED**: flat load image 237,952 bytes,
+SHA-1 `6f853f644a4279db18c15ceb8ee1d2a8b87a7b39`.
 
 ## 5. Phases
 
