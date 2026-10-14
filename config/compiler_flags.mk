@@ -8,10 +8,20 @@
 # default on purpose (an unevidenced flag cannot be assumed).
 
 # --- C compiler ---------------------------------------------------------------
-# ee-gcc2.96 from decompme/compilers (tools/cc/, gitignored).
-# tools/cc/eegcc.sh is a thin wrapper: the driver is a 32-bit i386 binary and
-# finds cc1/as through PATH, and it cannot stat sources on /mnt/c (drvfs).
+# ee-gcc from decompme/compilers (tools/cc/, gitignored), unpacked one dir per
+# published build. tools/cc/eegcc.sh is a thin wrapper that selects the
+# distribution with $EE_GCC_DIR; the driver is a 32-bit i386 binary, finds
+# cc1/as through PATH, and cannot stat sources on /mnt/c (drvfs).
 EE_GCC      ?= tools/cc/eegcc.sh
+
+# Default distribution for translation units that do not pin their own.
+EE_C_COMPILER      := ee-gcc2.96
+# Alternate revision. Evidence (docs/compiler.md section 4.3): nine functions
+# are only reproduced by the 2.9-991111 generation (e.g. `lui/ori 0xFFFFFFFE`
+# for -2, split `lui/addiu`+`%lo` addressing, the R5900 `mult` constant stride).
+# These three assets are codegen-identical on every case tested:
+#   ee-gcc2.9-991111-01, ee-gcc2.9-991111-xz, ee-gcc2.9-991111a
+EE_C_COMPILER_29   := ee-gcc2.9-991111-01
 
 # Pin 2026-10-14, 11/11 Phase-3 cases byte-exact:
 #   -O2   optimisation level (SOTC's default; not yet discriminated from

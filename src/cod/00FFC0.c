@@ -1,4 +1,8 @@
-/* asm/cod/00FFC0.s -> func_0010FFC0 @ 0x0010FFC0 (0x30 bytes)
+/* MATCHING (Session 4, 2026-10-14): byte-exact only with the ALTERNATE EE-GCC
+ * revision `ee-gcc2.9-991111-01` (manifest token `cc=29`). Evidence:
+ * tools/cc_matrix.py, docs/compiler.md section 4.3.
+ *
+ * asm/cod/00FFC0.s -> func_0010FFC0 @ 0x0010FFC0 (0x30 bytes)
  *   beqz  $a2, .L0010FFE8
  *    daddu $a3, $zero, $zero
  * .L0010FFC8:

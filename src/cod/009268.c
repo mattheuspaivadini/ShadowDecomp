@@ -1,4 +1,9 @@
-/* Phase 3 flag-pinning case: bit clear on a field + sibling store.
+/* MATCHING (Session 4, 2026-10-14): byte-exact with the ALTERNATE EE-GCC
+ * revision `ee-gcc2.9-991111-01` (manifest token `cc=29`); ee-gcc2.96 does NOT
+ * reproduce the `lui/ori 0xFFFFFFFE` materialisation below.
+ * Evidence: tools/cc_matrix.py, docs/compiler.md section 4.3.
+ *
+ * Phase 3 flag-pinning case: bit clear on a field + sibling store.
  * asm/cod/009268.s -> func_00109268 @ 0x00109268 (0x20 bytes, last word padding)
  *   lw    $v1, 0x10($a0)
  *   lui   $v0, (0xFFFFFFFE >> 16)

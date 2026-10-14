@@ -61,3 +61,19 @@
 002A40 = src/cod/002A40.c
 # guarded get-or-store with a local fallback
 02E6D0 = src/cod/02E6D0.c
+
+# --- Session 4: functions that pin the ALTERNATE EE-GCC revision ------------
+# The original image is a mixture of the 2.9-991111 and 2.96 EE-GCC
+# generations (docs/compiler.md section 4.3). These nine are byte-exact with
+# ee-gcc2.9-991111-01 under the pinned -O2 -g2 -G8 flags and are NOT
+# reproducible with ee-gcc2.96 (and vice versa). Evidence: tools/cc_matrix.py.
+#   * `cc=29` = $(EE_C_COMPILER_29) in config/compiler_flags.mk.
+009268 = src/cod/009268.c cc=29   # -2 via lui/ori 0xFFFFFFFE (not `li -2`)
+00FFC0 = src/cod/00FFC0.c cc=29   # byte-copy loop shape
+010640 = src/cod/010640.c cc=29   # error path falls through (block layout)
+0128D0 = src/cod/0128D0.c cc=29   # split lui/addiu + %lo operand (addressing)
+0128E8 = src/cod/0128E8.c cc=29   # split lui/addiu + %lo operand (addressing)
+0148B8 = src/cod/0148B8.c cc=29   # branchy leaf, constant masks
+014918 = src/cod/014918.c cc=29   # bounds-checked table lookup
+020F18 = src/cod/020F18.c cc=29   # R5900 `mult rd,rs,rt` constant stride (0x184)
+022018 = src/cod/022018.c cc=29   # R5900 `mult rd,rs,rt` constant stride (0x24)

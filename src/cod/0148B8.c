@@ -1,4 +1,8 @@
-/* Phase 3 flag-pinning case: branchy leaf, constant folded with masks.
+/* MATCHING (Session 4, 2026-10-14): byte-exact only with the ALTERNATE EE-GCC
+ * revision `ee-gcc2.9-991111-01` (manifest token `cc=29`). Evidence:
+ * tools/cc_matrix.py, docs/compiler.md section 4.3.
+ *
+ * Phase 3 flag-pinning case: branchy leaf, constant folded with masks.
  * asm/cod/0148B8.s -> func_001148B8 @ 0x001148B8 (0x28 bytes)
  *   addiu $v1, $zero, 7
  *   srl   $v0, $a0, 28

@@ -1,4 +1,9 @@
-/* asm/cod/010640.s -> func_00110640 @ 0x00110640 (0x2C bytes)
+/* MATCHING (Session 4, 2026-10-14): byte-exact only with the ALTERNATE EE-GCC
+ * revision `ee-gcc2.9-991111-01` (manifest token `cc=29`); the original keeps
+ * the error path falling through. Evidence: tools/cc_matrix.py,
+ * docs/compiler.md section 4.3.
+ *
+ * asm/cod/010640.s -> func_00110640 @ 0x00110640 (0x2C bytes)
  *   lui   $v0, %hi(D_00133920)
  *   lw    $v1, %lo(D_00133920)($v0)
  *   bgez  $v1, .L0011065C
