@@ -202,3 +202,10 @@
 01BA68 = src/cod/01BA68.c cc=29
 01BAA8 = src/cod/01BAA8.c cc=29
 019808 = src/cod/019808.c -fno-optimize-sibling-calls   # dispatch on a5 & 2
+
+# --- Session 5, step 2: batch 5 (func_00107410 buffers) -----------------------
+0122E0 = src/cod/0122E0.c cc=29   # op -8,  one-word buffer
+012308 = src/cod/012308.c cc=29   # op -9,  one-word buffer
+012330 = src/cod/012330.c cc=29   # op 0x10, one-word buffer
+012190 = src/cod/012190.c cc=29   # op 3, (a0, (signed char)a1)
+0122B0 = src/cod/0122B0.c cc=29   # op -7, (a0, (signed char)a1)
