@@ -343,6 +343,16 @@
 022C30 = src/cod/022C30.c cc=29   # same, command 8
 022C88 = src/cod/022C88.c cc=29   # same, command 9
 
+# --- Session 7, wave 2c (subagent drafts, verified here) ---------------------
+0231A8 = src/cod/0231A8.c cc=29   # one-shot CreateSema for D_00135960
+
+# --- Session 7, wave 3a (subagent drafts, verified here) ---------------------
+006430 = src/cod/006430.c        # 40x60 8-byte-record table fill (BLKmode copy)
+00FE98 = src/cod/00FE98.c cc=29   # RMW through syscall stubs 0x4B/0x4A
+015048 = src/cod/015048.c cc=29   # 0x334-stride table init loop
+016C80 = src/cod/016C80.c cc=29   # $gp swap via inline asm + gate
+022048 = src/cod/022048.c cc=29   # delete socket for record field4, clear field0
+
 # --- Session 7, wave 2a (subagent drafts, verified here) ---------------------
 0151B8 = src/cod/0151B8.c cc=29   # sceDbcDeleteSocket guard + 0x334-stride clear
 015650 = src/cod/015650.c cc=29   # sceDbcGetDepNumber guard + 0x334-stride record
