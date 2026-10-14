@@ -20,8 +20,9 @@ Usage (from WSL):
     python3 tools/build.py --targets       # also emit objdiff target objects
     python3 tools/build.py --only 002FE0   # rebuild just that object
 
-Outputs `build/SCUS_974.72.elf` / `.bin` and compares the flat binary's SHA-1
-against the hash pinned in `config/compiler_flags.mk`.
+Outputs `build/SCUS_974.72.ld.elf` (raw, single `.cod`), `build/SCUS_974.72.elf`
+(the original container, via tools/containerize.py) and `.bin`, and compares the
+flat binary's SHA-1 against the hash pinned in `config/compiler_flags.mk`.
 """
 from __future__ import annotations
 
@@ -41,8 +42,14 @@ import eegcc  # noqa: E402
 ROOT = Path(__file__).resolve().parent.parent
 LD_SCRIPT = ROOT / "build" / "SCUS_974.72.ld"
 PATCHED_LD = ROOT / "build" / "SCUS_974.72.patched.ld"
+# `ld` writes its raw single-.cod output here; the flat-image hash is checked
+# against it and, if `extracted/SCUS_974.72` is present, it is reshaped into the
+# original container at build/SCUS_974.72.elf by tools/containerize.py.
+LD_ELF = ROOT / "build" / "SCUS_974.72.ld.elf"
 ELF = ROOT / "build" / "SCUS_974.72.elf"
 BIN = ROOT / "build" / "SCUS_974.72.bin"
+ORIG_ELF = ROOT / "extracted" / "SCUS_974.72"
+CONTAINERIZE = ROOT / "tools" / "containerize.py"
 MAP = ROOT / "build" / "SCUS_974.72.map"
 TARGET_DIR = ROOT / "build" / "target"
 C_SOURCES = ROOT / "config" / "c_sources.txt"
@@ -367,11 +374,12 @@ def build_elf() -> int:
 
     link_cmd = [
         LD, "-EL",
+        "-e", "entry",  # original e_entry = 0x00100010 (the `entry` symbol)
         "-T", "undefined_syms_auto.txt",
         "-T", "undefined_funcs_auto.txt",
         "-Map", str(MAP),
         "-T", str(PATCHED_LD),
-        "-o", str(ELF),
+        "-o", str(LD_ELF),
     ]
     r = subprocess.run(link_cmd, cwd=ROOT, capture_output=True, text=True)
     if r.returncode != 0:
@@ -380,9 +388,28 @@ def build_elf() -> int:
         return 1
     print("link: OK")
 
-    subprocess.run([OBJCOPY, str(ELF), str(BIN), "-O", "binary"], check=True)
+    subprocess.run([OBJCOPY, str(LD_ELF), str(BIN), "-O", "binary"], check=True)
     got = sha1(BIN)
     size = BIN.stat().st_size
+
+    # Step 6: reshape the outer ELF into the original container. The flat image
+    # (BIN) is intentionally produced from the raw ld output: the pinned hash is
+    # splat's "load image" convention, which excludes the PT_MIPS_REGINFO bytes
+    # (tools/make_rom.py), whereas objcopy of the container image would include
+    # them. Neither affects the check below.
+    if CONTAINERIZE.exists():
+        if ORIG_ELF.exists():
+            c = subprocess.run(
+                [sys.executable, str(CONTAINERIZE), "--ld", str(LD_ELF),
+                 "--out", str(ELF)], cwd=ROOT, capture_output=True, text=True)
+            print((c.stdout or c.stderr).strip())
+            if c.returncode:
+                print(f"containerize: exited {c.returncode} "
+                      f"(flat-image gate unaffected)")
+        else:
+            print(f"containerize: skipped ({ORIG_ELF} not present); "
+                  f"build/SCUS_974.72.elf stays the raw ld output")
+
     print(f"bin: {size} bytes  sha1 {got}")
     print(f"expected      {EXPECTED_SIZE} bytes  sha1 {EXPECTED_SHA1}")
     ok = got == EXPECTED_SHA1 and size == EXPECTED_SIZE

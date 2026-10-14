@@ -58,12 +58,16 @@ def read_elf(path: Path) -> dict:
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--json", type=Path)
+    ap.add_argument("--ours", type=Path, default=OURS,
+                    help="ELF to compare against the original "
+                         "(default: build/SCUS_974.72.elf)")
     args = ap.parse_args()
-    if not ORIG.exists() or not OURS.exists():
-        print(f"need both {ORIG} and {OURS}")
+    ours = args.ours
+    if not ORIG.exists() or not ours.exists():
+        print(f"need both {ORIG} and {ours}")
         return 1
 
-    a, b = read_elf(ORIG), read_elf(OURS)
+    a, b = read_elf(ORIG), read_elf(ours)
     print(f"original: {a['path']}  {a['bytes']} bytes")
     print(f"ours    : {b['path']}  {b['bytes']} bytes  "
           f"({b['bytes'] - a['bytes']:+d})")
