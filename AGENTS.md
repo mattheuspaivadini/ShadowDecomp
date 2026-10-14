@@ -52,12 +52,15 @@ Fill in the table during DISCOVERY and keep it current.
 | objdiff | Compare compiled vs original | **objdiff-cli 3.8.2** in `.tools/objdiff/objdiff-cli.exe` (gitignored); project file `objdiff.json` — see `docs/progress.md` |
 | WSL2 Ubuntu 26.04 | Linux build environment | Installed (`wsl -d Ubuntu -u root`); repo at `/mnt/c/...` |
 | MIPS binutils | Assemble / link (R5900) | **`binutils-mips-linux-gnu` 2.45** in WSL: `mips-linux-gnu-as -EL -march=5900 -mabi=eabi`. Reassembly path — see `docs/toolchain.md` |
-| EE cross C compiler | Matching C builds | **`ee-gcc2.96`** `2.96-ee-001003-1` in `tools/cc/ee-gcc2.96/` (gitignored, WSL) + wrapper `tools/cc/eegcc.sh` (needs `libc6:i386` and the `/usr/local/sce/ee/gcc` symlink) — see `docs/toolchain.md` §4.1 |
+| EE cross C compiler | Matching C builds | **`ee-gcc2.96`** `2.96-ee-001003-1` in `tools/cc/ee-gcc2.96/` (gitignored, WSL) + wrapper `tools/cc/eegcc.sh` (needs `libc6:i386` and the `/usr/local/sce/ee/gcc` symlink) — see `docs/toolchain.md` §4.1. Pinned flags `-O2 -g2 -G8` in `config/compiler_flags.mk` |
 | build script | Assemble/compile/link/hash | **`tools/build.py`** (WSL2) — mixed C+asm, gated on the flat-image SHA-1; `make check` |
 | Phase-3 flag pinning | Pin compiler flags | **`tools/phase3_pin.py`** + `tools/matchcheck.py` — `docs/compiler.md` |
+| Small-data audit | gp-relative vs absolute | **`tools/scan_sdata_access.py`** — `docs/compiler.md` §3 |
+| Phase-6 loop | Per-function compile/diff | **`tools/eegcc.py`** (shared staging/flags, `cflags_for`: per-TU `-g` override), `tools/verify_c.py`, `tools/diff_func.py`, `tools/report.py`, `tools/gen_objdiff.py` — `docs/progress.md` |
 | Phase-5 naming | Strings -> functions | **`tools/find_string_refs.py`** — `docs/naming-candidates.md` |
 | IOP inventory | IRX modules (R3000) | **`tools/iop_inventory.py`** → `manifest/iop_modules.txt` |
-| 7z / isoinfo | ISO extraction | MISSING — replaced by `tools/iso9660.py` (pure Python) |
+| ELF container diff | our ELF vs original | **`tools/elf_container_diff.py`** — `docs/rebuild.md` §ELF container |
+| 7z / isoinfo | ISO extraction | not installed; replaced by `tools/iso9660.py` (pure Python) |
 | git | VCS | 2.55.0 (repo initialized) |
 | python3 | Infra/tooling | 3.12.10 (Windows) / 3.14.4 (WSL) |
 | node / npm | REA runtime | v24.21 / npm 11 |
@@ -79,13 +82,22 @@ objdiff-cli 3.8.2, ninja 1.13.2, make 4.4.1. Matching C compiler
 download). **Phase 4 byte-exact rebuild PASSED**: flat load image 237,952 bytes,
 SHA-1 `6f853f644a4279db18c15ceb8ee1d2a8b87a7b39`.
 
+**SESSION 3 (2026-10-14):** Phase 3 **done** — flags pinned to **`-O2 -g2 -G8`**
+by byte-level experiment (`tools/phase3_pin.py`, 11/11 cases), with a **per-TU
+`-g0` override** (`tools/eegcc.py:cflags_for`) because the original mixes debug
+levels and `-g` is *load-bearing* (`-g`/`-g2` suppress delay-slot filling).
+Mixed C/asm build with the flat-image hash gate; **33 functions matched from C**
+(504 / 203,692 `.text` bytes = 0.247 %); 13 NON_MATCHING attempts tracked in
+`src/non_matching/` (hypothesis: a different EE-GCC *revision*). Naming started
+(3 functions named from evidence). See `docs/archive-2026-10-14-session3.md`.
+
 ## 5. Phases
 
 Work in order. Mark each phase when done and commit.
 
 - [x] **Phase 1 — Extract.** ISO is at the **workspace root** (`Shadow of the Colossus (USA).iso`), not in `SHADOWDECOMP/`. Extracted 19 files with pure-Python ISO9660 (`tools/iso9660.py`, `tools/extract_iso.py`) → manifest in `manifest/files.txt`. Main ELF = **`SCUS_974.72`** (from `SYSTEM.CNF`, not `SCUS_973.24`).
 - [x] **Phase 2 — Analyze.** `SCUS_974.72` parsed (sections/segments/entry); 319 strings. **Ghidra 12.1.4 + `ghidra-emotionengine-reloaded`** (`r5900:LE:32:default`) now decodes **100 %** of `.text` (50,923/50,923, 0 undefined; was 84 % with stock `MIPS:LE:32:default`). Function boundaries still "to be confirmed". See `docs/analysis.md`, `docs/rea.md`.
-- [x] **Phase 3 — Compiler. DONE (2026-10-14, Session 3).** Flags pinned by byte-level experiment: **`-O2 -g2 -G8`** (with per-TU `-g0` where the original used it). 33 functions byte-exact out of the flag-pinning set + first batches; 13 functions recorded as NON_MATCHING with the hypothesis that the original is a different EE-GCC *revision*. Single source of truth: `config/compiler_flags.mk`. See `docs/compiler.md`.
+- [x] **Phase 3 — Compiler. DONE (2026-10-14, Session 3).** Flags pinned by byte-level experiment: **`-O2 -g2 -G8`**, with a **per-TU `-g` override** (`tools/eegcc.py:cflags_for`) because the original mixes debug levels (`func_00114C30` needs `-g0`; `-g`/`-g2` suppress delay-slot filling, so the level is load-bearing). 33 functions byte-exact out of the flag-pinning set + first batches; 13 functions recorded as NON_MATCHING with the hypothesis that the original is a different EE-GCC *revision*. Single source of truth: `config/compiler_flags.mk`. See `docs/compiler.md`.
 - [x] **Phase 4 — Split & rebuild.** splat split is **per-function**: **1037 `.s`** under `asm/cod/` (one per function), `.text` 16-byte header as `textbin`; plus data segments, `build/SCUS_974.72.ld`, `include/macro.inc`. **Reassembly + link + hash check PASS**: `tools/build.py` (WSL2) → flat image byte-identical to the original, **237,952 bytes, SHA-1 `6f853f644a4279db18c15ceb8ee1d2a8b87a7b39`**. Still green with 33 functions replaced by C. See `docs/splat.md`, `docs/toolchain.md`, `docs/rebuild.md`.
 - [~] **Phase 5 — Name.** In progress. `tools/find_string_refs.py` maps strings to the 66 functions that reference them; 2 functions named from direct evidence (`LoaderSysDumpIopModuleIdentifiers`, `OutputLinkerScriptFile`), the rest tabulated in `docs/naming-candidates.md`. Structs/data objects documented in `docs/structs.md`.
 - [~] **Phase 6 — Decompile. STARTED.** 33 / 1037 functions matched from C (504 / 203,692 `.text` bytes = 0.247 %), all gated by the image hash. Loop + tooling in `docs/progress.md`; non-matching attempts in `src/non_matching/`.
@@ -135,6 +147,14 @@ Tips: use a function's constants, string references, and call patterns to infer 
 | IOP modules inventoried | 11 IRX (ELF32 MIPS-I, R3000A) |
 
 ### Session log
+
+- **2026-10-14 (Session 4)** — sync start. Rebuild re-verified before any change:
+  `python3 tools/build.py` → `bin: 237952 bytes`, SHA-1 `6f853f64…`, **HASH MATCH**
+  (1048 objects: 33 from C, 1015 from asm). Session-3 results folded into
+  sections 4/5/9; stale `560 B / 0.275 %` metric in `docs/decisions.md` corrected
+  to the tool-reported `504 B / 0.247 %` (`tools/report.py`); Session-3 tooling
+  (small-data audit, Phase-6 loop, ELF container diff) added to the tool table;
+  `docs/structs.md` placeholder header removed.
 
 - **2026-10-14 (Session 3)** — Phase 3 flags pinned, mixed C/asm build, first 33 functions.
   - **Phase 3 (compiler flags) DONE.** `ee-gcc2.96` (`2.96-ee-001003-1`) runs in
