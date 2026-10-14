@@ -1,0 +1,20 @@
+# Functions replaced by matching C. Format:  <object stem> = <C source>
+#
+# Every entry MUST reproduce the original function byte-for-byte: tools/build.py
+# compiles it, pads .text to the original size with nop alignment padding, links
+# the whole image and requires SHA-1 6f853f644a4279db18c15ceb8ee1d2a8b87a7b39.
+# A function may only be listed here once it is verified that way - an entry
+# that is not byte-exact breaks `make check` immediately.
+#
+# All entries below are Phase-3 flag-pinning cases (docs/compiler.md).
+002FE0 = src/cod/002FE0.c
+011FB8 = src/cod/011FB8.c
+028B00 = src/cod/028B00.c
+0032F0 = src/cod/0032F0.c
+0128C0 = src/cod/0128C0.c
+013088 = src/cod/013088.c
+012908 = src/cod/012908.c
+012BD0 = src/cod/012BD0.c
+001A30 = src/cod/001A30.c
+011D50 = src/cod/011D50.c
+004E78 = src/cod/004E78.c
