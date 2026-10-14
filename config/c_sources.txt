@@ -137,9 +137,10 @@
 00EC38 = src/cod/00EC38.c -fno-optimize-sibling-calls   # call with stack buffer
 0120A8 = src/cod/0120A8.c -fno-optimize-sibling-calls   # guarded call
 
-# --- Session 5, step 1: six of the twelve "unexplained" functions ------------
+# --- Session 5, step 1: the twelve formerly "unexplained" functions ----------
 # Source-shape fixes found with tools/permute.py (evidence: docs/permute-log.md,
-# docs/non-matching-12.md). The remaining six stay in src/non_matching/.
+# docs/non-matching-12.md). All twelve were unexplained by any of the 14 EE-GCC
+# distributions before this session; each of these is byte-exact now.
 002C58 = src/cod/002C58.c         # two-step address build (`p += 0xFF`), cc=296
 0029C8 = src/cod/0029C8.c         # `int value = -1;` local (LICM register roles)
 012380 = src/cod/012380.c cc=29   # `p + (field0 + 16)` grouping
@@ -150,3 +151,5 @@
 021190 = src/cod/021190.c cc=29   # struct array indexed twice (copy in delay)
 0220F8 = src/cod/0220F8.c cc=29   # reversed test + double index (addr remat)
 0262B8 = src/cod/0262B8.c         # while (p->field0) — no carried local (no bnezl)
+0131F8 = src/cod/0131F8.c         # staged `a = a - 1` before the pointer difference
+015008 = src/cod/015008.c cc=29   # store first, int addresses (signed `slt`)
