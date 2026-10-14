@@ -363,6 +363,16 @@
 027538 = src/cod/027538.c        # D_00135C60 refcount, func_001275A0
 02FA40 = src/cod/02FA40.c        # worker + conditional field accumulate
 
+# --- Session 7, wave 3c (subagent drafts, verified here) ---------------------
+006518 = src/cod/006518.c        # two-way func_00114080 + sceGsPutDrawEnv arms
+00DD70 = src/cod/00DD70.c cc=29   # 9-arg func_00109980 + return table word
+
+# --- Session 7, wave 4b (subagent drafts, verified here) ---------------------
+019068 = src/cod/019068.c cc=29   # record put + bounded copy + return field
+01C320 = src/cod/01C320.c cc=29   # 0x898-stride record gate
+021088 = src/cod/021088.c cc=29   # CreateSema + 2-record 0x24-stride fill
+023260 = src/cod/023260.c cc=29   # handler dispatch through func_00109980
+
 # --- Session 7, wave 2a (subagent drafts, verified here) ---------------------
 0151B8 = src/cod/0151B8.c cc=29   # sceDbcDeleteSocket guard + 0x334-stride clear
 015650 = src/cod/015650.c cc=29   # sceDbcGetDepNumber guard + 0x334-stride record
