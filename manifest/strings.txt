@@ -1,0 +1,319 @@
+0x00131c00 noname
+0x00132270 PsIIlibkernl3000
+0x001339a0 PsIIlibdma  3000
+0x001339d8 PsIIlibpad2 3020
+0x00133a08 PsIIlibvib  3000PsIIlibdbc  3020
+0x00133a40 PsIIlibcdvd 3000
+0x001355f8 PsIIlibnet  3000PsIIlibmrpc 3000
+0x00135948 PsIInetcnfif3020
+0x00136160 ld:	Fatal error!! unknown relocation type(%d) appeared. (ofs:%x)\n
+0x001361d0 alloc flag(alloc)
+0x00136208 normal use
+0x00136218 ld:		decode section\n
+0x00136230 ld:	%15s(progbit): 0x%08x(0x%08x) %s\n
+0x00136258 ld:	%15s(overlaydata): 0x%08x(0x%08x) %s\n
+0x00136288 ld:	%15s(nobit)  : 0x%08x(0x%08x) %s\n
+0x001362b0 .DVP.ovlytab
+0x001362e8 %s = 0x%08x;\n
+0x001362f8 SECTIONS {\n
+0x00136320 in threadid: %d\n
+0x00136338 \nhit 'reset' or push 'start key on pad-1' to restart system.
+0x00136378 \n	or 'source s' to debugging and tracing.
+0x001363a8 undefined function call from %p.\n
+0x001363d0 ld:	execute entry point(%p) as h10kmode(id:%x)\n
+0x00136400 ld:			split at %p : (duplicate relinfo to %p-%p / reldata to %p-%p)\n
+0x00136448 ld:	load module "%s"\n
+0x00136460 Opening file "%s" failed(0x%x).\n
+0x00136488 ld:		0x%08x - 0x%08x (0x%08x:%x)\n
+0x001364b0 %p: %x => %p\n
+0x001364c0 entry: %p\n
+0x001364d0 Can't execute,\nbecause start file:"%s" can't read(%d).\n
+0x00136508 Can't execute, because map fail.\n
+0x00136530 trap exception
+0x00136540 arithmetic overflow exception
+0x00136560 coprocessor unusable exception
+0x00136580 reserve operation exception
+0x001365a0 break point exception
+0x001365b8 system call exception
+0x001365d0 bus error exception load OR store
+0x001365f8 bus error exception operation
+0x00136618 address error exception store
+0x00136638 address error exception load or operation
+0x00136668 tlb not match exception store
+0x00136688 tlb not match exception load or operation
+0x001366b8 tlb mod exception
+0x001366d0 (reserved
+0x001366e0 errorepc
+0x001366f0 reserved
+0x00136700 badvaddr
+0x00136710 (reserved)
+0x00136720 pagemask
+0x00136730 entrylo1
+0x00136740 entrylo0
+0x00136750      %s:%08x %s:%08x %s:%08x %s:%08x \n
+0x00136798 bva:%08x bpa:%08x 
+0x001367b0 cause:%08x\n
+0x001367ef [m: exceptional abort.(threadid:%d)\n
+0x00136818      -----------------------------------------------\n
+0x00136850            ios reports critical error message.\n
+0x00136880 recovering from exception...\n
+0x001368af [m: break instruction appeared.(threadid:%d)\n
+0x001368e0 recovering from break...\n
+0x00136900 ldsys: _loadIopModuleFromEEBuffer: allocated iop memory:%p(size:%d)\n
+0x00136948 ldsys: _loadIopModuleFromEEBuffer: senddma: finish\n
+0x00136980 ldsys: setNewIopIdentifier: set new iop identifier "%s" at #%d\n
+0x001369c0 ldsys: LoaderSysLoadIopModuleFromEEBuffer: iop identifier "%s" exists at #%d (load skipped).\n
+0x00136a20 ldsys: LoaderSysDumpIopModuleIdentifiers: dump list of iop identifiers\n
+0x00136a68 ldsys: LoaderSysDumpIopModuleIdentifiers: ----------------------------\n
+0x00136ab0 ldsys: LoaderSysDumpIopModuleIdentifiers: 	% 2d: "%s"\n
+0x00136ae8 	Rebooting Iop\n		with 
+0x00136b00 		Loading 
+0x00136b10 ERROR\n			Couldn't load "%s".\n				( Error code: %d )\n
+0x00136b48 		Unloading 
+0x00136b58 ERROR\n			Couldn't unload "%s".\n				( Error code: %d )...\n
+0x00136b98 Initialize loader (Version: 
+0x00136bd8 	Warm up CD/DVD hardware... 
+0x00136c10 cdrom0:\\MODULES\\SIO2MAN.IRX;1
+0x00136c30 cdrom0:\\MODULES\\DBCMAN.IRX;1
+0x00136c50 cdrom0:\\MODULES\\SIO2D.IRX;1
+0x00136c70 cdrom0:\\MODULES\\DS1O_D.IRX;1
+0x00136c90 cdrom0:\\MODULES\\USBD.IRX;1
+0x00136cb0 cdrom0:\\MODULES\\PL2303.IRX;1
+0x00136cf0  HEAP: %08p\n
+0x00136d00  END: %08p\n\n
+0x00136d10  LOADER HEAP START: %08p\n
+0x00136d30 ld: ERROR LOADER_RESET_CALLBACK_NUM over \n
+0x00136d60 cdrom0:\\STARTUP.XFF;1
+0x00136d78 \nreset: %d\n
+0x00136d88 ld: start: argc:%d \n
+0x00136da0 ld: 	argc %d: %s\n
+0x00136db8 \nInitialize loader complete.\n\n
+0x00136de0 cdrom0:\\MODULES\\INET.IRX;1
+0x00136e00 cdrom0:\\MODULES\\NETCNF.IRX;1
+0x00136e20 icon=cdrom0:\\SETTING\\SYS_NET.ICO;1
+0x00136e43 iconsys=cdrom0:\\SETTING\\ICON.SYS;1
+0x00136e68 cdrom0:\\MODULES\\INETCTL.IRX;1
+0x00136e88 -no_auto
+0x00136e91 -no_decode
+0x00136ea0 cdrom0:\\MODULES\\USBD.IRX;1
+0x00136ec0 cdrom0:\\MODULES\\AN986.IRX;1
+0x00136ee0 cdrom0:\\MODULES\\DEV9.IRX;1
+0x00136f00 cdrom0:\\MODULES\\SMAP.IRX;1
+0x00136f20 cdrom0:\\MODULES\\PPP.IRX;1
+0x00136f40 cdrom0:\\MODULES\\PPPOE.IRX;1
+0x00136f60 cdrom0:\\MODULES\\.IRX;1
+0x00136f78 cdrom0:\\MODULES\\MSIFRPC.IRX;1
+0x00136f98 cdrom0:\\MODULES\\LIBNET.IRX;1
+0x00136fb8 cdrom0:\\MODULES2\\NETCNFIF.IRX;1
+0x00137008 ldnet: network resource info: "%s"\n
+0x00137030 Combination7
+0x00137040 Combination6
+0x00137050 Combination5
+0x00137060 Combination4
+0x00137070 Combination1
+0x00137080 cdrom0:\\SETTING\\NET.DB;1
+0x001370a0 from CD default...
+0x001370b8 from memory card...
+0x001370e8 ldnet: up interface no auto\n
+0x00137108 load_set_conf_only() failed.\n
+0x00137128 get_interface_id()\n
+0x00137140 wait_get_addr_only() failed.\n
+0x00137160 start_thread(): CreateThread() failed.\n
+0x00137188 start_thread(): StartThread() failed.\n
+0x001371b0 Use hdd ether port\n
+0x001371c8 Use usb ether port\n
+0x001371e0 Use usb ether port(ppp on ehter)\n
+0x00137208 Use hdd ether port(ppp on ehter)\n
+0x00137230 Use modem\n
+0x00137240 Default startup\n
+0x00137258 reg_handler() failed.\n
+0x00137270 cdrom0:\\MODULES2\\MCMAN.IRX;1
+0x00137290 cdrom0:\\MODULES2\\MCSERV.IRX;1
+0x001372b0 \n	Initialize network environment 
+0x001372d8 failed.\n
+0x001372e8 		Retry by hdd ether 
+0x00137300 	Check your hardware environment...\n
+0x00137328 ldnet: invalid addr\n
+0x00137340 ldnet: my address: "%s"\n
+0x00137360 ldnet: my address: "%s"[%s]\n
+0x00137380 			---------------------------------------------\n
+0x001373b8 			Welcome to 
+0x001373c8 			     this ps2's ip address is 
+0x001373f0 \npower off request has come.\n
+0x00137410 CreateSema Error\n
+0x00137428 bind errr\n
+0x00137c60 wait gs init\n
+0x00137c88 ## internel error in libkernl.a!\n
+0x00137cb0 SceKerneltopThread
+0x00137cc8 SceKernelDelayThread
+0x00137d0e .A0123456789abcdef
+0x00137d28 0123456789ABCDEF
+0x00137ea8 SceSifrpcGod
+0x00137eb8 SceSifrpcBind
+0x00137ec8 SceSifrpcCall
+0x00137ee0 SceStdioIobSema
+0x00137ef0 SceStdioQueSema
+0x00137f68 SceStdioFioSema
+0x00137f80 SceStdioOpenSema
+0x00137f98 SceStdioCloseSema
+0x00137fb0 SceStdioLseekSema
+0x00137fc8 SceStdioReadSema
+0x00137fe0 SceStdioWriteSema
+0x00137ff8 SceStdioIoctlSema
+0x00138010 SceStdioIoctl2Sema
+0x00138028 SceStdioCCodeSema
+0x00138040 SceStdioMkdirSema
+0x00138058 SceStdioFormatSema
+0x00138070 SceStdioAddDrvSema
+0x00138088 SceStdioDcloseSema
+0x001380a0 SceStdioDreadSema
+0x001380b8 SceStdioGetstatSema
+0x001380d0 SceStdioChstatSema
+0x001380e8 SceStdioRenameSema
+0x00138100 SceStdioSyncSema
+0x00138118 SceStdioMountSema
+0x00138130 SceStdioLseek64Sema
+0x00138148 SceStdioDevctlSema
+0x00138160 SceStdioSymlinkSema
+0x00138178 SceStdioReadlinkSema
+0x001381b0 too long parameter '%s'\n
+0x001381d0 # TLB spad=0 kernel=1:%d default=%d:%d extended=%d:%d\n
+0x00138208 # TLB over flow (1)
+0x00138220 # TLB over flow (2)
+0x00138238 # TLB over flow (3)
+0x00138250 SceKernelLibc
+0x00138260 SceKernelLibcEh
+0x00138278 TTY: packet size larger than expect\n
+0x001382a0 TTY: receive error
+0x001382b8 TTY: send err %d\n
+0x001382d0 TTY: err ti->wlen=%08x\n
+0x001382e8 sceGsPutDrawEnv: DMA Ch.2 does not terminate\r\n
+0x00138318 sceGsSyncPath: DMA Ch.1 does not terminate\r\n
+0x00138358 D1_TADR=%08x:
+0x00138368 D1_MADR=%08x:
+0x00138398 D2_TADR=%08x:
+0x001383a8 D2_MADR=%08x:
+0x001383c8 	<VIF1_STAT=%08x:
+0x001383e0 GIF_STAT=%08x>\r\n
+0x001383f8 sceGsSyncPath: DMA Ch.2 does not terminate\r\n
+0x00138428 sceGsSyncPath: VIF1 does not terminate\r\n
+0x00138458 sceGsSyncPath: VU1 does not terminate\r\n
+0x00138480 sceGsSyncPath: GIF does not terminate\r\n
+0x001384b8 sceGsDefDispEnv:Not support displaymode for 0x%x!!\n
+0x001384f0 libdma: sync timeout\n
+0x00138560 libpad2: buffer addr is not 64 byte align. %08x\n
+0x00138598 ERROR
+0x001385a0 EXECCMD
+0x001385a8 STABLE
+0x001385b0 NOLINK
+0x001385c0 libdbc: bind failed\n
+0x001385d8 libdbc: Module version mismatch 
+0x00138600 [libdbc.a = %d.%02x, dbcman.irx = %d.%02x]\n
+0x00138630 sceDbc_sema
+0x00138640 libdbc: SifDmaAddr %08x\n
+0x00138660 sceDbcSetWorkAddr: rpc error\n
+0x00138680 sceDbcCreateSocket: rpc error\n
+0x001386a0 sceDbcDeleteSocket: rpc error\n
+0x001386c0 sceDbcGetDepNumber: rpc error\n
+0x001386e0 sceDbcInitSocket: rpc error\n
+0x00138700 sceDbcResetSocket: rpc error\n
+0x00138720 sceDbcGetDeviceStatus: rpc error\n
+0x00138748 sceDbcSRData: rpc error\n
+0x00138768 sceDbcSendData: rpc error\n
+0x00138788 libdbc: SendData2 data length too long [%d]\n
+0x001387b8 dbcman : SendData2 BUSY\n
+0x001387d8 sceDbcSendData2: rpc error\n
+0x001387f8 libdbc: SendData3 data length too long [%d]\n
+0x00138828 dbcman : SendData3 BUSY\n
+0x00138848 sceDbcReceiveData: rpc error\n
+0x00138868 sceCdCbfunc= %d sceCdCbfunc_num= %d\n
+0x00138890 SceCdCallbackThread
+0x001388a8 SceCdNcmdSema
+0x001388b8 SceCdScmdSema
+0x001388c8 SceCdRcmdSema
+0x001388d8 SceCdCallbackSema
+0x001388f0 Libcdvd bind err CdSearchFile\n
+0x00138910 ee call cmd search %s\n
+0x00138928 search name %s\n
+0x00138938 search size %d\n
+0x00138948 search loc lbn %d\n
+0x00138960 Ncmd fail sema cur_cmd:%d keep_cmd:%d\n
+0x00138988 Libcdvd bind err N CMD\n
+0x001389a0 N cmd wait\n
+0x001389b0 S cmd wait\n
+0x001389c0 Scmd fail sema cur_cmd:%d keep_cmd:%d\n
+0x001389e8 Libcdvd bind err S cmd\n
+0x00138a00 Libcdvd bind err %d CD_Init %d\n
+0x00138a20 Libcdvd Exit\n
+0x00138a30 OLD DiskReady Call\n
+0x00138a48 Libcdvd bind err CdDiskReady\n
+0x00138a68 DiskReady ended\n
+0x00138a80 NEW DiskReady Call\n
+0x00138a98 sceCdChgSys: Illegal_function_call\n
+0x00138ac0 [fatal error] insufficient buffer size in Libnet\n
+0x00138af8 (fno=%d, ssize=%d, rsize=%d, buffer=%d)\n
+0x00138b28 mode must be 0 in this version.\n
+0x00138b50 SceMrpcBind0
+0x00138b60 SceMrpcBind1
+0x00138b70 SceMrpcUnbind
+0x00138b80 %s: send buffer addr is not 64 byte align. %08x=n
+0x00138bb8 sceSifMCallRpc
+0x00138bc8 %s: receive buffer addr is not 64 byte align. %08x=n
+0x00138c00 SceMrpcCall
+0x00138c10 sceMc2_sema_main
+0x00138c28 sceMc2_sema_start
+0x00138c40 sceMc2_sema_end
+0x00138c50 sceMc2_basic_thread
+0x00138c68 libmc2: TerminateTread faild\n
+0x00138d10 Sony PS2 Memory Card Format
+0x00138d40 libmc2: Fatal Error [%08x]\n
+0x00138d68 sceMc2_sema_subs
+0x00138d80 ** PANIC!\n
+0x00138d90 libmc2: Invalid data length (over 8192)\n
+0x00138dc0 MC2SOCKET
+0x00138dd0 SceNetcnfifCallbackThread
+0x00138df0 SceNetcnfifCreateSema
+0x00138e08 [fatal error] c_sema in netcnfif(type=%d)\n
+0x00139430                 0000000000000000Inf
+0x00139460 0123456789abcdef
+0x00139480 0123456789ABCDEF
+0x00139498 bug in vfprintf: bad base
+0x00139ab0 Infinity
+0x00139e08 .vubss
+0x00139e18 .rodata
+0x00139e20 .vudata
+0x00139e28 .data
+0x00139e30 .vutext
+0x00139e38 .text
+0x00139e88 debug
+0x00139e90 config
+0x00139ea8 cause
+0x00139eb0 status
+0x00139eb8 compare
+0x00139ec0 entryhi
+0x00139ec8 count
+0x00139ed0 wired
+0x00139ed8 context
+0x00139ee0 random
+0x00139ee8 index
+0x0013a028 Done.\n
+0x0013a038 %s %s
+0x0013a098 INETCTL
+0x0013a0f0 done.\n\n
+0x00000001 .symtab
+0x00000009 .strtab
+0x00000011 .shstrtab
+0x0000001b .text
+0x00000021 .text_nop
+0x0000002b .reginfo
+0x00000034 .data
+0x0000003a .ctors
+0x00000041 .dtors
+0x00000048 .eh_frame
+0x00000052 .rodata
+0x0000005a .lit4
+0x00000060 .data_nop
+0x0000006a .sdata
+0x00000071 .sbss
+0x00000077 .bss
+0x0000007c .mdebug.eabi64

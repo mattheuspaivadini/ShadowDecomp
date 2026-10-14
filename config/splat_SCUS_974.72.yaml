@@ -1,0 +1,60 @@
+# splat configuration for SCUS_974.72 (DRAFT — not yet validated; splat is not installed)
+#
+# This is a best-effort starting point derived from the ELF section table
+# (docs/analysis.md). It has NOT been run. splat64/splat-ps2 must be installed
+# and this file iterated until `splat` reproduces the ELF byte-exactly.
+#
+# Reference: https://github.com/ethteck/splat  and PS2-specific forks.
+
+name: Shadow of the Colossus (USA) — SCUS_974.72
+sha1: b715b3496aad6f7601a0ab8495acd1d151a1ff7b
+
+options:
+  basename: SCUS_974.72
+  target_path: extracted/SCUS_974.72
+  base_path: ..
+  elf_support: true
+  # EE-GCC pads with NOPs into dedicated sections; keep them as data for now.
+  ld_scripts: [build/link/SCUS_974.72.ld]
+
+segments:
+  # --- executable ---------------------------------------------------------
+  - name: text
+    type: code
+    start: 0x00100000
+    vram: 0x00100000
+    bss_size: 0
+    subsegments:
+      - [0x00100000, asm]   # whole .text as code; split by symbols later
+  - name: text_nop
+    type: rodata
+    start: 0x00131bac
+    vram: 0x00131bac
+    subsegments:
+      - [0x00131bac, data]
+
+  # --- read/write data ----------------------------------------------------
+  - name: data
+    type: data
+    start: 0x00131c00
+    vram: 0x00131c00
+    subsegments:
+      - [0x00131c00, data]  # .data (SDK banners)
+      - [0x001360cc, data]  # .ctors
+      - [0x001360d4, data]  # .dtors
+      - [0x001360e0, data]  # .eh_frame
+      - [0x00136100, rodata] # .rodata (319 strings)
+      - [0x00139d80, data]  # .lit4
+      - [0x00139d84, data]  # .data_nop
+      - [0x00139e00, data]  # .sdata
+
+  # --- zero-initialised ---------------------------------------------------
+  - name: bss
+    type: bss
+    start: 0x0013a180
+    vram: 0x0013a180
+    subsegments:
+      - [0x0013a180, bss]   # .sbss
+      - [0x0013a200, bss]   # .bss
+
+symbol_addrs_path: config/symbol_addrs.txt
