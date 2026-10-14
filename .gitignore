@@ -28,10 +28,13 @@ build/
 
 # ============================================================================
 # Toolchains / large tools (installed locally, not part of the repo)
+# NOTE: tools/cc/ holds our own wrapper/probe scripts and must stay tracked;
+# only the downloaded toolchain itself and its archive are ignored.
 # ============================================================================
 tools/ghidra/
 tools/binutils/
-tools/cc/
+tools/cc/ee-gcc2.96/
+tools/cc/*.tar.xz
 .tools/
 
 # ============================================================================
