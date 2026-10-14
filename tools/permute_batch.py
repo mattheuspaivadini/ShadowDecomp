@@ -17,6 +17,7 @@ import argparse
 import concurrent.futures
 import datetime
 import json
+import re
 import shutil
 import struct
 import sys
@@ -53,20 +54,30 @@ def main() -> int:
                     help="comma-separated stems (default: every src/non_matching/*.c)")
     ap.add_argument("--cc", default="29,296")
     ap.add_argument("--flags", default="")
+    ap.add_argument("--flag-sets", default="",
+                    help="semicolon-separated flag sets, e.g. "
+                         "';-g0;-fno-optimize-sibling-calls' (each tried for "
+                         "every variant; the summary reports the best)")
     ap.add_argument("--log", type=Path, default=None)
     ap.add_argument("--note", default="")
     ap.add_argument("--jobs", type=int, default=8)
     ap.add_argument("--baseline", action="store_true",
                     help="seed build/permute/<stem>/v00_baseline.c from src/non_matching")
     ap.add_argument("--summary", action="store_true", help="print only the best table")
+    ap.add_argument("--only", default="",
+                    help="comma-separated variant names to compile (default: all)")
     ap.add_argument("--verbose", action="store_true")
     ap.add_argument("--json", type=Path, default=None)
     args = ap.parse_args()
 
     stems = ([s.strip() for s in args.stems.split(",") if s.strip()]
              if args.stems else backlog_stems())
+    only = {s.strip() for s in args.only.split(",") if s.strip()}
     ccs = [c.strip() for c in args.cc.split(",") if c.strip()]
-    extra = args.flags.split() if args.flags else []
+    if args.flag_sets:
+        flag_sets = [[f for f in s.split() if f] for s in args.flag_sets.split(";")]
+    else:
+        flag_sets = [args.flags.split() if args.flags else []]
     date = datetime.date.today().isoformat()
 
     if args.baseline:
@@ -83,6 +94,8 @@ def main() -> int:
     for stem in stems:
         vdir = VARIANTS / stem
         variants = sorted(p for p in vdir.glob("*.c"))
+        if only:
+            variants = [p for p in variants if p.stem in only]
         if not variants:
             print(f"  no variants in {vdir} (use --baseline)")
             continue
@@ -93,19 +106,25 @@ def main() -> int:
         for v in variants:
             shutil.copy2(v, wdir / v.name)
             for cc in ccs:
-                jobs.append((stem, v, cc, wdir))
+                for fs in flag_sets:
+                    jobs.append((stem, v, cc, wdir, fs))
 
     print(f"{len(jobs)} compiles over {len(info_cache)} stems")
 
+    def flag_tag(fs):
+        return " ".join(fs) if fs else "default"
+
     def run_one(job):
-        stem, v, cc, wdir = job
-        obj = wdir / "obj" / cc / f"{v.stem}.o"
+        stem, v, cc, wdir, fs = job
+        tag = re.sub(r"[^A-Za-z0-9]+", "_", flag_tag(fs))
+        obj = wdir / "obj" / f"{cc}_{tag}" / f"{v.stem}.o"
         obj.parent.mkdir(parents=True, exist_ok=True)
         if obj.exists():
             obj.unlink()
-        err = eegcc.compile_c(f"permute/{stem}/{v.name}", obj, extra,
+        err = eegcc.compile_c(f"permute/{stem}/{v.name}", obj, fs,
                               compiler=cc, stage=False)
-        res = {"stem": stem, "variant": v.stem, "cc": cc, "error": err}
+        res = {"stem": stem, "variant": v.stem, "cc": cc, "flags": flag_tag(fs),
+               "error": err}
         if err:
             return res
         info = info_cache[stem]
@@ -127,12 +146,12 @@ def main() -> int:
     with concurrent.futures.ThreadPoolExecutor(max_workers=args.jobs) as ex:
         results = list(ex.map(run_one, jobs))
 
-    best: dict[tuple[str, str], int] = {}
-    best_variant: dict[tuple[str, str], str] = {}
+    best: dict[tuple[str, str, str], int] = {}
+    best_variant: dict[tuple[str, str, str], str] = {}
     for r in results:
         if "score" not in r:
             continue
-        key = (r["stem"], r["cc"])
+        key = (r["stem"], r["cc"], r["flags"])
         if key not in best or r["score"] < best[key]:
             best[key] = r["score"]
             best_variant[key] = r["variant"]
@@ -147,11 +166,11 @@ def main() -> int:
                             f"compile failed: {r['error']} |")
                 continue
             tag = ""
-            if r["score"] == best[(stem, cc)]:
+            if r["score"] == best[(stem, cc, r["flags"])]:
                 tag = "  <- best"
             if r["score"] == 0:
                 tag = "  <- MATCH"
-            print(f"  {r['score']:>3}  {stem:<7} cc={cc:<4} {r['variant']:<30} "
+            print(f"  {r['score']:>3}  {stem:<7} cc={cc:<4} [{r['flags']:<28}] {r['variant']:<30} "
                   f"{len(r['owords'])}/{len(r['mine_words'])} insns{tag}")
             if args.verbose and r["score"]:
                 for op, a, b, _m in P.alignment(r["back"], r["owords"], r["mine_words"], r["masks"]):
@@ -161,7 +180,7 @@ def main() -> int:
                         print(f"        {op} orig {aw}  mine {bw}")
             rows.append(f"| {date} | {stem} | {cc} | {r['variant']} | {r['score']} | "
                         f"{len(r['owords'])}/{len(r['mine_words'])} | {tag.strip() or '-'} | "
-                        f"{args.note} |")
+                        f"{args.note} [{r['flags']}] |")
         if args.log:
             if not args.log.exists():
                 args.log.write_text(P.LOG_HEADER + "\n", encoding="utf-8")
@@ -170,16 +189,16 @@ def main() -> int:
                 fh.write("\n")
             print(f"logged {len(rows)} rows to {args.log}")
 
-    print("\n=== best score per (stem, cc) ===")
-    order = sorted(best, key=lambda k: (best[k], k[0]))
-    for stem, cc in order:
-        v = best_variant[(stem, cc)]
-        print(f"  {best[(stem, cc)]:>3}  {stem:<7} cc={cc:<4} {v}")
+    print("\n=== best score per (stem, cc, flags) ===")
+    order = sorted(best, key=lambda k: (best[k], k[0], k[1]))
+    for stem, cc, flags in order:
+        v = best_variant[(stem, cc, flags)]
+        print(f"  {best[(stem, cc, flags)]:>3}  {stem:<7} cc={cc:<4} [{flags:<28}] {v}")
     if args.json:
         args.json.parent.mkdir(parents=True, exist_ok=True)
         args.json.write_text(json.dumps(
-            {"best": {f"{k[0]}/{k[1]}": v for k, v in best.items()},
-             "variants": {f"{k[0]}/{k[1]}": v for k, v in best_variant.items()}},
+            {"best": {f"{k[0]}/{k[1]}/{k[2]}": v for k, v in best.items()},
+             "variants": {f"{k[0]}/{k[1]}/{k[2]}": v for k, v in best_variant.items()}},
             indent=1), encoding="utf-8")
     return 0
 
