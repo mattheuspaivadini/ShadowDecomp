@@ -209,3 +209,7 @@
 012330 = src/cod/012330.c cc=29   # op 0x10, one-word buffer
 012190 = src/cod/012190.c cc=29   # op 3, (a0, (signed char)a1)
 0122B0 = src/cod/0122B0.c cc=29   # op -7, (a0, (signed char)a1)
+
+# --- Session 5, step 2: promoted permuter near-misses -------------------------
+014EE8 = src/cod/014EE8.c cc=29   # unsigned field (srl, not sra) + guard
+018578 = src/cod/018578.c cc=29   # early return keeps `daddu v0,zero` before ld ra
