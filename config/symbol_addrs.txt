@@ -108,6 +108,18 @@ sceCdChgSys = 0x00118358;
 sceSifMCallRpc = 0x00119F18;
 
 // ---------------------------------------------------------------------------
+// Phase 5 (Session 5, step 4): callee names from failure diagnostics printed
+// by func_00104668 (all UNCONFIRMED).
+// func_00104668 calls the routine, then on a negative result prints the
+// message immediately after the call; the message names the operation:
+//   call at 0x00104744 -> print at 0x00104760 "load_set_conf_only() failed.\n"
+load_set_conf_only   = 0x00104428;
+//   call at 0x00104784 -> print at 0x00104794 "get_interface_id()\n"
+get_interface_id     = 0x00119778;
+//   call at 0x001047C4 -> print at 0x001047D4 "wait_get_addr_only() failed.\n"
+wait_get_addr_only   = 0x00119808;
+
+// ---------------------------------------------------------------------------
 // Phase 5 (Session 4, step 4): inferred identifiers (UNCONFIRMED).
 // ---------------------------------------------------------------------------
 // UNCONFIRMED: "sceDbcGetDeviceStatus: rpc error" (RPC 0x80001317). The same

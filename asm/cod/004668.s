@@ -70,7 +70,7 @@ glabel func_00104668
     /* 4738 00104738 2D38A002 */  daddu      $a3, $s5, $zero
     /* 473C 0010473C 2D406002 */  daddu      $a4, $s3, $zero
     /* 4740 00104740 2D48E002 */  daddu      $a5, $s7, $zero
-    /* 4744 00104744 0A11040C */  jal        func_00104428
+    /* 4744 00104744 0A11040C */  jal        load_set_conf_only
     /* 4748 00104748 2D302002 */   daddu     $a2, $s1, $zero
     /* 474C 0010474C 2D202002 */  daddu      $a0, $s1, $zero
     /* 4750 00104750 F09D040C */  jal        func_001277C0
@@ -90,7 +90,7 @@ glabel func_00104668
     /* 4778 00104778 2D200002 */  daddu      $a0, $s0, $zero
     /* 477C 0010477C 2D282002 */  daddu      $a1, $s1, $zero
     /* 4780 00104780 2D304002 */  daddu      $a2, $s2, $zero
-    /* 4784 00104784 DE65040C */  jal        func_00119778
+    /* 4784 00104784 DE65040C */  jal        get_interface_id
     /* 4788 00104788 01000724 */   addiu     $a3, $zero, 0x1
     /* 478C 0010478C 04004104 */  bgez       $v0, .L001047A0
     /* 4790 00104790 1484868F */   lw        $a2, %gp_rel(D_0013A180 + 0x4)($gp)
@@ -108,7 +108,7 @@ glabel func_00104668
     /* 47B8 001047B8 2D304002 */  daddu      $a2, $s2, $zero
     /* 47BC 001047BC C01F0825 */  addiu      $a4, $a4, %lo(D_00131FC0)
     /* 47C0 001047C0 01000724 */  addiu      $a3, $zero, 0x1
-    /* 47C4 001047C4 0266040C */  jal        func_00119808
+    /* 47C4 001047C4 0266040C */  jal        wait_get_addr_only
     /* 47C8 001047C8 2D480000 */   daddu     $a5, $zero, $zero
     /* 47CC 001047CC 06004104 */  bgez       $v0, .L001047E8
     /* 47D0 001047D0 01000224 */   addiu     $v0, $zero, 0x1
