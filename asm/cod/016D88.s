@@ -74,7 +74,7 @@ glabel func_00116D88
     /* 16E58 00116E58 D0FFBD27 */  addiu      $sp, $sp, -0x30
     /* 16E5C 00116E5C 2D388000 */  daddu      $a3, $a0, $zero
     /* 16E60 00116E60 1000B1FF */  sd         $s1, 0x10($sp)
-    /* 16E64 00116E64 2D40A000 */  daddu      $t0, $a1, $zero
+    /* 16E64 00116E64 2D40A000 */  daddu      $a4, $a1, $zero
     /* 16E68 00116E68 1300113C */  lui        $s1, %hi(D_00133A54)
     /* 16E6C 00116E6C 0000B0FF */  sd         $s0, 0x0($sp)
     /* 16E70 00116E70 543A248E */  lw         $a0, %lo(D_00133A54)($s1)
@@ -90,7 +90,7 @@ glabel func_00116D88
     /* 16E98 00116E98 0C0046AC */  sw         $a2, 0xC($v0)
     /* 16E9C 00116E9C 2D204000 */  daddu      $a0, $v0, $zero
     /* 16EA0 00116EA0 040043AC */  sw         $v1, 0x4($v0)
-    /* 16EA4 00116EA4 080048AC */  sw         $t0, 0x8($v0)
+    /* 16EA4 00116EA4 080048AC */  sw         $a4, 0x8($v0)
     /* 16EA8 00116EA8 140047AC */  sw         $a3, 0x14($v0)
     /* 16EAC 00116EAC 200045AC */  sw         $a1, 0x20($v0)
     /* 16EB0 00116EB0 781B040C */  jal        func_00106DE0

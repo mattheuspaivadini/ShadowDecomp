@@ -23,11 +23,11 @@ glabel func_00115D70
     /* 15D94 00115D94 0513A534 */  ori        $a1, $a1, (0x80001305 & 0xFFFF)
     /* 15D98 00115D98 2D300000 */  daddu      $a2, $zero, $zero
     /* 15D9C 00115D9C 2D380002 */  daddu      $a3, $s0, $zero
-    /* 15DA0 00115DA0 90000824 */  addiu      $t0, $zero, 0x90
-    /* 15DA4 00115DA4 2D480002 */  daddu      $t1, $s0, $zero
-    /* 15DA8 00115DA8 90000A24 */  addiu      $t2, $zero, 0x90
+    /* 15DA0 00115DA0 90000824 */  addiu      $a4, $zero, 0x90
+    /* 15DA4 00115DA4 2D480002 */  daddu      $a5, $s0, $zero
+    /* 15DA8 00115DA8 90000A24 */  addiu      $a6, $zero, 0x90
     /* 15DAC 00115DAC 6026040C */  jal        func_00109980
-    /* 15DB0 00115DB0 2D580000 */   daddu     $t3, $zero, $zero
+    /* 15DB0 00115DB0 2D580000 */   daddu     $a7, $zero, $zero
     /* 15DB4 00115DB4 02004304 */  bgezl      $v0, .L00115DC0
     /* 15DB8 00115DB8 0400028E */   lw        $v0, 0x4($s0)
     /* 15DBC 00115DBC 2D100000 */  daddu      $v0, $zero, $zero

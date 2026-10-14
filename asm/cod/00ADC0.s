@@ -29,11 +29,11 @@ glabel func_0010ADC0
     /* ADFC 0010ADFC 6000B2FF */  sd         $s2, 0x60($sp)
     /* AE00 0010AE00 2001A6FF */  sd         $a2, 0x120($sp)
     /* AE04 0010AE04 2801A7FF */  sd         $a3, 0x128($sp)
-    /* AE08 0010AE08 3001A8FF */  sd         $t0, 0x130($sp)
-    /* AE0C 0010AE0C 3801A9FF */  sd         $t1, 0x138($sp)
-    /* AE10 0010AE10 4001AAFF */  sd         $t2, 0x140($sp)
+    /* AE08 0010AE08 3001A8FF */  sd         $a4, 0x130($sp)
+    /* AE0C 0010AE0C 3801A9FF */  sd         $a5, 0x138($sp)
+    /* AE10 0010AE10 4001AAFF */  sd         $a6, 0x140($sp)
     /* AE14 0010AE14 E629040C */  jal        func_0010A798
-    /* AE18 0010AE18 4801ABFF */   sd        $t3, 0x148($sp)
+    /* AE18 0010AE18 4801ABFF */   sd        $a7, 0x148($sp)
     /* AE1C 0010AE1C 1300033C */  lui        $v1, %hi(D_00132314)
     /* AE20 0010AE20 1423628C */  lw         $v0, %lo(D_00132314)($v1)
     /* AE24 0010AE24 03004014 */  bnez       $v0, .L0010AE34
@@ -65,7 +65,7 @@ glabel func_0010ADC0
 .align 2
   .L0010AE7C:
     /* AE7C 0010AE7C 2D300000 */  daddu      $a2, $zero, $zero
-    /* AE80 0010AE80 2001A88F */  lw         $t0, 0x120($sp)
+    /* AE80 0010AE80 2001A88F */  lw         $a4, 0x120($sp)
     /* AE84 0010AE84 00160300 */  sll        $v0, $v1, 24
     /* AE88 0010AE88 12004010 */  beqz       $v0, .L0010AED4
     /* AE8C 0010AE8C 140023A2 */   sb        $v1, 0x14($s1)
@@ -112,7 +112,7 @@ glabel func_0010ADC0
     /* AF08 0010AF08 2418E302 */  and        $v1, $s7, $v1
     /* AF0C 0010AF0C 0C0023AE */  sw         $v1, 0xC($s1)
     /* AF10 0010AF10 807FA524 */  addiu      $a1, $a1, %lo(D_00137F80)
-    /* AF14 0010AF14 100028AE */  sw         $t0, 0x10($s1)
+    /* AF14 0010AF14 100028AE */  sw         $a4, 0x10($s1)
     /* AF18 0010AF18 01000224 */  addiu      $v0, $zero, 0x1
     /* AF1C 0010AF1C 1400A2AF */  sw         $v0, 0x14($sp)
     /* AF20 0010AF20 1000A427 */  addiu      $a0, $sp, 0x10
@@ -132,11 +132,11 @@ glabel func_0010ADC0
     /* AF58 0010AF58 0000A0AF */  sw         $zero, 0x0($sp)
     /* AF5C 0010AF5C 2D300000 */  daddu      $a2, $zero, $zero
     /* AF60 0010AF60 0800A0AF */  sw         $zero, 0x8($sp)
-    /* AF64 0010AF64 18040824 */  addiu      $t0, $zero, 0x418
-    /* AF68 0010AF68 2D488002 */  daddu      $t1, $s4, $zero
-    /* AF6C 0010AF6C 04000A24 */  addiu      $t2, $zero, 0x4
+    /* AF64 0010AF64 18040824 */  addiu      $a4, $zero, 0x418
+    /* AF68 0010AF68 2D488002 */  daddu      $a5, $s4, $zero
+    /* AF6C 0010AF6C 04000A24 */  addiu      $a6, $zero, 0x4
     /* AF70 0010AF70 8A28040C */  jal        func_0010A228
-    /* AF74 0010AF74 2D580000 */   daddu     $t3, $zero, $zero
+    /* AF74 0010AF74 2D580000 */   daddu     $a7, $zero, $zero
     /* AF78 0010AF78 07004104 */  bgez       $v0, .L0010AF98
     /* AF7C 0010AF7C 0020023C */   lui       $v0, (0x20000000 >> 16)
     /* AF80 0010AF80 FC1B040C */  jal        func_00106FF0

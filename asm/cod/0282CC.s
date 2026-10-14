@@ -10,15 +10,15 @@
 nonmatching func_001282CC, 0x104
 
 glabel func_001282CC
-    /* 282CC 001282CC 2D408000 */  daddu      $t0, $a0, $zero
-    /* 282D0 001282D0 2B10A800 */  sltu       $v0, $a1, $t0
+    /* 282CC 001282CC 2D408000 */  daddu      $a4, $a0, $zero
+    /* 282D0 001282D0 2B10A800 */  sltu       $v0, $a1, $a4
     /* 282D4 001282D4 13004010 */  beqz       $v0, .L00128324
-    /* 282D8 001282D8 2D180001 */   daddu     $v1, $t0, $zero
+    /* 282D8 001282D8 2D180001 */   daddu     $v1, $a4, $zero
     /* 282DC 001282DC 2138A600 */  addu       $a3, $a1, $a2
-    /* 282E0 001282E0 2B100701 */  sltu       $v0, $t0, $a3
+    /* 282E0 001282E0 2B100701 */  sltu       $v0, $a4, $a3
     /* 282E4 001282E4 0F004010 */  beqz       $v0, .L00128324
     /* 282E8 001282E8 FFFF0224 */   addiu     $v0, $zero, -0x1
-    /* 282EC 001282EC 21180601 */  addu       $v1, $t0, $a2
+    /* 282EC 001282EC 21180601 */  addu       $v1, $a4, $a2
     /* 282F0 001282F0 FFFFC624 */  addiu      $a2, $a2, -0x1
     /* 282F4 001282F4 3400C210 */  beq        $a2, $v0, .L001283C8
     /* 282F8 001282F8 2D28E000 */   daddu     $a1, $a3, $zero
@@ -33,7 +33,7 @@ glabel func_001282CC
     /* 28314 00128314 FAFFC414 */  bne        $a2, $a0, .L00128300
     /* 28318 00128318 00000000 */   nop
     /* 2831C 0012831C 0800E003 */  jr         $ra
-    /* 28320 00128320 2D100001 */   daddu     $v0, $t0, $zero
+    /* 28320 00128320 2D100001 */   daddu     $v0, $a4, $zero
 .align 2
   .L00128324:
     /* 28324 00128324 2000C22C */  sltiu      $v0, $a2, 0x20
@@ -90,5 +90,5 @@ glabel func_001282CC
 .align 2
   .L001283C8:
     /* 283C8 001283C8 0800E003 */  jr         $ra
-    /* 283CC 001283CC 2D100001 */   daddu     $v0, $t0, $zero
+    /* 283CC 001283CC 2D100001 */   daddu     $v0, $a4, $zero
 endlabel func_001282CC

@@ -12,9 +12,9 @@ nonmatching func_00118DD0, 0x88
 
 glabel func_00118DD0
     /* 18DD0 00118DD0 C0FFBD27 */  addiu      $sp, $sp, -0x40
-    /* 18DD4 00118DD4 80400700 */  sll        $t0, $a3, 2
+    /* 18DD4 00118DD4 80400700 */  sll        $a4, $a3, 2
     /* 18DD8 00118DD8 0000B0FF */  sd         $s0, 0x0($sp)
-    /* 18DDC 00118DDC 04000825 */  addiu      $t0, $t0, 0x4
+    /* 18DDC 00118DDC 04000825 */  addiu      $a4, $a4, 0x4
     /* 18DE0 00118DE0 2D80A000 */  daddu      $s0, $a1, $zero
     /* 18DE4 00118DE4 2000B2FF */  sd         $s2, 0x20($sp)
     /* 18DE8 00118DE8 1000B1FF */  sd         $s1, 0x10($sp)
@@ -35,7 +35,7 @@ glabel func_00118DD0
     /* 18E1C 00118E1C 08004004 */  bltz       $v0, .L00118E40
     /* 18E20 00118E20 2D202002 */   daddu     $a0, $s1, $zero
     /* 18E24 00118E24 2D284002 */  daddu      $a1, $s2, $zero
-    /* 18E28 00118E28 80400200 */  sll        $t0, $v0, 2
+    /* 18E28 00118E28 80400200 */  sll        $a4, $v0, 2
     /* 18E2C 00118E2C 2D300002 */  daddu      $a2, $s0, $zero
     /* 18E30 00118E30 2461040C */  jal        func_00118490
     /* 18E34 00118E34 01000724 */   addiu     $a3, $zero, 0x1

@@ -14,7 +14,7 @@ glabel func_001193D0
     /* 193D0 001193D0 E0FFBD27 */  addiu      $sp, $sp, -0x20
     /* 193D4 001193D4 2D380000 */  daddu      $a3, $zero, $zero
     /* 193D8 001193D8 0000B0FF */  sd         $s0, 0x0($sp)
-    /* 193DC 001193DC 04000824 */  addiu      $t0, $zero, 0x4
+    /* 193DC 001193DC 04000824 */  addiu      $a4, $zero, 0x4
     /* 193E0 001193E0 2D80A000 */  daddu      $s0, $a1, $zero
     /* 193E4 001193E4 1000BFFF */  sd         $ra, 0x10($sp)
     /* 193E8 001193E8 1E000524 */  addiu      $a1, $zero, 0x1E

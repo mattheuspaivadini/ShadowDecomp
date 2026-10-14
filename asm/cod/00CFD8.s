@@ -93,11 +93,11 @@ glabel func_0010CFD8
     /* D0E4 0010D0E4 0000A0AF */  sw         $zero, 0x0($sp)
     /* D0E8 0010D0E8 2D300000 */  daddu      $a2, $zero, $zero
     /* D0EC 0010D0EC 0800A0AF */  sw         $zero, 0x8($sp)
-    /* D0F0 0010D0F0 14040824 */  addiu      $t0, $zero, 0x414
-    /* D0F4 0010D0F4 2D486002 */  daddu      $t1, $s3, $zero
-    /* D0F8 0010D0F8 04000A24 */  addiu      $t2, $zero, 0x4
+    /* D0F0 0010D0F0 14040824 */  addiu      $a4, $zero, 0x414
+    /* D0F4 0010D0F4 2D486002 */  daddu      $a5, $s3, $zero
+    /* D0F8 0010D0F8 04000A24 */  addiu      $a6, $zero, 0x4
     /* D0FC 0010D0FC 8A28040C */  jal        func_0010A228
-    /* D100 0010D100 2D580000 */   daddu     $t3, $zero, $zero
+    /* D100 0010D100 2D580000 */   daddu     $a7, $zero, $zero
     /* D104 0010D104 07004104 */  bgez       $v0, .L0010D124
     /* D108 0010D108 0020023C */   lui       $v0, (0x20000000 >> 16)
     /* D10C 0010D10C FC1B040C */  jal        func_00106FF0

@@ -113,7 +113,7 @@ glabel func_00107E20
     /* 7F6C 00107F6C 641F040C */  jal        func_00107D90
     /* 7F70 00107F70 2D204000 */   daddu     $a0, $v0, $zero
     /* 7F74 00107F74 E07C6726 */  addiu      $a3, $s3, %lo(D_00137CE0)
-    /* 7F78 00107F78 2D404000 */  daddu      $t0, $v0, $zero
+    /* 7F78 00107F78 2D404000 */  daddu      $a4, $v0, $zero
     /* 7F7C 00107F7C 2D20A002 */  daddu      $a0, $s5, $zero
     /* 7F80 00107F80 2D28C002 */  daddu      $a1, $s6, $zero
     /* 7F84 00107F84 6E23040C */  jal        func_00108DB8
@@ -136,7 +136,7 @@ glabel func_00107E20
 .align 2
   .L00107FC0:
     /* 7FC0 00107FC0 6E23040C */  jal        func_00108DB8
-    /* 7FC4 00107FC4 2D404002 */   daddu     $t0, $s2, $zero
+    /* 7FC4 00107FC4 2D404002 */   daddu     $a4, $s2, $zero
     /* 7FC8 00107FC8 21A08202 */  addu       $s4, $s4, $v0
     /* 7FCC 00107FCC 2D108002 */  daddu      $v0, $s4, $zero
 .align 2

@@ -90,15 +90,15 @@ glabel func_0010C9A8
     /* CAA8 0010CAA8 080042AE */  sw         $v0, 0x8($s2)
     /* CAAC 0010CAAC C070A426 */  addiu      $a0, $s5, %lo(D_001470C0)
     /* CAB0 0010CAB0 C059E726 */  addiu      $a3, $s7, %lo(D_001459C0)
-    /* CAB4 0010CAB4 11000826 */  addiu      $t0, $s0, 0x11
+    /* CAB4 0010CAB4 11000826 */  addiu      $a4, $s0, 0x11
     /* CAB8 0010CAB8 0000A0AF */  sw         $zero, 0x0($sp)
     /* CABC 0010CABC 0C000524 */  addiu      $a1, $zero, 0xC
     /* CAC0 0010CAC0 0800A0AF */  sw         $zero, 0x8($sp)
     /* CAC4 0010CAC4 2D300000 */  daddu      $a2, $zero, $zero
-    /* CAC8 0010CAC8 2D488002 */  daddu      $t1, $s4, $zero
-    /* CACC 0010CACC 04000A24 */  addiu      $t2, $zero, 0x4
+    /* CAC8 0010CAC8 2D488002 */  daddu      $a5, $s4, $zero
+    /* CACC 0010CACC 04000A24 */  addiu      $a6, $zero, 0x4
     /* CAD0 0010CAD0 8A28040C */  jal        func_0010A228
-    /* CAD4 0010CAD4 2D580000 */   daddu     $t3, $zero, $zero
+    /* CAD4 0010CAD4 2D580000 */   daddu     $a7, $zero, $zero
     /* CAD8 0010CAD8 07004104 */  bgez       $v0, .L0010CAF8
     /* CADC 0010CADC 0020023C */   lui       $v0, (0x20000000 >> 16)
     /* CAE0 0010CAE0 FC1B040C */  jal        func_00106FF0

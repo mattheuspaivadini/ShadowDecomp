@@ -14,7 +14,7 @@ glabel func_00108E08
     /* 8E08 00108E08 E0FFBD27 */  addiu      $sp, $sp, -0x20
     /* 8E0C 00108E0C 2D10C000 */  daddu      $v0, $a2, $zero
     /* 8E10 00108E10 0000A4AF */  sw         $a0, 0x0($sp)
-    /* 8E14 00108E14 2D40E000 */  daddu      $t0, $a3, $zero
+    /* 8E14 00108E14 2D40E000 */  daddu      $a4, $a3, $zero
     /* 8E18 00108E18 2D30A000 */  daddu      $a2, $a1, $zero
     /* 8E1C 00108E1C 1100043C */  lui        $a0, %hi(func_00108D10)
     /* 8E20 00108E20 1000BFFF */  sd         $ra, 0x10($sp)

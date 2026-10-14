@@ -12,20 +12,20 @@ nonmatching func_00118A38, 0x110
 
 glabel func_00118A38
     /* 18A38 00118A38 90FFBD27 */  addiu      $sp, $sp, -0x70
-    /* 18A3C 00118A3C 2D180001 */  daddu      $v1, $t0, $zero
+    /* 18A3C 00118A3C 2D180001 */  daddu      $v1, $a4, $zero
     /* 18A40 00118A40 0000B0FF */  sd         $s0, 0x0($sp)
     /* 18A44 00118A44 5000B5FF */  sd         $s5, 0x50($sp)
     /* 18A48 00118A48 2D80A000 */  daddu      $s0, $a1, $zero
     /* 18A4C 00118A4C 4000B4FF */  sd         $s4, 0x40($sp)
     /* 18A50 00118A50 2DA8E000 */  daddu      $s5, $a3, $zero
     /* 18A54 00118A54 3000B3FF */  sd         $s3, 0x30($sp)
-    /* 18A58 00118A58 2DA04001 */  daddu      $s4, $t2, $zero
+    /* 18A58 00118A58 2DA04001 */  daddu      $s4, $a6, $zero
     /* 18A5C 00118A5C 2000B2FF */  sd         $s2, 0x20($sp)
-    /* 18A60 00118A60 2D986001 */  daddu      $s3, $t3, $zero
+    /* 18A60 00118A60 2D986001 */  daddu      $s3, $a7, $zero
     /* 18A64 00118A64 1000B1FF */  sd         $s1, 0x10($sp)
     /* 18A68 00118A68 2D908000 */  daddu      $s2, $a0, $zero
     /* 18A6C 00118A6C 6000BFFF */  sd         $ra, 0x60($sp)
-    /* 18A70 00118A70 2D882001 */  daddu      $s1, $t1, $zero
+    /* 18A70 00118A70 2D882001 */  daddu      $s1, $a5, $zero
     /* 18A74 00118A74 04002012 */  beqz       $s1, .L00118A88
     /* 18A78 00118A78 000006AE */   sw        $a2, 0x0($s0)
     /* 18A7C 00118A7C 0000228E */  lw         $v0, 0x0($s1)
@@ -37,7 +37,7 @@ glabel func_00118A38
 .align 2
   .L00118A8C:
     /* 18A8C 00118A8C 7000A28F */  lw         $v0, 0x70($sp)
-    /* 18A90 00118A90 1C006824 */  addiu      $t0, $v1, 0x1C
+    /* 18A90 00118A90 1C006824 */  addiu      $a4, $v1, 0x1C
     /* 18A94 00118A94 080003AE */  sw         $v1, 0x8($s0)
     /* 18A98 00118A98 2D204002 */  daddu      $a0, $s2, $zero
     /* 18A9C 00118A9C 0C0002AE */  sw         $v0, 0xC($s0)
@@ -63,14 +63,14 @@ glabel func_00118A38
     /* 18ADC 00118ADC 2D300002 */  daddu      $a2, $s0, $zero
     /* 18AE0 00118AE0 02000724 */  addiu      $a3, $zero, 0x2
     /* 18AE4 00118AE4 2461040C */  jal        func_00118490
-    /* 18AE8 00118AE8 10000824 */   addiu     $t0, $zero, 0x10
+    /* 18AE8 00118AE8 10000824 */   addiu     $a4, $zero, 0x10
     /* 18AEC 00118AEC 0E004004 */  bltz       $v0, .L00118B28
     /* 18AF0 00118AF0 6000BFDF */   ld        $ra, 0x60($sp)
     /* 18AF4 00118AF4 04006052 */  beql       $s3, $zero, .L00118B08
-    /* 18AF8 00118AF8 0000088E */   lw        $t0, 0x0($s0)
+    /* 18AF8 00118AF8 0000088E */   lw        $a4, 0x0($s0)
     /* 18AFC 00118AFC 1800028E */  lw         $v0, 0x18($s0)
     /* 18B00 00118B00 000062AE */  sw         $v0, 0x0($s3)
-    /* 18B04 00118B04 0000088E */  lw         $t0, 0x0($s0)
+    /* 18B04 00118B04 0000088E */  lw         $a4, 0x0($s0)
 .align 2
   .L00118B08:
     /* 18B08 00118B08 2D204002 */  daddu      $a0, $s2, $zero

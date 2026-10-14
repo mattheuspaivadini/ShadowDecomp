@@ -24,13 +24,13 @@ glabel func_00109980
     /* 99A8 001099A8 6000B4FF */  sd         $s4, 0x60($sp)
     /* 99AC 001099AC 2DA8E000 */  daddu      $s5, $a3, $zero
     /* 99B0 001099B0 5000B3FF */  sd         $s3, 0x50($sp)
-    /* 99B4 001099B4 2DA02001 */  daddu      $s4, $t1, $zero
+    /* 99B4 001099B4 2DA02001 */  daddu      $s4, $a5, $zero
     /* 99B8 001099B8 4000B2FF */  sd         $s2, 0x40($sp)
-    /* 99BC 001099BC 2D984001 */  daddu      $s3, $t2, $zero
+    /* 99BC 001099BC 2D984001 */  daddu      $s3, $a6, $zero
     /* 99C0 001099C0 2000B0FF */  sd         $s0, 0x20($sp)
-    /* 99C4 001099C4 2D900001 */  daddu      $s2, $t0, $zero
+    /* 99C4 001099C4 2D900001 */  daddu      $s2, $a4, $zero
     /* 99C8 001099C8 B000BFFF */  sd         $ra, 0xB0($sp)
-    /* 99CC 001099CC 2DB86001 */  daddu      $s7, $t3, $zero
+    /* 99CC 001099CC 2DB86001 */  daddu      $s7, $a7, $zero
     /* 99D0 001099D0 7024040C */  jal        func_001091C0
     /* 99D4 001099D4 40598424 */   addiu     $a0, $a0, %lo(D_00145940)
     /* 99D8 001099D8 2D804000 */  daddu      $s0, $v0, $zero
@@ -92,10 +92,10 @@ glabel func_00109980
   .L00109A8C:
     /* 9A8C 00109A8C FFFF0224 */  addiu      $v0, $zero, -0x1
     /* 9A90 00109A90 0080043C */  lui        $a0, (0x8000000A >> 16)
-    /* 9A94 00109A94 1400288E */  lw         $t0, 0x14($s1)
+    /* 9A94 00109A94 1400288E */  lw         $a4, 0x14($s1)
     /* 9A98 00109A98 2D38A002 */  daddu      $a3, $s5, $zero
     /* 9A9C 00109A9C 080022AE */  sw         $v0, 0x8($s1)
-    /* 9AA0 00109AA0 2D484002 */  daddu      $t1, $s2, $zero
+    /* 9AA0 00109AA0 2D484002 */  daddu      $a5, $s2, $zero
     /* 9AA4 00109AA4 0A008434 */  ori        $a0, $a0, (0x8000000A & 0xFFFF)
     /* 9AA8 00109AA8 2D280002 */  daddu      $a1, $s0, $zero
     /* 9AAC 00109AAC 804B040C */  jal        func_00112E00
@@ -124,8 +124,8 @@ glabel func_00109980
     /* 9AF8 00109AF8 300013AE */  sw         $s3, 0x30($s0)
     /* 9AFC 00109AFC 0080043C */  lui        $a0, (0x8000000A >> 16)
     /* 9B00 00109B00 2D38A002 */  daddu      $a3, $s5, $zero
-    /* 9B04 00109B04 2D484002 */  daddu      $t1, $s2, $zero
-    /* 9B08 00109B08 1400288E */  lw         $t0, 0x14($s1)
+    /* 9B04 00109B04 2D484002 */  daddu      $a5, $s2, $zero
+    /* 9B08 00109B08 1400288E */  lw         $a4, 0x14($s1)
     /* 9B0C 00109B0C 0A008434 */  ori        $a0, $a0, (0x8000000A & 0xFFFF)
     /* 9B10 00109B10 2D280002 */  daddu      $a1, $s0, $zero
     /* 9B14 00109B14 804B040C */  jal        func_00112E00

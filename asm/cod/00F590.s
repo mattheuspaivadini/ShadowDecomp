@@ -23,13 +23,13 @@ glabel func_0010F590
     /* F5B0 0010F5B0 68295026 */  addiu      $s0, $s2, %lo(D_00132968)
     /* F5B4 0010F5B4 6829458E */  lw         $a1, %lo(D_00132968)($s2)
     /* F5B8 0010F5B8 0400078E */  lw         $a3, 0x4($s0)
-    /* F5BC 0010F5BC 0800098E */  lw         $t1, 0x8($s0)
+    /* F5BC 0010F5BC 0800098E */  lw         $a5, 0x8($s0)
     /* F5C0 0010F5C0 2D30A000 */  daddu      $a2, $a1, $zero
     /* F5C4 0010F5C4 2138A700 */  addu       $a3, $a1, $a3
-    /* F5C8 0010F5C8 2148E900 */  addu       $t1, $a3, $t1
-    /* F5CC 0010F5CC 2D40E000 */  daddu      $t0, $a3, $zero
+    /* F5C8 0010F5C8 2148E900 */  addu       $a5, $a3, $a5
+    /* F5CC 0010F5CC 2D40E000 */  daddu      $a4, $a3, $zero
     /* F5D0 0010F5D0 FFFFA524 */  addiu      $a1, $a1, -0x1
-    /* F5D4 0010F5D4 FFFF2925 */  addiu      $t1, $t1, -0x1
+    /* F5D4 0010F5D4 FFFF2925 */  addiu      $a5, $a5, -0x1
     /* F5D8 0010F5D8 DE23040C */  jal        func_00108F78
     /* F5DC 0010F5DC FFFFE724 */   addiu     $a3, $a3, -0x1
     /* F5E0 0010F5E0 00308040 */  mtc0       $zero, $6 /* handwritten instruction */
@@ -55,7 +55,7 @@ glabel func_0010F590
     /* F620 0010F620 2D202003 */  daddu      $a0, $t9, $zero
     /* F624 0010F624 0400068E */  lw         $a2, 0x4($s0)
     /* F628 0010F628 0800078E */  lw         $a3, 0x8($s0)
-    /* F62C 0010F62C 0C00088E */  lw         $t0, 0xC($s0)
+    /* F62C 0010F62C 0C00088E */  lw         $a4, 0xC($s0)
     /* F630 0010F630 2C3D040C */  jal        func_0010F4B0
     /* F634 0010F634 10001026 */   addiu     $s0, $s0, 0x10
     /* F638 0010F638 01003927 */  addiu      $t9, $t9, 0x1
@@ -87,7 +87,7 @@ glabel func_0010F590
     /* F688 0010F688 2D202003 */  daddu      $a0, $t9, $zero
     /* F68C 0010F68C 0400068E */  lw         $a2, 0x4($s0)
     /* F690 0010F690 0800078E */  lw         $a3, 0x8($s0)
-    /* F694 0010F694 0C00088E */  lw         $t0, 0xC($s0)
+    /* F694 0010F694 0C00088E */  lw         $a4, 0xC($s0)
     /* F698 0010F698 2C3D040C */  jal        func_0010F4B0
     /* F69C 0010F69C 10001026 */   addiu     $s0, $s0, 0x10
     /* F6A0 0010F6A0 01003927 */  addiu      $t9, $t9, 0x1
@@ -123,7 +123,7 @@ glabel func_0010F590
     /* F700 0010F700 2D202003 */  daddu      $a0, $t9, $zero
     /* F704 0010F704 0400068E */  lw         $a2, 0x4($s0)
     /* F708 0010F708 0800078E */  lw         $a3, 0x8($s0)
-    /* F70C 0010F70C 0C00088E */  lw         $t0, 0xC($s0)
+    /* F70C 0010F70C 0C00088E */  lw         $a4, 0xC($s0)
     /* F710 0010F710 2C3D040C */  jal        func_0010F4B0
     /* F714 0010F714 10001026 */   addiu     $s0, $s0, 0x10
     /* F718 0010F718 01003927 */  addiu      $t9, $t9, 0x1
@@ -146,7 +146,7 @@ glabel func_0010F590
     /* F744 0010F744 2D302002 */  daddu      $a2, $s1, $zero
     /* F748 0010F748 2D280000 */  daddu      $a1, $zero, $zero
     /* F74C 0010F74C 2D380000 */  daddu      $a3, $zero, $zero
-    /* F750 0010F750 2D400000 */  daddu      $t0, $zero, $zero
+    /* F750 0010F750 2D400000 */  daddu      $a4, $zero, $zero
     /* F754 0010F754 2C3D040C */  jal        func_0010F4B0
     /* F758 0010F758 01001026 */   addiu     $s0, $s0, 0x1
     /* F75C 0010F75C 3000022A */  slti       $v0, $s0, 0x30

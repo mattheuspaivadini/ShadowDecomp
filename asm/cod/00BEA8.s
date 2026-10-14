@@ -90,14 +90,14 @@ glabel func_0010BEA8
     /* BFA8 0010BFA8 C070A426 */  addiu      $a0, $s5, %lo(D_001470C0)
     /* BFAC 0010BFAC 2D28C002 */  daddu      $a1, $s6, $zero
     /* BFB0 0010BFB0 C059E726 */  addiu      $a3, $s7, %lo(D_001459C0)
-    /* BFB4 0010BFB4 0D000826 */  addiu      $t0, $s0, 0xD
+    /* BFB4 0010BFB4 0D000826 */  addiu      $a4, $s0, 0xD
     /* BFB8 0010BFB8 2D300000 */  daddu      $a2, $zero, $zero
     /* BFBC 0010BFBC 0000A0AF */  sw         $zero, 0x0($sp)
-    /* BFC0 0010BFC0 2D488002 */  daddu      $t1, $s4, $zero
+    /* BFC0 0010BFC0 2D488002 */  daddu      $a5, $s4, $zero
     /* BFC4 0010BFC4 0800A0AF */  sw         $zero, 0x8($sp)
-    /* BFC8 0010BFC8 04000A24 */  addiu      $t2, $zero, 0x4
+    /* BFC8 0010BFC8 04000A24 */  addiu      $a6, $zero, 0x4
     /* BFCC 0010BFCC 8A28040C */  jal        func_0010A228
-    /* BFD0 0010BFD0 2D580000 */   daddu     $t3, $zero, $zero
+    /* BFD0 0010BFD0 2D580000 */   daddu     $a7, $zero, $zero
     /* BFD4 0010BFD4 07004104 */  bgez       $v0, .L0010BFF4
     /* BFD8 0010BFD8 0020023C */   lui       $v0, (0x20000000 >> 16)
     /* BFDC 0010BFDC FC1B040C */  jal        func_00106FF0

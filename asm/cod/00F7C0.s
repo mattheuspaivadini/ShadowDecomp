@@ -21,14 +21,14 @@ glabel func_0010F7C0
     /* F7D8 0010F7D8 5000457F */  sq         $a1, 0x50($k0) /* handwritten instruction */
     /* F7DC 0010F7DC 6000467F */  sq         $a2, 0x60($k0) /* handwritten instruction */
     /* F7E0 0010F7E0 7000477F */  sq         $a3, 0x70($k0) /* handwritten instruction */
-    /* F7E4 0010F7E4 8000487F */  sq         $t0, 0x80($k0) /* handwritten instruction */
-    /* F7E8 0010F7E8 9000497F */  sq         $t1, 0x90($k0) /* handwritten instruction */
-    /* F7EC 0010F7EC A0004A7F */  sq         $t2, 0xA0($k0) /* handwritten instruction */
-    /* F7F0 0010F7F0 B0004B7F */  sq         $t3, 0xB0($k0) /* handwritten instruction */
-    /* F7F4 0010F7F4 C0004C7F */  sq         $t4, 0xC0($k0) /* handwritten instruction */
-    /* F7F8 0010F7F8 D0004D7F */  sq         $t5, 0xD0($k0) /* handwritten instruction */
-    /* F7FC 0010F7FC E0004E7F */  sq         $t6, 0xE0($k0) /* handwritten instruction */
-    /* F800 0010F800 F0004F7F */  sq         $t7, 0xF0($k0) /* handwritten instruction */
+    /* F7E4 0010F7E4 8000487F */  sq         $a4, 0x80($k0) /* handwritten instruction */
+    /* F7E8 0010F7E8 9000497F */  sq         $a5, 0x90($k0) /* handwritten instruction */
+    /* F7EC 0010F7EC A0004A7F */  sq         $a6, 0xA0($k0) /* handwritten instruction */
+    /* F7F0 0010F7F0 B0004B7F */  sq         $a7, 0xB0($k0) /* handwritten instruction */
+    /* F7F4 0010F7F4 C0004C7F */  sq         $t0, 0xC0($k0) /* handwritten instruction */
+    /* F7F8 0010F7F8 D0004D7F */  sq         $t1, 0xD0($k0) /* handwritten instruction */
+    /* F7FC 0010F7FC E0004E7F */  sq         $t2, 0xE0($k0) /* handwritten instruction */
+    /* F800 0010F800 F0004F7F */  sq         $t3, 0xF0($k0) /* handwritten instruction */
     /* F804 0010F804 0001507F */  sq         $s0, 0x100($k0) /* handwritten instruction */
     /* F808 0010F808 1001517F */  sq         $s1, 0x110($k0) /* handwritten instruction */
     /* F80C 0010F80C 2001527F */  sq         $s2, 0x120($k0) /* handwritten instruction */
@@ -62,8 +62,8 @@ glabel func_0010F7C0
     /* F87C 0010F87C 00680540 */  mfc0       $a1, $13 /* handwritten instruction */
     /* F880 0010F880 00700640 */  mfc0       $a2, $14 /* handwritten instruction */
     /* F884 0010F884 00400740 */  mfc0       $a3, $8 /* handwritten instruction */
-    /* F888 0010F888 1500083C */  lui        $t0, %hi(D_00148640)
-    /* F88C 0010F88C 40860825 */  addiu      $t0, $t0, %lo(D_00148640)
+    /* F888 0010F888 1500083C */  lui        $a4, %hi(D_00148640)
+    /* F88C 0010F88C 40860825 */  addiu      $a4, $a4, %lo(D_00148640)
     /* F890 0010F890 1500013C */  lui        $at, %hi(D_00148868)
     /* F894 0010F894 688826AC */  sw         $a2, %lo(D_00148868)($at)
     /* F898 0010F898 1100013C */  lui        $at, %hi(D_0010F8C0)
@@ -128,14 +128,14 @@ glabel func_0010F7C0
     /* F97C 0010F97C 5000457B */  lq         $a1, 0x50($k0) /* handwritten instruction */
     /* F980 0010F980 6000467B */  lq         $a2, 0x60($k0) /* handwritten instruction */
     /* F984 0010F984 7000477B */  lq         $a3, 0x70($k0) /* handwritten instruction */
-    /* F988 0010F988 8000487B */  lq         $t0, 0x80($k0) /* handwritten instruction */
-    /* F98C 0010F98C 9000497B */  lq         $t1, 0x90($k0) /* handwritten instruction */
-    /* F990 0010F990 A0004A7B */  lq         $t2, 0xA0($k0) /* handwritten instruction */
-    /* F994 0010F994 B0004B7B */  lq         $t3, 0xB0($k0) /* handwritten instruction */
-    /* F998 0010F998 C0004C7B */  lq         $t4, 0xC0($k0) /* handwritten instruction */
-    /* F99C 0010F99C D0004D7B */  lq         $t5, 0xD0($k0) /* handwritten instruction */
-    /* F9A0 0010F9A0 E0004E7B */  lq         $t6, 0xE0($k0) /* handwritten instruction */
-    /* F9A4 0010F9A4 F0004F7B */  lq         $t7, 0xF0($k0) /* handwritten instruction */
+    /* F988 0010F988 8000487B */  lq         $a4, 0x80($k0) /* handwritten instruction */
+    /* F98C 0010F98C 9000497B */  lq         $a5, 0x90($k0) /* handwritten instruction */
+    /* F990 0010F990 A0004A7B */  lq         $a6, 0xA0($k0) /* handwritten instruction */
+    /* F994 0010F994 B0004B7B */  lq         $a7, 0xB0($k0) /* handwritten instruction */
+    /* F998 0010F998 C0004C7B */  lq         $t0, 0xC0($k0) /* handwritten instruction */
+    /* F99C 0010F99C D0004D7B */  lq         $t1, 0xD0($k0) /* handwritten instruction */
+    /* F9A0 0010F9A0 E0004E7B */  lq         $t2, 0xE0($k0) /* handwritten instruction */
+    /* F9A4 0010F9A4 F0004F7B */  lq         $t3, 0xF0($k0) /* handwritten instruction */
     /* F9A8 0010F9A8 0001507B */  lq         $s0, 0x100($k0) /* handwritten instruction */
     /* F9AC 0010F9AC 1001517B */  lq         $s1, 0x110($k0) /* handwritten instruction */
     /* F9B0 0010F9B0 2001527B */  lq         $s2, 0x120($k0) /* handwritten instruction */
@@ -169,14 +169,14 @@ glabel func_0010F7C0
     /* FA18 0010FA18 5000457F */  sq         $a1, 0x50($k0) /* handwritten instruction */
     /* FA1C 0010FA1C 6000467F */  sq         $a2, 0x60($k0) /* handwritten instruction */
     /* FA20 0010FA20 7000477F */  sq         $a3, 0x70($k0) /* handwritten instruction */
-    /* FA24 0010FA24 8000487F */  sq         $t0, 0x80($k0) /* handwritten instruction */
-    /* FA28 0010FA28 9000497F */  sq         $t1, 0x90($k0) /* handwritten instruction */
-    /* FA2C 0010FA2C A0004A7F */  sq         $t2, 0xA0($k0) /* handwritten instruction */
-    /* FA30 0010FA30 B0004B7F */  sq         $t3, 0xB0($k0) /* handwritten instruction */
-    /* FA34 0010FA34 C0004C7F */  sq         $t4, 0xC0($k0) /* handwritten instruction */
-    /* FA38 0010FA38 D0004D7F */  sq         $t5, 0xD0($k0) /* handwritten instruction */
-    /* FA3C 0010FA3C E0004E7F */  sq         $t6, 0xE0($k0) /* handwritten instruction */
-    /* FA40 0010FA40 F0004F7F */  sq         $t7, 0xF0($k0) /* handwritten instruction */
+    /* FA24 0010FA24 8000487F */  sq         $a4, 0x80($k0) /* handwritten instruction */
+    /* FA28 0010FA28 9000497F */  sq         $a5, 0x90($k0) /* handwritten instruction */
+    /* FA2C 0010FA2C A0004A7F */  sq         $a6, 0xA0($k0) /* handwritten instruction */
+    /* FA30 0010FA30 B0004B7F */  sq         $a7, 0xB0($k0) /* handwritten instruction */
+    /* FA34 0010FA34 C0004C7F */  sq         $t0, 0xC0($k0) /* handwritten instruction */
+    /* FA38 0010FA38 D0004D7F */  sq         $t1, 0xD0($k0) /* handwritten instruction */
+    /* FA3C 0010FA3C E0004E7F */  sq         $t2, 0xE0($k0) /* handwritten instruction */
+    /* FA40 0010FA40 F0004F7F */  sq         $t3, 0xF0($k0) /* handwritten instruction */
     /* FA44 0010FA44 0001507F */  sq         $s0, 0x100($k0) /* handwritten instruction */
     /* FA48 0010FA48 1001517F */  sq         $s1, 0x110($k0) /* handwritten instruction */
     /* FA4C 0010FA4C 2001527F */  sq         $s2, 0x120($k0) /* handwritten instruction */
@@ -210,9 +210,9 @@ glabel func_0010F7C0
     /* FABC 0010FABC 00680540 */  mfc0       $a1, $13 /* handwritten instruction */
     /* FAC0 0010FAC0 00700640 */  mfc0       $a2, $14 /* handwritten instruction */
     /* FAC4 0010FAC4 00400740 */  mfc0       $a3, $8 /* handwritten instruction */
-    /* FAC8 0010FAC8 00B80840 */  mfc0       $t0, $23 /* handwritten instruction */
-    /* FACC 0010FACC 1500093C */  lui        $t1, %hi(D_00148640)
-    /* FAD0 0010FAD0 40862925 */  addiu      $t1, $t1, %lo(D_00148640)
+    /* FAC8 0010FAC8 00B80840 */  mfc0       $a4, $23 /* handwritten instruction */
+    /* FACC 0010FACC 1500093C */  lui        $a5, %hi(D_00148640)
+    /* FAD0 0010FAD0 40862925 */  addiu      $a5, $a5, %lo(D_00148640)
     /* FAD4 0010FAD4 1100013C */  lui        $at, %hi(D_0010FAFC)
     /* FAD8 0010FAD8 FCFA2124 */  addiu      $at, $at, %lo(D_0010FAFC)
     /* FADC 0010FADC 00708140 */  mtc0       $at, $14 /* handwritten instruction */

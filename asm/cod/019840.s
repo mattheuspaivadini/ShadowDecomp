@@ -12,7 +12,7 @@ nonmatching func_00119840, 0x78
 
 glabel func_00119840
     /* 19840 00119840 C0FFBD27 */  addiu      $sp, $sp, -0x40
-    /* 19844 00119844 0C000824 */  addiu      $t0, $zero, 0xC
+    /* 19844 00119844 0C000824 */  addiu      $a4, $zero, 0xC
     /* 19848 00119848 2000B2FF */  sd         $s2, 0x20($sp)
     /* 1984C 0011984C 1000B1FF */  sd         $s1, 0x10($sp)
     /* 19850 00119850 2D90E000 */  daddu      $s2, $a3, $zero

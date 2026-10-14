@@ -131,11 +131,11 @@ glabel func_00117D98
     /* 17F14 00117F14 0000A0AF */  sw         $zero, 0x0($sp)
     /* 17F18 00117F18 2D280000 */  daddu      $a1, $zero, $zero
     /* 17F1C 00117F1C 2D300000 */  daddu      $a2, $zero, $zero
-    /* 17F20 00117F20 04000824 */  addiu      $t0, $zero, 0x4
-    /* 17F24 00117F24 2D482002 */  daddu      $t1, $s1, $zero
-    /* 17F28 00117F28 04000A24 */  addiu      $t2, $zero, 0x4
+    /* 17F20 00117F20 04000824 */  addiu      $a4, $zero, 0x4
+    /* 17F24 00117F24 2D482002 */  daddu      $a5, $s1, $zero
+    /* 17F28 00117F28 04000A24 */  addiu      $a6, $zero, 0x4
     /* 17F2C 00117F2C 6026040C */  jal        func_00109980
-    /* 17F30 00117F30 2D580000 */   daddu     $t3, $zero, $zero
+    /* 17F30 00117F30 2D580000 */   daddu     $a7, $zero, $zero
     /* 17F34 00117F34 09004304 */  bgezl      $v0, .L00117F5C
     /* 17F38 00117F38 503AC28E */   lw        $v0, %lo(D_00133A50)($s6)
 .align 2

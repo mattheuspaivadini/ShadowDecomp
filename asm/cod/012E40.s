@@ -13,14 +13,14 @@ nonmatching func_00112E40, 0x3C
 glabel func_00112E40
     /* 12E40 00112E40 2D10C000 */  daddu      $v0, $a2, $zero
     /* 12E44 00112E44 2D18E000 */  daddu      $v1, $a3, $zero
-    /* 12E48 00112E48 2D580001 */  daddu      $t3, $t0, $zero
+    /* 12E48 00112E48 2D580001 */  daddu      $a7, $a4, $zero
     /* 12E4C 00112E4C F0FFBD27 */  addiu      $sp, $sp, -0x10
-    /* 12E50 00112E50 2D502001 */  daddu      $t2, $t1, $zero
+    /* 12E50 00112E50 2D502001 */  daddu      $a6, $a5, $zero
     /* 12E54 00112E54 2D30A000 */  daddu      $a2, $a1, $zero
     /* 12E58 00112E58 0000BFFF */  sd         $ra, 0x0($sp)
     /* 12E5C 00112E5C 2D384000 */  daddu      $a3, $v0, $zero
-    /* 12E60 00112E60 2D406000 */  daddu      $t0, $v1, $zero
-    /* 12E64 00112E64 2D486001 */  daddu      $t1, $t3, $zero
+    /* 12E60 00112E60 2D406000 */  daddu      $a4, $v1, $zero
+    /* 12E64 00112E64 2D486001 */  daddu      $a5, $a7, $zero
     /* 12E68 00112E68 324B040C */  jal        func_00112CC8
     /* 12E6C 00112E6C 01000524 */   addiu     $a1, $zero, 0x1
     /* 12E70 00112E70 0000BFDF */  ld         $ra, 0x0($sp)

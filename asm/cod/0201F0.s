@@ -72,14 +72,14 @@ glabel func_001201F0
     /* 202C0 001202C0 2D30A003 */  daddu      $a2, $sp, $zero
     /* 202C4 001202C4 2D384002 */  daddu      $a3, $s2, $zero
     /* 202C8 001202C8 1877040C */  jal        func_0011DC60
-    /* 202CC 001202CC 2D406002 */   daddu     $t0, $s3, $zero
+    /* 202CC 001202CC 2D406002 */   daddu     $a4, $s3, $zero
     /* 202D0 001202D0 0181033C */  lui        $v1, (0x81010002 >> 16)
     /* 202D4 001202D4 02006334 */  ori        $v1, $v1, (0x81010002 & 0xFFFF)
     /* 202D8 001202D8 1C004314 */  bne        $v0, $v1, .L0012034C
     /* 202DC 001202DC 7003BFDF */   ld        $ra, 0x370($sp)
     /* 202E0 001202E0 2D28A002 */  daddu      $a1, $s5, $zero
     /* 202E4 001202E4 2D384002 */  daddu      $a3, $s2, $zero
-    /* 202E8 001202E8 2D406002 */  daddu      $t0, $s3, $zero
+    /* 202E8 001202E8 2D406002 */  daddu      $a4, $s3, $zero
     /* 202EC 001202EC 2D208002 */  daddu      $a0, $s4, $zero
     /* 202F0 001202F0 1877040C */  jal        func_0011DC60
     /* 202F4 001202F4 2D30A003 */   daddu     $a2, $sp, $zero

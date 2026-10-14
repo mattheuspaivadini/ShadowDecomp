@@ -13,7 +13,7 @@ nonmatching func_0012C0A0, 0x54
 glabel func_0012C0A0
     /* 2C0A0 0012C0A0 90FFBD27 */  addiu      $sp, $sp, -0x70
     /* 2C0A4 0012C0A4 FF7F033C */  lui        $v1, (0x7FFFFFFF >> 16)
-    /* 2C0A8 0012C0A8 2D40A000 */  daddu      $t0, $a1, $zero
+    /* 2C0A8 0012C0A8 2D40A000 */  daddu      $a4, $a1, $zero
     /* 2C0AC 0012C0AC 2D28C000 */  daddu      $a1, $a2, $zero
     /* 2C0B0 0012C0B0 FFFF6334 */  ori        $v1, $v1, (0x7FFFFFFF & 0xFFFF)
     /* 2C0B4 0012C0B4 5400A4AF */  sw         $a0, 0x54($sp)
@@ -24,9 +24,9 @@ glabel func_0012C0A0
     /* 2C0C8 0012C0C8 1400A3AF */  sw         $v1, 0x14($sp)
     /* 2C0CC 0012C0CC 0800A3AF */  sw         $v1, 0x8($sp)
     /* 2C0D0 0012C0D0 0C00A2A7 */  sh         $v0, 0xC($sp)
-    /* 2C0D4 0012C0D4 1000A8AF */  sw         $t0, 0x10($sp)
+    /* 2C0D4 0012C0D4 1000A8AF */  sw         $a4, 0x10($sp)
     /* 2C0D8 0012C0D8 4CA6040C */  jal        func_00129930
-    /* 2C0DC 0012C0DC 0000A8AF */   sw        $t0, 0x0($sp)
+    /* 2C0DC 0012C0DC 0000A8AF */   sw        $a4, 0x0($sp)
     /* 2C0E0 0012C0E0 0000A38F */  lw         $v1, 0x0($sp)
     /* 2C0E4 0012C0E4 6000BFDF */  ld         $ra, 0x60($sp)
     /* 2C0E8 0012C0E8 000060A0 */  sb         $zero, 0x0($v1)

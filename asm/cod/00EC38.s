@@ -12,7 +12,7 @@ nonmatching func_0010EC38, 0x20
 
 glabel func_0010EC38
     /* EC38 0010EC38 E0FFBD27 */  addiu      $sp, $sp, -0x20
-    /* EC3C 0010EC3C 2D400000 */  daddu      $t0, $zero, $zero
+    /* EC3C 0010EC3C 2D400000 */  daddu      $a4, $zero, $zero
     /* EC40 0010EC40 1000BFFF */  sd         $ra, 0x10($sp)
     /* EC44 0010EC44 843A040C */  jal        func_0010EA10
     /* EC48 0010EC48 2D38A003 */   daddu     $a3, $sp, $zero

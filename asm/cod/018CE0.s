@@ -12,7 +12,7 @@ nonmatching func_00118CE0, 0x48
 
 glabel func_00118CE0
     /* 18CE0 00118CE0 E0FFBD27 */  addiu      $sp, $sp, -0x20
-    /* 18CE4 00118CE4 04000824 */  addiu      $t0, $zero, 0x4
+    /* 18CE4 00118CE4 04000824 */  addiu      $a4, $zero, 0x4
     /* 18CE8 00118CE8 0000B0FF */  sd         $s0, 0x0($sp)
     /* 18CEC 00118CEC 2D80A000 */  daddu      $s0, $a1, $zero
     /* 18CF0 00118CF0 1000BFFF */  sd         $ra, 0x10($sp)

@@ -20,7 +20,7 @@ glabel func_0012E9C8
     /* 2E9E0 0012E9E0 1A006200 */  div        $zero, $v1, $v0
     /* 2E9E4 0012E9E4 0000B0FF */  sd         $s0, 0x0($sp)
     /* 2E9E8 0012E9E8 0800B1FF */  sd         $s1, 0x8($sp)
-    /* 2E9EC 0012E9EC 2D880001 */  daddu      $s1, $t0, $zero
+    /* 2E9EC 0012E9EC 2D880001 */  daddu      $s1, $a4, $zero
     /* 2E9F0 0012E9F0 1000B2FF */  sd         $s2, 0x10($sp)
     /* 2E9F4 0012E9F4 2D90C000 */  daddu      $s2, $a2, $zero
     /* 2E9F8 0012E9F8 1800B3FF */  sd         $s3, 0x18($sp)

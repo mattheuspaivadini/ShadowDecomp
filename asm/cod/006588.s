@@ -28,10 +28,10 @@ glabel func_00106588
     /* 65C0 001065C0 803A0700 */  sll        $a3, $a3, 10
     /* 65C4 001065C4 2800B1FF */  sd         $s1, 0x28($sp)
     /* 65C8 001065C8 033C0700 */  sra        $a3, $a3, 16
-    /* 65CC 001065CC 01000824 */  addiu      $t0, $zero, 0x1
-    /* 65D0 001065D0 0A000924 */  addiu      $t1, $zero, 0xA
-    /* 65D4 001065D4 08000A24 */  addiu      $t2, $zero, 0x8
-    /* 65D8 001065D8 2D580000 */  daddu      $t3, $zero, $zero
+    /* 65CC 001065CC 01000824 */  addiu      $a4, $zero, 0x1
+    /* 65D0 001065D0 0A000924 */  addiu      $a5, $zero, 0xA
+    /* 65D4 001065D4 08000A24 */  addiu      $a6, $zero, 0x8
+    /* 65D8 001065D8 2D580000 */  daddu      $a7, $zero, $zero
     /* 65DC 001065DC 20001126 */  addiu      $s1, $s0, %lo(D_20000020)
     /* 65E0 001065E0 03340600 */  sra        $a2, $a2, 16
     /* 65E4 001065E4 3000BFFF */  sd         $ra, 0x30($sp)

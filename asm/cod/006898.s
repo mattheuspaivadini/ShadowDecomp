@@ -28,7 +28,7 @@ glabel func_00106898
     /* 68D0 001068D0 3000B2FF */  sd         $s2, 0x30($sp)
     /* 68D4 001068D4 4800BFFF */  sd         $ra, 0x48($sp)
     /* 68D8 001068D8 1E4C040C */  jal        func_00113078
-    /* 68DC 001068DC 2D900001 */   daddu     $s2, $t0, $zero
+    /* 68DC 001068DC 2D900001 */   daddu     $s2, $a4, $zero
     /* 68E0 001068E0 2D20A003 */  daddu      $a0, $sp, $zero
     /* 68E4 001068E4 224C040C */  jal        func_00113088
     /* 68E8 001068E8 40007336 */   ori       $s3, $s3, 0x40

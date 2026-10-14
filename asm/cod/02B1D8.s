@@ -29,14 +29,14 @@ glabel func_0012B1D8
     /* 2B204 0012B204 3401A727 */  addiu      $a3, $sp, 0x134
     /* 2B208 0012B208 0A00A228 */  slti       $v0, $a1, 0xA
     /* 2B20C 0012B20C 20004014 */  bnez       $v0, .L0012B290
-    /* 2B210 0012B210 2D48E000 */   daddu     $t1, $a3, $zero
-    /* 2B214 0012B214 0A000824 */  addiu      $t0, $zero, 0xA
-    /* 2B218 0012B218 1A00A800 */  div        $zero, $a1, $t0
+    /* 2B210 0012B210 2D48E000 */   daddu     $a5, $a3, $zero
+    /* 2B214 0012B214 0A000824 */  addiu      $a4, $zero, 0xA
+    /* 2B218 0012B218 1A00A800 */  div        $zero, $a1, $a4
     /* 2B21C 0012B21C 00000000 */  nop
 .align 2
   .L0012B220:
     /* 2B220 0012B220 FFFFE724 */  addiu      $a3, $a3, -0x1
-    /* 2B224 0012B224 01000051 */  beql       $t0, $zero, .L0012B22C
+    /* 2B224 0012B224 01000051 */  beql       $a4, $zero, .L0012B22C
     /* 2B228 0012B228 CD010000 */   break     0, 7
 .align 2
   .L0012B22C:
@@ -47,13 +47,13 @@ glabel func_0012B1D8
     /* 2B23C 0012B23C 0A00A328 */  slti       $v1, $a1, 0xA
     /* 2B240 0012B240 0000E2A0 */  sb         $v0, 0x0($a3)
     /* 2B244 0012B244 F6FF6050 */  beql       $v1, $zero, .L0012B220
-    /* 2B248 0012B248 1A00A800 */   div       $zero, $a1, $t0
+    /* 2B248 0012B248 1A00A800 */   div       $zero, $a1, $a4
     /* 2B24C 0012B24C FFFFE724 */  addiu      $a3, $a3, -0x1
     /* 2B250 0012B250 3000A224 */  addiu      $v0, $a1, 0x30
-    /* 2B254 0012B254 2B18E900 */  sltu       $v1, $a3, $t1
+    /* 2B254 0012B254 2B18E900 */  sltu       $v1, $a3, $a5
     /* 2B258 0012B258 13006010 */  beqz       $v1, .L0012B2A8
     /* 2B25C 0012B25C 0000E2A0 */   sb        $v0, 0x0($a3)
-    /* 2B260 0012B260 2D282001 */  daddu      $a1, $t1, $zero
+    /* 2B260 0012B260 2D282001 */  daddu      $a1, $a5, $zero
     /* 2B264 0012B264 00000000 */  nop
 .align 2
   .L0012B268:

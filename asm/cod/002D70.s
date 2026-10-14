@@ -21,7 +21,7 @@ glabel func_00102D70
     /* 2D8C 00102D8C 4800B5FF */  sd         $s5, 0x48($sp)
     /* 2D90 00102D90 2DA8E000 */  daddu      $s5, $a3, $zero
     /* 2D94 00102D94 5000B6FF */  sd         $s6, 0x50($sp)
-    /* 2D98 00102D98 2DB00001 */  daddu      $s6, $t0, $zero
+    /* 2D98 00102D98 2DB00001 */  daddu      $s6, $a4, $zero
     /* 2D9C 00102D9C 2000B0FF */  sd         $s0, 0x20($sp)
     /* 2DA0 00102DA0 2800B1FF */  sd         $s1, 0x28($sp)
     /* 2DA4 00102DA4 5A004012 */  beqz       $s2, .L00102F10

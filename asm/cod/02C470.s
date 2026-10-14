@@ -13,7 +13,7 @@ nonmatching func_0012C470, 0x1264
 glabel func_0012C470
     /* 2C470 0012C470 50FFBD27 */  addiu      $sp, $sp, -0xB0
     /* 2C474 0012C474 6000B0FF */  sd         $s0, 0x60($sp)
-    /* 2C478 0012C478 2D802001 */  daddu      $s0, $t1, $zero
+    /* 2C478 0012C478 2D802001 */  daddu      $s0, $a5, $zero
     /* 2C47C 0012C47C 8000B4FF */  sd         $s4, 0x80($sp)
     /* 2C480 0012C480 2DA0A000 */  daddu      $s4, $a1, $zero
     /* 2C484 0012C484 9800B7FF */  sd         $s7, 0x98($sp)
@@ -26,19 +26,19 @@ glabel func_0012C470
     /* 2C4A0 0012C4A0 A000BEFF */  sd         $fp, 0xA0($sp)
     /* 2C4A4 0012C4A4 A800BFFF */  sd         $ra, 0xA8($sp)
     /* 2C4A8 0012C4A8 0800A6AF */  sw         $a2, 0x8($sp)
-    /* 2C4AC 0012C4AC 4000EB8E */  lw         $t3, 0x40($s7)
+    /* 2C4AC 0012C4AC 4000EB8E */  lw         $a7, 0x40($s7)
     /* 2C4B0 0012C4B0 0C00A7AF */  sw         $a3, 0xC($sp)
-    /* 2C4B4 0012C4B4 1000A8AF */  sw         $t0, 0x10($sp)
-    /* 2C4B8 0012C4B8 0A006011 */  beqz       $t3, .L0012C4E4
-    /* 2C4BC 0012C4BC 1400AAAF */   sw        $t2, 0x14($sp)
+    /* 2C4B4 0012C4B4 1000A8AF */  sw         $a4, 0x10($sp)
+    /* 2C4B8 0012C4B8 0A006011 */  beqz       $a7, .L0012C4E4
+    /* 2C4BC 0012C4BC 1400AAAF */   sw        $a6, 0x14($sp)
     /* 2C4C0 0012C4C0 4400E68E */  lw         $a2, 0x44($s7)
     /* 2C4C4 0012C4C4 01000324 */  addiu      $v1, $zero, 0x1
-    /* 2C4C8 0012C4C8 2D286001 */  daddu      $a1, $t3, $zero
-    /* 2C4CC 0012C4CC 040066AD */  sw         $a2, 0x4($t3)
+    /* 2C4C8 0012C4C8 2D286001 */  daddu      $a1, $a7, $zero
+    /* 2C4CC 0012C4CC 040066AD */  sw         $a2, 0x4($a7)
     /* 2C4D0 0012C4D0 4400E28E */  lw         $v0, 0x44($s7)
     /* 2C4D4 0012C4D4 04184300 */  sllv       $v1, $v1, $v0
     /* 2C4D8 0012C4D8 24BA040C */  jal        func_0012E890
-    /* 2C4DC 0012C4DC 080063AD */   sw        $v1, 0x8($t3)
+    /* 2C4DC 0012C4DC 080063AD */   sw        $v1, 0x8($a7)
     /* 2C4E0 0012C4E0 4000E0AE */  sw         $zero, 0x40($s7)
 .align 2
   .L0012C4E4:

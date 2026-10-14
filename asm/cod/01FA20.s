@@ -51,7 +51,7 @@ glabel func_0011FA20
     /* 1FAAC 0011FAAC 2D30A003 */  daddu      $a2, $sp, $zero
     /* 1FAB0 0011FAB0 2D380000 */  daddu      $a3, $zero, $zero
     /* 1FAB4 0011FAB4 1877040C */  jal        func_0011DC60
-    /* 1FAB8 0011FAB8 2D400000 */   daddu     $t0, $zero, $zero
+    /* 1FAB8 0011FAB8 2D400000 */   daddu     $a4, $zero, $zero
     /* 1FABC 0011FABC 0181033C */  lui        $v1, (0x81010011 >> 16)
     /* 1FAC0 0011FAC0 11006334 */  ori        $v1, $v1, (0x81010011 & 0xFFFF)
     /* 1FAC4 0011FAC4 18004314 */  bne        $v0, $v1, .L0011FB28

@@ -65,11 +65,11 @@ glabel func_0010C6E8
     /* C7A4 0010C7A4 0000A0AF */  sw         $zero, 0x0($sp)
     /* C7A8 0010C7A8 2D300000 */  daddu      $a2, $zero, $zero
     /* C7AC 0010C7AC 0800A0AF */  sw         $zero, 0x8($sp)
-    /* C7B0 0010C7B0 14000824 */  addiu      $t0, $zero, 0x14
-    /* C7B4 0010C7B4 2D486002 */  daddu      $t1, $s3, $zero
-    /* C7B8 0010C7B8 04000A24 */  addiu      $t2, $zero, 0x4
+    /* C7B0 0010C7B0 14000824 */  addiu      $a4, $zero, 0x14
+    /* C7B4 0010C7B4 2D486002 */  daddu      $a5, $s3, $zero
+    /* C7B8 0010C7B8 04000A24 */  addiu      $a6, $zero, 0x4
     /* C7BC 0010C7BC 8A28040C */  jal        func_0010A228
-    /* C7C0 0010C7C0 2D580000 */   daddu     $t3, $zero, $zero
+    /* C7C0 0010C7C0 2D580000 */   daddu     $a7, $zero, $zero
     /* C7C4 0010C7C4 07004304 */  bgezl      $v0, .L0010C7E4
     /* C7C8 0010C7C8 040000AE */   sw        $zero, 0x4($s0)
     /* C7CC 0010C7CC FC1B040C */  jal        func_00106FF0

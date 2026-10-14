@@ -37,10 +37,10 @@ glabel func_00121D58
   .L00121DB0:
     /* 21DB0 00121DB0 1600133C */  lui        $s3, %hi(D_00163D40)
     /* 21DB4 00121DB4 2D108000 */  daddu      $v0, $a0, $zero
-    /* 21DB8 00121DB8 1000898C */  lw         $t1, 0x10($a0)
+    /* 21DB8 00121DB8 1000898C */  lw         $a5, 0x10($a0)
     /* 21DBC 00121DBC 2D184000 */  daddu      $v1, $v0, $zero
     /* 21DC0 00121DC0 0800468C */  lw         $a2, 0x8($v0)
-    /* 21DC4 00121DC4 0C00688C */  lw         $t0, 0xC($v1)
+    /* 21DC4 00121DC4 0C00688C */  lw         $a4, 0xC($v1)
     /* 21DC8 00121DC8 403D6226 */  addiu      $v0, $s3, %lo(D_00163D40)
     /* 21DCC 00121DCC 01000324 */  addiu      $v1, $zero, 0x1
     /* 21DD0 00121DD0 200054AC */  sw         $s4, 0x20($v0)
@@ -48,9 +48,9 @@ glabel func_00121D58
     /* 21DD8 00121DD8 80200724 */  addiu      $a3, $zero, 0x2080
     /* 21DDC 00121DDC 040043AC */  sw         $v1, 0x4($v0)
     /* 21DE0 00121DE0 1600103C */  lui        $s0, %hi(D_00165DC0)
-    /* 21DE4 00121DE4 0C0048AC */  sw         $t0, 0xC($v0)
+    /* 21DE4 00121DE4 0C0048AC */  sw         $a4, 0xC($v0)
     /* 21DE8 00121DE8 C05D1026 */  addiu      $s0, $s0, %lo(D_00165DC0)
-    /* 21DEC 00121DEC 100049AC */  sw         $t1, 0x10($v0)
+    /* 21DEC 00121DEC 100049AC */  sw         $a5, 0x10($v0)
     /* 21DF0 00121DF0 2D200002 */  daddu      $a0, $s0, $zero
     /* 21DF4 00121DF4 0000A7AF */  sw         $a3, 0x0($sp)
     /* 21DF8 00121DF8 2D280000 */  daddu      $a1, $zero, $zero
@@ -75,7 +75,7 @@ glabel func_00121D58
     /* 21E3C 00121E3C 4459258E */  lw         $a1, %lo(D_00135944)($s1)
     /* 21E40 00121E40 403D6726 */  addiu      $a3, $s3, %lo(D_00163D40)
     /* 21E44 00121E44 765A040C */  jal        func_001169D8
-    /* 21E48 00121E48 5810A826 */   addiu     $t0, $s5, %lo(func_00121058)
+    /* 21E48 00121E48 5810A826 */   addiu     $a4, $s5, %lo(func_00121058)
     /* 21E4C 00121E4C FAFF5454 */  bnel       $v0, $s4, .L00121E38
     /* 21E50 00121E50 0000448E */   lw        $a0, 0x0($s2)
     /* 21E54 00121E54 CC83040C */  jal        func_00120F30

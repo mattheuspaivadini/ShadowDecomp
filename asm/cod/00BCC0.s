@@ -14,11 +14,11 @@ glabel func_0010BCC0
     /* BCC0 0010BCC0 30FFBD27 */  addiu      $sp, $sp, -0xD0
     /* BCC4 0010BCC4 B000B7FF */  sd         $s7, 0xB0($sp)
     /* BCC8 0010BCC8 9000B5FF */  sd         $s5, 0x90($sp)
-    /* BCCC 0010BCCC 2DB80001 */  daddu      $s7, $t0, $zero
+    /* BCCC 0010BCCC 2DB80001 */  daddu      $s7, $a4, $zero
     /* BCD0 0010BCD0 8000B4FF */  sd         $s4, 0x80($sp)
     /* BCD4 0010BCD4 2DA8A000 */  daddu      $s5, $a1, $zero
     /* BCD8 0010BCD8 7000B3FF */  sd         $s3, 0x70($sp)
-    /* BCDC 0010BCDC 2DA02001 */  daddu      $s4, $t1, $zero
+    /* BCDC 0010BCDC 2DA02001 */  daddu      $s4, $a5, $zero
     /* BCE0 0010BCE0 4000B0FF */  sd         $s0, 0x40($sp)
     /* BCE4 0010BCE4 2D98E000 */  daddu      $s3, $a3, $zero
     /* BCE8 0010BCE8 A000B6FF */  sd         $s6, 0xA0($sp)
@@ -109,11 +109,11 @@ glabel func_0010BCC0
     /* BE04 0010BE04 0800A0AF */  sw         $zero, 0x8($sp)
     /* BE08 0010BE08 1A000524 */  addiu      $a1, $zero, 0x1A
     /* BE0C 0010BE0C 2D300000 */  daddu      $a2, $zero, $zero
-    /* BE10 0010BE10 20040824 */  addiu      $t0, $zero, 0x420
-    /* BE14 0010BE14 2D482002 */  daddu      $t1, $s1, $zero
-    /* BE18 0010BE18 04000A24 */  addiu      $t2, $zero, 0x4
+    /* BE10 0010BE10 20040824 */  addiu      $a4, $zero, 0x420
+    /* BE14 0010BE14 2D482002 */  daddu      $a5, $s1, $zero
+    /* BE18 0010BE18 04000A24 */  addiu      $a6, $zero, 0x4
     /* BE1C 0010BE1C 8A28040C */  jal        func_0010A228
-    /* BE20 0010BE20 2D580000 */   daddu     $t3, $zero, $zero
+    /* BE20 0010BE20 2D580000 */   daddu     $a7, $zero, $zero
     /* BE24 0010BE24 07004104 */  bgez       $v0, .L0010BE44
     /* BE28 0010BE28 0020023C */   lui       $v0, (0x20000000 >> 16)
     /* BE2C 0010BE2C FC1B040C */  jal        func_00106FF0

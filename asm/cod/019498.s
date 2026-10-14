@@ -16,12 +16,12 @@ glabel func_00119498
     /* 194A0 001194A0 2D88A000 */  daddu      $s1, $a1, $zero
     /* 194A4 001194A4 0000B0FF */  sd         $s0, 0x0($sp)
     /* 194A8 001194A8 2D80E000 */  daddu      $s0, $a3, $zero
-    /* 194AC 001194AC 2D280001 */  daddu      $a1, $t0, $zero
+    /* 194AC 001194AC 2D280001 */  daddu      $a1, $a4, $zero
     /* 194B0 001194B0 2000B2FF */  sd         $s2, 0x20($sp)
-    /* 194B4 001194B4 80401000 */  sll        $t0, $s0, 2
+    /* 194B4 001194B4 80401000 */  sll        $a4, $s0, 2
     /* 194B8 001194B8 2D90C000 */  daddu      $s2, $a2, $zero
     /* 194BC 001194BC 3000BFFF */  sd         $ra, 0x30($sp)
-    /* 194C0 001194C0 04000825 */  addiu      $t0, $t0, 0x4
+    /* 194C0 001194C0 04000825 */  addiu      $a4, $a4, 0x4
     /* 194C4 001194C4 2D302002 */  daddu      $a2, $s1, $zero
     /* 194C8 001194C8 E060040C */  jal        func_00118380
     /* 194CC 001194CC 2D380000 */   daddu     $a3, $zero, $zero

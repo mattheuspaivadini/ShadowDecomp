@@ -22,7 +22,7 @@ glabel func_001069E8
     /* 6A08 00106A08 2DA8A000 */  daddu      $s5, $a1, $zero
     /* 6A0C 00106A0C 25284300 */  or         $a1, $v0, $v1
     /* 6A10 00106A10 2800B1FF */  sd         $s1, 0x28($sp)
-    /* 6A14 00106A14 2D882001 */  daddu      $s1, $t1, $zero
+    /* 6A14 00106A14 2D882001 */  daddu      $s1, $a5, $zero
     /* 6A18 00106A18 3000B2FF */  sd         $s2, 0x30($sp)
     /* 6A1C 00106A1C 2D90E000 */  daddu      $s2, $a3, $zero
     /* 6A20 00106A20 3800B3FF */  sd         $s3, 0x38($sp)
@@ -30,7 +30,7 @@ glabel func_001069E8
     /* 6A28 00106A28 4000B4FF */  sd         $s4, 0x40($sp)
     /* 6A2C 00106A2C 5000BFFF */  sd         $ra, 0x50($sp)
     /* 6A30 00106A30 1E4C040C */  jal        func_00113078
-    /* 6A34 00106A34 2DA00001 */   daddu     $s4, $t0, $zero
+    /* 6A34 00106A34 2DA00001 */   daddu     $s4, $a4, $zero
     /* 6A38 00106A38 2D20A003 */  daddu      $a0, $sp, $zero
     /* 6A3C 00106A3C 224C040C */  jal        func_00113088
     /* 6A40 00106A40 10001036 */   ori       $s0, $s0, 0x10

@@ -14,7 +14,7 @@ glabel func_0010EC58
     /* EC58 0010EC58 F0FFBD27 */  addiu      $sp, $sp, -0x10
     /* EC5C 0010EC5C 0000BFFF */  sd         $ra, 0x0($sp)
     /* EC60 0010EC60 843A040C */  jal        func_0010EA10
-    /* EC64 0010EC64 2D400000 */   daddu     $t0, $zero, $zero
+    /* EC64 0010EC64 2D400000 */   daddu     $a4, $zero, $zero
     /* EC68 0010EC68 0000BFDF */  ld         $ra, 0x0($sp)
     /* EC6C 0010EC6C 0800E003 */  jr         $ra
     /* EC70 0010EC70 1000BD27 */   addiu     $sp, $sp, 0x10

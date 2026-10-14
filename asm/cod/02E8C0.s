@@ -12,7 +12,7 @@ nonmatching func_0012E8C0, 0x108
 
 glabel func_0012E8C0
     /* 2E8C0 0012E8C0 D0FFBD27 */  addiu      $sp, $sp, -0x30
-    /* 2E8C4 0012E8C4 2D40C000 */  daddu      $t0, $a2, $zero
+    /* 2E8C4 0012E8C4 2D40C000 */  daddu      $a4, $a2, $zero
     /* 2E8C8 0012E8C8 0800B1FF */  sd         $s1, 0x8($sp)
     /* 2E8CC 0012E8CC 2D88A000 */  daddu      $s1, $a1, $zero
     /* 2E8D0 0012E8D0 1800B3FF */  sd         $s3, 0x18($sp)
@@ -22,18 +22,18 @@ glabel func_0012E8C0
     /* 2E8E0 0012E8E0 0000B0FF */  sd         $s0, 0x0($sp)
     /* 2E8E4 0012E8E4 14002726 */  addiu      $a3, $s1, 0x14
     /* 2E8E8 0012E8E8 1000B2FF */  sd         $s2, 0x10($sp)
-    /* 2E8EC 0012E8EC 2D480000 */  daddu      $t1, $zero, $zero
+    /* 2E8EC 0012E8EC 2D480000 */  daddu      $a5, $zero, $zero
     /* 2E8F0 0012E8F0 2800BFFF */  sd         $ra, 0x28($sp)
     /* 2E8F4 0012E8F4 1000328E */  lw         $s2, 0x10($s1)
 .align 2
   .L0012E8F8:
     /* 2E8F8 0012E8F8 0000E38C */  lw         $v1, 0x0($a3)
-    /* 2E8FC 0012E8FC 01002925 */  addiu      $t1, $t1, 0x1
-    /* 2E900 0012E900 2A303201 */  slt        $a2, $t1, $s2
+    /* 2E8FC 0012E8FC 01002925 */  addiu      $a5, $a5, 0x1
+    /* 2E900 0012E900 2A303201 */  slt        $a2, $a5, $s2
     /* 2E904 0012E904 FFFF6430 */  andi       $a0, $v1, 0xFFFF
     /* 2E908 0012E908 021C0300 */  srl        $v1, $v1, 16
-    /* 2E90C 0012E90C 18108800 */  mult       $v0, $a0, $t0
-    /* 2E910 0012E910 18186800 */  mult       $v1, $v1, $t0
+    /* 2E90C 0012E90C 18108800 */  mult       $v0, $a0, $a4
+    /* 2E910 0012E910 18186800 */  mult       $v1, $v1, $a4
     /* 2E914 0012E914 21205300 */  addu       $a0, $v0, $s3
     /* 2E918 0012E918 022C0400 */  srl        $a1, $a0, 16
     /* 2E91C 0012E91C FFFF8430 */  andi       $a0, $a0, 0xFFFF

@@ -25,7 +25,7 @@ glabel func_00108E88
     /* 8EB4 00108EB4 2D804000 */  daddu      $s0, $v0, $zero
     /* 8EB8 00108EB8 688D8424 */  addiu      $a0, $a0, %lo(func_00108D68)
     /* 8EBC 00108EBC 2D382002 */  daddu      $a3, $s1, $zero
-    /* 8EC0 00108EC0 2D404002 */  daddu      $t0, $s2, $zero
+    /* 8EC0 00108EC0 2D404002 */  daddu      $a4, $s2, $zero
     /* 8EC4 00108EC4 2D28A003 */  daddu      $a1, $sp, $zero
     /* 8EC8 00108EC8 FE1F040C */  jal        func_00107FF8
     /* 8ECC 00108ECC FFFFC634 */   ori       $a2, $a2, (0xFFFFFFFF & 0xFFFF)

@@ -35,7 +35,7 @@ glabel func_00120370
     /* 203C4 001203C4 2D30A003 */  daddu      $a2, $sp, $zero
     /* 203C8 001203C8 2D380000 */  daddu      $a3, $zero, $zero
     /* 203CC 001203CC 1877040C */  jal        func_0011DC60
-    /* 203D0 001203D0 2D400000 */   daddu     $t0, $zero, $zero
+    /* 203D0 001203D0 2D400000 */   daddu     $a4, $zero, $zero
     /* 203D4 001203D4 0181033C */  lui        $v1, (0x81010011 >> 16)
     /* 203D8 001203D8 2D204000 */  daddu      $a0, $v0, $zero
     /* 203DC 001203DC 11006334 */  ori        $v1, $v1, (0x81010011 & 0xFFFF)

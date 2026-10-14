@@ -70,11 +70,11 @@ glabel func_0010B050
     /* B120 0010B120 0000A0AF */  sw         $zero, 0x0($sp)
     /* B124 0010B124 2D300000 */  daddu      $a2, $zero, $zero
     /* B128 0010B128 0800A0AF */  sw         $zero, 0x8($sp)
-    /* B12C 0010B12C 14000824 */  addiu      $t0, $zero, 0x14
-    /* B130 0010B130 2D486002 */  daddu      $t1, $s3, $zero
-    /* B134 0010B134 04000A24 */  addiu      $t2, $zero, 0x4
+    /* B12C 0010B12C 14000824 */  addiu      $a4, $zero, 0x14
+    /* B130 0010B130 2D486002 */  daddu      $a5, $s3, $zero
+    /* B134 0010B134 04000A24 */  addiu      $a6, $zero, 0x4
     /* B138 0010B138 8A28040C */  jal        func_0010A228
-    /* B13C 0010B13C 2D580000 */   daddu     $t3, $zero, $zero
+    /* B13C 0010B13C 2D580000 */   daddu     $a7, $zero, $zero
     /* B140 0010B140 07004304 */  bgezl      $v0, .L0010B160
     /* B144 0010B144 040000AE */   sw        $zero, 0x4($s0)
     /* B148 0010B148 FC1B040C */  jal        func_00106FF0

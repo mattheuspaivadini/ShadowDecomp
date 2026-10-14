@@ -24,7 +24,7 @@ glabel func_001094D8
     /* 9500 00109500 2000B0FF */  sd         $s0, 0x20($sp)
     /* 9504 00109504 2DA8E000 */  daddu      $s5, $a3, $zero
     /* 9508 00109508 8000BFFF */  sd         $ra, 0x80($sp)
-    /* 950C 0010950C 2D900001 */  daddu      $s2, $t0, $zero
+    /* 950C 0010950C 2D900001 */  daddu      $s2, $a4, $zero
     /* 9510 00109510 7024040C */  jal        func_001091C0
     /* 9514 00109514 40598424 */   addiu     $a0, $a0, %lo(D_00145940)
     /* 9518 00109518 2D804000 */  daddu      $s0, $v0, $zero
@@ -61,9 +61,9 @@ glabel func_001094D8
     /* 958C 0010958C 0C008434 */  ori        $a0, $a0, (0x8000000C & 0xFFFF)
     /* 9590 00109590 40000624 */  addiu      $a2, $zero, 0x40
     /* 9594 00109594 2D380000 */  daddu      $a3, $zero, $zero
-    /* 9598 00109598 2D400000 */  daddu      $t0, $zero, $zero
+    /* 9598 00109598 2D400000 */  daddu      $a4, $zero, $zero
     /* 959C 0010959C 804B040C */  jal        func_00112E00
-    /* 95A0 001095A0 2D480000 */   daddu     $t1, $zero, $zero
+    /* 95A0 001095A0 2D480000 */   daddu     $a5, $zero, $zero
     /* 95A4 001095A4 07004014 */  bnez       $v0, .L001095C4
     /* 95A8 001095A8 00000000 */   nop
     /* 95AC 001095AC 9A24040C */  jal        func_00109268
@@ -89,9 +89,9 @@ glabel func_001094D8
     /* 95EC 001095EC 2D280002 */  daddu      $a1, $s0, $zero
     /* 95F0 001095F0 40000624 */  addiu      $a2, $zero, 0x40
     /* 95F4 001095F4 2D380000 */  daddu      $a3, $zero, $zero
-    /* 95F8 001095F8 2D400000 */  daddu      $t0, $zero, $zero
+    /* 95F8 001095F8 2D400000 */  daddu      $a4, $zero, $zero
     /* 95FC 001095FC 804B040C */  jal        func_00112E00
-    /* 9600 00109600 2D480000 */   daddu     $t1, $zero, $zero
+    /* 9600 00109600 2D480000 */   daddu     $a5, $zero, $zero
     /* 9604 00109604 04004014 */  bnez       $v0, .L00109618
     /* 9608 00109608 2D100000 */   daddu     $v0, $zero, $zero
     /* 960C 0010960C 9A24040C */  jal        func_00109268

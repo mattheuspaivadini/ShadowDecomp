@@ -37,7 +37,7 @@ glabel func_0011E988
     /* 1E9E4 0011E9E4 2D286002 */  daddu      $a1, $s3, $zero
     /* 1E9E8 0011E9E8 2D30A003 */  daddu      $a2, $sp, $zero
     /* 1E9EC 0011E9EC 2D380000 */  daddu      $a3, $zero, $zero
-    /* 1E9F0 0011E9F0 2D400000 */  daddu      $t0, $zero, $zero
+    /* 1E9F0 0011E9F0 2D400000 */  daddu      $a4, $zero, $zero
     /* 1E9F4 0011E9F4 1877040C */  jal        func_0011DC60
     /* 1E9F8 0011E9F8 2D800000 */   daddu     $s0, $zero, $zero
     /* 1E9FC 0011E9FC 0181033C */  lui        $v1, (0x81010011 >> 16)

@@ -74,12 +74,12 @@ glabel func_0011A188
     /* 1A270 0011A270 701DC624 */  addiu      $a2, $a2, %lo(D_00141D70)
     /* 1A274 0011A274 508CE724 */  addiu      $a3, $a3, %lo(D_00138C50)
     /* 1A278 0011A278 1500023C */  lui        $v0, %hi(D_00151904)
-    /* 1A27C 0011A27C 00C00834 */  ori        $t0, $zero, 0xC000
+    /* 1A27C 0011A27C 00C00834 */  ori        $a4, $zero, 0xC000
     /* 1A280 0011A280 041940AC */  sw         $zero, %lo(D_00151904)($v0)
     /* 1A284 0011A284 2D20A003 */  daddu      $a0, $sp, $zero
     /* 1A288 0011A288 0400A3AF */  sw         $v1, 0x4($sp)
     /* 1A28C 0011A28C 0800A5AF */  sw         $a1, 0x8($sp)
-    /* 1A290 0011A290 0C00A8AF */  sw         $t0, 0xC($sp)
+    /* 1A290 0011A290 0C00A8AF */  sw         $a4, 0xC($sp)
     /* 1A294 0011A294 1000A6AF */  sw         $a2, 0x10($sp)
     /* 1A298 0011A298 2000A7AF */  sw         $a3, 0x20($sp)
     /* 1A29C 0011A29C 781B040C */  jal        func_00106DE0

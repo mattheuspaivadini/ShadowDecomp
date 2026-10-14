@@ -66,11 +66,11 @@ glabel func_0010C850
     /* C910 0010C910 0000A0AF */  sw         $zero, 0x0($sp)
     /* C914 0010C914 2D300000 */  daddu      $a2, $zero, $zero
     /* C918 0010C918 0800A0AF */  sw         $zero, 0x8($sp)
-    /* C91C 0010C91C 20000824 */  addiu      $t0, $zero, 0x20
-    /* C920 0010C920 2D480002 */  daddu      $t1, $s0, $zero
-    /* C924 0010C924 04000A24 */  addiu      $t2, $zero, 0x4
+    /* C91C 0010C91C 20000824 */  addiu      $a4, $zero, 0x20
+    /* C920 0010C920 2D480002 */  daddu      $a5, $s0, $zero
+    /* C924 0010C924 04000A24 */  addiu      $a6, $zero, 0x4
     /* C928 0010C928 8A28040C */  jal        func_0010A228
-    /* C92C 0010C92C 2D580000 */   daddu     $t3, $zero, $zero
+    /* C92C 0010C92C 2D580000 */   daddu     $a7, $zero, $zero
     /* C930 0010C930 07004104 */  bgez       $v0, .L0010C950
     /* C934 0010C934 0020023C */   lui       $v0, (0x20000000 >> 16)
     /* C938 0010C938 081C040C */  jal        func_00107020

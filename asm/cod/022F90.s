@@ -26,9 +26,9 @@ glabel func_00122F90
     /* 22FC0 00122FC0 1200063C */  lui        $a2, %hi(func_00122EA8)
     /* 22FC4 00122FC4 1700073C */  lui        $a3, %hi(D_00168F00)
     /* 22FC8 00122FC8 0080053C */  lui        $a1, (0x80001101 >> 16)
-    /* 22FCC 00122FCC 2D500002 */  daddu      $t2, $s0, $zero
-    /* 22FD0 00122FD0 2D400000 */  daddu      $t0, $zero, $zero
-    /* 22FD4 00122FD4 2D480000 */  daddu      $t1, $zero, $zero
+    /* 22FCC 00122FCC 2D500002 */  daddu      $a6, $s0, $zero
+    /* 22FD0 00122FD0 2D400000 */  daddu      $a4, $zero, $zero
+    /* 22FD4 00122FD4 2D480000 */  daddu      $a5, $zero, $zero
     /* 22FD8 00122FD8 A82EC624 */  addiu      $a2, $a2, %lo(func_00122EA8)
     /* 22FDC 00122FDC 008FE724 */  addiu      $a3, $a3, %lo(D_00168F00)
     /* 22FE0 00122FE0 109F8424 */  addiu      $a0, $a0, %lo(D_00169F10)

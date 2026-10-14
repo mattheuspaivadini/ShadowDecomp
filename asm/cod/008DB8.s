@@ -13,15 +13,15 @@ nonmatching func_00108DB8, 0x4C
 glabel func_00108DB8
     /* 8DB8 00108DB8 80FFBD27 */  addiu      $sp, $sp, -0x80
     /* 8DBC 00108DBC 0000B0FF */  sd         $s0, 0x0($sp)
-    /* 8DC0 00108DC0 6000A8FF */  sd         $t0, 0x60($sp)
+    /* 8DC0 00108DC0 6000A8FF */  sd         $a4, 0x60($sp)
     /* 8DC4 00108DC4 2D80C000 */  daddu      $s0, $a2, $zero
     /* 8DC8 00108DC8 1000BFFF */  sd         $ra, 0x10($sp)
-    /* 8DCC 00108DCC 6000A827 */  addiu      $t0, $sp, 0x60
+    /* 8DCC 00108DCC 6000A827 */  addiu      $a4, $sp, 0x60
     /* 8DD0 00108DD0 0000068E */  lw         $a2, 0x0($s0)
-    /* 8DD4 00108DD4 6800A9FF */  sd         $t1, 0x68($sp)
-    /* 8DD8 00108DD8 7000AAFF */  sd         $t2, 0x70($sp)
+    /* 8DD4 00108DD4 6800A9FF */  sd         $a5, 0x68($sp)
+    /* 8DD8 00108DD8 7000AAFF */  sd         $a6, 0x70($sp)
     /* 8DDC 00108DDC FE1F040C */  jal        func_00107FF8
-    /* 8DE0 00108DE0 7800ABFF */   sd        $t3, 0x78($sp)
+    /* 8DE0 00108DE0 7800ABFF */   sd        $a7, 0x78($sp)
     /* 8DE4 00108DE4 0000038E */  lw         $v1, 0x0($s0)
     /* 8DE8 00108DE8 2D204000 */  daddu      $a0, $v0, $zero
     /* 8DEC 00108DEC 1000BFDF */  ld         $ra, 0x10($sp)

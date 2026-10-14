@@ -122,11 +122,11 @@ glabel func_0010CDB0
     /* CF18 0010CF18 11000524 */  addiu      $a1, $zero, 0x11
     /* CF1C 0010CF1C 0800A0AF */  sw         $zero, 0x8($sp)
     /* CF20 0010CF20 2D300000 */  daddu      $a2, $zero, $zero
-    /* CF24 0010CF24 0C080824 */  addiu      $t0, $zero, 0x80C
-    /* CF28 0010CF28 2D488002 */  daddu      $t1, $s4, $zero
-    /* CF2C 0010CF2C 04000A24 */  addiu      $t2, $zero, 0x4
+    /* CF24 0010CF24 0C080824 */  addiu      $a4, $zero, 0x80C
+    /* CF28 0010CF28 2D488002 */  daddu      $a5, $s4, $zero
+    /* CF2C 0010CF2C 04000A24 */  addiu      $a6, $zero, 0x4
     /* CF30 0010CF30 8A28040C */  jal        func_0010A228
-    /* CF34 0010CF34 2D580000 */   daddu     $t3, $zero, $zero
+    /* CF34 0010CF34 2D580000 */   daddu     $a7, $zero, $zero
     /* CF38 0010CF38 07004104 */  bgez       $v0, .L0010CF58
     /* CF3C 0010CF3C 0020023C */   lui       $v0, (0x20000000 >> 16)
     /* CF40 0010CF40 FC1B040C */  jal        func_00106FF0

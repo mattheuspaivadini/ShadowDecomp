@@ -32,16 +32,16 @@ glabel func_00123260
     /* 232A8 001232A8 2D100002 */   daddu     $v0, $s0, $zero
 .align 2
   .L001232AC:
-    /* 232AC 001232AC 12000B3C */  lui        $t3, %hi(func_00123180)
+    /* 232AC 001232AC 12000B3C */  lui        $a7, %hi(func_00123180)
     /* 232B0 001232B0 0000B0AF */  sw         $s0, 0x0($sp)
     /* 232B4 001232B4 2D206002 */  daddu      $a0, $s3, $zero
     /* 232B8 001232B8 2D284002 */  daddu      $a1, $s2, $zero
-    /* 232BC 001232BC 80316B25 */  addiu      $t3, $t3, %lo(func_00123180)
+    /* 232BC 001232BC 80316B25 */  addiu      $a7, $a7, %lo(func_00123180)
     /* 232C0 001232C0 01000624 */  addiu      $a2, $zero, 0x1
-    /* 232C4 001232C4 00100824 */  addiu      $t0, $zero, 0x1000
-    /* 232C8 001232C8 2D48E000 */  daddu      $t1, $a3, $zero
+    /* 232C4 001232C4 00100824 */  addiu      $a4, $zero, 0x1000
+    /* 232C8 001232C8 2D48E000 */  daddu      $a5, $a3, $zero
     /* 232CC 001232CC 6026040C */  jal        func_00109980
-    /* 232D0 001232D0 00100A24 */   addiu     $t2, $zero, 0x1000
+    /* 232D0 001232D0 00100A24 */   addiu     $a6, $zero, 0x1000
 .align 2
   .L001232D4:
     /* 232D4 001232D4 5000BFDF */  ld         $ra, 0x50($sp)

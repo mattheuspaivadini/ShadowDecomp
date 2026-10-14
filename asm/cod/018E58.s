@@ -14,11 +14,11 @@ glabel func_00118E58
     /* 18E58 00118E58 B0FFBD27 */  addiu      $sp, $sp, -0x50
     /* 18E5C 00118E5C 2000B2FF */  sd         $s2, 0x20($sp)
     /* 18E60 00118E60 0000B0FF */  sd         $s0, 0x0($sp)
-    /* 18E64 00118E64 2D902001 */  daddu      $s2, $t1, $zero
+    /* 18E64 00118E64 2D902001 */  daddu      $s2, $a5, $zero
     /* 18E68 00118E68 2D80A000 */  daddu      $s0, $a1, $zero
     /* 18E6C 00118E6C 3000B3FF */  sd         $s3, 0x30($sp)
     /* 18E70 00118E70 1000B1FF */  sd         $s1, 0x10($sp)
-    /* 18E74 00118E74 2D980001 */  daddu      $s3, $t0, $zero
+    /* 18E74 00118E74 2D980001 */  daddu      $s3, $a4, $zero
     /* 18E78 00118E78 4000BFFF */  sd         $ra, 0x40($sp)
     /* 18E7C 00118E7C 2D888000 */  daddu      $s1, $a0, $zero
     /* 18E80 00118E80 000006AE */  sw         $a2, 0x0($s0)
@@ -27,14 +27,14 @@ glabel func_00118E58
     /* 18E8C 00118E8C 03000624 */  addiu      $a2, $zero, 0x3
     /* 18E90 00118E90 2D386002 */  daddu      $a3, $s3, $zero
     /* 18E94 00118E94 0E61040C */  jal        func_00118438
-    /* 18E98 00118E98 2D404002 */   daddu     $t0, $s2, $zero
+    /* 18E98 00118E98 2D404002 */   daddu     $a4, $s2, $zero
     /* 18E9C 00118E9C 11004004 */  bltz       $v0, .L00118EE4
     /* 18EA0 00118EA0 2D202002 */   daddu     $a0, $s1, $zero
     /* 18EA4 00118EA4 0C004726 */  addiu      $a3, $s2, 0xC
     /* 18EA8 00118EA8 09000524 */  addiu      $a1, $zero, 0x9
     /* 18EAC 00118EAC 2D300002 */  daddu      $a2, $s0, $zero
     /* 18EB0 00118EB0 E060040C */  jal        func_00118380
-    /* 18EB4 00118EB4 2D40E000 */   daddu     $t0, $a3, $zero
+    /* 18EB4 00118EB4 2D40E000 */   daddu     $a4, $a3, $zero
     /* 18EB8 00118EB8 03004104 */  bgez       $v0, .L00118EC8
     /* 18EBC 00118EBC 2D202002 */   daddu     $a0, $s1, $zero
     /* 18EC0 00118EC0 08000010 */  b          .L00118EE4
@@ -42,7 +42,7 @@ glabel func_00118E58
 .align 2
   .L00118EC8:
     /* 18EC8 00118EC8 2D286002 */  daddu      $a1, $s3, $zero
-    /* 18ECC 00118ECC 2D404002 */  daddu      $t0, $s2, $zero
+    /* 18ECC 00118ECC 2D404002 */  daddu      $a4, $s2, $zero
     /* 18ED0 00118ED0 2D300002 */  daddu      $a2, $s0, $zero
     /* 18ED4 00118ED4 2461040C */  jal        func_00118490
     /* 18ED8 00118ED8 03000724 */   addiu     $a3, $zero, 0x3

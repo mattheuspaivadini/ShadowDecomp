@@ -13,10 +13,10 @@ nonmatching func_00128A70, 0x90
 glabel func_00128A70
     /* 28A70 00128A70 1300023C */  lui        $v0, %hi(D_00135C60)
     /* 28A74 00128A74 40FFBD27 */  addiu      $sp, $sp, -0xC0
-    /* 28A78 00128A78 605C4D8C */  lw         $t5, %lo(D_00135C60)($v0)
+    /* 28A78 00128A78 605C4D8C */  lw         $t1, %lo(D_00135C60)($v0)
     /* 28A7C 00128A7C 08020224 */  addiu      $v0, $zero, 0x208
     /* 28A80 00128A80 FF7F033C */  lui        $v1, (0x7FFFFFFF >> 16)
-    /* 28A84 00128A84 2D608000 */  daddu      $t4, $a0, $zero
+    /* 28A84 00128A84 2D608000 */  daddu      $t0, $a0, $zero
     /* 28A88 00128A88 FFFF6334 */  ori        $v1, $v1, (0x7FFFFFFF & 0xFFFF)
     /* 28A8C 00128A8C 9000A6FF */  sd         $a2, 0x90($sp)
     /* 28A90 00128A90 2D20A003 */  daddu      $a0, $sp, $zero
@@ -25,10 +25,10 @@ glabel func_00128A70
     /* 28A9C 00128A9C 1400A3AF */  sw         $v1, 0x14($sp)
     /* 28AA0 00128AA0 0800A3AF */  sw         $v1, 0x8($sp)
     /* 28AA4 00128AA4 9800A7FF */  sd         $a3, 0x98($sp)
-    /* 28AA8 00128AA8 A000A8FF */  sd         $t0, 0xA0($sp)
-    /* 28AAC 00128AAC A800A9FF */  sd         $t1, 0xA8($sp)
-    /* 28AB0 00128AB0 B000AAFF */  sd         $t2, 0xB0($sp)
-    /* 28AB4 00128AB4 B800ABFF */  sd         $t3, 0xB8($sp)
+    /* 28AA8 00128AA8 A000A8FF */  sd         $a4, 0xA0($sp)
+    /* 28AAC 00128AAC A800A9FF */  sd         $a5, 0xA8($sp)
+    /* 28AB0 00128AB0 B000AAFF */  sd         $a6, 0xB0($sp)
+    /* 28AB4 00128AB4 B800ABFF */  sd         $a7, 0xB8($sp)
     /* 28AB8 00128AB8 7000ACE7 */  swc1       $f12, 0x70($sp)
     /* 28ABC 00128ABC 7400ADE7 */  swc1       $f13, 0x74($sp)
     /* 28AC0 00128AC0 7800AEE7 */  swc1       $f14, 0x78($sp)
@@ -38,10 +38,10 @@ glabel func_00128A70
     /* 28AD0 00128AD0 8800B2E7 */  swc1       $f18, 0x88($sp)
     /* 28AD4 00128AD4 8C00B3E7 */  swc1       $f19, 0x8C($sp)
     /* 28AD8 00128AD8 0C00A2A7 */  sh         $v0, 0xC($sp)
-    /* 28ADC 00128ADC 1000ACAF */  sw         $t4, 0x10($sp)
-    /* 28AE0 00128AE0 5400ADAF */  sw         $t5, 0x54($sp)
+    /* 28ADC 00128ADC 1000ACAF */  sw         $t0, 0x10($sp)
+    /* 28AE0 00128AE0 5400ADAF */  sw         $t1, 0x54($sp)
     /* 28AE4 00128AE4 4CA6040C */  jal        func_00129930
-    /* 28AE8 00128AE8 0000ACAF */   sw        $t4, 0x0($sp)
+    /* 28AE8 00128AE8 0000ACAF */   sw        $t0, 0x0($sp)
     /* 28AEC 00128AEC 0000A38F */  lw         $v1, 0x0($sp)
     /* 28AF0 00128AF0 6000BFDF */  ld         $ra, 0x60($sp)
     /* 28AF4 00128AF4 000060A0 */  sb         $zero, 0x0($v1)

@@ -16,7 +16,7 @@ glabel func_0010D668
     /* D670 0010D670 C000BEFF */  sd         $fp, 0xC0($sp)
     /* D674 0010D674 2D988000 */  daddu      $s3, $a0, $zero
     /* D678 0010D678 9000B5FF */  sd         $s5, 0x90($sp)
-    /* D67C 0010D67C 2DF02001 */  daddu      $fp, $t1, $zero
+    /* D67C 0010D67C 2DF02001 */  daddu      $fp, $a5, $zero
     /* D680 0010D680 6000B2FF */  sd         $s2, 0x60($sp)
     /* D684 0010D684 2DA8A000 */  daddu      $s5, $a1, $zero
     /* D688 0010D688 4000B0FF */  sd         $s0, 0x40($sp)
@@ -29,7 +29,7 @@ glabel func_0010D668
     /* D6A4 0010D6A4 A000B6FF */  sd         $s6, 0xA0($sp)
     /* D6A8 0010D6A8 8000B4FF */  sd         $s4, 0x80($sp)
     /* D6AC 0010D6AC E629040C */  jal        func_0010A798
-    /* D6B0 0010D6B0 3400A8AF */   sw        $t0, 0x34($sp)
+    /* D6B0 0010D6B0 3400A8AF */   sw        $a4, 0x34($sp)
     /* D6B4 0010D6B4 1400023C */  lui        $v0, %hi(D_001459C0)
     /* D6B8 0010D6B8 C0595124 */  addiu      $s1, $v0, %lo(D_001459C0)
     /* D6BC 0010D6BC 1300023C */  lui        $v0, %hi(D_00132314)
@@ -170,11 +170,11 @@ glabel func_0010D668
     /* D868 0010D868 0000A0AF */  sw         $zero, 0x0($sp)
     /* D86C 0010D86C 0800A0AF */  sw         $zero, 0x8($sp)
     /* D870 0010D870 2D300000 */  daddu      $a2, $zero, $zero
-    /* D874 0010D874 1C080824 */  addiu      $t0, $zero, 0x81C
-    /* D878 0010D878 2D484002 */  daddu      $t1, $s2, $zero
-    /* D87C 0010D87C 04000A24 */  addiu      $t2, $zero, 0x4
+    /* D874 0010D874 1C080824 */  addiu      $a4, $zero, 0x81C
+    /* D878 0010D878 2D484002 */  daddu      $a5, $s2, $zero
+    /* D87C 0010D87C 04000A24 */  addiu      $a6, $zero, 0x4
     /* D880 0010D880 8A28040C */  jal        func_0010A228
-    /* D884 0010D884 2D580000 */   daddu     $t3, $zero, $zero
+    /* D884 0010D884 2D580000 */   daddu     $a7, $zero, $zero
     /* D888 0010D888 07004104 */  bgez       $v0, .L0010D8A8
     /* D88C 0010D88C 0020023C */   lui       $v0, (0x20000000 >> 16)
     /* D890 0010D890 FC1B040C */  jal        func_00106FF0

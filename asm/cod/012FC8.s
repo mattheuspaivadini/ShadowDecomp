@@ -15,50 +15,50 @@ glabel func_00112FC8
     /* 12FC8 00112FC8 FFFF193C */  lui        $t9, (0xFFFFFFC0 >> 16)
     /* 12FCC 00112FCC C0FF3937 */  ori        $t9, $t9, (0xFFFFFFC0 & 0xFFFF)
     /* 12FD0 00112FD0 2600A018 */  blez       $a1, .L0011306C
-    /* 12FD4 00112FD4 21508500 */   addu      $t2, $a0, $a1
-    /* 12FD8 00112FD8 24409900 */  and        $t0, $a0, $t9
-    /* 12FDC 00112FDC FFFF4A25 */  addiu      $t2, $t2, -0x1
-    /* 12FE0 00112FE0 24485901 */  and        $t1, $t2, $t9
-    /* 12FE4 00112FE4 23502801 */  subu       $t2, $t1, $t0
-    /* 12FE8 00112FE8 82590A00 */  srl        $t3, $t2, 6
-    /* 12FEC 00112FEC 01006B25 */  addiu      $t3, $t3, 0x1
-    /* 12FF0 00112FF0 07006931 */  andi       $t1, $t3, 0x7
-    /* 12FF4 00112FF4 08002011 */  beqz       $t1, .L00113018
-    /* 12FF8 00112FF8 C2500B00 */   srl       $t2, $t3, 3
+    /* 12FD4 00112FD4 21508500 */   addu      $a6, $a0, $a1
+    /* 12FD8 00112FD8 24409900 */  and        $a4, $a0, $t9
+    /* 12FDC 00112FDC FFFF4A25 */  addiu      $a6, $a6, -0x1
+    /* 12FE0 00112FE0 24485901 */  and        $a5, $a6, $t9
+    /* 12FE4 00112FE4 23502801 */  subu       $a6, $a5, $a4
+    /* 12FE8 00112FE8 82590A00 */  srl        $a7, $a6, 6
+    /* 12FEC 00112FEC 01006B25 */  addiu      $a7, $a7, 0x1
+    /* 12FF0 00112FF0 07006931 */  andi       $a5, $a7, 0x7
+    /* 12FF4 00112FF4 08002011 */  beqz       $a5, .L00113018
+    /* 12FF8 00112FF8 C2500B00 */   srl       $a6, $a7, 3
 .align 2
   .L00112FFC:
     /* 12FFC 00112FFC 0F000000 */  sync
-    /* 13000 00113000 000018BD */  cache      0x18, 0x0($t0) /* handwritten instruction */
+    /* 13000 00113000 000018BD */  cache      0x18, 0x0($a4) /* handwritten instruction */
     /* 13004 00113004 0F000000 */  sync
     /* 13008 00113008 00000000 */  nop
-    /* 1300C 0011300C FFFF2925 */  addiu      $t1, $t1, -0x1
-    /* 13010 00113010 FAFF201D */  bgtz       $t1, .L00112FFC
-    /* 13014 00113014 40000825 */   addiu     $t0, $t0, 0x40
+    /* 1300C 0011300C FFFF2925 */  addiu      $a5, $a5, -0x1
+    /* 13010 00113010 FAFF201D */  bgtz       $a5, .L00112FFC
+    /* 13014 00113014 40000825 */   addiu     $a4, $a4, 0x40
 .align 2
   .L00113018:
-    /* 13018 00113018 14004011 */  beqz       $t2, .L0011306C
+    /* 13018 00113018 14004011 */  beqz       $a6, .L0011306C
 .align 2
   .L0011301C:
-    /* 1301C 0011301C FFFF4A25 */   addiu     $t2, $t2, -0x1
+    /* 1301C 0011301C FFFF4A25 */   addiu     $a6, $a6, -0x1
     /* 13020 00113020 0F000000 */  sync
-    /* 13024 00113024 000018BD */  cache      0x18, 0x0($t0) /* handwritten instruction */
+    /* 13024 00113024 000018BD */  cache      0x18, 0x0($a4) /* handwritten instruction */
     /* 13028 00113028 0F000000 */  sync
-    /* 1302C 0011302C 400018BD */  cache      0x18, 0x40($t0) /* handwritten instruction */
+    /* 1302C 0011302C 400018BD */  cache      0x18, 0x40($a4) /* handwritten instruction */
     /* 13030 00113030 0F000000 */  sync
-    /* 13034 00113034 800018BD */  cache      0x18, 0x80($t0) /* handwritten instruction */
+    /* 13034 00113034 800018BD */  cache      0x18, 0x80($a4) /* handwritten instruction */
     /* 13038 00113038 0F000000 */  sync
-    /* 1303C 0011303C C00018BD */  cache      0x18, 0xC0($t0) /* handwritten instruction */
+    /* 1303C 0011303C C00018BD */  cache      0x18, 0xC0($a4) /* handwritten instruction */
     /* 13040 00113040 0F000000 */  sync
-    /* 13044 00113044 000118BD */  cache      0x18, 0x100($t0) /* handwritten instruction */
+    /* 13044 00113044 000118BD */  cache      0x18, 0x100($a4) /* handwritten instruction */
     /* 13048 00113048 0F000000 */  sync
-    /* 1304C 0011304C 400118BD */  cache      0x18, 0x140($t0) /* handwritten instruction */
+    /* 1304C 0011304C 400118BD */  cache      0x18, 0x140($a4) /* handwritten instruction */
     /* 13050 00113050 0F000000 */  sync
-    /* 13054 00113054 800118BD */  cache      0x18, 0x180($t0) /* handwritten instruction */
+    /* 13054 00113054 800118BD */  cache      0x18, 0x180($a4) /* handwritten instruction */
     /* 13058 00113058 0F000000 */  sync
-    /* 1305C 0011305C C00118BD */  cache      0x18, 0x1C0($t0) /* handwritten instruction */
+    /* 1305C 0011305C C00118BD */  cache      0x18, 0x1C0($a4) /* handwritten instruction */
     /* 13060 00113060 0F000000 */  sync
-    /* 13064 00113064 EDFF401D */  bgtz       $t2, .L0011301C
-    /* 13068 00113068 00020825 */   addiu     $t0, $t0, 0x200
+    /* 13064 00113064 EDFF401D */  bgtz       $a6, .L0011301C
+    /* 13068 00113068 00020825 */   addiu     $a4, $a4, 0x200
 .align 2
   .L0011306C:
     /* 1306C 0011306C 0800E003 */  jr         $ra

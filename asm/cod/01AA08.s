@@ -19,7 +19,7 @@ glabel func_0011AA08
     /* 1AA1C 0011AA1C 4000B4FF */  sd         $s4, 0x40($sp)
     /* 1AA20 0011AA20 2DA8C000 */  daddu      $s5, $a2, $zero
     /* 1AA24 0011AA24 3000B3FF */  sd         $s3, 0x30($sp)
-    /* 1AA28 0011AA28 2DA00001 */  daddu      $s4, $t0, $zero
+    /* 1AA28 0011AA28 2DA00001 */  daddu      $s4, $a4, $zero
     /* 1AA2C 0011AA2C 1000B1FF */  sd         $s1, 0x10($sp)
     /* 1AA30 0011AA30 2D98A000 */  daddu      $s3, $a1, $zero
     /* 1AA34 0011AA34 3056438C */  lw         $v1, %lo(D_00135630)($v0)

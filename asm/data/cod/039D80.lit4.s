@@ -9,3 +9,220 @@ nonmatching D_00139D80
 dlabel D_00139D80
     /* 39D80 00139D80 CCCC4C3F */ .float 0.7999999523
 enddlabel D_00139D80
+
+nonmatching D_00139D84
+
+/* Automatically generated and unreferenced pad */
+dlabel D_00139D84
+    /* 39D84 00139D84 00000000 */ .float 0
+enddlabel D_00139D84
+
+nonmatching D_00139D88
+
+/* Automatically generated and unreferenced pad */
+dlabel D_00139D88
+    /* 39D88 00139D88 00000000 */ .float 0
+enddlabel D_00139D88
+
+nonmatching D_00139D8C
+
+/* Automatically generated and unreferenced pad */
+dlabel D_00139D8C
+    /* 39D8C 00139D8C 00000000 */ .float 0
+enddlabel D_00139D8C
+
+nonmatching D_00139D90
+
+/* Automatically generated and unreferenced pad */
+dlabel D_00139D90
+    /* 39D90 00139D90 00000000 */ .float 0
+enddlabel D_00139D90
+
+nonmatching D_00139D94
+
+/* Automatically generated and unreferenced pad */
+dlabel D_00139D94
+    /* 39D94 00139D94 00000000 */ .float 0
+enddlabel D_00139D94
+
+nonmatching D_00139D98
+
+/* Automatically generated and unreferenced pad */
+dlabel D_00139D98
+    /* 39D98 00139D98 00000000 */ .float 0
+enddlabel D_00139D98
+
+nonmatching D_00139D9C
+
+/* Automatically generated and unreferenced pad */
+dlabel D_00139D9C
+    /* 39D9C 00139D9C 00000000 */ .float 0
+enddlabel D_00139D9C
+
+nonmatching D_00139DA0
+
+/* Automatically generated and unreferenced pad */
+dlabel D_00139DA0
+    /* 39DA0 00139DA0 00000000 */ .float 0
+enddlabel D_00139DA0
+
+nonmatching D_00139DA4
+
+/* Automatically generated and unreferenced pad */
+dlabel D_00139DA4
+    /* 39DA4 00139DA4 00000000 */ .float 0
+enddlabel D_00139DA4
+
+nonmatching D_00139DA8
+
+/* Automatically generated and unreferenced pad */
+dlabel D_00139DA8
+    /* 39DA8 00139DA8 00000000 */ .float 0
+enddlabel D_00139DA8
+
+nonmatching D_00139DAC
+
+/* Automatically generated and unreferenced pad */
+dlabel D_00139DAC
+    /* 39DAC 00139DAC 00000000 */ .float 0
+enddlabel D_00139DAC
+
+nonmatching D_00139DB0
+
+/* Automatically generated and unreferenced pad */
+dlabel D_00139DB0
+    /* 39DB0 00139DB0 00000000 */ .float 0
+enddlabel D_00139DB0
+
+nonmatching D_00139DB4
+
+/* Automatically generated and unreferenced pad */
+dlabel D_00139DB4
+    /* 39DB4 00139DB4 00000000 */ .float 0
+enddlabel D_00139DB4
+
+nonmatching D_00139DB8
+
+/* Automatically generated and unreferenced pad */
+dlabel D_00139DB8
+    /* 39DB8 00139DB8 00000000 */ .float 0
+enddlabel D_00139DB8
+
+nonmatching D_00139DBC
+
+/* Automatically generated and unreferenced pad */
+dlabel D_00139DBC
+    /* 39DBC 00139DBC 00000000 */ .float 0
+enddlabel D_00139DBC
+
+nonmatching D_00139DC0
+
+/* Automatically generated and unreferenced pad */
+dlabel D_00139DC0
+    /* 39DC0 00139DC0 00000000 */ .float 0
+enddlabel D_00139DC0
+
+nonmatching D_00139DC4
+
+/* Automatically generated and unreferenced pad */
+dlabel D_00139DC4
+    /* 39DC4 00139DC4 00000000 */ .float 0
+enddlabel D_00139DC4
+
+nonmatching D_00139DC8
+
+/* Automatically generated and unreferenced pad */
+dlabel D_00139DC8
+    /* 39DC8 00139DC8 00000000 */ .float 0
+enddlabel D_00139DC8
+
+nonmatching D_00139DCC
+
+/* Automatically generated and unreferenced pad */
+dlabel D_00139DCC
+    /* 39DCC 00139DCC 00000000 */ .float 0
+enddlabel D_00139DCC
+
+nonmatching D_00139DD0
+
+/* Automatically generated and unreferenced pad */
+dlabel D_00139DD0
+    /* 39DD0 00139DD0 00000000 */ .float 0
+enddlabel D_00139DD0
+
+nonmatching D_00139DD4
+
+/* Automatically generated and unreferenced pad */
+dlabel D_00139DD4
+    /* 39DD4 00139DD4 00000000 */ .float 0
+enddlabel D_00139DD4
+
+nonmatching D_00139DD8
+
+/* Automatically generated and unreferenced pad */
+dlabel D_00139DD8
+    /* 39DD8 00139DD8 00000000 */ .float 0
+enddlabel D_00139DD8
+
+nonmatching D_00139DDC
+
+/* Automatically generated and unreferenced pad */
+dlabel D_00139DDC
+    /* 39DDC 00139DDC 00000000 */ .float 0
+enddlabel D_00139DDC
+
+nonmatching D_00139DE0
+
+/* Automatically generated and unreferenced pad */
+dlabel D_00139DE0
+    /* 39DE0 00139DE0 00000000 */ .float 0
+enddlabel D_00139DE0
+
+nonmatching D_00139DE4
+
+/* Automatically generated and unreferenced pad */
+dlabel D_00139DE4
+    /* 39DE4 00139DE4 00000000 */ .float 0
+enddlabel D_00139DE4
+
+nonmatching D_00139DE8
+
+/* Automatically generated and unreferenced pad */
+dlabel D_00139DE8
+    /* 39DE8 00139DE8 00000000 */ .float 0
+enddlabel D_00139DE8
+
+nonmatching D_00139DEC
+
+/* Automatically generated and unreferenced pad */
+dlabel D_00139DEC
+    /* 39DEC 00139DEC 00000000 */ .float 0
+enddlabel D_00139DEC
+
+nonmatching D_00139DF0
+
+/* Automatically generated and unreferenced pad */
+dlabel D_00139DF0
+    /* 39DF0 00139DF0 00000000 */ .float 0
+enddlabel D_00139DF0
+
+nonmatching D_00139DF4
+
+/* Automatically generated and unreferenced pad */
+dlabel D_00139DF4
+    /* 39DF4 00139DF4 00000000 */ .float 0
+enddlabel D_00139DF4
+
+nonmatching D_00139DF8
+
+/* Automatically generated and unreferenced pad */
+dlabel D_00139DF8
+    /* 39DF8 00139DF8 00000000 */ .float 0
+enddlabel D_00139DF8
+
+nonmatching D_00139DFC
+
+/* Automatically generated and unreferenced pad */
+dlabel D_00139DFC
+    /* 39DFC 00139DFC 00000000 */ .float 0
+enddlabel D_00139DFC

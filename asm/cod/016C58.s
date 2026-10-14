@@ -15,10 +15,10 @@ glabel func_00116C58
     /* 16C5C 00116C5C 4800A5FF */  sd         $a1, 0x48($sp)
     /* 16C60 00116C60 5000A6FF */  sd         $a2, 0x50($sp)
     /* 16C64 00116C64 5800A7FF */  sd         $a3, 0x58($sp)
-    /* 16C68 00116C68 6000A8FF */  sd         $t0, 0x60($sp)
-    /* 16C6C 00116C6C 6800A9FF */  sd         $t1, 0x68($sp)
-    /* 16C70 00116C70 7000AAFF */  sd         $t2, 0x70($sp)
-    /* 16C74 00116C74 7800ABFF */  sd         $t3, 0x78($sp)
+    /* 16C68 00116C68 6000A8FF */  sd         $a4, 0x60($sp)
+    /* 16C6C 00116C6C 6800A9FF */  sd         $a5, 0x68($sp)
+    /* 16C70 00116C70 7000AAFF */  sd         $a6, 0x70($sp)
+    /* 16C74 00116C74 7800ABFF */  sd         $a7, 0x78($sp)
     /* 16C78 00116C78 0800E003 */  jr         $ra
     /* 16C7C 00116C7C 8000BD27 */   addiu     $sp, $sp, 0x80
 endlabel func_00116C58

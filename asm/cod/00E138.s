@@ -31,11 +31,11 @@ glabel func_0010E138
     /* E174 0010E174 0000A0AF */  sw         $zero, 0x0($sp)
     /* E178 0010E178 08000524 */  addiu      $a1, $zero, 0x8
     /* E17C 0010E17C 2D300000 */  daddu      $a2, $zero, $zero
-    /* E180 0010E180 04000824 */  addiu      $t0, $zero, 0x4
-    /* E184 0010E184 00720926 */  addiu      $t1, $s0, %lo(D_00147200)
-    /* E188 0010E188 04000A24 */  addiu      $t2, $zero, 0x4
+    /* E180 0010E180 04000824 */  addiu      $a4, $zero, 0x4
+    /* E184 0010E184 00720926 */  addiu      $a5, $s0, %lo(D_00147200)
+    /* E188 0010E188 04000A24 */  addiu      $a6, $zero, 0x4
     /* E18C 0010E18C 6026040C */  jal        func_00109980
-    /* E190 0010E190 2D580000 */   daddu     $t3, $zero, $zero
+    /* E190 0010E190 2D580000 */   daddu     $a7, $zero, $zero
     /* E194 0010E194 03004304 */  bgezl      $v0, .L0010E1A4
     /* E198 0010E198 0072028E */   lw        $v0, %lo(D_00147200)($s0)
     /* E19C 0010E19C FFFF023C */  lui        $v0, (0xFFFFFFFF >> 16)

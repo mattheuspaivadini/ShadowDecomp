@@ -203,7 +203,7 @@ glabel func_0012E018
 .align 2
   .L0012E284:
     /* 2E284 0012E284 0D00E056 */  bnel       $s7, $zero, .L0012E2BC
-    /* 2E288 0012E288 0000288E */   lw        $t0, 0x0($s1)
+    /* 2E288 0012E288 0000288E */   lw        $a4, 0x0($s1)
     /* 2E28C 0012E28C 2D206002 */  daddu      $a0, $s3, $zero
     /* 2E290 0012E290 0A000524 */  addiu      $a1, $zero, 0xA
     /* 2E294 0012E294 C1B9040C */  jal        func_0012E704
@@ -219,7 +219,7 @@ glabel func_0012E018
 .align 2
   .L0012E2B4:
     /* 2E2B4 0012E2B4 01001724 */  addiu      $s7, $zero, 0x1
-    /* 2E2B8 0012E2B8 0000288E */  lw         $t0, 0x0($s1)
+    /* 2E2B8 0012E2B8 0000288E */  lw         $a4, 0x0($s1)
 .align 2
   .L0012E2BC:
     /* 2E2BC 0012E2BC 2B105502 */  sltu       $v0, $s2, $s5
@@ -228,13 +228,13 @@ glabel func_0012E018
     /* 2E2C8 0012E2C8 0800248E */  lw         $a0, 0x8($s1)
     /* 2E2CC 0012E2CC 0A28A202 */  movz       $a1, $s5, $v0
     /* 2E2D0 0012E2D0 1400278E */  lw         $a3, 0x14($s1)
-    /* 2E2D4 0012E2D4 2B186800 */  sltu       $v1, $v1, $t0
+    /* 2E2D4 0012E2D4 2B186800 */  sltu       $v1, $v1, $a4
     /* 2E2D8 0012E2D8 11006010 */  beqz       $v1, .L0012E320
     /* 2E2DC 0012E2DC 21808700 */   addu      $s0, $a0, $a3
     /* 2E2E0 0012E2E0 2A100502 */  slt        $v0, $s0, $a1
     /* 2E2E4 0012E2E4 0F004050 */  beql       $v0, $zero, .L0012E324
     /* 2E2E8 0012E2E8 2D80E000 */   daddu     $s0, $a3, $zero
-    /* 2E2EC 0012E2EC 2D200001 */  daddu      $a0, $t0, $zero
+    /* 2E2EC 0012E2EC 2D200001 */  daddu      $a0, $a4, $zero
     /* 2E2F0 0012E2F0 2D286002 */  daddu      $a1, $s3, $zero
     /* 2E2F4 0012E2F4 B3A0040C */  jal        func_001282CC
     /* 2E2F8 0012E2F8 2D300002 */   daddu     $a2, $s0, $zero
@@ -268,7 +268,7 @@ glabel func_0012E018
 .align 2
   .L0012E358:
     /* 2E358 0012E358 2D286002 */  daddu      $a1, $s3, $zero
-    /* 2E35C 0012E35C 2D200001 */  daddu      $a0, $t0, $zero
+    /* 2E35C 0012E35C 2D200001 */  daddu      $a0, $a4, $zero
     /* 2E360 0012E360 B3A0040C */  jal        func_001282CC
     /* 2E364 0012E364 2D300002 */   daddu     $a2, $s0, $zero
     /* 2E368 0012E368 0800238E */  lw         $v1, 0x8($s1)

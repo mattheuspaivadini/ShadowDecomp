@@ -52,7 +52,8 @@ Fill in the table during DISCOVERY and keep it current.
 | objdiff | Compare compiled vs original | **objdiff-cli 3.8.2** in `.tools/objdiff/objdiff-cli.exe` (gitignored) |
 | WSL2 Ubuntu 26.04 | Linux build environment | Installed (`wsl -d Ubuntu -u root`); repo at `/mnt/c/...` |
 | MIPS binutils | Assemble / link (R5900) | **`binutils-mips-linux-gnu` 2.45** in WSL: `mips-linux-gnu-as -EL -march=5900 -mabi=eabi`. Reassembly path — see `docs/toolchain.md` |
-| EE cross C compiler | Matching C builds | **PENDING user decision** (`ee-gcc2.96` from `decompme/compilers`) — see `docs/toolchain.md` §4 |
+| EE cross C compiler | Matching C builds | `ee-gcc2.96` from `decompme/compilers` in `tools/cc/ee-gcc2.96/` (gitignored, WSL); see `docs/toolchain.md` |
+| build script | Assemble/link/hash | **`tools/build.py`** (runs in WSL2) → flat image byte-exact — `docs/rebuild.md` |
 | 7z / isoinfo | ISO extraction | MISSING — replaced by `tools/iso9660.py` (pure Python) |
 | git | VCS | 2.55.0 (repo initialized) |
 | python3 | Infra/tooling | 3.12.10 (Windows) / 3.14.4 (WSL) |
@@ -77,8 +78,8 @@ Work in order. Mark each phase when done and commit.
 
 - [x] **Phase 1 — Extract.** ISO is at the **workspace root** (`Shadow of the Colossus (USA).iso`), not in `SHADOWDECOMP/`. Extracted 19 files with pure-Python ISO9660 (`tools/iso9660.py`, `tools/extract_iso.py`) → manifest in `manifest/files.txt`. Main ELF = **`SCUS_974.72`** (from `SYSTEM.CNF`, not `SCUS_973.24`).
 - [x] **Phase 2 — Analyze.** `SCUS_974.72` parsed (sections/segments/entry); 319 strings. **Ghidra 12.1.4 + `ghidra-emotionengine-reloaded`** (`r5900:LE:32:default`) now decodes **100 %** of `.text` (50,923/50,923, 0 undefined; was 84 % with stock `MIPS:LE:32:default`). Function boundaries still "to be confirmed". See `docs/analysis.md`, `docs/rea.md`.
-- [ ] **Phase 3 — Compiler.** Hypothesis (EE-GCC **2.96** / PS2 SDK 3.x) documented in `docs/compiler.md`; corroborated by the sister project `Fantaskink/SOTC` (uses `ee-gcc2.96` from `decompme/compilers`, `-O2 -g2`, `mips-linux-gnu` binutils). **Flag matching pending the EE-GCC acquisition decision.**
-- [~] **Phase 4 — Split & rebuild.** splat split is **per-function**: **1037 `.s`** under `asm/cod/` (one per function), `.text` 16-byte header as data; plus data segments, `build/SCUS_974.72.ld`, `include/macro.inc`. WSL `mips-linux-gnu` binutils verified for the reassembly path (R5900 round-trip test). **Full link + hash check still to be scripted.** See `docs/splat.md`, `docs/toolchain.md`.
+- [ ] **Phase 3 — Compiler.** Hypothesis (EE-GCC **2.96** / PS2 SDK 3.x) documented in `docs/compiler.md`; corroborated by the sister project `Fantaskink/SOTC` (uses `ee-gcc2.96` from `decompme/compilers`, `-O2 -g2`, `mips-linux-gnu` binutils). **`ee-gcc2.96` installed** in `tools/cc/`; flag experiments are the next step.
+- [x] **Phase 4 — Split & rebuild.** splat split is **per-function**: **1037 `.s`** under `asm/cod/` (one per function), `.text` 16-byte header as `textbin`; plus data segments, `build/SCUS_974.72.ld`, `include/macro.inc`. **Reassembly + link + hash check PASS**: `tools/build.py` (WSL2) → flat image byte-identical to the original, **237,952 bytes, SHA-1 `6f853f644a4279db18c15ceb8ee1d2a8b87a7b39`**. See `docs/splat.md`, `docs/toolchain.md`, `docs/rebuild.md`.
 - [ ] **Phase 5 — Name.** Evidence anchors collected (SDK banners, loader, kernel, GS, cdvd, mc2, net). See `config/symbol_addrs.txt`.
 - [ ] **Phase 6 — Decompile.** Not started.
 
@@ -113,11 +114,11 @@ Tips: use a function's constants, string references, and call patterns to infer 
 
 | Metric | Value |
 |--------|-------|
-| Current phase | Phases 1–2 done; Phase 4 per-function split done (link/hash pending) |
-| ELF rebuild hash match | no (link script not yet run) |
+| Current phase | Phases 1–2 done; **Phase 4 byte-exact rebuild: MATCH**; ready for Phase 3/5 |
+| ELF rebuild hash match | **YES — 237,952 bytes, SHA-1 `6f853f64…` (flat load image)** |
 | Functions named | 1 (`entry`); evidence anchors for SDK banners |
 | Functions matched (C) | 0 / ~1037 detected |
-| Matched bytes | 0 % |
+| Matched bytes | 100 % of the flat load image (asm reassembly) |
 | `.text` disassembly (splat R5900) | accurate; **1037 per-function `.s`** |
 | Ghidra EE-extension decode | **100 %** of `.text` (50,923/50,923) |
 | splat split coverage | 203 KB / 85.6 % of ROM |
@@ -141,7 +142,15 @@ Tips: use a function's constants, string references, and call patterns to infer 
     Windows objdiff-cli 3.8.2, ninja, make. R5900 round-trip of `entry` verified.
     See `docs/toolchain.md`.
   - **Compiler**: corroborated `ee-gcc2.96` (`decompme/compilers`) via
-    `Fantaskink/SOTC`; **decision on downloading pending the user**.
+    `Fantaskink/SOTC`; **user approved the download**; fetched to
+    `tools/cc/ee-gcc2.96` (SHA-256 `0590d2ca…`).
+  - **PHASE 4 BYTE-EXACT REBUILD PASSED.** `tools/build.py` (WSL2, Debian
+    `mips-linux-gnu` binutils + `-mabi=eabi`) assembles the 1037 per-function
+    `.s` + header + data and links them; the flat output is **byte-identical** to
+    the original load image: 237,952 bytes, SHA-1 `6f853f64…`. Fixes along the
+    way: n64 GPR names, `-mabi=eabi` for `ld %lo`, `objcopy` section alignment 4,
+    strip splat's `ALIGN(.,16)`, route `.data_nop` into `.lit4`. See
+    `docs/rebuild.md`.
 
 - **2026-10-13** — DISCOVERY + Phase 1 + Phase 2 + Phase 4 split.
   - Found ISO at workspace root; main ELF is `SCUS_974.72` (per `SYSTEM.CNF`), not `SCUS_973.24`.

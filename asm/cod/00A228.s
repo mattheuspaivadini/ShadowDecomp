@@ -18,13 +18,13 @@ glabel func_0010A228
     /* A238 0010A238 8000B6FF */  sd         $s6, 0x80($sp)
     /* A23C 0010A23C 2DB8E000 */  daddu      $s7, $a3, $zero
     /* A240 0010A240 7000B5FF */  sd         $s5, 0x70($sp)
-    /* A244 0010A244 2DB00001 */  daddu      $s6, $t0, $zero
+    /* A244 0010A244 2DB00001 */  daddu      $s6, $a4, $zero
     /* A248 0010A248 6000B4FF */  sd         $s4, 0x60($sp)
-    /* A24C 0010A24C 2DA82001 */  daddu      $s5, $t1, $zero
+    /* A24C 0010A24C 2DA82001 */  daddu      $s5, $a5, $zero
     /* A250 0010A250 5000B3FF */  sd         $s3, 0x50($sp)
-    /* A254 0010A254 2DA04001 */  daddu      $s4, $t2, $zero
+    /* A254 0010A254 2DA04001 */  daddu      $s4, $a6, $zero
     /* A258 0010A258 4000B2FF */  sd         $s2, 0x40($sp)
-    /* A25C 0010A25C 2D986001 */  daddu      $s3, $t3, $zero
+    /* A25C 0010A25C 2D986001 */  daddu      $s3, $a7, $zero
     /* A260 0010A260 3000B1FF */  sd         $s1, 0x30($sp)
     /* A264 0010A264 2D900000 */  daddu      $s2, $zero, $zero
     /* A268 0010A268 B000BFFF */  sd         $ra, 0xB0($sp)
@@ -39,12 +39,12 @@ glabel func_0010A228
     /* A284 0010A284 1000A48F */  lw         $a0, 0x10($sp)
     /* A288 0010A288 2D38E002 */  daddu      $a3, $s7, $zero
     /* A28C 0010A28C 1400A58F */  lw         $a1, 0x14($sp)
-    /* A290 0010A290 2D40C002 */  daddu      $t0, $s6, $zero
+    /* A290 0010A290 2D40C002 */  daddu      $a4, $s6, $zero
     /* A294 0010A294 0000A2AF */  sw         $v0, 0x0($sp)
-    /* A298 0010A298 2D48A002 */  daddu      $t1, $s5, $zero
-    /* A29C 0010A29C 2D508002 */  daddu      $t2, $s4, $zero
+    /* A298 0010A298 2D48A002 */  daddu      $a5, $s5, $zero
+    /* A29C 0010A29C 2D508002 */  daddu      $a6, $s4, $zero
     /* A2A0 0010A2A0 6026040C */  jal        func_00109980
-    /* A2A4 0010A2A4 2D586002 */   daddu     $t3, $s3, $zero
+    /* A2A4 0010A2A4 2D586002 */   daddu     $a7, $s3, $zero
     /* A2A8 0010A2A8 C2870200 */  srl        $s0, $v0, 31
     /* A2AC 0010A2AC 0C000012 */  beqz       $s0, .L0010A2E0
     /* A2B0 0010A2B0 C800A28F */   lw        $v0, 0xC8($sp)

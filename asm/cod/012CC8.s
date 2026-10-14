@@ -23,10 +23,10 @@ glabel func_00112CC8
     /* 12CEC 00112CEC 7000BFFF */  sd         $ra, 0x70($sp)
     /* 12CF0 00112CF0 4000B2FF */  sd         $s2, 0x40($sp)
     /* 12CF4 00112CF4 2D80C000 */  daddu      $s0, $a2, $zero
-    /* 12CF8 00112CF8 2D200001 */  daddu      $a0, $t0, $zero
+    /* 12CF8 00112CF8 2D200001 */  daddu      $a0, $a4, $zero
     /* 12CFC 00112CFC 6100422C */  sltiu      $v0, $v0, 0x61
     /* 12D00 00112D00 03004014 */  bnez       $v0, .L00112D10
-    /* 12D04 00112D04 2D284001 */   daddu     $a1, $t2, $zero
+    /* 12D04 00112D04 2D284001 */   daddu     $a1, $a6, $zero
     /* 12D08 00112D08 34000010 */  b          .L00112DDC
     /* 12D0C 00112D0C 2D100000 */   daddu     $v0, $zero, $zero
 .align 2
@@ -35,13 +35,13 @@ glabel func_00112CC8
     /* 12D14 00112D14 2D900000 */   daddu     $s2, $zero, $zero
     /* 12D18 00112D18 00000292 */  lbu        $v0, 0x0($s0)
     /* 12D1C 00112D1C 001A0500 */  sll        $v1, $a1, 8
-    /* 12D20 00112D20 040009AE */  sw         $t1, 0x4($s0)
+    /* 12D20 00112D20 040009AE */  sw         $a5, 0x4($s0)
     /* 12D24 00112D24 01001224 */  addiu      $s2, $zero, 0x1
     /* 12D28 00112D28 25104300 */  or         $v0, $v0, $v1
     /* 12D2C 00112D2C 0000A4AF */  sw         $a0, 0x0($sp)
     /* 12D30 00112D30 000002AE */  sw         $v0, 0x0($s0)
     /* 12D34 00112D34 04006332 */  andi       $v1, $s3, 0x4
-    /* 12D38 00112D38 0400A9AF */  sw         $t1, 0x4($sp)
+    /* 12D38 00112D38 0400A9AF */  sw         $a5, 0x4($sp)
     /* 12D3C 00112D3C 0800A5AF */  sw         $a1, 0x8($sp)
     /* 12D40 00112D40 08006010 */  beqz       $v1, .L00112D64
     /* 12D44 00112D44 0C00A0AF */   sw        $zero, 0xC($sp)

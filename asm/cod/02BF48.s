@@ -18,10 +18,10 @@ glabel func_0012BF48
     /* 2BF58 0012BF58 0000A680 */  lb         $a2, 0x0($a1)
     /* 2BF5C 0012BF5C 0100A524 */  addiu      $a1, $a1, 0x1
     /* 2BF60 0012BF60 02000010 */  b          .L0012BF6C
-    /* 2BF64 0012BF64 01000824 */   addiu     $t0, $zero, 0x1
+    /* 2BF64 0012BF64 01000824 */   addiu     $a4, $zero, 0x1
 .align 2
   .L0012BF68:
-    /* 2BF68 0012BF68 2D400000 */  daddu      $t0, $zero, $zero
+    /* 2BF68 0012BF68 2D400000 */  daddu      $a4, $zero, $zero
 .align 2
   .L0012BF6C:
     /* 2BF6C 0012BF6C FF000724 */  addiu      $a3, $zero, 0xFF
@@ -30,7 +30,7 @@ glabel func_0012BF48
 .align 2
   .L0012BF78:
     /* 2BF78 0012BF78 FFFFE724 */  addiu      $a3, $a3, -0x1
-    /* 2BF7C 0012BF7C 000048A0 */  sb         $t0, 0x0($v0)
+    /* 2BF7C 0012BF7C 000048A0 */  sb         $a4, 0x0($v0)
     /* 2BF80 0012BF80 00000000 */  nop
     /* 2BF84 0012BF84 00000000 */  nop
     /* 2BF88 0012BF88 00000000 */  nop
@@ -39,20 +39,20 @@ glabel func_0012BF48
     /* 2BF94 0012BF94 2A00C010 */  beqz       $a2, .L0012C040
     /* 2BF98 0012BF98 FFFFA224 */   addiu     $v0, $a1, -0x1
     /* 2BF9C 0012BF9C 01000224 */  addiu      $v0, $zero, 0x1
-    /* 2BFA0 0012BFA0 2D000A24 */  addiu      $t2, $zero, 0x2D
-    /* 2BFA4 0012BFA4 23404800 */  subu       $t0, $v0, $t0
-    /* 2BFA8 0012BFA8 5D000924 */  addiu      $t1, $zero, 0x5D
+    /* 2BFA0 0012BFA0 2D000A24 */  addiu      $a6, $zero, 0x2D
+    /* 2BFA4 0012BFA4 23404800 */  subu       $a4, $v0, $a4
+    /* 2BFA8 0012BFA8 5D000924 */  addiu      $a5, $zero, 0x5D
     /* 2BFAC 0012BFAC 00000000 */  nop
 .align 2
   .L0012BFB0:
     /* 2BFB0 0012BFB0 21108600 */  addu       $v0, $a0, $a2
 .align 2
   .L0012BFB4:
-    /* 2BFB4 0012BFB4 000048A0 */  sb         $t0, 0x0($v0)
+    /* 2BFB4 0012BFB4 000048A0 */  sb         $a4, 0x0($v0)
     /* 2BFB8 0012BFB8 0000A780 */  lb         $a3, 0x0($a1)
 .align 2
   .L0012BFBC:
-    /* 2BFBC 0012BFBC 0C00EA10 */  beq        $a3, $t2, .L0012BFF0
+    /* 2BFBC 0012BFBC 0C00EA10 */  beq        $a3, $a6, .L0012BFF0
     /* 2BFC0 0012BFC0 0100A524 */   addiu     $a1, $a1, 0x1
     /* 2BFC4 0012BFC4 2E00E228 */  slti       $v0, $a3, 0x2E
     /* 2BFC8 0012BFC8 05004010 */  beqz       $v0, .L0012BFE0
@@ -63,14 +63,14 @@ glabel func_0012BF48
     /* 2BFDC 0012BFDC 2D30E000 */   daddu     $a2, $a3, $zero
 .align 2
   .L0012BFE0:
-    /* 2BFE0 0012BFE0 1700E910 */  beq        $a3, $t1, .L0012C040
+    /* 2BFE0 0012BFE0 1700E910 */  beq        $a3, $a5, .L0012C040
     /* 2BFE4 0012BFE4 2D10A000 */   daddu     $v0, $a1, $zero
     /* 2BFE8 0012BFE8 13000010 */  b          .L0012C038
     /* 2BFEC 0012BFEC 2D30E000 */   daddu     $a2, $a3, $zero
 .align 2
   .L0012BFF0:
     /* 2BFF0 0012BFF0 0000A780 */  lb         $a3, 0x0($a1)
-    /* 2BFF4 0012BFF4 EEFFE950 */  beql       $a3, $t1, .L0012BFB0
+    /* 2BFF4 0012BFF4 EEFFE950 */  beql       $a3, $a5, .L0012BFB0
     /* 2BFF8 0012BFF8 2D000624 */   addiu     $a2, $zero, 0x2D
     /* 2BFFC 0012BFFC 2A10E600 */  slt        $v0, $a3, $a2
     /* 2C000 0012C000 03004050 */  beql       $v0, $zero, .L0012C010
@@ -85,7 +85,7 @@ glabel func_0012BF48
     /* 2C01C 0012C01C 00000000 */  nop
     /* 2C020 0012C020 00000000 */  nop
     /* 2C024 0012C024 FAFF6014 */  bnez       $v1, .L0012C010
-    /* 2C028 0012C028 000048A0 */   sb        $t0, 0x0($v0)
+    /* 2C028 0012C028 000048A0 */   sb        $a4, 0x0($v0)
     /* 2C02C 0012C02C E3FF0010 */  b          .L0012BFBC
     /* 2C030 0012C030 0000A780 */   lb        $a3, 0x0($a1)
     /* 2C034 0012C034 00000000 */  nop

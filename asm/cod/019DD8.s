@@ -66,9 +66,9 @@ glabel func_00119DD8
     /* 19E98 00119E98 1D008434 */  ori        $a0, $a0, (0x8000001D & 0xFFFF)
     /* 19E9C 00119E9C 40000624 */  addiu      $a2, $zero, 0x40
     /* 19EA0 00119EA0 2D380000 */  daddu      $a3, $zero, $zero
-    /* 19EA4 00119EA4 2D400000 */  daddu      $t0, $zero, $zero
+    /* 19EA4 00119EA4 2D400000 */  daddu      $a4, $zero, $zero
     /* 19EA8 00119EA8 804B040C */  jal        func_00112E00
-    /* 19EAC 00119EAC 2D480000 */   daddu     $t1, $zero, $zero
+    /* 19EAC 00119EAC 2D480000 */   daddu     $a5, $zero, $zero
     /* 19EB0 00119EB0 07004014 */  bnez       $v0, .L00119ED0
     /* 19EB4 00119EB4 00000000 */   nop
     /* 19EB8 00119EB8 A866040C */  jal        func_00119AA0

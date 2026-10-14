@@ -37,11 +37,11 @@ glabel func_00115F70
     /* 15FC4 00115FC4 0213A534 */  ori        $a1, $a1, (0x80001302 & 0xFFFF)
     /* 15FC8 00115FC8 2D300000 */  daddu      $a2, $zero, $zero
     /* 15FCC 00115FCC 2D380002 */  daddu      $a3, $s0, $zero
-    /* 15FD0 00115FD0 90000824 */  addiu      $t0, $zero, 0x90
-    /* 15FD4 00115FD4 2D480002 */  daddu      $t1, $s0, $zero
-    /* 15FD8 00115FD8 90000A24 */  addiu      $t2, $zero, 0x90
+    /* 15FD0 00115FD0 90000824 */  addiu      $a4, $zero, 0x90
+    /* 15FD4 00115FD4 2D480002 */  daddu      $a5, $s0, $zero
+    /* 15FD8 00115FD8 90000A24 */  addiu      $a6, $zero, 0x90
     /* 15FDC 00115FDC 6026040C */  jal        func_00109980
-    /* 15FE0 00115FE0 2D580000 */   daddu     $t3, $zero, $zero
+    /* 15FE0 00115FE0 2D580000 */   daddu     $a7, $zero, $zero
     /* 15FE4 00115FE4 08004104 */  bgez       $v0, .L00116008
     /* 15FE8 00115FE8 C00D448E */   lw        $a0, %lo(D_00150DC0)($s2)
     /* 15FEC 00115FEC 1400043C */  lui        $a0, %hi(D_001386A0)

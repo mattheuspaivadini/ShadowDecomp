@@ -12,7 +12,7 @@ nonmatching func_001188E0, 0x48
 
 glabel func_001188E0
     /* 188E0 001188E0 E0FFBD27 */  addiu      $sp, $sp, -0x20
-    /* 188E4 001188E4 04000824 */  addiu      $t0, $zero, 0x4
+    /* 188E4 001188E4 04000824 */  addiu      $a4, $zero, 0x4
     /* 188E8 001188E8 0000B0FF */  sd         $s0, 0x0($sp)
     /* 188EC 001188EC 2D80A000 */  daddu      $s0, $a1, $zero
     /* 188F0 001188F0 1000BFFF */  sd         $ra, 0x10($sp)

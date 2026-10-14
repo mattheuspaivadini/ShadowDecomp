@@ -42,11 +42,11 @@ glabel func_0010E238
     /* E298 0010E298 FF000524 */  addiu      $a1, $zero, 0xFF
     /* E29C 0010E29C 2D300000 */  daddu      $a2, $zero, $zero
     /* E2A0 0010E2A0 2D380000 */  daddu      $a3, $zero, $zero
-    /* E2A4 0010E2A4 2D400000 */  daddu      $t0, $zero, $zero
-    /* E2A8 0010E2A8 80732926 */  addiu      $t1, $s1, %lo(D_00147380)
-    /* E2AC 0010E2AC 04000A24 */  addiu      $t2, $zero, 0x4
+    /* E2A4 0010E2A4 2D400000 */  daddu      $a4, $zero, $zero
+    /* E2A8 0010E2A8 80732926 */  addiu      $a5, $s1, %lo(D_00147380)
+    /* E2AC 0010E2AC 04000A24 */  addiu      $a6, $zero, 0x4
     /* E2B0 0010E2B0 6026040C */  jal        func_00109980
-    /* E2B4 0010E2B4 2D580000 */   daddu     $t3, $zero, $zero
+    /* E2B4 0010E2B4 2D580000 */   daddu     $a7, $zero, $zero
     /* E2B8 0010E2B8 04004104 */  bgez       $v0, .L0010E2CC
     /* E2BC 0010E2BC 1400033C */   lui       $v1, %hi(D_001475A8)
     /* E2C0 0010E2C0 FEFF023C */  lui        $v0, (0xFFFEFFFF >> 16)

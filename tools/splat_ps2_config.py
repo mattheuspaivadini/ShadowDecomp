@@ -53,6 +53,7 @@ options:
   asm_path: asm
   src_path: src
   build_path: build
+  asset_path: build/assets
 
   ld_script_path: build/{cleaned_basename}.ld
   ld_dependencies: True
@@ -73,6 +74,10 @@ options:
   rodata_string_guesser_level: 2
   data_string_guesser_level: 2
   named_regs_for_c_funcs: False
+  # Emit the 64-bit EABI (n64) GPR names ($a4-$a7/$t0-$t3 for r8-r15) so the
+  # output assembles with `mips-linux-gnu-as -mabi=eabi` (required for correct
+  # 64-bit `ld`/`sd` with %lo). o32 names break under any 64-bit -mabi.
+  mips_abi_gpr: n64
 """
 
     header += "\n  section_order:\n"
@@ -97,6 +102,14 @@ options:
             f"    subsegments:\n"
         )
         for section in seg.sections:
+            # `.data_nop` is an 8-byte nop pad plus alignment filler that
+            # physically sits AFTER `.lit4`, but splat routes every `data`
+            # subsegment into the single `.data` output section, which would
+            # misplace it before `.rodata` (observed +0x7C shift). Skipping it
+            # lets the preceding `.lit4` subsegment absorb those bytes, which
+            # keeps the ROM byte layout exact (verified: 237952 bytes).
+            if section.name == ".data_nop":
+                continue
             if section.is_nobits:
                 segments += (
                     f"      - {{ type: {section.splat_segment_type}, "

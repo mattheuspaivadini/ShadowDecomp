@@ -127,15 +127,15 @@ glabel func_0010CB60
     /* CCF4 0010CCF4 000072AE */   sw        $s2, 0x0($s3)
     /* CCF8 0010CCF8 C070C426 */  addiu      $a0, $s6, %lo(D_001470C0)
     /* CCFC 0010CCFC 2D380002 */  daddu      $a3, $s0, $zero
-    /* CD00 0010CD00 51002826 */  addiu      $t0, $s1, 0x51
+    /* CD00 0010CD00 51002826 */  addiu      $a4, $s1, 0x51
     /* CD04 0010CD04 0000A0AF */  sw         $zero, 0x0($sp)
     /* CD08 0010CD08 0800A0AF */  sw         $zero, 0x8($sp)
     /* CD0C 0010CD0C 0D000524 */  addiu      $a1, $zero, 0xD
     /* CD10 0010CD10 2D300000 */  daddu      $a2, $zero, $zero
-    /* CD14 0010CD14 2D48A002 */  daddu      $t1, $s5, $zero
-    /* CD18 0010CD18 04000A24 */  addiu      $t2, $zero, 0x4
+    /* CD14 0010CD14 2D48A002 */  daddu      $a5, $s5, $zero
+    /* CD18 0010CD18 04000A24 */  addiu      $a6, $zero, 0x4
     /* CD1C 0010CD1C 8A28040C */  jal        func_0010A228
-    /* CD20 0010CD20 2D580000 */   daddu     $t3, $zero, $zero
+    /* CD20 0010CD20 2D580000 */   daddu     $a7, $zero, $zero
     /* CD24 0010CD24 07004104 */  bgez       $v0, .L0010CD44
     /* CD28 0010CD28 0020023C */   lui       $v0, (0x20000000 >> 16)
     /* CD2C 0010CD2C FC1B040C */  jal        func_00106FF0

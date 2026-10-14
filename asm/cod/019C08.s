@@ -14,9 +14,9 @@ glabel func_00119C08
     /* 19C08 00119C08 60FFBD27 */  addiu      $sp, $sp, -0xA0
     /* 19C0C 00119C0C 8000B6FF */  sd         $s6, 0x80($sp)
     /* 19C10 00119C10 7000B5FF */  sd         $s5, 0x70($sp)
-    /* 19C14 00119C14 2DB02001 */  daddu      $s6, $t1, $zero
+    /* 19C14 00119C14 2DB02001 */  daddu      $s6, $a5, $zero
     /* 19C18 00119C18 6000B4FF */  sd         $s4, 0x60($sp)
-    /* 19C1C 00119C1C 2DA80001 */  daddu      $s5, $t0, $zero
+    /* 19C1C 00119C1C 2DA80001 */  daddu      $s5, $a4, $zero
     /* 19C20 00119C20 5000B3FF */  sd         $s3, 0x50($sp)
     /* 19C24 00119C24 2DA0E000 */  daddu      $s4, $a3, $zero
     /* 19C28 00119C28 3000B1FF */  sd         $s1, 0x30($sp)
@@ -98,9 +98,9 @@ glabel func_00119C08
     /* 19D40 00119D40 19008434 */  ori        $a0, $a0, (0x80000019 & 0xFFFF)
     /* 19D44 00119D44 40000624 */  addiu      $a2, $zero, 0x40
     /* 19D48 00119D48 2D380000 */  daddu      $a3, $zero, $zero
-    /* 19D4C 00119D4C 2D400000 */  daddu      $t0, $zero, $zero
+    /* 19D4C 00119D4C 2D400000 */  daddu      $a4, $zero, $zero
     /* 19D50 00119D50 804B040C */  jal        func_00112E00
-    /* 19D54 00119D54 2D480000 */   daddu     $t1, $zero, $zero
+    /* 19D54 00119D54 2D480000 */   daddu     $a5, $zero, $zero
     /* 19D58 00119D58 0A004014 */  bnez       $v0, .L00119D84
     /* 19D5C 00119D5C 00000000 */   nop
     /* 19D60 00119D60 A866040C */  jal        func_00119AA0

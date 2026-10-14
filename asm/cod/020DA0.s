@@ -40,7 +40,7 @@ glabel func_00120DA0
     /* 20E00 00120E00 37004010 */  beqz       $v0, .L00120EE0
     /* 20E04 00120E04 0000A4AF */   sw        $a0, 0x0($sp)
     /* 20E08 00120E08 FFFF133C */  lui        $s3, (0xFFFFFFFF >> 16)
-    /* 20E0C 00120E0C 00080924 */  addiu      $t1, $zero, 0x800
+    /* 20E0C 00120E0C 00080924 */  addiu      $a5, $zero, 0x800
     /* 20E10 00120E10 FFFF7336 */  ori        $s3, $s3, (0xFFFFFFFF & 0xFFFF)
     /* 20E14 00120E14 1000C22B */  slti       $v0, $fp, 0x10
 .align 2
@@ -49,15 +49,15 @@ glabel func_00120DA0
     /* 20E1C 00120E1C 2D28C002 */   daddu     $a1, $s6, $zero
     /* 20E20 00120E20 0000828E */  lw         $v0, 0x0($s4)
     /* 20E24 00120E24 0400868E */  lw         $a2, 0x4($s4)
-    /* 20E28 00120E28 2D400000 */  daddu      $t0, $zero, $zero
-    /* 20E2C 00120E2C 1B002201 */  divu       $zero, $t1, $v0
+    /* 20E28 00120E28 2D400000 */  daddu      $a4, $zero, $zero
+    /* 20E2C 00120E2C 1B002201 */  divu       $zero, $a5, $v0
     /* 20E30 00120E30 01004050 */  beql       $v0, $zero, .L00120E38
     /* 20E34 00120E34 CD010000 */   break     0, 7
 .align 2
   .L00120E38:
     /* 20E38 00120E38 0000A48F */  lw         $a0, 0x0($sp)
     /* 20E3C 00120E3C 2D880000 */  daddu      $s1, $zero, $zero
-    /* 20E40 00120E40 1000A97F */  sq         $t1, 0x10($sp)
+    /* 20E40 00120E40 1000A97F */  sq         $a5, 0x10($sp)
     /* 20E44 00120E44 12180000 */  mflo       $v1
     /* 20E48 00120E48 18004602 */  mult       $zero, $s2, $a2
     /* 20E4C 00120E4C 2D806000 */  daddu      $s0, $v1, $zero
@@ -69,7 +69,7 @@ glabel func_00120DA0
     /* 20E64 00120E64 1810D000 */  mult       $v0, $a2, $s0
     /* 20E68 00120E68 82100200 */  srl        $v0, $v0, 2
     /* 20E6C 00120E6C 12004010 */  beqz       $v0, .L00120EB8
-    /* 20E70 00120E70 1000A97B */   lq        $t1, 0x10($sp)
+    /* 20E70 00120E70 1000A97B */   lq        $a5, 0x10($sp)
     /* 20E74 00120E74 0000C28E */  lw         $v0, 0x0($s6)
     /* 20E78 00120E78 03005310 */  beq        $v0, $s3, .L00120E88
     /* 20E7C 00120E7C 01004426 */   addiu     $a0, $s2, 0x1

@@ -14,13 +14,13 @@ glabel func_00109C58
     /* 9C58 00109C58 80FFBD27 */  addiu      $sp, $sp, -0x80
     /* 9C5C 00109C5C 6000B6FF */  sd         $s6, 0x60($sp)
     /* 9C60 00109C60 5000B5FF */  sd         $s5, 0x50($sp)
-    /* 9C64 00109C64 2DB04001 */  daddu      $s6, $t2, $zero
+    /* 9C64 00109C64 2DB04001 */  daddu      $s6, $a6, $zero
     /* 9C68 00109C68 4000B4FF */  sd         $s4, 0x40($sp)
     /* 9C6C 00109C6C 2DA88000 */  daddu      $s5, $a0, $zero
     /* 9C70 00109C70 3000B3FF */  sd         $s3, 0x30($sp)
-    /* 9C74 00109C74 2DA02001 */  daddu      $s4, $t1, $zero
+    /* 9C74 00109C74 2DA02001 */  daddu      $s4, $a5, $zero
     /* 9C78 00109C78 2000B2FF */  sd         $s2, 0x20($sp)
-    /* 9C7C 00109C7C 2D980001 */  daddu      $s3, $t0, $zero
+    /* 9C7C 00109C7C 2D980001 */  daddu      $s3, $a4, $zero
     /* 9C80 00109C80 1000B1FF */  sd         $s1, 0x10($sp)
     /* 9C84 00109C84 2D90E000 */  daddu      $s2, $a3, $zero
     /* 9C88 00109C88 0000B0FF */  sd         $s0, 0x0($sp)

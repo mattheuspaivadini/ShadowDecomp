@@ -70,9 +70,9 @@ glabel func_00105CE0
     /* 5DC0 00105DC0 C0838687 */  lh         $a2, %gp_rel(D_0013A130)($gp)
     /* 5DC4 00105DC4 2D280000 */  daddu      $a1, $zero, $zero
     /* 5DC8 00105DC8 C4838787 */  lh         $a3, %gp_rel(D_0013A134)($gp)
-    /* 5DCC 00105DCC 02000824 */  addiu      $t0, $zero, 0x2
-    /* 5DD0 00105DD0 2D480000 */  daddu      $t1, $zero, $zero
-    /* 5DD4 00105DD4 01000A24 */  addiu      $t2, $zero, 0x1
+    /* 5DCC 00105DCC 02000824 */  addiu      $a4, $zero, 0x2
+    /* 5DD0 00105DD0 2D480000 */  daddu      $a5, $zero, $zero
+    /* 5DD4 00105DD4 01000A24 */  addiu      $a6, $zero, 0x1
     /* 5DD8 00105DD8 1A4E040C */  jal        func_00113868
     /* 5DDC 00105DDC 2D200002 */   daddu     $a0, $s0, $zero
     /* 5DE0 00105DE0 D84E040C */  jal        func_00113B60

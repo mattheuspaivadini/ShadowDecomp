@@ -82,7 +82,7 @@ glabel func_001299A8
     /* 29A90 00129A90 C860678C */  lw         $a3, %lo(D_001360C8)($v1)
     /* 29A94 00129A94 2D304002 */  daddu      $a2, $s2, $zero
     /* 29A98 00129A98 B4B9040C */  jal        func_0012E6D0
-    /* 29A9C 00129A9C D801A827 */   addiu     $t0, $sp, 0x1D8
+    /* 29A9C 00129A9C D801A827 */   addiu     $a4, $sp, 0x1D8
     /* 29AA0 00129AA0 2D804000 */  daddu      $s0, $v0, $zero
     /* 29AA4 00129AA4 0600005A */  blezl      $s0, .L00129AC0
     /* 29AA8 00129AA8 23885502 */   subu      $s1, $s2, $s5
@@ -374,11 +374,11 @@ glabel func_001299A8
     /* 29DE8 00129DE8 F801A5DF */  ld         $a1, 0x1F8($sp)
     /* 29DEC 00129DEC 2D308002 */  daddu      $a2, $s4, $zero
     /* 29DF0 00129DF0 2D38E002 */  daddu      $a3, $s7, $zero
-    /* 29DF4 00129DF4 D001A827 */  addiu      $t0, $sp, 0x1D0
-    /* 29DF8 00129DF8 DC01A927 */  addiu      $t1, $sp, 0x1DC
-    /* 29DFC 00129DFC 2D502002 */  daddu      $t2, $s1, $zero
+    /* 29DF4 00129DF4 D001A827 */  addiu      $a4, $sp, 0x1D0
+    /* 29DF8 00129DF8 DC01A927 */  addiu      $a5, $sp, 0x1DC
+    /* 29DFC 00129DFC 2D502002 */  daddu      $a6, $s1, $zero
     /* 29E00 00129E00 06AC040C */  jal        func_0012B018
-    /* 29E04 00129E04 E001AB27 */   addiu     $t3, $sp, 0x1E0
+    /* 29E04 00129E04 E001AB27 */   addiu     $a7, $sp, 0x1E0
     /* 29E08 00129E08 2DA84000 */  daddu      $s5, $v0, $zero
     /* 29E0C 00129E0C 67000224 */  addiu      $v0, $zero, 0x67
     /* 29E10 00129E10 03002212 */  beq        $s1, $v0, .L00129E20

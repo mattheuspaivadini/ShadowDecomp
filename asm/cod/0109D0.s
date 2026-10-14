@@ -85,7 +85,7 @@ glabel func_001109D0
     /* 10AD8 00110AD8 2F30C300 */  dsubu      $a2, $a2, $v1
     /* 10ADC 00110ADC 2C001C8E */  lw         $gp, 0x2C($s0)
     /* 10AE0 00110AE0 0800048E */  lw         $a0, 0x8($s0)
-    /* 10AE4 00110AE4 2D40C002 */  daddu      $t0, $s6, $zero
+    /* 10AE4 00110AE4 2D40C002 */  daddu      $a4, $s6, $zero
     /* 10AE8 00110AE8 2800028E */  lw         $v0, 0x28($s0)
     /* 10AEC 00110AEC 2520E400 */  or         $a0, $a3, $a0
     /* 10AF0 00110AF0 200005DE */  ld         $a1, 0x20($s0)

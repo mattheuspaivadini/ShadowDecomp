@@ -20,7 +20,7 @@ glabel func_0011F008
     /* 1F020 0011F020 B002B2FF */  sd         $s2, 0x2B0($sp)
     /* 1F024 0011F024 2D98A000 */  daddu      $s3, $a1, $zero
     /* 1F028 0011F028 9002B0FF */  sd         $s0, 0x290($sp)
-    /* 1F02C 0011F02C 2D900001 */  daddu      $s2, $t0, $zero
+    /* 1F02C 0011F02C 2D900001 */  daddu      $s2, $a4, $zero
     /* 1F030 0011F030 2D80E000 */  daddu      $s0, $a3, $zero
     /* 1F034 0011F034 2003BFFF */  sd         $ra, 0x320($sp)
     /* 1F038 0011F038 1003BEFF */  sd         $fp, 0x310($sp)
@@ -42,7 +42,7 @@ glabel func_0011F008
     /* 1F078 0011F078 2D30A003 */  daddu      $a2, $sp, $zero
     /* 1F07C 0011F07C 2D380000 */  daddu      $a3, $zero, $zero
     /* 1F080 0011F080 1877040C */  jal        func_0011DC60
-    /* 1F084 0011F084 2D400000 */   daddu     $t0, $zero, $zero
+    /* 1F084 0011F084 2D400000 */   daddu     $a4, $zero, $zero
     /* 1F088 0011F088 0181033C */  lui        $v1, (0x81010011 >> 16)
     /* 1F08C 0011F08C 11006334 */  ori        $v1, $v1, (0x81010011 & 0xFFFF)
     /* 1F090 0011F090 54004314 */  bne        $v0, $v1, .L0011F1E4

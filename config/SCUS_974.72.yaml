@@ -14,6 +14,7 @@ options:
   asm_path: asm
   src_path: src
   build_path: build
+  asset_path: build/assets
 
   ld_script_path: build/SCUS_974.72.ld
   ld_dependencies: True
@@ -34,6 +35,10 @@ options:
   rodata_string_guesser_level: 2
   data_string_guesser_level: 2
   named_regs_for_c_funcs: False
+  # Emit the 64-bit EABI (n64) GPR names ($a4-$a7/$t0-$t3 for r8-r15) so the
+  # output assembles with `mips-linux-gnu-as -mabi=eabi` (required for correct
+  # 64-bit `ld`/`sd` with %lo). o32 names break under any 64-bit -mabi.
+  mips_abi_gpr: n64
 
   section_order:
     - .text
@@ -70,7 +75,7 @@ segments:
     bss_size: 0x301A8
     subalign: null
     subsegments:
-      - [0x000000, data, cod/000000] # .text header (2 pointers + 2 zero words)
+      - [0x000000, textbin, cod/000000] # .text header (2 pointers + 2 zero words)
       - [0x000010, asm, cod/000010] # entry
       - [0x0000C0, asm, cod/0000C0] # func_001000C0
       - [0x0000C8, asm, cod/0000C8] # func_001000C8
@@ -1115,7 +1120,6 @@ segments:
       - [0x0360E0, data, cod/0360E0] # .eh_frame
       - [0x036100, rodata, cod/036100] # .rodata
       - [0x039D80, lit4, cod/039D80] # .lit4
-      - [0x039D84, data, cod/039D84] # .data_nop
       - [0x039E00, sdata, cod/039E00] # .sdata
       - { type: sbss, vram: 0x0013A180, name: cod/0013A180 } # .sbss
       - { type: bss, vram: 0x0013A200, name: cod/0013A200 } # .bss

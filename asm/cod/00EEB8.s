@@ -59,11 +59,11 @@ glabel func_0010EEB8
     /* EF44 0010EF44 0000A0AF */  sw         $zero, 0x0($sp)
     /* EF48 0010EF48 02000524 */  addiu      $a1, $zero, 0x2
     /* EF4C 0010EF4C 2D300000 */  daddu      $a2, $zero, $zero
-    /* EF50 0010EF50 20000824 */  addiu      $t0, $zero, 0x20
-    /* EF54 0010EF54 2D48E000 */  daddu      $t1, $a3, $zero
-    /* EF58 0010EF58 10000A24 */  addiu      $t2, $zero, 0x10
+    /* EF50 0010EF50 20000824 */  addiu      $a4, $zero, 0x20
+    /* EF54 0010EF54 2D48E000 */  daddu      $a5, $a3, $zero
+    /* EF58 0010EF58 10000A24 */  addiu      $a6, $zero, 0x10
     /* EF5C 0010EF5C 6026040C */  jal        func_00109980
-    /* EF60 0010EF60 2D580000 */   daddu     $t3, $zero, $zero
+    /* EF60 0010EF60 2D580000 */   daddu     $a7, $zero, $zero
     /* EF64 0010EF64 FEFF043C */  lui        $a0, (0xFFFEFFFF >> 16)
     /* EF68 0010EF68 FFFF0324 */  addiu      $v1, $zero, -0x1
     /* EF6C 0010EF6C 2A186200 */  slt        $v1, $v1, $v0

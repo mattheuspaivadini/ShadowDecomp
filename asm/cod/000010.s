@@ -29,12 +29,12 @@ glabel entry
     /* 40 00100040 FE01053C */  lui        $a1, %hi(D_1FE0000)
     /* 44 00100044 0200063C */  lui        $a2, %hi(D_20000)
     /* 48 00100048 1400073C */  lui        $a3, %hi(D_0013A200)
-    /* 4C 0010004C 1000083C */  lui        $t0, %hi(func_001000C8)
+    /* 4C 0010004C 1000083C */  lui        $a4, %hi(func_001000C8)
     /* 50 00100050 701D8424 */  addiu      $a0, $a0, %lo(D_00141D70)
     /* 54 00100054 0000A524 */  addiu      $a1, $a1, %lo(D_1FE0000)
     /* 58 00100058 0000C624 */  addiu      $a2, $a2, %lo(D_20000)
     /* 5C 0010005C 00A2E724 */  addiu      $a3, $a3, %lo(D_0013A200)
-    /* 60 00100060 C8000825 */  addiu      $t0, $t0, %lo(func_001000C8)
+    /* 60 00100060 C8000825 */  addiu      $a4, $a4, %lo(func_001000C8)
     /* 64 00100064 2DE08000 */  daddu      $gp, $a0, $zero
     /* 68 00100068 3C000324 */  addiu      $v1, $zero, 0x3C
     /* 6C 0010006C 0C000000 */  syscall    0 /* handwritten instruction */

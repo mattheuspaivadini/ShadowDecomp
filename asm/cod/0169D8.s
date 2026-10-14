@@ -14,7 +14,7 @@ glabel func_001169D8
     /* 169D8 001169D8 70FFBD27 */  addiu      $sp, $sp, -0x90
     /* 169DC 001169DC 6000B5FF */  sd         $s5, 0x60($sp)
     /* 169E0 001169E0 5000B4FF */  sd         $s4, 0x50($sp)
-    /* 169E4 001169E4 2DA80001 */  daddu      $s5, $t0, $zero
+    /* 169E4 001169E4 2DA80001 */  daddu      $s5, $a4, $zero
     /* 169E8 001169E8 4000B3FF */  sd         $s3, 0x40($sp)
     /* 169EC 001169EC 2DA0E000 */  daddu      $s4, $a3, $zero
     /* 169F0 001169F0 2000B1FF */  sd         $s1, 0x20($sp)
@@ -78,14 +78,14 @@ glabel func_001169D8
     /* 16AB8 00116AB8 C0EAE724 */  addiu      $a3, $a3, %lo(D_0014EAC0)
     /* 16ABC 00116ABC 0080053C */  lui        $a1, (0x8000131C >> 16)
     /* 16AC0 00116AC0 50E9C426 */  addiu      $a0, $s6, %lo(D_0014E950)
-    /* 16AC4 00116AC4 2D58A002 */  daddu      $t3, $s5, $zero
+    /* 16AC4 00116AC4 2D58A002 */  daddu      $a7, $s5, $zero
     /* 16AC8 00116AC8 0000A0AF */  sw         $zero, 0x0($sp)
     /* 16ACC 00116ACC 1C13A534 */  ori        $a1, $a1, (0x8000131C & 0xFFFF)
     /* 16AD0 00116AD0 01000624 */  addiu      $a2, $zero, 0x1
-    /* 16AD4 00116AD4 90200824 */  addiu      $t0, $zero, 0x2090
-    /* 16AD8 00116AD8 2D48E000 */  daddu      $t1, $a3, $zero
+    /* 16AD4 00116AD4 90200824 */  addiu      $a4, $zero, 0x2090
+    /* 16AD8 00116AD8 2D48E000 */  daddu      $a5, $a3, $zero
     /* 16ADC 00116ADC 6026040C */  jal        func_00109980
-    /* 16AE0 00116AE0 90200A24 */   addiu     $t2, $zero, 0x2090
+    /* 16AE0 00116AE0 90200A24 */   addiu     $a6, $zero, 0x2090
     /* 16AE4 00116AE4 05004104 */  bgez       $v0, .L00116AFC
     /* 16AE8 00116AE8 00000000 */   nop
 .align 2

@@ -31,11 +31,11 @@ glabel func_0010DE60
     /* DE9C 0010DE9C 0000A0AF */  sw         $zero, 0x0($sp)
     /* DEA0 0010DEA0 02000524 */  addiu      $a1, $zero, 0x2
     /* DEA4 0010DEA4 2D300000 */  daddu      $a2, $zero, $zero
-    /* DEA8 0010DEA8 04000824 */  addiu      $t0, $zero, 0x4
-    /* DEAC 0010DEAC 00720926 */  addiu      $t1, $s0, %lo(D_00147200)
-    /* DEB0 0010DEB0 04000A24 */  addiu      $t2, $zero, 0x4
+    /* DEA8 0010DEA8 04000824 */  addiu      $a4, $zero, 0x4
+    /* DEAC 0010DEAC 00720926 */  addiu      $a5, $s0, %lo(D_00147200)
+    /* DEB0 0010DEB0 04000A24 */  addiu      $a6, $zero, 0x4
     /* DEB4 0010DEB4 6026040C */  jal        func_00109980
-    /* DEB8 0010DEB8 2D580000 */   daddu     $t3, $zero, $zero
+    /* DEB8 0010DEB8 2D580000 */   daddu     $a7, $zero, $zero
     /* DEBC 0010DEBC 02004104 */  bgez       $v0, .L0010DEC8
     /* DEC0 0010DEC0 0072028E */   lw        $v0, %lo(D_00147200)($s0)
     /* DEC4 0010DEC4 FFFF0224 */  addiu      $v0, $zero, -0x1

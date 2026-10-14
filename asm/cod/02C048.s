@@ -13,7 +13,7 @@ nonmatching func_0012C048, 0x54
 glabel func_0012C048
     /* 2C048 0012C048 1300023C */  lui        $v0, %hi(D_00135C60)
     /* 2C04C 0012C04C 90FFBD27 */  addiu      $sp, $sp, -0x70
-    /* 2C050 0012C050 605C488C */  lw         $t0, %lo(D_00135C60)($v0)
+    /* 2C050 0012C050 605C488C */  lw         $a4, %lo(D_00135C60)($v0)
     /* 2C054 0012C054 08020224 */  addiu      $v0, $zero, 0x208
     /* 2C058 0012C058 FF7F033C */  lui        $v1, (0x7FFFFFFF >> 16)
     /* 2C05C 0012C05C 2D388000 */  daddu      $a3, $a0, $zero
@@ -24,7 +24,7 @@ glabel func_0012C048
     /* 2C070 0012C070 0800A3AF */  sw         $v1, 0x8($sp)
     /* 2C074 0012C074 0C00A2A7 */  sh         $v0, 0xC($sp)
     /* 2C078 0012C078 1000A7AF */  sw         $a3, 0x10($sp)
-    /* 2C07C 0012C07C 5400A8AF */  sw         $t0, 0x54($sp)
+    /* 2C07C 0012C07C 5400A8AF */  sw         $a4, 0x54($sp)
     /* 2C080 0012C080 4CA6040C */  jal        func_00129930
     /* 2C084 0012C084 0000A7AF */   sw        $a3, 0x0($sp)
     /* 2C088 0012C088 0000A38F */  lw         $v1, 0x0($sp)

@@ -80,11 +80,11 @@ glabel func_0010AB90
     /* AC70 0010AC70 0800A0AF */  sw         $zero, 0x8($sp)
     /* AC74 0010AC74 FE000524 */  addiu      $a1, $zero, 0xFE
     /* AC78 0010AC78 2D300000 */  daddu      $a2, $zero, $zero
-    /* AC7C 0010AC7C 08000824 */  addiu      $t0, $zero, 0x8
-    /* AC80 0010AC80 2D484002 */  daddu      $t1, $s2, $zero
-    /* AC84 0010AC84 04000A24 */  addiu      $t2, $zero, 0x4
+    /* AC7C 0010AC7C 08000824 */  addiu      $a4, $zero, 0x8
+    /* AC80 0010AC80 2D484002 */  daddu      $a5, $s2, $zero
+    /* AC84 0010AC84 04000A24 */  addiu      $a6, $zero, 0x4
     /* AC88 0010AC88 8A28040C */  jal        func_0010A228
-    /* AC8C 0010AC8C 2D580000 */   daddu     $t3, $zero, $zero
+    /* AC8C 0010AC8C 2D580000 */   daddu     $a7, $zero, $zero
     /* AC90 0010AC90 05004104 */  bgez       $v0, .L0010ACA8
     /* AC94 0010AC94 0020023C */   lui       $v0, (0x20000000 >> 16)
     /* AC98 0010AC98 F229040C */  jal        func_0010A7C8

@@ -15,13 +15,13 @@ glabel func_0011AE28
     /* 1AE2C 0011AE2C 1300023C */  lui        $v0, %hi(D_00135630)
     /* 1AE30 0011AE30 7000B7FF */  sd         $s7, 0x70($sp)
     /* 1AE34 0011AE34 6000B6FF */  sd         $s6, 0x60($sp)
-    /* 1AE38 0011AE38 2DB80001 */  daddu      $s7, $t0, $zero
+    /* 1AE38 0011AE38 2DB80001 */  daddu      $s7, $a4, $zero
     /* 1AE3C 0011AE3C 5000B5FF */  sd         $s5, 0x50($sp)
     /* 1AE40 0011AE40 2DB0E000 */  daddu      $s6, $a3, $zero
     /* 1AE44 0011AE44 4000B4FF */  sd         $s4, 0x40($sp)
     /* 1AE48 0011AE48 2DA8C000 */  daddu      $s5, $a2, $zero
     /* 1AE4C 0011AE4C 3000B3FF */  sd         $s3, 0x30($sp)
-    /* 1AE50 0011AE50 2DA02001 */  daddu      $s4, $t1, $zero
+    /* 1AE50 0011AE50 2DA02001 */  daddu      $s4, $a5, $zero
     /* 1AE54 0011AE54 1000B1FF */  sd         $s1, 0x10($sp)
     /* 1AE58 0011AE58 2D98A000 */  daddu      $s3, $a1, $zero
     /* 1AE5C 0011AE5C 3056438C */  lw         $v1, %lo(D_00135630)($v0)

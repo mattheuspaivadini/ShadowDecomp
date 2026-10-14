@@ -73,8 +73,11 @@ def parse_function_starts(asm_s: Path, symbols: dict[str, int]) -> list[tuple[in
 
 
 def build_text_block(funcs: list[tuple[int, str]]) -> str:
+    # `textbin` emits raw bytes into `.text` (as an `.incbin`), which is where the
+    # 2-pointer + 2-zero-word header physically lives (0x00100000..0x0010000F).
+    # A `data` subsegment would wrongly land in the `.data` output section.
     lines: list[str] = [
-        f"      - [0x{TEXT_ROM_START:06X}, data, cod/{TEXT_ROM_START:06X}]"
+        f"      - [0x{TEXT_ROM_START:06X}, textbin, cod/000000]"
         " # .text header (2 pointers + 2 zero words)"
     ]
     for vram, name in funcs:

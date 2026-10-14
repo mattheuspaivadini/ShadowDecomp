@@ -16,7 +16,7 @@ glabel func_0010EA10
     /* EA18 0010EA18 4000B3FF */  sd         $s3, 0x40($sp)
     /* EA1C 0010EA1C 2DA0E000 */  daddu      $s4, $a3, $zero
     /* EA20 0010EA20 3000B2FF */  sd         $s2, 0x30($sp)
-    /* EA24 0010EA24 2D980001 */  daddu      $s3, $t0, $zero
+    /* EA24 0010EA24 2D980001 */  daddu      $s3, $a4, $zero
     /* EA28 0010EA28 2000B1FF */  sd         $s1, 0x20($sp)
     /* EA2C 0010EA2C 2D90A000 */  daddu      $s2, $a1, $zero
     /* EA30 0010EA30 1000B0FF */  sd         $s0, 0x10($sp)
@@ -61,18 +61,18 @@ glabel func_0010EA10
     /* EABC 0010EABC 0000666C */  ldr        $a2, 0x0($v1)
     /* EAC0 0010EAC0 0F006768 */  ldl        $a3, 0xF($v1)
     /* EAC4 0010EAC4 0800676C */  ldr        $a3, 0x8($v1)
-    /* EAC8 0010EAC8 17006868 */  ldl        $t0, 0x17($v1)
-    /* EACC 0010EACC 1000686C */  ldr        $t0, 0x10($v1)
-    /* EAD0 0010EAD0 1F006968 */  ldl        $t1, 0x1F($v1)
-    /* EAD4 0010EAD4 1800696C */  ldr        $t1, 0x18($v1)
+    /* EAC8 0010EAC8 17006868 */  ldl        $a4, 0x17($v1)
+    /* EACC 0010EACC 1000686C */  ldr        $a4, 0x10($v1)
+    /* EAD0 0010EAD0 1F006968 */  ldl        $a5, 0x1F($v1)
+    /* EAD4 0010EAD4 1800696C */  ldr        $a5, 0x18($v1)
     /* EAD8 0010EAD8 070086B0 */  sdl        $a2, 0x7($a0)
     /* EADC 0010EADC 000086B4 */  sdr        $a2, 0x0($a0)
     /* EAE0 0010EAE0 0F0087B0 */  sdl        $a3, 0xF($a0)
     /* EAE4 0010EAE4 080087B4 */  sdr        $a3, 0x8($a0)
-    /* EAE8 0010EAE8 170088B0 */  sdl        $t0, 0x17($a0)
-    /* EAEC 0010EAEC 100088B4 */  sdr        $t0, 0x10($a0)
-    /* EAF0 0010EAF0 1F0089B0 */  sdl        $t1, 0x1F($a0)
-    /* EAF4 0010EAF4 180089B4 */  sdr        $t1, 0x18($a0)
+    /* EAE8 0010EAE8 170088B0 */  sdl        $a4, 0x17($a0)
+    /* EAEC 0010EAEC 100088B4 */  sdr        $a4, 0x10($a0)
+    /* EAF0 0010EAF0 1F0089B0 */  sdl        $a5, 0x1F($a0)
+    /* EAF4 0010EAF4 180089B4 */  sdr        $a5, 0x18($a0)
     /* EAF8 0010EAF8 20006324 */  addiu      $v1, $v1, 0x20
     /* EAFC 0010EAFC 20008424 */  addiu      $a0, $a0, 0x20
     /* EB00 0010EB00 00000000 */  nop
@@ -89,12 +89,12 @@ glabel func_0010EA10
   .L0010EB20:
     /* EB20 0010EB20 000066DC */  ld         $a2, 0x0($v1)
     /* EB24 0010EB24 080067DC */  ld         $a3, 0x8($v1)
-    /* EB28 0010EB28 100068DC */  ld         $t0, 0x10($v1)
-    /* EB2C 0010EB2C 180069DC */  ld         $t1, 0x18($v1)
+    /* EB28 0010EB28 100068DC */  ld         $a4, 0x10($v1)
+    /* EB2C 0010EB2C 180069DC */  ld         $a5, 0x18($v1)
     /* EB30 0010EB30 000086FC */  sd         $a2, 0x0($a0)
     /* EB34 0010EB34 080087FC */  sd         $a3, 0x8($a0)
-    /* EB38 0010EB38 100088FC */  sd         $t0, 0x10($a0)
-    /* EB3C 0010EB3C 180089FC */  sd         $t1, 0x18($a0)
+    /* EB38 0010EB38 100088FC */  sd         $a4, 0x10($a0)
+    /* EB3C 0010EB3C 180089FC */  sd         $a5, 0x18($a0)
     /* EB40 0010EB40 20006324 */  addiu      $v1, $v1, 0x20
     /* EB44 0010EB44 20008424 */  addiu      $a0, $a0, 0x20
     /* EB48 0010EB48 00000000 */  nop
@@ -106,19 +106,19 @@ glabel func_0010EA10
     /* EB58 0010EB58 0000666C */  ldr        $a2, 0x0($v1)
     /* EB5C 0010EB5C 0F006768 */  ldl        $a3, 0xF($v1)
     /* EB60 0010EB60 0800676C */  ldr        $a3, 0x8($v1)
-    /* EB64 0010EB64 17006868 */  ldl        $t0, 0x17($v1)
-    /* EB68 0010EB68 1000686C */  ldr        $t0, 0x10($v1)
-    /* EB6C 0010EB6C 1B006988 */  lwl        $t1, 0x1B($v1)
-    /* EB70 0010EB70 18006998 */  lwr        $t1, 0x18($v1)
+    /* EB64 0010EB64 17006868 */  ldl        $a4, 0x17($v1)
+    /* EB68 0010EB68 1000686C */  ldr        $a4, 0x10($v1)
+    /* EB6C 0010EB6C 1B006988 */  lwl        $a5, 0x1B($v1)
+    /* EB70 0010EB70 18006998 */  lwr        $a5, 0x18($v1)
     /* EB74 0010EB74 070086B0 */  sdl        $a2, 0x7($a0)
     /* EB78 0010EB78 000086B4 */  sdr        $a2, 0x0($a0)
     /* EB7C 0010EB7C 0F0087B0 */  sdl        $a3, 0xF($a0)
     /* EB80 0010EB80 080087B4 */  sdr        $a3, 0x8($a0)
-    /* EB84 0010EB84 170088B0 */  sdl        $t0, 0x17($a0)
-    /* EB88 0010EB88 100088B4 */  sdr        $t0, 0x10($a0)
-    /* EB8C 0010EB8C 1B0089A8 */  swl        $t1, 0x1B($a0)
+    /* EB84 0010EB84 170088B0 */  sdl        $a4, 0x17($a0)
+    /* EB88 0010EB88 100088B4 */  sdr        $a4, 0x10($a0)
+    /* EB8C 0010EB8C 1B0089A8 */  swl        $a5, 0x1B($a0)
     /* EB90 0010EB90 FC000224 */  addiu      $v0, $zero, 0xFC
-    /* EB94 0010EB94 180089B8 */  swr        $t1, 0x18($a0)
+    /* EB94 0010EB94 180089B8 */  swr        $a5, 0x18($a0)
     /* EB98 0010EB98 0B000010 */  b          .L0010EBC8
     /* EB9C 0010EB9C 8073A2AE */   sw        $v0, %lo(D_00147380)($s5)
 .align 2
@@ -145,11 +145,11 @@ glabel func_0010EA10
     /* EBD4 0010EBD4 0000A0AF */  sw         $zero, 0x0($sp)
     /* EBD8 0010EBD8 2D300000 */  daddu      $a2, $zero, $zero
     /* EBDC 0010EBDC 2D380002 */  daddu      $a3, $s0, $zero
-    /* EBE0 0010EBE0 00020824 */  addiu      $t0, $zero, 0x200
-    /* EBE4 0010EBE4 2D480002 */  daddu      $t1, $s0, $zero
-    /* EBE8 0010EBE8 08000A24 */  addiu      $t2, $zero, 0x8
+    /* EBE0 0010EBE0 00020824 */  addiu      $a4, $zero, 0x200
+    /* EBE4 0010EBE4 2D480002 */  daddu      $a5, $s0, $zero
+    /* EBE8 0010EBE8 08000A24 */  addiu      $a6, $zero, 0x8
     /* EBEC 0010EBEC 6026040C */  jal        func_00109980
-    /* EBF0 0010EBF0 2D580000 */   daddu     $t3, $zero, $zero
+    /* EBF0 0010EBF0 2D580000 */   daddu     $a7, $zero, $zero
     /* EBF4 0010EBF4 04004304 */  bgezl      $v0, .L0010EC08
     /* EBF8 0010EBF8 0400038E */   lw        $v1, 0x4($s0)
     /* EBFC 0010EBFC FEFF023C */  lui        $v0, (0xFFFEFFFF >> 16)

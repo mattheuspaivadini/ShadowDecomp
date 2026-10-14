@@ -104,11 +104,11 @@ glabel func_0010DB08
     /* DC40 0010DC40 0000A0AF */  sw         $zero, 0x0($sp)
     /* DC44 0010DC44 2D300000 */  daddu      $a2, $zero, $zero
     /* DC48 0010DC48 0800A0AF */  sw         $zero, 0x8($sp)
-    /* DC4C 0010DC4C 0C080824 */  addiu      $t0, $zero, 0x80C
-    /* DC50 0010DC50 2D480002 */  daddu      $t1, $s0, $zero
-    /* DC54 0010DC54 04000A24 */  addiu      $t2, $zero, 0x4
+    /* DC4C 0010DC4C 0C080824 */  addiu      $a4, $zero, 0x80C
+    /* DC50 0010DC50 2D480002 */  daddu      $a5, $s0, $zero
+    /* DC54 0010DC54 04000A24 */  addiu      $a6, $zero, 0x4
     /* DC58 0010DC58 8A28040C */  jal        func_0010A228
-    /* DC5C 0010DC5C 2D580000 */   daddu     $t3, $zero, $zero
+    /* DC5C 0010DC5C 2D580000 */   daddu     $a7, $zero, $zero
     /* DC60 0010DC60 07004104 */  bgez       $v0, .L0010DC80
     /* DC64 0010DC64 0020023C */   lui       $v0, (0x20000000 >> 16)
     /* DC68 0010DC68 FC1B040C */  jal        func_00106FF0
