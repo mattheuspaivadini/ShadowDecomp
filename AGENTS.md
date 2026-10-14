@@ -155,7 +155,7 @@ Work in order. Mark each phase when done and commit.
 - [x] **Phase 3 — Compiler. DONE (2026-10-14, Session 3; revision question resolved Session 4).** Flags pinned by byte-level experiment: **`-O2 -g2 -G8`**, with a **per-TU `-g` override** (`tools/eegcc.py:cflags_for`) because the original mixes debug levels (`func_00114C30` needs `-g0`; `-g`/`-g2` suppress delay-slot filling, so the level is load-bearing). The original is a **mix of two EE-GCC generations**: `2.9-ee-991111(-01)` and `2.96-ee-001003-1` (`tools/cc_matrix.py`, all 14 published revisions; no single one matches everything). 47 functions byte-exact; 12 recorded as NON_MATCHING and unexplained by any revision. **`-O2` discriminated from `-O1`/`-Os`** (Session 4 step 3: 92-function sweep, 39 / 14 counterexamples; `-O2` ≡ `-O3`). See `docs/compiler.md`, `docs/cc-matrix-session4.txt`, `docs/opt-sweep-session4.txt`.
 - [x] **Phase 4 — Split & rebuild.** splat split is **per-function**: **1036 `.s`** under `asm/cod/` (one per function) plus 2 raw `textbin` subsegments (the `.text` 16-byte header and the `0x00113074` non-function hole); plus data segments, `build/SCUS_974.72.ld`, `include/macro.inc`. **Reassembly + link + hash check PASS**: `tools/build.py` (WSL2) → flat image byte-identical to the original, **237,952 bytes, SHA-1 `6f853f644a4279db18c15ceb8ee1d2a8b87a7b39`**. Still green with 92 functions replaced by C. **Step 6 (ELF container) done (Session 4): `build/SCUS_974.72.elf` is byte-identical to the original `SCUS_974.72`** (242,940 bytes, SHA-1 `b715b349…`) — 3 program headers, real section names, `.mdebug.eabi64`, no symtab, `e_entry 0x00100010`; `tools/containerize.py` (run by `tools/build.py`). See `docs/splat.md`, `docs/toolchain.md`, `docs/rebuild.md`.
 - [~] **Phase 5 — Name.** In progress. `tools/name_from_strings.py` (authoritative: resolves `string -> function` from splat's `%hi/%lo` relocation labels) finds **61 functions that reference a string carrying an identifier**; **46 are named, 15 are recorded candidates** (`docs/naming-candidates.md`). Names come from four evidence classes — *verbatim* self-naming log messages (17), *object* semaphore names with the routine inferred (22, UNCONFIRMED), three single inferences (`start`, `vfprintf`, `sceDbcGetDeviceStatus`, UNCONFIRMED) and three *callee* names from `func_00104668`'s failure diagnostics (Session 5: `load_set_conf_only`, `get_interface_id`, `wait_get_addr_only`, UNCONFIRMED) — plus the two Session-3 names (`LoaderSysDumpIopModuleIdentifiers`, `OutputLinkerScriptFile`). **48 named `.text` symbols** (`entry` + 47 evidence-derived). `func_00113074` was re-checked and is a splat boundary false positive (unreferenced; see `config/non_function_holes.txt`). Structs/data objects documented in `docs/structs.md`.
-- [~] **Phase 6 — Decompile. STARTED.** **261 / 1036 functions matched from C (12972 / 203,692 `.text` bytes = 6.368 %)**, all gated by the image hash (1037 splat boundaries minus the `0x00113074` false positive). Session 7 ran a **shape-clustering + parallel-subagent drafting** loop (`tools/shape_clusters.py`, brief + central scorer in `build/s7/`), promoted 49 functions and archived 49 near-misses; the backlog re-attack, the winning patterns and the near-miss table are in `docs/non-matching-backlog.md`; per-session detail in `docs/archive-2026-10-14-session7.md` and the live plan in `docs/session7-plan.md`; non-matching attempts in `src/non_matching/` (99 tracked).
+- [~] **Phase 6 — Decompile. STARTED.** **284 / 1036 functions matched from C (15820 / 203,692 `.text` bytes = 7.767 %)**, all gated by the image hash (1037 splat boundaries minus the `0x00113074` false positive). Session 7 ran a **shape-clustering + parallel-subagent drafting** loop (`tools/shape_clusters.py`, brief + central scorer in `build/s7/`), promoted 72 functions and archived 74 near-misses; the backlog re-attack, the winning patterns and the near-miss table are in `docs/non-matching-backlog.md`; per-session detail in `docs/archive-2026-10-14-session7.md` and the live plan in `docs/session7-plan.md`; non-matching attempts in `src/non_matching/` (124 tracked).
 
 ## 6. Identifying the compiler
 
@@ -193,22 +193,22 @@ Tips: use a function's constants, string references, and call patterns to infer 
 | ELF container (whole file) | **YES — `build/SCUS_974.72.elf` byte-identical to the original: 242,940 bytes, SHA-1 `b715b349…`; 3 program headers, 16 sections, `e_entry 0x00100010`, `.mdebug.eabi64`, no `.symtab`** (`tools/containerize.py`) |
 | Functions named | **48 `.text` symbols** = `entry` + **47 evidence-derived names**: 17 verbatim self-naming log messages, 22 inferred from `SceStdio<Op>Sema` object names (UNCONFIRMED), 3 single inferences (UNCONFIRMED), 3 callee names from `func_00104668` failure diagnostics (Session 5, UNCONFIRMED), 2 Session-3 names |
 | String-evidenced name candidates | **61 functions** reference an identifier-bearing string; **46 named, 15 pending** (the 18 Session-4 pending minus 3 resolved; none promoted in Session 5 — the evidence rule held) |
-| Functions matched (C) | **261 / 1036** (2.9-991111 and 2.96 per TU; the wrapper tier uses a per-TU `-fno-optimize-sibling-calls` on cc=296 TUs only — the 2.9 `cc1` rejects the flag) |
-| Matched bytes | 12972 / 203,692 `.text` bytes = **6.368 %** (verified) |
+| Functions matched (C) | **284 / 1036** (2.9-991111 and 2.96 per TU; the wrapper tier uses a per-TU `-fno-optimize-sibling-calls` on cc=296 TUs only — the 2.9 `cc1` rejects the flag) |
+| Matched bytes | 15820 / 203,692 `.text` bytes = **7.767 %** (verified) |
 | Compiler flags | `-O2 -g2 -G8` (per-TU `-g0` and `-fno-optimize-sibling-calls` overrides, the latter cc=296-only); `-O1`/`-Os` ruled out on 148 functions; `-O2 ≡ -O3` (not separable; Session 6 ran the decisive experiment — §2.4 of `docs/compiler.md`: plain static + `-O3` ≡ `inline` + `{-O2,-O3}`, so the `-O2` pin stays) |
 | Compilers | `ee-gcc2.96` (default) + `ee-gcc2.9-991111-01` (`cc=29`); matrix in `docs/compiler.md` §4.3 |
 | `.text` disassembly (splat R5900) | accurate; **1036 per-function `.s` + 2 raw `textbin`** (`.text` header, `0x00113074` non-function hole) |
 | Ghidra EE-extension decode | **100 %** of `.text` (50,923/50,923) |
 | splat split coverage | 203 KB / 85.6 % of ROM |
 | Functions detected | 1036 after removing 1 splat boundary false positive (`0x00113074`) from spimdisasm's 1037 |
-| Non-matching attempts tracked | **99** (`src/non_matching/`; 49 added in Session 7 — every one has a best-score row in `docs/non-matching-backlog.md` §"Session 7 update" and a `STATUS:` header with its residual) |
+| Non-matching attempts tracked | **124** (`src/non_matching/`; 74 added in Session 7 — every one has a best-score row in `docs/non-matching-backlog.md` §"Session 7 update" and a `STATUS:` header with its residual) |
 | IOP modules inventoried | 11 IRX (ELF32 MIPS-I, R3000A) |
 | EE hardware registers referenced | **38 addresses** (`tools/scan_hw_regs.py`); the 2 that were unidentified are now **confirmed**: `0x10001010` = `T2_MODE` (Timer 2 mode/status), `0x1000E060` = `D_STADR` (DMAC stall address) — `docs/structs.md` §"Hardware registers" |
 
 ### Session log
 
-- **2026-10-14 (Session 7) — shape clustering + parallel drafting waves, +49
-  functions (212 → 261).** Archive: `docs/archive-2026-10-14-session7.md`; live
+- **2026-10-14 (Session 7) — shape clustering + parallel drafting waves, +72
+  functions (212 → 284).** Archive: `docs/archive-2026-10-14-session7.md`; live
   plan/scoreboard: `docs/session7-plan.md`.
   - **Step 0 (baseline).** Gate re-verified before any change (HASH MATCH +
   container byte-identical + 212/212). True baseline computed: 1036 functions,
@@ -221,11 +221,12 @@ Tips: use a function's constants, string references, and call patterns to infer 
   the session is per-function work.
   - **Step 2 (waves).** 12 drafting subagents in waves of ~12 functions
   (`build/s7/BRIEF.md` + central `build/s7/score.py`, cc 29/296 × default/`-g0`/
-  `-fno-optimize-sibling-calls`), 4-7 matches per 12-14 metrics-tier batch:
-  waves **0** (3), **1a** (4), **1b** (7), **1c** (7), **1d** (3), **2a+2b** (11),
-  **2c** (1), **3a** (5) + the targeted fixes below.
+  `-fno-optimize-sibling-calls`): waves **0** (3), **1a** (4), **1b** (7),
+  **1c** (7), **1d** (3), **2a+2b** (11), **2c** (1), **3a** (5), **3b** (8),
+  **3c** (2), **4a** (6), **4b** (4) + the targeted fixes below.
   - **Step 3 (targeted).** Solved the Session-6 backlog pair `027500` / `00A798`
-  and five more stems with the permuter (`0101D8 0230B0 022BD8 022C30 022C88`).
+  and eight more stems with the permuter (`0101D8 0230B0 022BD8 022C30 022C88
+  006310 00A0B0 026140`).
   **New winning patterns (all byte-exact):** a callee declared returning
   **64-bit** makes an `int` wrapper emit `dsll32/dsra32`; a **`void`** callee
   frees `$v0` for the next statement's base; an **asm memory barrier** preserves
@@ -235,8 +236,9 @@ Tips: use a function's constants, string references, and call patterns to infer 
   - **Step 4 (naming).** No new evidence; 48 named symbols unchanged; no splat
     re-run.
   - Closing: `tools/build.py` → **HASH MATCH** + container byte-identical;
-  `tools/report.py` → **261/1036, 12,972/203,692 B = 6.368 %**; 99 near-misses
-  archived; history commits `29f50bd 64f9372 f42589d 30cf06b 8064757 822ddd5`.
+  `tools/report.py` → **284/1036, 15,820/203,692 B = 7.767 %**; 124 near-misses
+  archived; history commits `29f50bd 64f9372 f42589d 30cf06b 8064757 822ddd5
+  9caabd3 96a0213`.
 
 - **2026-10-14 (Session 6) — permuter re-attack, -O2/-O3 verdict, +64 functions
   (148 → 212).** Archive: `docs/archive-2026-10-14-session6.md`. STEP 0 (sync +
