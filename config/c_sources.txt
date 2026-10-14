@@ -283,3 +283,9 @@
 004040 = src/cod/004040.c        # variadic register save (same shape)
 005948 = src/cod/005948.c        # variadic register save (2 fixed args)
 005990 = src/cod/005990.c        # variadic register save (same shape)
+
+# --- Session 6, step 3: func_00107010 + sync/ei family, 022DA0 ----------------
+022DA0 = src/cod/022DA0.c cc=29   # store + func_00123260(...,0x65) (2.9 shapes)
+023180 = src/cod/023180.c        # func_00107010(a0); sync; ei
+021058 = src/cod/021058.c        # func_00107010(D_00163CC0[0]); sync; ei
+007C48 = src/cod/007C48.c        # func_00107010(a3); sync; ei; return 0
