@@ -301,5 +301,11 @@
 011390 = src/cod/011390.c cc=29   # same family (func_00111320)
 010DB8 = src/cod/010DB8.c cc=29   # same family, second call takes no argument
 00F118 = src/cod/00F118.c cc=29   # func_001073F0(4) & 0x40000 gate + two calls
-027500 = src/cod/027500.c
+027500 = src/cod/027500.c        # 64-bit callee decl -> dsll32/dsra32 pair
 00A798 = src/cod/00A798.c cc=29   # void-callee decl frees v0 for the base
+
+# --- Session 7, wave 1a (subagent drafts, verified here) ---------------------
+001AC0 = src/cod/001AC0.c cc=29   # bump pointer: divu + 3-op mult (2.9 shapes)
+002FE8 = src/cod/002FE8.c        # printf("%s", a0) through the .sdata format
+0199A0 = src/cod/0199A0.c cc=29   # once-only guard + bare tail j (2.9)
+026298 = src/cod/026298.c        # node lookup by key, then framed tail call
