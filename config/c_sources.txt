@@ -279,6 +279,8 @@
 0030C8 = src/cod/0030C8.c        # tail call sceStdioMkdir
 0030E0 = src/cod/0030E0.c        # tail call sceStdioGetstat
 0030F8 = src/cod/0030F8.c        # tail call sceStdioChstat
+003098 = src/cod/003098.c        # tail call func_0010C058 (same framed family)
+0030B0 = src/cod/0030B0.c        # tail call func_0010C230 (same framed family)
 003FF8 = src/cod/003FF8.c        # variadic register save (0x60 frame)
 004040 = src/cod/004040.c        # variadic register save (same shape)
 005948 = src/cod/005948.c        # variadic register save (2 fixed args)
@@ -289,6 +291,7 @@
 023180 = src/cod/023180.c        # func_00107010(a0); sync; ei
 021058 = src/cod/021058.c        # func_00107010(D_00163CC0[0]); sync; ei
 007C48 = src/cod/007C48.c        # func_00107010(a3); sync; ei; return 0
+0289D0 = src/cod/0289D0.c        # tail call func_001120A0 (framed family)
 
 # --- Session 6, step 3: func_0010FB20-gated wrapper family (cc=29) -----------
 010EA0 = src/cod/010EA0.c cc=29   # a=guard(); b=target(a0); if(a) guard2(); return b
