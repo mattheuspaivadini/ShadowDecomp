@@ -165,3 +165,13 @@
 0121C0 = src/cod/0121C0.c cc=29   # func_00107410(4, &buf)
 012218 = src/cod/012218.c cc=29   # func_00107410(0x21, &buf)
 018358 = src/cod/018358.c cc=29   # sceCdChgSys (named from its own string)
+
+# --- Session 5, step 2: wrapper tier batch 2 ---------------------------------
+025870 = src/cod/025870.c         # pack (a0,a1,a2,a3:64) on stack -> func_001270D8
+0270A8 = src/cod/0270A8.c         # pack 4 words on stack -> func_00127390
+003300 = src/cod/003300.c         # func_00129200(a0,D_0013A000,6); movn select
+012240 = src/cod/012240.c cc=29   # func_00107410(-5, &buf{a0,a1,(u16)a2})
+012278 = src/cod/012278.c cc=29   # func_00107410(-6, &buf)
+014F20 = src/cod/014F20.c cc=29   # branch on a2; sltu(p[4], a1)
+0093C8 = src/cod/0093C8.c cc=29   # forward struct fields 0x24/28/2C; 0x800 on fail
+009690 = src/cod/009690.c cc=29   # same with zero fields
