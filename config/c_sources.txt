@@ -244,3 +244,27 @@
 # allocator picks a 0x10 frame / different store order; cc=29 reproduces the
 # original's 0x20 frame with $s0 = p and the a4-first argument setup).
 021E88 = src/cod/021E88.c cc=29   # record stride 0x24 -> addiu+mult; xori+sltu != 3
+
+# --- Session 6, step 3: tail-call trampolines ---------------------------------
+# Bare  trampolines are the cc=29 shape (no frame); the framed ones (the
+#  sequence) are cc=296. Both were generated from
+# the asm by build/tmp/gen_tramps.py and verified per TU.
+010400 = src/cod/010400.c cc=29   # g(0xB0001000, a0) tail call
+010410 = src/cod/010410.c cc=29   # g(0xB0001010, a0) tail call
+010420 = src/cod/010420.c cc=29   # g(0xB0001020, a0) tail call
+031940 = src/cod/031940.c cc=29   # g(a0 & ~0x3F, a1 & ~0x3F) tail call
+031A80 = src/cod/031A80.c cc=29   # same shape (other target)
+0288E8 = src/cod/0288E8.c        # g(D_00135C60[0], a0) with frame
+028908 = src/cod/028908.c        # g(D_00135C60[0], a0, a1) with frame
+028930 = src/cod/028930.c        # g(D_00135C60[0]) with frame
+028950 = src/cod/028950.c        # g(D_00135C60[0], a0) with frame
+029800 = src/cod/029800.c        # g(D_00135C60[0], a0, a1, a2) with frame
+02C208 = src/cod/02C208.c        # g(0) with frame
+02C220 = src/cod/02C220.c        # g(a0, 0, 10) with frame
+02D9E0 = src/cod/02D9E0.c        # g(D_00135C60[0]) with frame
+02E530 = src/cod/02E530.c        # g(D_00135C60[0], a0, a1) with frame
+02E558 = src/cod/02E558.c        # g(D_00135C60[0]) with frame
+02FB90 = src/cod/02FB90.c        # g(*(int*)(p+0x54), *(short*)(p+0xE)) with frame
+030AC8 = src/cod/030AC8.c        # g(D_00135C60[0], a0, a1) with frame
+030D48 = src/cod/030D48.c        # g(D_00135C60[0], a0, a1, a2) with frame
+# --- Session 6, step 3, wave 2 (parallel-session drafts, verified here) ------
