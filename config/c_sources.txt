@@ -419,3 +419,5 @@
 00AB90 = src/cod/00AB90.c cc=29               # 3-way validation, err/ok block layout; w45a_2 (R2)
 00ACD0 = src/cod/00ACD0.c cc=29               # 3-way validation, inverted last test; w45a_2 (R2)
 00FCC8 = src/cod/00FCC8.c cc=29               # two-list walk + sltu sentinel store; w45a_3 (R2)
+003CB8 = src/cod/003CB8.c                     # clean; w45a_1 (R2)
+003D88 = src/cod/003D88.c                     # clean; w45a_1 (R2)
