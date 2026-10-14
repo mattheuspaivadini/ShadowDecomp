@@ -121,7 +121,7 @@ Work in order. Mark each phase when done and commit.
 - [x] **Phase 3 — Compiler. DONE (2026-10-14, Session 3; revision question resolved Session 4).** Flags pinned by byte-level experiment: **`-O2 -g2 -G8`**, with a **per-TU `-g` override** (`tools/eegcc.py:cflags_for`) because the original mixes debug levels (`func_00114C30` needs `-g0`; `-g`/`-g2` suppress delay-slot filling, so the level is load-bearing). The original is a **mix of two EE-GCC generations**: `2.9-ee-991111(-01)` and `2.96-ee-001003-1` (`tools/cc_matrix.py`, all 14 published revisions; no single one matches everything). 47 functions byte-exact; 12 recorded as NON_MATCHING and unexplained by any revision. **`-O2` discriminated from `-O1`/`-Os`** (Session 4 step 3: 92-function sweep, 39 / 14 counterexamples; `-O2` ≡ `-O3`). See `docs/compiler.md`, `docs/cc-matrix-session4.txt`, `docs/opt-sweep-session4.txt`.
 - [x] **Phase 4 — Split & rebuild.** splat split is **per-function**: **1036 `.s`** under `asm/cod/` (one per function) plus 2 raw `textbin` subsegments (the `.text` 16-byte header and the `0x00113074` non-function hole); plus data segments, `build/SCUS_974.72.ld`, `include/macro.inc`. **Reassembly + link + hash check PASS**: `tools/build.py` (WSL2) → flat image byte-identical to the original, **237,952 bytes, SHA-1 `6f853f644a4279db18c15ceb8ee1d2a8b87a7b39`**. Still green with 92 functions replaced by C. **Step 6 (ELF container) done (Session 4): `build/SCUS_974.72.elf` is byte-identical to the original `SCUS_974.72`** (242,940 bytes, SHA-1 `b715b349…`) — 3 program headers, real section names, `.mdebug.eabi64`, no symtab, `e_entry 0x00100010`; `tools/containerize.py` (run by `tools/build.py`). See `docs/splat.md`, `docs/toolchain.md`, `docs/rebuild.md`.
 - [~] **Phase 5 — Name.** In progress. `tools/name_from_strings.py` (authoritative: resolves `string -> function` from splat's `%hi/%lo` relocation labels) finds **61 functions that reference a string carrying an identifier**; **43 are named, 18 are recorded candidates** (`docs/naming-candidates.md`). Names come from three evidence classes — *verbatim* self-naming log messages (17), *object* semaphore names with the routine inferred (22, UNCONFIRMED) and three single inferences (`start`, `vfprintf`, `sceDbcGetDeviceStatus`, UNCONFIRMED) — plus the two Session-3 names (`LoaderSysDumpIopModuleIdentifiers`, `OutputLinkerScriptFile`). **45 named `.text` symbols** (`entry` + 44 evidence-derived). `func_00113074` was re-checked and is a splat boundary false positive (unreferenced; see `config/non_function_holes.txt`). Structs/data objects documented in `docs/structs.md`.
-- [~] **Phase 6 — Decompile. STARTED.** 92 / 1037 functions matched from C (3308 / 203,692 `.text` bytes = 1.624 %), all gated by the image hash. Loop + tooling in `docs/progress.md`; non-matching attempts in `src/non_matching/` (36 tracked, none explained by any EE-GCC revision).
+- [~] **Phase 6 — Decompile. STARTED.** 92 / 1036 functions matched from C (3308 / 203,692 `.text` bytes = 1.624 %), all gated by the image hash (1037 splat boundaries minus the `0x00113074` false positive). Loop + tooling in `docs/progress.md`; non-matching attempts in `src/non_matching/` (36 tracked, none explained by any EE-GCC revision).
 
 ## 6. Identifying the compiler
 
@@ -159,7 +159,7 @@ Tips: use a function's constants, string references, and call patterns to infer 
 | ELF container (whole file) | **YES — `build/SCUS_974.72.elf` byte-identical to the original: 242,940 bytes, SHA-1 `b715b349…`; 3 program headers, 16 sections, `e_entry 0x00100010`, `.mdebug.eabi64`, no `.symtab`** (`tools/containerize.py`) |
 | Functions named | **45 `.text` symbols** = `entry` + **44 evidence-derived names**: 17 verbatim self-naming log messages, 22 inferred from `SceStdio<Op>Sema` object names (UNCONFIRMED), 3 single inferences (UNCONFIRMED), 2 Session-3 names |
 | String-evidenced name candidates | **61 functions** reference an identifier-bearing string; **43 named, 18 pending** (61 vs Session 3's 66: the old `lui`-window heuristic both missed referents and counted strings that carry no identifier) |
-| Functions matched (C) | **92 / 1037** (68 with `ee-gcc2.96`, 24 with `ee-gcc2.9-991111-01`; 26 wrappers use a per-TU `-fno-optimize-sibling-calls`) |
+| Functions matched (C) | **92 / 1036** (68 with `ee-gcc2.96`, 24 with `ee-gcc2.9-991111-01`; 26 wrappers use a per-TU `-fno-optimize-sibling-calls`) |
 | Matched bytes | 3308 / 203,692 `.text` bytes = **1.624 %** (verified) |
 | Compiler flags | `-O2 -g2 -G8` (per-TU `-g0` and `-fno-optimize-sibling-calls` overrides); `-O2` discriminated from `-O1`/`-Os`, `-O2` ≡ `-O3` (§2.2) |
 | Compilers | `ee-gcc2.96` (default) + `ee-gcc2.9-991111-01` (`cc=29`); matrix in `docs/compiler.md` §4.3 |
@@ -172,6 +172,16 @@ Tips: use a function's constants, string references, and call patterns to infer 
 | EE hardware registers referenced | **38 addresses** (`tools/scan_hw_regs.py`); the 2 that were unidentified are now **confirmed**: `0x10001010` = `T2_MODE` (Timer 2 mode/status), `0x1000E060` = `D_STADR` (DMAC stall address) — `docs/structs.md` §"Hardware registers" |
 
 ### Session log
+
+- **2026-10-14 (Session 4, closing) — session archive written and the gate
+  re-verified.** `docs/archive-2026-10-14-session4.md` records the whole session
+  (scope, per-step evidence, reproduction commands, metrics, assumptions, Session-5
+  TODO); it supersedes the mid-session draft that stopped at "Phase-6 batch 3".
+  Closing verification: `tools/build.py` → **HASH MATCH** (237,952 B,
+  `6f853f64…`) with the whole ELF container byte-identical, and
+  `tools/verify_c.py` → **92/92 byte-exact**. Metrics table (section 9) reconciled
+  to the tool-reported 1036 real functions (1037 splat boundaries − 1 false
+  positive).
 
 - **2026-10-14 (Session 4, step 6) — the ELF container is reproduced and the
   whole file is byte-exact.**

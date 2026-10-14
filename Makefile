@@ -4,8 +4,16 @@
 # run from Windows (the recipes shell out to `wsl`) or from inside WSL.
 # See docs/toolchain.md and docs/compiler_flags.mk.
 
+# From Windows the recipes launch WSL, and `$(CURDIR)` is a Windows path
+# (`C:/...`) that `cd` inside WSL cannot use — translate it with `wslpath`.
+# From inside WSL the launcher is empty and `$(CURDIR)` is already a Linux path.
+ifeq ($(OS),Windows_NT)
 WSL   ?= wsl -d Ubuntu -u root --
+REPO  := $(shell wsl -d Ubuntu -u root -- wslpath $(CURDIR))
+else
+WSL   ?=
 REPO  := $(CURDIR)
+endif
 
 .PHONY: all build check targets diff report objdiff clean help verify matrix container elf-diff
 
