@@ -1,7 +1,6 @@
-/* STATUS (Session 7, 2026-10-14): NON_MATCHING. best score 2 [cc=296, -fno-optimize-sibling-calls].
- * list node init twin of 0260A8.
- * The original .s stays in the build (asm/cod/026140.s); this C
- * draft (subagent-produced, Session 7) is kept for the record. */
+/* asm/cod/026140.s -> func_001260A8 (cc=296).
+ * list node init twin of 0260A8 (stmt-order swap + no sibcall).
+ * MATCHED (Session 7, permuter). */
 /* asm/cod/026140.s -> func_00126140 @ 0x00126140 (0x68 bytes, 26 insns)
  *
  * Twin of func_001260A8 (called from func_001261A8 with (a0,
@@ -24,8 +23,8 @@
 struct S169F90 {
     int f00;                        /* 0x00 */
     int f04;                        /* 0x04 */
-    int key;                        /* 0x08 */
-    int f0C;                        /* 0x0C */
+    int f0C;                        /* 0x08 */
+    int key;                        /* 0x0C */
     int f10;                        /* 0x10 */
     struct S169F90 *f14;            /* 0x14 next-in-list */
 };

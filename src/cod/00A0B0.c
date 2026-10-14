@@ -1,7 +1,6 @@
-/* STATUS (Session 7, 2026-10-14): NON_MATCHING. best score 2 [cc=29, default].
- * one-shot CreateSema pair for D_00132320/24.
- * The original .s stays in the build (asm/cod/00A0B0.s); this C
- * draft (subagent-produced, Session 7) is kept for the record. */
+/* asm/cod/00A0B0.s -> func_00106FE0 (cc=29).
+ * one-shot CreateSema pair (stmt-order swap).
+ * MATCHED (Session 7, permuter). */
 /* asm/cod/00A0B0.s -> func_0010A0B0 @ 0x0010A0B0 (0x70 bytes, 28 insns)
  *
  * One-shot pair of CreateSema handles (func_00106FE0 = `addiu $v1,$zero,0x40;
@@ -22,8 +21,8 @@
  */
 struct S00A0B0 {
     int   f00;      /* 0x00 */
-    int   f04;      /* 0x04 */
-    int   f08;      /* 0x08 */
+    int   f08;      /* 0x04 */
+    int   f04;      /* 0x08 */
     int   f0C;      /* 0x0C */
     int   f10;      /* 0x10 */
     void *f14;      /* 0x14 */

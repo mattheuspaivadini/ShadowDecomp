@@ -373,6 +373,19 @@
 021088 = src/cod/021088.c cc=29   # CreateSema + 2-record 0x24-stride fill
 023260 = src/cod/023260.c cc=29   # handler dispatch through func_00109980
 
+# --- Session 7, second permuter pass (stmt-order swaps) ----------------------
+006310 = src/cod/006310.c        # GS packet + sceGsSyncPath/PutDrawEnv
+00A0B0 = src/cod/00A0B0.c cc=29   # one-shot CreateSema pair
+026140 = src/cod/026140.c -fno-optimize-sibling-calls   # list node init twin
+
+# --- Session 7, wave 4a (subagent drafts, verified here) ---------------------
+003E98 = src/cod/003E98.c        # 3 variadic stubs + two poll spins + tail
+00E810 = src/cod/00E810.c cc=29   # two probes + 9-arg func_00109980 dispatch
+00E940 = src/cod/00E940.c cc=29   # 00E810 clone (command 0xA)
+010670 = src/cod/010670.c cc=29   # T2_MODE read + enable + epoch release
+011D60 = src/cod/011D60.c cc=29   # I_STAT write + poll + release
+0184E8 = src/cod/0184E8.c cc=29   # bounded string copy-in with length return
+
 # --- Session 7, wave 2a (subagent drafts, verified here) ---------------------
 0151B8 = src/cod/0151B8.c cc=29   # sceDbcDeleteSocket guard + 0x334-stride clear
 015650 = src/cod/015650.c cc=29   # sceDbcGetDepNumber guard + 0x334-stride record

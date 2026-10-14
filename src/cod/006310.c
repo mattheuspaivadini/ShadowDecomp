@@ -1,7 +1,6 @@
-/* STATUS (Session 7, 2026-10-14): NON_MATCHING. best score 4 [cc=296, default].
- * GS packet + sceGsSyncPath/PutDrawEnv.
- * The original .s stays in the build (asm/cod/006310.s); this C
- * draft (subagent-produced, Session 7) is kept for the record. */
+/* asm/cod/006310.s -> func_00114020 (cc=296).
+ * GS packet + sceGsSyncPath/sceGsPutDrawEnv (stmt-order swap).
+ * MATCHED (Session 7, permuter). */
 /* asm/cod/006310.s -> func_00106310 @ 0x00106310 (0x70 bytes, 28 insns)
  *
  * GS draw-env packet setup through the 0x20000000 RAM mirror:
@@ -29,8 +28,8 @@ void func_00106310(void) {
 
     func_00114020(p + 4, 0);
     p[4] = 0x48;
-    p[3] = 0x47;
     p[2] = 0x20000;
+    p[3] = 0x47;
     sceGsSyncPath(0, 0);
     sceGsPutDrawEnv(p);
     func_001059D8();
