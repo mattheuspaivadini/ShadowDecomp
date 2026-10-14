@@ -220,3 +220,4 @@
 0120D0 = src/cod/0120D0.c cc=29   # identical shape to 011F90
 011C50 = src/cod/011C50.c cc=29   # negated test + swapped branches (bgezl layout)
 020D10 = src/cod/020D10.c cc=29   # record pointer local -> +0xD0 on the record base
+00F0F0 = src/cod/00F0F0.c cc=29   # mask local before the call keeps `and` non-immediate
