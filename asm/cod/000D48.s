@@ -330,7 +330,7 @@ glabel func_00100D48
     /* 1148 00101148 2D20A002 */  daddu      $a0, $s5, $zero
     /* 114C 0010114C 1000023C */  lui        $v0, %hi(func_00102CF8)
     /* 1150 00101150 2D280002 */  daddu      $a1, $s0, $zero
-    /* 1154 00101154 6401040C */  jal        func_00100590
+    /* 1154 00101154 6401040C */  jal        OutputLinkerScriptFile
     /* 1158 00101158 F82C4624 */   addiu     $a2, $v0, %lo(func_00102CF8)
     /* 115C 0010115C 2D10A002 */  daddu      $v0, $s5, $zero
 .align 2

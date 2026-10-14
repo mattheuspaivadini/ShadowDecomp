@@ -20,3 +20,20 @@ D_libdbc_banner    = 0x00133A18; // "PsIIlibdbc  3020" (same packed string, +0x1
 D_libcdvd_banner   = 0x00133A40; // "PsIIlibcdvd 3000"
 D_libnet_banner    = 0x001355F8; // "PsIIlibnet  3000"
 D_libmrpc_banner   = 0x00135608; // "PsIIlibmrpc 3000" (same packed string, +0x10)
+
+// ---------------------------------------------------------------------------
+// Phase 5 (Session 3): names taken from strings the function itself references.
+// Evidence chain: tools/find_string_refs.py resolves every lui/%lo address
+// materialisation in .text and reports which splat function refers to which
+// string in manifest/strings.txt. See docs/naming-candidates.md for the rest.
+// ---------------------------------------------------------------------------
+
+// The function's own diagnostic message names it verbatim:
+//   "ldsys: LoaderSysDumpIopModuleIdentifiers: dump list of iop identifiers\n"
+LoaderSysDumpIopModuleIdentifiers = 0x00103258;
+
+// Emits a linker script: "SECTIONS {\n", "%s = 0x%08x;\n", and the section
+// table strings ("alloc flag(alloc)", "normal use", ...).
+// UNCONFIRMED: identifier chosen from the emitted text; the same name appears in
+// the Fantaskink/SOTC preview-build decompilation (hint source, different build).
+OutputLinkerScriptFile = 0x00100590;

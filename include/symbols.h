@@ -31,12 +31,15 @@ D_SMALL int D_0013A170;   /* .sbss,  _gp-0x3C00  func_00106380 */
 /* ---- .data / .rodata / .bss : absolute addressing (declared non-small) */
 #define D_ABS extern __attribute__((section(".data")))
 D_ABS int D_001329A4;         /* .data   0x001329A4  func_0010FBE8 */
+D_ABS int D_00133920;         /* .data   0x00133920  func_00110640 */
 D_ABS int D_00133940;         /* .data   0x00133940  func_00111D50 */
 D_ABS int D_00133970;         /* .data   0x00133970  func_00113520 */
 D_ABS int D_00135C60;         /* .data   0x00135C60  func_00127528 */
 D_ABS int D_00135958;         /* .data   0x00135958  func_00122448 */
 
 /* .bss / .rodata objects of unknown size: unknown size is already non-small. */
+extern char D_0013BF90[];     /* .bss    0x0013BF90  func_001029C8 */
+extern char D_0013C790[];     /* .bss    0x0013C790  func_00102C58 */
 extern char D_0013CF90[];     /* .bss    0x0013CF90  func_00103CA8 */
 extern char D_00139B08[];     /* .rodata 0x00139B08  func_0012E520 */
 extern char D_0014B358[];     /* .bss    0x0014B358  func_00112908/_00112BD0/_00112BE8 */

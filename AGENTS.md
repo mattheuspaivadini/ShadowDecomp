@@ -49,11 +49,14 @@ Fill in the table during DISCOVERY and keep it current.
 | REA (Reverse Engineering Anything) `rea-agents@6.4.0` | RE toolset + MCP server | Installed; **MCP attached** (170 tools). Deep-analysis lane unusable for PS2 on Windows (PE-only gate) — use for artifact inventory + evidence bundles only. See `docs/rea.md` |
 | Ghidra 12.1.4 + `ghidra-emotionengine-reloaded` v2.1.38 | Native analysis (headless) | `C:\Users\Matheus\ghidra\ghidra_12.1.4_PUBLIC`; EE extension language `r5900:LE:32:default` decodes **100 %** of `.text`. See `docs/rea.md` |
 | splat64 | Split ELF into asm/data | **0.50.1 installed** in `.venv` (+ spimdisasm 1.42.4, rabbitizer 1.16.2). **Per-function split**: 1037 `.s` under `asm/cod/` — see `docs/splat.md` |
-| objdiff | Compare compiled vs original | **objdiff-cli 3.8.2** in `.tools/objdiff/objdiff-cli.exe` (gitignored) |
+| objdiff | Compare compiled vs original | **objdiff-cli 3.8.2** in `.tools/objdiff/objdiff-cli.exe` (gitignored); project file `objdiff.json` — see `docs/progress.md` |
 | WSL2 Ubuntu 26.04 | Linux build environment | Installed (`wsl -d Ubuntu -u root`); repo at `/mnt/c/...` |
 | MIPS binutils | Assemble / link (R5900) | **`binutils-mips-linux-gnu` 2.45** in WSL: `mips-linux-gnu-as -EL -march=5900 -mabi=eabi`. Reassembly path — see `docs/toolchain.md` |
-| EE cross C compiler | Matching C builds | `ee-gcc2.96` from `decompme/compilers` in `tools/cc/ee-gcc2.96/` (gitignored, WSL); see `docs/toolchain.md` |
-| build script | Assemble/link/hash | **`tools/build.py`** (runs in WSL2) → flat image byte-exact — `docs/rebuild.md` |
+| EE cross C compiler | Matching C builds | **`ee-gcc2.96`** `2.96-ee-001003-1` in `tools/cc/ee-gcc2.96/` (gitignored, WSL) + wrapper `tools/cc/eegcc.sh` (needs `libc6:i386` and the `/usr/local/sce/ee/gcc` symlink) — see `docs/toolchain.md` §4.1 |
+| build script | Assemble/compile/link/hash | **`tools/build.py`** (WSL2) — mixed C+asm, gated on the flat-image SHA-1; `make check` |
+| Phase-3 flag pinning | Pin compiler flags | **`tools/phase3_pin.py`** + `tools/matchcheck.py` — `docs/compiler.md` |
+| Phase-5 naming | Strings -> functions | **`tools/find_string_refs.py`** — `docs/naming-candidates.md` |
+| IOP inventory | IRX modules (R3000) | **`tools/iop_inventory.py`** → `manifest/iop_modules.txt` |
 | 7z / isoinfo | ISO extraction | MISSING — replaced by `tools/iso9660.py` (pure Python) |
 | git | VCS | 2.55.0 (repo initialized) |
 | python3 | Infra/tooling | 3.12.10 (Windows) / 3.14.4 (WSL) |
@@ -82,10 +85,10 @@ Work in order. Mark each phase when done and commit.
 
 - [x] **Phase 1 — Extract.** ISO is at the **workspace root** (`Shadow of the Colossus (USA).iso`), not in `SHADOWDECOMP/`. Extracted 19 files with pure-Python ISO9660 (`tools/iso9660.py`, `tools/extract_iso.py`) → manifest in `manifest/files.txt`. Main ELF = **`SCUS_974.72`** (from `SYSTEM.CNF`, not `SCUS_973.24`).
 - [x] **Phase 2 — Analyze.** `SCUS_974.72` parsed (sections/segments/entry); 319 strings. **Ghidra 12.1.4 + `ghidra-emotionengine-reloaded`** (`r5900:LE:32:default`) now decodes **100 %** of `.text` (50,923/50,923, 0 undefined; was 84 % with stock `MIPS:LE:32:default`). Function boundaries still "to be confirmed". See `docs/analysis.md`, `docs/rea.md`.
-- [ ] **Phase 3 — Compiler.** Hypothesis (EE-GCC **2.96** / PS2 SDK 3.x) documented in `docs/compiler.md`; corroborated by the sister project `Fantaskink/SOTC` (uses `ee-gcc2.96` from `decompme/compilers`, `-O2 -g2`, `mips-linux-gnu` binutils). **`ee-gcc2.96` installed** in `tools/cc/`; flag experiments are the next step.
-- [x] **Phase 4 — Split & rebuild.** splat split is **per-function**: **1037 `.s`** under `asm/cod/` (one per function), `.text` 16-byte header as `textbin`; plus data segments, `build/SCUS_974.72.ld`, `include/macro.inc`. **Reassembly + link + hash check PASS**: `tools/build.py` (WSL2) → flat image byte-identical to the original, **237,952 bytes, SHA-1 `6f853f644a4279db18c15ceb8ee1d2a8b87a7b39`**. See `docs/splat.md`, `docs/toolchain.md`, `docs/rebuild.md`.
-- [ ] **Phase 5 — Name.** Evidence anchors collected (SDK banners, loader, kernel, GS, cdvd, mc2, net). See `config/symbol_addrs.txt`.
-- [ ] **Phase 6 — Decompile.** Not started.
+- [x] **Phase 3 — Compiler. DONE (2026-10-14, Session 3).** Flags pinned by byte-level experiment: **`-O2 -g2 -G8`** (with per-TU `-g0` where the original used it). 33 functions byte-exact out of the flag-pinning set + first batches; 13 functions recorded as NON_MATCHING with the hypothesis that the original is a different EE-GCC *revision*. Single source of truth: `config/compiler_flags.mk`. See `docs/compiler.md`.
+- [x] **Phase 4 — Split & rebuild.** splat split is **per-function**: **1037 `.s`** under `asm/cod/` (one per function), `.text` 16-byte header as `textbin`; plus data segments, `build/SCUS_974.72.ld`, `include/macro.inc`. **Reassembly + link + hash check PASS**: `tools/build.py` (WSL2) → flat image byte-identical to the original, **237,952 bytes, SHA-1 `6f853f644a4279db18c15ceb8ee1d2a8b87a7b39`**. Still green with 33 functions replaced by C. See `docs/splat.md`, `docs/toolchain.md`, `docs/rebuild.md`.
+- [~] **Phase 5 — Name.** In progress. `tools/find_string_refs.py` maps strings to the 66 functions that reference them; 2 functions named from direct evidence (`LoaderSysDumpIopModuleIdentifiers`, `OutputLinkerScriptFile`), the rest tabulated in `docs/naming-candidates.md`. Structs/data objects documented in `docs/structs.md`.
+- [~] **Phase 6 — Decompile. STARTED.** 33 / 1037 functions matched from C (504 / 203,692 `.text` bytes = 0.247 %), all gated by the image hash. Loop + tooling in `docs/progress.md`; non-matching attempts in `src/non_matching/`.
 
 ## 6. Identifying the compiler
 
@@ -118,17 +121,58 @@ Tips: use a function's constants, string references, and call patterns to infer 
 
 | Metric | Value |
 |--------|-------|
-| Current phase | Phases 1–2 done; **Phase 4 byte-exact rebuild: MATCH**; ready for Phase 3/5 |
-| ELF rebuild hash match | **YES — 237,952 bytes, SHA-1 `6f853f64…` (flat load image)** |
-| Functions named | 1 (`entry`); evidence anchors for SDK banners |
-| Functions matched (C) | 0 / ~1037 detected |
-| Matched bytes | 100 % of the flat load image (asm reassembly) |
+| Current phase | Phases 1–4 done; **Phase 3 flags pinned**; Phase 5 in progress; **Phase 6 started: 33 functions matched** |
+| ELF rebuild hash match | **YES — 237,952 bytes, SHA-1 `6f853f64…` (flat load image), still green with 33 functions from C** |
+| Functions named | 3 (`entry`, `LoaderSysDumpIopModuleIdentifiers`, `OutputLinkerScriptFile`) + 66 string-reference candidates |
+| Functions matched (C) | **33 / 1037** |
+| Matched bytes | 504 / 203,692 `.text` bytes = **0.247 %** (verified) |
+| Compiler flags | `-O2 -g2 -G8` (per-TU `-g0` override); `config/compiler_flags.mk` |
 | `.text` disassembly (splat R5900) | accurate; **1037 per-function `.s`** |
 | Ghidra EE-extension decode | **100 %** of `.text` (50,923/50,923) |
 | splat split coverage | 203 KB / 85.6 % of ROM |
 | Functions detected | 1037 (spimdisasm) |
+| Non-matching attempts tracked | 13 (`src/non_matching/`) |
+| IOP modules inventoried | 11 IRX (ELF32 MIPS-I, R3000A) |
 
 ### Session log
+
+- **2026-10-14 (Session 3)** — Phase 3 flags pinned, mixed C/asm build, first 33 functions.
+  - **Phase 3 (compiler flags) DONE.** `ee-gcc2.96` (`2.96-ee-001003-1`) runs in
+    WSL after `libc6:i386` + a `/usr/local/sce/ee/gcc` symlink
+    (`tools/cc/eegcc.sh`); its `cc1` cannot read sources on `/mnt/c` (drvfs), so
+    sources are staged to ext4. Flags pinned by byte-level experiment:
+    **`-O2 -g2 -G8`** — `tools/phase3_pin.py` compiles 11 cases and compares them
+    against the original (`tools/matchcheck.py`). Key finding: **`-g`/`-g2` change
+    codegen** (no delay-slot filling → `...; jr $ra; nop`), `-g0`/`-g3` do not
+    match; the level is *sticky* in ee-gcc2.96. Small-data rule audited
+    (`tools/scan_sdata_access.py`): 174/174 `%gp_rel` accesses resolve inside the
+    gp window, 0 into it are absolute. Config: `config/compiler_flags.mk`,
+    `docs/compiler.md`.
+  - **Mixed C/asm build + objdiff.** `tools/build.py` now compiles functions
+    listed in `config/c_sources.txt` from C and assembles the rest, with the
+    flat-image SHA-1 as the gate (`make check`). A C object's `.text` is padded by
+    the *linker* (align 8), never by `objcopy --update-section` (which drops
+    relocations). `objdiff.json` + `tools/diff_func.py` + `tools/report.py` +
+    `tools/verify_c.py` complete the loop.
+  - **Phase 6 started: 33 functions byte-exact** (504 / 203,692 `.text` bytes =
+    0.247 %), including `func_00114C30` which needed a per-TU **`-g0`**. 13
+    attempts are tracked in `src/non_matching/` — none explained by any of 14
+    extra `-f…`/`-m…` flags or by `-O1..-Os`; hypothesis: the original is a
+    different **EE-GCC revision** (`docs/compiler.md` §4.1).
+  - **Phase 5 started.** `tools/find_string_refs.py` links strings to the 66
+    functions that reference them; 2 functions named from direct evidence, the
+    rest tabulated in `docs/naming-candidates.md`; data objects/structs in
+    `docs/structs.md`.
+  - **REA re-tested from WSL2, still unusable** (2 attempts: no Linux node/java,
+    Windows `node.exe` is still `platform=win32`; no bundled Linux Ghidra lane).
+    New: `inspect_binary_layout` is x86-64-only. Session-3 metadata bundle:
+    `docs/rea/evidence-bundle-session3.json` (2 records, 0 unknowns).
+  - **Step 6 (optional).** ELF container diff documented
+    (`tools/elf_container_diff.py`, `docs/rebuild.md`): ours is a single RWX
+    `PT_LOAD` with `.cod`/`.cod_bss`, `e_entry` 0, `.symtab` retained, no
+    `.mdebug.eabi64`; the original has 3 program headers and 15 sections.
+    11 IOP modules inventoried (`manifest/iop_modules.txt`): ELF32 LE, EM_MIPS,
+    MIPS-I (R3000A), flags `0x00000001`.
 
 - **2026-10-14** — REA attach/use, EE Ghidra extension, per-function split, build env.
   - **REA**: MCP already attached (170 tools). Native lane re-verified unusable on
