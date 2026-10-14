@@ -222,3 +222,6 @@
 020D10 = src/cod/020D10.c cc=29   # record pointer local -> +0xD0 on the record base
 0121E8 = src/cod/0121E8.c cc=29   # 0x20-byte buffer (frame 0x30) + store order 1,0,2
 00F0F0 = src/cod/00F0F0.c cc=29   # mask local before the call keeps `and` non-immediate
+0121E8 = src/cod/0121E8.c cc=29   # 8-int buffer, store order 1,0,2 (cc=29: no sibling calls)
+01B718 = src/cod/01B718.c cc=29   # wrapper (1,a0,a1): 2.9 keeps jal+epilogue
+01B740 = src/cod/01B740.c cc=29   # wrapper (0,a0,a1): int-return shape
