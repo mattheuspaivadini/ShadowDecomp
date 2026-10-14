@@ -52,7 +52,8 @@ Fill in the table during DISCOVERY and keep it current.
 | objdiff | Compare compiled vs original | **objdiff-cli 3.8.2** in `.tools/objdiff/objdiff-cli.exe` (gitignored); project file `objdiff.json` — see `docs/progress.md` |
 | WSL2 Ubuntu 26.04 | Linux build environment | Installed (`wsl -d Ubuntu -u root`); repo at `/mnt/c/...` |
 | MIPS binutils | Assemble / link (R5900) | **`binutils-mips-linux-gnu` 2.45** in WSL: `mips-linux-gnu-as -EL -march=5900 -mabi=eabi`. Reassembly path — see `docs/toolchain.md` |
-| EE cross C compiler | Matching C builds | **`ee-gcc2.96`** `2.96-ee-001003-1` in `tools/cc/ee-gcc2.96/` (gitignored, WSL) + wrapper `tools/cc/eegcc.sh` (needs `libc6:i386` and the `/usr/local/sce/ee/gcc` symlink) — see `docs/toolchain.md` §4.1. Pinned flags `-O2 -g2 -G8` in `config/compiler_flags.mk` |
+| EE cross C compiler | Matching C builds | **`ee-gcc2.96`** `2.96-ee-001003-1` (default) + **`ee-gcc2.9-991111-01`** (`cc=29`) in `tools/cc/<asset>/` (gitignored, WSL); wrapper `tools/cc/eegcc.sh` selects one with `$EE_GCC_DIR` (needs `libc6:i386`; PE builds need `wine`). Get all revisions with `tools/cc/fetch_eegcc.sh`. Pinned flags `-O2 -g2 -G8` in `config/compiler_flags.mk` — see `docs/toolchain.md` §4, `docs/compiler.md` §4.3 |
+| Compiler matrix | Revision question | **`tools/cc_matrix.py`** (compiler × function × flag-set match matrix; `--wine` for the PE builds) + `tools/cc_matrix_analyze.py`. Evidence: `docs/cc-matrix-session4.txt` |
 | build script | Assemble/compile/link/hash | **`tools/build.py`** (WSL2) — mixed C+asm, gated on the flat-image SHA-1; `make check` |
 | Phase-3 flag pinning | Pin compiler flags | **`tools/phase3_pin.py`** + `tools/matchcheck.py` — `docs/compiler.md` |
 | Small-data audit | gp-relative vs absolute | **`tools/scan_sdata_access.py`** — `docs/compiler.md` §3 |
@@ -92,16 +93,29 @@ Mixed C/asm build with the flat-image hash gate; **33 functions matched from C**
 `src/non_matching/` (hypothesis: a different EE-GCC *revision*). Naming started
 (3 functions named from evidence). See `docs/archive-2026-10-14-session3.md`.
 
+**SESSION 4 (2026-10-14): the revision question is RESOLVED — the image mixes two
+EE-GCC generations.** Every EE-GCC build published in `decompme/compilers`
+(8 Linux + 5 Windows/PE, the latter via wine 10.0) was compiled against all 59
+functions we have C for (`tools/cc_matrix.py`; evidence
+`docs/cc-matrix-session4.txt`). **No single revision matches everything**: the
+`2.9-ee-991111(-01)` generation reproduces 9 functions `2.96-ee-001003-1`
+cannot, and vice versa; the minimum cover is exactly
+`{2.9-ee-991111-*, 2.96-ee-001003-1}` (47/59); 12 functions match neither.
+`config/c_sources.txt` now carries a per-TU `cc=<token>` selector; the 9
+"2.9-only" functions moved to `src/cod/`, so **47 functions are byte-exact**
+(1148 / 203,692 `.text` bytes = 0.564 %) and the image SHA-1 is unchanged.
+See `docs/compiler.md` §4.3, `docs/toolchain.md` §4.
+
 ## 5. Phases
 
 Work in order. Mark each phase when done and commit.
 
 - [x] **Phase 1 — Extract.** ISO is at the **workspace root** (`Shadow of the Colossus (USA).iso`), not in `SHADOWDECOMP/`. Extracted 19 files with pure-Python ISO9660 (`tools/iso9660.py`, `tools/extract_iso.py`) → manifest in `manifest/files.txt`. Main ELF = **`SCUS_974.72`** (from `SYSTEM.CNF`, not `SCUS_973.24`).
 - [x] **Phase 2 — Analyze.** `SCUS_974.72` parsed (sections/segments/entry); 319 strings. **Ghidra 12.1.4 + `ghidra-emotionengine-reloaded`** (`r5900:LE:32:default`) now decodes **100 %** of `.text` (50,923/50,923, 0 undefined; was 84 % with stock `MIPS:LE:32:default`). Function boundaries still "to be confirmed". See `docs/analysis.md`, `docs/rea.md`.
-- [x] **Phase 3 — Compiler. DONE (2026-10-14, Session 3).** Flags pinned by byte-level experiment: **`-O2 -g2 -G8`**, with a **per-TU `-g` override** (`tools/eegcc.py:cflags_for`) because the original mixes debug levels (`func_00114C30` needs `-g0`; `-g`/`-g2` suppress delay-slot filling, so the level is load-bearing). 33 functions byte-exact out of the flag-pinning set + first batches; 13 functions recorded as NON_MATCHING with the hypothesis that the original is a different EE-GCC *revision*. Single source of truth: `config/compiler_flags.mk`. See `docs/compiler.md`.
-- [x] **Phase 4 — Split & rebuild.** splat split is **per-function**: **1037 `.s`** under `asm/cod/` (one per function), `.text` 16-byte header as `textbin`; plus data segments, `build/SCUS_974.72.ld`, `include/macro.inc`. **Reassembly + link + hash check PASS**: `tools/build.py` (WSL2) → flat image byte-identical to the original, **237,952 bytes, SHA-1 `6f853f644a4279db18c15ceb8ee1d2a8b87a7b39`**. Still green with 33 functions replaced by C. See `docs/splat.md`, `docs/toolchain.md`, `docs/rebuild.md`.
+- [x] **Phase 3 — Compiler. DONE (2026-10-14, Session 3; revision question resolved Session 4).** Flags pinned by byte-level experiment: **`-O2 -g2 -G8`**, with a **per-TU `-g` override** (`tools/eegcc.py:cflags_for`) because the original mixes debug levels (`func_00114C30` needs `-g0`; `-g`/`-g2` suppress delay-slot filling, so the level is load-bearing). The original is a **mix of two EE-GCC generations**: `2.9-ee-991111(-01)` and `2.96-ee-001003-1` (`tools/cc_matrix.py`, all 14 published revisions; no single one matches everything). 47 functions byte-exact; 12 recorded as NON_MATCHING and unexplained by any revision. See `docs/compiler.md`, `docs/cc-matrix-session4.txt`.
+- [x] **Phase 4 — Split & rebuild.** splat split is **per-function**: **1037 `.s`** under `asm/cod/` (one per function), `.text` 16-byte header as `textbin`; plus data segments, `build/SCUS_974.72.ld`, `include/macro.inc`. **Reassembly + link + hash check PASS**: `tools/build.py` (WSL2) → flat image byte-identical to the original, **237,952 bytes, SHA-1 `6f853f644a4279db18c15ceb8ee1d2a8b87a7b39`**. Still green with 47 functions replaced by C. See `docs/splat.md`, `docs/toolchain.md`, `docs/rebuild.md`.
 - [~] **Phase 5 — Name.** In progress. `tools/find_string_refs.py` maps strings to the 66 functions that reference them; 2 functions named from direct evidence (`LoaderSysDumpIopModuleIdentifiers`, `OutputLinkerScriptFile`), the rest tabulated in `docs/naming-candidates.md`. Structs/data objects documented in `docs/structs.md`.
-- [~] **Phase 6 — Decompile. STARTED.** 38 / 1037 functions matched from C (812 / 203,692 `.text` bytes = 0.399 %), all gated by the image hash. Loop + tooling in `docs/progress.md`; non-matching attempts in `src/non_matching/` (22 tracked).
+- [~] **Phase 6 — Decompile. STARTED.** 47 / 1037 functions matched from C (1148 / 203,692 `.text` bytes = 0.564 %), all gated by the image hash. Loop + tooling in `docs/progress.md`; non-matching attempts in `src/non_matching/` (12 tracked, none explained by any EE-GCC revision).
 
 ## 6. Identifying the compiler
 
@@ -134,20 +148,59 @@ Tips: use a function's constants, string references, and call patterns to infer 
 
 | Metric | Value |
 |--------|-------|
-| Current phase | Phases 1–4 done; **Phase 3 flags pinned**; Phase 5 in progress; **Phase 6 started: 38 functions matched** |
-| ELF rebuild hash match | **YES — 237,952 bytes, SHA-1 `6f853f64…` (flat load image), still green with 38 functions from C** |
+| Current phase | Phases 1–4 done; **Phase 3 revision question resolved**; Phase 5 in progress; **Phase 6 started: 47 functions matched** |
+| ELF rebuild hash match | **YES — 237,952 bytes, SHA-1 `6f853f64…` (flat load image), still green with 47 functions from C** |
 | Functions named | 3 (`entry`, `LoaderSysDumpIopModuleIdentifiers`, `OutputLinkerScriptFile`) + 66 string-reference candidates |
-| Functions matched (C) | **38 / 1037** |
-| Matched bytes | 812 / 203,692 `.text` bytes = **0.399 %** (verified) |
-| Compiler flags | `-O2 -g2 -G8` (per-TU `-g0` override); `config/compiler_flags.mk` |
+| Functions matched (C) | **47 / 1037** (38 with `ee-gcc2.96`, 9 with `ee-gcc2.9-991111-01`) |
+| Matched bytes | 1148 / 203,692 `.text` bytes = **0.564 %** (verified) |
+| Compiler flags | `-O2 -g2 -G8` (per-TU `-g0` override) |
+| Compilers | `ee-gcc2.96` (default) + `ee-gcc2.9-991111-01` (`cc=29`); matrix in `docs/compiler.md` §4.3 |
 | `.text` disassembly (splat R5900) | accurate; **1037 per-function `.s`** |
 | Ghidra EE-extension decode | **100 %** of `.text` (50,923/50,923) |
 | splat split coverage | 203 KB / 85.6 % of ROM |
 | Functions detected | 1037 (spimdisasm) |
-| Non-matching attempts tracked | 22 (`src/non_matching/`) |
+| Non-matching attempts tracked | 12 (`src/non_matching/`, none explained by any EE-GCC revision) |
 | IOP modules inventoried | 11 IRX (ELF32 MIPS-I, R3000A) |
 
 ### Session log
+
+- **2026-10-14 (Session 4, revision resolution)** — the compiler-revision
+  question, end to end.
+  - **Candidate inventory.** Every EE-GCC asset in `decompme/compilers` fetched
+    and unpacked (`tools/cc/fetch_eegcc.sh`); 13 EE-GCC archives = 8 Linux (ELF
+    i386) + 5 Windows (PE) builds, plus the two extra PE patch levels in
+    `ps2_compilers.tar.xz`. Versions and hosts tabulated in
+    `docs/toolchain.md` §4.1. The wrapper/install scripts were generalised so
+    many distributions coexist (`$EE_GCC_DIR`, auto-detected `cc1`/assembler
+    dirs); PE builds run through wine 10.0 via a `wine:<name>` selector in
+    `tools/eegcc.py`.
+  - **Matrix.** `tools/cc_matrix.py` compiles all 59 functions we have C for (47
+    matching + 12 non-matching) with every candidate under `-O2 -g2 -G8` and
+    `-g0` and compares each with the original (`tools/matchcheck.py`). Full
+    output in `docs/cc-matrix-session4.txt`; summary table in `docs/compiler.md`
+    §4.3.
+  - **Verdict: no single revision.** Totals: 2.9-990721 37, 2.9-991111(-01/a)
+    38, 2.9-991111-01-dtls13010 39, 2.95.2-273a 34, 2.95.3-* 33, 2.96 38,
+    3.2-* 19, 3.2-030210-beta2 (Cygwin) will not run under wine. **Union 47/59;
+    the minimum cover is exactly `{2.9-ee-991111-*, 2.96-ee-001003-1}`; 12
+    functions match neither.**
+  - **e_flags / mdebug.** The original's `.mdebug.eabi64` is stripped to size 0
+    and there is no `.comment`, so the revision could not be read from the ELF.
+    `e_flags` *does* discriminate: the 2.9/2.95 family emits `0x20924001` (the
+    original's flags), `2.96` emits `0x20924000` (NOREORDER bit clear), 3.2
+    `0x20920001`.
+  - **Applied fix.** `config/c_sources.txt` gained a per-TU `cc=<token>` selector
+    (`cc=29` -> `EE_C_COMPILER_29`); the 9 "2.9-only" functions moved from
+    `src/non_matching/` to `src/cod/`. `tools/verify_c.py` is 47/47 byte-exact;
+    `tools/build.py` → HASH MATCH (237,952 B, `6f853f64…`). §4.2 corrected: the
+    `mult` constant-stride shape is a *2.9-vs-2.96* difference, and the literal
+    form now matches (`int size = 0x184;` workaround removed).
+  - **New tooling tracked:** `tools/cc_matrix.py`,
+    `tools/cc_matrix_analyze.py`, `tools/cc/fetch_eegcc.sh`,
+    `tools/cc/eegcc_versions.sh`, `tools/cc/eegcc_inventory.sh`,
+    `tools/cc/find_compiler_strings.py`; `tools/eegcc.py` and `tools/build.py`
+    resolve the per-TU compiler; `tools/cc/eegcc.sh` + `install_prefix.sh` are
+    generic.
 
 - **2026-10-14 (Session 4)** — sync + Phase 6 batch 3 (5 more functions) + compiler finding.
   - **Sync.** Rebuild re-verified before any change: `python3 tools/build.py` →
