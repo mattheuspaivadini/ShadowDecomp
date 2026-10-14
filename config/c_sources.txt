@@ -314,3 +314,12 @@
 00FDD8 = src/cod/00FDD8.c        # timer start-up: 8 calls + framed tail call
 022E18 = src/cod/022E18.c cc=29   # D_00167F00 transfer (022D68/022DA0 family)
 025768 = src/cod/025768.c        # double compare: two part-block decompositions
+
+# --- Session 7, wave 1c (subagent drafts, verified here) ---------------------
+010190 = src/cod/010190.c cc=29   # loader helper + syscall 6 tail call
+010200 = src/cod/010200.c cc=29   # loader helper + syscall 0x7B tail call
+015D28 = src/cod/015D28.c cc=29   # one-shot flag handler (two return 1 sites)
+01C4C8 = src/cod/01C4C8.c cc=29   # 0x7FFFFFFF error-code fix-up
+022E68 = src/cod/022E68.c cc=29   # init/deinit pair + flag clear, return first
+025040 = src/cod/025040.c        # float decompose + 64-bit 4th arg (<<30)
+0277C0 = src/cod/0277C0.c        # ref-counted stdio state acquire/release
