@@ -1,35 +1,22 @@
-# Symbol addresses for Shadow of the Colossus (USA), main ELF: SCUS_974.72
-#
-# Format: <name> = 0x<address>;   (splat-compatible)
-# Conventions: func_XXXXXXXX for functions, D_XXXXXXXX for data. Evidence only.
-#
-# The retail ELF is STRIPPED (no .symtab). Addresses below are confirmed from the
-# ELF header. Everything else must be added from evidence (strings, call graphs).
-#
-# See docs/analysis.md for the section/segment map.
+// Symbol addresses for Shadow of the Colossus (USA), main ELF: SCUS_974.72
+//
+// Format: <name> = 0x<address>; // attr0:val0 attr1:val1 [...]
+// Comments use "//". Exactly one ";" per line, right after the address.
+// Conventions: func_XXXXXXXX for functions, D_XXXXXXXX for data. Evidence only.
+//
+// The retail ELF is STRIPPED (no .symtab). Addresses below are confirmed from
+// the ELF header / string evidence. See docs/analysis.md.
 
-# ---------------------------------------------------------------------------
-# Entry point (from ELF header e_entry)
-# ---------------------------------------------------------------------------
+// Entry point (from ELF header e_entry).
 entry = 0x00100010;
 
-# ---------------------------------------------------------------------------
-# Section anchors (data)
-# ---------------------------------------------------------------------------
-# First word of .text is a pointer (0x00102cf8), not code.
-.text_base        = 0x00100000;
-.rodata_base      = 0x00136100;
-.data_base        = 0x00131c00;
-.sdata_base       = 0x00139e00;
-.bss_base         = 0x0013a200;
-
-# ---------------------------------------------------------------------------
-# Evidence anchors: embedded SDK banners (address of the string, not a function)
-# ---------------------------------------------------------------------------
-D_00132270 = 0x00132270;  # "PsIIlibkernl3000"
-D_001339a0 = 0x001339a0;  # "PsIIlibdma  3000"
-D_001339d8 = 0x001339d8;  # "PsIIlibpad2 3020"
-D_00133a08 = 0x00133a08;  # "PsIIlibvib  3000" / "PsIIlibdbc  3020"
-D_00133a40 = 0x00133a40;  # "PsIIlibcdvd 3000"
-D_001355f8 = 0x001355f8;  # "PsIIlibnet  3000" / "PsIIlibmrpc 3000"
-D_00135948 = 0x00135948;  # "PsIInetcnfif3020"
+// Evidence anchors: embedded PS2 SDK version banners (string data, not functions).
+// Nexus strings pack several banners together, so sub-banners are address+0x10.
+D_libkernel_banner = 0x00132270; // "PsIIlibkernl3000"
+D_libdma_banner    = 0x001339A0; // "PsIIlibdma  3000"
+D_libpad2_banner   = 0x001339D8; // "PsIIlibpad2 3020"
+D_libvib_banner    = 0x00133A08; // "PsIIlibvib  3000"
+D_libdbc_banner    = 0x00133A18; // "PsIIlibdbc  3020" (same packed string, +0x10)
+D_libcdvd_banner   = 0x00133A40; // "PsIIlibcdvd 3000"
+D_libnet_banner    = 0x001355F8; // "PsIIlibnet  3000"
+D_libmrpc_banner   = 0x00135608; // "PsIIlibmrpc 3000" (same packed string, +0x10)

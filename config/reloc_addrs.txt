@@ -1,0 +1,4 @@
+// Relocation addresses for SCUS_974.72.
+// Format: <address> = 0x...; // rom:0x... attr:val [...]
+// The retail ELF is stripped and has no relocation sections, so this is empty
+// for now. Entries will be added when relocation targets are identified.

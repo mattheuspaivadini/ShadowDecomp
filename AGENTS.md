@@ -48,9 +48,9 @@ Fill in the table during DISCOVERY and keep it current.
 |------|---------|---------------|
 | REA (Reverse Engineering Anything) `rea-agents@6.4.0` | RE toolset + MCP server | Installed; **MCP registered with OpenCode**. Native lane unusable for PS2 on Windows (PE-only P0 profile) — see `docs/decisions.md` |
 | Ghidra 12.1.4 | Native analysis (headless) | `C:\Users\Matheus\ghidra\ghidra_12.1.4_PUBLIC`; `GHIDRA_INSTALL_DIR` set. Language `MIPS:LE:32:default` (imperfect for R5900) |
-| splat64 | Split ELF into asm/data | **MISSING** — config draft in `config/splat_SCUS_974.72.yaml` |
+| splat64 | Split ELF into asm/data | **0.50.1 installed** in `.venv` (+ spimdisasm 1.42.4, rabbitizer 1.16.2). `splat split config/SCUS_974.72.yaml` works — see `docs/splat.md` |
 | objdiff / asm-differ | Compare compiled vs original | **MISSING** |
-| EE cross toolchain (ee-gcc, ee-as, ee-ld, binutils-mips) | Build | **MISSING** — blocks Phase 3/4/6 |
+| EE cross toolchain (ee-gcc, ee-as, ee-ld, binutils-mips) | Build / reassemble | **MISSING** — blocks the byte-exact rebuild (Phase 4 hash check) |
 | 7z / isoinfo | ISO extraction | MISSING — replaced by `tools/iso9660.py` (pure Python) |
 | git | VCS | 2.55.0 (repo initialized) |
 | python3 | Infra/tooling | 3.12.10 |
@@ -70,8 +70,8 @@ Work in order. Mark each phase when done and commit.
 
 - [x] **Phase 1 — Extract.** ISO is at the **workspace root** (`Shadow of the Colossus (USA).iso`), not in `SHADOWDECOMP/`. Extracted 19 files with pure-Python ISO9660 (`tools/iso9660.py`, `tools/extract_iso.py`) → manifest in `manifest/files.txt`. Main ELF = **`SCUS_974.72`** (from `SYSTEM.CNF`, not `SCUS_973.24`).
 - [~] **Phase 2 — Analyze.** Loaded `SCUS_974.72` in Ghidra 12.1.4 (MIPS LE). Sections/segments/entry recorded; 319 strings; full linear disassembly (`build/SCUS_974.72.linear.txt`) is **84 % decoded** (16 % are undecodable R5900 MMI/COP2 words). Function boundaries are **unreliable** (Ghidra's recursive traversal breaks on R5900 gaps). See `docs/analysis.md`.
-- [ ] **Phase 3 — Compiler.** Hypothesis (EE-GCC 2.9x / PS2 SDK 3.x) documented in `docs/compiler.md`; **blocked on obtaining an EE cross-toolchain**.
-- [ ] **Phase 4 — Split & rebuild.** splat config drafted but **blocked on installing splat + EE toolchain**.
+- [ ] **Phase 3 — Compiler.** Hypothesis (EE-GCC 2.9x / PS2 SDK 3.x) documented in `docs/compiler.md`; splat's `ps2elfinfo` also selects the `EEGCC` profile (independent corroboration). **Flag matching blocked on obtaining an EE cross-toolchain.**
+- [~] **Phase 4 — Split & rebuild.** `splat` split succeeds → `asm/cod/000000.s` (accurate R5900), data segments, `build/SCUS_974.72.ld`, `include/macro.inc`. **Reassembly/link and hash check blocked on the EE toolchain.** See `docs/splat.md`.
 - [ ] **Phase 5 — Name.** Evidence anchors collected (SDK banners, loader, kernel, GS, cdvd, mc2, net). See `config/symbol_addrs.txt`.
 - [ ] **Phase 6 — Decompile.** Not started.
 
@@ -106,23 +106,26 @@ Tips: use a function's constants, string references, and call patterns to infer 
 
 | Metric | Value |
 |--------|-------|
-| Current phase | Phase 1 done; Phase 2 analysis complete (boundaries pending) |
-| ELF rebuild hash match | no |
-| Functions named | 0 (evidence anchors collected) |
+| Current phase | Phases 1–2 done; Phase 4 split done (rebuild blocked) |
+| ELF rebuild hash match | no (no EE toolchain yet) |
+| Functions named | 1 (`entry`); evidence anchors for SDK banners |
 | Functions matched (C) | 0 / ~1500 (estimate) |
 | Matched bytes | 0 % |
-| `.text` linear disassembly coverage | 84.0 % decoded (42,768 / 50,923 slots) |
+| `.text` spimdisasm/R5900 disassembly | accurate; `asm/cod/000000.s` |
+| splat split coverage | 203 KB / 85.6 % of ROM |
 
 ### Session log
 
-- **2026-10-13** — DISCOVERY + Phase 1 + Phase 2.
+- **2026-10-13** — DISCOVERY + Phase 1 + Phase 2 + Phase 4 split.
   - Found ISO at workspace root; main ELF is `SCUS_974.72` (per `SYSTEM.CNF`), not `SCUS_973.24`.
   - Installed Ghidra 12.1.4, set `GHIDRA_INSTALL_DIR`; registered REA MCP with OpenCode; installed REA skill.
-  - **Blocker found:** REA's native lane is PE-only on Windows; its MIPS lane needs MIPS32r2 + ABIFLAGS. R5900 not supported → using **Ghidra headless directly**.
+  - **Blocker:** REA's native lane is PE-only on Windows; its MIPS lane needs MIPS32r2 + ABIFLAGS. R5900 not supported.
   - Extracted 19 ISO files with hashes (`manifest/files.txt`); `SCUS_974.72` SHA-1 `b715b349…`.
   - Parsed ELF (stripped, `e_flags 0x20924001` = ARCH_3/NOREORDER/MACH_5900, entry `0x00100010`).
-  - Produced full linear disassembly + 319 strings (`manifest/strings.txt`).
-  - **Blockers for next phase:** no EE cross-toolchain (ee-gcc), no splat, no objdiff.
+  - Ghidra linear disasm: 84 % decoded (16 % R5900 gaps) — superseded below.
+  - **Better engine found:** installed `splat64[mips]` (splat 0.50.1 + spimdisasm + rabbitizer) into `.venv`; Rabbitizer `R5900` category gives accurate decoding.
+  - Built flat ROM (`tools/make_rom.py`) and config (`tools/splat_ps2_config.py`); `splat split` succeeded → accurate R5900 `asm/`, data segments, linker script, macros.
+  - **Remaining blocker:** no EE toolchain (ee-as/ee-ld) → cannot reassemble/link/hash-check (Phase 3/4).
 
 ## 10. End-of-session checklist
 
