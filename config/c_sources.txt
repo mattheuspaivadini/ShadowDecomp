@@ -153,3 +153,15 @@
 0262B8 = src/cod/0262B8.c         # while (p->field0) — no carried local (no bnezl)
 0131F8 = src/cod/0131F8.c         # staged `a = a - 1` before the pointer difference
 015008 = src/cod/015008.c cc=29   # store first, int addresses (signed `slt`)
+
+# --- Session 5, step 2: wrapper tier (2.9-991111 TUs) -------------------------
+# Guard/call wrappers: 10-12 instructions, `jal` + real epilogue; the 2.9
+# generation reproduces the copy/argument order (cc=29; ee-gcc2.96 differs).
+008D68 = src/cod/008D68.c cc=29   # if (c) func_00107CA8(c); return 1
+008D90 = src/cod/008D90.c cc=29   # same shape, callee func_00107D58
+009198 = src/cod/009198.c cc=29   # func_00112B98(); D_00132288 = 0
+0120F8 = src/cod/0120F8.c cc=29   # *func_00127528() = 5; return -1
+012168 = src/cod/012168.c cc=29   # func_00107410(2, &buf)
+0121C0 = src/cod/0121C0.c cc=29   # func_00107410(4, &buf)
+012218 = src/cod/012218.c cc=29   # func_00107410(0x21, &buf)
+018358 = src/cod/018358.c cc=29   # sceCdChgSys (named from its own string)
