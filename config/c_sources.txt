@@ -400,3 +400,13 @@
 010F40 = src/cod/010F40.c cc=29   # func_0010FB20 gate + func_00110EF0 (2-arg)
 0252E0 = src/cod/0252E0.c        # double decompose x2 + func_00125080
 027768 = src/cod/027768.c        # stdio ref-count via func_00127A60
+002AF0 = src/cod/002AF0.c                     # clean; wave3e (R1)
+00DE60 = src/cod/00DE60.c cc=29               # command-2 clone of matched 00DD70; wave3e (R1)
+017210 = src/cod/017210.c cc=29               # guard + tail call; wave3e (R1)
+019210 = src/cod/019210.c cc=29               # beql answer copy-back; wave3e (R1)
+011600 = src/cod/011600.c cc=29               # 32x32->64 multu pair; wave3d (R1)
+015DD0 = src/cod/015DD0.c cc=29               # clone of matched 015A30 (modId 0x80001304 + p[1]=a0); wave3d (R1)
+017838 = src/cod/017838.c cc=29               # drain loop + post-body guard; wave3d (R1)
+022F90 = src/cod/022F90.c cc=29               # 7-arg func_00109C58 materialisation + tail (func_001230B0 idiom); wave3d (R1)
+018710 = src/cod/018710.c cc=29               # first guard returns callee code; wave4c (R1)
+02DA00 = src/cod/02DA00.c                     # 3x func_0012D7F0 init + 0x3C/0x38/0x1D8/0x1DC/0x1E0 stores; wave4c (R1)

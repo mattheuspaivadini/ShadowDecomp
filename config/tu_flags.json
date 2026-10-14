@@ -1,0 +1,1774 @@
+{
+ "_note": "Per-function confirmed EE-GCC config (confirmed only when a function is byte-exact under the hash gate). Keyed by stem; tu ids filled by tools/infer_tu.py (Phase D).",
+ "confirmed": {
+  "0000C0": {
+   "addr": "0x001000C0",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "001A30": {
+   "addr": "0x00101A30",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "001A48": {
+   "addr": "0x00101A48",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "001AC0": {
+   "addr": "0x00101AC0",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "001AF0": {
+   "addr": "0x00101AF0",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "0028A0": {
+   "addr": "0x001028A0",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "0028F0": {
+   "addr": "0x001028F0",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "002930": {
+   "addr": "0x00102930",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "0029C8": {
+   "addr": "0x001029C8",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "002A00": {
+   "addr": "0x00102A00",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "002A40": {
+   "addr": "0x00102A40",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "002A80": {
+   "addr": "0x00102A80",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "002B68": {
+   "addr": "0x00102B68",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "002C58": {
+   "addr": "0x00102C58",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "002FE0": {
+   "addr": "0x00102FE0",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "002FE8": {
+   "addr": "0x00102FE8",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "003008": {
+   "addr": "0x00103008",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "003020": {
+   "addr": "0x00103020",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "003038": {
+   "addr": "0x00103038",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "003050": {
+   "addr": "0x00103050",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "003068": {
+   "addr": "0x00103068",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "003080": {
+   "addr": "0x00103080",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "003098": {
+   "addr": "0x00103098",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "0030B0": {
+   "addr": "0x001030B0",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "0030C8": {
+   "addr": "0x001030C8",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "0030E0": {
+   "addr": "0x001030E0",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "0030F8": {
+   "addr": "0x001030F8",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "0032F0": {
+   "addr": "0x001032F0",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "0032F8": {
+   "addr": "0x001032F8",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "003300": {
+   "addr": "0x00103300",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "003CA8": {
+   "addr": "0x00103CA8",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "003E90": {
+   "addr": "0x00103E90",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "003E98": {
+   "addr": "0x00103E98",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "003F28": {
+   "addr": "0x00103F28",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "003F98": {
+   "addr": "0x00103F98",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "003FF8": {
+   "addr": "0x00103FF8",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "004040": {
+   "addr": "0x00104040",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "004088": {
+   "addr": "0x00104088",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "004E78": {
+   "addr": "0x00104E78",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "004F58": {
+   "addr": "0x00104F58",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "005948": {
+   "addr": "0x00105948",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "005990": {
+   "addr": "0x00105990",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "006310": {
+   "addr": "0x00106310",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "006380": {
+   "addr": "0x00106380",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "006430": {
+   "addr": "0x00106430",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "006518": {
+   "addr": "0x00106518",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "006B58": {
+   "addr": "0x00106B58",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "007610": {
+   "addr": "0x00107610",
+   "cc": "296",
+   "flags": [
+    "-fno-optimize-sibling-calls"
+   ],
+   "tu": null
+  },
+  "007630": {
+   "addr": "0x00107630",
+   "cc": "296",
+   "flags": [
+    "-fno-optimize-sibling-calls"
+   ],
+   "tu": null
+  },
+  "007650": {
+   "addr": "0x00107650",
+   "cc": "296",
+   "flags": [
+    "-fno-optimize-sibling-calls"
+   ],
+   "tu": null
+  },
+  "007670": {
+   "addr": "0x00107670",
+   "cc": "296",
+   "flags": [
+    "-fno-optimize-sibling-calls"
+   ],
+   "tu": null
+  },
+  "007C48": {
+   "addr": "0x00107C48",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "008D68": {
+   "addr": "0x00108D68",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "008D90": {
+   "addr": "0x00108D90",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "009198": {
+   "addr": "0x00109198",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "009268": {
+   "addr": "0x00109268",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "0093C8": {
+   "addr": "0x001093C8",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "009640": {
+   "addr": "0x00109640",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "009690": {
+   "addr": "0x00109690",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "009B80": {
+   "addr": "0x00109B80",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "00A0B0": {
+   "addr": "0x0010A0B0",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "00A798": {
+   "addr": "0x0010A798",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "00C058": {
+   "addr": "0x0010C058",
+   "cc": "296",
+   "flags": [
+    "-fno-optimize-sibling-calls"
+   ],
+   "tu": null
+  },
+  "00C230": {
+   "addr": "0x0010C230",
+   "cc": "296",
+   "flags": [
+    "-fno-optimize-sibling-calls"
+   ],
+   "tu": null
+  },
+  "00C600": {
+   "addr": "0x0010C600",
+   "cc": "296",
+   "flags": [
+    "-fno-optimize-sibling-calls"
+   ],
+   "tu": null
+  },
+  "00CFB8": {
+   "addr": "0x0010CFB8",
+   "cc": "296",
+   "flags": [
+    "-fno-optimize-sibling-calls"
+   ],
+   "tu": null
+  },
+  "00D408": {
+   "addr": "0x0010D408",
+   "cc": "296",
+   "flags": [
+    "-fno-optimize-sibling-calls"
+   ],
+   "tu": null
+  },
+  "00DD70": {
+   "addr": "0x0010DD70",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "00DED8": {
+   "addr": "0x0010DED8",
+   "cc": "296",
+   "flags": [
+    "-fno-optimize-sibling-calls"
+   ],
+   "tu": null
+  },
+  "00E810": {
+   "addr": "0x0010E810",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "00E940": {
+   "addr": "0x0010E940",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "00E9D0": {
+   "addr": "0x0010E9D0",
+   "cc": "296",
+   "flags": [
+    "-fno-optimize-sibling-calls"
+   ],
+   "tu": null
+  },
+  "00E9F0": {
+   "addr": "0x0010E9F0",
+   "cc": "296",
+   "flags": [
+    "-fno-optimize-sibling-calls"
+   ],
+   "tu": null
+  },
+  "00EC38": {
+   "addr": "0x0010EC38",
+   "cc": "296",
+   "flags": [
+    "-fno-optimize-sibling-calls"
+   ],
+   "tu": null
+  },
+  "00EC58": {
+   "addr": "0x0010EC58",
+   "cc": "296",
+   "flags": [
+    "-fno-optimize-sibling-calls"
+   ],
+   "tu": null
+  },
+  "00ED80": {
+   "addr": "0x0010ED80",
+   "cc": "296",
+   "flags": [
+    "-fno-optimize-sibling-calls"
+   ],
+   "tu": null
+  },
+  "00F0F0": {
+   "addr": "0x0010F0F0",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "00F118": {
+   "addr": "0x0010F118",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "00F278": {
+   "addr": "0x0010F278",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "00F370": {
+   "addr": "0x0010F370",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "00FB88": {
+   "addr": "0x0010FB88",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "00FBE8": {
+   "addr": "0x0010FBE8",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "00FC08": {
+   "addr": "0x0010FC08",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "00FDD8": {
+   "addr": "0x0010FDD8",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "00FE50": {
+   "addr": "0x0010FE50",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "00FE98": {
+   "addr": "0x0010FE98",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "00FFC0": {
+   "addr": "0x0010FFC0",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "010118": {
+   "addr": "0x00110118",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "010190": {
+   "addr": "0x00110190",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "0101D8": {
+   "addr": "0x001101D8",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "010200": {
+   "addr": "0x00110200",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "010270": {
+   "addr": "0x00110270",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "010400": {
+   "addr": "0x00110400",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "010410": {
+   "addr": "0x00110410",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "010420": {
+   "addr": "0x00110420",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "010640": {
+   "addr": "0x00110640",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "010670": {
+   "addr": "0x00110670",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "010910": {
+   "addr": "0x00110910",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "010998": {
+   "addr": "0x00110998",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "010DB8": {
+   "addr": "0x00110DB8",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "010EA0": {
+   "addr": "0x00110EA0",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "010F40": {
+   "addr": "0x00110F40",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "011050": {
+   "addr": "0x00111050",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "011168": {
+   "addr": "0x00111168",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "0112D0": {
+   "addr": "0x001112D0",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "011390": {
+   "addr": "0x00111390",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "011C50": {
+   "addr": "0x00111C50",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "011D50": {
+   "addr": "0x00111D50",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "011D60": {
+   "addr": "0x00111D60",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "011F90": {
+   "addr": "0x00111F90",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "011FB8": {
+   "addr": "0x00111FB8",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "011FC0": {
+   "addr": "0x00111FC0",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "011FC8": {
+   "addr": "0x00111FC8",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "012080": {
+   "addr": "0x00112080",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "012088": {
+   "addr": "0x00112088",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "0120A0": {
+   "addr": "0x001120A0",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "0120A8": {
+   "addr": "0x001120A8",
+   "cc": "296",
+   "flags": [
+    "-fno-optimize-sibling-calls"
+   ],
+   "tu": null
+  },
+  "0120D0": {
+   "addr": "0x001120D0",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "0120F8": {
+   "addr": "0x001120F8",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "012168": {
+   "addr": "0x00112168",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "012190": {
+   "addr": "0x00112190",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "0121C0": {
+   "addr": "0x001121C0",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "0121E8": {
+   "addr": "0x001121E8",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "012218": {
+   "addr": "0x00112218",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "012240": {
+   "addr": "0x00112240",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "012278": {
+   "addr": "0x00112278",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "0122B0": {
+   "addr": "0x001122B0",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "0122E0": {
+   "addr": "0x001122E0",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "012308": {
+   "addr": "0x00112308",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "012330": {
+   "addr": "0x00112330",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "012358": {
+   "addr": "0x00112358",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "012380": {
+   "addr": "0x00112380",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "0123C0": {
+   "addr": "0x001123C0",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "0128A0": {
+   "addr": "0x001128A0",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "0128C0": {
+   "addr": "0x001128C0",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "0128D0": {
+   "addr": "0x001128D0",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "0128E8": {
+   "addr": "0x001128E8",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "012908": {
+   "addr": "0x00112908",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "012BD0": {
+   "addr": "0x00112BD0",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "012BE8": {
+   "addr": "0x00112BE8",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "012E00": {
+   "addr": "0x00112E00",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "012E40": {
+   "addr": "0x00112E40",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "013078": {
+   "addr": "0x00113078",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "013088": {
+   "addr": "0x00113088",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "0131F8": {
+   "addr": "0x001131F8",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "013228": {
+   "addr": "0x00113228",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "013520": {
+   "addr": "0x00113520",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "014020": {
+   "addr": "0x00114020",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "0148B8": {
+   "addr": "0x001148B8",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "0148E0": {
+   "addr": "0x001148E0",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "014918": {
+   "addr": "0x00114918",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "014BF8": {
+   "addr": "0x00114BF8",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "014C30": {
+   "addr": "0x00114C30",
+   "cc": "296",
+   "flags": [
+    "-g0"
+   ],
+   "tu": null
+  },
+  "014EE8": {
+   "addr": "0x00114EE8",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "014F20": {
+   "addr": "0x00114F20",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "014FF0": {
+   "addr": "0x00114FF0",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "015008": {
+   "addr": "0x00115008",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "015048": {
+   "addr": "0x00115048",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "0151B8": {
+   "addr": "0x001151B8",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "015650": {
+   "addr": "0x00115650",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "015888": {
+   "addr": "0x00115888",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "015A30": {
+   "addr": "0x00115A30",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "015D28": {
+   "addr": "0x00115D28",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "016C80": {
+   "addr": "0x00116C80",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "017588": {
+   "addr": "0x00117588",
+   "cc": "296",
+   "flags": [
+    "-fno-optimize-sibling-calls"
+   ],
+   "tu": null
+  },
+  "018358": {
+   "addr": "0x00118358",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "0184E8": {
+   "addr": "0x001184E8",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "018578": {
+   "addr": "0x00118578",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "0188E0": {
+   "addr": "0x001188E0",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "018928": {
+   "addr": "0x00118928",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "018CE0": {
+   "addr": "0x00118CE0",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "019020": {
+   "addr": "0x00119020",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "019068": {
+   "addr": "0x00119068",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "0190F8": {
+   "addr": "0x001190F8",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "019138": {
+   "addr": "0x00119138",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "019180": {
+   "addr": "0x00119180",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "0191C8": {
+   "addr": "0x001191C8",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "0193D0": {
+   "addr": "0x001193D0",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "019410": {
+   "addr": "0x00119410",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "019450": {
+   "addr": "0x00119450",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "019528": {
+   "addr": "0x00119528",
+   "cc": "296",
+   "flags": [
+    "-fno-optimize-sibling-calls"
+   ],
+   "tu": null
+  },
+  "019548": {
+   "addr": "0x00119548",
+   "cc": "296",
+   "flags": [
+    "-fno-optimize-sibling-calls"
+   ],
+   "tu": null
+  },
+  "019808": {
+   "addr": "0x00119808",
+   "cc": "296",
+   "flags": [
+    "-fno-optimize-sibling-calls"
+   ],
+   "tu": null
+  },
+  "0199A0": {
+   "addr": "0x001199A0",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "019AA0": {
+   "addr": "0x00119AA0",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "01B718": {
+   "addr": "0x0011B718",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "01B740": {
+   "addr": "0x0011B740",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "01B768": {
+   "addr": "0x0011B768",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "01B7A8": {
+   "addr": "0x0011B7A8",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "01B7E8": {
+   "addr": "0x0011B7E8",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "01B828": {
+   "addr": "0x0011B828",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "01B868": {
+   "addr": "0x0011B868",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "01B8A8": {
+   "addr": "0x0011B8A8",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "01B8E8": {
+   "addr": "0x0011B8E8",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "01B928": {
+   "addr": "0x0011B928",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "01B968": {
+   "addr": "0x0011B968",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "01B9A8": {
+   "addr": "0x0011B9A8",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "01B9E8": {
+   "addr": "0x0011B9E8",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "01BA28": {
+   "addr": "0x0011BA28",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "01BA68": {
+   "addr": "0x0011BA68",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "01BAA8": {
+   "addr": "0x0011BAA8",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "01BF68": {
+   "addr": "0x0011BF68",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "01C320": {
+   "addr": "0x0011C320",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "01C4C8": {
+   "addr": "0x0011C4C8",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "020438": {
+   "addr": "0x00120438",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "020470": {
+   "addr": "0x00120470",
+   "cc": "296",
+   "flags": [
+    "-fno-optimize-sibling-calls"
+   ],
+   "tu": null
+  },
+  "020490": {
+   "addr": "0x00120490",
+   "cc": "296",
+   "flags": [
+    "-fno-optimize-sibling-calls"
+   ],
+   "tu": null
+  },
+  "0204B0": {
+   "addr": "0x001204B0",
+   "cc": "296",
+   "flags": [
+    "-fno-optimize-sibling-calls"
+   ],
+   "tu": null
+  },
+  "020CD0": {
+   "addr": "0x00120CD0",
+   "cc": "296",
+   "flags": [
+    "-fno-optimize-sibling-calls"
+   ],
+   "tu": null
+  },
+  "020CF0": {
+   "addr": "0x00120CF0",
+   "cc": "296",
+   "flags": [
+    "-fno-optimize-sibling-calls"
+   ],
+   "tu": null
+  },
+  "020D10": {
+   "addr": "0x00120D10",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "020F18": {
+   "addr": "0x00120F18",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "021000": {
+   "addr": "0x00121000",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "021058": {
+   "addr": "0x00121058",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "021088": {
+   "addr": "0x00121088",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "021190": {
+   "addr": "0x00121190",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "0211B8": {
+   "addr": "0x001211B8",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "021E88": {
+   "addr": "0x00121E88",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "021EC0": {
+   "addr": "0x00121EC0",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "022018": {
+   "addr": "0x00122018",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "022048": {
+   "addr": "0x00122048",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "0220B0": {
+   "addr": "0x001220B0",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "0220F8": {
+   "addr": "0x001220F8",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "0221D0": {
+   "addr": "0x001221D0",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "022338": {
+   "addr": "0x00122338",
+   "cc": "296",
+   "flags": [
+    "-fno-optimize-sibling-calls"
+   ],
+   "tu": null
+  },
+  "022358": {
+   "addr": "0x00122358",
+   "cc": "296",
+   "flags": [
+    "-fno-optimize-sibling-calls"
+   ],
+   "tu": null
+  },
+  "022448": {
+   "addr": "0x00122448",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "022458": {
+   "addr": "0x00122458",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "022BD8": {
+   "addr": "0x00122BD8",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "022C30": {
+   "addr": "0x00122C30",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "022C88": {
+   "addr": "0x00122C88",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "022D68": {
+   "addr": "0x00122D68",
+   "cc": "296",
+   "flags": [
+    "-fno-optimize-sibling-calls"
+   ],
+   "tu": null
+  },
+  "022DA0": {
+   "addr": "0x00122DA0",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "022DE0": {
+   "addr": "0x00122DE0",
+   "cc": "296",
+   "flags": [
+    "-fno-optimize-sibling-calls"
+   ],
+   "tu": null
+  },
+  "022E18": {
+   "addr": "0x00122E18",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "022E68": {
+   "addr": "0x00122E68",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "0230B0": {
+   "addr": "0x001230B0",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "023158": {
+   "addr": "0x00123158",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "023180": {
+   "addr": "0x00123180",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "0231A8": {
+   "addr": "0x001231A8",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "023208": {
+   "addr": "0x00123208",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "023260": {
+   "addr": "0x00123260",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "025008": {
+   "addr": "0x00125008",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "025040": {
+   "addr": "0x00125040",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "0252E0": {
+   "addr": "0x001252E0",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "025338": {
+   "addr": "0x00125338",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "025768": {
+   "addr": "0x00125768",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "025870": {
+   "addr": "0x00125870",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "025998": {
+   "addr": "0x00125998",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "0259E0": {
+   "addr": "0x001259E0",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "0260A8": {
+   "addr": "0x001260A8",
+   "cc": "296",
+   "flags": [
+    "-fno-optimize-sibling-calls"
+   ],
+   "tu": null
+  },
+  "026140": {
+   "addr": "0x00126140",
+   "cc": "296",
+   "flags": [
+    "-fno-optimize-sibling-calls"
+   ],
+   "tu": null
+  },
+  "026298": {
+   "addr": "0x00126298",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "0262B8": {
+   "addr": "0x001262B8",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "0270A8": {
+   "addr": "0x001270A8",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "027500": {
+   "addr": "0x00127500",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "027528": {
+   "addr": "0x00127528",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "027538": {
+   "addr": "0x00127538",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "027768": {
+   "addr": "0x00127768",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "0277C0": {
+   "addr": "0x001277C0",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "0288E8": {
+   "addr": "0x001288E8",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "028908": {
+   "addr": "0x00128908",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "028930": {
+   "addr": "0x00128930",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "028950": {
+   "addr": "0x00128950",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "0289D0": {
+   "addr": "0x001289D0",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "028B00": {
+   "addr": "0x00128B00",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "029578": {
+   "addr": "0x00129578",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "029800": {
+   "addr": "0x00129800",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "02C208": {
+   "addr": "0x0012C208",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "02C220": {
+   "addr": "0x0012C220",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "02D7F0": {
+   "addr": "0x0012D7F0",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "02D9E0": {
+   "addr": "0x0012D9E0",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "02E520": {
+   "addr": "0x0012E520",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "02E530": {
+   "addr": "0x0012E530",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "02E558": {
+   "addr": "0x0012E558",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "02E6D0": {
+   "addr": "0x0012E6D0",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "02E890": {
+   "addr": "0x0012E890",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "02F800": {
+   "addr": "0x0012F800",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "02FA40": {
+   "addr": "0x0012FA40",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "02FB90": {
+   "addr": "0x0012FB90",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "030AC8": {
+   "addr": "0x00130AC8",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "030D48": {
+   "addr": "0x00130D48",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "031940": {
+   "addr": "0x00131940",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "031A80": {
+   "addr": "0x00131A80",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  }
+ },
+ "tu": {}
+}
