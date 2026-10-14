@@ -146,3 +146,7 @@
 0123C0 = src/cod/0123C0.c cc=29   # same grouping shape
 012358 = src/cod/012358.c cc=29   # field store order 00,04,0C,08
 02E890 = src/cod/02E890.c         # table indexed twice (allocator keeps `$a0`)
+009B80 = src/cod/009B80.c cc=29   # explicit ret0/ret1 labels (three return blocks)
+021190 = src/cod/021190.c cc=29   # struct array indexed twice (copy in delay)
+0220F8 = src/cod/0220F8.c cc=29   # reversed test + double index (addr remat)
+0262B8 = src/cod/0262B8.c         # while (p->field0) — no carried local (no bnezl)
