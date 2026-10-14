@@ -1,12 +1,18 @@
-# Functions replaced by matching C. Format:  <object stem> = <C source>
+# Functions replaced by matching C. Format:
 #
-# Every entry MUST reproduce the original function byte-for-byte: tools/build.py
-# compiles it, pads .text to the original size with nop alignment padding, links
-# the whole image and requires SHA-1 6f853f644a4279db18c15ceb8ee1d2a8b87a7b39.
-# A function may only be listed here once it is verified that way - an entry
-# that is not byte-exact breaks `make check` immediately.
+#     <object stem> = <C source> [<extra compiler flags> ...]
 #
-# All entries below are Phase-3 flag-pinning cases (docs/compiler.md).
+# Every entry MUST reproduce the original function byte-for-byte.
+# `python3 tools/verify_c.py` checks each one in isolation (per-instruction,
+# relocation-aware); `python3 tools/build.py` re-links the whole image and
+# requires SHA-1 6f853f644a4279db18c15ceb8ee1d2a8b87a7b39. A function may only
+# be listed here once both are green.
+#
+# The extra flags exist because the original binary is a mix: the EE-GCC `-g`
+# level changes delay-slot scheduling, and some translation units clearly used
+# `-g0` while others used `-g2` (see docs/compiler.md §4 / docs/decisions.md).
+
+# --- Phase 3 flag-pinning cases (docs/compiler.md) ---
 002FE0 = src/cod/002FE0.c
 011FB8 = src/cod/011FB8.c
 028B00 = src/cod/028B00.c
@@ -18,3 +24,28 @@
 001A30 = src/cod/001A30.c
 011D50 = src/cod/011D50.c
 004E78 = src/cod/004E78.c
+
+# --- Phase 6 batch 1 ---
+001A48 = src/cod/001A48.c
+0032F8 = src/cod/0032F8.c
+003E90 = src/cod/003E90.c
+004088 = src/cod/004088.c
+004F58 = src/cod/004F58.c
+011FC0 = src/cod/011FC0.c
+011FC8 = src/cod/011FC8.c
+012080 = src/cod/012080.c
+0120A0 = src/cod/0120A0.c
+003CA8 = src/cod/003CA8.c
+006380 = src/cod/006380.c
+00FBE8 = src/cod/00FBE8.c
+012BE8 = src/cod/012BE8.c
+013520 = src/cod/013520.c
+022448 = src/cod/022448.c
+027528 = src/cod/027528.c
+02E520 = src/cod/02E520.c
+012088 = src/cod/012088.c
+014FF0 = src/cod/014FF0.c
+0128A0 = src/cod/0128A0.c
+
+# --- matched with a per-TU debug level (evidence: tools/cc/probe_variants6.sh) ---
+014C30 = src/cod/014C30.c -g0

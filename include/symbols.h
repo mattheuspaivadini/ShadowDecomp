@@ -17,15 +17,34 @@
  * ("relocation truncated to fit"), so an object that the original addresses
  * absolutely must be declared so that ee-gcc itself picks absolute addressing:
  * use `__attribute__((section(".data")))` (verified: tools/cc/probe_section.sh)
- * or a declared size > 8 bytes.
+ * or a declared size > 8 bytes. `D_ABS` below documents the intent.
  */
 
-/* .sdata (gp-relative) */
-extern int D_00139E04;   /* evidence: %gp_rel(D_00139E04) in func_00101A48/_00101A30 */
+/* ---- .sdata / .sbss : gp-relative (place them anywhere in [_gp-0x8000, _gp+0x7FFF]) *
+ * offsets are relative to _gp = 0x00141D70. */
+#define D_SMALL extern
+D_SMALL int D_00139E04;   /* .sdata, _gp-0x7F6C  func_00101A48/_00101A30 */
+D_SMALL int D_0013A11C;   /* .sbss,  _gp-0x3C54  func_00104F58 */
+D_SMALL int D_0013A16C;   /* .sbss,  _gp-0x3C04  func_00106380 */
+D_SMALL int D_0013A170;   /* .sbss,  _gp-0x3C00  func_00106380 */
 
-/* .data (outside the gp window -> absolute lui/%lo addressing) */
-extern int D_00133940 __attribute__((section(".data")));
-extern int D_001339B0[] __attribute__((section(".data")));
-extern char D_0014B358[];    /* .bss: unknown size is already non-small */
+/* ---- .data / .rodata / .bss : absolute addressing (declared non-small) */
+#define D_ABS extern __attribute__((section(".data")))
+D_ABS int D_001329A4;         /* .data   0x001329A4  func_0010FBE8 */
+D_ABS int D_00133940;         /* .data   0x00133940  func_00111D50 */
+D_ABS int D_00133970;         /* .data   0x00133970  func_00113520 */
+D_ABS int D_00135C60;         /* .data   0x00135C60  func_00127528 */
+D_ABS int D_00135958;         /* .data   0x00135958  func_00122448 */
+
+/* .bss / .rodata objects of unknown size: unknown size is already non-small. */
+extern char D_0013CF90[];     /* .bss    0x0013CF90  func_00103CA8 */
+extern char D_00139B08[];     /* .rodata 0x00139B08  func_0012E520 */
+extern char D_0014B358[];     /* .bss    0x0014B358  func_00112908/_00112BD0/_00112BE8 */
+extern int  D_0014B500[];     /* .bss    0x0014B500  func_001128D0/_001128E8 */
+extern int  D_001339B0[];     /* .data   0x001339B0  func_00114918 */
+extern char D_0013D840[];     /* .bss    0x0013D840  func_00104E78 */
+
+/* ---- hardware registers (uncached EE addresses) */
+#define HWREG(addr) (*(volatile unsigned int *)(addr))
 
 #endif /* SYMBOLS_H */

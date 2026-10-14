@@ -66,6 +66,20 @@ def cflags() -> list[str]:
     return raw.split()
 
 
+def cflags_for(extra: list[str] | None = None) -> list[str]:
+    """The pinned C flags, plus per-function extras.
+
+    NOTE (ee-gcc2.96 quirk, measured): the `-g` level is sticky - once any
+    `-g`/`-g2` is seen a later `-g0` has no effect. So an explicit `-g...` in
+    `extra` must *replace* the pinned `-g2`, not be appended after it.
+    """
+    extra = extra or []
+    base = cflags()
+    if any(re.match(r"^-g", f) for f in extra):
+        base = [f for f in base if not re.match(r"^-g", f)]
+    return base + extra
+
+
 def stage_sources(verbose: bool = False) -> None:
     """Mirror src/ + include/ into the native work tree (drvfs workaround)."""
     for name in ("src", "include"):
@@ -93,7 +107,7 @@ def compile_c(src_rel: str, out_obj: Path, extra: list[str] | None = None) -> st
     if not staged.exists():
         return f"staged source missing: {staged}"
     out_obj.parent.mkdir(parents=True, exist_ok=True)
-    cmd = [str(EEGCC), "-c", *cflags(), *(extra or []), str(staged), "-o", str(out_obj)]
+    cmd = [str(EEGCC), "-c", *cflags_for(extra), str(staged), "-o", str(out_obj)]
     r = subprocess.run(cmd, capture_output=True, text=True, cwd=str(WORK))
     if r.returncode != 0:
         lines = (r.stderr or r.stdout).strip().splitlines()

@@ -67,18 +67,38 @@ DATA_SECTIONS = {".data", ".rodata", ".data_nop", ".sdata", ".sbss", ".bss",
                  ".lit4", ".text_nop", ".ctors", ".dtors", ".eh_frame"}
 
 
-def load_c_sources() -> dict[str, str]:
-    """object stem -> repo-relative C source, from config/c_sources.txt."""
-    out: dict[str, str] = {}
+def _load_c_manifest() -> dict[str, tuple[str, list[str]]]:
+    """object stem -> (C source, extra flags) from config/c_sources.txt.
+
+    Entry format:  <stem> = <C source> [<extra compiler flags> ...]
+    The extra flags exist because the original binary mixes debug levels: e.g.
+    func_00114C30 only matches with `-g0` while func_00104E78 only matches with
+    `-g2` (the `-g` level changes the EE-GCC delay-slot scheduling).
+    """
+    out: dict[str, tuple[str, list[str]]] = {}
     if not C_SOURCES.exists():
         return out
     for line in C_SOURCES.read_text(encoding="utf-8").splitlines():
         line = line.split("#", 1)[0].strip()
         if not line or "=" not in line:
             continue
-        stem, src = (p.strip() for p in line.split("=", 1))
-        out[stem] = src
+        stem, rest = (p.strip() for p in line.split("=", 1))
+        parts = rest.split()
+        if not parts:
+            continue
+        out[stem] = (parts[0], parts[1:])
     return out
+
+
+_MANIFEST = _load_c_manifest()
+
+
+def load_c_sources() -> dict[str, str]:
+    return {k: v[0] for k, v in _MANIFEST.items()}
+
+
+def load_c_flags(stem: str) -> list[str]:
+    return _MANIFEST.get(stem, ("", []))[1]
 
 
 def object_refs() -> list[str]:
@@ -172,7 +192,7 @@ def compile_object(obj_rel: str, src_rel: str) -> tuple[str, str]:
     if want == 0:
         return (obj_rel, "original object has an empty .text")
 
-    err = eegcc.compile_c(src_rel, obj)
+    err = eegcc.compile_c(src_rel, obj, load_c_flags(stem_of(obj_rel)))
     if err:
         return (obj_rel, f"ee-gcc: {err}")
 
