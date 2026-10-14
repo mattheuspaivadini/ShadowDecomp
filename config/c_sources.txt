@@ -218,3 +218,5 @@
 010910 = src/cod/010910.c cc=29   # sorted-list insert (register roles: 2.9 revision)
 011F90 = src/cod/011F90.c cc=29   # store 5 through getter pointer; return -1
 0120D0 = src/cod/0120D0.c cc=29   # identical shape to 011F90
+011C50 = src/cod/011C50.c cc=29   # negated test + swapped branches (bgezl layout)
+020D10 = src/cod/020D10.c cc=29   # record pointer local -> +0xD0 on the record base

@@ -1,7 +1,9 @@
-/* STATUS (Session 4, 2026-10-14): NON_MATCHING. table lookup; the `bgezl` layout and register roles differ.
- * The original .s stays in the build (asm/cod/011C50.s); this C
- * attempt is kept for the record. */
-/* asm/cod/011C50.s -> func_00111C50 @ 0x00111C50 (0x54 bytes)
+/* MATCHED (Session 6): byte-exact with the 2.9-ee-991111-01 revision (cc=29)
+ * once the test is negated and the branches swapped (`if (!(index >= 0))` with
+ * the negative-index path first) - the same "reversed test" pattern as
+ * docs/non-matching-12.md #10. The `bgezl` layout follows from it.
+ *
+ * asm/cod/011C50.s -> func_00111C50 @ 0x00111C50 (0x54 bytes)
  *   bgezl $a0, .L00111C74
  *    lui  $v0, %hi(D_00133938)
  *   lui   $v0, (0x7FFFFFFF >> 16)
@@ -39,13 +41,13 @@ int func_00111C50(int index) {
     void *base;
     unsigned int count;
 
-    if (index >= 0) {
-        base = D_00133938[0];
-        count = D_0013393C[0];
-    } else {
+    if (!(index >= 0)) {
         base = D_0014AC88;
         count = 0x20;
         index &= 0x7FFFFFFF;
+    } else {
+        base = D_00133938[0];
+        count = D_0013393C[0];
     }
     if ((unsigned int)index >= count)
         return -0x69;
