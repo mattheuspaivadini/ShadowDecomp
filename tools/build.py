@@ -296,12 +296,22 @@ def patch_linker_script(c_sources: dict[str, str]) -> str:
         if m and m.group(1) in c_sources and m.group(1) in spans:
             vaddr, span = spans[m.group(1)]
             # The compiler emits no trailing alignment `nop`s; the original
-            # function is followed by padding up to the next subsegment. Align
-            # the location counter to 8 (the observed alignment) so the linker
-            # fills the gap with the section FILL value (0x00000000 == nop).
+            # function is followed by padding up to the next subsegment. Advance
+            # the location counter by the exact remainder so the linker fills the
+            # gap with the section FILL value (0x00000000 == nop).
+            # NOTE: this must be a *relative* advance (`. = . + n`) - an absolute
+            # `. = <vaddr>` assignment breaks the AT() LMA handling, and
+            # `. = ALIGN(., 8)` is wrong for the handful of subsegments that are
+            # only 4-byte aligned (e.g. 02E6D0, next at 0x12E704; it grew the
+            # image by 4 bytes).
+            obj = ROOT / "build" / "asm" / "cod" / f"{m.group(1)}.o"
+            got = eegcc.section_sizes(obj).get(".text", 0)
+            pad = span - got
             out.append(f"        /* span pinned for C object {m.group(1)}: "
-                       f"{span:#x} bytes, next {vaddr + span:#x} */")
-            out.append("        . = ALIGN(., 8);")
+                       f"{got:#x} + {pad:#x} pad = {span:#x} bytes, "
+                       f"next {vaddr + span:#x} */")
+            if pad > 0:
+                out.append(f"        . = . + {pad:#x};")
     return "\n".join(out) + "\n"
 
 

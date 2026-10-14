@@ -149,7 +149,13 @@ def compare(obj_path: Path, case: str, rom: bytes, *, verbose: bool = False) -> 
     text = obj["text"]
     # locate the function inside the object
     start = 0
-    fsym = obj["symbols"].get(_find_sym(obj, sym) or -1)
+    idx = _find_sym(obj, sym)
+    fsym = obj["symbols"].get(idx if idx is not None else -1)
+    if fsym is None and obj["symbols"]:
+        res = {"case": case, "symbol": sym, "addr": addr, "orig_size": size,
+               "ok": False, "diffs": [],
+               "why": f"object defines no symbol named {sym}"}
+        return res
     if fsym:
         start = fsym["value"] - _text_vaddr(obj)
     mine = text[start:start + len(body)]

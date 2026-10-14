@@ -33,7 +33,11 @@ def main() -> int:
     ap.add_argument("stems", nargs="*")
     ap.add_argument("--verbose", action="store_true")
     ap.add_argument("--json", type=Path)
+    ap.add_argument("--flags", default=None,
+                    help="extra flags for every stem (overrides the manifest; "
+                         "used to try a per-TU -g level before listing it)")
     args = ap.parse_args()
+    extra = args.flags.split() if args.flags else None
 
     c_sources = build.load_c_sources()
     stems = args.stems or sorted(c_sources)
@@ -54,7 +58,8 @@ def main() -> int:
                 continue
             src = str(cand).replace("\\", "/")
         obj = TMP / f"{stem}.o"
-        err = eegcc.compile_c(src, obj, build.load_c_flags(stem))
+        err = eegcc.compile_c(src, obj, extra if extra is not None
+                              else build.load_c_flags(stem))
         if err:
             print(f"FAIL  {stem}: compile: {err}")
             results.append({"stem": stem, "ok": False, "why": err})
