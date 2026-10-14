@@ -162,7 +162,7 @@ segments:
       - [0x004040, asm, cod/004040] # func_00104040
       - [0x004088, asm, cod/004088] # func_00104088
       - [0x004090, asm, cod/004090] # func_00104090
-      - [0x004428, asm, cod/004428] # func_00104428
+      - [0x004428, asm, cod/004428] # load_set_conf_only
       - [0x004668, asm, cod/004668] # func_00104668
       - [0x004818, asm, cod/004818] # func_00104818
       - [0x004990, asm, cod/004990] # func_00104990
@@ -769,8 +769,8 @@ segments:
       - [0x019648, asm, cod/019648] # func_00119648
       - [0x019670, asm, cod/019670] # func_00119670
       - [0x019708, asm, cod/019708] # func_00119708
-      - [0x019778, asm, cod/019778] # func_00119778
-      - [0x019808, asm, cod/019808] # func_00119808
+      - [0x019778, asm, cod/019778] # get_interface_id
+      - [0x019808, asm, cod/019808] # wait_get_addr_only
       - [0x019840, asm, cod/019840] # func_00119840
       - [0x0198B8, asm, cod/0198B8] # func_001198B8
       - [0x0199A0, asm, cod/0199A0] # func_001199A0
