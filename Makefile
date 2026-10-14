@@ -7,13 +7,21 @@
 WSL   ?= wsl -d Ubuntu -u root --
 REPO  := $(CURDIR)
 
-.PHONY: all build check targets diff report objdiff clean help
+.PHONY: all build check targets diff report objdiff clean help verify matrix
 
 all: check
 
 ## Build the image and require the byte-exact hash (the gate for every change).
 check build:
 	$(WSL) bash -lc "cd $(REPO) && python3 tools/build.py --jobs 8"
+
+## Verify every function in config/c_sources.txt byte-exact (per instruction).
+verify:
+	$(WSL) bash -lc "cd $(REPO) && python3 tools/verify_c.py"
+
+## Rebuild the compiler x function match matrix (WINE=1 to include the PE builds).
+matrix:
+	$(WSL) bash -lc "cd $(REPO) && python3 tools/cc_matrix.py --set all $(if $(WINE),--wine,)"
 
 ## Build + also emit the objdiff target objects.
 targets:
@@ -36,6 +44,8 @@ clean:
 
 help:
 	@echo "make check          build + require the pinned SHA-1 (default)"
+	@echo "make verify         verify_c.py: every listed function byte-exact"
+	@echo "make matrix         compiler x function match matrix (WINE=1: + PE)"
 	@echo "make targets        also assemble objdiff target objects"
 	@echo "make objdiff        regenerate objdiff.json"
 	@echo "make diff F=<func>  build and diff one function"

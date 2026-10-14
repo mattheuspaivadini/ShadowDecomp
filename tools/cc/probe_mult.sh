@@ -1,27 +1,25 @@
 #!/bin/bash
-# Probe: constant-multiply code generation of ee-gcc2.96 (Session 4 evidence).
+# Probe: constant-multiply code generation (Session 4 evidence, corrected).
 #
 # Question: the original image uses the R5900 3-operand `mult rd,rs,rt` for
 #   func_00120F18  -> i * 0x184
-#   func_00121190 / func_00122018 / func_001220F8 -> i * 0x24
+#   func_00122018  -> i * 0x24
 # but a shift/add sequence for
-#   func_00104E78  -> x * 320   (which we DO match today)
-# What makes this compiler pick one or the other?
+#   func_00104E78  -> x * 320   (which matches with ee-gcc2.96)
 #
 # Findings (all reproduced by this script):
-#   * a multiply by a *literal* constant is ALWAYS expanded into a shift/add
-#     sequence, for every ISA/CPU/-O level this compiler accepts
+#   * ee-gcc2.96: a multiply by a *literal* constant is ALWAYS expanded into a
+#     shift/add sequence, for every ISA/CPU/-O level it accepts
 #     (`-mips1..4`, `-m3900`, `-m5900`, `-O0..-O3`, `-Os`, `-mmad`, ...);
-#   * `-m3900` alone does select MULT for constant multiplies, but it also
-#     switches e_flags to `0x814001, mips1, 3900` - not the original's
-#     `0x20924001, mips3, 5900` - so it is not the original flag set;
-#   * a multiply by a *runtime* value becomes `mult rd,rs,rt`. The original's
-#     `addiu v1,$zero,0x184; mult a0,a0,v1` is exactly that shape, so the
-#     original stride was a variable at RTL-expansion time.
+#     `-m3900` alone does select MULT, but it also switches e_flags to
+#     `0x814001, mips1, 3900` - not the original's `0x20924001, mips3, 5900`;
+#     a multiply by a *runtime* value becomes `mult rd,rs,rt` there;
+#   * ee-gcc2.9-991111[-01]: a *literal* constant stride IS compiled to
+#     `mult rd,rs,rt` (section 3 below) - the original's shape.
 #
-# Consequence: reproducing those functions needs a local stride variable in the
-# reconstruction (see src/non_matching/020F18.c) - the instruction sequence is
-# then reproduced, only register allocation still differs.
+# Consequence (docs/compiler.md 4.2/4.3): the `mult` shape is a *revision*
+# difference, not a flag one. func_00120F18 / func_00122018 are byte-exact with
+# the 2.9 revision and a plain literal stride.
 #
 # Usage (WSL2): bash tools/cc/probe_mult.sh
 set -e
@@ -66,5 +64,16 @@ EOF
 for f in literal runtime var_times_var; do
     echo "  -- $f"
     mips-linux-gnu-objdump -d probe_mult_spelling.o | sed -n "/<$f>:/,/^$/p" \
+        | grep -E '^\s+[0-9a-f]+:\s' | sed 's/^/       /'
+done
+
+echo
+echo "=== 3. literal stride under the alternate revision (2.9-991111-01)"
+EE_GCC_DIR=ee-gcc2.9-991111-01 \
+    "$REPO/tools/cc/eegcc.sh" -c -O2 -g2 -G8 probe_mult_spelling.c \
+    -o probe_mult_spelling_29.o
+for f in literal; do
+    echo "  -- $f (2.9-991111-01)"
+    mips-linux-gnu-objdump -d probe_mult_spelling_29.o | sed -n "/<$f>:/,/^$/p" \
         | grep -E '^\s+[0-9a-f]+:\s' | sed 's/^/       /'
 done

@@ -67,15 +67,20 @@ DATA_SECTIONS = {".data", ".rodata", ".data_nop", ".sdata", ".sbss", ".bss",
                  ".lit4", ".text_nop", ".ctors", ".dtors", ".eh_frame"}
 
 
-def _load_c_manifest() -> dict[str, tuple[str, list[str]]]:
-    """object stem -> (C source, extra flags) from config/c_sources.txt.
+def _load_c_manifest() -> dict[str, tuple[str, list[str], str | None]]:
+    """object stem -> (C source, extra flags, compiler) from config/c_sources.txt.
 
-    Entry format:  <stem> = <C source> [<extra compiler flags> ...]
+    Entry format:  <stem> = <C source> [<extra flags> ...] [cc=<token>]
+
     The extra flags exist because the original binary mixes debug levels: e.g.
     func_00114C30 only matches with `-g0` while func_00104E78 only matches with
     `-g2` (the `-g` level changes the EE-GCC delay-slot scheduling).
+
+    `cc=<token>` pins the EE-GCC distribution for this translation unit (see
+    tools/eegcc.py:resolve_compiler). Evidence: the original is a mixture of the
+    2.9-991111 and 2.96 EE-GCC generations (docs/compiler.md section 4.3).
     """
-    out: dict[str, tuple[str, list[str]]] = {}
+    out: dict[str, tuple[str, list[str], str | None]] = {}
     if not C_SOURCES.exists():
         return out
     for line in C_SOURCES.read_text(encoding="utf-8").splitlines():
@@ -86,7 +91,14 @@ def _load_c_manifest() -> dict[str, tuple[str, list[str]]]:
         parts = rest.split()
         if not parts:
             continue
-        out[stem] = (parts[0], parts[1:])
+        flags: list[str] = []
+        compiler: str | None = None
+        for tok in parts[1:]:
+            if tok.startswith("cc="):
+                compiler = tok[3:]
+            else:
+                flags.append(tok)
+        out[stem] = (parts[0], flags, compiler)
     return out
 
 
@@ -98,7 +110,11 @@ def load_c_sources() -> dict[str, str]:
 
 
 def load_c_flags(stem: str) -> list[str]:
-    return _MANIFEST.get(stem, ("", []))[1]
+    return _MANIFEST.get(stem, ("", [], None))[1]
+
+
+def load_c_compiler(stem: str) -> str | None:
+    return _MANIFEST.get(stem, ("", [], None))[2]
 
 
 def object_refs() -> list[str]:
@@ -192,7 +208,8 @@ def compile_object(obj_rel: str, src_rel: str) -> tuple[str, str]:
     if want == 0:
         return (obj_rel, "original object has an empty .text")
 
-    err = eegcc.compile_c(src_rel, obj, load_c_flags(stem_of(obj_rel)))
+    err = eegcc.compile_c(src_rel, obj, load_c_flags(stem_of(obj_rel)),
+                          compiler=load_c_compiler(stem_of(obj_rel)))
     if err:
         return (obj_rel, f"ee-gcc: {err}")
 

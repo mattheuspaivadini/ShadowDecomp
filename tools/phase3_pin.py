@@ -62,16 +62,16 @@ CASES = [
     "004E78",  # strength reduction: &arr[x*320]
 ]
 
-# Cases whose C shape is not yet reproduced byte-exactly (see the note in each
-# file). They are kept out of the pass/fail sweep so that the flag signal is
-# not diluted.
+# Cases whose C shape is not reproduced by the *default* compiler
+# (ee-gcc2.96). All three ARE byte-exact with the alternate revision
+# ee-gcc2.9-991111-01 (manifest token `cc=29`, docs/compiler.md 4.3), so they
+# are kept out of this 2.96 flag sweep to leave the flag signal clean.
 NON_MATCHING = {
-    "009268": "mask 0xFFFFFFFE: original materialises it with lui+ori, "
-              "ee-gcc emits `li $v1,-2` for every C spelling tried",
-    "0148B8": "two `lui` constant materialisations emitted in the opposite "
-              "order (branch delay slot vs fall-through)",
-    "014918": "register allocation / scheduling around the bounds check "
-              "(original keeps the index in $a0 across the branch)",
+    "009268": "matched only by the 2.9-991111 revision (lui/ori 0xFFFFFFFE); "
+              "2.96 emits `li $v1,-2` for every C spelling tried",
+    "0148B8": "matched only by the 2.9-991111 revision (order of the two `lui`s)",
+    "014918": "matched only by the 2.9-991111 revision (allocation around the "
+              "bounds check)",
 }
 
 FLAG_SETS: list[tuple[str, str]] = [

@@ -36,6 +36,9 @@ def main() -> int:
     ap.add_argument("--flags", default=None,
                     help="extra flags for every stem (overrides the manifest; "
                          "used to try a per-TU -g level before listing it)")
+    ap.add_argument("--compiler", default=None,
+                    help="compiler token/selector for every stem (overrides the "
+                         "manifest; e.g. 29, 2.96, ee-gcc2.9-991111-01)")
     args = ap.parse_args()
     extra = args.flags.split() if args.flags else None
 
@@ -54,12 +57,16 @@ def main() -> int:
         if src is None:
             cand = Path("src") / "cod" / f"{stem}.c"
             if not cand.exists():
+                cand = Path("src") / "non_matching" / f"{stem}.c"
+            if not cand.exists():
                 print(f"{stem}: not in config/c_sources.txt")
                 continue
             src = str(cand).replace("\\", "/")
         obj = TMP / f"{stem}.o"
         err = eegcc.compile_c(src, obj, extra if extra is not None
-                              else build.load_c_flags(stem))
+                              else build.load_c_flags(stem),
+                              compiler=args.compiler if args.compiler is not None
+                              else build.load_c_compiler(stem))
         if err:
             print(f"FAIL  {stem}: compile: {err}")
             results.append({"stem": stem, "ok": False, "why": err})

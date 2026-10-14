@@ -20,6 +20,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 EEGCC = ROOT / "tools" / "cc" / "eegcc.sh"
+CC_DIR = ROOT / "tools" / "cc"
 FLAGS_MK = ROOT / "config" / "compiler_flags.mk"
 WORK = Path(os.environ.get("SOT_WORK", str(Path.home() / "shadowdecomp-work")))
 
@@ -80,6 +81,45 @@ def cflags_for(extra: list[str] | None = None) -> list[str]:
     return base + extra
 
 
+def default_compiler() -> str:
+    """Distribution used when a translation unit does not pin one."""
+    return flag("EE_C_COMPILER", "ee-gcc2.96")
+
+
+def resolve_compiler(token: str | None) -> str:
+    """Map a manifest compiler token to an `EE_GCC_DIR` selector.
+
+    Tokens: None/'' -> EE_C_COMPILER; `29`/`2.9` -> EE_C_COMPILER_29;
+    `96`/`2.96` -> EE_C_COMPILER; anything else is taken verbatim (a name under
+    tools/cc/ or a path), so a new distribution needs no tool change.
+
+    A `wine:<name>` selector marks a Windows (PE) distribution that must be run
+    through wine (see `compile_c`).
+    """
+    if not token:
+        return default_compiler()
+    return {
+        "96": flag("EE_C_COMPILER", "ee-gcc2.96"),
+        "2.96": flag("EE_C_COMPILER", "ee-gcc2.96"),
+        "29": flag("EE_C_COMPILER_29", "ee-gcc2.9-991111-01"),
+        "2.9": flag("EE_C_COMPILER_29", "ee-gcc2.9-991111-01"),
+    }.get(token, token)
+
+
+WINE_PREFIX = os.environ.get("SOT_WINEPREFIX", str(Path.home() / ".wine-sotc"))
+
+
+def is_wine(sel: str) -> bool:
+    return sel.startswith("wine:")
+
+
+def wine_dist_dir(sel: str) -> Path:
+    """tools/cc directory of a `wine:<name>` selector (name or path)."""
+    name = sel[len("wine:"):]
+    p = Path(name)
+    return p if p.is_absolute() else CC_DIR / name
+
+
 def stage_sources(verbose: bool = False) -> None:
     """Mirror src/ + include/ into the native work tree (drvfs workaround)."""
     for name in ("src", "include"):
@@ -97,19 +137,43 @@ def stage_sources(verbose: bool = False) -> None:
                     print(f"  staged {p.relative_to(ROOT)}")
 
 
-def compile_c(src_rel: str, out_obj: Path, extra: list[str] | None = None) -> str:
+def compile_c(src_rel: str, out_obj: Path, extra: list[str] | None = None,
+              compiler: str | None = None, *, stage: bool = True) -> str:
     """Compile `src_rel` (repo-relative, e.g. src/cod/002FE0.c) to `out_obj`.
 
     Returns an error string ('' on success). `out_obj` may live on /mnt/c.
+
+    `compiler` selects an EE-GCC distribution (a name under tools/cc/, a path,
+    or a token resolved by `resolve_compiler`); None uses the pinned default
+    (EE_C_COMPILER). The selector is passed to `tools/cc/eegcc.sh` through the
+    EE_GCC_DIR environment variable.
+
+    `stage=False` skips the (per-call) source mirror for callers that stage
+    once up front.
     """
-    stage_sources()
+    if stage:
+        stage_sources()
     staged = WORK / src_rel
     if not staged.exists():
         return f"staged source missing: {staged}"
     out_obj.parent.mkdir(parents=True, exist_ok=True)
-    cmd = [str(EEGCC), "-c", *cflags_for(extra), str(staged), "-o", str(out_obj)]
-    r = subprocess.run(cmd, capture_output=True, text=True, cwd=str(WORK))
-    if r.returncode != 0:
+    sel = resolve_compiler(compiler)
+    env = dict(os.environ)
+    if is_wine(sel):
+        dist = wine_dist_dir(sel)
+        drv = dist / "bin" / "ee-gcc.exe"
+        if not drv.exists():
+            return f"no wine driver: {drv}"
+        cmd = ["wine", str(drv), "-c", *cflags_for(extra),
+               str(staged), "-o", str(out_obj)]
+        env.setdefault("WINEDEBUG", "-all")
+        env.setdefault("WINEPREFIX", WINE_PREFIX)
+    else:
+        cmd = [str(EEGCC), "-c", *cflags_for(extra),
+               str(staged), "-o", str(out_obj)]
+        env["EE_GCC_DIR"] = sel
+    r = subprocess.run(cmd, capture_output=True, text=True, cwd=str(WORK), env=env)
+    if r.returncode != 0 or not out_obj.exists():
         lines = (r.stderr or r.stdout).strip().splitlines()
         return lines[0] if lines else "ee-gcc failed"
     return ""

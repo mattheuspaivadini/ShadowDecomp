@@ -1,11 +1,24 @@
 #!/bin/bash
-# Install the decompme ee-gcc2.96 distribution at the prefix its GCC driver
-# expects (/usr/local/sce/ee/gcc), by symlinking the unpacked tarball. Run as
-# root in WSL. The toolchain itself lives in tools/cc/ (gitignored).
+# Point the Sony SDK prefix (/usr/local/sce/ee/gcc) at one of the unpacked
+# EE-GCC distributions in tools/cc/. The driver normally finds cc1/as through
+# PATH (see eegcc.sh) but keeping the prefix correct avoids surprises for any
+# code that hard-codes it. Run as root in WSL.
+#
+#   tools/cc/install_prefix.sh                    # default: ee-gcc2.96
+#   tools/cc/install_prefix.sh ee-gcc3.2-040921
 set -e
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SEL="${1:-ee-gcc2.96}"
+case "$SEL" in
+  /*) TARGET="$SEL" ;;
+  *)  TARGET="$HERE/$SEL" ;;
+esac
+if [ ! -d "$TARGET" ]; then
+  echo "install_prefix.sh: no such distribution: $TARGET" >&2
+  exit 1
+fi
 PREFIX=/usr/local/sce/ee
 mkdir -p "$PREFIX"
-ln -sfn "$HERE/ee-gcc2.96" "$PREFIX/gcc"
+ln -sfn "$TARGET" "$PREFIX/gcc"
 ls -la "$PREFIX"/
 ls "$PREFIX/gcc/"
