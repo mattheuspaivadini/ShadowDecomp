@@ -61,6 +61,7 @@ Fill in the table during DISCOVERY and keep it current.
 | Phase-6 loop | Per-function compile/diff | **`tools/eegcc.py`** (shared staging/flags, `cflags_for`: per-TU `-g` override), `tools/verify_c.py` (`--flags=` to try a per-TU level before listing), `tools/diff_func.py`, `tools/report.py`, `tools/gen_objdiff.py`, `tools/cc/show_compiled.sh` — `docs/progress.md` |
 | Candidate ranking | Pick the next tier | **`tools/find_candidates.py`**, `tools/dump_candidates.py`, `tools/list_unmatched.py` (leaf pool), `tools/list_callers.py` (1–2-call wrappers), `tools/archive_extra_c.py` (move a failed attempt to `src/non_matching/` with a `STATUS:` note) — `docs/progress.md` |
 | Source permuter | Score source-shape variants | **`tools/permute.py`** (batch-compiles `build/permute/<stem>/*.c` with both compilers, scores each as an instruction edit distance with reloc bits masked; `--verbose` prints the aligned diff; logs to `docs/permute-log.md`). Resolved all 12 formerly-unexplained functions — `docs/non-matching-12.md` |
+| Permuter batch + mutations | Re-attack the backlog at scale | **`tools/permute_batch.py`** (one staging + ROM load, many stems/variants; `--flag-sets ';-g0;-fno-optimize-sibling-calls'`; obj dirs tagged per flag set) + **`tools/permute_gen.py`** (13 mechanical text-mutation kinds: store order, arg order, unsigned, assoc, loop form, index-twice, casts, const-local, early return…). Session-6 backlog: `docs/non-matching-backlog.md` |
 | Split-build internals | Constant multiply / padding | **`tools/cc/probe_mult.sh`** (R5900 `mult` vs shift/add, `docs/compiler.md` §4.2); `tools/build.py` pads a C object to its exact original span (`. = . + (span - size)`) — `docs/rebuild.md` |
 | Phase-5 naming | Strings -> functions | **`tools/name_from_strings.py`** (authoritative: resolves `string -> function` from splat's `%hi/%lo` labels; `--json`) — `docs/naming-candidates.md`. Older heuristic `tools/find_string_refs.py` (window-6 `lui` pairing) is retained for the raw "which strings does a function touch" list but **under-reports** referents |
 | Boundary evidence | Is a `glabel` a real entry? | **`tools/ref_check.py`** (`jal`/`j` + `lui`-relative + literal-word reference counts for an address) — `docs/naming-candidates.md` §"Boundary re-check" |
@@ -151,7 +152,7 @@ Work in order. Mark each phase when done and commit.
 - [x] **Phase 3 — Compiler. DONE (2026-10-14, Session 3; revision question resolved Session 4).** Flags pinned by byte-level experiment: **`-O2 -g2 -G8`**, with a **per-TU `-g` override** (`tools/eegcc.py:cflags_for`) because the original mixes debug levels (`func_00114C30` needs `-g0`; `-g`/`-g2` suppress delay-slot filling, so the level is load-bearing). The original is a **mix of two EE-GCC generations**: `2.9-ee-991111(-01)` and `2.96-ee-001003-1` (`tools/cc_matrix.py`, all 14 published revisions; no single one matches everything). 47 functions byte-exact; 12 recorded as NON_MATCHING and unexplained by any revision. **`-O2` discriminated from `-O1`/`-Os`** (Session 4 step 3: 92-function sweep, 39 / 14 counterexamples; `-O2` ≡ `-O3`). See `docs/compiler.md`, `docs/cc-matrix-session4.txt`, `docs/opt-sweep-session4.txt`.
 - [x] **Phase 4 — Split & rebuild.** splat split is **per-function**: **1036 `.s`** under `asm/cod/` (one per function) plus 2 raw `textbin` subsegments (the `.text` 16-byte header and the `0x00113074` non-function hole); plus data segments, `build/SCUS_974.72.ld`, `include/macro.inc`. **Reassembly + link + hash check PASS**: `tools/build.py` (WSL2) → flat image byte-identical to the original, **237,952 bytes, SHA-1 `6f853f644a4279db18c15ceb8ee1d2a8b87a7b39`**. Still green with 92 functions replaced by C. **Step 6 (ELF container) done (Session 4): `build/SCUS_974.72.elf` is byte-identical to the original `SCUS_974.72`** (242,940 bytes, SHA-1 `b715b349…`) — 3 program headers, real section names, `.mdebug.eabi64`, no symtab, `e_entry 0x00100010`; `tools/containerize.py` (run by `tools/build.py`). See `docs/splat.md`, `docs/toolchain.md`, `docs/rebuild.md`.
 - [~] **Phase 5 — Name.** In progress. `tools/name_from_strings.py` (authoritative: resolves `string -> function` from splat's `%hi/%lo` relocation labels) finds **61 functions that reference a string carrying an identifier**; **46 are named, 15 are recorded candidates** (`docs/naming-candidates.md`). Names come from four evidence classes — *verbatim* self-naming log messages (17), *object* semaphore names with the routine inferred (22, UNCONFIRMED), three single inferences (`start`, `vfprintf`, `sceDbcGetDeviceStatus`, UNCONFIRMED) and three *callee* names from `func_00104668`'s failure diagnostics (Session 5: `load_set_conf_only`, `get_interface_id`, `wait_get_addr_only`, UNCONFIRMED) — plus the two Session-3 names (`LoaderSysDumpIopModuleIdentifiers`, `OutputLinkerScriptFile`). **48 named `.text` symbols** (`entry` + 47 evidence-derived). `func_00113074` was re-checked and is a splat boundary false positive (unreferenced; see `config/non_function_holes.txt`). Structs/data objects documented in `docs/structs.md`.
-- [~] **Phase 6 — Decompile. STARTED.** 148 / 1036 functions matched from C (6372 / 203,692 `.text` bytes = 3.128 %), all gated by the image hash (1037 splat boundaries minus the `0x00113074` false positive). Loop + tooling in `docs/progress.md`; the permuter + per-function record of the twelve solved in `docs/non-matching-12.md`; non-matching attempts in `src/non_matching/` (49 tracked).
+- [~] **Phase 6 — Decompile. STARTED.** **170 / 1036 functions matched from C (7676 / 203,692 `.text` bytes = 3.768 %)**, all gated by the image hash (1037 splat boundaries minus the `0x00113074` false positive). Loop + tooling in `docs/progress.md`; the permuter + per-function record of the twelve solved in `docs/non-matching-12.md`; the Session-6 backlog re-attack (best scores per remaining stem + winning patterns) in `docs/non-matching-backlog.md`; non-matching attempts in `src/non_matching/` (42 tracked).
 
 ## 6. Identifying the compiler
 
@@ -184,24 +185,51 @@ Tips: use a function's constants, string references, and call patterns to infer 
 
 | Metric | Value |
 |--------|-------|
-| Current phase | Phases 1–4 done (**incl. step 6, ELF container**); **Phase 3 revision question resolved**; **Phase 5 in progress (48 named symbols)**; Phase 6: 148 functions matched |
-| ELF rebuild hash match | **YES — 237,952 bytes, SHA-1 `6f853f64…` (flat load image), still green with 148 functions from C** |
+| Current phase | Phases 1–4 done (**incl. step 6, ELF container**); **Phase 3 revision question resolved** (+ Session-6 `-O2`/`-O3` verdict); **Phase 5 in progress (48 named symbols)**; Phase 6: **170 functions matched** |
+| ELF rebuild hash match | **YES — 237,952 bytes, SHA-1 `6f853f64…` (flat load image), still green with 170 functions from C** |
 | ELF container (whole file) | **YES — `build/SCUS_974.72.elf` byte-identical to the original: 242,940 bytes, SHA-1 `b715b349…`; 3 program headers, 16 sections, `e_entry 0x00100010`, `.mdebug.eabi64`, no `.symtab`** (`tools/containerize.py`) |
 | Functions named | **48 `.text` symbols** = `entry` + **47 evidence-derived names**: 17 verbatim self-naming log messages, 22 inferred from `SceStdio<Op>Sema` object names (UNCONFIRMED), 3 single inferences (UNCONFIRMED), 3 callee names from `func_00104668` failure diagnostics (Session 5, UNCONFIRMED), 2 Session-3 names |
 | String-evidenced name candidates | **61 functions** reference an identifier-bearing string; **46 named, 15 pending** (the 18 Session-4 pending minus 3 resolved; none promoted in Session 5 — the evidence rule held) |
-| Functions matched (C) | **148 / 1036** (2.9-991111 and 2.96 per TU; 26 wrappers use a per-TU `-fno-optimize-sibling-calls`) |
-| Matched bytes | 6372 / 203,692 `.text` bytes = **3.128 %** (verified) |
-| Compiler flags | `-O2 -g2 -G8` (per-TU `-g0` and `-fno-optimize-sibling-calls` overrides); `-O1`/`-Os` ruled out on 148 functions; `-O2 ≡ -O3` (not separable; §2.3 of `docs/compiler.md` records the experiment that would settle it) |
+| Functions matched (C) | **170 / 1036** (2.9-991111 and 2.96 per TU; the wrapper tier uses a per-TU `-fno-optimize-sibling-calls` on cc=296 TUs only — the 2.9 `cc1` rejects the flag and does not sibling-call-optimise) |
+| Matched bytes | 7676 / 203,692 `.text` bytes = **3.768 %** (verified) |
+| Compiler flags | `-O2 -g2 -G8` (per-TU `-g0` and `-fno-optimize-sibling-calls` overrides, the latter cc=296-only); `-O1`/`-Os` ruled out on 148 functions; `-O2 ≡ -O3` (not separable; Session 6 ran the decisive experiment — §2.4 of `docs/compiler.md`: plain static + `-O3` ≡ `inline` + `{-O2,-O3}`, so the `-O2` pin stays) |
 | Compilers | `ee-gcc2.96` (default) + `ee-gcc2.9-991111-01` (`cc=29`); matrix in `docs/compiler.md` §4.3 |
 | `.text` disassembly (splat R5900) | accurate; **1036 per-function `.s` + 2 raw `textbin`** (`.text` header, `0x00113074` non-function hole) |
 | Ghidra EE-extension decode | **100 %** of `.text` (50,923/50,923) |
 | splat split coverage | 203 KB / 85.6 % of ROM |
 | Functions detected | 1036 after removing 1 splat boundary false positive (`0x00113074`) from spimdisasm's 1037 |
-| Non-matching attempts tracked | 49 (`src/non_matching/`; 25 new in Session 5, families in `docs/progress.md`) |
+| Non-matching attempts tracked | **42** (`src/non_matching/`; every one with a best-score row and family note in `docs/non-matching-backlog.md`) |
 | IOP modules inventoried | 11 IRX (ELF32 MIPS-I, R3000A) |
 | EE hardware registers referenced | **38 addresses** (`tools/scan_hw_regs.py`); the 2 that were unidentified are now **confirmed**: `0x10001010` = `T2_MODE` (Timer 2 mode/status), `0x1000E060` = `D_STADR` (DMAC stall address) — `docs/structs.md` §"Hardware registers" |
 
 ### Session log
+
+- **2026-10-14 (Session 6) — permuter re-attack, -O2/-O3 verdict, +22 functions
+  (151 → 170).** Archive: `docs/archive-2026-10-14-session6.md`. STEP 0 (sync +
+  count reconciliation) was done by a *different model session* (`ad45ea2`,
+  +3 functions `010910 011F90 0120D0`); steps 1–4 ran here, with a parallel
+  model session intermittently active in the same worktree (its batch drafts
+  were adopted and re-verified).
+  - **Step 1 — backlog re-attack.** `docs/non-matching-backlog.md` (every
+    remaining stem, best edit distance over all rounds, family notes, the new
+    winning patterns). Promoted `011C50 020D10 00F0F0 0121E8 01B718 01B740`.
+    Key findings: the literal must be a named local *after* the call
+    (`00F0F0`); **cc=29 does not sibling-call-optimise and its cc1 rejects
+    `-fno-optimize-sibling-calls`** (the flag is cc=296-only); `-g0` fills the
+    `jr` delay but did not close the six score-2 stems.
+  - **Step 2 — `-O2` vs `-O3` decided (mechanism).** `func_00102D70` with plain
+    static helpers: `-O2` keeps the helpers out of line (648 B, 76-insn
+    caller), `-O3` integrates them (604 B, 151 insns) and is byte-identical to
+    the `inline` control at both levels; neither is byte-exact yet, so the
+    `-O2` pin stays — `docs/compiler.md` §2.4.
+  - **Step 3 — +13 more** (`0000C0 010118 0188E0 018928 018CE0 019020 019138
+    019180 0191C8 019450 022D68 022DE0 021E88`); the 018xxx block-store
+    family + tail-call wrappers are cc=29-only. `020708`/`020748` archived
+    (register roles).
+  - **Step 4 — naming.** No new evidence; 48 named symbols unchanged; the
+    18 pending candidates keep their documented reasons.
+  - Closing: `tools/verify_c.py` → **170/170 byte-exact**; `tools/build.py` →
+    **HASH MATCH** + container byte-identical.
 
 - **2026-10-14 (Session 4, closing) — session archive written and the gate
   re-verified.** `docs/archive-2026-10-14-session4.md` records the whole session
