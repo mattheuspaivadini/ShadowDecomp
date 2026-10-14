@@ -268,3 +268,18 @@
 030AC8 = src/cod/030AC8.c        # g(D_00135C60[0], a0, a1) with frame
 030D48 = src/cod/030D48.c        # g(D_00135C60[0], a0, a1, a2) with frame
 # --- Session 6, step 3, wave 2 (parallel-session drafts, verified here) ------
+
+# --- Session 6, step 3: sceStdio trampolines + variadic register saves -------
+003008 = src/cod/003008.c        # tail call sceStdioOpen (frame + j)
+003020 = src/cod/003020.c        # tail call sceStdioClose
+003038 = src/cod/003038.c        # tail call sceStdioLseek
+003050 = src/cod/003050.c        # tail call sceStdioLseek64
+003068 = src/cod/003068.c        # tail call sceStdioRead
+003080 = src/cod/003080.c        # tail call sceStdioWrite
+0030C8 = src/cod/0030C8.c        # tail call sceStdioMkdir
+0030E0 = src/cod/0030E0.c        # tail call sceStdioGetstat
+0030F8 = src/cod/0030F8.c        # tail call sceStdioChstat
+003FF8 = src/cod/003FF8.c        # variadic register save (0x60 frame)
+004040 = src/cod/004040.c        # variadic register save (same shape)
+005948 = src/cod/005948.c        # variadic register save (2 fixed args)
+005990 = src/cod/005990.c        # variadic register save (same shape)
