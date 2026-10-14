@@ -183,3 +183,22 @@
 0193D0 = src/cod/0193D0.c cc=29   # same with op 0x1E
 019410 = src/cod/019410.c cc=29   # same with op 0x1F
 023158 = src/cod/023158.c         # ~func_00107380() >> 31
+
+# --- Session 5, step 2: batch 4 (01B7xx error-fix-up family + 3) --------------
+# Family: v = callee(); if (v != 0) return v; func_0011B670(0, 0, &v); return v;
+# (the early return makes ee-gcc reload v into $v0 at the tail; cc=29).
+01B768 = src/cod/01B768.c cc=29
+01B7A8 = src/cod/01B7A8.c cc=29
+01B7E8 = src/cod/01B7E8.c cc=29
+01B828 = src/cod/01B828.c cc=29
+01B868 = src/cod/01B868.c cc=29
+01B8A8 = src/cod/01B8A8.c cc=29
+01B8E8 = src/cod/01B8E8.c cc=29
+01B928 = src/cod/01B928.c cc=29
+01B968 = src/cod/01B968.c cc=29
+01B9A8 = src/cod/01B9A8.c cc=29
+01B9E8 = src/cod/01B9E8.c cc=29
+01BA28 = src/cod/01BA28.c cc=29   # u16 third argument (andi a2,0xFFFF)
+01BA68 = src/cod/01BA68.c cc=29
+01BAA8 = src/cod/01BAA8.c cc=29
+019808 = src/cod/019808.c -fno-optimize-sibling-calls   # dispatch on a5 & 2
