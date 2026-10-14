@@ -136,3 +136,13 @@
 00E9D0 = src/cod/00E9D0.c -fno-optimize-sibling-calls   # call with stack buffer
 00EC38 = src/cod/00EC38.c -fno-optimize-sibling-calls   # call with stack buffer
 0120A8 = src/cod/0120A8.c -fno-optimize-sibling-calls   # guarded call
+
+# --- Session 5, step 1: six of the twelve "unexplained" functions ------------
+# Source-shape fixes found with tools/permute.py (evidence: docs/permute-log.md,
+# docs/non-matching-12.md). The remaining six stay in src/non_matching/.
+002C58 = src/cod/002C58.c         # two-step address build (`p += 0xFF`), cc=296
+0029C8 = src/cod/0029C8.c         # `int value = -1;` local (LICM register roles)
+012380 = src/cod/012380.c cc=29   # `p + (field0 + 16)` grouping
+0123C0 = src/cod/0123C0.c cc=29   # same grouping shape
+012358 = src/cod/012358.c cc=29   # field store order 00,04,0C,08
+02E890 = src/cod/02E890.c         # table indexed twice (allocator keeps `$a0`)

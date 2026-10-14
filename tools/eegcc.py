@@ -107,6 +107,7 @@ def resolve_compiler(token: str | None) -> str:
     return {
         "96": flag("EE_C_COMPILER", "ee-gcc2.96"),
         "2.96": flag("EE_C_COMPILER", "ee-gcc2.96"),
+        "296": flag("EE_C_COMPILER", "ee-gcc2.96"),
         "29": flag("EE_C_COMPILER_29", "ee-gcc2.9-991111-01"),
         "2.9": flag("EE_C_COMPILER_29", "ee-gcc2.9-991111-01"),
     }.get(token, token)
