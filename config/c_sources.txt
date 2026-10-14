@@ -410,3 +410,8 @@
 022F90 = src/cod/022F90.c cc=29               # 7-arg func_00109C58 materialisation + tail (func_001230B0 idiom); wave3d (R1)
 018710 = src/cod/018710.c cc=29               # first guard returns callee code; wave4c (R1)
 02DA00 = src/cod/02DA00.c                     # 3x func_0012D7F0 init + 0x3C/0x38/0x1D8/0x1DC/0x1E0 stores; wave4c (R1)
+00DFE8 = src/cod/00DFE8.c cc=29               # cmd 5; unsigned return keeps 0xFFFFFFFF as lui/ori (an int return folds it to addiu -1); R1 Phase A fix
+00E058 = src/cod/00E058.c cc=29               # cmd 6; same unsigned-return fix; R1 Phase A
+00E0C8 = src/cod/00E0C8.c cc=29               # cmd 7; same unsigned-return fix; R1 Phase A
+00E138 = src/cod/00E138.c cc=29               # cmd 8; clone of 00DE60 + unsigned-return fix; R1
+00E1B8 = src/cod/00E1B8.c cc=29               # cmd 9; clone of 00E138 + unsigned-return fix; R1
