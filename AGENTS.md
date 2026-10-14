@@ -48,7 +48,7 @@ Fill in the table during DISCOVERY and keep it current.
 |------|---------|---------------|
 | REA (Reverse Engineering Anything) `rea-agents@6.4.0` | RE toolset + MCP server | Installed; **MCP attached** (170 tools). Deep-analysis lane unusable for PS2 on Windows (PE-only gate) — use for artifact inventory + evidence bundles only. See `docs/rea.md` |
 | Ghidra 12.1.4 + `ghidra-emotionengine-reloaded` v2.1.38 | Native analysis (headless) | `C:\Users\Matheus\ghidra\ghidra_12.1.4_PUBLIC`; EE extension language `r5900:LE:32:default` decodes **100 %** of `.text`. See `docs/rea.md` |
-| splat64 | Split ELF into asm/data | **0.50.1 installed** in `.venv` (+ spimdisasm 1.42.4, rabbitizer 1.16.2). **Per-function split**: 1037 `.s` under `asm/cod/` — see `docs/splat.md` |
+| splat64 | Split ELF into asm/data | **0.50.1 installed** in `.venv` (+ spimdisasm 1.42.4, rabbitizer 1.16.2). **Per-function split**: 1036 `.s` + 2 raw `textbin` under `asm/cod/` — see `docs/splat.md` |
 | objdiff | Compare compiled vs original | **objdiff-cli 3.8.2** in `.tools/objdiff/objdiff-cli.exe` (gitignored); project file `objdiff.json` — see `docs/progress.md` |
 | WSL2 Ubuntu 26.04 | Linux build environment | Installed (`wsl -d Ubuntu -u root`); repo at `/mnt/c/...` |
 | MIPS binutils | Assemble / link (R5900) | **`binutils-mips-linux-gnu` 2.45** in WSL: `mips-linux-gnu-as -EL -march=5900 -mabi=eabi`. Reassembly path — see `docs/toolchain.md` |
