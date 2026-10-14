@@ -46,32 +46,39 @@ Fill in the table during DISCOVERY and keep it current.
 
 | Tool | Purpose | Status / path |
 |------|---------|---------------|
-| REA (Reverse Engineering Anything) `rea-agents@6.4.0` | RE toolset + MCP server | Installed; **MCP registered with OpenCode**. Native lane unusable for PS2 on Windows (PE-only P0 profile) — see `docs/decisions.md` |
-| Ghidra 12.1.4 | Native analysis (headless) | `C:\Users\Matheus\ghidra\ghidra_12.1.4_PUBLIC`; `GHIDRA_INSTALL_DIR` set. Language `MIPS:LE:32:default` (imperfect for R5900) |
-| splat64 | Split ELF into asm/data | **0.50.1 installed** in `.venv` (+ spimdisasm 1.42.4, rabbitizer 1.16.2). `splat split config/SCUS_974.72.yaml` works — see `docs/splat.md` |
-| objdiff / asm-differ | Compare compiled vs original | **MISSING** |
-| EE cross toolchain (ee-gcc, ee-as, ee-ld, binutils-mips) | Build / reassemble | **MISSING** — blocks the byte-exact rebuild (Phase 4 hash check) |
+| REA (Reverse Engineering Anything) `rea-agents@6.4.0` | RE toolset + MCP server | Installed; **MCP attached** (170 tools). Deep-analysis lane unusable for PS2 on Windows (PE-only gate) — use for artifact inventory + evidence bundles only. See `docs/rea.md` |
+| Ghidra 12.1.4 + `ghidra-emotionengine-reloaded` v2.1.38 | Native analysis (headless) | `C:\Users\Matheus\ghidra\ghidra_12.1.4_PUBLIC`; EE extension language `r5900:LE:32:default` decodes **100 %** of `.text`. See `docs/rea.md` |
+| splat64 | Split ELF into asm/data | **0.50.1 installed** in `.venv` (+ spimdisasm 1.42.4, rabbitizer 1.16.2). **Per-function split**: 1037 `.s` under `asm/cod/` — see `docs/splat.md` |
+| objdiff | Compare compiled vs original | **objdiff-cli 3.8.2** in `.tools/objdiff/objdiff-cli.exe` (gitignored) |
+| WSL2 Ubuntu 26.04 | Linux build environment | Installed (`wsl -d Ubuntu -u root`); repo at `/mnt/c/...` |
+| MIPS binutils | Assemble / link (R5900) | **`binutils-mips-linux-gnu` 2.45** in WSL: `mips-linux-gnu-as -EL -march=5900 -mabi=eabi`. Reassembly path — see `docs/toolchain.md` |
+| EE cross C compiler | Matching C builds | **PENDING user decision** (`ee-gcc2.96` from `decompme/compilers`) — see `docs/toolchain.md` §4 |
 | 7z / isoinfo | ISO extraction | MISSING — replaced by `tools/iso9660.py` (pure Python) |
 | git | VCS | 2.55.0 (repo initialized) |
-| python3 | Infra/tooling | 3.12.10 |
+| python3 | Infra/tooling | 3.12.10 (Windows) / 3.14.4 (WSL) |
 | node / npm | REA runtime | v24.21 / npm 11 |
 | Java (JDK) | Ghidra runtime | 27 (accepted by Ghidra) |
-| make / ninja | Build driver | **MISSING** |
+| make / ninja | Build driver | **make 4.4.1 / ninja 1.13.2** (winget + WSL) |
 
-**DISCOVERY (done 2026-10-13)**: REA CLI present and MCP-registered, but REA's
+**DISCOVERY (2026-10-13)**: REA CLI present and MCP-registered, but REA's
 native analysis is **PE-only on Windows** and its cross-platform MIPS lane needs
 standard MIPS32r2 + `SHT_MIPS_ABIFLAGS`, which the R5900/PS2 ELF lacks.
-**Fallback in use: Ghidra headless driven directly** (`tools/ghidra_headless.bat`,
-`tools/ghidra_scripts/*.java`). See `docs/decisions.md`.
+
+**SESSION 2 (2026-10-14):** REA deep lane re-verified unusable on Windows
+(3-attempt workaround time-box documented in `docs/rea.md`); REA is used for
+artifact inventory + evidence bundles. Primary disassembly = splat (per-function,
+1037 files). Secondary view = Ghidra + Emotion Engine extension (100 % decode).
+Reassembly toolchain = Debian `mips-linux-gnu` binutils in WSL2 (no Sony
+`ee-as`/`ee-ld` needed). Matching C compiler (`ee-gcc2.96`) pending user approval.
 
 ## 5. Phases
 
 Work in order. Mark each phase when done and commit.
 
 - [x] **Phase 1 — Extract.** ISO is at the **workspace root** (`Shadow of the Colossus (USA).iso`), not in `SHADOWDECOMP/`. Extracted 19 files with pure-Python ISO9660 (`tools/iso9660.py`, `tools/extract_iso.py`) → manifest in `manifest/files.txt`. Main ELF = **`SCUS_974.72`** (from `SYSTEM.CNF`, not `SCUS_973.24`).
-- [~] **Phase 2 — Analyze.** Loaded `SCUS_974.72` in Ghidra 12.1.4 (MIPS LE). Sections/segments/entry recorded; 319 strings; full linear disassembly (`build/SCUS_974.72.linear.txt`) is **84 % decoded** (16 % are undecodable R5900 MMI/COP2 words). Function boundaries are **unreliable** (Ghidra's recursive traversal breaks on R5900 gaps). See `docs/analysis.md`.
-- [ ] **Phase 3 — Compiler.** Hypothesis (EE-GCC 2.9x / PS2 SDK 3.x) documented in `docs/compiler.md`; splat's `ps2elfinfo` also selects the `EEGCC` profile (independent corroboration). **Flag matching blocked on obtaining an EE cross-toolchain.**
-- [~] **Phase 4 — Split & rebuild.** `splat` split succeeds → `asm/cod/000000.s` (accurate R5900), data segments, `build/SCUS_974.72.ld`, `include/macro.inc`. **Reassembly/link and hash check blocked on the EE toolchain.** See `docs/splat.md`.
+- [x] **Phase 2 — Analyze.** `SCUS_974.72` parsed (sections/segments/entry); 319 strings. **Ghidra 12.1.4 + `ghidra-emotionengine-reloaded`** (`r5900:LE:32:default`) now decodes **100 %** of `.text` (50,923/50,923, 0 undefined; was 84 % with stock `MIPS:LE:32:default`). Function boundaries still "to be confirmed". See `docs/analysis.md`, `docs/rea.md`.
+- [ ] **Phase 3 — Compiler.** Hypothesis (EE-GCC **2.96** / PS2 SDK 3.x) documented in `docs/compiler.md`; corroborated by the sister project `Fantaskink/SOTC` (uses `ee-gcc2.96` from `decompme/compilers`, `-O2 -g2`, `mips-linux-gnu` binutils). **Flag matching pending the EE-GCC acquisition decision.**
+- [~] **Phase 4 — Split & rebuild.** splat split is **per-function**: **1037 `.s`** under `asm/cod/` (one per function), `.text` 16-byte header as data; plus data segments, `build/SCUS_974.72.ld`, `include/macro.inc`. WSL `mips-linux-gnu` binutils verified for the reassembly path (R5900 round-trip test). **Full link + hash check still to be scripted.** See `docs/splat.md`, `docs/toolchain.md`.
 - [ ] **Phase 5 — Name.** Evidence anchors collected (SDK banners, loader, kernel, GS, cdvd, mc2, net). See `config/symbol_addrs.txt`.
 - [ ] **Phase 6 — Decompile.** Not started.
 
@@ -106,15 +113,35 @@ Tips: use a function's constants, string references, and call patterns to infer 
 
 | Metric | Value |
 |--------|-------|
-| Current phase | Phases 1–2 done; Phase 4 split done (rebuild blocked) |
-| ELF rebuild hash match | no (no EE toolchain yet) |
+| Current phase | Phases 1–2 done; Phase 4 per-function split done (link/hash pending) |
+| ELF rebuild hash match | no (link script not yet run) |
 | Functions named | 1 (`entry`); evidence anchors for SDK banners |
-| Functions matched (C) | 0 / ~1500 (estimate) |
+| Functions matched (C) | 0 / ~1037 detected |
 | Matched bytes | 0 % |
-| `.text` spimdisasm/R5900 disassembly | accurate; `asm/cod/000000.s` |
+| `.text` disassembly (splat R5900) | accurate; **1037 per-function `.s`** |
+| Ghidra EE-extension decode | **100 %** of `.text` (50,923/50,923) |
 | splat split coverage | 203 KB / 85.6 % of ROM |
+| Functions detected | 1037 (spimdisasm) |
 
 ### Session log
+
+- **2026-10-14** — REA attach/use, EE Ghidra extension, per-function split, build env.
+  - **REA**: MCP already attached (170 tools). Native lane re-verified unusable on
+    Windows (PE-only gate); 3 workaround attempts time-boxed → (a) custom Ghidra
+    language fails, (b) `ghidra-emotionengine-reloaded` v2.1.38 works for the
+    **direct Ghidra** view, (c) derived ELF not pursued (host gate). REA used for
+    artifact inventory (11 ELFs) + evidence bundle (`docs/rea/`). See `docs/rea.md`.
+  - **Ghidra EE extension**: `r5900:LE:32:default` decodes **100 %** of `.text`
+    (was 84 %).
+  - **Per-function split**: `tools/gen_function_splits.py` → **1037 `.s`**; `.text`
+    16-byte header marked data; coverage unchanged 85.60 %; instruction count
+    exact (50,919 = 50,923 − 4). See `docs/splat.md`.
+  - **Build env**: WSL2 Ubuntu 26.04; `binutils-mips-linux-gnu` 2.45
+    (`mips-linux-gnu-as -EL -march=5900 -mabi=eabi`), gcc/cpp 15.2, ninja, make;
+    Windows objdiff-cli 3.8.2, ninja, make. R5900 round-trip of `entry` verified.
+    See `docs/toolchain.md`.
+  - **Compiler**: corroborated `ee-gcc2.96` (`decompme/compilers`) via
+    `Fantaskink/SOTC`; **decision on downloading pending the user**.
 
 - **2026-10-13** — DISCOVERY + Phase 1 + Phase 2 + Phase 4 split.
   - Found ISO at workspace root; main ELF is `SCUS_974.72` (per `SYSTEM.CNF`), not `SCUS_973.24`.
