@@ -1,0 +1,17 @@
+/* asm/cod/0027E0.s -> func_001027E0 @ 0x001027E0 (0x4C bytes)
+ * Identical shape to func_00102790, on the table D_0013BB90.
+ */
+extern int D_0013BB90[256];
+
+void func_001027E0(int value) {
+    int i = 0;
+
+    while (D_0013BB90[i] >= 0) {
+        i++;
+        if (i >= 256) {
+            i = -1;
+            break;
+        }
+    }
+    D_0013BB90[i] = value;
+}

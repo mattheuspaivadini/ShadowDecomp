@@ -94,3 +94,10 @@
 010998 = src/cod/010998.c cc=29   # doubly-linked-list unlink
 020438 = src/cod/020438.c cc=29   # init two 0x2010-byte records
 025998 = src/cod/025998.c         # LEB128 decoder (this one is 2.96-only)
+0028A0 = src/cod/0028A0.c         # pair-table search, clears to -1
+029578 = src/cod/029578.c         # manual strrchr
+009640 = src/cod/009640.c cc=29   # nested list search by key
+0259E0 = src/cod/0259E0.c         # signed LEB128 decoder
+02D7F0 = src/cod/02D7F0.c         # handler-struct init (4 function pointers)
+014020 = src/cod/014020.c         # 64-bit transfer list + sync
+006B58 = src/cod/006B58.c         # 60-column table record store
