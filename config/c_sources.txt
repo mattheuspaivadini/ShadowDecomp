@@ -335,3 +335,18 @@
 
 # --- Session 7, targeted near-miss fixes -------------------------------------
 013228 = src/cod/013228.c cc=29   # quadword append; asm memory barrier keeps store order
+
+# --- Session 7, wave 2a (subagent drafts, verified here) ---------------------
+0151B8 = src/cod/0151B8.c cc=29   # sceDbcDeleteSocket guard + 0x334-stride clear
+015650 = src/cod/015650.c cc=29   # sceDbcGetDepNumber guard + 0x334-stride record
+015A30 = src/cod/015A30.c cc=29   # 9-arg func_00109980 call + return table word
+021000 = src/cod/021000.c cc=29   # D_00163CC0 init + 0x80-entry range clear
+023208 = src/cod/023208.c cc=29   # D_00135960 gate; -1 sentinel; syscall free
+
+# --- Session 7, wave 2b (subagent drafts, verified here) ---------------------
+003F98 = src/cod/003F98.c        # 10-entry wrap table + counter
+00F278 = src/cod/00F278.c cc=29   # store handler + AddDmacHandler syscall
+00FB88 = src/cod/00FB88.c cc=29   # two CreateSema calls + handles
+010F40 = src/cod/010F40.c cc=29   # func_0010FB20 gate + func_00110EF0 (2-arg)
+0252E0 = src/cod/0252E0.c        # double decompose x2 + func_00125080
+027768 = src/cod/027768.c        # stdio ref-count via func_00127A60
