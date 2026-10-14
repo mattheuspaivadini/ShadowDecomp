@@ -77,3 +77,20 @@
 014918 = src/cod/014918.c cc=29   # bounds-checked table lookup
 020F18 = src/cod/020F18.c cc=29   # R5900 `mult rd,rs,rt` constant stride (0x184)
 022018 = src/cod/022018.c cc=29   # R5900 `mult rd,rs,rt` constant stride (0x24)
+
+# --- Session 4, step 2: next leaf tier ---------------------------------------
+# The 2.9-991111 generation reproduces the scheduler's delay-slot choice (a
+# `nop` after the increment / block padding) and the R5900 shapes in this
+# address range; ee-gcc2.96 does not (evidence: tools/verify_c.py --compiler=29).
+00FC08 = src/cod/00FC08.c cc=29   # word copy of `size >> 2` words
+00FE50 = src/cod/00FE50.c cc=29   # word copy (identical shape)
+010270 = src/cod/010270.c cc=29   # word copy (identical shape)
+00F370 = src/cod/00F370.c cc=29   # word copy (identical shape)
+019AA0 = src/cod/019AA0.c cc=29   # field10 &= 0xFFFFFFFE; field18 = 0
+01BF68 = src/cod/01BF68.c cc=29   # count '/' in a string
+0220B0 = src/cod/0220B0.c cc=29   # find record by key (stride 0x24)
+021EC0 = src/cod/021EC0.c cc=29   # first free record slot (stride 0x24)
+0148E0 = src/cod/0148E0.c cc=29   # zero `n` bytes
+010998 = src/cod/010998.c cc=29   # doubly-linked-list unlink
+020438 = src/cod/020438.c cc=29   # init two 0x2010-byte records
+025998 = src/cod/025998.c         # LEB128 decoder (this one is 2.96-only)
