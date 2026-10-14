@@ -415,3 +415,4 @@
 00E0C8 = src/cod/00E0C8.c cc=29               # cmd 7; same unsigned-return fix; R1 Phase A
 00E138 = src/cod/00E138.c cc=29               # cmd 8; clone of 00DE60 + unsigned-return fix; R1
 00E1B8 = src/cod/00E1B8.c cc=29               # cmd 9; clone of 00E138 + unsigned-return fix; R1
+00DDE0 = src/cod/00DDE0.c cc=29               # cmd 4 of the func_00109980 command family; template clone; R1
