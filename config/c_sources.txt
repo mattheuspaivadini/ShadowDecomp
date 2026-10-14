@@ -221,6 +221,35 @@
 011C50 = src/cod/011C50.c cc=29   # negated test + swapped branches (bgezl layout)
 020D10 = src/cod/020D10.c cc=29   # record pointer local -> +0xD0 on the record base
 0121E8 = src/cod/0121E8.c cc=29   # 0x20-byte buffer (frame 0x30) + store order 1,0,2
+0188E0 = src/cod/0188E0.c cc=29   # block fill + func_00118380 (0x20 frame = 2.9 shape)
+018928 = src/cod/018928.c cc=29   # same family (N=3)
+018CE0 = src/cod/018CE0.c cc=29   # same family (N=0xF)
+019020 = src/cod/019020.c cc=29   # same family (N=0xC, 1 store)
+019138 = src/cod/019138.c cc=29   # same family (N=0x32)
+019180 = src/cod/019180.c cc=29   # same family (N=0x33)
+0191C8 = src/cod/0191C8.c cc=29   # same family (N=0x34)
+019450 = src/cod/019450.c cc=29   # same family (N=0x20)
+022D68 = src/cod/022D68.c -fno-optimize-sibling-calls   # init + buffer fill
+022DE0 = src/cod/022DE0.c -fno-optimize-sibling-calls   # same (N=0x66)
 00F0F0 = src/cod/00F0F0.c cc=29   # mask local before the call keeps `and` non-immediate
 01B718 = src/cod/01B718.c cc=29   # wrapper (1,a0,a1): 2.9 keeps jal+epilogue
 01B740 = src/cod/01B740.c cc=29   # wrapper (0,a0,a1): int-return shape
+
+# --- Session 6, step 3: tail-call wrappers (cc=29: no frame around the tail j) --
+0000C0 = src/cod/0000C0.c cc=29   # tail call g(0) -> j + move a0,zero (2 insns)
+010118 = src/cod/010118.c cc=29   # tail call g()  -> j + nop
+
+# --- Session 6, step 3: the 018xxx block-store family + 022D6x (cc=29) --------
+# All ten: Session-6 drafts that only needed the 2.9 revision (the 2.96
+# allocator picks a 0x10 frame / different store order; cc=29 reproduces the
+# original's 0x20 frame with $s0 = p and the a4-first argument setup).
+0188E0 = src/cod/0188E0.c cc=29   # p[0..1] = a2,a3; f(a0,0x2,p,0x8,4); >=0 ? p[0] : -0x21E
+018928 = src/cod/018928.c cc=29   # same, selector 0x3
+018CE0 = src/cod/018CE0.c cc=29   # same, selector 0xF
+019020 = src/cod/019020.c cc=29   # p[0] = a2; f(a0,0xC,p,0x4,4); >=0 ? p[0] : -0x21E
+019138 = src/cod/019138.c cc=29   # same, selector 0x32
+019180 = src/cod/019180.c cc=29   # same, selector 0x33
+0191C8 = src/cod/0191C8.c cc=29   # same, selector 0x34
+019450 = src/cod/019450.c cc=29   # same, selector 0x20
+022D68 = src/cod/022D68.c cc=29   # func_001221D0(); return f(D_00167EC0, D_00167F00, 0x64)
+022DE0 = src/cod/022DE0.c cc=29   # same, 0x66
