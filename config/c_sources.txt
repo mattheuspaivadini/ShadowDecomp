@@ -301,3 +301,5 @@
 011390 = src/cod/011390.c cc=29   # same family (func_00111320)
 010DB8 = src/cod/010DB8.c cc=29   # same family, second call takes no argument
 00F118 = src/cod/00F118.c cc=29   # func_001073F0(4) & 0x40000 gate + two calls
+027500 = src/cod/027500.c
+00A798 = src/cod/00A798.c cc=29   # void-callee decl frees v0 for the base
