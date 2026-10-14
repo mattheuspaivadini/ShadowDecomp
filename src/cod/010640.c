@@ -18,7 +18,12 @@
  *    andi $v0, $v0, 0x3
  *
  * D_00133920 is in .data, i.e. outside the gp window -> absolute addressing.
- * 0x10001010 is an EE hardware register; 0x80008001 is an error sentinel.
+ * 0x10001010 is the EE **Timer 2 MODE register** (`EE_T2_MODE`, identified in
+ * Session 4 step 5: ps2sdk `ee/kernel/include/timer.h`, ps2sdk
+ * `common/include/ee_regs.h`, PCSX2 `Hw.h` RCNT2_MODE, PS2Tek "EE Timers"), so
+ * this returns `MODE & 3` = the timer's clock source (0 = bus clock,
+ * 1 = /16, 2 = /256, 3 = HBLANK). 0x80008001 is an error sentinel.
+ * See docs/structs.md section "Hardware registers".
  */
 #include "symbols.h"
 
@@ -26,5 +31,5 @@ int func_00110640(void) {
     if (D_00133920 < 0) {
         return 0x80008001;
     }
-    return HWREG(0x10001010) & 3;
+    return HWREG(EE_T2_MODE) & 3;
 }

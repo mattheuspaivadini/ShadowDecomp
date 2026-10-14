@@ -54,6 +54,30 @@ extern int  D_0013BB90[256];  /* .bss    0x0013BB90  func_00102930/_00102A00 (_0
 /* ---- hardware registers (uncached EE addresses) */
 #define HWREG(addr) (*(volatile unsigned int *)(addr))
 
+/* ---- identified EE hardware registers (Session 4, step 5) -----------------
+ * Addresses are confirmed against two independent public references (ps2sdk
+ * headers + PCSX2's EERegisterAddresses) and against how this binary uses them;
+ * the full evidence and citations are in docs/structs.md. Only registers that
+ * are actually referenced by this image are declared here.
+ *
+ *   0x1000E000-0x1000E060  DMAC global block (D_CTRL..D_STADR)
+ *   0x1000F520/0x1000F590  DMAC D_ENABLER / D_ENABLEW
+ *   0x10000000+N*0x800     Timers: +0x00 COUNT, +0x10 MODE, +0x20 COMP
+ */
+#define EE_D_CTRL    0x1000E000u  /* DMAC control                     */
+#define EE_D_STAT    0x1000E010u  /* DMAC interrupt status            */
+#define EE_D_PCR     0x1000E020u  /* DMAC priority control            */
+#define EE_D_SQWC    0x1000E030u  /* DMAC skip quadword (interleave)  */
+#define EE_D_RBSR    0x1000E040u  /* DMAC ring buffer size            */
+#define EE_D_RBOR    0x1000E050u  /* DMAC ring buffer offset          */
+#define EE_D_STADR   0x1000E060u  /* DMAC stall address               */
+#define EE_D_ENABLER 0x1000F520u  /* DMAC disabled status (read)      */
+#define EE_D_ENABLEW 0x1000F590u  /* DMAC disable (write)             */
+
+#define EE_T2_COUNT  0x10001000u  /* Timer 2 counter value            */
+#define EE_T2_MODE   0x10001010u  /* Timer 2 mode/status              */
+#define EE_T3_MODE   0x10001810u  /* Timer 3 mode/status              */
+
 /* ---- Session 4, step 2: newly confirmed data objects --------------------- */
 /* .data doubly-linked list head used by func_00110998 (next at 0x0, prev at
  * 0x4). Declared as an array so the access is absolute, not %gp_rel. */

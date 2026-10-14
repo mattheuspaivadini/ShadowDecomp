@@ -65,6 +65,7 @@ Fill in the table during DISCOVERY and keep it current.
 | Boundary evidence | Is a `glabel` a real entry? | **`tools/ref_check.py`** (`jal`/`j` + `lui`-relative + literal-word reference counts for an address) — `docs/naming-candidates.md` §"Boundary re-check" |
 | Non-function holes | Bad splat boundaries | **`config/non_function_holes.txt`** (addresses emitted as raw `textbin` by `tools/gen_function_splits.py` instead of `asm`) — `docs/naming-candidates.md` §"Boundary re-check" |
 | IOP inventory | IRX modules (R3000) | **`tools/iop_inventory.py`** → `manifest/iop_modules.txt` |
+| Hardware register map | Which EE registers does the image touch? | **`tools/scan_hw_regs.py`** (rebuilds every absolute `lui`+immediate address in `asm/cod/*.s`, keeps the `0x10000000`-`0x13FFFFFF` register range; `--func`/`--addr`/`--json`) — `docs/structs.md` §"Hardware registers" |
 | ELF container diff | our ELF vs original | **`tools/elf_container_diff.py`** — `docs/rebuild.md` §ELF container |
 | 7z / isoinfo | ISO extraction | not installed; replaced by `tools/iso9660.py` (pure Python) |
 | git | VCS | 2.55.0 (repo initialized) |
@@ -166,8 +167,65 @@ Tips: use a function's constants, string references, and call patterns to infer 
 | Functions detected | 1036 after removing 1 splat boundary false positive (`0x00113074`) from spimdisasm's 1037 |
 | Non-matching attempts tracked | 36 (`src/non_matching/`, none explained by any EE-GCC revision) |
 | IOP modules inventoried | 11 IRX (ELF32 MIPS-I, R3000A) |
+| EE hardware registers referenced | **38 addresses** (`tools/scan_hw_regs.py`); the 2 that were unidentified are now **confirmed**: `0x10001010` = `T2_MODE` (Timer 2 mode/status), `0x1000E060` = `D_STADR` (DMAC stall address) — `docs/structs.md` §"Hardware registers" |
 
 ### Session log
+
+- **2026-10-14 (Session 4, step 5) — the two unidentified hardware registers are
+  identified (`T2_MODE`, `D_STADR`), both CONFIRMED against public references.**
+  - **New tool `tools/scan_hw_regs.py`**: reconstructs every absolute address
+    built by a `lui`+immediate pair in `asm/cod/*.s` (the same text that is
+    assembled for the byte-exact rebuild) and keeps the addresses inside the EE
+    register range `0x10000000`-`0x13FFFFFF`: **38 addresses**, none of them
+    resolving back into the image. Two reconstruction bugs were found and fixed
+    while writing it: `(0x… >> 16)` must be masked **after** the shift, and
+    load/store displacements are **signed** (`lui $at,0x10010000` with
+    `sw -0x1000($at)` is `0x1000F000`, not `0x1001F000`). The tool also reports
+    read/write counts and read-modify-write sequences per address.
+  - **`0x10001010` = EE Timer 2 MODE (`T2_MODE`) — confirmed.** Sources: ps2sdk
+    `ee/kernel/include/timer.h`, ps2sdk `common/include/ee_regs.h`
+    (`A_EE_T2_MODE`, "Timer 2 mode/status"), PCSX2 `pcsx2/Hw.h`
+    (`RCNT2_MODE = 0x10001010`) and PS2Tek "EE Timers" (`10000010h + N*800h`,
+    bit layout). Usage (10 reads, 1 RMW, 3 write helpers): `func_00110640`
+    returns `MODE & 3` = **clock source**; `func_00110430` programs
+    `(old & ~3) | arg | 0x300`, plus `0xC80` when idle (`0x300` =
+    CMPE|OVFE, `0xC80` = timer enable + clear the two flags) — i.e. *start
+    Timer 2 with a clock source* — and registers `func_001109D0` as the INTC
+    handler for **cause 11 = Timer 2** (`syscall 0x10` = `AddIntcHandler`);
+    `func_00110C78`/`_001109D0`/`_00110780` test bit 10 (compare flag) / bit 11
+    (overflow flag) and maintain the 64-bit software time base `D_00133918`;
+    `func_00110410` is a MODE write helper that uses the **KSEG1 alias
+    `0xB0001010`**. Sibling `T3_MODE` (`0x10001810`) is read by `func_001102B8`.
+  - **`0x1000E060` = EE DMAC Stall Address (`D_STADR`) — confirmed.** Sources:
+    ps2sdk `ee/dma/include/dma_registers.h` (`DMA_REG_STADR 0x1000E060`,
+    "Stall Address Register"), ps2sdk `common/include/ee_regs.h`
+    (`A_EE_D_STADR`) and PCSX2 `pcsx2/Hw.h` (`DMAC_STADR`). `func_00114C30` is a
+    32-bit read-old/write-new pair on it (and is *unreferenced* in the image —
+    dead libdma code, so its SDK name stays UNCONFIRMED); the whole block
+    `0x1000E000`-`0x1000E060` plus `D_ENABLER`/`D_ENABLEW` (0x1000F520/0x1000F590)
+    is used by `func_00114940` (reset of the 10 channels + `D_STAT`),
+    `func_00114A20` (env put: `D_CTRL` via the documented `DMA_SET_CTRL` field
+    positions, then `D_PCR`/`D_SQWC`/`D_RBSR`/`D_RBOR`) and `func_00114F58`
+    (DMA hold: `D_ENABLER`/`D_ENABLEW` bit 16).
+  - **Bonus (HYPOTHESIS, routine names only):** the cluster
+    `0x001102B8`-`0x00110D40` is very likely ps2sdk's `ee/kernel/timer.c` — T2
+    as the 64-bit system-time base, a sorted alarm list
+    (`func_00110910`/`_00110998`), and an `mfc0 $12`/`di`/`sync.p`/`mtc0
+    $ra,$30`/`eret` wrapper (`func_00110390`/`_00110410`) for the register write.
+    Per-routine candidate table in `docs/structs.md`; every name stays
+    **UNCONFIRMED** (the *register* identification does not depend on it).
+  - **Applied**: named macros in `include/symbols.h` (`EE_T2_MODE`,
+    `EE_D_STADR`, the DMAC global block, `EE_D_ENABLER`/`_ENABLEW`,
+    `EE_T2_COUNT`, `EE_T3_MODE`); `src/cod/010640.c` and `src/cod/014C30.c`
+    now use them. `tools/verify_c.py 014C30 010640` → **2/2 byte-exact**,
+    `tools/build.py` → **HASH MATCH** (237,952 B, `6f853f64…`).
+  - **Fixed**: the EE memory-map table in `docs/structs.md` listed the timers at
+    `0x1000F000`-`0x1000F300` and the GS at `0x1000E000` — both wrong. It is
+    replaced by the documented map (timers at `0x10000000`+N*0x800, DMAC globals
+    at `0x1000E000`, INTC at `0x1000F000`, SIO at `0x1000F100`, SBUS/PGIF at
+    `0x1000F200`/`0x1000F300`, GS privileged at `0x12000000`, `GS_CSR` at
+    `0x12001000`) with per-claim references; a table also identifies the other
+    36 register addresses the image touches.
 
 - **2026-10-14 (Session 4, step 4) — Phase 5 naming pass; the `func_00113074`
   boundary is a false positive.** Naming goes from 3 to **45 named `.text`
