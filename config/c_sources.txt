@@ -175,3 +175,11 @@
 014F20 = src/cod/014F20.c cc=29   # branch on a2; sltu(p[4], a1)
 0093C8 = src/cod/0093C8.c cc=29   # forward struct fields 0x24/28/2C; 0x800 on fail
 009690 = src/cod/009690.c cc=29   # same with zero fields
+
+# --- Session 5, step 2: wrapper/leaf tier batch 3 -----------------------------
+012E00 = src/cod/012E00.c cc=29   # 7-arg shift, mode 0
+012E40 = src/cod/012E40.c cc=29   # 7-arg shift, mode 1
+0190F8 = src/cod/0190F8.c cc=29   # func_00118380(a0,0x10,out,0,4); -0x21E guard
+0193D0 = src/cod/0193D0.c cc=29   # same with op 0x1E
+019410 = src/cod/019410.c cc=29   # same with op 0x1F
+023158 = src/cod/023158.c         # ~func_00107380() >> 31
