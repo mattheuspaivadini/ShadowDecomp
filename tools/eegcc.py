@@ -73,11 +73,17 @@ def cflags_for(extra: list[str] | None = None) -> list[str]:
     NOTE (ee-gcc2.96 quirk, measured): the `-g` level is sticky - once any
     `-g`/`-g2` is seen a later `-g0` has no effect. So an explicit `-g...` in
     `extra` must *replace* the pinned `-g2`, not be appended after it.
+
+    An explicit `-O...` in `extra` likewise *replaces* the pinned `-O2` (used by
+    `tools/opt_sweep.py` to discriminate the optimisation level; the manifest
+    itself never carries an `-O`). This keeps the applied flag set unambiguous.
     """
     extra = extra or []
     base = cflags()
     if any(re.match(r"^-g", f) for f in extra):
         base = [f for f in base if not re.match(r"^-g", f)]
+    if any(re.match(r"^-O", f) for f in extra):
+        base = [f for f in base if not re.match(r"^-O", f)]
     return base + extra
 
 

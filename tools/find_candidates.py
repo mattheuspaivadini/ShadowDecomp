@@ -104,6 +104,9 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--limit", type=int, default=40)
     ap.add_argument("--max-insns", type=int, default=24)
+    ap.add_argument("--min-insns", type=int, default=0,
+                    help="only keep functions with at least this many insns "
+                         "(e.g. 30 for the -O binding test)")
     ap.add_argument("--json", type=str, default="")
     ap.add_argument("--all", action="store_true", help="include non-leaf/hard functions")
     args = ap.parse_args()
@@ -114,6 +117,7 @@ def main() -> int:
         c for c in cands
         if not c["hard"] and c["calls"] == 0 and c["tailcalls"] == 0
         and not c["unaligned"] and c["insns"] <= args.max_insns
+        and c["insns"] >= args.min_insns
     ]
     pool.sort(key=score)
     print(f"{len(pool)} leaf candidates (<= {args.max_insns} insns, no hard ops)")

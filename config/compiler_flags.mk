@@ -24,8 +24,11 @@ EE_C_COMPILER      := ee-gcc2.96
 EE_C_COMPILER_29   := ee-gcc2.9-991111-01
 
 # Pin 2026-10-14, 11/11 Phase-3 cases byte-exact:
-#   -O2   optimisation level (SOTC's default; not yet discriminated from
-#         -O1/-O3/-Os by small functions -> revisit with larger units)
+#   -O2   optimisation level (SOTC's default).  Discriminated from -O1 and -Os
+#         by the 92-function sweep (tools/opt_sweep.py): 39 functions fail at
+#         -O1 and 14 at -Os, while -O2 and -O3 are codegen-identical on the
+#         whole corpus (-O3 = -O2 + -finline-functions, and no TU here has an
+#         inlinable helper).  See docs/compiler.md section 2.2.
 #   -g2   debug level. NOT cosmetic: -g/-g2 disable the delayed-branch
 #         scheduler, which is required to reproduce the original's
 #         "compute, then jr, then nop" epilogues.

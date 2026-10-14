@@ -56,6 +56,7 @@ Fill in the table during DISCOVERY and keep it current.
 | Compiler matrix | Revision question | **`tools/cc_matrix.py`** (compiler × function × flag-set match matrix; `--wine` for the PE builds) + `tools/cc_matrix_analyze.py`. Evidence: `docs/cc-matrix-session4.txt` |
 | build script | Assemble/compile/link/hash | **`tools/build.py`** (WSL2) — mixed C+asm, gated on the flat-image SHA-1; `make check` |
 | Phase-3 flag pinning | Pin compiler flags | **`tools/phase3_pin.py`** + `tools/matchcheck.py` — `docs/compiler.md` |
+| `-O` level discrimination | Pin the optimisation level | **`tools/opt_sweep.py`** (every manifest entry × `-O1/-O2/-O3/-Os`, per-TU flags/compiler kept) + `tools/cc/probe_olevels_diff.sh`, `tools/cc/probe_inline_dump.sh`; **`-O1` and `-Os` ruled out (39 / 14 counterexamples), `-O2` ≡ `-O3`** — `docs/compiler.md` §2.2, `docs/opt-sweep-session4.txt` |
 | Small-data audit | gp-relative vs absolute | **`tools/scan_sdata_access.py`** — `docs/compiler.md` §3 |
 | Phase-6 loop | Per-function compile/diff | **`tools/eegcc.py`** (shared staging/flags, `cflags_for`: per-TU `-g` override), `tools/verify_c.py` (`--flags=` to try a per-TU level before listing), `tools/diff_func.py`, `tools/report.py`, `tools/gen_objdiff.py`, `tools/cc/show_compiled.sh` — `docs/progress.md` |
 | Candidate ranking | Pick the next tier | **`tools/find_candidates.py`**, `tools/dump_candidates.py`, `tools/list_unmatched.py` (leaf pool), `tools/list_callers.py` (1–2-call wrappers), `tools/archive_extra_c.py` (move a failed attempt to `src/non_matching/` with a `STATUS:` note) — `docs/progress.md` |
@@ -113,7 +114,7 @@ Work in order. Mark each phase when done and commit.
 
 - [x] **Phase 1 — Extract.** ISO is at the **workspace root** (`Shadow of the Colossus (USA).iso`), not in `SHADOWDECOMP/`. Extracted 19 files with pure-Python ISO9660 (`tools/iso9660.py`, `tools/extract_iso.py`) → manifest in `manifest/files.txt`. Main ELF = **`SCUS_974.72`** (from `SYSTEM.CNF`, not `SCUS_973.24`).
 - [x] **Phase 2 — Analyze.** `SCUS_974.72` parsed (sections/segments/entry); 319 strings. **Ghidra 12.1.4 + `ghidra-emotionengine-reloaded`** (`r5900:LE:32:default`) now decodes **100 %** of `.text` (50,923/50,923, 0 undefined; was 84 % with stock `MIPS:LE:32:default`). Function boundaries still "to be confirmed". See `docs/analysis.md`, `docs/rea.md`.
-- [x] **Phase 3 — Compiler. DONE (2026-10-14, Session 3; revision question resolved Session 4).** Flags pinned by byte-level experiment: **`-O2 -g2 -G8`**, with a **per-TU `-g` override** (`tools/eegcc.py:cflags_for`) because the original mixes debug levels (`func_00114C30` needs `-g0`; `-g`/`-g2` suppress delay-slot filling, so the level is load-bearing). The original is a **mix of two EE-GCC generations**: `2.9-ee-991111(-01)` and `2.96-ee-001003-1` (`tools/cc_matrix.py`, all 14 published revisions; no single one matches everything). 47 functions byte-exact; 12 recorded as NON_MATCHING and unexplained by any revision. See `docs/compiler.md`, `docs/cc-matrix-session4.txt`.
+- [x] **Phase 3 — Compiler. DONE (2026-10-14, Session 3; revision question resolved Session 4).** Flags pinned by byte-level experiment: **`-O2 -g2 -G8`**, with a **per-TU `-g` override** (`tools/eegcc.py:cflags_for`) because the original mixes debug levels (`func_00114C30` needs `-g0`; `-g`/`-g2` suppress delay-slot filling, so the level is load-bearing). The original is a **mix of two EE-GCC generations**: `2.9-ee-991111(-01)` and `2.96-ee-001003-1` (`tools/cc_matrix.py`, all 14 published revisions; no single one matches everything). 47 functions byte-exact; 12 recorded as NON_MATCHING and unexplained by any revision. **`-O2` discriminated from `-O1`/`-Os`** (Session 4 step 3: 92-function sweep, 39 / 14 counterexamples; `-O2` ≡ `-O3`). See `docs/compiler.md`, `docs/cc-matrix-session4.txt`, `docs/opt-sweep-session4.txt`.
 - [x] **Phase 4 — Split & rebuild.** splat split is **per-function**: **1037 `.s`** under `asm/cod/` (one per function), `.text` 16-byte header as `textbin`; plus data segments, `build/SCUS_974.72.ld`, `include/macro.inc`. **Reassembly + link + hash check PASS**: `tools/build.py` (WSL2) → flat image byte-identical to the original, **237,952 bytes, SHA-1 `6f853f644a4279db18c15ceb8ee1d2a8b87a7b39`**. Still green with 47 functions replaced by C. See `docs/splat.md`, `docs/toolchain.md`, `docs/rebuild.md`.
 - [~] **Phase 5 — Name.** In progress. `tools/find_string_refs.py` maps strings to the 66 functions that reference them; 2 functions named from direct evidence (`LoaderSysDumpIopModuleIdentifiers`, `OutputLinkerScriptFile`), the rest tabulated in `docs/naming-candidates.md`. Structs/data objects documented in `docs/structs.md`.
 - [~] **Phase 6 — Decompile. STARTED.** 47 / 1037 functions matched from C (1148 / 203,692 `.text` bytes = 0.564 %), all gated by the image hash. Loop + tooling in `docs/progress.md`; non-matching attempts in `src/non_matching/` (12 tracked, none explained by any EE-GCC revision).
@@ -154,16 +155,38 @@ Tips: use a function's constants, string references, and call patterns to infer 
 | Functions named | 3 (`entry`, `LoaderSysDumpIopModuleIdentifiers`, `OutputLinkerScriptFile`) + 66 string-reference candidates |
 | Functions matched (C) | **92 / 1037** (68 with `ee-gcc2.96`, 24 with `ee-gcc2.9-991111-01`; 26 wrappers use a per-TU `-fno-optimize-sibling-calls`) |
 | Matched bytes | 3308 / 203,692 `.text` bytes = **1.624 %** (verified) |
-| Compiler flags | `-O2 -g2 -G8` (per-TU `-g0` and `-fno-optimize-sibling-calls` overrides) |
+| Compiler flags | `-O2 -g2 -G8` (per-TU `-g0` and `-fno-optimize-sibling-calls` overrides); `-O2` discriminated from `-O1`/`-Os`, `-O2` ≡ `-O3` (§2.2) |
 | Compilers | `ee-gcc2.96` (default) + `ee-gcc2.9-991111-01` (`cc=29`); matrix in `docs/compiler.md` §4.3 |
 | `.text` disassembly (splat R5900) | accurate; **1037 per-function `.s`** |
 | Ghidra EE-extension decode | **100 %** of `.text` (50,923/50,923) |
 | splat split coverage | 203 KB / 85.6 % of ROM |
 | Functions detected | 1037 (spimdisasm) |
-| Non-matching attempts tracked | 34 (`src/non_matching/`, none explained by any EE-GCC revision) |
+| Non-matching attempts tracked | 36 (`src/non_matching/`, none explained by any EE-GCC revision) |
 | IOP modules inventoried | 11 IRX (ELF32 MIPS-I, R3000A) |
 
 ### Session log
+
+- **2026-10-14 (Session 4, step 3) — the optimisation level is discriminated.**
+  New tool **`tools/opt_sweep.py`**: compiles every entry of
+  `config/c_sources.txt` at `-O1/-O2/-O3/-Os` (keeping the per-TU `-g` /
+  `-fno-optimize-sibling-calls` and the `cc=29` revision; an explicit `-O…`
+  replaces the pinned `-O2`, `tools/eegcc.py:cflags_for`). Result over the 92
+  matched functions: **`-O1` 53/92** (39 counterexamples), **`-O2` 92/92**,
+  **`-O3` 92/92**, **`-Os` 78/92** (14 counterexamples). **`-O1` and `-Os` are
+  ruled out; `-O2` is confirmed over them.** `-O2` and `-O3` are *not*
+  separated — they emit identical code for all 92 (and for all 36
+  `src/non_matching/` attempts too). This is structural: in GCC 2.9x/2.96 the
+  only `-O3` delta is `-finline-functions`, and no TU here has an inlinable
+  helper (`tools/cc/probe_olevels_diff.sh`, `tools/cc/probe_inline_dump.sh`).
+  The level cannot be narrowed past `{-O2,-O3}` without a function whose body
+  contains an inlined static helper; either reproduces the image, so `-O2` is
+  kept. Evidence: `docs/compiler.md` §2.2, `docs/opt-sweep-session4.txt`.
+  - Two ≥30-instruction candidates written for this step —
+    `func_00110910` (33 insns, sorted-list insert) and `func_0012EAF8`
+    (32 insns, binary-search clz) — are archived in `src/non_matching/`: both
+    reproduce the control flow but are non-matching (register allocation; EE-GCC
+    if-conversion into `movn`). No matched function reaches 30 insns (largest:
+    23). `tools/find_candidates.py` gained `--min-insns`. Image hash unchanged.
 
 - **2026-10-14 (Session 4, step 2)** — Phase 6 batch: 47 → **92 functions**
   (1148 → 3308 bytes, 0.564 % → 1.624 %), image SHA-1 unchanged.
