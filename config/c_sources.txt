@@ -323,3 +323,12 @@
 022E68 = src/cod/022E68.c cc=29   # init/deinit pair + flag clear, return first
 025040 = src/cod/025040.c        # float decompose + 64-bit 4th arg (<<30)
 0277C0 = src/cod/0277C0.c        # ref-counted stdio state acquire/release
+
+# --- Session 7, wave 1b (subagent drafts, verified here) ---------------------
+001AF0 = src/cod/001AF0.c cc=29   # bump pointer with fixed 0x100 alignment
+014BF8 = src/cod/014BF8.c cc=29   # 0x14-byte record copy-out (ldl/ldr pieces)
+015888 = src/cod/015888.c cc=29   # table lookup by index + out-of-range byte
+0211B8 = src/cod/0211B8.c cc=29   # 16-byte block store into the 0x24 records
+0221D0 = src/cod/0221D0.c cc=29   # id + clear D_00167F00 tracking block
+025008 = src/cod/025008.c        # (framed family, 296)
+02F800 = src/cod/02F800.c        # (framed family, 296)
