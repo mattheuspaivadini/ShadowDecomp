@@ -56,7 +56,8 @@ Fill in the table during DISCOVERY and keep it current.
 | build script | Assemble/compile/link/hash | **`tools/build.py`** (WSL2) — mixed C+asm, gated on the flat-image SHA-1; `make check` |
 | Phase-3 flag pinning | Pin compiler flags | **`tools/phase3_pin.py`** + `tools/matchcheck.py` — `docs/compiler.md` |
 | Small-data audit | gp-relative vs absolute | **`tools/scan_sdata_access.py`** — `docs/compiler.md` §3 |
-| Phase-6 loop | Per-function compile/diff | **`tools/eegcc.py`** (shared staging/flags, `cflags_for`: per-TU `-g` override), `tools/verify_c.py`, `tools/diff_func.py`, `tools/report.py`, `tools/gen_objdiff.py` — `docs/progress.md` |
+| Phase-6 loop | Per-function compile/diff | **`tools/eegcc.py`** (shared staging/flags, `cflags_for`: per-TU `-g` override), `tools/verify_c.py` (`--flags=` to try a per-TU level before listing), `tools/diff_func.py`, `tools/report.py`, `tools/gen_objdiff.py`, `tools/cc/show_compiled.sh` — `docs/progress.md` |
+| Split-build internals | Constant multiply / padding | **`tools/cc/probe_mult.sh`** (R5900 `mult` vs shift/add, `docs/compiler.md` §4.2); `tools/build.py` pads a C object to its exact original span (`. = . + (span - size)`) — `docs/rebuild.md` |
 | Phase-5 naming | Strings -> functions | **`tools/find_string_refs.py`** — `docs/naming-candidates.md` |
 | IOP inventory | IRX modules (R3000) | **`tools/iop_inventory.py`** → `manifest/iop_modules.txt` |
 | ELF container diff | our ELF vs original | **`tools/elf_container_diff.py`** — `docs/rebuild.md` §ELF container |
@@ -100,7 +101,7 @@ Work in order. Mark each phase when done and commit.
 - [x] **Phase 3 — Compiler. DONE (2026-10-14, Session 3).** Flags pinned by byte-level experiment: **`-O2 -g2 -G8`**, with a **per-TU `-g` override** (`tools/eegcc.py:cflags_for`) because the original mixes debug levels (`func_00114C30` needs `-g0`; `-g`/`-g2` suppress delay-slot filling, so the level is load-bearing). 33 functions byte-exact out of the flag-pinning set + first batches; 13 functions recorded as NON_MATCHING with the hypothesis that the original is a different EE-GCC *revision*. Single source of truth: `config/compiler_flags.mk`. See `docs/compiler.md`.
 - [x] **Phase 4 — Split & rebuild.** splat split is **per-function**: **1037 `.s`** under `asm/cod/` (one per function), `.text` 16-byte header as `textbin`; plus data segments, `build/SCUS_974.72.ld`, `include/macro.inc`. **Reassembly + link + hash check PASS**: `tools/build.py` (WSL2) → flat image byte-identical to the original, **237,952 bytes, SHA-1 `6f853f644a4279db18c15ceb8ee1d2a8b87a7b39`**. Still green with 33 functions replaced by C. See `docs/splat.md`, `docs/toolchain.md`, `docs/rebuild.md`.
 - [~] **Phase 5 — Name.** In progress. `tools/find_string_refs.py` maps strings to the 66 functions that reference them; 2 functions named from direct evidence (`LoaderSysDumpIopModuleIdentifiers`, `OutputLinkerScriptFile`), the rest tabulated in `docs/naming-candidates.md`. Structs/data objects documented in `docs/structs.md`.
-- [~] **Phase 6 — Decompile. STARTED.** 33 / 1037 functions matched from C (504 / 203,692 `.text` bytes = 0.247 %), all gated by the image hash. Loop + tooling in `docs/progress.md`; non-matching attempts in `src/non_matching/`.
+- [~] **Phase 6 — Decompile. STARTED.** 38 / 1037 functions matched from C (812 / 203,692 `.text` bytes = 0.399 %), all gated by the image hash. Loop + tooling in `docs/progress.md`; non-matching attempts in `src/non_matching/` (22 tracked).
 
 ## 6. Identifying the compiler
 
@@ -133,22 +134,63 @@ Tips: use a function's constants, string references, and call patterns to infer 
 
 | Metric | Value |
 |--------|-------|
-| Current phase | Phases 1–4 done; **Phase 3 flags pinned**; Phase 5 in progress; **Phase 6 started: 33 functions matched** |
-| ELF rebuild hash match | **YES — 237,952 bytes, SHA-1 `6f853f64…` (flat load image), still green with 33 functions from C** |
+| Current phase | Phases 1–4 done; **Phase 3 flags pinned**; Phase 5 in progress; **Phase 6 started: 38 functions matched** |
+| ELF rebuild hash match | **YES — 237,952 bytes, SHA-1 `6f853f64…` (flat load image), still green with 38 functions from C** |
 | Functions named | 3 (`entry`, `LoaderSysDumpIopModuleIdentifiers`, `OutputLinkerScriptFile`) + 66 string-reference candidates |
-| Functions matched (C) | **33 / 1037** |
-| Matched bytes | 504 / 203,692 `.text` bytes = **0.247 %** (verified) |
+| Functions matched (C) | **38 / 1037** |
+| Matched bytes | 812 / 203,692 `.text` bytes = **0.399 %** (verified) |
 | Compiler flags | `-O2 -g2 -G8` (per-TU `-g0` override); `config/compiler_flags.mk` |
 | `.text` disassembly (splat R5900) | accurate; **1037 per-function `.s`** |
 | Ghidra EE-extension decode | **100 %** of `.text` (50,923/50,923) |
 | splat split coverage | 203 KB / 85.6 % of ROM |
 | Functions detected | 1037 (spimdisasm) |
-| Non-matching attempts tracked | 13 (`src/non_matching/`) |
+| Non-matching attempts tracked | 22 (`src/non_matching/`) |
 | IOP modules inventoried | 11 IRX (ELF32 MIPS-I, R3000A) |
 
 ### Session log
 
-- **2026-10-14 (Session 4)** — sync start. Rebuild re-verified before any change:
+- **2026-10-14 (Session 4)** — sync + Phase 6 batch 3 (5 more functions) + compiler finding.
+  - **Sync.** Rebuild re-verified before any change: `python3 tools/build.py` →
+    `bin: 237952 bytes`, SHA-1 `6f853f64…`, **HASH MATCH** (33 from C, 1015 from
+    asm). Session-3 results folded into sections 4/5/9; stale `560 B / 0.275 %`
+    metric in `docs/decisions.md` corrected to the tool-reported `504 B /
+    0.247 %` (`tools/report.py`); Session-3 tooling (small-data audit, Phase-6
+    loop, ELF container diff) added to the tool table; `docs/structs.md`
+    placeholder header removed. Commit `d3a877b`.
+  - **Phase 6 batch 3 — 38 / 1037 functions now byte-exact** (812 / 203,692
+    `.text` bytes = 0.399 %), image SHA-1 unchanged. New:
+    `func_001028F0`/`func_00102930` (256-entry `.bss` table search, write `-1`),
+    `func_00102A00`/`func_00102A40` (fill those tables with `-1`) and
+    `func_0012E6D0` (guarded get-or-store with a local fallback). One trick worth
+    keeping: the `-1` must be a *local initialised before the loop* so LICM
+    materialises it before the loop bound (matching the original's instruction
+    order).
+  - **Compiler finding (docs/compiler.md §4.2).** The original uses the R5900
+    3-operand `mult rd,rs,rt` for constant strides (`i*0x184`, `i*0x24`) but a
+    shift/add sequence for `x*320`. `tools/cc/probe_mult.sh` shows `ee-gcc2.96`
+    **never** emits `mult` for a *literal* constant under any ISA/CPU/`-O` flag
+    (`-m3900` does, but changes `e_flags` to `mips1/3900`), while a *runtime*
+    multiplier does — and the original's `addiu v1,$zero,0x184; mult a0,a0,v1`
+    is exactly that shape. Reproducing it needs a local stride variable; four
+    functions now match the multiply and differ only in register allocation, so
+    they stay in `src/non_matching/`. This is concrete extra evidence for the
+    different-revision hypothesis.
+  - **Build fix (`tools/build.py`).** C objects were padded with `. = ALIGN(.,
+    8)`, which over-pads the subsegments whose original span is only 4-byte
+    aligned (`02E6D0`, span `0x34`, next `0x12E704`) and grew the image by 4
+    bytes. Now a relative `. = . + (span - compiled_size)`. An absolute
+    `. = <vaddr>` was tried and rejected (breaks `AT()` LMA → `ld` "small-data
+    section too large").
+  - **Tooling.** `tools/verify_c.py --flags=…` (try a per-TU `-g` before listing
+    it), `tools/cc/show_compiled.sh` (disassemble what we compiled),
+    `tools/matchcheck.py` now fails when the expected symbol is absent (a
+    mis-named C function used to "match" and only fail at link time).
+  - **Tracking.** 9 new NON_MATCHING attempts with `STATUS:` headers
+    (`009B80`, `012380`, `0123C0`, `015008`, `020F18`, `021190`, `022018`,
+    `0220F8`, `0262B8`) → 22 total. All are shape differences (allocation / block
+    layout / loop rotation), none flag-fixable.
+
+- **2026-10-14 (Session 4, start)** — sync. Rebuild re-verified before any change:
   `python3 tools/build.py` → `bin: 237952 bytes`, SHA-1 `6f853f64…`, **HASH MATCH**
   (1048 objects: 33 from C, 1015 from asm). Session-3 results folded into
   sections 4/5/9; stale `560 B / 0.275 %` metric in `docs/decisions.md` corrected

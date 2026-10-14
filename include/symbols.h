@@ -47,6 +47,10 @@ extern int  D_0014B500[];     /* .bss    0x0014B500  func_001128D0/_001128E8 */
 extern int  D_001339B0[];     /* .data   0x001339B0  func_00114918 */
 extern char D_0013D840[];     /* .bss    0x0013D840  func_00104E78 */
 
+/* ---- Session 4: 256-entry int tables (uniform -> absolute addressing) */
+extern int  D_0013B790[256];  /* .bss    0x0013B790  func_001028F0/_00102A40 (_002500.._002BD8) */
+extern int  D_0013BB90[256];  /* .bss    0x0013BB90  func_00102930/_00102A00 (_002500.._002BD8) */
+
 /* ---- hardware registers (uncached EE addresses) */
 #define HWREG(addr) (*(volatile unsigned int *)(addr))
 

@@ -52,3 +52,12 @@
 
 # --- Phase 6 batch 2 ---
 013078 = src/cod/013078.c
+
+# --- Phase 6 batch 3 (Session 4) ---
+# .bss 256-entry int tables: -1 fill / key search (evidence: asm/data/cod/0013A200.bss.s)
+0028F0 = src/cod/0028F0.c
+002930 = src/cod/002930.c
+002A00 = src/cod/002A00.c
+002A40 = src/cod/002A40.c
+# guarded get-or-store with a local fallback
+02E6D0 = src/cod/02E6D0.c
