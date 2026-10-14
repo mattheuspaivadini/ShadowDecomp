@@ -53,7 +53,7 @@ glabel entry
     /* A0 001000A0 1400023C */  lui        $v0, %hi(D_0013A200)
     /* A4 001000A4 00A24224 */  addiu      $v0, $v0, %lo(D_0013A200)
     /* A8 001000A8 0000448C */  lw         $a0, 0x0($v0)
-    /* AC 001000AC D00E040C */  jal        func_00103B40
+    /* AC 001000AC D00E040C */  jal        start
     /* B0 001000B0 04004524 */   addiu     $a1, $v0, 0x4
     /* B4 001000B4 76400408 */  j          func_001101D8
     /* B8 001000B8 2D204000 */   daddu     $a0, $v0, $zero

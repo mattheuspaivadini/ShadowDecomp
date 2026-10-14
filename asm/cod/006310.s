@@ -30,9 +30,9 @@ glabel func_00106310
     /* 6350 00106350 2D280000 */  daddu      $a1, $zero, $zero
     /* 6354 00106354 180006FE */  sd         $a2, (0x20000018 & 0xFFFF)($s0)
     /* 6358 00106358 2D200000 */  daddu      $a0, $zero, $zero
-    /* 635C 0010635C FE4E040C */  jal        func_00113BF8
+    /* 635C 0010635C FE4E040C */  jal        sceGsSyncPath
     /* 6360 00106360 100002FE */   sd        $v0, (0x20000010 & 0xFFFF)($s0)
-    /* 6364 00106364 E04D040C */  jal        func_00113780
+    /* 6364 00106364 E04D040C */  jal        sceGsPutDrawEnv
     /* 6368 00106368 2D200002 */   daddu     $a0, $s0, $zero
     /* 636C 0010636C 0000B0DF */  ld         $s0, 0x0($sp)
     /* 6370 00106370 0800B1DF */  ld         $s1, 0x8($sp)

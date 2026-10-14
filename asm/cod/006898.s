@@ -73,7 +73,7 @@ glabel func_00106898
     /* 6984 00106984 264C040C */  jal        func_00113098
     /* 6988 00106988 2D20A003 */   daddu     $a0, $sp, $zero
     /* 698C 0010698C 2D200000 */  daddu      $a0, $zero, $zero
-    /* 6990 00106990 FE4E040C */  jal        func_00113BF8
+    /* 6990 00106990 FE4E040C */  jal        sceGsSyncPath
     /* 6994 00106994 2D280000 */   daddu     $a1, $zero, $zero
     /* 6998 00106998 4652040C */  jal        func_00114918
     /* 699C 0010699C 01000424 */   addiu     $a0, $zero, 0x1

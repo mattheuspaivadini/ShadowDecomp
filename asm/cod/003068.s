@@ -14,7 +14,7 @@ glabel func_00103068
     /* 3068 00103068 F0FFBD27 */  addiu      $sp, $sp, -0x10
     /* 306C 0010306C 0000BFFF */  sd         $ra, 0x0($sp)
     /* 3070 00103070 0000BFDF */  ld         $ra, 0x0($sp)
-    /* 3074 00103074 022D0408 */  j          func_0010B408
+    /* 3074 00103074 022D0408 */  j          sceStdioRead
     /* 3078 00103078 1000BD27 */   addiu     $sp, $sp, 0x10
 endlabel func_00103068
     /* 307C 0010307C 00000000 */  nop

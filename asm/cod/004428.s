@@ -43,7 +43,7 @@ glabel func_00104428
     /* 449C 0010449C FFFF0224 */   addiu     $v0, $zero, -0x1
 .align 2
   .L001044A0:
-    /* 44A0 001044A0 D00C040C */  jal        func_00103340
+    /* 44A0 001044A0 D00C040C */  jal        setNewIopIdentifier
     /* 44A4 001044A4 D86F8424 */   addiu     $a0, $a0, %lo(D_00136FD8)
 .align 2
   .L001044A8:

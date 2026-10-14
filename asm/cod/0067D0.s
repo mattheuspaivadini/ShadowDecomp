@@ -68,13 +68,13 @@ glabel func_001067D0
     /* 6868 00106868 180003FE */  sd         $v1, 0x18($s0)
     /* 686C 0010686C 2D200000 */  daddu      $a0, $zero, $zero
     /* 6870 00106870 100002FE */  sd         $v0, 0x10($s0)
-    /* 6874 00106874 FE4E040C */  jal        func_00113BF8
+    /* 6874 00106874 FE4E040C */  jal        sceGsSyncPath
     /* 6878 00106878 2D280000 */   daddu     $a1, $zero, $zero
     /* 687C 0010687C 2D200002 */  daddu      $a0, $s0, $zero
     /* 6880 00106880 0800B1DF */  ld         $s1, 0x8($sp)
     /* 6884 00106884 0000B0DF */  ld         $s0, 0x0($sp)
     /* 6888 00106888 1000BFDF */  ld         $ra, 0x10($sp)
-    /* 688C 0010688C E04D0408 */  j          func_00113780
+    /* 688C 0010688C E04D0408 */  j          sceGsPutDrawEnv
     /* 6890 00106890 2000BD27 */   addiu     $sp, $sp, 0x20
 endlabel func_001067D0
     /* 6894 00106894 00000000 */  nop

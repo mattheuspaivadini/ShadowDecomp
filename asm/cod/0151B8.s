@@ -14,7 +14,7 @@ glabel func_001151B8
     /* 151B8 001151B8 E0FFBD27 */  addiu      $sp, $sp, -0x20
     /* 151BC 001151BC 0000B0FF */  sd         $s0, 0x0($sp)
     /* 151C0 001151C0 1000BFFF */  sd         $ra, 0x10($sp)
-    /* 151C4 001151C4 DC57040C */  jal        func_00115F70
+    /* 151C4 001151C4 DC57040C */  jal        sceDbcDeleteSocket
     /* 151C8 001151C8 2D808000 */   daddu     $s0, $a0, $zero
     /* 151CC 001151CC 0B004004 */  bltz       $v0, .L001151FC
     /* 151D0 001151D0 34030424 */   addiu     $a0, $zero, 0x334

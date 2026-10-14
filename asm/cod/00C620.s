@@ -38,7 +38,7 @@ glabel func_0010C620
     /* C678 0010C678 EDFF0224 */   addiu     $v0, $zero, -0x13
 .align 2
   .L0010C67C:
-    /* C67C 0010C67C AA2F040C */  jal        func_0010BEA8
+    /* C67C 0010C67C AA2F040C */  jal        sceStdioCCode
     /* C680 0010C680 09000524 */   addiu     $a1, $zero, 0x9
     /* C684 0010C684 2D884000 */  daddu      $s1, $v0, $zero
     /* C688 0010C688 06002106 */  bgez       $s1, .L0010C6A4

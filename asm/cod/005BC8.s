@@ -20,7 +20,7 @@ glabel func_00105BC8
     /* 5BE0 00105BE0 981C040C */  jal        func_00107260
     /* 5BE4 00105BE4 60EB1026 */   addiu     $s0, $s0, %lo(D_0013EB60)
     /* 5BE8 00105BE8 2D280000 */  daddu      $a1, $zero, $zero
-    /* 5BEC 00105BEC FE4E040C */  jal        func_00113BF8
+    /* 5BEC 00105BEC FE4E040C */  jal        sceGsSyncPath
     /* 5BF0 00105BF0 01000424 */   addiu     $a0, $zero, 0x1
     /* 5BF4 00105BF4 D84E040C */  jal        func_00113B60
     /* 5BF8 00105BF8 2D200000 */   daddu     $a0, $zero, $zero
@@ -44,7 +44,7 @@ glabel func_00105BC8
     /* 5C40 00105C40 003C0700 */  sll        $a3, $a3, 16
     /* 5C44 00105C44 2050040C */  jal        func_00114080
     /* 5C48 00105C48 033C0700 */   sra       $a3, $a3, 16
-    /* 5C4C 00105C4C E04D040C */  jal        func_00113780
+    /* 5C4C 00105C4C E04D040C */  jal        sceGsPutDrawEnv
     /* 5C50 00105C50 40010426 */   addiu     $a0, $s0, %lo(D_20000140)
     /* 5C54 00105C54 0B000010 */  b          .L00105C84
     /* 5C58 00105C58 1300103C */   lui       $s0, %hi(D_001321A0)
@@ -57,7 +57,7 @@ glabel func_00105BC8
     /* 5C6C 00105C6C 00080624 */  addiu      $a2, $zero, 0x800
     /* 5C70 00105C70 2050040C */  jal        func_00114080
     /* 5C74 00105C74 033C0700 */   sra       $a3, $a3, 16
-    /* 5C78 00105C78 E04D040C */  jal        func_00113780
+    /* 5C78 00105C78 E04D040C */  jal        sceGsPutDrawEnv
     /* 5C7C 00105C7C 50000426 */   addiu     $a0, $s0, %lo(D_20000050)
     /* 5C80 00105C80 1300103C */  lui        $s0, %hi(D_001321A0)
 .align 2
@@ -76,13 +76,13 @@ glabel func_00105BC8
     /* 5CB0 00105CB0 2D200000 */  daddu      $a0, $zero, $zero
     /* 5CB4 00105CB4 180006FE */  sd         $a2, (0x20000018 & 0xFFFF)($s0)
     /* 5CB8 00105CB8 2D280000 */  daddu      $a1, $zero, $zero
-    /* 5CBC 00105CBC FE4E040C */  jal        func_00113BF8
+    /* 5CBC 00105CBC FE4E040C */  jal        sceGsSyncPath
     /* 5CC0 00105CC0 100002FE */   sd        $v0, (0x20000010 & 0xFFFF)($s0)
     /* 5CC4 00105CC4 2D200002 */  daddu      $a0, $s0, $zero
     /* 5CC8 00105CC8 0800B1DF */  ld         $s1, 0x8($sp)
     /* 5CCC 00105CCC 0000B0DF */  ld         $s0, 0x0($sp)
     /* 5CD0 00105CD0 1000BFDF */  ld         $ra, 0x10($sp)
-    /* 5CD4 00105CD4 E04D0408 */  j          func_00113780
+    /* 5CD4 00105CD4 E04D0408 */  j          sceGsPutDrawEnv
     /* 5CD8 00105CD8 2000BD27 */   addiu     $sp, $sp, 0x20
 endlabel func_00105BC8
     /* 5CDC 00105CDC 00000000 */  nop

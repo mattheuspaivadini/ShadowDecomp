@@ -92,7 +92,7 @@ glabel func_00105CE0
     /* 5E10 00105E10 01000424 */  addiu      $a0, $zero, 0x1
 .align 2
   .L00105E14:
-    /* 5E14 00105E14 FE4E040C */  jal        func_00113BF8
+    /* 5E14 00105E14 FE4E040C */  jal        sceGsSyncPath
     /* 5E18 00105E18 2D280000 */   daddu     $a1, $zero, $zero
     /* 5E1C 00105E1C FAFF4014 */  bnez       $v0, .L00105E08
     /* 5E20 00105E20 607C2426 */   addiu     $a0, $s1, %lo(D_00137C60)

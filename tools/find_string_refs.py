@@ -1,6 +1,14 @@
 #!/usr/bin/env python3
 """Phase 5: find which function references which string (evidence for naming).
 
+NOTE (Session 4): superseded for *naming* by tools/name_from_strings.py. This
+tool pairs a `lui` with an immediate-materialising instruction within 6
+instructions; a `lui` whose `addiu` sits far away - e.g. 0x00102DF4 -> 0x00102F00
+in func_00102D70, 67 instructions apart - is missed, and it reported several
+referenced strings as unreferenced. Keep it for the raw list of "which strings a
+function touches" (it also reports strings that carry no identifier), but use the
+splat `%hi/%lo` labels for anything that must be exact.
+
 Scans `.text` for `lui`/`%lo` address materialisations, resolves them to
 absolute addresses, and maps each resolved address that coincides with a known
 string (`manifest/strings.txt`) back to the splat function that contains the

@@ -50,7 +50,7 @@ glabel func_00121EF8
     /* 21F88 00121F88 0000A2AF */   sw        $v0, 0x0($sp)
     /* 21F8C 00121F8C 2D280002 */  daddu      $a1, $s0, $zero
     /* 21F90 00121F90 2D20A003 */  daddu      $a0, $sp, $zero
-    /* 21F94 00121F94 9057040C */  jal        func_00115E40
+    /* 21F94 00121F94 9057040C */  jal        sceDbcCreateSocket
     /* 21F98 00121F98 8000A624 */   addiu     $a2, $a1, 0x80
     /* 21F9C 00121F9C 24000324 */  addiu      $v1, $zero, 0x24
     /* 21FA0 00121FA0 1600043C */  lui        $a0, %hi(D_00163CC8)

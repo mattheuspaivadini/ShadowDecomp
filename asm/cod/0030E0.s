@@ -14,7 +14,7 @@ glabel func_001030E0
     /* 30E0 001030E0 F0FFBD27 */  addiu      $sp, $sp, -0x10
     /* 30E4 001030E4 0000BFFF */  sd         $ra, 0x0($sp)
     /* 30E8 001030E8 0000BFDF */  ld         $ra, 0x0($sp)
-    /* 30EC 001030EC 6A320408 */  j          func_0010C9A8
+    /* 30EC 001030EC 6A320408 */  j          sceStdioGetstat
     /* 30F0 001030F0 1000BD27 */   addiu     $sp, $sp, 0x10
 endlabel func_001030E0
     /* 30F4 001030F4 00000000 */  nop

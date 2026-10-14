@@ -60,7 +60,7 @@ glabel func_00115940
     /* 159F8 001159F8 2D206002 */  daddu      $a0, $s3, $zero
     /* 159FC 001159FC 2D288002 */  daddu      $a1, $s4, $zero
     /* 15A00 00115A00 3000A627 */  addiu      $a2, $sp, 0x30
-    /* 15A04 00115A04 0A5A040C */  jal        func_00116828
+    /* 15A04 00115A04 0A5A040C */  jal        sceDbcSendData2
     /* 15A08 00115A08 2D38A003 */   daddu     $a3, $sp, $zero
     /* 15A0C 00115A0C 9000BFDF */  ld         $ra, 0x90($sp)
     /* 15A10 00115A10 8000B4DF */  ld         $s4, 0x80($sp)

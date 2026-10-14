@@ -77,7 +77,7 @@ glabel func_001153B8
     /* 1549C 0011549C 0400A637 */  ori        $a2, $sp, 0x4
     /* 154A0 001154A0 3C281000 */  dsll32     $a1, $s0, 0
     /* 154A4 001154A4 3F280500 */  dsra32     $a1, $a1, 0
-    /* 154A8 001154A8 CC5A040C */  jal        func_00116B30
+    /* 154A8 001154A8 CC5A040C */  jal        sceDbcReceiveData
     /* 154AC 001154AC 2D38A003 */   daddu     $a3, $sp, $zero
     /* 154B0 001154B0 0B004304 */  bgezl      $v0, .L001154E0
     /* 154B4 001154B4 0000A293 */   lbu       $v0, 0x0($sp)

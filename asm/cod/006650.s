@@ -45,14 +45,14 @@ glabel func_00106650
     /* 66CC 001066CC 000042FE */  sd         $v0, 0x0($s2)
     /* 66D0 001066D0 200022DE */  ld         $v0, (0x20000020 & 0xFFFF)($s1)
     /* 66D4 001066D4 25104300 */  or         $v0, $v0, $v1
-    /* 66D8 001066D8 FE4E040C */  jal        func_00113BF8
+    /* 66D8 001066D8 FE4E040C */  jal        sceGsSyncPath
     /* 66DC 001066DC 200022FE */   sd        $v0, (0x20000020 & 0xFFFF)($s1)
     /* 66E0 001066E0 2D202002 */  daddu      $a0, $s1, $zero
     /* 66E4 001066E4 0000B0DF */  ld         $s0, 0x0($sp)
     /* 66E8 001066E8 0800B1DF */  ld         $s1, 0x8($sp)
     /* 66EC 001066EC 1000B2DF */  ld         $s2, 0x10($sp)
     /* 66F0 001066F0 1800BFDF */  ld         $ra, 0x18($sp)
-    /* 66F4 001066F4 E04D0408 */  j          func_00113780
+    /* 66F4 001066F4 E04D0408 */  j          sceGsPutDrawEnv
     /* 66F8 001066F8 2000BD27 */   addiu     $sp, $sp, 0x20
 endlabel func_00106650
     /* 66FC 001066FC 00000000 */  nop

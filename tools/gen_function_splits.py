@@ -11,6 +11,11 @@ single `[0x000000, asm, cod/000000]` subsegment) and replaces that line with:
     entry point at `0x00100010`), and
   * one `asm` subsegment per function label found in the previous split's `.s`.
 
+Addresses listed in `config/non_function_holes.txt` are emitted as `textbin`
+(raw bytes) instead of `asm`: splat's linear scan sometimes promotes a word that
+is not a function entry to a `glabel`, and a raw subsegment keeps the image
+byte-identical without inventing a function (see that file for the evidence).
+
 Function start addresses are taken from splat's own output
 (`asm/cod/000000.s`): every `glabel func_XXXXXXXX` carries its VRAM address, and
 named symbols (e.g. `entry`) are resolved through `config/symbol_addrs.txt`.
@@ -35,6 +40,7 @@ TEXT_SEGMENT_VRAM = 0x00100000
 TEXT_HEADER_SIZE = 0x10  # two pointers + two zero words before `entry`
 TEXT_ROM_START = 0x000000
 TEXT_ROM_END = 0x031BAC  # from the ELF section map (.text size)
+DEFAULT_HOLES = Path(__file__).resolve().parent.parent / "config" / "non_function_holes.txt"
 
 TEXT_SUBSEG_LINE = re.compile(
     r"^(\s*-\s*\[)0x0*0*0000,\s*asm,\s*[^\]]*\](\s*#\s*\.text\s*)$"
@@ -72,7 +78,24 @@ def parse_function_starts(asm_s: Path, symbols: dict[str, int]) -> list[tuple[in
     return funcs
 
 
-def build_text_block(funcs: list[tuple[int, str]]) -> str:
+def parse_holes(path: Path) -> set[int]:
+    """vram addresses that must be emitted as raw `textbin`, not as `asm`.
+
+    Format: `0x<VREG>  # comment` (blank lines and `#` comments ignored).
+    """
+    if not path.exists():
+        return set()
+    out: set[int] = set()
+    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+        line = line.split("#", 1)[0].strip()
+        if line:
+            out.add(int(line, 0))
+    return out
+
+
+def build_text_block(funcs: list[tuple[int, str]],
+                     holes: set[int] | None = None) -> str:
+    holes = holes or set()
     # `textbin` emits raw bytes into `.text` (as an `.incbin`), which is where the
     # 2-pointer + 2-zero-word header physically lives (0x00100000..0x0010000F).
     # A `data` subsegment would wrongly land in the `.data` output section.
@@ -84,12 +107,17 @@ def build_text_block(funcs: list[tuple[int, str]]) -> str:
         rom = vram - TEXT_SEGMENT_VRAM
         if rom >= TEXT_ROM_END:
             break
+        if vram in holes:
+            lines.append(f"      - [0x{rom:06X}, textbin, cod/{rom:06X}]"
+                         f" # non-function hole (raw bytes), was {name}")
+            continue
         lines.append(f"      - [0x{rom:06X}, asm, cod/{rom:06X}] # {name}")
     return "\n".join(lines) + "\n"
 
 
 def main(config_in: str, asm_s: str, symbol_addrs: str, config_out: str) -> None:
     symbols = parse_symbol_addrs(Path(symbol_addrs))
+    holes = parse_holes(DEFAULT_HOLES)
     funcs = parse_function_starts(Path(asm_s), symbols)
     # Drop anything at or before the header (e.g. the bogus func_00100000).
     funcs = [(v, n) for (v, n) in funcs if v >= TEXT_SEGMENT_VRAM + TEXT_HEADER_SIZE]
@@ -97,7 +125,8 @@ def main(config_in: str, asm_s: str, symbol_addrs: str, config_out: str) -> None
     if not funcs:
         raise SystemExit("no function labels found in the .s file")
 
-    block = build_text_block(funcs)
+    applied = sorted(v for v, _n in funcs if v in holes)
+    block = build_text_block(funcs, holes)
     text_in = Path(config_in).read_text(encoding="utf-8").splitlines(keepends=True)
 
     replaced = False
@@ -115,7 +144,11 @@ def main(config_in: str, asm_s: str, symbol_addrs: str, config_out: str) -> None
 
     Path(config_out).write_text("".join(out_lines), encoding="utf-8", newline="\n")
     print(f"wrote {config_out}")
-    print(f"  {len(funcs)} functions -> 1 data + {len(funcs)} asm subsegments")
+    print(f"  {len(funcs)} function labels -> 1 header raw subsegment + "
+          f"{len(funcs) - len(applied)} asm + {len(applied)} raw hole(s)")
+    if applied:
+        print(f"  {len(applied)} non-function hole(s) emitted as textbin: "
+              + ", ".join(f"0x{v:08X}" for v in applied))
 
 
 if __name__ == "__main__":

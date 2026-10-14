@@ -159,7 +159,7 @@ glabel func_001033B0
     /* 35CC 001035CC 00000000 */  nop
 .align 2
   .L001035D0:
-    /* 35D0 001035D0 D00C040C */  jal        func_00103340
+    /* 35D0 001035D0 D00C040C */  jal        setNewIopIdentifier
     /* 35D4 001035D4 48A08424 */   addiu     $a0, $a0, %lo(D_0013A048)
     /* 35D8 001035D8 1300023C */  lui        $v0, %hi(D_00136C30)
     /* 35DC 001035DC 8040043C */  lui        $a0, (0x4080FF00 >> 16)
@@ -213,7 +213,7 @@ glabel func_001033B0
     /* 3684 00103684 00000000 */  nop
 .align 2
   .L00103688:
-    /* 3688 00103688 D00C040C */  jal        func_00103340
+    /* 3688 00103688 D00C040C */  jal        setNewIopIdentifier
     /* 368C 0010368C 50A08424 */   addiu     $a0, $a0, %lo(D_0013A050)
     /* 3690 00103690 1300023C */  lui        $v0, %hi(D_00136C50)
     /* 3694 00103694 8040043C */  lui        $a0, (0x4080FF00 >> 16)
@@ -267,7 +267,7 @@ glabel func_001033B0
     /* 373C 0010373C 00000000 */  nop
 .align 2
   .L00103740:
-    /* 3740 00103740 D00C040C */  jal        func_00103340
+    /* 3740 00103740 D00C040C */  jal        setNewIopIdentifier
     /* 3744 00103744 58A08424 */   addiu     $a0, $a0, %lo(D_0013A058)
     /* 3748 00103748 1300023C */  lui        $v0, %hi(D_00136C70)
     /* 374C 0010374C 8040043C */  lui        $a0, (0x4080FF00 >> 16)
@@ -321,7 +321,7 @@ glabel func_001033B0
     /* 37F4 001037F4 00000000 */  nop
 .align 2
   .L001037F8:
-    /* 37F8 001037F8 D00C040C */  jal        func_00103340
+    /* 37F8 001037F8 D00C040C */  jal        setNewIopIdentifier
     /* 37FC 001037FC 60A08424 */   addiu     $a0, $a0, %lo(D_0013A060)
     /* 3800 00103800 F238040C */  jal        func_0010E3C8
     /* 3804 00103804 00000000 */   nop
@@ -385,7 +385,7 @@ glabel func_001033B0
     /* 38D4 001038D4 00000000 */  nop
 .align 2
   .L001038D8:
-    /* 38D8 001038D8 D00C040C */  jal        func_00103340
+    /* 38D8 001038D8 D00C040C */  jal        setNewIopIdentifier
     /* 38DC 001038DC 68A08424 */   addiu     $a0, $a0, %lo(D_0013A068)
     /* 38E0 001038E0 1300023C */  lui        $v0, %hi(D_00136CB0)
     /* 38E4 001038E4 8040043C */  lui        $a0, (0x4080FF00 >> 16)
@@ -439,7 +439,7 @@ glabel func_001033B0
     /* 398C 0010398C 00000000 */  nop
 .align 2
   .L00103990:
-    /* 3990 00103990 D00C040C */  jal        func_00103340
+    /* 3990 00103990 D00C040C */  jal        setNewIopIdentifier
     /* 3994 00103994 70A08424 */   addiu     $a0, $a0, %lo(D_0013A070)
     /* 3998 00103998 0000B0DF */  ld         $s0, 0x0($sp)
     /* 399C 0010399C 0800B1DF */  ld         $s1, 0x8($sp)

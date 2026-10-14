@@ -14,7 +14,7 @@ glabel func_00115650
     /* 15650 00115650 E0FFBD27 */  addiu      $sp, $sp, -0x20
     /* 15654 00115654 0000B0FF */  sd         $s0, 0x0($sp)
     /* 15658 00115658 1000BFFF */  sd         $ra, 0x10($sp)
-    /* 1565C 0011565C 0C58040C */  jal        func_00116030
+    /* 1565C 0011565C 0C58040C */  jal        sceDbcGetDepNumber
     /* 15660 00115660 2D808000 */   daddu     $s0, $a0, $zero
     /* 15664 00115664 2D384000 */  daddu      $a3, $v0, $zero
     /* 15668 00115668 0A00E004 */  bltz       $a3, .L00115694

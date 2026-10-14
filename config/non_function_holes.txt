@@ -1,0 +1,20 @@
+# .text addresses that splat/spimdisasm promoted to a function start but that are
+# NOT function entries. `tools/gen_function_splits.py` emits them as `textbin`
+# (raw bytes) instead of `asm`, so no bogus function label is invented and the
+# image stays byte-identical.
+#
+# Format: 0x<vram>  # <evidence>
+#
+# Evidence for each entry (Phase 5, Session 4 step 4; docs/naming-candidates.md):
+#   * the address is not referenced anywhere in the image - not by `jal`/`j`,
+#     not by a `lui`+immediate materialisation, and not as a literal word in
+#     .data/.rodata (checked both on the raw image and against splat's own
+#     `%hi/%lo` labels);
+#   * its only instruction is `jr $ra`, and its delay slot is the *first*
+#     instruction of the next function, i.e. the two candidate boundaries
+#     overlap, so it cannot be a separate out-of-line function.
+# All other 4-byte-aligned function starts in the image ARE referenced and are
+# kept (`0x0012821C`, `0x001282CC`, `0x00128CDC`, `0x00128E6C`, `0x001290C4`,
+# `0x0012E704` - 2..55 call sites each).
+#
+0x00113074  # unreferenced `jr $ra`; 0x00113078 (8 call sites) is the real entry

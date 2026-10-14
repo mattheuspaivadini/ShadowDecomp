@@ -61,7 +61,9 @@ Fill in the table during DISCOVERY and keep it current.
 | Phase-6 loop | Per-function compile/diff | **`tools/eegcc.py`** (shared staging/flags, `cflags_for`: per-TU `-g` override), `tools/verify_c.py` (`--flags=` to try a per-TU level before listing), `tools/diff_func.py`, `tools/report.py`, `tools/gen_objdiff.py`, `tools/cc/show_compiled.sh` — `docs/progress.md` |
 | Candidate ranking | Pick the next tier | **`tools/find_candidates.py`**, `tools/dump_candidates.py`, `tools/list_unmatched.py` (leaf pool), `tools/list_callers.py` (1–2-call wrappers), `tools/archive_extra_c.py` (move a failed attempt to `src/non_matching/` with a `STATUS:` note) — `docs/progress.md` |
 | Split-build internals | Constant multiply / padding | **`tools/cc/probe_mult.sh`** (R5900 `mult` vs shift/add, `docs/compiler.md` §4.2); `tools/build.py` pads a C object to its exact original span (`. = . + (span - size)`) — `docs/rebuild.md` |
-| Phase-5 naming | Strings -> functions | **`tools/find_string_refs.py`** — `docs/naming-candidates.md` |
+| Phase-5 naming | Strings -> functions | **`tools/name_from_strings.py`** (authoritative: resolves `string -> function` from splat's `%hi/%lo` labels; `--json`) — `docs/naming-candidates.md`. Older heuristic `tools/find_string_refs.py` (window-6 `lui` pairing) is retained for the raw "which strings does a function touch" list but **under-reports** referents |
+| Boundary evidence | Is a `glabel` a real entry? | **`tools/ref_check.py`** (`jal`/`j` + `lui`-relative + literal-word reference counts for an address) — `docs/naming-candidates.md` §"Boundary re-check" |
+| Non-function holes | Bad splat boundaries | **`config/non_function_holes.txt`** (addresses emitted as raw `textbin` by `tools/gen_function_splits.py` instead of `asm`) — `docs/naming-candidates.md` §"Boundary re-check" |
 | IOP inventory | IRX modules (R3000) | **`tools/iop_inventory.py`** → `manifest/iop_modules.txt` |
 | ELF container diff | our ELF vs original | **`tools/elf_container_diff.py`** — `docs/rebuild.md` §ELF container |
 | 7z / isoinfo | ISO extraction | not installed; replaced by `tools/iso9660.py` (pure Python) |
@@ -115,9 +117,9 @@ Work in order. Mark each phase when done and commit.
 - [x] **Phase 1 — Extract.** ISO is at the **workspace root** (`Shadow of the Colossus (USA).iso`), not in `SHADOWDECOMP/`. Extracted 19 files with pure-Python ISO9660 (`tools/iso9660.py`, `tools/extract_iso.py`) → manifest in `manifest/files.txt`. Main ELF = **`SCUS_974.72`** (from `SYSTEM.CNF`, not `SCUS_973.24`).
 - [x] **Phase 2 — Analyze.** `SCUS_974.72` parsed (sections/segments/entry); 319 strings. **Ghidra 12.1.4 + `ghidra-emotionengine-reloaded`** (`r5900:LE:32:default`) now decodes **100 %** of `.text` (50,923/50,923, 0 undefined; was 84 % with stock `MIPS:LE:32:default`). Function boundaries still "to be confirmed". See `docs/analysis.md`, `docs/rea.md`.
 - [x] **Phase 3 — Compiler. DONE (2026-10-14, Session 3; revision question resolved Session 4).** Flags pinned by byte-level experiment: **`-O2 -g2 -G8`**, with a **per-TU `-g` override** (`tools/eegcc.py:cflags_for`) because the original mixes debug levels (`func_00114C30` needs `-g0`; `-g`/`-g2` suppress delay-slot filling, so the level is load-bearing). The original is a **mix of two EE-GCC generations**: `2.9-ee-991111(-01)` and `2.96-ee-001003-1` (`tools/cc_matrix.py`, all 14 published revisions; no single one matches everything). 47 functions byte-exact; 12 recorded as NON_MATCHING and unexplained by any revision. **`-O2` discriminated from `-O1`/`-Os`** (Session 4 step 3: 92-function sweep, 39 / 14 counterexamples; `-O2` ≡ `-O3`). See `docs/compiler.md`, `docs/cc-matrix-session4.txt`, `docs/opt-sweep-session4.txt`.
-- [x] **Phase 4 — Split & rebuild.** splat split is **per-function**: **1037 `.s`** under `asm/cod/` (one per function), `.text` 16-byte header as `textbin`; plus data segments, `build/SCUS_974.72.ld`, `include/macro.inc`. **Reassembly + link + hash check PASS**: `tools/build.py` (WSL2) → flat image byte-identical to the original, **237,952 bytes, SHA-1 `6f853f644a4279db18c15ceb8ee1d2a8b87a7b39`**. Still green with 47 functions replaced by C. See `docs/splat.md`, `docs/toolchain.md`, `docs/rebuild.md`.
-- [~] **Phase 5 — Name.** In progress. `tools/find_string_refs.py` maps strings to the 66 functions that reference them; 2 functions named from direct evidence (`LoaderSysDumpIopModuleIdentifiers`, `OutputLinkerScriptFile`), the rest tabulated in `docs/naming-candidates.md`. Structs/data objects documented in `docs/structs.md`.
-- [~] **Phase 6 — Decompile. STARTED.** 47 / 1037 functions matched from C (1148 / 203,692 `.text` bytes = 0.564 %), all gated by the image hash. Loop + tooling in `docs/progress.md`; non-matching attempts in `src/non_matching/` (12 tracked, none explained by any EE-GCC revision).
+- [x] **Phase 4 — Split & rebuild.** splat split is **per-function**: **1036 `.s`** under `asm/cod/` (one per function) plus 2 raw `textbin` subsegments (the `.text` 16-byte header and the `0x00113074` non-function hole); plus data segments, `build/SCUS_974.72.ld`, `include/macro.inc`. **Reassembly + link + hash check PASS**: `tools/build.py` (WSL2) → flat image byte-identical to the original, **237,952 bytes, SHA-1 `6f853f644a4279db18c15ceb8ee1d2a8b87a7b39`**. Still green with 92 functions replaced by C. See `docs/splat.md`, `docs/toolchain.md`, `docs/rebuild.md`.
+- [~] **Phase 5 — Name.** In progress. `tools/name_from_strings.py` (authoritative: resolves `string -> function` from splat's `%hi/%lo` relocation labels) finds **61 functions that reference a string carrying an identifier**; **43 are named, 18 are recorded candidates** (`docs/naming-candidates.md`). Names come from three evidence classes — *verbatim* self-naming log messages (17), *object* semaphore names with the routine inferred (22, UNCONFIRMED) and three single inferences (`start`, `vfprintf`, `sceDbcGetDeviceStatus`, UNCONFIRMED) — plus the two Session-3 names (`LoaderSysDumpIopModuleIdentifiers`, `OutputLinkerScriptFile`). **45 named `.text` symbols** (`entry` + 44 evidence-derived). `func_00113074` was re-checked and is a splat boundary false positive (unreferenced; see `config/non_function_holes.txt`). Structs/data objects documented in `docs/structs.md`.
+- [~] **Phase 6 — Decompile. STARTED.** 92 / 1037 functions matched from C (3308 / 203,692 `.text` bytes = 1.624 %), all gated by the image hash. Loop + tooling in `docs/progress.md`; non-matching attempts in `src/non_matching/` (36 tracked, none explained by any EE-GCC revision).
 
 ## 6. Identifying the compiler
 
@@ -150,21 +152,65 @@ Tips: use a function's constants, string references, and call patterns to infer 
 
 | Metric | Value |
 |--------|-------|
-| Current phase | Phases 1–4 done; **Phase 3 revision question resolved**; Phase 5 in progress; **Phase 6: 92 functions matched** |
+| Current phase | Phases 1–4 done; **Phase 3 revision question resolved**; **Phase 5 in progress (45 named symbols)**; Phase 6: 92 functions matched |
 | ELF rebuild hash match | **YES — 237,952 bytes, SHA-1 `6f853f64…` (flat load image), still green with 92 functions from C** |
-| Functions named | 3 (`entry`, `LoaderSysDumpIopModuleIdentifiers`, `OutputLinkerScriptFile`) + 66 string-reference candidates |
+| Functions named | **45 `.text` symbols** = `entry` + **44 evidence-derived names**: 17 verbatim self-naming log messages, 22 inferred from `SceStdio<Op>Sema` object names (UNCONFIRMED), 3 single inferences (UNCONFIRMED), 2 Session-3 names |
+| String-evidenced name candidates | **61 functions** reference an identifier-bearing string; **43 named, 18 pending** (61 vs Session 3's 66: the old `lui`-window heuristic both missed referents and counted strings that carry no identifier) |
 | Functions matched (C) | **92 / 1037** (68 with `ee-gcc2.96`, 24 with `ee-gcc2.9-991111-01`; 26 wrappers use a per-TU `-fno-optimize-sibling-calls`) |
 | Matched bytes | 3308 / 203,692 `.text` bytes = **1.624 %** (verified) |
 | Compiler flags | `-O2 -g2 -G8` (per-TU `-g0` and `-fno-optimize-sibling-calls` overrides); `-O2` discriminated from `-O1`/`-Os`, `-O2` ≡ `-O3` (§2.2) |
 | Compilers | `ee-gcc2.96` (default) + `ee-gcc2.9-991111-01` (`cc=29`); matrix in `docs/compiler.md` §4.3 |
-| `.text` disassembly (splat R5900) | accurate; **1037 per-function `.s`** |
+| `.text` disassembly (splat R5900) | accurate; **1036 per-function `.s` + 2 raw `textbin`** (`.text` header, `0x00113074` non-function hole) |
 | Ghidra EE-extension decode | **100 %** of `.text` (50,923/50,923) |
 | splat split coverage | 203 KB / 85.6 % of ROM |
-| Functions detected | 1037 (spimdisasm) |
+| Functions detected | 1036 after removing 1 splat boundary false positive (`0x00113074`) from spimdisasm's 1037 |
 | Non-matching attempts tracked | 36 (`src/non_matching/`, none explained by any EE-GCC revision) |
 | IOP modules inventoried | 11 IRX (ELF32 MIPS-I, R3000A) |
 
 ### Session log
+
+- **2026-10-14 (Session 4, step 4) — Phase 5 naming pass; the `func_00113074`
+  boundary is a false positive.** Naming goes from 3 to **45 named `.text`
+  symbols** (`entry` + 44 evidence-derived), and the split is re-run and
+  hash-verified.
+  - **New tool `tools/name_from_strings.py`** (authoritative): resolves
+    `string -> function` from **splat's own `%hi/%lo` relocation labels** in
+    `asm/cod/*.s`, and classifies each string as *verbatim* (the routine's own
+    diagnostic names it — `"sceDbcSendData2: rpc error"`), *object* (a semaphore
+    the routine creates for itself — `"SceStdioReadSema"`), *bare*, or *assert*.
+    It found **61 functions** with an identifier-bearing string (Session 3's
+    `tools/find_string_refs.py` window-6 heuristic reported 66 and missed 11 real
+    referents; it now carries a warning).
+  - **Applied 43 names**: 17 *verbatim* (`LoaderSysLoadIopModuleFromEEBuffer`,
+    `setNewIopIdentifier`, `sceGsPutDrawEnv`/`sceGsSyncPath`/`sceGsDefDispEnv`,
+    ten `sceDbc*`, `sceCdChgSys`, `sceSifMCallRpc` — all UNCONFIRMED-free because
+    the function's own message states the name), 22 *object*-rule `sceStdio*`
+    (each verified to lazily create its own per-operation sema at the operation
+    site), plus `start`, `vfprintf` and `sceDbcGetDeviceStatus` marked
+    UNCONFIRMED. `LoaderSysLoadIopModuleFromEEBuffer` is the one function whose
+    body inlines two static helpers, which is why it references three names.
+  - **18 candidates left pending with reasons** (thread names, `bare` object
+    names, multi-object inits, pure sema-creation helpers) — table in
+    `docs/naming-candidates.md`.
+  - **`func_00113074`: the proposed size-8/size-12 split is contradicted by the
+    call graph.** 0x00113074 has no reference of any kind (no `jal`/`j`, no
+    `lui`+immediate, no literal word), its only instruction is a `jr $ra` whose
+    delay slot is the *first* instruction of 0x00113078, and 0x00113078 has 8
+    `jal` callers — so splitting there would delete the entry those callers need.
+    New mechanism `config/non_function_holes.txt` +
+    `tools/gen_function_splits.py` emits it as a 4-byte `textbin` (raw bytes)
+    instead of `asm`: no function is invented and the image is byte-identical.
+    The **six other non-8-byte-aligned starts** (0x0012821C, 0x001282CC,
+    0x00128CDC, 0x00128E6C, 0x001290C4, 0x0012E704) all have **2–55 callers** and
+    stay real: 8-byte alignment is not a validity criterion here.
+  - **Symbol-rename plumbing.** splat parses everything after `;` on a
+    `symbol_addrs.txt` line as `attr:value` pairs, so comments moved to their own
+    lines; five matching C sources (`00C058/00C230/00C600/00CFB8/00D408`) had
+    their `func_0010BEA8` callee renamed to `sceStdioCCode` or the link failed.
+  - **Verification.** Pipeline re-run end to end (`splat_ps2_config.py` → base
+    split → `gen_function_splits.py` → `rm -rf asm` → clean split): 1036 `asm` +
+    2 `textbin`, coverage 85.60 %. `tools/build.py` → **HASH MATCH** (237,952 B,
+    `6f853f64…`); `tools/verify_c.py` → **92/92 byte-exact**.
 
 - **2026-10-14 (Session 4, step 3) — the optimisation level is discriminated.**
   New tool **`tools/opt_sweep.py`**: compiles every entry of

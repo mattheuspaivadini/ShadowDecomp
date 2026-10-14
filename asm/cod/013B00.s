@@ -23,13 +23,13 @@ glabel func_00113B00
     /* 13B24 00113B24 21205100 */   addu      $a0, $v0, $s1
     /* 13B28 00113B28 05000012 */  beqz       $s0, .L00113B40
     /* 13B2C 00113B2C 00000000 */   nop
-    /* 13B30 00113B30 E04D040C */  jal        func_00113780
+    /* 13B30 00113B30 E04D040C */  jal        sceGsPutDrawEnv
     /* 13B34 00113B34 40012426 */   addiu     $a0, $s1, 0x140
     /* 13B38 00113B38 04000010 */  b          .L00113B4C
     /* 13B3C 00113B3C 2000BFDF */   ld        $ra, 0x20($sp)
 .align 2
   .L00113B40:
-    /* 13B40 00113B40 E04D040C */  jal        func_00113780
+    /* 13B40 00113B40 E04D040C */  jal        sceGsPutDrawEnv
     /* 13B44 00113B44 50002426 */   addiu     $a0, $s1, 0x50
     /* 13B48 00113B48 2000BFDF */  ld         $ra, 0x20($sp)
 .align 2

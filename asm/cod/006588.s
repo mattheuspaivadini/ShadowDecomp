@@ -53,12 +53,12 @@ glabel func_00106588
     /* 6624 00106624 700006FE */  sd         $a2, (0x20000070 & 0xFFFF)($s0)
     /* 6628 00106628 2D200000 */  daddu      $a0, $zero, $zero
     /* 662C 0010662C 100002FE */  sd         $v0, (0x20000010 & 0xFFFF)($s0)
-    /* 6630 00106630 FE4E040C */  jal        func_00113BF8
+    /* 6630 00106630 FE4E040C */  jal        sceGsSyncPath
     /* 6634 00106634 900000FE */   sd        $zero, (0x20000090 & 0xFFFF)($s0)
     /* 6638 00106638 2D200002 */  daddu      $a0, $s0, $zero
     /* 663C 0010663C 2800B1DF */  ld         $s1, 0x28($sp)
     /* 6640 00106640 2000B0DF */  ld         $s0, 0x20($sp)
     /* 6644 00106644 3000BFDF */  ld         $ra, 0x30($sp)
-    /* 6648 00106648 E04D0408 */  j          func_00113780
+    /* 6648 00106648 E04D0408 */  j          sceGsPutDrawEnv
     /* 664C 0010664C 4000BD27 */   addiu     $sp, $sp, 0x40
 endlabel func_00106588

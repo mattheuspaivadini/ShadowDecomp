@@ -128,7 +128,7 @@ segments:
       - [0x002C58, asm, cod/002C58] # func_00102C58
       - [0x002C90, asm, cod/002C90] # func_00102C90
       - [0x002CF8, asm, cod/002CF8] # func_00102CF8
-      - [0x002D70, asm, cod/002D70] # func_00102D70
+      - [0x002D70, asm, cod/002D70] # LoaderSysLoadIopModuleFromEEBuffer
       - [0x002FE0, asm, cod/002FE0] # func_00102FE0
       - [0x002FE8, asm, cod/002FE8] # func_00102FE8
       - [0x003008, asm, cod/003008] # func_00103008
@@ -147,10 +147,10 @@ segments:
       - [0x0032F0, asm, cod/0032F0] # func_001032F0
       - [0x0032F8, asm, cod/0032F8] # func_001032F8
       - [0x003300, asm, cod/003300] # func_00103300
-      - [0x003340, asm, cod/003340] # func_00103340
+      - [0x003340, asm, cod/003340] # setNewIopIdentifier
       - [0x0033B0, asm, cod/0033B0] # func_001033B0
       - [0x0039C0, asm, cod/0039C0] # func_001039C0
-      - [0x003B40, asm, cod/003B40] # func_00103B40
+      - [0x003B40, asm, cod/003B40] # start
       - [0x003CA8, asm, cod/003CA8] # func_00103CA8
       - [0x003CB8, asm, cod/003CB8] # func_00103CB8
       - [0x003D88, asm, cod/003D88] # func_00103D88
@@ -409,34 +409,34 @@ segments:
       - [0x00AB58, asm, cod/00AB58] # func_0010AB58
       - [0x00AB90, asm, cod/00AB90] # func_0010AB90
       - [0x00ACD0, asm, cod/00ACD0] # func_0010ACD0
-      - [0x00ADC0, asm, cod/00ADC0] # func_0010ADC0
-      - [0x00B050, asm, cod/00B050] # func_0010B050
-      - [0x00B1C8, asm, cod/00B1C8] # func_0010B1C8
-      - [0x00B408, asm, cod/00B408] # func_0010B408
-      - [0x00B678, asm, cod/00B678] # func_0010B678
-      - [0x00B938, asm, cod/00B938] # func_0010B938
-      - [0x00BCC0, asm, cod/00BCC0] # func_0010BCC0
-      - [0x00BEA8, asm, cod/00BEA8] # func_0010BEA8
+      - [0x00ADC0, asm, cod/00ADC0] # sceStdioOpen
+      - [0x00B050, asm, cod/00B050] # sceStdioClose
+      - [0x00B1C8, asm, cod/00B1C8] # sceStdioLseek
+      - [0x00B408, asm, cod/00B408] # sceStdioRead
+      - [0x00B678, asm, cod/00B678] # sceStdioWrite
+      - [0x00B938, asm, cod/00B938] # sceStdioIoctl
+      - [0x00BCC0, asm, cod/00BCC0] # sceStdioIoctl2
+      - [0x00BEA8, asm, cod/00BEA8] # sceStdioCCode
       - [0x00C058, asm, cod/00C058] # func_0010C058
-      - [0x00C078, asm, cod/00C078] # func_0010C078
+      - [0x00C078, asm, cod/00C078] # sceStdioMkdir
       - [0x00C230, asm, cod/00C230] # func_0010C230
-      - [0x00C250, asm, cod/00C250] # func_0010C250
-      - [0x00C4D0, asm, cod/00C4D0] # func_0010C4D0
+      - [0x00C250, asm, cod/00C250] # sceStdioFormat
+      - [0x00C4D0, asm, cod/00C4D0] # sceStdioAddDrv
       - [0x00C600, asm, cod/00C600] # func_0010C600
       - [0x00C620, asm, cod/00C620] # func_0010C620
-      - [0x00C6E8, asm, cod/00C6E8] # func_0010C6E8
-      - [0x00C850, asm, cod/00C850] # func_0010C850
-      - [0x00C9A8, asm, cod/00C9A8] # func_0010C9A8
-      - [0x00CB60, asm, cod/00CB60] # func_0010CB60
-      - [0x00CDB0, asm, cod/00CDB0] # func_0010CDB0
+      - [0x00C6E8, asm, cod/00C6E8] # sceStdioDclose
+      - [0x00C850, asm, cod/00C850] # sceStdioDread
+      - [0x00C9A8, asm, cod/00C9A8] # sceStdioGetstat
+      - [0x00CB60, asm, cod/00CB60] # sceStdioChstat
+      - [0x00CDB0, asm, cod/00CDB0] # sceStdioRename
       - [0x00CFB8, asm, cod/00CFB8] # func_0010CFB8
-      - [0x00CFD8, asm, cod/00CFD8] # func_0010CFD8
-      - [0x00D188, asm, cod/00D188] # func_0010D188
+      - [0x00CFD8, asm, cod/00CFD8] # sceStdioSync
+      - [0x00D188, asm, cod/00D188] # sceStdioMount
       - [0x00D408, asm, cod/00D408] # func_0010D408
-      - [0x00D428, asm, cod/00D428] # func_0010D428
-      - [0x00D668, asm, cod/00D668] # func_0010D668
-      - [0x00D910, asm, cod/00D910] # func_0010D910
-      - [0x00DB08, asm, cod/00DB08] # func_0010DB08
+      - [0x00D428, asm, cod/00D428] # sceStdioLseek64
+      - [0x00D668, asm, cod/00D668] # sceStdioDevctl
+      - [0x00D910, asm, cod/00D910] # sceStdioSymlink
+      - [0x00DB08, asm, cod/00DB08] # sceStdioReadlink
       - [0x00DCE8, asm, cod/00DCE8] # func_0010DCE8
       - [0x00DD70, asm, cod/00DD70] # func_0010DD70
       - [0x00DDE0, asm, cod/00DDE0] # func_0010DDE0
@@ -620,7 +620,7 @@ segments:
       - [0x012E40, asm, cod/012E40] # func_00112E40
       - [0x012E80, asm, cod/012E80] # func_00112E80
       - [0x012FC8, asm, cod/012FC8] # func_00112FC8
-      - [0x013074, asm, cod/013074] # func_00113074
+      - [0x013074, textbin, cod/013074] # non-function hole (raw bytes), was func_00113074
       - [0x013078, asm, cod/013078] # func_00113078
       - [0x013088, asm, cod/013088] # func_00113088
       - [0x013098, asm, cod/013098] # func_00113098
@@ -636,17 +636,17 @@ segments:
       - [0x013520, asm, cod/013520] # func_00113520
       - [0x013530, asm, cod/013530] # func_00113530
       - [0x013598, asm, cod/013598] # func_00113598
-      - [0x013780, asm, cod/013780] # func_00113780
+      - [0x013780, asm, cod/013780] # sceGsPutDrawEnv
       - [0x013868, asm, cod/013868] # func_00113868
       - [0x013B00, asm, cod/013B00] # func_00113B00
       - [0x013B60, asm, cod/013B60] # func_00113B60
-      - [0x013BF8, asm, cod/013BF8] # func_00113BF8
+      - [0x013BF8, asm, cod/013BF8] # sceGsSyncPath
       - [0x013F10, asm, cod/013F10] # func_00113F10
       - [0x014020, asm, cod/014020] # func_00114020
       - [0x014080, asm, cod/014080] # func_00114080
       - [0x014108, asm, cod/014108] # func_00114108
       - [0x0141A8, asm, cod/0141A8] # func_001141A8
-      - [0x0141B8, asm, cod/0141B8] # func_001141B8
+      - [0x0141B8, asm, cod/0141B8] # sceGsDefDispEnv
       - [0x014530, asm, cod/014530] # func_00114530
       - [0x0145F0, asm, cod/0145F0] # func_001145F0
       - [0x0146B8, asm, cod/0146B8] # func_001146B8
@@ -690,20 +690,20 @@ segments:
       - [0x015A88, asm, cod/015A88] # func_00115A88
       - [0x015D28, asm, cod/015D28] # func_00115D28
       - [0x015D70, asm, cod/015D70] # func_00115D70
-      - [0x015DD0, asm, cod/015DD0] # func_00115DD0
-      - [0x015E40, asm, cod/015E40] # func_00115E40
-      - [0x015F70, asm, cod/015F70] # func_00115F70
-      - [0x016030, asm, cod/016030] # func_00116030
+      - [0x015DD0, asm, cod/015DD0] # sceDbcSetWorkAddr
+      - [0x015E40, asm, cod/015E40] # sceDbcCreateSocket
+      - [0x015F70, asm, cod/015F70] # sceDbcDeleteSocket
+      - [0x016030, asm, cod/016030] # sceDbcGetDepNumber
       - [0x0161A0, asm, cod/0161A0] # func_001161A0
-      - [0x016298, asm, cod/016298] # func_00116298
-      - [0x016348, asm, cod/016348] # func_00116348
-      - [0x0163F8, asm, cod/0163F8] # func_001163F8
+      - [0x016298, asm, cod/016298] # sceDbcInitSocket
+      - [0x016348, asm, cod/016348] # sceDbcResetSocket
+      - [0x0163F8, asm, cod/0163F8] # sceDbcGetDeviceStatus
       - [0x0164A8, asm, cod/0164A8] # func_001164A8
-      - [0x016568, asm, cod/016568] # func_00116568
-      - [0x0166F8, asm, cod/0166F8] # func_001166F8
-      - [0x016828, asm, cod/016828] # func_00116828
+      - [0x016568, asm, cod/016568] # sceDbcSRData
+      - [0x0166F8, asm, cod/0166F8] # sceDbcSendData
+      - [0x016828, asm, cod/016828] # sceDbcSendData2
       - [0x0169D8, asm, cod/0169D8] # func_001169D8
-      - [0x016B30, asm, cod/016B30] # func_00116B30
+      - [0x016B30, asm, cod/016B30] # sceDbcReceiveData
       - [0x016C58, asm, cod/016C58] # func_00116C58
       - [0x016C80, asm, cod/016C80] # func_00116C80
       - [0x016CE8, asm, cod/016CE8] # func_00116CE8
@@ -727,7 +727,7 @@ segments:
       - [0x017FB0, asm, cod/017FB0] # func_00117FB0
       - [0x0181D0, asm, cod/0181D0] # func_001181D0
       - [0x018288, asm, cod/018288] # func_00118288
-      - [0x018358, asm, cod/018358] # func_00118358
+      - [0x018358, asm, cod/018358] # sceCdChgSys
       - [0x018380, asm, cod/018380] # func_00118380
       - [0x018438, asm, cod/018438] # func_00118438
       - [0x018490, asm, cod/018490] # func_00118490
@@ -781,7 +781,7 @@ segments:
       - [0x019BE0, asm, cod/019BE0] # func_00119BE0
       - [0x019C08, asm, cod/019C08] # func_00119C08
       - [0x019DD8, asm, cod/019DD8] # func_00119DD8
-      - [0x019F18, asm, cod/019F18] # func_00119F18
+      - [0x019F18, asm, cod/019F18] # sceSifMCallRpc
       - [0x01A188, asm, cod/01A188] # func_0011A188
       - [0x01A330, asm, cod/01A330] # func_0011A330
       - [0x01A408, asm, cod/01A408] # func_0011A408
@@ -1035,7 +1035,7 @@ segments:
       - [0x029830, asm, cod/029830] # func_00129830
       - [0x029878, asm, cod/029878] # func_00129878
       - [0x029930, asm, cod/029930] # func_00129930
-      - [0x0299A8, asm, cod/0299A8] # func_001299A8
+      - [0x0299A8, asm, cod/0299A8] # vfprintf
       - [0x02B018, asm, cod/02B018] # func_0012B018
       - [0x02B1D8, asm, cod/02B1D8] # func_0012B1D8
       - [0x02B2B8, asm, cod/02B2B8] # func_0012B2B8

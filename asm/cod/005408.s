@@ -89,7 +89,7 @@ glabel func_00105408
     /* 5534 00105534 264C040C */  jal        func_00113098
     /* 5538 00105538 2D202002 */   daddu     $a0, $s1, $zero
     /* 553C 0010553C 2D200000 */  daddu      $a0, $zero, $zero
-    /* 5540 00105540 FE4E040C */  jal        func_00113BF8
+    /* 5540 00105540 FE4E040C */  jal        sceGsSyncPath
     /* 5544 00105544 2D280000 */   daddu     $a1, $zero, $zero
     /* 5548 00105548 4652040C */  jal        func_00114918
     /* 554C 0010554C 01000424 */   addiu     $a0, $zero, 0x1
@@ -171,7 +171,7 @@ glabel func_00105408
     /* 5664 00105664 264C040C */  jal        func_00113098
     /* 5668 00105668 2D20A003 */   daddu     $a0, $sp, $zero
     /* 566C 0010566C 2D200000 */  daddu      $a0, $zero, $zero
-    /* 5670 00105670 FE4E040C */  jal        func_00113BF8
+    /* 5670 00105670 FE4E040C */  jal        sceGsSyncPath
     /* 5674 00105674 2D280000 */   daddu     $a1, $zero, $zero
     /* 5678 00105678 4652040C */  jal        func_00114918
     /* 567C 0010567C 01000424 */   addiu     $a0, $zero, 0x1

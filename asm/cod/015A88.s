@@ -192,7 +192,7 @@ glabel func_00115A88
     /* 15CD8 00115CD8 40868424 */  addiu      $a0, $a0, %lo(D_00138640)
     /* 15CDC 00115CDC 165B040C */  jal        func_00116C58
     /* 15CE0 00115CE0 2D280002 */   daddu     $a1, $s0, $zero
-    /* 15CE4 00115CE4 7457040C */  jal        func_00115DD0
+    /* 15CE4 00115CE4 7457040C */  jal        sceDbcSetWorkAddr
     /* 15CE8 00115CE8 2D200002 */   daddu     $a0, $s0, $zero
     /* 15CEC 00115CEC 01000324 */  addiu      $v1, $zero, 0x1
     /* 15CF0 00115CF0 01000224 */  addiu      $v0, $zero, 0x1

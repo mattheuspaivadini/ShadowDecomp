@@ -1,39 +1,180 @@
 // Symbol addresses for Shadow of the Colossus (USA), main ELF: SCUS_974.72
 //
-// Format: <name> = 0x<address>; // attr0:val0 attr1:val1 [...]
-// Comments use "//". Exactly one ";" per line, right after the address.
-// Conventions: func_XXXXXXXX for functions, D_XXXXXXXX for data. Evidence only.
+// Format: <name> = 0x<address>;
+// NOTE: splat parses everything after the ";" on an assignment line as
+// space-separated `attr:value` pairs, so assignment lines below end at the ";"
+// and all explanation lives on its own "//" line above. Do not add text (or a
+// colon) after the semicolon.
 //
+// Conventions: func_XXXXXXXX for functions, D_XXXXXXXX for data. Evidence only.
 // The retail ELF is STRIPPED (no .symtab). Addresses below are confirmed from
 // the ELF header / string evidence. See docs/analysis.md.
+//
+// Evidence classes used by the Phase-5 naming pass (Session 4, step 4); the full
+// candidate table is docs/naming-candidates.md and the generator is
+// tools/name_from_strings.py:
+//
+//   * "verbatim" - the function's own diagnostic message contains the routine's
+//     identifier (log prefix "<name>:", e.g. "sceDbcSendData2: rpc error"), or
+//     the name is passed as that message's own %s argument. Direct evidence.
+//   * "object"   - the string is a semaphore/thread name the routine hands to
+//     the kernel create call (e.g. "SceStdioReadSema"). It names the *object*;
+//     the routine name is inferred from it, so it is marked UNCONFIRMED.
+//   * UNCONFIRMED - identifier inferred from the evidence, not literally stated
+//     by it. See docs/naming-candidates.md for the per-entry reason.
 
 // Entry point (from ELF header e_entry).
 entry = 0x00100010;
 
-// Evidence anchors: embedded PS2 SDK version banners (string data, not functions).
-// Nexus strings pack several banners together, so sub-banners are address+0x10.
-D_libkernel_banner = 0x00132270; // "PsIIlibkernl3000"
-D_libdma_banner    = 0x001339A0; // "PsIIlibdma  3000"
-D_libpad2_banner   = 0x001339D8; // "PsIIlibpad2 3020"
-D_libvib_banner    = 0x00133A08; // "PsIIlibvib  3000"
-D_libdbc_banner    = 0x00133A18; // "PsIIlibdbc  3020" (same packed string, +0x10)
-D_libcdvd_banner   = 0x00133A40; // "PsIIlibcdvd 3000"
-D_libnet_banner    = 0x001355F8; // "PsIIlibnet  3000"
-D_libmrpc_banner   = 0x00135608; // "PsIIlibmrpc 3000" (same packed string, +0x10)
+// ---------------------------------------------------------------------------
+// Evidence anchors: embedded PS2 SDK version banners (string data, not
+// functions). Nexus strings pack several banners together, so sub-banners are
+// address+0x10.
+// ---------------------------------------------------------------------------
+// "PsIIlibkernl3000"
+D_libkernel_banner = 0x00132270;
+// "PsIIlibdma  3000"
+D_libdma_banner    = 0x001339A0;
+// "PsIIlibpad2 3020"
+D_libpad2_banner   = 0x001339D8;
+// "PsIIlibvib  3000"
+D_libvib_banner    = 0x00133A08;
+// "PsIIlibdbc  3020" (sub-banner of the same packed string, address+0x10)
+D_libdbc_banner    = 0x00133A18;
+// "PsIIlibcdvd 3000"
+D_libcdvd_banner   = 0x00133A40;
+// "PsIIlibnet  3000"
+D_libnet_banner    = 0x001355F8;
+// "PsIIlibmrpc 3000" (sub-banner of the same packed string, address+0x10)
+D_libmrpc_banner   = 0x00135608;
 
 // ---------------------------------------------------------------------------
 // Phase 5 (Session 3): names taken from strings the function itself references.
-// Evidence chain: tools/find_string_refs.py resolves every lui/%lo address
-// materialisation in .text and reports which splat function refers to which
-// string in manifest/strings.txt. See docs/naming-candidates.md for the rest.
 // ---------------------------------------------------------------------------
-
 // The function's own diagnostic message names it verbatim:
-//   "ldsys: LoaderSysDumpIopModuleIdentifiers: dump list of iop identifiers\n"
+//   "ldsys: LoaderSysDumpIopModuleIdentifiers: dump list of iop identifiers"
 LoaderSysDumpIopModuleIdentifiers = 0x00103258;
 
-// Emits a linker script: "SECTIONS {\n", "%s = 0x%08x;\n", and the section
-// table strings ("alloc flag(alloc)", "normal use", ...).
+// Emits a linker script ("SECTIONS {", "%s = 0x%08x;", and the section table
+// strings "alloc flag(alloc)", "normal use", ...).
 // UNCONFIRMED: identifier chosen from the emitted text; the same name appears in
 // the Fantaskink/SOTC preview-build decompilation (hint source, different build).
 OutputLinkerScriptFile = 0x00100590;
+
+// ---------------------------------------------------------------------------
+// Phase 5 (Session 4, step 4): "verbatim" self-naming log evidence.
+// Every entry below is named by its own diagnostic message, resolved by
+// tools/name_from_strings.py from splat's %hi/%lo relocation labels.
+// ---------------------------------------------------------------------------
+// "ldsys: LoaderSysLoadIopModuleFromEEBuffer: iop identifier <name> exists at
+// #N (load skipped". This function also contains inlined copies of the static
+// helpers _loadIopModuleFromEEBuffer (2x) and setNewIopIdentifier (1x), whose
+// the strings are therefore referenced from inside this function as well.
+LoaderSysLoadIopModuleFromEEBuffer = 0x00102D70;
+
+// "ldsys: setNewIopIdentifier: set new iop identifier <name> at #N".
+// 22 call sites; increments the counter at D_0013A008 and stores the copied
+// identifier into the 16-byte records at D_0013CB90.
+setNewIopIdentifier = 0x00103340;
+
+// libgraph (sceGs*): each function's own message is prefixed with its name.
+// "sceGsPutDrawEnv: DMA Ch.2 does not terminate"
+sceGsPutDrawEnv = 0x00113780;
+// Five messages, all prefixed "sceGsSyncPath: "
+sceGsSyncPath   = 0x00113BF8;
+// "sceGsDefDispEnv:Not support displaymode for 0x%x!!"
+sceGsDefDispEnv = 0x001141B8;
+
+// libdbc (i.LINK / Digital Broadband). Each wrapper's own "rpc error" message
+// carries its name; the RPC ids are consecutive (0x80001301, 02, 03, 04, ...).
+sceDbcSetWorkAddr   = 0x00115DD0;
+sceDbcCreateSocket  = 0x00115E40;
+sceDbcDeleteSocket  = 0x00115F70;
+sceDbcGetDepNumber  = 0x00116030;
+sceDbcInitSocket    = 0x00116298;
+sceDbcResetSocket   = 0x00116348;
+sceDbcSRData        = 0x00116568;
+sceDbcSendData      = 0x001166F8;
+// also prints "dbcman : SendData2 BUSY"
+sceDbcSendData2     = 0x00116828;
+sceDbcReceiveData   = 0x00116B30;
+
+// "sceCdChgSys: Illegal_function_call" - this is the whole body of the
+// function: a stub that prints the message and returns 2.
+sceCdChgSys = 0x00118358;
+
+// Prints "%s: send buffer addr is not 64 byte align. %08x=n" with
+// %s = "sceSifMCallRpc", i.e. the function passes its own name to the message.
+sceSifMCallRpc = 0x00119F18;
+
+// ---------------------------------------------------------------------------
+// Phase 5 (Session 4, step 4): inferred identifiers (UNCONFIRMED).
+// ---------------------------------------------------------------------------
+// UNCONFIRMED: "sceDbcGetDeviceStatus: rpc error" (RPC 0x80001317). The same
+// message text is reused verbatim by 0x001164A8 (RPC 0x8000131D), which is left
+// unnamed; 0x001163F8 is the 0x1317 wrapper predicted by its position in the
+// consecutive id block 0x1315 InitSocket ... 0x131A ReceiveData.
+sceDbcGetDeviceStatus = 0x001163F8;
+
+// UNCONFIRMED: prints "ld: start: argc:%d" with its own first argument, then
+// walks the loader argument list; called once, from `entry` (at 0x001000AC).
+// The identifier may be a log prefix rather than the routine's name.
+start = 0x00103B40;
+
+// UNCONFIRMED: the only string is libc's in-function assert
+// "bug in vfprintf: bad base"; the exported libc symbol could be _vfprintf.
+vfprintf = 0x001299A8;
+
+// ---------------------------------------------------------------------------
+// libstdio, "SceStdio<Op>Sema" object rule (all UNCONFIRMED).
+// Each of these creates *its own* per-operation semaphore lazily inside the
+// operation (verified: 00B050 at 0x0010B0B8, 00B408 at 0x0010B488 and 00ADC0 at
+// 0x0010AF30 all call the create-sema wrapper func_00106FE0 with the string),
+// so the object name is a direct proxy for the operation the routine
+// implements: routine name inferred as sceStdio<Op> from "SceStdio<Op>Sema".
+// The SDK's own symbol spelling is not in the binary.
+// ---------------------------------------------------------------------------
+// "SceStdioOpenSema"
+sceStdioOpen     = 0x0010ADC0;
+// "SceStdioCloseSema"
+sceStdioClose    = 0x0010B050;
+// "SceStdioLseekSema"
+sceStdioLseek    = 0x0010B1C8;
+// "SceStdioReadSema"
+sceStdioRead     = 0x0010B408;
+// "SceStdioWriteSema"
+sceStdioWrite    = 0x0010B678;
+// "SceStdioIoctlSema"
+sceStdioIoctl    = 0x0010B938;
+// "SceStdioIoctl2Sema"
+sceStdioIoctl2   = 0x0010BCC0;
+// "SceStdioCCodeSema"
+sceStdioCCode    = 0x0010BEA8;
+// "SceStdioMkdirSema"
+sceStdioMkdir    = 0x0010C078;
+// "SceStdioFormatSema"
+sceStdioFormat   = 0x0010C250;
+// "SceStdioAddDrvSema"
+sceStdioAddDrv   = 0x0010C4D0;
+// "SceStdioDcloseSema"
+sceStdioDclose   = 0x0010C6E8;
+// "SceStdioDreadSema"
+sceStdioDread    = 0x0010C850;
+// "SceStdioGetstatSema"
+sceStdioGetstat  = 0x0010C9A8;
+// "SceStdioChstatSema"
+sceStdioChstat   = 0x0010CB60;
+// "SceStdioRenameSema"
+sceStdioRename   = 0x0010CDB0;
+// "SceStdioSyncSema"
+sceStdioSync     = 0x0010CFD8;
+// "SceStdioMountSema"
+sceStdioMount    = 0x0010D188;
+// "SceStdioLseek64Sema"
+sceStdioLseek64  = 0x0010D428;
+// "SceStdioDevctlSema"
+sceStdioDevctl   = 0x0010D668;
+// "SceStdioSymlinkSema"
+sceStdioSymlink  = 0x0010D910;
+// "SceStdioReadlinkSema"
+sceStdioReadlink = 0x0010DB08;

@@ -39,7 +39,7 @@ glabel func_00104FF0
     /* 5044 00105044 2D300000 */  daddu      $a2, $zero, $zero
     /* 5048 00105048 2D380000 */  daddu      $a3, $zero, $zero
     /* 504C 0010504C 2D400000 */  daddu      $a4, $zero, $zero
-    /* 5050 00105050 9A35040C */  jal        func_0010D668
+    /* 5050 00105050 9A35040C */  jal        sceStdioDevctl
     /* 5054 00105054 2D480000 */   daddu     $a5, $zero, $zero
     /* 5058 00105058 28A10426 */  addiu      $a0, $s0, %lo(D_0013A128)
     /* 505C 0010505C 00000000 */  nop
@@ -49,7 +49,7 @@ glabel func_00104FF0
     /* 5064 00105064 2D300000 */  daddu      $a2, $zero, $zero
     /* 5068 00105068 2D380000 */  daddu      $a3, $zero, $zero
     /* 506C 0010506C 2D400000 */  daddu      $a4, $zero, $zero
-    /* 5070 00105070 9A35040C */  jal        func_0010D668
+    /* 5070 00105070 9A35040C */  jal        sceStdioDevctl
     /* 5074 00105074 2D480000 */   daddu     $a5, $zero, $zero
     /* 5078 00105078 F9FF4204 */  bltzl      $v0, .L00105060
     /* 507C 0010507C 28A10426 */   addiu     $a0, $s0, %lo(D_0013A128)

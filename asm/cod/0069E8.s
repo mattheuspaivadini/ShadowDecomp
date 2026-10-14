@@ -82,7 +82,7 @@ glabel func_001069E8
     /* 6AF0 00106AF0 264C040C */  jal        func_00113098
     /* 6AF4 00106AF4 2D20A003 */   daddu     $a0, $sp, $zero
     /* 6AF8 00106AF8 2D200000 */  daddu      $a0, $zero, $zero
-    /* 6AFC 00106AFC FE4E040C */  jal        func_00113BF8
+    /* 6AFC 00106AFC FE4E040C */  jal        sceGsSyncPath
     /* 6B00 00106B00 2D280000 */   daddu     $a1, $zero, $zero
     /* 6B04 00106B04 4652040C */  jal        func_00114918
     /* 6B08 00106B08 01000424 */   addiu     $a0, $zero, 0x1

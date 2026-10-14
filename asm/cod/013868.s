@@ -42,14 +42,14 @@ glabel func_00113868
     /* 138D8 001138D8 2D306002 */  daddu      $a2, $s3, $zero
     /* 138DC 001138DC 2D388002 */  daddu      $a3, $s4, $zero
     /* 138E0 001138E0 2D400000 */  daddu      $a4, $zero, $zero
-    /* 138E4 001138E4 6E50040C */  jal        func_001141B8
+    /* 138E4 001138E4 6E50040C */  jal        sceGsDefDispEnv
     /* 138E8 001138E8 2D480000 */   daddu     $a5, $zero, $zero
     /* 138EC 001138EC 28004426 */  addiu      $a0, $s2, 0x28
     /* 138F0 001138F0 2D28C002 */  daddu      $a1, $s6, $zero
     /* 138F4 001138F4 2D306002 */  daddu      $a2, $s3, $zero
     /* 138F8 001138F8 2D388002 */  daddu      $a3, $s4, $zero
     /* 138FC 001138FC 2D400000 */  daddu      $a4, $zero, $zero
-    /* 13900 00113900 6E50040C */  jal        func_001141B8
+    /* 13900 00113900 6E50040C */  jal        sceGsDefDispEnv
     /* 13904 00113904 2D480000 */   daddu     $a5, $zero, $zero
     /* 13908 00113908 60004426 */  addiu      $a0, $s2, 0x60
     /* 1390C 0011390C 2D28C002 */  daddu      $a1, $s6, $zero

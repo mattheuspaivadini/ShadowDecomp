@@ -13,7 +13,7 @@ nonmatching func_0010C230, 0x1C
 glabel func_0010C230
     /* C230 0010C230 F0FFBD27 */  addiu      $sp, $sp, -0x10
     /* C234 0010C234 0000BFFF */  sd         $ra, 0x0($sp)
-    /* C238 0010C238 AA2F040C */  jal        func_0010BEA8
+    /* C238 0010C238 AA2F040C */  jal        sceStdioCCode
     /* C23C 0010C23C 08000524 */   addiu     $a1, $zero, 0x8
     /* C240 0010C240 0000BFDF */  ld         $ra, 0x0($sp)
     /* C244 0010C244 0800E003 */  jr         $ra

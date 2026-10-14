@@ -79,7 +79,7 @@ glabel func_00105E38
     /* 5F3C 00105F3C 264C040C */  jal        func_00113098
     /* 5F40 00105F40 2D202002 */   daddu     $a0, $s1, $zero
     /* 5F44 00105F44 2D200000 */  daddu      $a0, $zero, $zero
-    /* 5F48 00105F48 FE4E040C */  jal        func_00113BF8
+    /* 5F48 00105F48 FE4E040C */  jal        sceGsSyncPath
     /* 5F4C 00105F4C 2D280000 */   daddu     $a1, $zero, $zero
     /* 5F50 00105F50 4652040C */  jal        func_00114918
     /* 5F54 00105F54 01000424 */   addiu     $a0, $zero, 0x1
@@ -160,7 +160,7 @@ glabel func_00105E38
     /* 6080 00106080 264C040C */  jal        func_00113098
     /* 6084 00106084 2D20A003 */   daddu     $a0, $sp, $zero
     /* 6088 00106088 2D200000 */  daddu      $a0, $zero, $zero
-    /* 608C 0010608C FE4E040C */  jal        func_00113BF8
+    /* 608C 0010608C FE4E040C */  jal        sceGsSyncPath
     /* 6090 00106090 2D280000 */   daddu     $a1, $zero, $zero
     /* 6094 00106094 4652040C */  jal        func_00114918
     /* 6098 00106098 01000424 */   addiu     $a0, $zero, 0x1
@@ -231,7 +231,7 @@ glabel func_00105E38
     /* 6194 00106194 264C040C */  jal        func_00113098
     /* 6198 00106198 2D202002 */   daddu     $a0, $s1, $zero
     /* 619C 0010619C 2D200000 */  daddu      $a0, $zero, $zero
-    /* 61A0 001061A0 FE4E040C */  jal        func_00113BF8
+    /* 61A0 001061A0 FE4E040C */  jal        sceGsSyncPath
     /* 61A4 001061A4 2D280000 */   daddu     $a1, $zero, $zero
     /* 61A8 001061A8 4652040C */  jal        func_00114918
     /* 61AC 001061AC 01000424 */   addiu     $a0, $zero, 0x1
@@ -298,7 +298,7 @@ glabel func_00105E38
     /* 62A0 001062A0 264C040C */  jal        func_00113098
     /* 62A4 001062A4 2D20A003 */   daddu     $a0, $sp, $zero
     /* 62A8 001062A8 2D200000 */  daddu      $a0, $zero, $zero
-    /* 62AC 001062AC FE4E040C */  jal        func_00113BF8
+    /* 62AC 001062AC FE4E040C */  jal        sceGsSyncPath
     /* 62B0 001062B0 2D280000 */   daddu     $a1, $zero, $zero
     /* 62B4 001062B4 4652040C */  jal        func_00114918
     /* 62B8 001062B8 01000424 */   addiu     $a0, $zero, 0x1

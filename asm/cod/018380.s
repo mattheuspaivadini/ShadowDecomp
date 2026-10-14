@@ -51,7 +51,7 @@ glabel func_00118380
     /* 18404 00118404 0000A0AF */  sw         $zero, 0x0($sp)
     /* 18408 00118408 2D300000 */  daddu      $a2, $zero, $zero
     /* 1840C 0011840C 2D48E000 */  daddu      $a5, $a3, $zero
-    /* 18410 00118410 C667040C */  jal        func_00119F18
+    /* 18410 00118410 C667040C */  jal        sceSifMCallRpc
     /* 18414 00118414 2D580000 */   daddu     $a7, $zero, $zero
 .align 2
   .L00118418:
