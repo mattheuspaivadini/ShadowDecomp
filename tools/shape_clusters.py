@@ -146,6 +146,10 @@ def main() -> int:
     ap.add_argument("--stems", default="")
     ap.add_argument("--clone-dist", type=int, default=0,
                     help="max token edit distance for a matched-clone (0 = exact)")
+    ap.add_argument("--mnemonics", action="store_true",
+                    help="cluster by mnemonic sequence only (registers/immediates "
+                         "abstracted) - finds families with the same shape but "
+                         "different constants")
     args = ap.parse_args()
 
     mm = matched_map()
@@ -155,6 +159,9 @@ def main() -> int:
         fns[p.stem] = parse(p.stem)
     for f in fns.values():
         f["sig"] = normalize(f)
+        f["msig"] = tuple(t.split("(")[0] for t in f["sig"])
+
+    sig_key = "msig" if args.mnemonics else "sig"
 
     remaining = [s for s in fns if s not in mm]
     if args.stems:
@@ -177,7 +184,7 @@ def main() -> int:
     # clusters over the real pool (exclude the already-tracked backlog?)
     clusters: dict[tuple, list[str]] = {}
     for s in real:
-        clusters.setdefault(fns[s]["sig"], []).append(s)
+        clusters.setdefault(fns[s][sig_key], []).append(s)
     rows = [(len(v), min(len(fns[x]['insns']) for x in v), v[0], v, k)
             for k, v in clusters.items()]
     rows.sort(key=lambda r: (-r[0], r[1]))
