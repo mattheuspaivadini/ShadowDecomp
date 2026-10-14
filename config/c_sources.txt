@@ -353,6 +353,16 @@
 016C80 = src/cod/016C80.c cc=29   # $gp swap via inline asm + gate
 022048 = src/cod/022048.c cc=29   # delete socket for record field4, clear field0
 
+# --- Session 7, wave 3b (subagent drafts, verified here) ---------------------
+002A80 = src/cod/002A80.c        # table walk: skip -1 entries, call cb(v)
+002B68 = src/cod/002B68.c        # free loop over the table
+003F28 = src/cod/003F28.c        # flush the 10 handler slots + memset + counter
+022458 = src/cod/022458.c cc=29   # 022DA0 command family, command 0
+025338 = src/cod/025338.c        # double decompose x2 with sign flip
+0260A8 = src/cod/0260A8.c -fno-optimize-sibling-calls   # list node init + push
+027538 = src/cod/027538.c        # D_00135C60 refcount, func_001275A0
+02FA40 = src/cod/02FA40.c        # worker + conditional field accumulate
+
 # --- Session 7, wave 2a (subagent drafts, verified here) ---------------------
 0151B8 = src/cod/0151B8.c cc=29   # sceDbcDeleteSocket guard + 0x334-stride clear
 015650 = src/cod/015650.c cc=29   # sceDbcGetDepNumber guard + 0x334-stride record
