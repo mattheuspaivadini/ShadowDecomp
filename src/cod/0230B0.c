@@ -1,7 +1,6 @@
-/* STATUS (Session 7, 2026-10-14): NON_MATCHING. best score 2 [cc=29, default, variant best_void].
- * cc=29 keeps jal+epilogue (+1 instruction) while the image has a 2.9-style 0x30 frame AND a tail `j`; cc=296 sibling-calls but packs an 8-byte frame.
- * The original .s stays in the build (asm/cod/0230B0.s); this C
- * draft (Session 7) is kept for the record. */
+/* asm/cod/0230B0.s -> func_00109D28 (cc=29).
+ * Void wrapper + void tail callee: the 0x30 (2.9) frame + `j`
+ * MATCHED (Session 7). */
 /* v01: both the wrapper and the tail callee void (sibling-call eligibility). */
 extern int D_00169F10[];
 extern int D_00169F58[];
