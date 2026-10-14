@@ -24,15 +24,12 @@
  * .L8C:
  *   jr ra (delay: D_00133918.head = n)
  *
- * STATUS (2026-10-14, Session 4 step 3): NON_MATCHING. The control flow and
- * every instruction opcode are reproduced, but ee-gcc2.96 assigns a different
- * register set to the four loop values (n=$7, cur=$6, key=$5 vs the original's
- * n=$6, cur=$5, key=$7; prev/base agree). Register-allocation family, like the
- * other `Register allocation` entries in docs/progress.md. Tested: source-shape
- * permutations, local register variables (`asm("$6")` etc.), and the
- * ee-gcc2.9-991111-01 revision — none reproduces the original assignment. It is
- * the ≥30-instruction candidate for the -O sweep (see docs/compiler.md §2.2);
- * at -O1/-O2/-O3/-Os it is non-matching, so it does not discriminate -O.
+ * MATCHED (Session 6): byte-exact with the 2.9-ee-991111-01 revision (cc=29).
+ * Session 4 had recorded this as a register-allocation failure under
+ * ee-gcc2.96 (`n=$7, cur=$6, key=$5` vs the original's `n=$6, cur=$5, key=$7`);
+ * the 2.9 revision reproduces the original assignment exactly, so the whole
+ * `Register allocation` family has to be re-checked per revision. It was the
+ * ≥30-instruction candidate for the -O sweep (docs/compiler.md §2.2).
  */
 #include "symbols.h"
 

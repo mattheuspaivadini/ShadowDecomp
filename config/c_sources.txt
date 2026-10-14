@@ -213,3 +213,8 @@
 # --- Session 5, step 2: promoted permuter near-misses -------------------------
 014EE8 = src/cod/014EE8.c cc=29   # unsigned field (srl, not sra) + guard
 018578 = src/cod/018578.c cc=29   # early return keeps `daddu v0,zero` before ld ra
+
+# --- Session 6 (permuter re-attack of the non-matching backlog) ---
+010910 = src/cod/010910.c cc=29   # sorted-list insert (register roles: 2.9 revision)
+011F90 = src/cod/011F90.c cc=29   # store 5 through getter pointer; return -1
+0120D0 = src/cod/0120D0.c cc=29   # identical shape to 011F90

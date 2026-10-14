@@ -1,7 +1,9 @@
-/* STATUS (Session 4, 2026-10-14): NON_MATCHING. scheduling: the original materialises the constant before the epilogue `ld ra`; ours loads ra first.
- * The original .s stays in the build (asm/cod/011F90.s); this C
- * attempt is kept for the record. */
-/* asm/cod/011F90.s -> func_00111F90 @ 0x00111F90 (0x28 bytes)
+/* MATCHED (Session 6): byte-exact with the 2.9-ee-991111-01 revision (cc=29).
+ * Session 4 recorded a scheduling failure ("the original materialises the
+ * constant before the epilogue `ld ra`; ours loads ra first") under ee-gcc2.96;
+ * the 2.9 revision emits the original order.
+ *
+ * asm/cod/011F90.s -> func_00111F90 @ 0x00111F90 (0x28 bytes)
  *   addiu sp,sp,-0x10; sd ra,0(sp)
  *   jal func_00127528
  *    nop
