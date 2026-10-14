@@ -332,3 +332,6 @@
 0221D0 = src/cod/0221D0.c cc=29   # id + clear D_00167F00 tracking block
 025008 = src/cod/025008.c        # (framed family, 296)
 02F800 = src/cod/02F800.c        # (framed family, 296)
+
+# --- Session 7, targeted near-miss fixes -------------------------------------
+013228 = src/cod/013228.c cc=29   # quadword append; asm memory barrier keeps store order
