@@ -44,6 +44,10 @@ def main() -> int:
     ap.add_argument("--note", default="s8-draft")
     ap.add_argument("--log", type=Path, default=None)
     ap.add_argument("--jobs", type=int, default=8)
+    ap.add_argument("--extra-cc", default="wine:ee-gcc2.95.3-136,wine:ee-gcc2.95.3-114,wine:ee-gcc2.95.2-273a",
+                    help="third-generation compilers tried only on stems that "
+                         "did not match under the pinned cc=29/296 matrix "
+                         "(empty string disables)")
     args = ap.parse_args()
 
     stems = [s.strip() for s in args.stems.split(",") if s.strip()]
@@ -89,14 +93,33 @@ def main() -> int:
         if stem not in best or score < best[stem][0]:
             best[stem] = (score, cc, flags, variant)
 
+    zeros = [s for s in best if best[s][0] == 0]
+    small = [s for s in best if 0 < best[s][0] <= 3]
+
+    # third generation: only for the stems the pinned matrix could not match
+    if args.extra_cc:
+        rest = [s for s in best if best[s][0] != 0]
+        if rest:
+            out3 = run([sys.executable, "tools/permute_batch.py",
+                        "--stems", ",".join(rest), "--jobs", str(args.jobs),
+                        "--only", "v00_draft", "--summary", "--cc", args.extra_cc])
+            for line in out3.splitlines():
+                m = re.match(r"\s*(\d+)\s+(\S+)\s+cc=(\S+)\s+\[([^\]]*)\]\s+(\S+)", line)
+                if not m:
+                    continue
+                score, stem, cc, flags, variant = (int(m.group(1)), m.group(2),
+                                                   m.group(3), m.group(4), m.group(5))
+                if stem in best and score < best[stem][0]:
+                    best[stem] = (score, cc, flags, variant)
+            zeros = [s for s in best if best[s][0] == 0]
+            small = [s for s in best if 0 < best[s][0] <= 3]
+
     print(f"\n=== best per stem ({len(best)}) ===")
     for stem in sorted(best, key=lambda s: (best[s][0], s)):
         score, cc, flags, variant = best[stem]
         mark = "  MATCH" if score == 0 else ""
         print(f"  {score:>3}  {stem:<8} cc={cc:<4} [{flags:<26}] {variant}{mark}")
 
-    zeros = [s for s in best if best[s][0] == 0]
-    small = [s for s in best if 0 < best[s][0] <= 3]
     print(f"\n{len(zeros)} match: {' '.join(sorted(zeros)) or '-'}")
     print(f"{len(small)} near (<=3): {' '.join(sorted(small)) or '-'}")
     return 0

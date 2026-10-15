@@ -1,7 +1,6 @@
-/* STATUS (Session 7, 2026-10-14): NON_MATCHING. best score 3 [cc=296, -fno-optimize-sibling-calls].
- * two-way handler call; the `ld ra` duplication per arm plus the branch displacements differ by 1.
- * The original .s stays in the build (asm/cod/00F550.s); this C
- * draft (subagent-produced, Session 7) is kept for the record. */
+/* asm/cod/00F550.s -> func_0010F550.
+ * byte-exact under EE-GCC 2.95.3-136 (PE/wine)
+ * MATCHED (Session 8). */
 /* asm/cod/00F550.s -> func_0010F550 @ 0x0010F550 (0x40 bytes, 14 insns)
  *
  * Two-way branch on a syscall result:

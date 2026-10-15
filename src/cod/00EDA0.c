@@ -1,6 +1,6 @@
-/* STATUS (Session 5, step 2): NON_MATCHING - best attempt [cc=296/-fno-optimize-sibling-calls] is not byte-exact.
- * 4 instructions: argument copy `a2=a1` is scheduled after the callback `lui`; original moves it first (right-to-left argument evaluation).
- * See docs/progress.md for the family classification. */
+/* asm/cod/00EDA0.s -> func_0010EC78.
+ * byte-exact under EE-GCC 2.95.3-136 (PE/wine)
+ * MATCHED (Session 8). */
 /* func_0010EDA0 @ 0x0010EDA0 (0x28 bytes): forwards (a0, &D_00138198,
  * a1, 1) to func_0010EC78. Second argument moves before its register is
  * reused. */

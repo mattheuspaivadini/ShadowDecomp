@@ -421,3 +421,16 @@
 00FCC8 = src/cod/00FCC8.c cc=29               # two-list walk + sltu sentinel store; w45a_3 (R2)
 003CB8 = src/cod/003CB8.c                     # clean; w45a_1 (R2)
 003D88 = src/cod/003D88.c                     # clean; w45a_1 (R2)
+008E08 = src/cod/008E08.c cc=wine:ee-gcc2.95.3-136# byte-exact under EE-GCC 2.95.3-136 (PE/wine); residue sweep found the third generation
+00EDA0 = src/cod/00EDA0.c cc=wine:ee-gcc2.95.3-136# byte-exact under EE-GCC 2.95.3-136 (PE/wine)
+00F550 = src/cod/00F550.c cc=wine:ee-gcc2.95.3-136# byte-exact under EE-GCC 2.95.3-136 (PE/wine)
+019648 = src/cod/019648.c cc=wine:ee-gcc2.95.3-136# byte-exact under EE-GCC 2.95.3-136 (PE/wine)
+019BE0 = src/cod/019BE0.c cc=wine:ee-gcc2.95.3-136# constant 0x2000 fixed + byte-exact under EE-GCC 2.95.3-136
+00E8A0 = src/cod/00E8A0.c cc=29               # family sibling of matched 00E810/00E940 (0xFC copy + cmd 9); famA (R3)
+017700 = src/cod/017700.c cc=29               # 9-arg cmd 0xE + uncached mirror read; famA (R3)
+0181D0 = src/cod/0181D0.c cc=29               # func_001178A8 guard + double mirror read; famA (R3)
+016C58 = src/cod/016C58.c cc=ee-gcc2.9-991111-xz# integer-only register-save stub; byte-exact under ee-gcc2.9-991111-xz (all-generation sweep)
+016298 = src/cod/016298.c cc=29               # sceDbcInitSocket: cmd 0x80001315 + intermediate-result shape (v = D_0014EA00[1] before the unlock, return v)
+016348 = src/cod/016348.c cc=29               # sceDbcResetSocket: cmd 0x80001316 + intermediate-result shape
+0163F8 = src/cod/0163F8.c cc=29               # sceDbcGetDeviceStatus: cmd 0x80001317 + intermediate-result shape
+0164A8 = src/cod/0164A8.c cc=29               # cmd 0x8000131D + intermediate-result shape
