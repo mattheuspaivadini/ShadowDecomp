@@ -1,28 +1,10 @@
-/* STATUS (Session 4, 2026-10-14): NON_MATCHING. only the final store placement differs: the original puts `sb` in the `jr ra` delay slot; ours emits `sb` before `jr ra`. Tested -g0/-g2 and both revisions.
+/* STATUS (Session 9, 2026-10-15): NON_MATCHING. best score 4 [cc=29].
+ * session9 R1; residual class not auto-classified
  * The original .s stays in the build (asm/cod/007C70.s); this C
- * attempt is kept for the record. */
-/* asm/cod/007C70.s -> func_00107C70 @ 0x00107C70 (0x38 bytes)
- *   lui   $v1, 0x1000F130
- *   ori   $v1, $v1, 0xF130
- * .L00107C78:
- *   lw    $v0, 0x0($v1)
- *   andi  $v0, $v0, 0x8000
- *   nop x3
- *   bnez  $v0, .L00107C78
- *    nop
- *   lui   $v1, 0x1000F180
- *   daddu $v0, $a0, $zero        ; return value
- *   ori   $v1, $v1, 0xF180
- *   jr    $ra
- *    sb   $a0, 0x0($v1)
- *
- * Poll the status register 0x1000F130 (bit 0x8000) until clear, then write the
- * byte to 0x1000F180 and return it. Both are unconfirmed EE register
- * identifications (docs/structs.md).
- */
+ * draft (Session 9) is kept for the record. */
 int func_00107C70(unsigned int value) {
     while (*(volatile unsigned int *)0x1000F130 & 0x8000)
         ;
-    *(volatile unsigned char *)0x1000F180 = value;
+    *(unsigned char *)0x1000F180 = value;
     return value;
 }

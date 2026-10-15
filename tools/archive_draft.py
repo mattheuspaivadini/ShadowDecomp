@@ -20,18 +20,18 @@ NM = ROOT / "src" / "non_matching"
 
 
 def archive(stem: str, score: str, cc: str, flags: list[str], note: str,
-            src: Path) -> str:
+            src: Path, session: str = "Session 8") -> str:
     if not src.exists():
         return f"{stem}: draft missing {src}"
     text = src.read_text(encoding="utf-8")
     m = re.match(r"\s*/\*.*?\*/\s*", text, re.S)
     body = text[m.end():] if m else text
     flagstr = (" " + " ".join(flags)) if flags else ""
-    head = (f"/* STATUS (Session 8, {_dt.date.today().isoformat()}): "
+    head = (f"/* STATUS ({session}, {_dt.date.today().isoformat()}): "
             f"NON_MATCHING. best score {score} [cc={cc}{flagstr}].\n"
             f" * {note}\n"
             f" * The original .s stays in the build (asm/cod/{stem}.s); this C\n"
-            f" * draft (Session 8) is kept for the record. */\n")
+            f" * draft ({session}) is kept for the record. */\n")
     NM.mkdir(parents=True, exist_ok=True)
     (NM / f"{stem}.c").write_text(head + body, encoding="utf-8")
     return f"{stem}: archived (score {score}, cc={cc}{flagstr})"
@@ -45,6 +45,8 @@ def main() -> int:
     ap.add_argument("--flags", default="")
     ap.add_argument("--note", default="")
     ap.add_argument("--spec", type=Path, default=None)
+    ap.add_argument("--drafts-dir", type=Path, default=DRAFTS)
+    ap.add_argument("--session", default="Session 8")
     args = ap.parse_args()
 
     if args.spec:
@@ -59,13 +61,14 @@ def main() -> int:
             stem, score = parts[0], parts[1]
             cc = parts[2] if len(parts) > 2 else "296"
             flags = parts[3:]
-            print(archive(stem, score, cc, flags, note.strip(), DRAFTS / f"{stem}.c"))
+            print(archive(stem, score, cc, flags, note.strip(),
+                          args.drafts_dir / f"{stem}.c", args.session))
         return 0
 
     if not args.stem:
         ap.error("need --stem or --spec")
     print(archive(args.stem, args.score, args.cc, args.flags.split(),
-                  args.note, DRAFTS / f"{args.stem}.c"))
+                  args.note, args.drafts_dir / f"{args.stem}.c", args.session))
     return 0
 
 

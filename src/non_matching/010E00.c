@@ -1,7 +1,7 @@
-/* STATUS (Session 8, 2026-10-14): NON_MATCHING. best score 2 [cc=29].
- * R4 w25a_1: alarm free-list push
+/* STATUS (Session 9, 2026-10-15): NON_MATCHING. best score 2 [cc=29].
+ * session9 R1; residual class not auto-classified
  * The original .s stays in the build (asm/cod/010E00.s); this C
- * draft (Session 8) is kept for the record. */
+ * draft (Session 9) is kept for the record. */
 struct N10E00 {
     struct N10E00 *next;            /* 0x00 */
     struct N10E00 *prev;            /* 0x04 */
@@ -26,7 +26,9 @@ void func_00110998(struct N10E00 *p);
 unsigned int func_00110E00(int a0) {
     struct N10E00 *p;
     struct H10E00 *h;
+    struct N10E00 *t;
     unsigned int f;
+    unsigned int c;
 
     p = (struct N10E00 *)(((unsigned int)a0 >> 10) << 6);
     if (a0 < 0 || (a0 & 0x3FF) != p->id)
@@ -39,8 +41,10 @@ unsigned int func_00110E00(int a0) {
         func_00110998(p);
     p->id = 0;
     p->flags = 0;
-    p->next = h->freehead;
+    t = h->freehead;
+    c = h->count - 1;
+    p->next = t;
     h->freehead = p;
-    h->count = h->count - 1;
+    h->count = c;
     return 0;
 }

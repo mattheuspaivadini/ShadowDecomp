@@ -1,7 +1,7 @@
-/* STATUS (Session 8, 2026-10-14): NON_MATCHING. best score 2 [cc=29].
- * R4 w25a_1: alarm start (flags load before the 64-bit store)
+/* STATUS (Session 9, 2026-10-15): NON_MATCHING. best score 2 [cc=29].
+ * session9 R1; residual class not auto-classified
  * The original .s stays in the build (asm/cod/010FA0.s); this C
- * draft (Session 8) is kept for the record. */
+ * draft (Session 9) is kept for the record. */
 struct N10FA0 {
     struct N10FA0 *next;            /* 0x00 */
     struct N10FA0 *prev;            /* 0x04 */
@@ -42,7 +42,7 @@ unsigned int func_00110FA0(int a0) {
     t = func_00110C78();
     f = p->flags;
     p->f10 = t;
-    f = f | 1;
+    f |= 1;
     p->flags = f;
     if (f & 2) {
         func_00110910(p);

@@ -1,10 +1,11 @@
-/* STATUS (Session 8, 2026-10-14): NON_MATCHING. best score 2 [cc=296].
- * strcmp chain, assigns 0x34 then 0x30, returns &D_00139B48; wave4c (R1)
+/* STATUS (Session 9, 2026-10-15): NON_MATCHING. best score 2 [cc=296].
+ * session9 R1; residual class not auto-classified
  * The original .s stays in the build (asm/cod/02E490.s); this C
- * draft (Session 8) is kept for the record. */
-extern char D_00139B48[];              /* lui/%lo - non-small */
-extern char D_00139B38[];              /* lui/%lo - non-small */
-extern int func_00128E6C(int a0, int a1);
+ * draft (Session 9) is kept for the record. */
+extern char D_00139B48[];   /* absolute lui/addiu */
+extern char D_00139B38[];   /* absolute lui/addiu */
+
+int func_00128E6C(int a0, int a1);
 
 int func_0012E490(int *a0, int a1, int a2) {
     if (a2 != 0) {

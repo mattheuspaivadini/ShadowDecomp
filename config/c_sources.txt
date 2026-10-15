@@ -446,3 +446,16 @@
 018F98 = src/cod/018F98.c cc=29               # 018xxx family (power-of-two stride -> sll, a3<<4 | 4)
 006390 = src/cod/006390.c                     # R4 w25a_0 (nested-loop biv)
 007CA8 = src/cod/007CA8.c cc=29               # R4 w25a_0 (base kept in $s2 per arm)
+00A070 = src/cod/00A070.c cc=29               # session9 step1 residue: nested drain-loop form
+018870 = src/cod/018870.c cc=29               # session9 step1 residue: held 2nd call result
+014530 = src/cod/014530.c cc=29               # session9 R1 wcg wave
+019840 = src/cod/019840.c cc=29               # session9 R1 w25b wave
+01A498 = src/cod/01A498.c cc=29               # session9 R1 w25b wave
+01A518 = src/cod/01A518.c cc=29               # session9 R1 w25b wave
+021118 = src/cod/021118.c cc=29               # session9 R1 w25b wave
+022378 = src/cod/022378.c cc=29               # session9 R1 wcg wave
+022AD8 = src/cod/022AD8.c cc=29               # session9 R1 w25b command family c5
+022B58 = src/cod/022B58.c cc=29               # session9 R1 w25b command family c6
+028490 = src/cod/028490.c                     # session9 R1 w25b/wcg wave
+02E7E8 = src/cod/02E7E8.c                     # session9 R1 w25b wave
+01C578 = src/cod/01C578.c cc=29               # session9 R2 wave A 45-80 tier

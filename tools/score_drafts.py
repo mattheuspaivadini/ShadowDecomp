@@ -48,6 +48,11 @@ def main() -> int:
                     help="third-generation compilers tried only on stems that "
                          "did not match under the pinned cc=29/296 matrix "
                          "(empty string disables)")
+    ap.add_argument("--only-draft", action="store_true",
+                    help="compile only v00_draft (the freshly staged draft) "
+                         "instead of every archived variant in "
+                         "build/permute/<stem>/ - much faster on residue stems "
+                         "that carry hundreds of old permuter variants")
     args = ap.parse_args()
 
     stems = [s.strip() for s in args.stems.split(",") if s.strip()]
@@ -77,6 +82,8 @@ def main() -> int:
 
     base = [sys.executable, "tools/permute_batch.py", "--stems", ",".join(staged),
             "--jobs", str(args.jobs), "--summary"]
+    if args.only_draft:
+        base += ["--only", "v00_draft"]
     if args.log:
         base += ["--log", str(args.log), "--note", args.note]
     out29 = run(base + ["--cc", "29", "--flag-sets", ";-g0"])

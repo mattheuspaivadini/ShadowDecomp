@@ -1,10 +1,10 @@
-/* STATUS (Session 8, 2026-10-14): NON_MATCHING. best score 31 [cc=29].
- * R1 wave4c: R5900 MMI lq/pxor/pcpyud 128-bit compare
+/* STATUS (Session 9, 2026-10-15): NON_MATCHING. best score 31 [cc=29].
+ * session9 R1; residual class not auto-classified
  * The original .s stays in the build (asm/cod/028188.s); this C
- * draft (Session 8) is kept for the record. */
+ * draft (Session 9) is kept for the record. */
 struct S028188 {
-    unsigned long long lo;      /* 0x0 */
-    unsigned long long hi;      /* 0x8 */
+    unsigned long long lo;       /* 0x0 */
+    unsigned long long hi;       /* 0x8 */
 };
 
 int func_00128188(unsigned int a0, unsigned int a1, unsigned int n) {

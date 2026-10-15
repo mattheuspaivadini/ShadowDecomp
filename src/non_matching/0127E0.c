@@ -1,0 +1,53 @@
+/* STATUS (Session 9, 2026-10-15): NON_MATCHING. best score 23 [cc=29].
+ * session9 R2 waveA; residual class not auto-classified
+ * The original .s stays in the build (asm/cod/0127E0.s); this C
+ * draft (Session 9) is kept for the record. */
+struct S0127E0 {
+    int f00;    /* 0x00 */
+    int f04;    /* 0x04 */
+    int f08;    /* 0x08 */
+    int f0C;    /* 0x0C */
+    int f10;    /* 0x10 */
+    int f14;    /* 0x14 */
+    int f18;    /* 0x18 */
+};
+
+struct P0127E0 {                 /* uncached packet at D_0014B000 | 0x20000002 */
+    unsigned short f00;          /* 0x00 (untouched) */
+    unsigned short f02;          /* 0x02 */
+    unsigned short f04;          /* 0x04 */
+    unsigned char  f06;          /* 0x06 */
+    unsigned char  f07;          /* 0x07 */
+    int            f08;          /* 0x08 */
+};
+
+extern struct S0127E0 D_0014AFD0;
+extern int D_0014B000[];
+extern int D_0014B140[];
+
+int  func_00107260(int a0);
+int  func_00112120(int a0, int a1, int a2);
+int  func_00112358(int a0);
+void func_00112400(void);
+
+int func_001127E0(void) {
+    struct P0127E0 *pkt;
+
+    func_00107260(0);
+    D_0014AFD0.f00 = func_00112120(0x210, (int)&D_0014AFD0, (int)func_00112400);
+    if (D_0014AFD0.f00 < 0)
+        return 0;
+    pkt = (struct P0127E0 *)((int)D_0014B000 | 0x20000002);
+    D_0014AFD0.f0C = 0;
+    D_0014AFD0.f04 = 0;
+    D_0014AFD0.f08 = 0;
+    D_0014AFD0.f14 = (int)D_0014B140 | 0x20000002;
+    D_0014AFD0.f10 = (int)pkt;
+    pkt->f04 = 0x210;
+    pkt->f06 = 0x45;
+    pkt->f07 = 0x48;
+    pkt->f08 = 0;
+    pkt->f02 = 0;
+    D_0014AFD0.f18 = func_00112358(0x100);
+    return 1;
+}

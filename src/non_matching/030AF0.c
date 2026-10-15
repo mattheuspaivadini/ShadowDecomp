@@ -1,12 +1,10 @@
-/* STATUS (Session 5, step 2): NON_MATCHING - best attempt [cc=296/-fno-optimize-sibling-calls] is not byte-exact.
- * 4 bytes short: `move a0,v0` placed in the first jal delay slot.
- * See docs/progress.md for the family classification. */
-/* func_00130AF0 @ 0x00130AF0 (0x28 bytes): func_001258A0(func_00130AC8()). */
-int func_00130AC8(void);
+/* STATUS (Session 9, 2026-10-15): NON_MATCHING. best score 2 [cc=29].
+ * session9 R1; residual class not auto-classified
+ * The original .s stays in the build (asm/cod/030AF0.s); this C
+ * draft (Session 9) is kept for the record. */
+int func_00130AC8(int a0);
 int func_001258A0(int x);
 
-int func_00130AF0(void) {
-    int v = func_00130AC8();
-
-    return func_001258A0(v);
+int func_00130AF0(int a0) {
+    return func_001258A0(func_00130AC8(a0));
 }

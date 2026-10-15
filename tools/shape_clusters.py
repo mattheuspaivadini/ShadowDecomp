@@ -150,6 +150,15 @@ def main() -> int:
                     help="cluster by mnemonic sequence only (registers/immediates "
                          "abstracted) - finds families with the same shape but "
                          "different constants")
+    ap.add_argument("--clone-of", default="",
+                    help="comma-separated stems/symbols of *newly matched* "
+                         "functions; report the closest unmatched functions to "
+                         "each (the sibling-exploitation report)")
+    ap.add_argument("--clone-of-file", type=Path, default=None,
+                    help="file of stems (one per line) for --clone-of")
+    ap.add_argument("--clone-of-dist", type=int, default=6,
+                    help="max token edit distance for the --clone-of report")
+    ap.add_argument("--clone-of-json", type=Path, default=None)
     args = ap.parse_args()
 
     mm = matched_map()
@@ -236,6 +245,48 @@ def main() -> int:
             "real_pool": real,
         }, indent=1), encoding="utf-8")
         print(f"\nwrote {args.json}")
+
+    # --clone-of: the sibling-exploitation report.  For a set of *newly
+    # matched* stems, list the unmatched functions closest to each of them by
+    # normalized token edit distance.  The closest targets are the cheapest
+    # next drafts (copy the matched C and adapt the symbols/constants).
+    src_stems: list[str] = []
+    if args.clone_of:
+        src_stems += [s.strip() for s in args.clone_of.split(",") if s.strip()]
+    if args.clone_of_file:
+        src_stems += [ln.strip() for ln in
+                      args.clone_of_file.read_text().splitlines()
+                      if ln.strip() and not ln.startswith("#")]
+    if src_stems:
+        by_symbol = {fns[s]["symbol"]: s for s in fns if fns[s]["symbol"]}
+        src_stems = [by_symbol.get(s, s) for s in src_stems]
+        src_stems = [s for s in src_stems if s in fns]
+        # match target stems only against unmatched, real functions
+        report = []
+        for s in src_stems:
+            ds = [(lev(fns[t]["sig"], fns[s]["sig"]), t)
+                  for t in real if t != s]
+            ds = [d for d in ds if d[0] <= args.clone_of_dist]
+            ds.sort()
+            report.append({"matched": s, "symbol": fns[s]["symbol"],
+                           "cc": mm.get(s, ""),
+                           "insns": len(fns[s]["insns"]),
+                           "targets": [{"stem": t, "dist": d} for d, t in ds[:12]]})
+        print(f"\n=== closest unmatched to the newly matched ({len(src_stems)} srcs, "
+              f"dist <= {args.clone_of_dist}) ===")
+        for row in report:
+            if not row["targets"]:
+                print(f"  {row['matched']} ({row['insns']} insn, "
+                      f"cc={row['cc'] or 'def'}): no close target")
+                continue
+            head = " ".join(f"{t['stem']}({t['dist']})" for t in row["targets"])
+            print(f"  {row['matched']} ({row['insns']} insn, "
+                  f"cc={row['cc'] or 'def'}): {head}")
+        if args.clone_of_json:
+            args.clone_of_json.parent.mkdir(parents=True, exist_ok=True)
+            args.clone_of_json.write_text(json.dumps(report, indent=1),
+                                          encoding="utf-8")
+            print(f"wrote {args.clone_of_json}")
     return 0
 
 

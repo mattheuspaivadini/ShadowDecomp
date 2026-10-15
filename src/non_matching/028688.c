@@ -1,14 +1,14 @@
-/* STATUS (Session 8, 2026-10-14): NON_MATCHING. best score 2 [cc=296].
- * rotated constant-trip clear loop; wave3d (R1)
+/* STATUS (Session 9, 2026-10-15): NON_MATCHING. best score 2 [cc=296].
+ * session9 R1; residual class not auto-classified
  * The original .s stays in the build (asm/cod/028688.s); this C
- * draft (Session 8) is kept for the record. */
+ * draft (Session 9) is kept for the record. */
 int func_00127A60(int a0, int a1);
 
 int func_00128688(int a0) {
     int *p;
+    int *q;
     int r;
     int i;
-    int *q;
 
     p = (int *)a0;
     if (p[0x75] != 0)
@@ -18,9 +18,11 @@ int func_00128688(int a0) {
     if (r == 0)
         return -1;
     q = (int *)(r + 0x7C);
-    for (i = 0x1F; i >= 0; i--) {
+    i = 0x1F;
+    do {
+        i--;
         *q = 0;
         q--;
-    }
+    } while (i >= 0);
     return 0;
 }
