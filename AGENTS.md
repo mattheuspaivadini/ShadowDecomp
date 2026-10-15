@@ -192,24 +192,50 @@ Tips: use a function's constants, string references, and call patterns to infer 
 
 | Metric | Value |
 |--------|-------|
-| Current phase | Phases 1–4 done (**incl. step 6, ELF container**); **Phase 3 revision question resolved** (Session 8 added a **third** generation, `2.95.3-136`); **Phase 5 in progress (48 named symbols)**; Phase 6: **330 functions matched** |
-| ELF rebuild hash match | **YES — 237,952 bytes, SHA-1 `6f853f64…` (flat load image), still green with 330 functions from C** |
+| Current phase | Phases 1–4 done (**incl. step 6, ELF container**); **Phase 3 revision question resolved** (Session 8 added a **third** generation, `2.95.3-136`); **Phase 5 in progress (48 named symbols)**; Phase 6: **343 functions matched** |
+| ELF rebuild hash match | **YES — 237,952 bytes, SHA-1 `6f853f64…` (flat load image), still green with 343 functions from C** |
 | ELF container (whole file) | **YES — `build/SCUS_974.72.elf` byte-identical to the original: 242,940 bytes, SHA-1 `b715b349…`; 3 program headers, 16 sections, `e_entry 0x00100010`, `.mdebug.eabi64`, no `.symtab`** (`tools/containerize.py`) |
 | Functions named | **48 `.text` symbols** = `entry` + **47 evidence-derived names**: 17 verbatim self-naming log messages, 22 inferred from `SceStdio<Op>Sema` object names (UNCONFIRMED), 3 single inferences (UNCONFIRMED), 3 callee names from `func_00104668` failure diagnostics (Session 5, UNCONFIRMED), 2 Session-3 names |
 | String-evidenced name candidates | **61 functions** reference an identifier-bearing string; **46 named, 15 pending** (the 18 Session-4 pending minus 3 resolved; none promoted in Session 5 — the evidence rule held) |
-| Functions matched (C) | **330 / 1036** (2.9-991111, 2.96 and 2.95.3-136 per TU; the wrapper tier uses a per-TU `-fno-optimize-sibling-calls` on cc=296 TUs only — the 2.9 `cc1` rejects the flag) |
-| Matched bytes | 22420 / 203,692 `.text` bytes = **11.007 %** (verified) |
+| Functions matched (C) | **343 / 1036** (2.9-991111, 2.96 and 2.95.3-136 per TU; the wrapper tier uses a per-TU `-fno-optimize-sibling-calls` on cc=296 TUs only — the 2.9 `cc1` rejects the flag) |
+| Matched bytes | 24396 / 203,692 `.text` bytes = **11.977 %** (verified) |
 | Compiler flags | `-O2 -g2 -G8` (per-TU `-g0` and `-fno-optimize-sibling-calls` overrides, the latter cc=296-only); `-O1`/`-Os` ruled out on 148 functions; `-O2 ≡ -O3` (not separable; Session 6 ran the decisive experiment — §2.4 of `docs/compiler.md`: plain static + `-O3` ≡ `inline` + `{-O2,-O3}`, so the `-O2` pin stays) |
 | Compilers | `ee-gcc2.96` (default) + `ee-gcc2.9-991111-01` (`cc=29`) + **`wine:ee-gcc2.95.3-136`** and `ee-gcc2.9-991111-xz`; matrix in `docs/compiler.md` §4.3, third-generation verdict in §4.4 |
 | `.text` disassembly (splat R5900) | accurate; **1036 per-function `.s` + 2 raw `textbin`** (`.text` header, `0x00113074` non-function hole) |
 | Ghidra EE-extension decode | **100 %** of `.text` (50,923/50,923) |
 | splat split coverage | 203 KB / 85.6 % of ROM |
 | Functions detected | 1036 after removing 1 splat boundary false positive (`0x00113074`) from spimdisasm's 1037 |
-| Non-matching attempts tracked | **233** (`src/non_matching/`; Session 8 archived every wave failure with a best score and residual; per-tier hit rates in `docs/archive-2026-10-14-session8.md`) |
+| Non-matching attempts tracked | **344** (`src/non_matching/`; Session 9 archived 111 new attempts with best score and residual; per-tier hit rates in `docs/archive-2026-10-15-session9.md`) |
 | IOP modules inventoried | 11 IRX (ELF32 MIPS-I, R3000A) |
 | EE hardware registers referenced | **38 addresses** (`tools/scan_hw_regs.py`); the 2 that were unidentified are now **confirmed**: `0x10001010` = `T2_MODE` (Timer 2 mode/status), `0x1000E060` = `D_STADR` (DMAC stall address) — `docs/structs.md` §"Hardware registers" |
 
 ### Session log
+
+- **2026-10-15 (Session 9) — wave loop (parallel drafting + central scoring),
+  +13 functions (330 → 343, 11.007% → 11.977%).** Archive: `docs/archive-2026-10-15-session9.md`.
+  - **Floor target +40 NOT met; stretch +60 NOT met.** Primary blocker: subagent
+    budget exhausted — R2 wave B (w45s_3–6, 37 stems) received zero drafts.
+  - **Step 0 (baseline).** Gate re-verified: HASH MATCH, 330/330, 22,420 bytes
+    (11.007%), ledger 330 matched / 233 near / 191 asm-permanent / 282 untouched.
+  - **Step 1 (score-≤3 residue, 15 stems).** 2 matches: `00A070`, `018870` (both
+    cc=29); 10 near ≤3.
+  - **R1 wave (w25b 36 + wcg 48 = 68 stems).** 10 matches (8 cc=29, 2 cc=296),
+    6 near ≤3. Combined hit rate 14.7%.
+  - **R1 gate:** promoted 12 → HASH MATCH, 342 from C (11.828%).
+  - **Step 3 (clone-of on 12 new matches).** Only actionable: `022AD8`/`022B58`
+    ≈ `0229B0`/`022CE0` (dist 4, command family).
+  - **Step 4 (naming).** 61 string-evidenced candidates; 46 in untouched 45+
+    tiers. SDK identities confirmed (`sceGsPutDrawEnv`, `sceGsSyncPath`,
+    `sceGsDefDispEnv`, `SceMrpcBind0/1`, `SceCd*Sema`, `SceStdio*`, `start`).
+    No new promotions.
+  - **R2 wave A (pilot 8 + w45s_0/1/2 36 = 44 stems).** 1 match: `01C578`
+    (cc=29, 304 B); 1 near score 1: `028778` (cc=296). Hit rate 2.3% (expected
+    ~10%). Pilot 81-150: 0/8.
+  - **R2A gate:** promoted `01C578` → HASH MATCH, 343 from C (11.977%).
+  - **43 failures archived** to `src/non_matching/`.
+  - **Tooling updates:** `score_drafts.py --only-draft`,
+    `shape_clusters.py --clone-of*`, `archive_draft.py --drafts-dir/--session`,
+    `build/s9/score_multi.py`, `build/s9/gate.sh`.
 
 - **2026-10-14 (Session 7) — shape clustering + parallel drafting waves, +72
   functions (212 → 284).** Archive: `docs/archive-2026-10-14-session7.md`; live
