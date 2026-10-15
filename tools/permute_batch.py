@@ -72,10 +72,12 @@ def main() -> int:
 
     stems = ([s.strip() for s in args.stems.split(",") if s.strip()]
              if args.stems else backlog_stems())
+    stems = list(dict.fromkeys(stems))  # dedupe: duplicate stems race on unlink
     only = {s.strip() for s in args.only.split(",") if s.strip()}
     ccs = [c.strip() for c in args.cc.split(",") if c.strip()]
     if args.flag_sets:
         flag_sets = [[f for f in s.split() if f] for s in args.flag_sets.split(";")]
+        flag_sets = [list(t) for t in dict.fromkeys(tuple(fs) for fs in flag_sets)]
     else:
         flag_sets = [args.flags.split() if args.flags else []]
     date = datetime.date.today().isoformat()
