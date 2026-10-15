@@ -217,6 +217,10 @@ Tips: use a function's constants, string references, and call patterns to infer 
   - **`022550` 3 → 3 (3 iterations, 17 variants).** Residual = register allocation only: the `%hi(D_00135958)` pseudo and the loaded value swap `$v0/$v1` (same schedule). Store order, temps, volatile, struct, local extern, const-local base/n: no change. Archived (`archive_draft.py`). **Command family stopped by rule**: `0229B0 022A38 022CE0` not touched.
   - **New pattern (commutative operand order):** a 1-insn diff where `addu rd,rs,rt` has rs/rt swapped is fixed by swapping the C operands (`i*4 + base` vs `base + i*4`); permuter body/decl-order mutations do not cover it.
   - Ledger: **344 matched / 328 near / 191 asm-permanent / 173 untouched / 501 real pool**.
+- **2026-10-15 (Session 10c) — triage + volume, 0 matches (344 unchanged, 12.083%).**
+  - **Step 0 (triage):** 11 near(<=2) stems listed; all skipped — `build/s10/perm/` holds only Session 10b perm data (022550, 028778), so `pdiff.py` cannot classify any diff. 0 matches. Stop (>5 consecutive skipped).
+  - **Step 1 (45-80 tier):** blocker — lot-1 stems require callee signatures + global/struct types not available; speculative drafts cannot match. EE-GCC toolchain confirmed functional (002FE0 smoke test byte-exact). Lot 1 = 0/0 → STOP per 0/10 rule. Remaining 37 stems saved to `build/s10/w45s_remaining.txt`.
+  - Ledger unchanged: **344 matched / 328 near / 191 asm-permanent / 173 untouched / 501 real pool**.
 
 - **2026-10-15 (Session 10a.2) — mechanical symbol rename: the two SDK names Session 10a reverted are applied (+0 functions, 343 unchanged, 11.977%).**
   - **Task.** Apply `SceSifrpcCall` 0x00109980 and `SceMrpcBind` 0x00119C08 (the two names Session 10a renamed, then reverted because the rename broke the link) as a **pure symbol rename** — no C body, no flag, no other symbol.
