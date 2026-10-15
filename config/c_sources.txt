@@ -434,3 +434,15 @@
 016348 = src/cod/016348.c cc=29               # sceDbcResetSocket: cmd 0x80001316 + intermediate-result shape
 0163F8 = src/cod/0163F8.c cc=29               # sceDbcGetDeviceStatus: cmd 0x80001317 + intermediate-result shape
 0164A8 = src/cod/0164A8.c cc=29               # cmd 0x8000131D + intermediate-result shape
+00F2D8 = src/cod/00F2D8.c cc=29               # R4 w25a_1
+0114D8 = src/cod/0114D8.c cc=29               # R4 w25a_1 (4-arg guard wrapper, a1 = long long)
+011558 = src/cod/011558.c cc=29               # unsigned int q makes the remainder multiply multu (was mult, 1 word off)
+0185A8 = src/cod/0185A8.c cc=29               # 018xxx record-put family (p[1]/p[0] order, n = a3*8, n|4)
+018B48 = src/cod/018B48.c cc=29               # 018xxx family (7-arg variant of the 019210 q-block shape)
+018D28 = src/cod/018D28.c cc=29               # 018xxx family (shared a5+0xC, op 0x13)
+018DD0 = src/cod/018DD0.c cc=29               # 018xxx family (a3*4+4, count reloaded in the bgezl delay)
+018E58 = src/cod/018E58.c cc=29               # 018xxx family twin of 018D28 (op 9)
+018F00 = src/cod/018F00.c cc=29               # 018xxx family (cc=29 3-operand mult for the 0x48 stride)
+018F98 = src/cod/018F98.c cc=29               # 018xxx family (power-of-two stride -> sll, a3<<4 | 4)
+006390 = src/cod/006390.c                     # R4 w25a_0 (nested-loop biv)
+007CA8 = src/cod/007CA8.c cc=29               # R4 w25a_0 (base kept in $s2 per arm)
