@@ -1,7 +1,6 @@
-/* STATUS (Session 9, 2026-10-15): NON_MATCHING. best score 1 [cc=296].
- * session9 R2 waveA; residual class not auto-classified
- * The original .s stays in the build (asm/cod/028778.s); this C
- * draft (Session 9) is kept for the record. */
+/* asm/cod/028778.s -> func_00128688.
+ * Session 10b: commutative addu operand order fixed by writing index*4 + base
+ * MATCHED (Session 8). */
 int  func_00128688(int a0);
 int  func_001289D0(int a0);
 int  func_00128970(int a0, int a1, int a2);
@@ -19,7 +18,7 @@ int func_00128778(int *ctx, int index) {
         if (func_00128688((int)ctx) != 0)
             return -1;
     }
-    e = (int *)(ctx[0x75] + index * 4);
+    e = (int *)(index * 4 + ctx[0x75]);
     h = *e;
     if (h == 0) {
         r = func_001289D0((int)ctx);
@@ -35,3 +34,4 @@ int func_00128778(int *ctx, int index) {
     ((void (*)(int))h)(index);
     return 0;
 }
+
