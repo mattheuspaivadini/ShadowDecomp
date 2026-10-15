@@ -1,5 +1,5 @@
 {
- "_note": "Per-function confirmed EE-GCC config (confirmed only when a function is byte-exact under the hash gate). Keyed by stem; tu ids filled by tools/infer_tu.py (Phase D).",
+ "_note": "Per-function confirmed EE-GCC config (confirmed only when a function is byte-exact under the hash gate). Keyed by stem; tu ids are filled by tools/infer_tu.py (Phase D).",
  "confirmed": {
   "0000C0": {
    "addr": "0x001000C0",
@@ -69,6 +69,12 @@
   },
   "002A80": {
    "addr": "0x00102A80",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "002AF0": {
+   "addr": "0x00102AF0",
    "cc": "296",
    "flags": [],
    "tu": null
@@ -187,6 +193,18 @@
    "flags": [],
    "tu": null
   },
+  "003CB8": {
+   "addr": "0x00103CB8",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "003D88": {
+   "addr": "0x00103D88",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
   "003E90": {
    "addr": "0x00103E90",
    "cc": "296",
@@ -265,6 +283,12 @@
    "flags": [],
    "tu": null
   },
+  "006390": {
+   "addr": "0x00106390",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
   "006430": {
    "addr": "0x00106430",
    "cc": "296",
@@ -321,6 +345,12 @@
    "flags": [],
    "tu": null
   },
+  "007CA8": {
+   "addr": "0x00107CA8",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
   "008D68": {
    "addr": "0x00108D68",
    "cc": "29",
@@ -330,6 +360,12 @@
   "008D90": {
    "addr": "0x00108D90",
    "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "008E08": {
+   "addr": "0x00108E08",
+   "cc": "wine:ee-gcc2.95.3-136",
    "flags": [],
    "tu": null
   },
@@ -381,6 +417,18 @@
    "flags": [],
    "tu": null
   },
+  "00AB90": {
+   "addr": "0x0010AB90",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "00ACD0": {
+   "addr": "0x0010ACD0",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
   "00C058": {
    "addr": "0x0010C058",
    "cc": "296",
@@ -427,6 +475,18 @@
    "flags": [],
    "tu": null
   },
+  "00DDE0": {
+   "addr": "0x0010DDE0",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "00DE60": {
+   "addr": "0x0010DE60",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
   "00DED8": {
    "addr": "0x0010DED8",
    "cc": "296",
@@ -435,8 +495,44 @@
    ],
    "tu": null
   },
+  "00DFE8": {
+   "addr": "0x0010DFE8",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "00E058": {
+   "addr": "0x0010E058",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "00E0C8": {
+   "addr": "0x0010E0C8",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "00E138": {
+   "addr": "0x0010E138",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "00E1B8": {
+   "addr": "0x0010E1B8",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
   "00E810": {
    "addr": "0x0010E810",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "00E8A0": {
+   "addr": "0x0010E8A0",
    "cc": "29",
    "flags": [],
    "tu": null
@@ -487,6 +583,12 @@
    ],
    "tu": null
   },
+  "00EDA0": {
+   "addr": "0x0010EDA0",
+   "cc": "wine:ee-gcc2.95.3-136",
+   "flags": [],
+   "tu": null
+  },
   "00F0F0": {
    "addr": "0x0010F0F0",
    "cc": "29",
@@ -505,9 +607,21 @@
    "flags": [],
    "tu": null
   },
+  "00F2D8": {
+   "addr": "0x0010F2D8",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
   "00F370": {
    "addr": "0x0010F370",
    "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "00F550": {
+   "addr": "0x0010F550",
+   "cc": "wine:ee-gcc2.95.3-136",
    "flags": [],
    "tu": null
   },
@@ -525,6 +639,12 @@
   },
   "00FC08": {
    "addr": "0x0010FC08",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "00FCC8": {
+   "addr": "0x0010FCC8",
    "cc": "29",
    "flags": [],
    "tu": null
@@ -663,6 +783,24 @@
   },
   "011390": {
    "addr": "0x00111390",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "0114D8": {
+   "addr": "0x001114D8",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "011558": {
+   "addr": "0x00111558",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "011600": {
+   "addr": "0x00111600",
    "cc": "29",
    "flags": [],
    "tu": null
@@ -1013,8 +1151,50 @@
    "flags": [],
    "tu": null
   },
+  "015DD0": {
+   "addr": "0x00115DD0",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "016298": {
+   "addr": "0x00116298",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "016348": {
+   "addr": "0x00116348",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "0163F8": {
+   "addr": "0x001163F8",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "0164A8": {
+   "addr": "0x001164A8",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "016C58": {
+   "addr": "0x00116C58",
+   "cc": "ee-gcc2.9-991111-xz",
+   "flags": [],
+   "tu": null
+  },
   "016C80": {
    "addr": "0x00116C80",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "017210": {
+   "addr": "0x00117210",
    "cc": "29",
    "flags": [],
    "tu": null
@@ -1025,6 +1205,24 @@
    "flags": [
     "-fno-optimize-sibling-calls"
    ],
+   "tu": null
+  },
+  "017700": {
+   "addr": "0x00117700",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "017838": {
+   "addr": "0x00117838",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "0181D0": {
+   "addr": "0x001181D0",
+   "cc": "29",
+   "flags": [],
    "tu": null
   },
   "018358": {
@@ -1045,6 +1243,18 @@
    "flags": [],
    "tu": null
   },
+  "0185A8": {
+   "addr": "0x001185A8",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "018710": {
+   "addr": "0x00118710",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
   "0188E0": {
    "addr": "0x001188E0",
    "cc": "29",
@@ -1057,8 +1267,44 @@
    "flags": [],
    "tu": null
   },
+  "018B48": {
+   "addr": "0x00118B48",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
   "018CE0": {
    "addr": "0x00118CE0",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "018D28": {
+   "addr": "0x00118D28",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "018DD0": {
+   "addr": "0x00118DD0",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "018E58": {
+   "addr": "0x00118E58",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "018F00": {
+   "addr": "0x00118F00",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "018F98": {
+   "addr": "0x00118F98",
    "cc": "29",
    "flags": [],
    "tu": null
@@ -1099,6 +1345,12 @@
    "flags": [],
    "tu": null
   },
+  "019210": {
+   "addr": "0x00119210",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
   "0193D0": {
    "addr": "0x001193D0",
    "cc": "29",
@@ -1133,6 +1385,12 @@
    ],
    "tu": null
   },
+  "019648": {
+   "addr": "0x00119648",
+   "cc": "wine:ee-gcc2.95.3-136",
+   "flags": [],
+   "tu": null
+  },
   "019808": {
    "addr": "0x00119808",
    "cc": "296",
@@ -1150,6 +1408,12 @@
   "019AA0": {
    "addr": "0x00119AA0",
    "cc": "29",
+   "flags": [],
+   "tu": null
+  },
+  "019BE0": {
+   "addr": "0x00119BE0",
+   "cc": "wine:ee-gcc2.95.3-136",
    "flags": [],
    "tu": null
   },
@@ -1477,6 +1741,12 @@
    "flags": [],
    "tu": null
   },
+  "022F90": {
+   "addr": "0x00122F90",
+   "cc": "29",
+   "flags": [],
+   "tu": null
+  },
   "0230B0": {
    "addr": "0x001230B0",
    "cc": "29",
@@ -1693,6 +1963,12 @@
   },
   "02D9E0": {
    "addr": "0x0012D9E0",
+   "cc": "296",
+   "flags": [],
+   "tu": null
+  },
+  "02DA00": {
+   "addr": "0x0012DA00",
    "cc": "296",
    "flags": [],
    "tu": null

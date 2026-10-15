@@ -108,6 +108,8 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--summary", action="store_true")
     ap.add_argument("--json", type=Path, default=LEDGER)
+    ap.add_argument("--tu-flags", type=Path, default=None,
+                    help="also write config/tu_flags.json from the matched set")
     args = ap.parse_args()
 
     c_sources = build.load_c_sources()
@@ -200,6 +202,21 @@ def main() -> int:
     print(f"wrote {args.json}: {len(funcs)} records")
     for k in sorted(doc["counts"]):
         print(f"  {k:<22} {doc['counts'][k]}")
+
+    if args.tu_flags:
+        conf = {}
+        for stem, r in funcs.items():
+            if r["status"] == "matched" and r["compiler_cfg"]:
+                conf[stem] = {"cc": r["compiler_cfg"]["cc"],
+                              "flags": r["compiler_cfg"]["flags"],
+                              "addr": r["addr"], "tu": None}
+        args.tu_flags.write_text(json.dumps({
+            "_note": "Per-function confirmed EE-GCC config (confirmed only when "
+                     "a function is byte-exact under the hash gate). Keyed by "
+                     "stem; tu ids are filled by tools/infer_tu.py (Phase D).",
+            "confirmed": conf, "tu": {}}, indent=1, sort_keys=True) + "\n",
+            encoding="utf-8")
+        print(f"wrote {args.tu_flags}: {len(conf)} confirmed configs")
 
     if args.summary:
         from collections import defaultdict
