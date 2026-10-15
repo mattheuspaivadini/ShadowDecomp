@@ -1,0 +1,20 @@
+/* STATUS (Session 8, 2026-10-14): NON_MATCHING. best score 26 [cc=29].
+ * R4 w25a_0: twin of 008EF8
+ * The original .s stays in the build (asm/cod/008F78.s); this C
+ * draft (Session 8) is kept for the record. */
+int  func_0010FB20(void);
+void func_0010FB70(void);
+int  func_00107FF8(int (*cb)(), int *p, int a1, int a2, int a3);
+int  func_00108D90(int a, int b, int c);
+
+void func_00108F78(int a0, ...) {
+    int buf;
+    int g;
+
+    buf = 0;
+    g = func_0010FB20();
+    func_00107FF8(func_00108D90, &buf, 0xFFFFFFFF, a0,
+                  (int)__builtin_saveregs());
+    if (g != 0)
+        func_0010FB70();
+}

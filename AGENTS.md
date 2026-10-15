@@ -67,6 +67,10 @@ Fill in the table during DISCOVERY and keep it current.
 | Constant-mismatch diff | Semantic bugs the edit distance hides | **`tools/const_diff.py`** (immediate-value multiset per function, reloc-masked; found the 019BE0 `0x200`/`0x2000` bug and 0121E8's 0x20-byte buffer) — Session 6 |
 | Split-build internals | Constant multiply / padding | **`tools/cc/probe_mult.sh`** (R5900 `mult` vs shift/add, `docs/compiler.md` §4.2); `tools/build.py` pads a C object to its exact original span (`. = . + (span - size)`) — `docs/rebuild.md` |
 | Phase-5 naming | Strings -> functions | **`tools/name_from_strings.py`** (authoritative: resolves `string -> function` from splat's `%hi/%lo` labels; `--json`) — `docs/naming-candidates.md`. Older heuristic `tools/find_string_refs.py` (window-6 `lui` pairing) is retained for the raw "which strings does a function touch" list but **under-reports** referents |
+| Ledger (Session 8) | Single source of truth for every function | **`tools/gen_ledger.py`** → `docs/ledger.json` (1038 records: `{addr,size,insns,kind,tu,cluster,compiler_cfg,status,attempts,notes}`; statuses `matched`/`near(N)`/`asm-permanent`/`untouched`/`textbin`). `--summary` prints the per-tier census |
+| Wave loop (Session 8) | Drafting subagents + central scoring | **`tools/score_drafts.py`** (stages `build/s8/drafts/<stem>.c`, scores cc 29/296 × default/`-g0`/`-fno-optimize-sibling-calls`, then `--extra-cc` retries non-matching stems under the 2.95.x PE builds), **`tools/promote.py`**, **`tools/archive_draft.py`**, **`tools/fix_draft_header.py`** (repairs nested `/* */` in a header, which silently drops a draft from the score table), **`tools/wave_lists.py`** (tier lists + 12-stem chunks) — `docs/session8-plan.md` |
+| Phase D (Session 8) | TU / call-graph / struct recovery | **`tools/infer_tu.py`** (specificity-weighted shared-symbol components + confirmed-config propagation → `config/tu_flags.json`), **`tools/callgraph.py`** (fraction of matched callees = bottom-up priority), **`tools/struct_infer.py`** (paste-ready struct skeletons from base+offset patterns) |
+| Third generation (Session 8) | The image mixes **three** EE-GCC generations | `2.9-991111-*`, `2.96-ee-001003-1` and **`2.95.3-136` (PE, wine)**; `build/s8/sweep_allgen.sh` + `allgen-sweep.json`; `config/c_sources.txt` accepts `cc=wine:ee-gcc2.95.3-136` — `docs/compiler.md` §4.4 |
 | Boundary evidence | Is a `glabel` a real entry? | **`tools/ref_check.py`** (`jal`/`j` + `lui`-relative + literal-word reference counts for an address) — `docs/naming-candidates.md` §"Boundary re-check" |
 | Non-function holes | Bad splat boundaries | **`config/non_function_holes.txt`** (addresses emitted as raw `textbin` by `tools/gen_function_splits.py` instead of `asm`) — `docs/naming-candidates.md` §"Boundary re-check" |
 | IOP inventory | IRX modules (R3000) | **`tools/iop_inventory.py`** → `manifest/iop_modules.txt` |
@@ -188,20 +192,20 @@ Tips: use a function's constants, string references, and call patterns to infer 
 
 | Metric | Value |
 |--------|-------|
-| Current phase | Phases 1–4 done (**incl. step 6, ELF container**); **Phase 3 revision question resolved** (+ Session-6 `-O2`/`-O3` verdict); **Phase 5 in progress (48 named symbols)**; Phase 6: **261 functions matched** |
-| ELF rebuild hash match | **YES — 237,952 bytes, SHA-1 `6f853f64…` (flat load image), still green with 261 functions from C** |
+| Current phase | Phases 1–4 done (**incl. step 6, ELF container**); **Phase 3 revision question resolved** (Session 8 added a **third** generation, `2.95.3-136`); **Phase 5 in progress (48 named symbols)**; Phase 6: **330 functions matched** |
+| ELF rebuild hash match | **YES — 237,952 bytes, SHA-1 `6f853f64…` (flat load image), still green with 330 functions from C** |
 | ELF container (whole file) | **YES — `build/SCUS_974.72.elf` byte-identical to the original: 242,940 bytes, SHA-1 `b715b349…`; 3 program headers, 16 sections, `e_entry 0x00100010`, `.mdebug.eabi64`, no `.symtab`** (`tools/containerize.py`) |
 | Functions named | **48 `.text` symbols** = `entry` + **47 evidence-derived names**: 17 verbatim self-naming log messages, 22 inferred from `SceStdio<Op>Sema` object names (UNCONFIRMED), 3 single inferences (UNCONFIRMED), 3 callee names from `func_00104668` failure diagnostics (Session 5, UNCONFIRMED), 2 Session-3 names |
 | String-evidenced name candidates | **61 functions** reference an identifier-bearing string; **46 named, 15 pending** (the 18 Session-4 pending minus 3 resolved; none promoted in Session 5 — the evidence rule held) |
-| Functions matched (C) | **284 / 1036** (2.9-991111 and 2.96 per TU; the wrapper tier uses a per-TU `-fno-optimize-sibling-calls` on cc=296 TUs only — the 2.9 `cc1` rejects the flag) |
-| Matched bytes | 15820 / 203,692 `.text` bytes = **7.767 %** (verified) |
+| Functions matched (C) | **330 / 1036** (2.9-991111, 2.96 and 2.95.3-136 per TU; the wrapper tier uses a per-TU `-fno-optimize-sibling-calls` on cc=296 TUs only — the 2.9 `cc1` rejects the flag) |
+| Matched bytes | 22420 / 203,692 `.text` bytes = **11.006 %** (verified) |
 | Compiler flags | `-O2 -g2 -G8` (per-TU `-g0` and `-fno-optimize-sibling-calls` overrides, the latter cc=296-only); `-O1`/`-Os` ruled out on 148 functions; `-O2 ≡ -O3` (not separable; Session 6 ran the decisive experiment — §2.4 of `docs/compiler.md`: plain static + `-O3` ≡ `inline` + `{-O2,-O3}`, so the `-O2` pin stays) |
-| Compilers | `ee-gcc2.96` (default) + `ee-gcc2.9-991111-01` (`cc=29`); matrix in `docs/compiler.md` §4.3 |
+| Compilers | `ee-gcc2.96` (default) + `ee-gcc2.9-991111-01` (`cc=29`) + **`wine:ee-gcc2.95.3-136`** and `ee-gcc2.9-991111-xz`; matrix in `docs/compiler.md` §4.3, third-generation verdict in §4.4 |
 | `.text` disassembly (splat R5900) | accurate; **1036 per-function `.s` + 2 raw `textbin`** (`.text` header, `0x00113074` non-function hole) |
 | Ghidra EE-extension decode | **100 %** of `.text` (50,923/50,923) |
 | splat split coverage | 203 KB / 85.6 % of ROM |
 | Functions detected | 1036 after removing 1 splat boundary false positive (`0x00113074`) from spimdisasm's 1037 |
-| Non-matching attempts tracked | **124** (`src/non_matching/`; 74 added in Session 7 — every one has a best-score row in `docs/non-matching-backlog.md` §"Session 7 update" and a `STATUS:` header with its residual) |
+| Non-matching attempts tracked | **233** (`src/non_matching/`; Session 8 archived every wave failure with a best score and residual; per-tier hit rates in `docs/archive-2026-10-14-session8.md`) |
 | IOP modules inventoried | 11 IRX (ELF32 MIPS-I, R3000A) |
 | EE hardware registers referenced | **38 addresses** (`tools/scan_hw_regs.py`); the 2 that were unidentified are now **confirmed**: `0x10001010` = `T2_MODE` (Timer 2 mode/status), `0x1000E060` = `D_STADR` (DMAC stall address) — `docs/structs.md` §"Hardware registers" |
 
