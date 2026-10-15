@@ -3,7 +3,7 @@
  * The original .s stays in the build (asm/cod/00EEB8.s); this C
  * draft (Session 8) is kept for the record. */
 int func_0010E238(void);
-int func_00109980(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
+int SceSifrpcCall(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
                   int a7, int a8);
 
 extern int D_00147380[];   /* .data/.bss outside small-data -> lui/%lo */
@@ -22,6 +22,6 @@ int func_0010EEB8(int a0, void *a1, int a2) {
         D_00147380[2] = *(int *)a1;
     else
         return 0xFFFEFFFE;
-    return (func_00109980((int)D_00147580, 2, 0, (int)D_00147380, 0x20,
+    return (SceSifrpcCall((int)D_00147580, 2, 0, (int)D_00147380, 0x20,
                           (int)D_00147380, 0x10, 0, 0) >= 0) ? 0 : 0xFFFEFFFF;
 }

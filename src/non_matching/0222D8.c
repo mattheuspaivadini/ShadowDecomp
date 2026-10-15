@@ -1,5 +1,5 @@
 /* STATUS (Session 7, 2026-10-14): NON_MATCHING. best score 3 [cc=29, default].
- * func_001230B0 + 9-arg func_00109980 (cmd 0xF); slt/movn select differs.
+ * func_001230B0 + 9-arg SceSifrpcCall (cmd 0xF); slt/movn select differs.
  * The original .s stays in the build (asm/cod/0222D8.s); this C
  * draft (subagent-produced, Session 7) is kept for the record. */
 /* asm/cod/0222D8.s -> func_001222D8 @ 0x001222D8 (0x60 bytes, 24 insns)
@@ -10,7 +10,7 @@
  *                                   ; D_00169F10/D_00169F58 (src/non_matching/
  *                                   ; 0230B0.c); $a0 is forwarded untouched
  *   func_001221D0();                ; id + clear the D_00167F00 block
- *   r = func_00109980(&D_00167EC0, 0xF, 0, &D_00167F00, 0x1000,
+ *   r = SceSifrpcCall(&D_00167EC0, 0xF, 0, &D_00167F00, 0x1000,
  *                     &D_00167F00, 0x1000, 0, 0);
  *   if (r >= 0) r = 0;              ; slt (-1 < r) then movn $v0,$zero
  *   return r;
@@ -24,7 +24,7 @@
  * matched 0221D0.c; 16-byte-spaced $ra/$s0 frame) */
 int func_001230B0(int a0);
 int func_001221D0(void);
-int func_00109980(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
+int SceSifrpcCall(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
                   int a7, int a8);
 
 extern char D_00167EC0[];   /* .bss 0x00167EC0, 0x40 bytes */
@@ -35,7 +35,7 @@ int func_001222D8(int a0) {
 
     func_001230B0(a0);
     func_001221D0();
-    r = func_00109980((int)D_00167EC0, 0xF, 0, (int)D_00167F00, 0x1000,
+    r = SceSifrpcCall((int)D_00167EC0, 0xF, 0, (int)D_00167F00, 0x1000,
                       (int)D_00167F00, 0x1000, 0, 0);
     if (r >= 0)
         r = 0;

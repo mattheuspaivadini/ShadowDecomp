@@ -43,7 +43,7 @@ glabel func_0010A228
     /* A294 0010A294 0000A2AF */  sw         $v0, 0x0($sp)
     /* A298 0010A298 2D48A002 */  daddu      $a5, $s5, $zero
     /* A29C 0010A29C 2D508002 */  daddu      $a6, $s4, $zero
-    /* A2A0 0010A2A0 6026040C */  jal        func_00109980
+    /* A2A0 0010A2A0 6026040C */  jal        SceSifrpcCall
     /* A2A4 0010A2A4 2D586002 */   daddu     $a7, $s3, $zero
     /* A2A8 0010A2A8 C2870200 */  srl        $s0, $v0, 31
     /* A2AC 0010A2AC 0C000012 */  beqz       $s0, .L0010A2E0

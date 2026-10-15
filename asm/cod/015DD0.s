@@ -26,7 +26,7 @@ glabel sceDbcSetWorkAddr
     /* 15E00 00115E00 90000824 */  addiu      $a4, $zero, 0x90
     /* 15E04 00115E04 2D48E000 */  daddu      $a5, $a3, $zero
     /* 15E08 00115E08 90000A24 */  addiu      $a6, $zero, 0x90
-    /* 15E0C 00115E0C 6026040C */  jal        func_00109980
+    /* 15E0C 00115E0C 6026040C */  jal        SceSifrpcCall
     /* 15E10 00115E10 2D580000 */   daddu     $a7, $zero, $zero
     /* 15E14 00115E14 05004104 */  bgez       $v0, .L00115E2C
     /* 15E18 00115E18 00EA028E */   lw        $v0, %lo(D_0014EA00)($s0)

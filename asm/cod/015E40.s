@@ -69,7 +69,7 @@ glabel sceDbcCreateSocket
     /* 15F0C 00115F0C 90000824 */  addiu      $a4, $zero, 0x90
     /* 15F10 00115F10 2D48E000 */  daddu      $a5, $a3, $zero
     /* 15F14 00115F14 90000A24 */  addiu      $a6, $zero, 0x90
-    /* 15F18 00115F18 6026040C */  jal        func_00109980
+    /* 15F18 00115F18 6026040C */  jal        SceSifrpcCall
     /* 15F1C 00115F1C 2D580000 */   daddu     $a7, $zero, $zero
     /* 15F20 00115F20 08004104 */  bgez       $v0, .L00115F44
     /* 15F24 00115F24 C00D848E */   lw        $a0, %lo(D_00150DC0)($s4)

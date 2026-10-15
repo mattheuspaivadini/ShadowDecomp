@@ -2,7 +2,7 @@
  * R3 famB: func_001178A8 gate + mirror read
  * The original .s stays in the build (asm/cod/018288.s); this C
  * draft (Session 8) is kept for the record. */
-int func_00109980(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
+int SceSifrpcCall(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
                   int a7, int a8);
 int func_001178A8(int a0);
 int func_00112FC8(int a0, int a1);
@@ -23,7 +23,7 @@ int func_00118288(int a0) {
         return 0;
     D_00135080[0] = a0;
     func_00112FC8((int)D_00135080, 4);
-    if (func_00109980((int)D_001355C0, D_001355E8[0], 0, (int)D_00135080,
+    if (SceSifrpcCall((int)D_001355C0, D_001355E8[0], 0, (int)D_00135080,
                       D_001355EC[0], (int)D_00134C40, D_001355F0[0], 0,
                       0) < 0) {
         func_00107000(D_00133A6C[0]);

@@ -25,7 +25,7 @@ glabel func_00115A30
     /* 15A5C 00115A5C 90000824 */  addiu      $a4, $zero, 0x90
     /* 15A60 00115A60 2D48E000 */  daddu      $a5, $a3, $zero
     /* 15A64 00115A64 90000A24 */  addiu      $a6, $zero, 0x90
-    /* 15A68 00115A68 6026040C */  jal        func_00109980
+    /* 15A68 00115A68 6026040C */  jal        SceSifrpcCall
     /* 15A6C 00115A6C 2D580000 */   daddu     $a7, $zero, $zero
     /* 15A70 00115A70 00EA028E */  lw         $v0, %lo(D_0014EA00)($s0)
     /* 15A74 00115A74 2000BFDF */  ld         $ra, 0x20($sp)

@@ -27,7 +27,7 @@ glabel func_001222D8
     /* 2230C 0012230C 00100824 */  addiu      $a4, $zero, 0x1000
     /* 22310 00122310 2D48E000 */  daddu      $a5, $a3, $zero
     /* 22314 00122314 00100A24 */  addiu      $a6, $zero, 0x1000
-    /* 22318 00122318 6026040C */  jal        func_00109980
+    /* 22318 00122318 6026040C */  jal        SceSifrpcCall
     /* 2231C 0012231C 2D580000 */   daddu     $a7, $zero, $zero
     /* 22320 00122320 FFFF0324 */  addiu      $v1, $zero, -0x1
     /* 22324 00122324 1000BFDF */  ld         $ra, 0x10($sp)

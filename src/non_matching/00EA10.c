@@ -4,7 +4,7 @@
  * draft (Session 8) is kept for the record. */
 int func_0010E238(void);
 int func_0010E338(void);
-int func_00109980(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
+int SceSifrpcCall(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
                   int a7, int a8);
 int func_0012821C(int dst, int src, int n);
 int func_001293B8(int dst, int src, int n);   /* strncpy-like: NUL-fills */
@@ -33,7 +33,7 @@ int func_0010EA10(int a0, int a1, int a2, int *a3, int a4) {
         *(struct B_EA10 *)((char *)D_00147380 + 0x104) = *(struct B_EA10 *)a2;
         D_00147380[0] = 0xFC;
     }
-    if (func_00109980((int)D_00147580, a4, 0, (int)D_00147380, 0x200,
+    if (SceSifrpcCall((int)D_00147580, a4, 0, (int)D_00147380, 0x200,
                       (int)D_00147380, 8, 0, 0) < 0)
         return 0xFFFEFFFF;
     *a3 = D_00147380[1];

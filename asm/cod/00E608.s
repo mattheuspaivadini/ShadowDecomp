@@ -140,7 +140,7 @@ glabel func_0010E608
     /* E7B8 0010E7B8 00020824 */  addiu      $a4, $zero, 0x200
     /* E7BC 0010E7BC 2D480002 */  daddu      $a5, $s0, $zero
     /* E7C0 0010E7C0 08000A24 */  addiu      $a6, $zero, 0x8
-    /* E7C4 0010E7C4 6026040C */  jal        func_00109980
+    /* E7C4 0010E7C4 6026040C */  jal        SceSifrpcCall
     /* E7C8 0010E7C8 2D580000 */   daddu     $a7, $zero, $zero
     /* E7CC 0010E7CC 04004304 */  bgezl      $v0, .L0010E7E0
     /* E7D0 0010E7D0 0400038E */   lw        $v1, 0x4($s0)

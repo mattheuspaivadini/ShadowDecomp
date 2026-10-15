@@ -30,7 +30,7 @@ glabel func_0010DD70
     /* DDB0 0010DDB0 04000824 */  addiu      $a4, $zero, 0x4
     /* DDB4 0010DDB4 00720926 */  addiu      $a5, $s0, %lo(D_00147200)
     /* DDB8 0010DDB8 04000A24 */  addiu      $a6, $zero, 0x4
-    /* DDBC 0010DDBC 6026040C */  jal        func_00109980
+    /* DDBC 0010DDBC 6026040C */  jal        SceSifrpcCall
     /* DDC0 0010DDC0 2D580000 */   daddu     $a7, $zero, $zero
     /* DDC4 0010DDC4 02004104 */  bgez       $v0, .L0010DDD0
     /* DDC8 0010DDC8 0072028E */   lw        $v0, %lo(D_00147200)($s0)

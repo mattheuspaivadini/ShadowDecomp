@@ -40,7 +40,7 @@ glabel sceDbcDeleteSocket
     /* 15FD0 00115FD0 90000824 */  addiu      $a4, $zero, 0x90
     /* 15FD4 00115FD4 2D480002 */  daddu      $a5, $s0, $zero
     /* 15FD8 00115FD8 90000A24 */  addiu      $a6, $zero, 0x90
-    /* 15FDC 00115FDC 6026040C */  jal        func_00109980
+    /* 15FDC 00115FDC 6026040C */  jal        SceSifrpcCall
     /* 15FE0 00115FE0 2D580000 */   daddu     $a7, $zero, $zero
     /* 15FE4 00115FE4 08004104 */  bgez       $v0, .L00116008
     /* 15FE8 00115FE8 C00D448E */   lw        $a0, %lo(D_00150DC0)($s2)

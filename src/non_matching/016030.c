@@ -13,7 +13,7 @@ extern int D_0014E900[];    /* .bss 0x0014E900 (request) -> lui/%lo */
 extern int D_0014EA00[];    /* .bss 0x0014EA00, 0xC0 bytes -> lui/%lo */
 extern char D_001386C0[];   /* .rodata: the error message -> lui/%lo */
 
-int func_00109980(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
+int SceSifrpcCall(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
                   int a7, int a8);
 void func_001318C0(int a0, int a1);
 void func_0010FB20(void);
@@ -34,7 +34,7 @@ int sceDbcGetDepNumber(int a0) {
         return -0xC;
     func_00107020(D_00150DC0[0]);
     D_0014EA00[0] = a0;
-    r = func_00109980((int)D_0014E900, 0x80001303, 0, (int)D_0014EA00, 0x90,
+    r = SceSifrpcCall((int)D_0014E900, 0x80001303, 0, (int)D_0014EA00, 0x90,
                       (int)D_0014EA00, 0x90, 0, 0);
     if (r < 0) {
         func_00116C58((int)D_001386C0);

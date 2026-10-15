@@ -384,7 +384,7 @@ segments:
       - [0x0096D0, asm, cod/0096D0] # func_001096D0
       - [0x0097A0, asm, cod/0097A0] # SceSifrpcBind
       - [0x0098F0, asm, cod/0098F0] # func_001098F0
-      - [0x009980, asm, cod/009980] # func_00109980
+      - [0x009980, asm, cod/009980] # SceSifrpcCall
       - [0x009B80, asm, cod/009B80] # func_00109B80
       - [0x009BC0, asm, cod/009BC0] # func_00109BC0
       - [0x009C58, asm, cod/009C58] # func_00109C58
@@ -779,7 +779,7 @@ segments:
       - [0x019AA0, asm, cod/019AA0] # func_00119AA0
       - [0x019AC0, asm, cod/019AC0] # func_00119AC0
       - [0x019BE0, asm, cod/019BE0] # func_00119BE0
-      - [0x019C08, asm, cod/019C08] # func_00119C08
+      - [0x019C08, asm, cod/019C08] # SceMrpcBind
       - [0x019DD8, asm, cod/019DD8] # SceMrpcUnbind
       - [0x019F18, asm, cod/019F18] # sceSifMCallRpc
       - [0x01A188, asm, cod/01A188] # sceMc2Init

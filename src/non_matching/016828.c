@@ -10,7 +10,7 @@ extern char D_00138788[];   /* .rodata: the size error message -> lui/%lo */
 extern char D_001387B8[];   /* .rodata: the first error message -> lui/%lo */
 extern char D_001387D8[];   /* .rodata: the second error message -> lui/%lo */
 
-int func_00109980(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
+int SceSifrpcCall(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
                   int a7, int a8);
 int func_00109B80(int a0);
 void func_00107020(int a0);
@@ -40,7 +40,7 @@ int sceDbcSendData2(int a0, int a1, int *a2, unsigned char *a3) {
         func_00107000(D_00150DC0[0]);
         return 0;
     }
-    r = func_00109980((int)D_0014E978 + D_00133A2C[0] * 0x28, D_00133A2C[0], 1,
+    r = SceSifrpcCall((int)D_0014E978 + D_00133A2C[0] * 0x28, D_00133A2C[0], 1,
                       (int)((char *)D_00150B80 + D_00133A2C[0] * 0xC0), 0x90,
                       (int)((char *)D_00150B80 + D_00133A2C[0] * 0xC0), 0x90, 0, 0);
     if (r < 0) {

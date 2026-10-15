@@ -40,7 +40,7 @@ glabel func_00123260
     /* 232C0 001232C0 01000624 */  addiu      $a2, $zero, 0x1
     /* 232C4 001232C4 00100824 */  addiu      $a4, $zero, 0x1000
     /* 232C8 001232C8 2D48E000 */  daddu      $a5, $a3, $zero
-    /* 232CC 001232CC 6026040C */  jal        func_00109980
+    /* 232CC 001232CC 6026040C */  jal        SceSifrpcCall
     /* 232D0 001232D0 00100A24 */   addiu     $a6, $zero, 0x1000
 .align 2
   .L001232D4:

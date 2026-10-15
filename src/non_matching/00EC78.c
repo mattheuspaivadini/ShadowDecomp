@@ -8,7 +8,7 @@ extern int D_00147580[];
 int func_0010E238(void);
 int func_0010E338(void);
 void func_001293B8(char *dst, char *src, int n);
-int func_00109980(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
+int SceSifrpcCall(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
                   int a7, int a8);
 
 int func_0010EC78(char *a0, char *a1, int *a2, int a3) {
@@ -25,7 +25,7 @@ int func_0010EC78(char *a0, char *a1, int *a2, int a3) {
     p[0x103] = 0;
     func_001293B8((char *)D_00147388 + 0xFC, a1, 0xFC);
     p[0x1FF] = 0;
-    r = func_00109980((int)D_00147580, a3, 0, (int)p, 0x200, (int)p, 0x10,
+    r = SceSifrpcCall((int)D_00147580, a3, 0, (int)p, 0x200, (int)p, 0x10,
                       0, 0);
     if (r < 0)
         return 0xFFFEFFFF;

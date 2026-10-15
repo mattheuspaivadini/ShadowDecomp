@@ -62,7 +62,7 @@ glabel func_0010EEB8
     /* EF50 0010EF50 20000824 */  addiu      $a4, $zero, 0x20
     /* EF54 0010EF54 2D48E000 */  daddu      $a5, $a3, $zero
     /* EF58 0010EF58 10000A24 */  addiu      $a6, $zero, 0x10
-    /* EF5C 0010EF5C 6026040C */  jal        func_00109980
+    /* EF5C 0010EF5C 6026040C */  jal        SceSifrpcCall
     /* EF60 0010EF60 2D580000 */   daddu     $a7, $zero, $zero
     /* EF64 0010EF64 FEFF043C */  lui        $a0, (0xFFFEFFFF >> 16)
     /* EF68 0010EF68 FFFF0324 */  addiu      $v1, $zero, -0x1

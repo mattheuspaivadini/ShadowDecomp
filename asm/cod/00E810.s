@@ -38,7 +38,7 @@ glabel func_0010E810
     /* E868 0010E868 04000824 */  addiu      $a4, $zero, 0x4
     /* E86C 0010E86C 2D48E000 */  daddu      $a5, $a3, $zero
     /* E870 0010E870 04000A24 */  addiu      $a6, $zero, 0x4
-    /* E874 0010E874 6026040C */  jal        func_00109980
+    /* E874 0010E874 6026040C */  jal        SceSifrpcCall
     /* E878 0010E878 2D580000 */   daddu     $a7, $zero, $zero
     /* E87C 0010E87C 03004304 */  bgezl      $v0, .L0010E88C
     /* E880 0010E880 8073028E */   lw        $v0, %lo(D_00147380)($s0)

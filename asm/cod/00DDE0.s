@@ -34,7 +34,7 @@ glabel func_0010DDE0
     /* DE30 0010DE30 0C000824 */  addiu      $a4, $zero, 0xC
     /* DE34 0010DE34 00720926 */  addiu      $a5, $s0, %lo(D_00147200)
     /* DE38 0010DE38 04000A24 */  addiu      $a6, $zero, 0x4
-    /* DE3C 0010DE3C 6026040C */  jal        func_00109980
+    /* DE3C 0010DE3C 6026040C */  jal        SceSifrpcCall
     /* DE40 0010DE40 2D580000 */   daddu     $a7, $zero, $zero
     /* DE44 0010DE44 02004104 */  bgez       $v0, .L0010DE50
     /* DE48 0010DE48 0072028E */   lw        $v0, %lo(D_00147200)($s0)

@@ -34,7 +34,7 @@ glabel sceDbcInitSocket
     /* 162E8 001162E8 90000824 */  addiu      $a4, $zero, 0x90
     /* 162EC 001162EC 2D482002 */  daddu      $a5, $s1, $zero
     /* 162F0 001162F0 90000A24 */  addiu      $a6, $zero, 0x90
-    /* 162F4 001162F4 6026040C */  jal        func_00109980
+    /* 162F4 001162F4 6026040C */  jal        SceSifrpcCall
     /* 162F8 001162F8 2D580000 */   daddu     $a7, $zero, $zero
     /* 162FC 001162FC 08004104 */  bgez       $v0, .L00116320
     /* 16300 00116300 C00D448E */   lw        $a0, %lo(D_00150DC0)($s2)

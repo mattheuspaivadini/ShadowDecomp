@@ -2,7 +2,7 @@
  * R3 famB: sceDbcCreateSocket
  * The original .s stays in the build (asm/cod/015E40.s); this C
  * draft (Session 8) is kept for the record. */
-int func_00109980(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
+int SceSifrpcCall(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
                   int a7, int a8);
 int func_00107020(int a0);
 int func_00107000(int a0);
@@ -30,7 +30,7 @@ int sceDbcCreateSocket(int *a0, int a1, int a2) {
     D_0014EA00[4] = a0[4];
     for (i = 0; i < 0x10; i++)
         ((char *)D_0014EA00)[0x14 + i] = ((char *)a0)[0x14 + i];
-    if (func_00109980((int)D_0014E900, 0x80001301, 0, (int)D_0014EA00, 0x90,
+    if (SceSifrpcCall((int)D_0014E900, 0x80001301, 0, (int)D_0014EA00, 0x90,
                       (int)D_0014EA00, 0x90, 0, 0) < 0) {
         func_00116C58((int)D_00138680);
         func_00107000(D_00150DC0[0]);

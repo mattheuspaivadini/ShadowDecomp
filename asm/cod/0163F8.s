@@ -34,7 +34,7 @@ glabel sceDbcGetDeviceStatus
     /* 16448 00116448 90000824 */  addiu      $a4, $zero, 0x90
     /* 1644C 0011644C 2D482002 */  daddu      $a5, $s1, $zero
     /* 16450 00116450 90000A24 */  addiu      $a6, $zero, 0x90
-    /* 16454 00116454 6026040C */  jal        func_00109980
+    /* 16454 00116454 6026040C */  jal        SceSifrpcCall
     /* 16458 00116458 2D580000 */   daddu     $a7, $zero, $zero
     /* 1645C 0011645C 08004104 */  bgez       $v0, .L00116480
     /* 16460 00116460 C00D448E */   lw        $a0, %lo(D_00150DC0)($s2)

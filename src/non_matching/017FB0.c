@@ -11,7 +11,7 @@ int func_0010FB20(void);
 void func_0010FB70(void);
 int func_001097A0(int a0, int a1, int a2);
 int func_00112FC8(int a0, int a1);
-int func_00109980(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
+int SceSifrpcCall(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
                   int a7, int a8);
 int func_00117D98(int a0);
 
@@ -71,7 +71,7 @@ int func_00117FB0(int a0) {
         func_0010FB70();
     D_00151090[0] = a0;
     func_00112FC8((int)D_00151090, 4);
-    if (func_00109980((int)D_00151050, 0, 0, (int)D_00151090, 4,
+    if (SceSifrpcCall((int)D_00151050, 0, 0, (int)D_00151090, 4,
                       (int)D_001354C0, 4, 0, 0) < 0) {
         func_00107000(D_00133A70[0]);
         return (a0 == 8) ? -1 : 6;

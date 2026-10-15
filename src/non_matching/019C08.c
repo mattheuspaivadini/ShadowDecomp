@@ -53,7 +53,7 @@ int func_001199F8(int pool);
 void func_00119AA0(void *node);
 int func_00112E00(int a0, int a1, int a2, int a3, int a4, int a5);
 
-int func_00119C08(int a0, int a1, int a2, int a3, int a4, int a5) {
+int SceMrpcBind(int a0, int a1, int a2, int a3, int a4, int a5) {
     struct C019C08 *c;
     struct N019C08 *n;
     struct SemaParam_019C08 buf;

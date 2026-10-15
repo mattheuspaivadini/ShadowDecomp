@@ -82,7 +82,7 @@ glabel sceDbcGetDepNumber
     /* 16140 00116140 90000824 */  addiu      $a4, $zero, 0x90
     /* 16144 00116144 2D480002 */  daddu      $a5, $s0, $zero
     /* 16148 00116148 90000A24 */  addiu      $a6, $zero, 0x90
-    /* 1614C 0011614C 6026040C */  jal        func_00109980
+    /* 1614C 0011614C 6026040C */  jal        SceSifrpcCall
     /* 16150 00116150 2D580000 */   daddu     $a7, $zero, $zero
     /* 16154 00116154 08004104 */  bgez       $v0, .L00116178
     /* 16158 00116158 C00D248E */   lw        $a0, %lo(D_00150DC0)($s1)

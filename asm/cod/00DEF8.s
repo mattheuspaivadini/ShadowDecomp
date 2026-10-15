@@ -74,7 +74,7 @@ glabel func_0010DEF8
     /* DFB8 0010DFB8 2D300000 */  daddu      $a2, $zero, $zero
     /* DFBC 0010DFBC 00720926 */  addiu      $a5, $s0, %lo(D_00147200)
     /* DFC0 0010DFC0 04000A24 */  addiu      $a6, $zero, 0x4
-    /* DFC4 0010DFC4 6026040C */  jal        func_00109980
+    /* DFC4 0010DFC4 6026040C */  jal        SceSifrpcCall
     /* DFC8 0010DFC8 2D580000 */   daddu     $a7, $zero, $zero
     /* DFCC 0010DFCC 02004104 */  bgez       $v0, .L0010DFD8
     /* DFD0 0010DFD0 0072028E */   lw        $v0, %lo(D_00147200)($s0)

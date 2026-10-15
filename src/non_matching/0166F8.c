@@ -2,7 +2,7 @@
  * R3 famB: sceDbcSendData
  * The original .s stays in the build (asm/cod/0166F8.s); this C
  * draft (Session 8) is kept for the record. */
-int func_00109980(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
+int SceSifrpcCall(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
                   int a7, int a8);
 int func_00107020(int a0);
 int func_00107000(int a0);
@@ -23,7 +23,7 @@ int sceDbcSendData(int a0, int a1, int *a2, char *a3) {
     D_0014EA00[2] = *a2;
     for (i = 0; i < *a2; i++)
         ((char *)D_0014EA00)[0xC + i] = a3[i];
-    if (func_00109980((int)D_0014E900, 0x80001319, 0, (int)D_0014EA00, 0x90,
+    if (SceSifrpcCall((int)D_0014E900, 0x80001319, 0, (int)D_0014EA00, 0x90,
                       (int)D_0014EA00, 0x90, 0, 0) < 0) {
         func_00116C58((int)D_00138768);
         func_00107000(D_00150DC0[0]);

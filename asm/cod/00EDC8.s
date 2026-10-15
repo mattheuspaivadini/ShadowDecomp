@@ -41,7 +41,7 @@ glabel func_0010EDC8
     /* EE2C 0010EE2C 20000824 */  addiu      $a4, $zero, 0x20
     /* EE30 0010EE30 2D48E000 */  daddu      $a5, $a3, $zero
     /* EE34 0010EE34 20000A24 */  addiu      $a6, $zero, 0x20
-    /* EE38 0010EE38 6026040C */  jal        func_00109980
+    /* EE38 0010EE38 6026040C */  jal        SceSifrpcCall
     /* EE3C 0010EE3C 2D580000 */   daddu     $a7, $zero, $zero
     /* EE40 0010EE40 04004104 */  bgez       $v0, .L0010EE54
     /* EE44 0010EE44 00000000 */   nop

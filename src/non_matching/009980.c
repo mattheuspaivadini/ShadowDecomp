@@ -47,7 +47,7 @@ int func_00109268(int a0);
 int func_00112FC8(int a0, int a1);
 int func_00112E00(int a0, int a1, int a2, int a3, int a4, int a5);
 
-int func_00109980(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
+int SceSifrpcCall(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
                   int a7, int a8) {
     struct RpcCd *cd;
     struct RpcCall *call;

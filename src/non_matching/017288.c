@@ -10,7 +10,7 @@ void func_00108FF8(int a0);
 int func_001097A0(int a0, int a1, int a2);
 int func_00108EF8(const char *msg, ...);
 int func_00112FC8(int a0, int a1);
-int func_00109980(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
+int SceSifrpcCall(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
                   int a7, int a8);
 
 extern int D_00133A68[];    /* lui/%lo (non-small) */
@@ -87,7 +87,7 @@ int func_00117288(int a0, int a1, int a2) {
     *(int *)(p + 0x128) = a2;
     *(int *)(p + 0x124) = (int)p;
     func_00112FC8((int)p, 0x12C);
-    if (func_00109980((int)D_00151000, 0, 0, (int)p, 0x12C,
+    if (SceSifrpcCall((int)D_00151000, 0, 0, (int)p, 0x12C,
                       (int)D_00150FC0, 4, 0, 0) < 0) {
     fail:
         func_00107000(D_00133A68[0]);

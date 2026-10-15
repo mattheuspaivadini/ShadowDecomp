@@ -107,7 +107,7 @@ glabel func_00117AB0
     /* 17C04 00117C04 04000824 */  addiu      $a4, $zero, 0x4
     /* 17C08 00117C08 2D480002 */  daddu      $a5, $s0, $zero
     /* 17C0C 00117C0C 10000A24 */  addiu      $a6, $zero, 0x10
-    /* 17C10 00117C10 6026040C */  jal        func_00109980
+    /* 17C10 00117C10 6026040C */  jal        SceSifrpcCall
     /* 17C14 00117C14 2D580000 */   daddu     $a7, $zero, $zero
     /* 17C18 00117C18 10004104 */  bgez       $v0, .L00117C5C
     /* 17C1C 00117C1C 1300023C */   lui       $v0, %hi(D_00133A64)

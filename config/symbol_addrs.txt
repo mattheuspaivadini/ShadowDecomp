@@ -199,11 +199,10 @@ sceStdioReadlink = 0x0010DB08;
 // sceStdio* set above. Applied with the owner's Session-10a instruction; the
 // per-entry reasons for the ones still withheld are in
 // docs/naming-candidates.md.
-// Two further candidates are deliberately NOT applied here because 20/1
-// matched C translation units reference them as func_00109980 (SceSifrpcCall)
-// and func_00119C08 (SceMrpcBind): renaming them would require editing those C
-// bodies, which Session 10a ruled out (the rename broke the link, see
-// docs/decisions.md).
+// Two further candidates were applied in Session 10a.2 (see the block at the
+// end of this file): Session 10a had reverted them because matched C TUs
+// called them by their func_* names (the rename broke the link, see
+// docs/decisions.md); Session 10a.2 renamed those call sites too.
 // ---------------------------------------------------------------------------
 // "SceSifrpcBind" (at 0x00137EB8) - semaphore created per bind; the routine
 // sends SIF command 0x80000009 (RPC bind) with it.
@@ -219,3 +218,17 @@ SceMrpcUnbind = 0x00119DD8;
 // "sceMc2_sema_main" + "sceMc2_sema_start" + "sceMc2_sema_end" +
 // "sceMc2_basic_thread" - creates the whole memory-card sub-system object set.
 sceMc2Init = 0x0011A188;
+
+// ---------------------------------------------------------------------------
+// Phase 5 (Session 10a.2): the two names Session 10a reverted, applied
+// mechanically. Same object rule as the Session-10a set above; both
+// UNCONFIRMED. They had to wait for a pure *symbol* rename of their call
+// sites (the 20 matched C TUs that used the old func_00109980 name;
+// src/cod/019BE0.c for the old func_00119C08 name) - no C body was changed.
+// ---------------------------------------------------------------------------
+// "SceSifrpcCall" (string at 0x00137EC8) - the 9-argument SIF RPC call routine
+// (sceSifCallRpc-shaped); the whole 00Dxx0-023260 command family calls it.
+SceSifrpcCall = 0x00109980;
+// "SceMrpcBind0" + "SceMrpcBind1" (strings at 0x00138B50 / 0x00138B60) -
+// creates both mrpc bind semaphores in one lazily-guarded pass.
+SceMrpcBind = 0x00119C08;

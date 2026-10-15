@@ -7,7 +7,7 @@ struct C019288 {
     int  f24;       /* 0x24 busy/done word */
 };
 
-int func_00119C08(int a0, int a1, int a2, int a3, int a4, int a5);
+int SceMrpcBind(int a0, int a1, int a2, int a3, int a4, int a5);
 
 int func_00119288(int a0, int a1, int a2, int a3) {
     struct C019288 *c;
@@ -16,7 +16,7 @@ int func_00119288(int a0, int a1, int a2, int a3) {
     c = (struct C019288 *)a0;
     if (a1 < 0x100 || (a1 & 0x3F) != 0)
         return -0x21F;
-    if (func_00119C08(a0, 0x80001201, 0, a1, a2, a3) < 0)
+    if (SceMrpcBind(a0, 0x80001201, 0, a1, a2, a3) < 0)
         return -0x21C;
     if (c->f24 == 0) {
         i = 0xFFFF0000;

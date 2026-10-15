@@ -3,7 +3,7 @@
  *   h = func_001231A8();                    (one-shot CreateSema for
  *                                            D_00135960; negative on failure)
  *   if (h < 0) { func_00108EF8(D_00138E08, a2); return h; }
- *   return func_00109980(a0, a2, 1, a1, 0x1000, a1, 0x1000,
+ *   return SceSifrpcCall(a0, a2, 1, a1, 0x1000, a1, 0x1000,
  *                        (int)func_00123180, h);   (9-arg RPC-style call: the
  *                        9th argument is the `sw $s0,0x0($sp)` stack word)
  * The command descriptor is the a1 argument (passed as both the 4th and 6th
@@ -12,7 +12,7 @@
  * MATCH GUESS: cc=29 (0231A8/023208 D_00135960 family; filled jal shadows) */
 int func_001231A8(void);
 int func_00108EF8(const char *msg, int a1);
-int func_00109980(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
+int SceSifrpcCall(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
                   int a7, int a8);
 void func_00123180(int a0);
 
@@ -26,6 +26,6 @@ int func_00123260(int a0, int a1, int a2) {
         func_00108EF8(D_00138E08, a2);
         return h;
     }
-    return func_00109980(a0, a2, 1, a1, 0x1000, a1, 0x1000, (int)func_00123180,
+    return SceSifrpcCall(a0, a2, 1, a1, 0x1000, a1, 0x1000, (int)func_00123180,
                          h);
 }

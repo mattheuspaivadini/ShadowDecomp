@@ -192,11 +192,11 @@ Tips: use a function's constants, string references, and call patterns to infer 
 
 | Metric | Value |
 |--------|-------|
-| Current phase | Phases 1–4 done (**incl. step 6, ELF container**); **Phase 3 revision question resolved** (Session 8 added a **third** generation, `2.95.3-136`); **Phase 5 in progress (53 named symbols)**; Phase 6: **343 functions matched** |
+| Current phase | Phases 1–4 done (**incl. step 6, ELF container**); **Phase 3 revision question resolved** (Session 8 added a **third** generation, `2.95.3-136`); **Phase 5 in progress (55 named symbols)**; Phase 6: **343 functions matched** |
 | ELF rebuild hash match | **YES — 237,952 bytes, SHA-1 `6f853f64…` (flat load image), still green with 343 functions from C** |
 | ELF container (whole file) | **YES — `build/SCUS_974.72.elf` byte-identical to the original: 242,940 bytes, SHA-1 `b715b349…`; 3 program headers, 16 sections, `e_entry 0x00100010`, `.mdebug.eabi64`, no `.symtab`** (`tools/containerize.py`) |
-| Functions named | **53 `.text` symbols** = `entry` + **52 evidence-derived names**: 17 verbatim self-naming log messages, 22 inferred from `SceStdio<Op>Sema` object names (UNCONFIRMED), 3 single inferences (UNCONFIRMED), 3 callee names from `func_00104668` failure diagnostics (Session 5, UNCONFIRMED), 2 Session-3 names, 5 SDK object/operation names (Session 10a, UNCONFIRMED) |
-| String-evidenced name candidates | **61 functions** reference an identifier-bearing string; **48 named, 13 pending** (Session 10a applied 5 with no C body/caller; 2 more were reverted after they broke the link because matched C calls them by `func_*` name) |
+| Functions named | **55 `.text` symbols** = `entry` + **54 evidence-derived names**: 17 verbatim self-naming log messages, 22 inferred from `SceStdio<Op>Sema` object names (UNCONFIRMED), 3 single inferences (UNCONFIRMED), 3 callee names from `func_00104668` failure diagnostics (Session 5, UNCONFIRMED), 2 Session-3 names, 5 SDK object/operation names (Session 10a, UNCONFIRMED), 2 more SDK names (Session 10a.2, UNCONFIRMED) |
+| String-evidenced name candidates | **61 functions** reference an identifier-bearing string; **50 named, 11 pending** (Session 10a applied 5 with no C body/caller; Session 10a.2 applied the 2 that Session 10a had reverted after they broke the link, via a pure symbol rename of the 21 matched C call sites) |
 | Functions matched (C) | **343 / 1036** (2.9-991111, 2.96 and 2.95.3-136 per TU; the wrapper tier uses a per-TU `-fno-optimize-sibling-calls` on cc=296 TUs only — the 2.9 `cc1` rejects the flag) |
 | Matched bytes | 24396 / 203,692 `.text` bytes = **11.977 %** (verified) |
 | Compiler flags | `-O2 -g2 -G8` (per-TU `-g0` and `-fno-optimize-sibling-calls` overrides, the latter cc=296-only); `-O1`/`-Os` ruled out on 148 functions; `-O2 ≡ -O3` (not separable; Session 6 ran the decisive experiment — §2.4 of `docs/compiler.md`: plain static + `-O3` ≡ `inline` + `{-O2,-O3}`, so the `-O2` pin stays) |
@@ -210,6 +210,13 @@ Tips: use a function's constants, string references, and call patterns to infer 
 | EE hardware registers referenced | **38 addresses** (`tools/scan_hw_regs.py`); the 2 that were unidentified are now **confirmed**: `0x10001010` = `T2_MODE` (Timer 2 mode/status), `0x1000E060` = `D_STADR` (DMAC stall address) — `docs/structs.md` §"Hardware registers" |
 
 ### Session log
+
+- **2026-10-15 (Session 10a.2) — mechanical symbol rename: the two SDK names Session 10a reverted are applied (+0 functions, 343 unchanged, 11.977%).**
+  - **Task.** Apply `SceSifrpcCall` 0x00109980 and `SceMrpcBind` 0x00119C08 (the two names Session 10a renamed, then reverted because the rename broke the link) as a **pure symbol rename** — no C body, no flag, no other symbol.
+  - **References found (Grep over `src/`, `asm/`, `config/`, `include/`).** `func_00109980`: 20 compiled `src/cod/` callers + 28 archived `src/non_matching/` attempts + the `asm/`-generated call sites; `func_00119C08`: `src/cod/019BE0.c` + 2 `src/non_matching/` attempts. No `include/` references; `config/` had only comments (no `symbol_addrs.txt` entry existed). Historical logs under `docs/` were left untouched.
+  - **Applied.** Two new `config/symbol_addrs.txt` entries (`SceSifrpcCall = 0x00109980`, `SceMrpcBind = 0x00119C08`); the identifiers renamed at every call site in `src/` (50 C files, 127 occurrences) and in the `config/c_sources.txt` comments; the splat pipeline re-run end to end, which regenerated `asm/` (2 `glabel` files + 48 `jal` targets) and `config/SCUS_974.72.yaml`. 103 files changed; every `asm/` diff is exactly the old→new substitution.
+  - **Gate.** `tools/build.py` → **HASH MATCH** (237,952 B, `6f853f64…`), `containerize.py` → **byte-identical to the original**; `tools/verify_c.py` → **343/343 byte-exact** (4-TU spot check first, incl. the wine `2.95.3-136` `019BE0`).
+  - **Naming.** Named `.text` symbols 53 → **55**; string-evidenced candidates now **50 named / 11 pending** (`docs/naming-candidates.md` updated; decision recorded in `docs/decisions.md`).
 
 - **2026-10-15 (Session 10a) — permuter pass (no gain) + SDK naming promotion (+0 functions, 343 unchanged, 11.977%).**
   - **Task 1 (near-miss permuter, 5 targets): no target improved.** `028778` 1→1, `022550` 3→3, `0229B0` 3→3, `022A38` 3→3, `022CE0` 3→3; ~400 `permute_gen.py` body/decl-order mutants per stem scored with `score_drafts.py` (cc 29/296 × default/`-g0`/`-fno-optimize-sibling-calls` + 3rd-gen PE retry). Log: `build/s10/permuter_pass.log`. No promotions; best mutant = the already-archived attempt, so no re-archive.

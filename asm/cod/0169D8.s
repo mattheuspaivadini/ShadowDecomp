@@ -84,7 +84,7 @@ glabel func_001169D8
     /* 16AD0 00116AD0 01000624 */  addiu      $a2, $zero, 0x1
     /* 16AD4 00116AD4 90200824 */  addiu      $a4, $zero, 0x2090
     /* 16AD8 00116AD8 2D48E000 */  daddu      $a5, $a3, $zero
-    /* 16ADC 00116ADC 6026040C */  jal        func_00109980
+    /* 16ADC 00116ADC 6026040C */  jal        SceSifrpcCall
     /* 16AE0 00116AE0 90200A24 */   addiu     $a6, $zero, 0x2090
     /* 16AE4 00116AE4 05004104 */  bgez       $v0, .L00116AFC
     /* 16AE8 00116AE8 00000000 */   nop

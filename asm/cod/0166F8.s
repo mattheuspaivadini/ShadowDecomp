@@ -65,7 +65,7 @@ glabel sceDbcSendData
     /* 167AC 001167AC 90000824 */  addiu      $a4, $zero, 0x90
     /* 167B0 001167B0 2D48E000 */  daddu      $a5, $a3, $zero
     /* 167B4 001167B4 90000A24 */  addiu      $a6, $zero, 0x90
-    /* 167B8 001167B8 6026040C */  jal        func_00109980
+    /* 167B8 001167B8 6026040C */  jal        SceSifrpcCall
     /* 167BC 001167BC 2D580000 */   daddu     $a7, $zero, $zero
     /* 167C0 001167C0 08004304 */  bgezl      $v0, .L001167E4
     /* 167C4 001167C4 8C00508E */   lw        $s0, 0x8C($s2)
