@@ -192,13 +192,13 @@ Tips: use a function's constants, string references, and call patterns to infer 
 
 | Metric | Value |
 |--------|-------|
-| Current phase | Phases 1–4 done (**incl. step 6, ELF container**); **Phase 3 revision question resolved** (Session 8 added a **third** generation, `2.95.3-136`); **Phase 5 in progress (55 named symbols)**; Phase 6: **344 functions matched** |
-| ELF rebuild hash match | **YES — 237,952 bytes, SHA-1 `6f853f64…` (flat load image), still green with 344 functions from C** |
+| Current phase | Phases 1–4 done (**incl. step 6, ELF container**); **Phase 3 revision question resolved** (Session 8 added a **third** generation, `2.95.3-136`); **Phase 5 in progress (55 named symbols)**; Phase 6: **346 functions matched** |
+| ELF rebuild hash match | **YES — 237,952 bytes, SHA-1 `6f853f64…` (flat load image), still green with 346 functions from C** |
 | ELF container (whole file) | **YES — `build/SCUS_974.72.elf` byte-identical to the original: 242,940 bytes, SHA-1 `b715b349…`; 3 program headers, 16 sections, `e_entry 0x00100010`, `.mdebug.eabi64`, no `.symtab`** (`tools/containerize.py`) |
 | Functions named | **55 `.text` symbols** = `entry` + **54 evidence-derived names**: 17 verbatim self-naming log messages, 22 inferred from `SceStdio<Op>Sema` object names (UNCONFIRMED), 3 single inferences (UNCONFIRMED), 3 callee names from `func_00104668` failure diagnostics (Session 5, UNCONFIRMED), 2 Session-3 names, 5 SDK object/operation names (Session 10a, UNCONFIRMED), 2 more SDK names (Session 10a.2, UNCONFIRMED) |
 | String-evidenced name candidates | **61 functions** reference an identifier-bearing string; **50 named, 11 pending** (Session 10a applied 5 with no C body/caller; Session 10a.2 applied the 2 that Session 10a had reverted after they broke the link, via a pure symbol rename of the 21 matched C call sites) |
-| Functions matched (C) | **344 / 1036** (2.9-991111, 2.96 and 2.95.3-136 per TU; the wrapper tier uses a per-TU `-fno-optimize-sibling-calls` on cc=296 TUs only — the 2.9 `cc1` rejects the flag) |
-| Matched bytes | 24612 / 203,692 `.text` bytes = **12.083 %** (verified) |
+| Functions matched (C) | **346 / 1036** (2.9-991111, 2.96 and 2.95.3-136 per TU; the wrapper tier uses a per-TU `-fno-optimize-sibling-calls` on cc=296 TUs only — the 2.9 `cc1` rejects the flag) |
+| Matched bytes | 24876 / 203,692 `.text` bytes = **12.21 %** (verified) |
 | Compiler flags | `-O2 -g2 -G8` (per-TU `-g0` and `-fno-optimize-sibling-calls` overrides, the latter cc=296-only); `-O1`/`-Os` ruled out on 148 functions; `-O2 ≡ -O3` (not separable; Session 6 ran the decisive experiment — §2.4 of `docs/compiler.md`: plain static + `-O3` ≡ `inline` + `{-O2,-O3}`, so the `-O2` pin stays) |
 | Compilers | `ee-gcc2.96` (default) + `ee-gcc2.9-991111-01` (`cc=29`) + **`wine:ee-gcc2.95.3-136`** and `ee-gcc2.9-991111-xz`; matrix in `docs/compiler.md` §4.3, third-generation verdict in §4.4 |
 | `.text` disassembly (splat R5900) | accurate; **1036 per-function `.s` + 2 raw `textbin`** (`.text` header, `0x00113074` non-function hole) |
@@ -221,6 +221,10 @@ Tips: use a function's constants, string references, and call patterns to infer 
   - **Step 0 (triage):** 11 near(<=2) stems listed; all skipped — `build/s10/perm/` holds only Session 10b perm data (022550, 028778), so `pdiff.py` cannot classify any diff. 0 matches. Stop (>5 consecutive skipped).
   - **Step 1 (45-80 tier):** blocker — lot-1 stems require callee signatures + global/struct types not available; speculative drafts cannot match. EE-GCC toolchain confirmed functional (002FE0 smoke test byte-exact). Lot 1 = 0/0 → STOP per 0/10 rule. Remaining 37 stems saved to `build/s10/w45s_remaining.txt`.
   - Ledger unchanged: **344 matched / 328 near / 191 asm-permanent / 173 untouched / 501 real pool**.
+- **2026-10-15 (Session 10c.3) — triage + one lot, +2 functions (344 → 346, 12.083% → 12.21%, 24,612 → 24,876 B).**
+  - **PART 1 triage:** all 11 stems scored via pdiff.py; 2 matched via a single store-order/removed-store lever — `0155D8` MATCH cc=29 (dropped redundant pre-loop `p->f00 = 0`), `02E490` MATCH cc=296 (swapped `a0[0x30]=a1;` before `a0[0x34]=a2;`). Both promoted via promote.py; gate HASH MATCH + container byte-identical. Remaining 9 stems archived (best score 1-2; classes: register allocation / branch layout / scheduling).
+  - **PART 2 lot 1 (45-80 tier):** all 10 stems (018380 029878 031048 011B98 020370 018970 020F30 02F6C0 0214D0 016FB0) drafted + scored once; 0 matches (scores 34-52; 3 compile errors on complex call-chain stems). Hit rate 0%. Lot 1: drafted 10 / matched 0 / hit rate 0%.
+  - Ledger: **346 matched / 326 near / 191 asm-permanent / 173 untouched / 499 real pool**; matched bytes 24,876.
 
 - **2026-10-15 (Session 10a.2) — mechanical symbol rename: the two SDK names Session 10a reverted are applied (+0 functions, 343 unchanged, 11.977%).**
   - **Task.** Apply `SceSifrpcCall` 0x00109980 and `SceMrpcBind` 0x00119C08 (the two names Session 10a renamed, then reverted because the rename broke the link) as a **pure symbol rename** — no C body, no flag, no other symbol.
