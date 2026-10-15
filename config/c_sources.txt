@@ -460,3 +460,5 @@
 02E7E8 = src/cod/02E7E8.c                     # session9 R1 w25b wave
 01C578 = src/cod/01C578.c cc=29               # session9 R2 wave A 45-80 tier
 028778 = src/cod/028778.c                     # Session 10b: commutative addu operand order fixed by writing index*4 + base
+02E490 = src/cod/02E490.c                     # PART1 02E490 store-order swap (a0[0x30]=a1 before a0[0x34]=a2), MATCH cc=296
+0155D8 = src/cod/0155D8.c cc=29               # PART1 0155D8 dropped redundant pre-loop p->f00=0 (store-order), MATCH cc=29

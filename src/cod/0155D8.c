@@ -1,7 +1,6 @@
-/* STATUS (Session 8, 2026-10-14): NON_MATCHING. best score 2 [cc=29].
- * rotated-loop: duplicated preheader sb + the copy in the bgezl delay (store order 7C/01/03/02/04); wave3e (R1)
- * The original .s stays in the build (asm/cod/0155D8.s); this C
- * draft (Session 8) is kept for the record. */
+/* asm/cod/0155D8.s -> func_001283D0.
+ * PART1 0155D8 dropped redundant pre-loop p->f00=0 (store-order), MATCH cc=29
+ * MATCHED (Session 8). */
 struct R0155D8 {
     char pad00[0x10];
     char *buf;          /* 0x10 */
@@ -28,7 +27,6 @@ void func_001155D8(int index) {
     int             i;
 
     p = (struct B0155D8 *)D_0014B598[index].buf;
-    p->f00 = 0;
     for (i = 1; i >= 0; i--) {
         p->f00 = 0;
         p->f7C = 0;
