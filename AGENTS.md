@@ -211,6 +211,13 @@ Tips: use a function's constants, string references, and call patterns to infer 
 
 ### Session log
 
+- **2026-10-15 (Session 10b) — diff-driven hard cases (+1 function, 343 → 344, 11.977% → 12.083%, 24,612 B).**
+  - **Method:** classify the residual diff first (`build/s10/pdiff.py`: permute.py on `build/s10/perm/<stem>/` + side-by-side disassembly), then one targeted C lever per class. Notes: `build/s10/notes_10b.md`; handoff `build/s10/handoff_10b.md`.
+  - **`028778` 1 → 0 (MATCH, cc=296, 1 iteration).** Residual = operand order of one commutative `addu` (`$v0,$v1` vs `$v1,$v0`); fixed by `index * 4 + ctx[0x75]`. Promoted via `promote.py`; gate HASH MATCH + container byte-identical + `verify_c.py` 344/344; commit `821adf9`.
+  - **`022550` 3 → 3 (3 iterations, 17 variants).** Residual = register allocation only: the `%hi(D_00135958)` pseudo and the loaded value swap `$v0/$v1` (same schedule). Store order, temps, volatile, struct, local extern, const-local base/n: no change. Archived (`archive_draft.py`). **Command family stopped by rule**: `0229B0 022A38 022CE0` not touched.
+  - **New pattern (commutative operand order):** a 1-insn diff where `addu rd,rs,rt` has rs/rt swapped is fixed by swapping the C operands (`i*4 + base` vs `base + i*4`); permuter body/decl-order mutations do not cover it.
+  - Ledger: **344 matched / 328 near / 191 asm-permanent / 173 untouched / 501 real pool**.
+
 - **2026-10-15 (Session 10a.2) — mechanical symbol rename: the two SDK names Session 10a reverted are applied (+0 functions, 343 unchanged, 11.977%).**
   - **Task.** Apply `SceSifrpcCall` 0x00109980 and `SceMrpcBind` 0x00119C08 (the two names Session 10a renamed, then reverted because the rename broke the link) as a **pure symbol rename** — no C body, no flag, no other symbol.
   - **References found (Grep over `src/`, `asm/`, `config/`, `include/`).** `func_00109980`: 20 compiled `src/cod/` callers + 28 archived `src/non_matching/` attempts + the `asm/`-generated call sites; `func_00119C08`: `src/cod/019BE0.c` + 2 `src/non_matching/` attempts. No `include/` references; `config/` had only comments (no `symbol_addrs.txt` entry existed). Historical logs under `docs/` were left untouched.

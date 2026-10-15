@@ -1,7 +1,7 @@
-/* STATUS (Session 9, 2026-10-15): NON_MATCHING. best score 3 [cc=29].
- * session9 R1; residual class not auto-classified
+/* STATUS (Session 10b, 2026-10-15): NON_MATCHING. best score 3 [cc=29].
+ * register allocation: orig lui v1/lw v0 for D_00135958, ours swaps v0/v1; 17 diff-driven variants (store order, temps, volatile, struct, const-local base) all 3. Log build/s10/notes_10b.md
  * The original .s stays in the build (asm/cod/022550.s); this C
- * draft (Session 9) is kept for the record. */
+ * draft (Session 10b) is kept for the record. */
 int func_001221D0(void);
 void func_00128FB0(char *dst, char *src);
 int func_00123260(char *dst, char *src, int n);
