@@ -39,6 +39,14 @@ import shape_clusters as sc  # noqa: E402
 NON_MATCHING = ROOT / "src" / "non_matching"
 LEDGER = ROOT / "docs" / "ledger.json"
 
+# Functions proven NOT to be plain C, so they stay `.s` permanently.  The `$gp`
+# save/restore family: no published EE-GCC generation emits the dance for a C
+# indirect call, and the EE `as` cannot assemble an inline-asm `$gp` read
+# (build/s8/probe_gp*.sh, sweep_gp*.sh, docs/session8-plan.md).
+ASM_PERMANENT_EXTRA = {
+    "0092F8", "00A878", "011CA8", "012E80", "016D88", "019AC0", "0171B8",
+}
+
 # "best score 4 [cc=29, default]" / "best score 14"
 SCORE_RE = re.compile(r"best score\s+(\d+)", re.I)
 # fallback: the Session-6 machine tables "| 2 | 007C70 | 29 |"
@@ -130,7 +138,7 @@ def main() -> int:
         elif stem in archived:
             n = scores.get(stem)
             status = f"near({n})" if n is not None and n >= 0 else "near(?)"
-        elif stem in handwritten or stem in syscall:
+        elif stem in handwritten or stem in syscall or stem in ASM_PERMANENT_EXTRA:
             status = "asm-permanent"
         else:
             status = "untouched"
@@ -145,6 +153,8 @@ def main() -> int:
             notes = "syscall-stub"
         elif stem in handwritten:
             notes = "handwritten"
+        elif stem in ASM_PERMANENT_EXTRA:
+            notes = "gp save/restore; no C spelling (probe build/s8/sweep_gp*)"
         if status.startswith("near") and stem in archived:
             m = SCORE_RE.search(archived[stem].read_text(
                 encoding="utf-8", errors="replace")[:1200])
