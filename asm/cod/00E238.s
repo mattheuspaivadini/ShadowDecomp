@@ -26,7 +26,7 @@ glabel func_0010E238
     /* E260 0010E260 0080053C */  lui        $a1, (0x80000006 >> 16)
     /* E264 0010E264 2D200002 */  daddu      $a0, $s0, $zero
     /* E268 0010E268 0600A534 */  ori        $a1, $a1, (0x80000006 & 0xFFFF)
-    /* E26C 0010E26C E825040C */  jal        func_001097A0
+    /* E26C 0010E26C E825040C */  jal        SceSifrpcBind
     /* E270 0010E270 2D300000 */   daddu     $a2, $zero, $zero
     /* E274 0010E274 03004304 */  bgezl      $v0, .L0010E284
     /* E278 0010E278 2400028E */   lw        $v0, 0x24($s0)

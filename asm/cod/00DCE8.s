@@ -36,7 +36,7 @@ glabel func_0010DCE8
     /* DD28 0010DD28 0080053C */  lui        $a1, (0x80000003 >> 16)
     /* DD2C 0010DD2C 2D200002 */  daddu      $a0, $s0, $zero
     /* DD30 0010DD30 0300A534 */  ori        $a1, $a1, (0x80000003 & 0xFFFF)
-    /* DD34 0010DD34 E825040C */  jal        func_001097A0
+    /* DD34 0010DD34 E825040C */  jal        SceSifrpcBind
     /* DD38 0010DD38 2D300000 */   daddu     $a2, $zero, $zero
     /* DD3C 0010DD3C 03004304 */  bgezl      $v0, .L0010DD4C
     /* DD40 0010DD40 2400028E */   lw        $v0, 0x24($s0)

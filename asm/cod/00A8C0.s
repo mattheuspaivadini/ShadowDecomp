@@ -66,7 +66,7 @@ glabel func_0010A8C0
     /* A970 0010A970 0080053C */  lui        $a1, (0x80000001 >> 16)
     /* A974 0010A974 2D200002 */  daddu      $a0, $s0, $zero
     /* A978 0010A978 0100A534 */  ori        $a1, $a1, (0x80000001 & 0xFFFF)
-    /* A97C 0010A97C E825040C */  jal        func_001097A0
+    /* A97C 0010A97C E825040C */  jal        SceSifrpcBind
     /* A980 0010A980 2D300000 */   daddu     $a2, $zero, $zero
     /* A984 0010A984 48004004 */  bltz       $v0, .L0010AAA8
     /* A988 0010A988 EAFF0224 */   addiu     $v0, $zero, -0x16

@@ -382,7 +382,7 @@ segments:
       - [0x009640, asm, cod/009640] # func_00109640
       - [0x009690, asm, cod/009690] # func_00109690
       - [0x0096D0, asm, cod/0096D0] # func_001096D0
-      - [0x0097A0, asm, cod/0097A0] # func_001097A0
+      - [0x0097A0, asm, cod/0097A0] # SceSifrpcBind
       - [0x0098F0, asm, cod/0098F0] # func_001098F0
       - [0x009980, asm, cod/009980] # func_00109980
       - [0x009B80, asm, cod/009B80] # func_00109B80
@@ -687,7 +687,7 @@ segments:
       - [0x0158C0, asm, cod/0158C0] # func_001158C0
       - [0x015940, asm, cod/015940] # func_00115940
       - [0x015A30, asm, cod/015A30] # func_00115A30
-      - [0x015A88, asm, cod/015A88] # func_00115A88
+      - [0x015A88, asm, cod/015A88] # sceDbcInit
       - [0x015D28, asm, cod/015D28] # func_00115D28
       - [0x015D70, asm, cod/015D70] # func_00115D70
       - [0x015DD0, asm, cod/015DD0] # sceDbcSetWorkAddr
@@ -709,7 +709,7 @@ segments:
       - [0x016CE8, asm, cod/016CE8] # func_00116CE8
       - [0x016D88, asm, cod/016D88] # func_00116D88
       - [0x016EF8, asm, cod/016EF8] # func_00116EF8
-      - [0x016FB0, asm, cod/016FB0] # func_00116FB0
+      - [0x016FB0, asm, cod/016FB0] # sceCdInit
       - [0x017098, asm, cod/017098] # func_00117098
       - [0x017138, asm, cod/017138] # func_00117138
       - [0x0171B8, asm, cod/0171B8] # func_001171B8
@@ -780,9 +780,9 @@ segments:
       - [0x019AC0, asm, cod/019AC0] # func_00119AC0
       - [0x019BE0, asm, cod/019BE0] # func_00119BE0
       - [0x019C08, asm, cod/019C08] # func_00119C08
-      - [0x019DD8, asm, cod/019DD8] # func_00119DD8
+      - [0x019DD8, asm, cod/019DD8] # SceMrpcUnbind
       - [0x019F18, asm, cod/019F18] # sceSifMCallRpc
-      - [0x01A188, asm, cod/01A188] # func_0011A188
+      - [0x01A188, asm, cod/01A188] # sceMc2Init
       - [0x01A330, asm, cod/01A330] # func_0011A330
       - [0x01A408, asm, cod/01A408] # func_0011A408
       - [0x01A498, asm, cod/01A498] # func_0011A498

@@ -40,7 +40,7 @@ glabel func_00117D98
     /* 17DF8 00117DF8 00000000 */   nop
 .align 2
   .L00117DFC:
-    /* 17DFC 00117DFC EC5B040C */  jal        func_00116FB0
+    /* 17DFC 00117DFC EC5B040C */  jal        sceCdInit
     /* 17E00 00117E00 1300133C */   lui       $s3, %hi(D_00133A6C)
     /* 17E04 00117E04 6C3A648E */  lw         $a0, %lo(D_00133A6C)($s3)
     /* 17E08 00117E08 0C1C040C */  jal        func_00107030
@@ -82,7 +82,7 @@ glabel func_00117D98
     /* 17E78 00117E78 0080053C */  lui        $a1, (0x8000059A >> 16)
     /* 17E7C 00117E7C 2D200002 */  daddu      $a0, $s0, $zero
     /* 17E80 00117E80 9A05A534 */  ori        $a1, $a1, (0x8000059A & 0xFFFF)
-    /* 17E84 00117E84 E825040C */  jal        func_001097A0
+    /* 17E84 00117E84 E825040C */  jal        SceSifrpcBind
     /* 17E88 00117E88 2D300000 */   daddu     $a2, $zero, $zero
     /* 17E8C 00117E8C 13004304 */  bgezl      $v0, .L00117EDC
     /* 17E90 00117E90 2400028E */   lw        $v0, 0x24($s0)

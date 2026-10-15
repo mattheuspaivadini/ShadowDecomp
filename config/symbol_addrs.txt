@@ -190,3 +190,32 @@ sceStdioDevctl   = 0x0010D668;
 sceStdioSymlink  = 0x0010D910;
 // "SceStdioReadlinkSema"
 sceStdioReadlink = 0x0010DB08;
+
+// ---------------------------------------------------------------------------
+// Phase 5 (Session 10a): string-evidenced SDK names applied to functions that
+// have no C body and no C caller (naming-only, zero compilation risk). All
+// UNCONFIRMED: the string names the kernel object the routine owns, and the
+// routine name is inferred from it by the same object rule used for the
+// sceStdio* set above. Applied with the owner's Session-10a instruction; the
+// per-entry reasons for the ones still withheld are in
+// docs/naming-candidates.md.
+// Two further candidates are deliberately NOT applied here because 20/1
+// matched C translation units reference them as func_00109980 (SceSifrpcCall)
+// and func_00119C08 (SceMrpcBind): renaming them would require editing those C
+// bodies, which Session 10a ruled out (the rename broke the link, see
+// docs/decisions.md).
+// ---------------------------------------------------------------------------
+// "SceSifrpcBind" (at 0x00137EB8) - semaphore created per bind; the routine
+// sends SIF command 0x80000009 (RPC bind) with it.
+SceSifrpcBind = 0x001097A0;
+// "sceDbc_sema" - libdbc module init: creates that semaphore and prints
+// "libdbc: bind failed" / the module-version-mismatch banner.
+sceDbcInit = 0x00115A88;
+// "SceCdNcmdSema" + "SceCdScmdSema" + "SceCdRcmdSema" + "SceCdCallbackSema" -
+// creates all four cd semaphores in one lazily-guarded pass (libcdvd init).
+sceCdInit = 0x00116FB0;
+// "SceMrpcUnbind" - the mrpc unbind routine/semaphore.
+SceMrpcUnbind = 0x00119DD8;
+// "sceMc2_sema_main" + "sceMc2_sema_start" + "sceMc2_sema_end" +
+// "sceMc2_basic_thread" - creates the whole memory-card sub-system object set.
+sceMc2Init = 0x0011A188;
