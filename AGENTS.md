@@ -198,7 +198,7 @@ Tips: use a function's constants, string references, and call patterns to infer 
 | Functions named | **48 `.text` symbols** = `entry` + **47 evidence-derived names**: 17 verbatim self-naming log messages, 22 inferred from `SceStdio<Op>Sema` object names (UNCONFIRMED), 3 single inferences (UNCONFIRMED), 3 callee names from `func_00104668` failure diagnostics (Session 5, UNCONFIRMED), 2 Session-3 names |
 | String-evidenced name candidates | **61 functions** reference an identifier-bearing string; **46 named, 15 pending** (the 18 Session-4 pending minus 3 resolved; none promoted in Session 5 — the evidence rule held) |
 | Functions matched (C) | **330 / 1036** (2.9-991111, 2.96 and 2.95.3-136 per TU; the wrapper tier uses a per-TU `-fno-optimize-sibling-calls` on cc=296 TUs only — the 2.9 `cc1` rejects the flag) |
-| Matched bytes | 22420 / 203,692 `.text` bytes = **11.006 %** (verified) |
+| Matched bytes | 22420 / 203,692 `.text` bytes = **11.007 %** (verified) |
 | Compiler flags | `-O2 -g2 -G8` (per-TU `-g0` and `-fno-optimize-sibling-calls` overrides, the latter cc=296-only); `-O1`/`-Os` ruled out on 148 functions; `-O2 ≡ -O3` (not separable; Session 6 ran the decisive experiment — §2.4 of `docs/compiler.md`: plain static + `-O3` ≡ `inline` + `{-O2,-O3}`, so the `-O2` pin stays) |
 | Compilers | `ee-gcc2.96` (default) + `ee-gcc2.9-991111-01` (`cc=29`) + **`wine:ee-gcc2.95.3-136`** and `ee-gcc2.9-991111-xz`; matrix in `docs/compiler.md` §4.3, third-generation verdict in §4.4 |
 | `.text` disassembly (splat R5900) | accurate; **1036 per-function `.s` + 2 raw `textbin`** (`.text` header, `0x00113074` non-function hole) |
