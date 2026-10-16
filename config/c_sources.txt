@@ -511,3 +511,6 @@
 02E578 = src/cod/02E578.c                     # Newlib makebuf.c __smakebuf; stat frame size adapted to the original 0x90/0x70 layout
 02F3A0 = src/cod/02F3A0.c                     # Newlib mprec.c _b2d (Pack_32/IEEE_8087), double_union word0/word1
 02F538 = src/cod/02F538.c                     # Newlib mprec.c _d2b (Pack_32/IEEE_8087, !Sudden_Underflow)
+02EC70 = src/cod/02EC70.c                     # Newlib mprec.c mult (Pack_32); official name _multiply
+02F140 = src/cod/02F140.c                     # Newlib mprec.c __mdiff (Pack_32); 16-bit limb Storeinc loops
+02DEA8 = src/cod/02DEA8.c                     # Newlib mallocr.c malloc_trim; size_t=32-bit, long=64-bit, .data attr for the sbrk_base global

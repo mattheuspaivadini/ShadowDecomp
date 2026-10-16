@@ -169,9 +169,9 @@ Work in order. Mark each phase when done and commit.
 - [x] **Phase 1 — Extract.** ISO is at the **workspace root** (`Shadow of the Colossus (USA).iso`), not in `SHADOWDECOMP/`. Extracted 19 files with pure-Python ISO9660 (`tools/iso9660.py`, `tools/extract_iso.py`) → manifest in `manifest/files.txt`. Main ELF = **`SCUS_974.72`** (from `SYSTEM.CNF`, not `SCUS_973.24`).
 - [x] **Phase 2 — Analyze.** `SCUS_974.72` parsed (sections/segments/entry); 319 strings. **Ghidra 12.1.4 + `ghidra-emotionengine-reloaded`** (`r5900:LE:32:default`) now decodes **100 %** of `.text` (50,923/50,923, 0 undefined; was 84 % with stock `MIPS:LE:32:default`). Function boundaries still "to be confirmed". See `docs/analysis.md`, `docs/rea.md`.
 - [x] **Phase 3 — Compiler. DONE (2026-10-14, Session 3; revision question resolved Session 4).** Flags pinned by byte-level experiment: **`-O2 -g2 -G8`**, with a **per-TU `-g` override** (`tools/eegcc.py:cflags_for`) because the original mixes debug levels (`func_00114C30` needs `-g0`; `-g`/`-g2` suppress delay-slot filling, so the level is load-bearing). The original is a **mix of two EE-GCC generations**: `2.9-ee-991111(-01)` and `2.96-ee-001003-1` (`tools/cc_matrix.py`, all 14 published revisions; no single one matches everything). 47 functions byte-exact; 12 recorded as NON_MATCHING and unexplained by any revision. **`-O2` discriminated from `-O1`/`-Os`** (Session 4 step 3: 92-function sweep, 39 / 14 counterexamples; `-O2` ≡ `-O3`). See `docs/compiler.md`, `docs/cc-matrix-session4.txt`, `docs/opt-sweep-session4.txt`.
-- [x] **Phase 4 — Split & rebuild.** splat split is **per-function**: **1042 `.s`** under `asm/cod/` (one per function; 1036 after the Session-4 split + 6 merged boundaries separated by `T004` in Session 12) plus 2 raw `textbin` subsegments (the `.text` 16-byte header and the `0x00113074` non-function hole); plus data segments, `build/SCUS_974.72.ld`, `include/macro.inc`. **Reassembly + link + hash check PASS**: `tools/build.py` (WSL2) → flat image byte-identical to the original, **237,952 bytes, SHA-1 `6f853f644a4279db18c15ceb8ee1d2a8b87a7b39`**. Still green with 395 functions replaced by C. **Step 6 (ELF container) done (Session 4): `build/SCUS_974.72.elf` is byte-identical to the original `SCUS_974.72`** (242,940 bytes, SHA-1 `b715b349…`) — 3 program headers, real section names, `.mdebug.eabi64`, no symtab, `e_entry 0x00100010`; `tools/containerize.py` (run by `tools/build.py`). See `docs/splat.md`, `docs/toolchain.md`, `docs/rebuild.md`.
+- [x] **Phase 4 — Split & rebuild.** splat split is **per-function**: **1042 `.s`** under `asm/cod/` (one per function; 1036 after the Session-4 split + 6 merged boundaries separated by `T004` in Session 12) plus 2 raw `textbin` subsegments (the `.text` 16-byte header and the `0x00113074` non-function hole); plus data segments, `build/SCUS_974.72.ld`, `include/macro.inc`. **Reassembly + link + hash check PASS**: `tools/build.py` (WSL2) → flat image byte-identical to the original, **237,952 bytes, SHA-1 `6f853f644a4279db18c15ceb8ee1d2a8b87a7b39`**. Still green with 398 functions replaced by C. **Step 6 (ELF container) done (Session 4): `build/SCUS_974.72.elf` is byte-identical to the original `SCUS_974.72`** (242,940 bytes, SHA-1 `b715b349…`) — 3 program headers, real section names, `.mdebug.eabi64`, no symtab, `e_entry 0x00100010`; `tools/containerize.py` (run by `tools/build.py`). See `docs/splat.md`, `docs/toolchain.md`, `docs/rebuild.md`.
 - [~] **Phase 5 — Name.** In progress. `tools/name_from_strings.py` (authoritative: resolves `string -> function` from splat's `%hi/%lo` relocation labels) finds **61 functions that reference a string carrying an identifier**; **50 are named, 11 are recorded candidates** (`docs/naming-candidates.md`). Names come from six evidence classes — *verbatim* self-naming log messages (17), *object* semaphore names with the routine inferred (22, UNCONFIRMED), three single inferences (`start`, `vfprintf`, `sceDbcGetDeviceStatus`, UNCONFIRMED), three *callee* names from `func_00104668`'s failure diagnostics (Session 5: `load_set_conf_only`, `get_interface_id`, `wait_get_addr_only`, UNCONFIRMED), 5 SDK object/operation names (Session 10a, UNCONFIRMED) and 2 more SDK names (Session 10a.2, UNCONFIRMED) — plus the two Session-3 names (`LoaderSysDumpIopModuleIdentifiers`, `OutputLinkerScriptFile`). Session 12 also imported **840 official `SHN_ABS` function names + 65 global object names from `KERNEL.XFF`** (`config/symbol_addrs.txt` is the single source of truth). **55 named `.text` symbols** (`entry` + 54 evidence-derived). `func_00113074` was re-checked and is a splat boundary false positive (unreferenced; see `config/non_function_holes.txt`). Structs/data objects documented in `docs/structs.md`.
-- [~] **Phase 6 — Decompile. IN PROGRESS.** **395 / 1042 functions matched from C (31,652 / 203,692 `.text` bytes = 15.539 %)**, all gated by the image hash (`docs/ledger.json` holds 1044 records = 1042 real functions + 2 raw `textbin`). Session 7 ran a **shape-clustering + parallel-subagent drafting** loop (`tools/shape_clusters.py`, brief + central scorer in `build/s7/`); Session 12 executed the **master plan** (`docs/plan/PLAN.md`, waves `B001`–`B009`, `A001`–`A002`) via `tools/score_drafts.py` + `tools/promote.py`; Session 14 mined the authentic Newlib sources for `028xxx`–`031xxx` stems (7 matches, first-scoring in every case). Remaining real pool: **452** = 294 near-miss + 158 untouched. Non-matching attempts in `src/non_matching/` (294 tracked). See `docs/non-matching-backlog.md`, `docs/archive-2026-10-14-session7.md`, `docs/plan/`.
+- [~] **Phase 6 — Decompile. IN PROGRESS.** **398 / 1042 functions matched from C (32,948 / 203,692 `.text` bytes = 16.175 %)**, all gated by the image hash (`docs/ledger.json` holds 1044 records = 1042 real functions + 2 raw `textbin`). Session 7 ran a **shape-clustering + parallel-subagent drafting** loop (`tools/shape_clusters.py`, brief + central scorer in `build/s7/`); Session 12 executed the **master plan** (`docs/plan/PLAN.md`, waves `B001`–`B009`, `A001`–`A002`) via `tools/score_drafts.py` + `tools/promote.py`; Session 14 mined the authentic Newlib sources for `028xxx`–`031xxx` stems (10 matches, first-scoring in every case). Remaining real pool: **449** = 296 near-miss + 153 untouched. Non-matching attempts in `src/non_matching/` (296 tracked). See `docs/non-matching-backlog.md`, `docs/archive-2026-10-14-session7.md`, `docs/plan/`.
 
 ## 6. Identifying the compiler
 
@@ -204,26 +204,27 @@ Tips: use a function's constants, string references, and call patterns to infer 
 
 | Metric | Value |
 |--------|-------|
-| Current phase | Phases 1–4 done (**incl. step 6, ELF container**); **Phase 3 revision question resolved** (Session 8 added a **third** generation, `2.95.3-136`); **Phase 5 in progress (55 named symbols)**; Phase 6: **395 functions matched** |
-| ELF rebuild hash match | **YES — 237,952 bytes, SHA-1 `6f853f64…` (flat load image), still green with 395 functions from C** |
+| Current phase | Phases 1–4 done (**incl. step 6, ELF container**); **Phase 3 revision question resolved** (Session 8 added a **third** generation, `2.95.3-136`); **Phase 5 in progress (55 named symbols)**; Phase 6: **398 functions matched** |
+| ELF rebuild hash match | **YES — 237,952 bytes, SHA-1 `6f853f64…` (flat load image), still green with 398 functions from C** |
 | ELF container (whole file) | **YES — `build/SCUS_974.72.elf` byte-identical to the original: 242,940 bytes, SHA-1 `b715b349…`; 3 program headers, 16 sections, `e_entry 0x00100010`, `.mdebug.eabi64`, no `.symtab`** (`tools/containerize.py`) |
 | Functions named | **55 `.text` symbols** = `entry` + **54 evidence-derived names**: 17 verbatim self-naming log messages, 22 inferred from `SceStdio<Op>Sema` object names (UNCONFIRMED), 3 single inferences (UNCONFIRMED), 3 callee names from `func_00104668` failure diagnostics (Session 5, UNCONFIRMED), 2 Session-3 names, 5 SDK object/operation names (Session 10a, UNCONFIRMED), 2 more SDK names (Session 10a.2, UNCONFIRMED) |
 | String-evidenced name candidates | **61 functions** reference an identifier-bearing string; **50 named, 11 pending** (Session 10a applied 5 with no C body/caller; Session 10a.2 applied the 2 that Session 10a had reverted after they broke the link, via a pure symbol rename of the 21 matched C call sites) |
-| Functions matched (C) | **395 / 1042** (2.9-991111, 2.96 and 2.95.3-136 per TU; the wrapper tier uses a per-TU `-fno-optimize-sibling-calls` on cc=296 TUs only — the 2.9 `cc1` rejects the flag) |
-| Matched bytes | 31652 / 203,692 `.text` bytes = **15.539 %** (verified) |
+| Functions matched (C) | **398 / 1042** (2.9-991111, 2.96 and 2.95.3-136 per TU; the wrapper tier uses a per-TU `-fno-optimize-sibling-calls` on cc=296 TUs only — the 2.9 `cc1` rejects the flag) |
+| Matched bytes | 32948 / 203,692 `.text` bytes = **16.175 %** (verified) |
+| Fundamental types | **`int` 4 B, `void *` 4 B, `long`/`unsigned long` 8 B, `long long` 8 B, `double` 8 B** — probed with the pinned `ee-gcc2.96` (`build/s13/probe_long.c`): `long` is **64-bit** in this image's C, which is why routines such as `_malloc_trim_r` and `_strtol_r` do 64-bit arithmetic (`dsll32/dsrl32`, `__muldi3`, `__udivdi3`). `size_t` is 4 bytes in this SDK's headers; see `docs/compiler.md` §8 |
 | Compiler flags | `-O2 -g2 -G8` (per-TU `-g0` and `-fno-optimize-sibling-calls` overrides, the latter cc=296-only); `-O1`/`-Os` ruled out on 148 functions; `-O2 ≡ -O3` (not separable; Session 6 ran the decisive experiment — §2.4 of `docs/compiler.md`: plain static + `-O3` ≡ `inline` + `{-O2,-O3}`, so the `-O2` pin stays) |
 | Compilers | `ee-gcc2.96` (default) + `ee-gcc2.9-991111-01` (`cc=29`) + **`wine:ee-gcc2.95.3-136`** and `ee-gcc2.9-991111-xz`; matrix in `docs/compiler.md` §4.3, third-generation verdict in §4.4 |
 | `.text` disassembly (splat R5900) | accurate; **1042 per-function `.s` + 2 raw `textbin`** (`.text` header, `0x00113074` non-function hole) |
 | Ghidra EE-extension decode | **100 %** of `.text` (50,923/50,923) |
 | splat split coverage | 203 KB / 85.6 % of ROM |
 | Functions detected | **1042** real functions (`docs/ledger.json`: 1044 records = 1042 + 2 `textbin`); 1037 spimdisasm boundaries − 1 false positive (`0x00113074`) = 1036, then `T004` split 6 merged boundaries (+6) in Session 12 |
-| Non-matching attempts tracked | **294** (`src/non_matching/`; ledger: 294 near / 158 untouched / 195 asm-permanent → 452 real pool remaining) |
+| Non-matching attempts tracked | **296** (`src/non_matching/`; ledger: 296 near / 153 untouched / 195 asm-permanent → 449 real pool remaining) |
 | IOP modules inventoried | 11 IRX (ELF32 MIPS-I, R3000A) |
 | EE hardware registers referenced | **38 addresses** (`tools/scan_hw_regs.py`); the 2 that were unidentified are now **confirmed**: `0x10001010` = `T2_MODE` (Timer 2 mode/status), `0x1000E060` = `D_STADR` (DMAC stall address) — `docs/structs.md` §"Hardware registers" |
 
 ### Session log
 
-- **2026-10-16 (Session 14) — authentic-Newlib-source mining, +7 matched functions (388 → 395, 14.404 % → 15.539 %, 29,340 → 31,652 B) + stale-doc reconciliation.**
+- **2026-10-16 (Session 14) — authentic-Newlib-source mining, +10 matched functions (388 → 398, 14.404 % → 16.175 %, 29,340 → 32,948 B) + stale-doc reconciliation.**
   - **Method that worked.** The untouched pool has a large Newlib block (`028xxx`–`031xxx`). Drafting those from the
     *authentic upstream source* (raw mirror `https://raw.githubusercontent.com/eblot/newlib/master/newlib/libc/<dir>/<file>`,
     kept in `build/s13/newlib/`) instead of from ASM prose matched **every** one of them on the **first scoring run**; the ASM is
@@ -243,19 +244,41 @@ Tips: use a function's constants, string references, and call patterns to infer 
     - `02F3A0` (`_b2d`) and `02F538` (`_d2b`) — the `union double_union` + `word0(x) = x.i[1]` / `word1(x) = x.i[0]` (IEEE_8087)
       macros reproduce the `and` + `dsll32/or` word writes exactly; `_d2b` needs the `!Sudden_Underflow` shape
       (`if (de) { *e = de - Bias - (P-1) + k; *bits = P - k; } else { *bits = 32 * i - hi0bits(x[i-1]); }`, Bias + P - 1 = 1075).
+    - `02EC70` (`_multiply`, the mprec.c `mult`) and `02F140` (`__mdiff`, the mprec.c `diff`) — both Pack_32 bodies with
+      the 16-bit limb loops (`andi 0xFFFF` / `srl 16`, signed `sra` for the `borrow = y >> 16` of `__Long`) and the
+      `Storeinc(xc, z, y)` pair of `sh` stores; `__mdiff` needs `if (!i) { _Balloc(ptr,0); _wds = 1; _x[0] = 0; }` and
+      `while (!*--xc) wa--;` for the trailing `_wds` fixup.
+    - `02DEA8` (`_malloc_trim_r`, mallocr.c `malloc_trim`) — reproduced from the authentic source with the build's own
+      types, and it exposed a **fundamental type fact**: in this EE-GCC `int` is 4 B, `void *` is 4 B but
+      **`long`/`unsigned long` is 8 B** (probe below), so the whole `extra` computation is 64-bit
+      (`dsubu`/`daddiu`/`dsrl 12`/`dsll 12`) while `size_t` stays 4 B (`MINSIZE = 16`, `chunksize()` zero-extends). Also
+      needed the project's `section(".data")` attribute trick: `char *__malloc_sbrk_base` is 4 B, so `-G8` would send it to
+      the small-data window (`%gp_rel`) while the image reaches it absolutely (`lui`/`%hi`+`%lo`).
+  - **New evidence — the type model of the build.** `build/s13/probe_long.c` compiled with the pinned `ee-gcc2.96`
+    (`tools/cc/eegcc.sh -O2 -g2 -G8 -S`, the `.stabs` type records and the folded `sizeof` sum) gives
+    `int` 4, `void *` 4, `long` **8**, `unsigned long` **8**, `long long` 8, `double` 8, `long double` 8, `float` 4.
+    This is the missing piece for reading the `dsll32/dsrl32` zero-extensions and the `__muldi3`/`__udivdi3`/`__umoddi3`
+    calls in the `0295C8`/`030B18` `strtol` block. The type table is recorded in AGENTS.md §9 and `docs/compiler.md` §8.
   - **Near-misses archived.** `013780` (`sceGsPutDrawEnv`, cc=29, 4 iterations, best 12, 58/58 insns) and `029930` (official
     `vfprintf`, cc=296, 29/29 insns, frame 0x20). `029930`'s residual is allocation-only: the original does **not** keep the reent
     live across `__sinit` (the tail call re-reads `fp->_data`), and ee-gcc then swaps `$s1`/`$s2` (`fmt`/`ap`) and picks the
     branch-likely form of the `__sdidinit` test.
+  - **Two `strtol` near-misses archived (score 17).** `0295C8` (`_strtol_r`) and `030B18` (`_strtoul_r`) were drafted from the
+    authentic Newlib `strtol.c`/`strtoul.c` and confirmed the type model (`__umoddi3`/`__udivdi3`/`__muldi3` in source order,
+    `s` is `const char *` so the string loads are `lb`, the ctype table is `(_ctype_ + 1)[c]` with _U 1/_L 2/_N 4/_S 8,
+    `_errno` at reent+0, `ERANGE` 0x22, `ULONG_MAX` as `addiu -1`, `(unsigned long)base` kept in `$s7`). The residual is
+    **loop rotation only**: the image keeps the conversion at the end of the body with the `c >= base` test at the top and two
+    back-edge branches out of the conversion (delay slots filled with `addiu $s1,-0x30` and `movz`), while ee-gcc emits the
+    test after the conversion plus one extra `nop` (142 vs 140 insns). Both drafts are in `src/non_matching/`.
   - **Reclassifications (asm-permanent).** `028BB0` (`strcat`) and `028CDC` (`strchr`) are hand-vectorised MMI
     (`lq`/`psubb`/`pnor`/`pcpyld`/`pcpyud`, `pxor`) — not expressible in pure C, so they stay `.s`. `tools/gen_ledger.py`'s
     `ASM_PERMANENT_EXTRA` is now a `{stem: reason}` map and writes the reason into `docs/ledger.json`.
   - **Documentation reconciliation.** `AGENTS.md`, `CONTEXT.md` and `docs/plan/PLAN.md` carried stale numbers (pre-`T004` /
     pre-Session-12); every metric was re-derived from `tools/gen_ledger.py --summary` plus `config/c_sources.txt` and
     `asm/cod/`. `A003`/`A005` are now `WIP` in `docs/plan/TASK_STATE.tsv` with per-stem results.
-  - **Gates.** `build/s10/verify_fast.py` → **395/395 byte-exact**; `tools/build.py` → flat image **HASH MATCH** (237,952 B,
-    `6f853f64…`) with the ELF container byte-identical; `docs/ledger.json` regenerated (**395 matched / 31,652 B / 294 near /
-    195 asm-permanent / 158 untouched / 452 real pool**).
+  - **Gates.** `build/s10/verify_fast.py` → **398/398 byte-exact**; `tools/build.py` → flat image **HASH MATCH** (237,952 B,
+    `6f853f64…`) with the ELF container byte-identical; `docs/ledger.json` regenerated (**398 matched / 32,948 B / 296 near /
+    195 asm-permanent / 153 untouched / 449 real pool**).
 
 - **2026-10-16 (Session 13) — Reference-architecture review.** Compared the
   local NTSC-U `SCUS_974.72` project against `Fantaskink/SOTC` and prepared a
