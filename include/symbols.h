@@ -78,6 +78,16 @@ extern int  D_0013BB90[256];  /* .bss    0x0013BB90  func_00102930/_00102A00 (_0
 #define EE_T2_MODE   0x10001010u  /* Timer 2 mode/status              */
 #define EE_T3_MODE   0x10001810u  /* Timer 3 mode/status              */
 
+/* ---- DMA channels --------------------------------------------------------
+ * Channel base = 0x10008000 + N*0x1000; per channel: +0x00 CHCR (control),
+ * +0x10 MADR (memory address), +0x20 QWC (quadword count), +0x30 TADR.
+ * Evidence: sceGsPutDrawEnv (0x00113780) polls/sets channel 2 with the GS
+ * bit layout: CHCR bit 8 = STR (start), `& 0x100`; `0x101` = start+direction;
+ * MADR keeps the low 28 address bits, | 0x80000000 for the 0x7xxxxxxx alias. */
+#define EE_D2_CHCR   0x1000A000u  /* DMA ch.2 control (bit 8 = STR)   */
+#define EE_D2_MADR   0x1000A010u  /* DMA ch.2 memory address          */
+#define EE_D2_QWC    0x1000A020u  /* DMA ch.2 quadword count          */
+
 /* ---- Session 4, step 2: newly confirmed data objects --------------------- */
 /* .data doubly-linked list head used by func_00110998 (next at 0x0, prev at
  * 0x4). Declared as an array so the access is absolute, not %gp_rel. */

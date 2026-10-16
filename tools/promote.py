@@ -37,7 +37,7 @@ def promote(stem: str, cc: str, flags: list[str], note: str,
     sym_name = sym_m.group(1) if sym_m else stem
     header = (f"/* asm/cod/{stem}.s -> {sym_name}.\n"
               f" * {note}\n"
-              f" * MATCHED (Session 12). */\n")
+              f" * MATCHED. */\n")
     out = ROOT / "src" / "cod" / f"{stem}.c"
     out.write_text(header + body, encoding="utf-8")
 

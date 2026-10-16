@@ -504,3 +504,10 @@
 013B00 = src/cod/013B00.c cc=29               # sceGsSwapDBuff (SHN_ABS)
 004DF8 = src/cod/004DF8.c                     # padsysInit: buf[8] 0x20 stack allocation
 01D8E0 = src/cod/01D8E0.c cc=29               # func_0011D8E0: D_0015DF48 array indexing with mult 0x898
+030D78 = src/cod/030D78.c                     # Newlib __submore; authentic ungetc.c source, older fp->_data reent signature
+02E9C8 = src/cod/02E9C8.c                     # Newlib mprec.c _s2b; authentic source, Bigint offsets confirmed by matched _Balloc
+02DA90 = src/cod/02DA90.c                     # Newlib fread; authentic source, non-reentrant __srefill(fp) variant
+02EF80 = src/cod/02EF80.c                     # Newlib mprec.c _lshift (Pack_32); authentic source, Bigint offsets confirmed by matched _Balloc
+02E578 = src/cod/02E578.c                     # Newlib makebuf.c __smakebuf; stat frame size adapted to the original 0x90/0x70 layout
+02F3A0 = src/cod/02F3A0.c                     # Newlib mprec.c _b2d (Pack_32/IEEE_8087), double_union word0/word1
+02F538 = src/cod/02F538.c                     # Newlib mprec.c _d2b (Pack_32/IEEE_8087, !Sudden_Underflow)

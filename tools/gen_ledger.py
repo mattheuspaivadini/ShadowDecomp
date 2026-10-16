@@ -42,9 +42,19 @@ LEDGER = ROOT / "docs" / "ledger.json"
 # Functions proven NOT to be plain C, so they stay `.s` permanently.  The `$gp`
 # save/restore family: no published EE-GCC generation emits the dance for a C
 # indirect call, and the EE `as` cannot assemble an inline-asm `$gp` read
-# (build/s8/probe_gp*.sh, sweep_gp*.sh, docs/session8-plan.md).
+# (build/s8/probe_gp*.sh, sweep_gp*.sh, docs/session8-plan.md).  The MMI string
+# primitives are hand-vectorised for the R5900 (`lq`/`psubb`/`pnor`/`pcpyld`/
+# `pcpyud`), i.e. not expressible in pure C (project rule: no inline asm).
 ASM_PERMANENT_EXTRA = {
-    "0092F8", "00A878", "011CA8", "012E80", "016D88", "019AC0", "0171B8",
+    "0092F8": "gp save/restore; no C spelling (probe build/s8/sweep_gp*)",
+    "00A878": "gp save/restore; no C spelling (probe build/s8/sweep_gp*)",
+    "011CA8": "gp save/restore; no C spelling (probe build/s8/sweep_gp*)",
+    "012E80": "gp save/restore; no C spelling (probe build/s8/sweep_gp*)",
+    "016D88": "gp save/restore; no C spelling (probe build/s8/sweep_gp*)",
+    "019AC0": "gp save/restore; no C spelling (probe build/s8/sweep_gp*)",
+    "0171B8": "gp save/restore; no C spelling (probe build/s8/sweep_gp*)",
+    "028BB0": "MMI strcat: lq/psubb/pnor/pcpyld/pcpyud (hand-vectorised)",
+    "028CDC": "MMI strchr: lq/psubb/pnor/pcpyld/pcpyud/pxor (hand-vectorised)",
 }
 
 # "best score 4 [cc=29, default]" / "best score 14"
@@ -156,7 +166,7 @@ def main() -> int:
         elif stem in handwritten:
             notes = "handwritten"
         elif stem in ASM_PERMANENT_EXTRA:
-            notes = "gp save/restore; no C spelling (probe build/s8/sweep_gp*)"
+            notes = ASM_PERMANENT_EXTRA[stem]
         if status.startswith("near") and stem in archived:
             m = SCORE_RE.search(archived[stem].read_text(
                 encoding="utf-8", errors="replace")[:1200])
