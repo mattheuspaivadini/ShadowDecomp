@@ -1,7 +1,6 @@
-/* STATUS (Session 9, 2026-10-15): NON_MATCHING. best score 2 [cc=29].
- * session9 R1; residual class not auto-classified
- * The original .s stays in the build (asm/cod/010E00.s); this C
- * draft (Session 9) is kept for the record. */
+/* asm/cod/010E00.s -> func_00110998.
+ * Session 11a: asm memory barrier stops dbr annulling the store into the beqz delay
+ * MATCHED (Session 8). */
 struct N10E00 {
     struct N10E00 *next;            /* 0x00 */
     struct N10E00 *prev;            /* 0x04 */
@@ -39,6 +38,7 @@ unsigned int func_00110E00(int a0) {
     f = p->flags;
     if (f & 2)
         func_00110998(p);
+    __asm__ __volatile__ ("" : : : "memory");
     p->id = 0;
     p->flags = 0;
     t = h->freehead;

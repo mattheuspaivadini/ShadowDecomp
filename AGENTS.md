@@ -192,25 +192,34 @@ Tips: use a function's constants, string references, and call patterns to infer 
 
 | Metric | Value |
 |--------|-------|
-| Current phase | Phases 1–4 done (**incl. step 6, ELF container**); **Phase 3 revision question resolved** (Session 8 added a **third** generation, `2.95.3-136`); **Phase 5 in progress (55 named symbols)**; Phase 6: **346 functions matched** |
-| ELF rebuild hash match | **YES — 237,952 bytes, SHA-1 `6f853f64…` (flat load image), still green with 346 functions from C** |
+| Current phase | Phases 1–4 done (**incl. step 6, ELF container**); **Phase 3 revision question resolved** (Session 8 added a **third** generation, `2.95.3-136`); **Phase 5 in progress (55 named symbols)**; Phase 6: **349 functions matched** |
+| ELF rebuild hash match | **YES — 237,952 bytes, SHA-1 `6f853f64…` (flat load image), still green with 349 functions from C** |
 | ELF container (whole file) | **YES — `build/SCUS_974.72.elf` byte-identical to the original: 242,940 bytes, SHA-1 `b715b349…`; 3 program headers, 16 sections, `e_entry 0x00100010`, `.mdebug.eabi64`, no `.symtab`** (`tools/containerize.py`) |
 | Functions named | **55 `.text` symbols** = `entry` + **54 evidence-derived names**: 17 verbatim self-naming log messages, 22 inferred from `SceStdio<Op>Sema` object names (UNCONFIRMED), 3 single inferences (UNCONFIRMED), 3 callee names from `func_00104668` failure diagnostics (Session 5, UNCONFIRMED), 2 Session-3 names, 5 SDK object/operation names (Session 10a, UNCONFIRMED), 2 more SDK names (Session 10a.2, UNCONFIRMED) |
 | String-evidenced name candidates | **61 functions** reference an identifier-bearing string; **50 named, 11 pending** (Session 10a applied 5 with no C body/caller; Session 10a.2 applied the 2 that Session 10a had reverted after they broke the link, via a pure symbol rename of the 21 matched C call sites) |
-| Functions matched (C) | **346 / 1036** (2.9-991111, 2.96 and 2.95.3-136 per TU; the wrapper tier uses a per-TU `-fno-optimize-sibling-calls` on cc=296 TUs only — the 2.9 `cc1` rejects the flag) |
-| Matched bytes | 24876 / 203,692 `.text` bytes = **12.21 %** (verified) |
+| Functions matched (C) | **349 / 1036** (2.9-991111, 2.96 and 2.95.3-136 per TU; the wrapper tier uses a per-TU `-fno-optimize-sibling-calls` on cc=296 TUs only — the 2.9 `cc1` rejects the flag) |
+| Matched bytes | 25252 / 203,692 `.text` bytes = **12.397 %** (verified) |
 | Compiler flags | `-O2 -g2 -G8` (per-TU `-g0` and `-fno-optimize-sibling-calls` overrides, the latter cc=296-only); `-O1`/`-Os` ruled out on 148 functions; `-O2 ≡ -O3` (not separable; Session 6 ran the decisive experiment — §2.4 of `docs/compiler.md`: plain static + `-O3` ≡ `inline` + `{-O2,-O3}`, so the `-O2` pin stays) |
 | Compilers | `ee-gcc2.96` (default) + `ee-gcc2.9-991111-01` (`cc=29`) + **`wine:ee-gcc2.95.3-136`** and `ee-gcc2.9-991111-xz`; matrix in `docs/compiler.md` §4.3, third-generation verdict in §4.4 |
 | `.text` disassembly (splat R5900) | accurate; **1036 per-function `.s` + 2 raw `textbin`** (`.text` header, `0x00113074` non-function hole) |
 | Ghidra EE-extension decode | **100 %** of `.text` (50,923/50,923) |
 | splat split coverage | 203 KB / 85.6 % of ROM |
 | Functions detected | 1036 after removing 1 splat boundary false positive (`0x00113074`) from spimdisasm's 1037 |
-| Non-matching attempts tracked | **344** (`src/non_matching/`; Session 9 archived 111 new attempts with best score and residual; per-tier hit rates in `docs/archive-2026-10-15-session9.md`) |
+| Non-matching attempts tracked | **323** (`src/non_matching/`; the 3 Session-11a promotions left it; per-tier hit rates in `docs/archive-2026-10-15-session9.md`) |
 | IOP modules inventoried | 11 IRX (ELF32 MIPS-I, R3000A) |
 | EE hardware registers referenced | **38 addresses** (`tools/scan_hw_regs.py`); the 2 that were unidentified are now **confirmed**: `0x10001010` = `T2_MODE` (Timer 2 mode/status), `0x1000E060` = `D_STADR` (DMAC stall address) — `docs/structs.md` §"Hardware registers" |
 
 ### Session log
 
+- **2026-10-15 (Session 11a) — near-miss campaign, +3 functions (346 → 349, 12.21 % → 12.397 %, 24,876 → 25,252 B).**
+  - **New pattern — empty-asm register pin** `asm volatile ("" : "+r" (x));` (emits no code, forces the value
+    through a register): `010FA0` (materialises the `D_00133918` `lui/addiu` base) and `030AF0` (keeps the
+    return value out of the tail call's delay). The `"memory"`-clobber form fences dbr: `010E00` (plain
+    `beqz`+`nop` instead of `beqzl`+duplicated store). All three at cc=29, promoted via `promote.py`.
+  - `028850` (best 1 @ cc=296, 3 rounds / 8 variants) and `022210` (best 2 @ cc=29, 3 rounds / 8 variants)
+    stay archived with residuals: dbr plain-vs-annul bit and error-path arg-copy order.
+  - Gate: HASH MATCH (237,952 B, `6f853f64…`) + container byte-identical + 349/349 byte-exact
+    (`build/s10/verify_fast.py`, 21 s vs ~1.5 h serial; handoff: `build/s10/handoff_11a.md`).
 - **2026-10-15 (Session 10b) — diff-driven hard cases (+1 function, 343 → 344, 11.977% → 12.083%, 24,612 B).**
   - **Method:** classify the residual diff first (`build/s10/pdiff.py`: permute.py on `build/s10/perm/<stem>/` + side-by-side disassembly), then one targeted C lever per class. Notes: `build/s10/notes_10b.md`; handoff `build/s10/handoff_10b.md`.
   - **`028778` 1 → 0 (MATCH, cc=296, 1 iteration).** Residual = operand order of one commutative `addu` (`$v0,$v1` vs `$v1,$v0`); fixed by `index * 4 + ctx[0x75]`. Promoted via `promote.py`; gate HASH MATCH + container byte-identical + `verify_c.py` 344/344; commit `821adf9`.

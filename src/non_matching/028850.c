@@ -1,5 +1,9 @@
-/* STATUS (Session 9, 2026-10-15): NON_MATCHING. best score 1 [cc=296].
- * session9 R1; residual class not auto-classified
+/* STATUS (Session 11a, 2026-10-15): NON_MATCHING. best score 1 [cc=296].
+ * Session 11a R1-R3: 8 variants (028778 idiom, e-pointer, register pins);
+ * residual: dbr fills the join `sll` into the first `bnez` delay ANNULLED
+ * (bnezl) where the original fills it PLAIN (bnez); the plain path needs
+ * `!insn_sets_resource_p (sll, &opposite_needed, 1)` at the jal - no C lever
+ * found (probes + dbr source archaeology, notes_11a.md).
  * The original .s stays in the build (asm/cod/028850.s); this C
  * draft (Session 9) is kept for the record. */
 extern int func_00128688(int a0);

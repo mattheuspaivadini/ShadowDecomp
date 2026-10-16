@@ -1,5 +1,9 @@
-/* STATUS (Session 8, 2026-10-14): NON_MATCHING. best score 2 [cc=29].
- * R3 famB: cmd 0xB + acquire/release blocks
+/* STATUS (Session 11a, 2026-10-15): NON_MATCHING. best score 2 [cc=29].
+ * Session 11a R1-R3: 8 variants (ifelse, reversed, void proto, temps, pre-saved
+ * locals, comma-return, asm barrier). Residual: the error-path call's two
+ * register copies are ordered [a1=s2][a0=s1] in the original but forward
+ * [a0=s1][a1=s2] by every published EE-GCC (probe2/3/5, notes_11a.md);
+ * only those 2 words differ.
  * The original .s stays in the build (asm/cod/022210.s); this C
  * draft (Session 8) is kept for the record. */
 int SceSifrpcCall(int a0, int a1, int a2, int a3, int a4, int a5, int a6,

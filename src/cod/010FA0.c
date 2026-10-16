@@ -1,7 +1,6 @@
-/* STATUS (Session 9, 2026-10-15): NON_MATCHING. best score 2 [cc=29].
- * session9 R1; residual class not auto-classified
- * The original .s stays in the build (asm/cod/010FA0.s); this C
- * draft (Session 9) is kept for the record. */
+/* asm/cod/010FA0.s -> func_00110C78.
+ * Session 11a: empty-asm +r pin forces D_00133918 base materialisation
+ * MATCHED (Session 8). */
 struct N10FA0 {
     struct N10FA0 *next;            /* 0x00 */
     struct N10FA0 *prev;            /* 0x04 */
@@ -35,6 +34,7 @@ unsigned int func_00110FA0(int a0) {
     if (a0 < 0 || (a0 & 0x3FF) != p->id)
         return 0x80008002u;
     h = &D_00133918;
+    asm volatile ("" : "+r" (h));
     if (h->cur == (unsigned int)a0)
         return 0x80000010u;
     if (p->flags & 1)

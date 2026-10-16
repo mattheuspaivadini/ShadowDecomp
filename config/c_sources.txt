@@ -462,3 +462,6 @@
 028778 = src/cod/028778.c                     # Session 10b: commutative addu operand order fixed by writing index*4 + base
 02E490 = src/cod/02E490.c                     # PART1 02E490 store-order swap (a0[0x30]=a1 before a0[0x34]=a2), MATCH cc=296
 0155D8 = src/cod/0155D8.c cc=29               # PART1 0155D8 dropped redundant pre-loop p->f00=0 (store-order), MATCH cc=29
+010FA0 = src/cod/010FA0.c cc=29               # Session 11a: empty-asm +r pin forces D_00133918 base materialisation
+030AF0 = src/cod/030AF0.c cc=29               # Session 11a: empty-asm +r pin keeps the return value in a register before the tail call
+010E00 = src/cod/010E00.c cc=29               # Session 11a: asm memory barrier stops dbr annulling the store into the beqz delay
