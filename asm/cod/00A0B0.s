@@ -25,13 +25,13 @@ glabel func_0010A0B0
     /* A0DC 0010A0DC 0400A3AF */  sw         $v1, 0x4($sp)
     /* A0E0 0010A0E0 1400A2AF */  sw         $v0, 0x14($sp)
     /* A0E4 0010A0E4 2D20A003 */  daddu      $a0, $sp, $zero
-    /* A0E8 0010A0E8 F81B040C */  jal        func_00106FE0
+    /* A0E8 0010A0E8 F81B040C */  jal        CreateSema
     /* A0EC 0010A0EC 0800A3AF */   sw        $v1, 0x8($sp)
     /* A0F0 0010A0F0 1300033C */  lui        $v1, %hi(D_00137EF0)
     /* A0F4 0010A0F4 202302AE */  sw         $v0, %lo(D_00132320)($s0)
     /* A0F8 0010A0F8 F07E6324 */  addiu      $v1, $v1, %lo(D_00137EF0)
     /* A0FC 0010A0FC 2D20A003 */  daddu      $a0, $sp, $zero
-    /* A100 0010A100 F81B040C */  jal        func_00106FE0
+    /* A100 0010A100 F81B040C */  jal        CreateSema
     /* A104 0010A104 1400A3AF */   sw        $v1, 0x14($sp)
     /* A108 0010A108 1300033C */  lui        $v1, %hi(D_00132324)
     /* A10C 0010A10C 242362AC */  sw         $v0, %lo(D_00132324)($v1)

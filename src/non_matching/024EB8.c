@@ -17,11 +17,11 @@ typedef void (*VFP)(void);
 
 extern VFP *D_00135964[];   /* cursor into the handler table (lui/%lo) */
 extern int D_00135968[];    /* one-shot "already armed" flag (lui/%lo) */
-extern char D_001360E0[];   /* the argument handed to func_001261D8 */
+extern char __EH_FRAME_BEGIN__[];   /* the argument handed to func_001261D8 */
 
-int func_001261D8(int key);
+int __deregister_frame_info(int key);
 
-void func_00124EB8(void) {
+void __do_global_dtors(void) {
     VFP *p;
 
     p = D_00135964[0];
@@ -32,6 +32,6 @@ void func_00124EB8(void) {
     }
     if (D_00135968[0] == 0) {
         D_00135968[0] = 1;
-        func_001261D8((int)D_001360E0);
+        __deregister_frame_info((int)__EH_FRAME_BEGIN__);
     }
 }

@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00106CD0, 0x10
+nonmatching AddIntcHandler2, 0x10
 
-glabel func_00106CD0
+glabel AddIntcHandler2
     /* 6CD0 00106CD0 10000324 */  addiu      $v1, $zero, 0x10
     /* 6CD4 00106CD4 0C000000 */  syscall    0 /* handwritten instruction */
     /* 6CD8 00106CD8 0800E003 */  jr         $ra
     /* 6CDC 00106CDC 00000000 */   nop
-endlabel func_00106CD0
+endlabel AddIntcHandler2

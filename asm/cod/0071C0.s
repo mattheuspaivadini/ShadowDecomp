@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_001071C0, 0x10
+nonmatching DisableIntcHandler, 0x10
 
-glabel func_001071C0
+glabel DisableIntcHandler
     /* 71C0 001071C0 5D000324 */  addiu      $v1, $zero, 0x5D
     /* 71C4 001071C4 0C000000 */  syscall    0 /* handwritten instruction */
     /* 71C8 001071C8 0800E003 */  jr         $ra
     /* 71CC 001071CC 00000000 */   nop
-endlabel func_001071C0
+endlabel DisableIntcHandler

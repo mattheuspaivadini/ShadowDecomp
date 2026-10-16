@@ -8,30 +8,30 @@ extern char D_0013A120[];               /* lui/%lo */
 extern char D_0013A128[];               /* lui/%lo */
 extern char D_001373F0[];               /* lui/%lo */
 
-int  func_00107020(int a0);
-int  func_00107010(int a0);
-void func_00105990(int a0, int a1, ...);
-int  sceStdioDevctl(int a0, int a1, int a2, int a3, int a4);
-int  func_001181D0(int *p);
+int  WaitSema(int a0);
+int  iSignalSema(int a0);
+void PutStringS(int a0, int a1, ...);
+int  sceDevctl(int a0, int a1, int a2, int a3, int a4);
+int  sceCdPowerOff(int *p);
 
 void func_00104FF0(void) {
     int x;
     int r;
 
     for (;;) {
-        func_00107020(D_0013A118);
+        WaitSema(D_0013A118);
         if (D_0013A11C != 0)
             D_0013A11C();
-        func_00105990(0x4080FF80, (int)D_001373F0);
-        sceStdioDevctl((int)D_0013A120, 0x5003, 0, 0, 0);
-        while (sceStdioDevctl((int)D_0013A128, 0x4402, 0, 0, 0) < 0)
+        PutStringS(0x4080FF80, (int)D_001373F0);
+        sceDevctl((int)D_0013A120, 0x5003, 0, 0, 0);
+        while (sceDevctl((int)D_0013A128, 0x4402, 0, 0, 0) < 0)
             ;
         do {
-            r = func_001181D0(&x);
+            r = sceCdPowerOff(&x);
         } while (r == 0 || x != 0);
     }
 }
 
 void func_001050A0(void) {
-    func_00107010(D_0013A118);
+    iSignalSema(D_0013A118);
 }

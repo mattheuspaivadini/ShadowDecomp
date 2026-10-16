@@ -14,7 +14,7 @@ extern struct R01C3B0 D_0015DF48[];   /* .bss 0x0015DF48, 0x898-byte records */
 
 int func_0011C200(int a0, int a1, int a2);
 int func_0011C320(int index);
-int func_00120708(int index, int a1, int a2, int a3);
+int _sceMcpReadClust(int index, int a1, int a2, int a3);
 
 int func_0011C3B0(int a0, int a1, int *a2) {
     int off;
@@ -30,7 +30,7 @@ int func_0011C3B0(int a0, int a1, int *a2) {
             *a2 = 0x8101006F;
             return 0;
         }
-        if (func_00120708(a0, (int)D_0015DF48 + 0x400 + a0 * 0x898, r, 1) == 0) {
+        if (_sceMcpReadClust(a0, (int)D_0015DF48 + 0x400 + a0 * 0x898, r, 1) == 0) {
             *a2 = 0x8101006F;
             return 0;
         }

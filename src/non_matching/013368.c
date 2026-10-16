@@ -15,7 +15,7 @@
  *
  * Append a 64-bit value as two 32-bit words; returns &p[1].
  */
-int *func_00113368(int **pp, long long v) {
+int *sceVif1PkAddGsData(int **pp, long long v) {
     int *p = *pp;
 
     p[0] = (int)v;

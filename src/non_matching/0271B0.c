@@ -11,7 +11,7 @@ struct D25768 {
     unsigned long long pad18;       /* 0x18 */
 };
 
-void func_001271B0(long long *in, struct D25768 *z) {
+void __unpack_d(long long *in, struct D25768 *z) {
     unsigned long long v = (unsigned long long)*in;
     unsigned long long mant = v & 0x000FFFFFFFFFFFFFULL;
     int exp = (int)((v >> 52) & 0x7FF);
@@ -37,3 +37,4 @@ void func_001271B0(long long *in, struct D25768 *z) {
     z->exp = exp - 0x3FF;
     z->type = 3;
 }
+/* func_001271B0 */

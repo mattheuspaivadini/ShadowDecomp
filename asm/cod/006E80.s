@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00106E80, 0x10
+nonmatching iChangeThreadPriority, 0x10
 
-glabel func_00106E80
+glabel iChangeThreadPriority
     /* 6E80 00106E80 D6FF0324 */  addiu      $v1, $zero, -0x2A
     /* 6E84 00106E84 0C000000 */  syscall    0 /* handwritten instruction */
     /* 6E88 00106E88 0800E003 */  jr         $ra
     /* 6E8C 00106E8C 00000000 */   nop
-endlabel func_00106E80
+endlabel iChangeThreadPriority

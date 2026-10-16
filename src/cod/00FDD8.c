@@ -12,22 +12,22 @@
  */
 void func_0010FB88(void);
 void func_0010FCC8(void);
-void func_001102B8(void);
-void func_00110430(int a0);
-void func_00110670(void);
-void func_00107768(void);
-void func_0010FF00(void);
-void func_0010F3C8(void);
-void func_00111AF0(void);
+void InitAlarm(void);
+void InitTimer(int a0);
+void StartTimerSystemTime(void);
+void InitThread(void);
+void InitExecPS2(void);
+void InitTLBFunctions(void);
+void sceSifInitRebootNotify(void);
 
-void func_0010FDD8(void) {
+void _InitSys(void) {
     func_0010FB88();
     func_0010FCC8();
-    func_001102B8();
-    func_00110430(2);
-    func_00110670();
-    func_00107768();
-    func_0010FF00();
-    func_0010F3C8();
-    func_00111AF0();
+    InitAlarm();
+    InitTimer(2);
+    StartTimerSystemTime();
+    InitThread();
+    InitExecPS2();
+    InitTLBFunctions();
+    sceSifInitRebootNotify();
 }

@@ -4,7 +4,7 @@
  *   jr   $ra
  *    sw  $a1, 0x4($a0)
  */
-void func_00113078(int *p, int value) {
+void sceVif1PkInit(int *p, int value) {
     p[1] = value;
     p[0] = value;
     p[2] = 0;

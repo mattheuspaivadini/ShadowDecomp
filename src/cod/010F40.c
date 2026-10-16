@@ -12,15 +12,15 @@
  * The saves are 16 bytes apart ($s0 0x00, $s1 0x10, $s2 0x20, $ra 0x30, frame
  * 0x40) - the cc=29 slot layout of this whole family.
  * MATCH GUESS: cc=29 */
-int func_0010FB20(void);
-int func_00110EF0(int a0, int a1);
-int func_0010FB70(void);
+int DIntr(void);
+int iGetTimerUsedUnusedCounters(int a0, int a1);
+int EIntr(void);
 
-int func_00110F40(int a0, int a1) {
-    int a = func_0010FB20();
-    int b = func_00110EF0(a0, a1);
+int GetTimerUsedUnusedCounters(int a0, int a1) {
+    int a = DIntr();
+    int b = iGetTimerUsedUnusedCounters(a0, a1);
 
     if (a != 0)
-        func_0010FB70();
+        EIntr();
     return b;
 }

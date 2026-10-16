@@ -38,10 +38,10 @@ struct S12FB28 {
     int f54;                        /* 0x54 handle passed to the worker      */
 };
 
-long long func_001311B8(int a0, int a1, int a2, int a3);
+long long _lseek_r(int a0, int a1, int a2, int a3);
 
-void func_0012FB28(struct S12FB28 *p, int a1, int a2) {
-    long long q = func_001311B8(p->f54, p->f0E, a1, a2);
+void __sseek(struct S12FB28 *p, int a1, int a2) {
+    long long q = _lseek_r(p->f54, p->f0E, a1, a2);
     int r = q;
 
     if (r == -1)

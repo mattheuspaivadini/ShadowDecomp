@@ -11,7 +11,7 @@ struct P002730 {
 
 extern struct P002730 D_0013BF90[];
 
-void func_00102730(int a, int b) {
+void LoaderSysEntryExternalIntcHandlerList(int a, int b) {
     int i;
 
     for (i = 0; i < 256; i++) {

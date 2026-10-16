@@ -10,12 +10,13 @@ struct S02FAA8 {
     int f54;                     /* 0x54 handle passed to the worker */
 };
 
-extern void func_001311B8(int a0, int a1, int a2, int a3);
-extern long long func_00130FE8(int a0, int a1, int a2, int a3);
+extern void _lseek_r(int a0, int a1, int a2, int a3);
+extern long long _write_r(int a0, int a1, int a2, int a3);
 
-int func_0012FAA8(struct S02FAA8 *p, int a1, int a2) {
+int __swrite(struct S02FAA8 *p, int a1, int a2) {
     if ((p->f0C & 0x100) != 0)
-        func_001311B8(p->f54, p->f0E, 0, 2);
+        _lseek_r(p->f54, p->f0E, 0, 2);
     p->f0C &= 0xEFFF;
-    return (int)func_00130FE8(p->f54, p->f0E, a1, a2);
+    return (int)_write_r(p->f54, p->f0E, a1, a2);
 }
+/* func_0012FAA8 */

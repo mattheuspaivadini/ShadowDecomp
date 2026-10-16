@@ -25,7 +25,7 @@ glabel sceDbcDeleteSocket
 .align 2
   .L00115F9C:
     /* 15F9C 00115F9C 1500123C */  lui        $s2, %hi(D_00150DC0)
-    /* 15FA0 00115FA0 081C040C */  jal        func_00107020
+    /* 15FA0 00115FA0 081C040C */  jal        WaitSema
     /* 15FA4 00115FA4 C00D448E */   lw        $a0, %lo(D_00150DC0)($s2)
     /* 15FA8 00115FA8 1500033C */  lui        $v1, %hi(D_0014EA00)
     /* 15FAC 00115FAC 1500043C */  lui        $a0, %hi(D_0014E900)
@@ -40,20 +40,20 @@ glabel sceDbcDeleteSocket
     /* 15FD0 00115FD0 90000824 */  addiu      $a4, $zero, 0x90
     /* 15FD4 00115FD4 2D480002 */  daddu      $a5, $s0, $zero
     /* 15FD8 00115FD8 90000A24 */  addiu      $a6, $zero, 0x90
-    /* 15FDC 00115FDC 6026040C */  jal        SceSifrpcCall
+    /* 15FDC 00115FDC 6026040C */  jal        sceSifCallRpc
     /* 15FE0 00115FE0 2D580000 */   daddu     $a7, $zero, $zero
     /* 15FE4 00115FE4 08004104 */  bgez       $v0, .L00116008
     /* 15FE8 00115FE8 C00D448E */   lw        $a0, %lo(D_00150DC0)($s2)
     /* 15FEC 00115FEC 1400043C */  lui        $a0, %hi(D_001386A0)
     /* 15FF0 00115FF0 165B040C */  jal        func_00116C58
     /* 15FF4 00115FF4 A0868424 */   addiu     $a0, $a0, %lo(D_001386A0)
-    /* 15FF8 00115FF8 001C040C */  jal        func_00107000
+    /* 15FF8 00115FF8 001C040C */  jal        SignalSema
     /* 15FFC 00115FFC C00D448E */   lw        $a0, %lo(D_00150DC0)($s2)
     /* 16000 00116000 04000010 */  b          .L00116014
     /* 16004 00116004 2D100000 */   daddu     $v0, $zero, $zero
 .align 2
   .L00116008:
-    /* 16008 00116008 001C040C */  jal        func_00107000
+    /* 16008 00116008 001C040C */  jal        SignalSema
     /* 1600C 0011600C 0400108E */   lw        $s0, 0x4($s0)
     /* 16010 00116010 2D100002 */  daddu      $v0, $s0, $zero
 .align 2

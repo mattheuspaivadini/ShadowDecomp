@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00107200, 0x10
+nonmatching DisableDmacHandler, 0x10
 
-glabel func_00107200
+glabel DisableDmacHandler
     /* 7200 00107200 5F000324 */  addiu      $v1, $zero, 0x5F
     /* 7204 00107204 0C000000 */  syscall    0 /* handwritten instruction */
     /* 7208 00107208 0800E003 */  jr         $ra
     /* 720C 0010720C 00000000 */   nop
-endlabel func_00107200
+endlabel DisableDmacHandler

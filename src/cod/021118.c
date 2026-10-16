@@ -9,16 +9,16 @@ struct R021118 {
 
 extern struct R021118 D_00163CC8[];
 extern int D_00163CC0[];
-int func_00106FF0(int a0);
+int DeleteSema(int a0);
 int sceDbcDeleteSocket(int id);
 
-int func_00121118(void) {
+int _sceMcCoreEnd(void) {
     int i;
     int v;
 
     v = D_00163CC0[0];
     if (v >= 0)
-        func_00106FF0(v);
+        DeleteSema(v);
     for (i = 0; i < 2; i++) {
         if (D_00163CC8[i].field0 != 0) {
             sceDbcDeleteSocket(D_00163CC8[i].field4);

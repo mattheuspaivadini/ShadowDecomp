@@ -25,10 +25,10 @@ typedef struct {
     int w3;
 } Block16;
 
-int func_00107260(int x);
-int func_001073A0(Block16 *args, int x);
+int FlushCache(int x);
+int sceSifSetDma(Block16 *args, int x);
 
-int func_00123108(int a0, int a1, unsigned int a2) {
+int sceNetcnfifSendIOP(int a0, int a1, unsigned int a2) {
     Block16 args;
 
     if ((a2 & 0x3F) != 0)
@@ -39,6 +39,6 @@ int func_00123108(int a0, int a1, unsigned int a2) {
     args.w1 = a1;
     args.w2 = a2;
     args.w3 = 0;
-    func_00107260(0);
-    return func_001073A0(&args, 1);
+    FlushCache(0);
+    return sceSifSetDma(&args, 1);
 }

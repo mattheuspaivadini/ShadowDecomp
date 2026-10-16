@@ -30,15 +30,15 @@ struct D25768 {
     long long pad18;                /* 0x18 */
 };
 
-int func_001271B0(long long *in, struct D25768 *out);
-int func_001270A8(int a0, int a1, int a2, int a3);
+int __unpack_d(long long *in, struct D25768 *out);
+int __make_fp(int a0, int a1, int a2, int a3);
 
-int func_001258A0(long long a0) {
+int dptofp(long long a0) {
     struct D25768 pa;
     int v;
 
-    func_001271B0(&a0, &pa);
+    __unpack_d(&a0, &pa);
     v = (int)((pa.mant << 2) >> 32);
-    return func_001270A8(pa.type, pa.sign, pa.exp,
+    return __make_fp(pa.type, pa.sign, pa.exp,
                          (pa.mant & 0x3FFFFFFF) ? (v | 1) : v);
 }

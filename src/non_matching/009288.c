@@ -1,7 +1,7 @@
-/* STATUS (Session 7, 2026-10-14): NON_MATCHING. best score 6 [cc=296, default].
- * struct division; block layout/scheduling differs.
+/* STATUS (10, 2026-10-16): NON_MATCHING. best score 6 [cc=296].
+ * 
  * The original .s stays in the build (asm/cod/009288.s); this C
- * draft (subagent-produced, Session 7) is kept for the record. */
+ * draft (10) is kept for the record. */
 /* asm/cod/009288.s -> func_00109288 @ 0x00109288 (0x30 bytes, 11 insns)
  *
  * Cursor step through a table of 64-byte records hanging off the same object:

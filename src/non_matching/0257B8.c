@@ -10,9 +10,9 @@ struct B01257B8 {
     long long v;        /* 0x10 magnitude */
 };
 
-long long func_001270D8(void *desc);
+long long __pack_d(void *desc);
 
-long long func_001257B8(int a0) {
+long long litodp(int a0) {
     struct B01257B8 d;
     unsigned int sign;
     long long v;
@@ -43,5 +43,6 @@ long long func_001257B8(int a0) {
             d.v = v;
         }
     }
-    return func_001270D8(&d);
+    return __pack_d(&d);
 }
+/* func_001257B8 */

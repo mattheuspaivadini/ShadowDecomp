@@ -21,7 +21,7 @@ struct Mod00101800 {
     int  f40;       /* 0x40 */
 };
 
-int func_00101800(struct Mod00101800 *p, void (*cb)(int)) {
+int FreeDecodedSection(struct Mod00101800 *p, void (*cb)(int)) {
     struct Rec00101800 *e;
     int i;
 

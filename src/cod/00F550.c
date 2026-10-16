@@ -31,14 +31,14 @@
  * declares this function `void func_0010F550(void)`.
  * MATCH GUESS: cc=296 + -fno-optimize-sibling-calls
  */
-int func_00107440(void);
+int GetMemorySize(void);
 void func_0010F590(void);
-void func_00107450(void);
+void _InitTLB(void);
 
-void func_0010F550(void) {
-    if (func_00107440() == 0x2000000) {
+void InitTLB(void) {
+    if (GetMemorySize() == 0x2000000) {
         func_0010F590();
     } else {
-        func_00107450();
+        _InitTLB();
     }
 }

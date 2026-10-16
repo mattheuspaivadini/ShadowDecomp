@@ -1,7 +1,7 @@
-/* STATUS (Session 7, 2026-10-14): NON_MATCHING. best score 4 [cc=29, default].
- * 015A30 clone (cmd 0x80001305); bgezl tail.
+/* STATUS (10, 2026-10-16): NON_MATCHING. best score 4 [cc=29].
+ * 
  * The original .s stays in the build (asm/cod/015D70.s); this C
- * draft (subagent-produced, Session 7) is kept for the record. */
+ * draft (10) is kept for the record. */
 /* asm/cod/015D70.s -> func_00115D70 @ 0x00115D70 (0x60 bytes, 24 insns)
  *
  * Clone of the matched func_00115A30 (src/cod/015A30.c) - the same 9-argument
@@ -22,11 +22,11 @@
 extern int D_0014E900[];   /* .bss 0x0014E900, 0x50 bytes (lui/%lo) */
 extern int D_0014EA00[];   /* .bss 0x0014EA00, 0xC0 bytes (lui/%lo) */
 
-int SceSifrpcCall(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
+int sceSifCallRpc(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
                   int a7, int a8);
 
 int func_00115D70(void) {
-    int r = SceSifrpcCall((int)D_0014E900, (int)0x80001305, 0, (int)D_0014EA00,
+    int r = sceSifCallRpc((int)D_0014E900, (int)0x80001305, 0, (int)D_0014EA00,
                           0x90, (int)D_0014EA00, 0x90, 0, 0);
 
     return r >= 0 ? D_0014EA00[1] : 0;

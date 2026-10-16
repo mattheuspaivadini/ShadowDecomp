@@ -3,7 +3,7 @@
  */
 extern int D_0013B790[256];
 
-void func_00102A40(void) {
+void LoaderSysInitExternalThreadList(void) {
     int value = -1;
     int i;
 

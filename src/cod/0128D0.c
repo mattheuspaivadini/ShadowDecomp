@@ -13,6 +13,6 @@
  */
 #include "symbols.h"
 
-int func_001128D0(int index) {
+int sceSifGetSreg(int index) {
     return D_0014B500[index];
 }

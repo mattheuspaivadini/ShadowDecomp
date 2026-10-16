@@ -4,8 +4,8 @@
  * f0 is materialised from the bit pattern 0x4D0CA000 (= 147456000.0f) with
  * `lui/ori` + `mtc1`, then `div.s f12, f0, f12` and func_00124D90(f12).
  * UNCONFIRMED: the constant's meaning; the bit pattern is evidence. */
-float func_00124D90(float x);
+float __fixunssfdi(float x);
 
-float func_001116C8(float x) {
-    return func_00124D90(147456000.0f / x);
+float TimerFreq2BusClock(float x) {
+    return __fixunssfdi(147456000.0f / x);
 }

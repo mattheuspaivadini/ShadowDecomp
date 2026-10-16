@@ -22,16 +22,16 @@ struct B23000 {             /* 16-byte plain-word block (ldl/ldr/sdl/sdr) */
     unsigned int wC;        /* 0x0C */
 };
 
-int func_00106DE0(void *param);     /* syscall 0x20: CreateThread */
-int func_00107AD0(int thread, int a1);
-int func_00106DF0(int a0);          /* DeleteThread */
+int CreateThread(void *param);     /* syscall 0x20: CreateThread */
+int StartThread(int thread, int a1);
+int DeleteThread(int a0);          /* DeleteThread */
 void func_00122F90(void);           /* the thread entry point */
 
 extern char D_00138DD0[];
 extern char D_00169F00[];
-extern char D_00141D70[];           /* the linker's _gp value */
+extern char _gp[];           /* the linker's _gp value */
 
-int func_00123000(int a0, int a1, int a2, int a3) {
+int sce_create_callback_thread(int a0, int a1, int a2, int a3) {
     struct S23000Ctx ctx;
     int id;
 
@@ -39,14 +39,14 @@ int func_00123000(int a0, int a1, int a2, int a3) {
     ctx.f08 = a1;
     ctx.f0C = a2;
     ctx.f14 = a3;
-    ctx.gp = (int)D_00141D70;
+    ctx.gp = (int)_gp;
     ctx.f20 = (int)D_00138DD0;
-    id = func_00106DE0(&ctx);
+    id = CreateThread(&ctx);
     if (id <= 0)
         return -1;
     *(struct B23000 *)D_00169F00 = *(struct B23000 *)a0;
-    if (func_00107AD0(id, 0) >= 0)
+    if (StartThread(id, 0) >= 0)
         return id;
-    func_00106DF0(id);
+    DeleteThread(id);
     return -1;
 }

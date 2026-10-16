@@ -25,14 +25,14 @@ struct D25768 {
     unsigned long long pad18;       /* 0x18 */
 };
 
-int func_001271B0(long long *in, struct D25768 *out);
-int func_00127270(struct D25768 *a, struct D25768 *b);
+int __unpack_d(long long *in, struct D25768 *out);
+int __fpcmp_parts_d(struct D25768 *a, struct D25768 *b);
 
-int func_00125768(long long a0, long long a1) {
+int dpcmp(long long a0, long long a1) {
     struct D25768 pa;
     struct D25768 pb;
 
-    func_001271B0(&a0, &pa);
-    func_001271B0(&a1, &pb);
-    return func_00127270(&pa, &pb);
+    __unpack_d(&a0, &pa);
+    __unpack_d(&a1, &pb);
+    return __fpcmp_parts_d(&pa, &pb);
 }

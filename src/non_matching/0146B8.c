@@ -6,7 +6,7 @@ struct P146B8 {
     long long q[12];
 };
 
-int func_001146B8(struct P146B8 *p, short a1, short a2, short a3, short a4,
+int sceGsSetDefClear(struct P146B8 *p, short a1, short a2, short a3, short a4,
                   short a5, unsigned char a6, unsigned char a7,
                   unsigned char a8, unsigned char a9, unsigned int a10) {
     p->q[2] = 6;
@@ -34,3 +34,4 @@ int func_001146B8(struct P146B8 *p, short a1, short a2, short a3, short a4,
     __asm__ __volatile__("sync" ::: "memory");
     return 6;
 }
+/* func_001146B8 */

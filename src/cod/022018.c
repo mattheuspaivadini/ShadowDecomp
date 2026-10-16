@@ -24,7 +24,7 @@ struct S022018 {
 
 extern struct S022018 D_00163CC8[];
 
-int func_00122018(unsigned int i) {
+int _sceMcCoreCheckSocket(unsigned int i) {
     if (i >= 2)
         return 0;
     return ((struct S022018 *)((char *)D_00163CC8 + i * 0x24))->field0 != 0;

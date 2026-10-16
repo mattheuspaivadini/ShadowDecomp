@@ -51,28 +51,28 @@ struct P07AD0 {
     u_long128V2 q270;   /* 0x270 */
 };
 
-extern int func_00107460(void);
-extern int func_0010FB20(void);
-extern int func_0010FB70(void);
-extern int func_00106EE0(int a0, int *buf);
-extern int func_00106E00(int a0, int a1);
+extern int QueryIntrContext(void);
+extern int DIntr(void);
+extern int EIntr(void);
+extern int ReferThreadStatus(int a0, int *buf);
+extern int _StartThread(int a0, int a1);
 
-int func_00107AD0(int a0, int a1) {
+int StartThread(int a0, int a1) {
     int buf[4];
     int r;
     struct P07AD0 *p;
 
-    if (func_00107460() != 0)
+    if (QueryIntrContext() != 0)
         return -1;
-    if (func_0010FB20() == 0)
+    if (DIntr() == 0)
         return -1;
-    r = func_00106EE0(a0, buf);
+    r = ReferThreadStatus(a0, buf);
     if (r < 0) {
-        func_0010FB70();
+        EIntr();
         return r;
     }
     if (buf[0] != 0x10) {
-        func_0010FB70();
+        EIntr();
         return -1;
     }
     p = (struct P07AD0 *)(buf[2] + buf[3] - 0x2A0);
@@ -94,6 +94,7 @@ int func_00107AD0(int a0, int a1) {
     p->q200 = 0; p->q210 = 0; p->q220 = 0; p->q230 = 0;
     p->q240 = 0; p->q250 = 0; p->q260 = 0; p->q270 = 0;
     *(long long *)((char *)p + 0x40) = a1;
-    func_0010FB70();
-    return func_00106E00(a0, a1);
+    EIntr();
+    return _StartThread(a0, a1);
 }
+/* func_00107AD0 */

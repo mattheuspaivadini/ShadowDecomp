@@ -31,7 +31,7 @@ struct E006430 {
 extern struct E006430 D_0013A160;     /* .sdata, gp-relative: template record  */
 extern struct E006430 D_0013ED90[];   /* .bss: 40 rows x 60 records            */
 
-void func_00106430(void) {
+void ClearDisplay(void) {
     int i;
     int j;
 

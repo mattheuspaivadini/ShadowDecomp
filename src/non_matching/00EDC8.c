@@ -6,10 +6,10 @@ extern unsigned char D_00147380[];
 extern int D_00147580[];
 
 int func_0010E238(void);
-int SceSifrpcCall(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
+int sceSifCallRpc(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
                   int a7, int a8);
 
-int func_0010EDC8(int a0, unsigned char *a1, unsigned int a2) {
+int sceSifGetIopAddr(int a0, unsigned char *a1, unsigned int a2) {
     int r;
 
     if (func_0010E238() < 0)
@@ -18,7 +18,7 @@ int func_0010EDC8(int a0, unsigned char *a1, unsigned int a2) {
         return 0xFFFEFFFE;
     *(int *)D_00147380 = a0;
     *(int *)(D_00147380 + 4) = (int)a2;
-    r = SceSifrpcCall((int)D_00147580, 3, 0, (int)D_00147380, 0x20,
+    r = sceSifCallRpc((int)D_00147580, 3, 0, (int)D_00147380, 0x20,
                       (int)D_00147380, 0x20, 0, 0);
     if (r < 0)
         return 0xFFFEFFFF;

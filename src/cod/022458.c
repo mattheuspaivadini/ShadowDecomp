@@ -16,18 +16,18 @@
  * The `+0x10` offset is a named local (the const-local pattern of 022BD8).
  * RESIDUAL: none known; if the store lands before the lui it needs the
  * 022DA0 store-order variant. */
-int func_001221D0(void);
+int sceNetcnfifInit(void);
 void func_00128FB0(char *dst, char *src);
-int func_00123260(char *dst, char *src, int n);
+int sce_call_rpc(char *dst, char *src, int n);
 
 extern char D_00167F00[];
 extern char D_00167EC0[];
 
-int func_00122458(int a0, int a1) {
+int sceNetcnfifGetCount(int a0, int a1) {
     int lit_0 = 0x10;
 
-    func_001221D0();
+    sceNetcnfifInit();
     func_00128FB0(D_00167F00 + lit_0, (char *)a0);
     *(int *)(D_00167F00 + 8) = a1;
-    return func_00123260(D_00167EC0, D_00167F00, 0);
+    return sce_call_rpc(D_00167EC0, D_00167F00, 0);
 }

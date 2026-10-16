@@ -2,7 +2,7 @@
  * R2 w45a_0: scheduling (load hoisting above the store block)
  * The original .s stays in the build (asm/cod/0004B8.s); this C
  * draft (Session 8) is kept for the record. */
-void func_001004B8(char *p) {
+void RelocateElfInfoHeader(char *p) {
     int n;
     int cnt;
     char *q;
@@ -38,3 +38,4 @@ void func_001004B8(char *p) {
     }
     *(int *)(p + 0x18) = (int)(p + *(int *)(p + 0x14));
 }
+/* func_001004B8 */

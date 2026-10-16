@@ -35,7 +35,7 @@ glabel load_set_conf_only
     /* 447C 0010447C 2D280000 */   daddu     $a1, $zero, $zero
     /* 4480 00104480 1300043C */  lui        $a0, %hi(D_00136FB8)
     /* 4484 00104484 B86F8424 */  addiu      $a0, $a0, %lo(D_00136FB8)
-    /* 4488 00104488 2E0F040C */  jal        func_00103CB8
+    /* 4488 00104488 2E0F040C */  jal        LoaderSysLoadIopModule
     /* 448C 0010448C 2D300000 */   daddu     $a2, $zero, $zero
     /* 4490 00104490 03004104 */  bgez       $v0, .L001044A0
     /* 4494 00104494 1300043C */   lui       $a0, %hi(D_00136FD8)
@@ -47,19 +47,19 @@ glabel load_set_conf_only
     /* 44A4 001044A4 D86F8424 */   addiu     $a0, $a0, %lo(D_00136FD8)
 .align 2
   .L001044A8:
-    /* 44A8 001044A8 4A88040C */  jal        func_00122128
+    /* 44A8 001044A8 4A88040C */  jal        sceNetcnfifSetup
     /* 44AC 001044AC 00000000 */   nop
-    /* 44B0 001044B0 688B040C */  jal        func_00122DA0
+    /* 44B0 001044B0 688B040C */  jal        sceNetcnfifAllocWorkarea
     /* 44B4 001044B4 00100424 */   addiu     $a0, $zero, 0x1000
     /* 44B8 001044B8 2D80A003 */  daddu      $s0, $sp, $zero
     /* 44BC 001044BC 00000000 */  nop
 .align 2
   .L001044C0:
-    /* 44C0 001044C0 D688040C */  jal        func_00122358
+    /* 44C0 001044C0 D688040C */  jal        sceNetcnfifCheck
     /* 44C4 001044C4 00000000 */   nop
     /* 44C8 001044C8 FDFF4014 */  bnez       $v0, .L001044C0
     /* 44CC 001044CC 00000000 */   nop
-    /* 44D0 001044D0 DE88040C */  jal        func_00122378
+    /* 44D0 001044D0 DE88040C */  jal        sceNetcnfifGetResult
     /* 44D4 001044D4 2D200002 */   daddu     $a0, $s0, $zero
     /* 44D8 001044D8 0000038E */  lw         $v1, 0x0($s0)
     /* 44DC 001044DC 57006004 */  bltz       $v1, .L0010463C
@@ -67,73 +67,73 @@ glabel load_set_conf_only
     /* 44E4 001044E4 01002232 */  andi       $v0, $s1, 0x1
     /* 44E8 001044E8 05004010 */  beqz       $v0, .L00104500
     /* 44EC 001044EC 00000000 */   nop
-    /* 44F0 001044F0 1289040C */  jal        func_00122448
+    /* 44F0 001044F0 1289040C */  jal        sceNetcnfifSetFNoDecode
     /* 44F4 001044F4 2D200000 */   daddu     $a0, $zero, $zero
     /* 44F8 001044F8 03000010 */  b          .L00104508
     /* 44FC 001044FC 00000000 */   nop
 .align 2
   .L00104500:
-    /* 4500 00104500 1289040C */  jal        func_00122448
+    /* 4500 00104500 1289040C */  jal        sceNetcnfifSetFNoDecode
     /* 4504 00104504 01000424 */   addiu     $a0, $zero, 0x1
 .align 2
   .L00104508:
-    /* 4508 00104508 981C040C */  jal        func_00107260
+    /* 4508 00104508 981C040C */  jal        FlushCache
     /* 450C 0010450C 2D200000 */   daddu     $a0, $zero, $zero
     /* 4510 00104510 2D208002 */  daddu      $a0, $s4, $zero
     /* 4514 00104514 2D280000 */  daddu      $a1, $zero, $zero
     /* 4518 00104518 2D30A002 */  daddu      $a2, $s5, $zero
-    /* 451C 0010451C 5489040C */  jal        func_00122550
+    /* 451C 0010451C 5489040C */  jal        sceNetcnfifLoadEntry
     /* 4520 00104520 2D38C002 */   daddu     $a3, $s6, $zero
     /* 4524 00104524 2D80A003 */  daddu      $s0, $sp, $zero
 .align 2
   .L00104528:
-    /* 4528 00104528 D688040C */  jal        func_00122358
+    /* 4528 00104528 D688040C */  jal        sceNetcnfifCheck
     /* 452C 0010452C 00000000 */   nop
     /* 4530 00104530 FDFF4014 */  bnez       $v0, .L00104528
     /* 4534 00104534 00000000 */   nop
-    /* 4538 00104538 DE88040C */  jal        func_00122378
+    /* 4538 00104538 DE88040C */  jal        sceNetcnfifGetResult
     /* 453C 0010453C 2D200002 */   daddu     $a0, $s0, $zero
     /* 4540 00104540 0000048E */  lw         $a0, 0x0($s0)
     /* 4544 00104544 3D008004 */  bltz       $a0, .L0010463C
     /* 4548 00104548 E4FD0224 */   addiu     $v0, $zero, -0x21C
-    /* 454C 0010454C 5A8B040C */  jal        func_00122D68
+    /* 454C 0010454C 5A8B040C */  jal        sceNetcnfifGetAddr
     /* 4550 00104550 00000000 */   nop
     /* 4554 00104554 2D80A003 */  daddu      $s0, $sp, $zero
 .align 2
   .L00104558:
-    /* 4558 00104558 D688040C */  jal        func_00122358
+    /* 4558 00104558 D688040C */  jal        sceNetcnfifCheck
     /* 455C 0010455C 00000000 */   nop
     /* 4560 00104560 FDFF4014 */  bnez       $v0, .L00104558
     /* 4564 00104564 00000000 */   nop
-    /* 4568 00104568 DE88040C */  jal        func_00122378
+    /* 4568 00104568 DE88040C */  jal        sceNetcnfifGetResult
     /* 456C 0010456C 2D200002 */   daddu     $a0, $s0, $zero
     /* 4570 00104570 0000038E */  lw         $v1, 0x0($s0)
     /* 4574 00104574 31006004 */  bltz       $v1, .L0010463C
     /* 4578 00104578 E4FD0224 */   addiu     $v0, $zero, -0x21C
     /* 457C 0010457C 0C00A58F */  lw         $a1, 0xC($sp)
     /* 4580 00104580 2D20C002 */  daddu      $a0, $s6, $zero
-    /* 4584 00104584 428C040C */  jal        func_00123108
+    /* 4584 00104584 428C040C */  jal        sceNetcnfifSendIOP
     /* 4588 00104588 40130624 */   addiu     $a2, $zero, 0x1340
     /* 458C 0010458C 2D804000 */  daddu      $s0, $v0, $zero
     /* 4590 00104590 2A000012 */  beqz       $s0, .L0010463C
     /* 4594 00104594 E4FD0224 */   addiu     $v0, $zero, -0x21C
 .align 2
   .L00104598:
-    /* 4598 00104598 568C040C */  jal        func_00123158
+    /* 4598 00104598 568C040C */  jal        sceNetcnfifDmaCheck
     /* 459C 0010459C 2D200002 */   daddu     $a0, $s0, $zero
     /* 45A0 001045A0 FDFF4014 */  bnez       $v0, .L00104598
     /* 45A4 001045A4 00000000 */   nop
-    /* 45A8 001045A8 868B040C */  jal        func_00122E18
+    /* 45A8 001045A8 868B040C */  jal        sceNetcnfifSetEnv
     /* 45AC 001045AC 2D200000 */   daddu     $a0, $zero, $zero
     /* 45B0 001045B0 2D80A003 */  daddu      $s0, $sp, $zero
     /* 45B4 001045B4 00000000 */  nop
 .align 2
   .L001045B8:
-    /* 45B8 001045B8 D688040C */  jal        func_00122358
+    /* 45B8 001045B8 D688040C */  jal        sceNetcnfifCheck
     /* 45BC 001045BC 00000000 */   nop
     /* 45C0 001045C0 FDFF4014 */  bnez       $v0, .L001045B8
     /* 45C4 001045C4 00000000 */   nop
-    /* 45C8 001045C8 DE88040C */  jal        func_00122378
+    /* 45C8 001045C8 DE88040C */  jal        sceNetcnfifGetResult
     /* 45CC 001045CC 2D200002 */   daddu     $a0, $s0, $zero
     /* 45D0 001045D0 0000038E */  lw         $v1, 0x0($s0)
     /* 45D4 001045D4 19006004 */  bltz       $v1, .L0010463C
@@ -143,7 +143,7 @@ glabel load_set_conf_only
     /* 45E4 001045E4 0C00B08F */   lw        $s0, 0xC($sp)
     /* 45E8 001045E8 2D204002 */  daddu      $a0, $s2, $zero
     /* 45EC 001045EC 2D286002 */  daddu      $a1, $s3, $zero
-    /* 45F0 001045F0 7264040C */  jal        func_001191C8
+    /* 45F0 001045F0 7264040C */  jal        sceInetCtlSetAutoMode
     /* 45F4 001045F4 01000624 */   addiu     $a2, $zero, 0x1
     /* 45F8 001045F8 06000010 */  b          .L00104614
     /* 45FC 001045FC 2D204000 */   daddu     $a0, $v0, $zero
@@ -151,7 +151,7 @@ glabel load_set_conf_only
   .L00104600:
     /* 4600 00104600 2D204002 */  daddu      $a0, $s2, $zero
     /* 4604 00104604 2D286002 */  daddu      $a1, $s3, $zero
-    /* 4608 00104608 7264040C */  jal        func_001191C8
+    /* 4608 00104608 7264040C */  jal        sceInetCtlSetAutoMode
     /* 460C 0010460C 2D300000 */   daddu     $a2, $zero, $zero
     /* 4610 00104610 2D204000 */  daddu      $a0, $v0, $zero
 .align 2
@@ -160,7 +160,7 @@ glabel load_set_conf_only
     /* 4618 00104618 2D108000 */   daddu     $v0, $a0, $zero
     /* 461C 0010461C 2D204002 */  daddu      $a0, $s2, $zero
     /* 4620 00104620 2D286002 */  daddu      $a1, $s3, $zero
-    /* 4624 00104624 1465040C */  jal        func_00119450
+    /* 4624 00104624 1465040C */  jal        sceLibnetSetConfiguration
     /* 4628 00104628 2D300002 */   daddu     $a2, $s0, $zero
     /* 462C 0010462C 2D204000 */  daddu      $a0, $v0, $zero
     /* 4630 00104630 2D100000 */  daddu      $v0, $zero, $zero

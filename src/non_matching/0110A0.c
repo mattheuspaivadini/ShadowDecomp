@@ -21,11 +21,11 @@ struct T110A0 {
 };
 
 extern struct T110A0 D_00133918;
-long long func_00110C78(void);
+long long iGetTimerSystemTime(void);
 int func_00110998(void *a0);
 int func_00110780(long long a0);
 
-int func_001110A0(int a0) {
+int iStopTimerCounter(int a0) {
     struct S110A0 *p;
     long long now;
     long long old;
@@ -40,7 +40,7 @@ int func_001110A0(int a0) {
         return 0x80000010;
     if ((p->f0C & 1) == 0)
         return 0;
-    now = func_00110C78();
+    now = iGetTimerSystemTime();
     m = p->f0C;
     old = p->f10;
     p->f18 = p->f18 + (now - old);

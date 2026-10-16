@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_001072C0, 0x10
+nonmatching SetCPUTimerHandler, 0x10
 
-glabel func_001072C0
+glabel SetCPUTimerHandler
     /* 72C0 001072C0 6C000324 */  addiu      $v1, $zero, 0x6C
     /* 72C4 001072C4 0C000000 */  syscall    0 /* handwritten instruction */
     /* 72C8 001072C8 0800E003 */  jr         $ra
     /* 72CC 001072CC 00000000 */   nop
-endlabel func_001072C0
+endlabel SetCPUTimerHandler

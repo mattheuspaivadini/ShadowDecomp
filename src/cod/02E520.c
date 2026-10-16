@@ -5,6 +5,6 @@
  */
 #include "symbols.h"
 
-void *func_0012E520(void) {
+void *_localeconv_r(void) {
     return D_00139B08;
 }

@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00106EA0, 0x10
+nonmatching _iRotateThreadReadyQueue, 0x10
 
-glabel func_00106EA0
+glabel _iRotateThreadReadyQueue
     /* 6EA0 00106EA0 D4FF0324 */  addiu      $v1, $zero, -0x2C
     /* 6EA4 00106EA4 0C000000 */  syscall    0 /* handwritten instruction */
     /* 6EA8 00106EA8 0800E003 */  jr         $ra
     /* 6EAC 00106EAC 00000000 */   nop
-endlabel func_00106EA0
+endlabel _iRotateThreadReadyQueue

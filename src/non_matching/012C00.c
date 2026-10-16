@@ -17,7 +17,7 @@ struct T012C00 {
 
 extern struct T012C00 D_0014B358;   /* non-small: lui/%lo */
 
-void func_00112C00(int id, int handler, int arg) {
+void sceSifAddCmdHandler(int id, int handler, int arg) {
     int             idx;
     int             g;
     struct R012C00 *rec;

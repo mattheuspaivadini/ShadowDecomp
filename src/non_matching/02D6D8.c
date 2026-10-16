@@ -23,11 +23,11 @@ struct File02D6D8 {
     int   f54;              /* 0x54 */
 };
 
-extern int D_00135C60[];    /* .data 0x00135C60: the default stream */
-extern void func_0012DA00(int a0);
-extern int func_0012E3F8(int a0, int a1);
+extern int _impure_ptr[];    /* .data 0x00135C60: the default stream */
+extern void __sinit(int a0);
+extern int _fwalk(int a0, int a1);
 
-int func_0012D6D8(struct File02D6D8 *p) {
+int fflush(struct File02D6D8 *p) {
     struct File02D6D8 *f;
     int ofs;
     int n;
@@ -35,14 +35,14 @@ int func_0012D6D8(struct File02D6D8 *p) {
     int r;
 
     if (p == 0)
-        return func_0012E3F8(D_00135C60[0], (int)func_0012D6D8);
+        return _fwalk(_impure_ptr[0], (int)fflush);
     f = (struct File02D6D8 *)p->f54;
     if (f == 0) {
-        f = (struct File02D6D8 *)D_00135C60[0];
+        f = (struct File02D6D8 *)_impure_ptr[0];
         p->f54 = (int)f;
     }
     if (f->f38 == 0)
-        func_0012DA00((int)f);
+        __sinit((int)f);
     if ((p->f0C & 8) == 0)
         return 0;
     n = p->f10;
@@ -67,3 +67,4 @@ int func_0012D6D8(struct File02D6D8 *p) {
     }
     return 0;
 }
+/* func_0012D6D8 */

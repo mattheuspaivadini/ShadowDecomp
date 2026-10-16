@@ -15,7 +15,7 @@ glabel func_001091C0
     /* 91C4 001091C4 1000B1FF */  sd         $s1, 0x10($sp)
     /* 91C8 001091C8 0000B0FF */  sd         $s0, 0x0($sp)
     /* 91CC 001091CC 2000BFFF */  sd         $ra, 0x20($sp)
-    /* 91D0 001091D0 C83E040C */  jal        func_0010FB20
+    /* 91D0 001091D0 C83E040C */  jal        DIntr
     /* 91D4 001091D4 2D888000 */   daddu     $s1, $a0, $zero
     /* 91D8 001091D8 0800248E */  lw         $a0, 0x8($s1)
     /* 91DC 001091DC 2D180000 */  daddu      $v1, $zero, $zero
@@ -42,7 +42,7 @@ glabel func_001091C0
 .align 2
   .L00109228:
     /* 9228 00109228 140010AE */  sw         $s0, 0x14($s0)
-    /* 922C 0010922C DC3E040C */  jal        func_0010FB70
+    /* 922C 0010922C DC3E040C */  jal        EIntr
     /* 9230 00109230 180003AE */   sw        $v1, 0x18($s0)
     /* 9234 00109234 07000010 */  b          .L00109254
     /* 9238 00109238 2D100002 */   daddu     $v0, $s0, $zero
@@ -53,7 +53,7 @@ glabel func_001091C0
     /* 9244 00109244 40001026 */   addiu     $s0, $s0, 0x40
 .align 2
   .L00109248:
-    /* 9248 00109248 DC3E040C */  jal        func_0010FB70
+    /* 9248 00109248 DC3E040C */  jal        EIntr
     /* 924C 0010924C 00000000 */   nop
     /* 9250 00109250 2D100000 */  daddu      $v0, $zero, $zero
 .align 2

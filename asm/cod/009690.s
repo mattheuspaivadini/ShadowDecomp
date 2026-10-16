@@ -19,7 +19,7 @@ glabel func_00109690
     /* 96A4 001096A4 40000624 */  addiu      $a2, $zero, 0x40
     /* 96A8 001096A8 2D380000 */  daddu      $a3, $zero, $zero
     /* 96AC 001096AC 2D400000 */  daddu      $a4, $zero, $zero
-    /* 96B0 001096B0 904B040C */  jal        func_00112E40
+    /* 96B0 001096B0 904B040C */  jal        isceSifSendCmd
     /* 96B4 001096B4 2D480000 */   daddu     $a5, $zero, $zero
     /* 96B8 001096B8 00080324 */  addiu      $v1, $zero, 0x800
     /* 96BC 001096BC 0000BFDF */  ld         $ra, 0x0($sp)

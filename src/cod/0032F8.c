@@ -2,5 +2,5 @@
  *   jr   $ra
  *    nop
  */
-void func_001032F8(void) {
+void LoaderSysFlushPrint(void) {
 }

@@ -5,8 +5,8 @@
  *   ld ra,0(sp); jr ra; addiu sp,sp,0x10
  * A plain wrapper: call and return the callee's value.
  */
-extern int func_001207F8();
+extern int _sceMcpWriteUserClustOnCache();
 
-int func_00120CF0(void) {
-    return func_001207F8();
+int _sceMcpWriteUserClust(void) {
+    return _sceMcpWriteUserClustOnCache();
 }

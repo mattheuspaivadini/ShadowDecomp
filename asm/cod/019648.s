@@ -15,7 +15,7 @@ glabel func_00119648
     /* 1964C 0011964C 2D40E000 */  daddu      $a4, $a3, $zero
     /* 19650 00119650 0000BFFF */  sd         $ra, 0x0($sp)
     /* 19654 00119654 09000724 */  addiu      $a3, $zero, 0x9
-    /* 19658 00119658 9663040C */  jal        func_00118E58
+    /* 19658 00119658 9663040C */  jal        sceInetInterfaceControl
     /* 1965C 0011965C 10000924 */   addiu     $a5, $zero, 0x10
     /* 19660 00119660 0000BFDF */  ld         $ra, 0x0($sp)
     /* 19664 00119664 0800E003 */  jr         $ra

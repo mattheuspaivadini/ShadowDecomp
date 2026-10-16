@@ -8,7 +8,7 @@ struct S013240 {
     unsigned int *last;    /* 0x14 */
 };
 
-void func_00113240(struct S013240 *p) {
+void sceVif1PkCloseGifTag(struct S013240 *p) {
     unsigned int *last;
     unsigned int *write;
     unsigned long long v;
@@ -39,3 +39,4 @@ void func_00113240(struct S013240 *p) {
     }
     p->write = write;
 }
+/* func_00113240 */

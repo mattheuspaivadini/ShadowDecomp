@@ -29,7 +29,7 @@ extern struct S0151B8 D_0014B598[];   /* .bss 0x0014B598: 16 records */
 
 int sceDbcDeleteSocket(int id);
 
-int func_001151B8(int index) {
+int scePad2DeleteSocket(int index) {
     int r;
 
     r = sceDbcDeleteSocket(index);

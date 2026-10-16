@@ -1,7 +1,7 @@
-/* STATUS (Session 9, 2026-10-15): NON_MATCHING. best score 5 [cc=296].
- * session9 R1; residual class not auto-classified
+/* STATUS (10, 2026-10-16): NON_MATCHING. best score 5 [cc=296].
+ * 
  * The original .s stays in the build (asm/cod/0289E8.s); this C
- * draft (Session 9) is kept for the record. */
+ * draft (10) is kept for the record. */
 extern int func_00129930(int a0, int a1, int a2);
 
 struct S0289E8 {                 /* the pseudo-FILE built on the stack */
@@ -16,7 +16,7 @@ struct S0289E8 {                 /* the pseudo-FILE built on the stack */
     int   field54;               /* 0x54: the real FILE */
 };
 
-int func_001289E8(int a0, char *buf, char *fmt, ...) {
+int _sprintf_r(int a0, char *buf, char *fmt, ...) {
     struct S0289E8 f;
     int n;
 

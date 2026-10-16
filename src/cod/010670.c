@@ -22,24 +22,24 @@
  * MATCH GUESS: cc=29 (the whole func_0010FB20 wrapper family is 2.9) */
 #include "symbols.h"
 
-int  func_0010FB20(void);
-int  func_0010FB70(void);
-void func_00110410(int a0);
-unsigned long long func_00110C78(void);
+int  DIntr(void);
+int  EIntr(void);
+void SetT2_MODE(int a0);
+unsigned long long iGetTimerSystemTime(void);
 void func_00110780(unsigned long long t);
 
-int func_00110670(void) {
-    int g = func_0010FB20();
+int StartTimerSystemTime(void) {
+    int g = DIntr();
     unsigned int mode = HWREG(EE_T2_MODE);
 
     if (mode & 0x80) {
         if (g != 0)
-            func_0010FB70();
+            EIntr();
         return 1;
     }
-    func_00110410((mode & 0xFFFFF3FF) | 0x80);
-    func_00110780(func_00110C78());
+    SetT2_MODE((mode & 0xFFFFF3FF) | 0x80);
+    func_00110780(iGetTimerSystemTime());
     if (g != 0)
-        func_0010FB70();
+        EIntr();
     return 0;
 }

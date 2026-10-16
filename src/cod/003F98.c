@@ -13,11 +13,11 @@
 extern int D_0013A07C;        /* .sbss/.sdata: gp-relative (small scalar) */
 extern char D_00136D30[];     /* lui/%lo (non-small) - the message */
 extern int D_0013CFA0[];      /* lui/%lo (non-small) - the 10-entry table */
-int func_00102CF8(char *fmt, ...);
+int LoaderSysPrintf(char *fmt, ...);
 
-void func_00103F98(int a0) {
+void loaderSetResetCallback(int a0) {
     if (D_0013A07C == 10) {
-        func_00102CF8(D_00136D30);
+        LoaderSysPrintf(D_00136D30);
         D_0013A07C = 0;
     }
     D_0013CFA0[D_0013A07C++] = a0;

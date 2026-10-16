@@ -2,11 +2,11 @@
  * session9 R2 waveA; residual class not auto-classified
  * The original .s stays in the build (asm/cod/016EF8.s); this C
  * draft (Session 9) is kept for the record. */
-extern int D_00133AA0[];   /* lui/%lo: the address is what is passed */
+extern int sceCdCbfunc_num[];   /* lui/%lo: the address is what is passed */
 
-void func_00116CE8(int *a0);
+void _sceCd_cd_callback(int *a0);
 
-void func_00116EF8(int a0) {
+void _sceCd_cd_read_intr(int a0) {
     int *p;
     int i;
     int src;
@@ -29,5 +29,5 @@ void func_00116EF8(int a0) {
             *((unsigned char *)src + i) = c;
         }
     }
-    func_00116CE8(D_00133AA0);
+    _sceCd_cd_callback(sceCdCbfunc_num);
 }

@@ -17,7 +17,7 @@ extern struct S012710A D_0014AFD0;   /* non-small (lui/addiu) */
 extern int D_0014AFE8[];             /* non-small; [0] = queue pointer */
 int func_001123C0(struct Q012710 *q);
 
-int func_00112710(char *dst, int n) {
+int sceTtyRead(char *dst, int n) {
     int i;
     int c;
 

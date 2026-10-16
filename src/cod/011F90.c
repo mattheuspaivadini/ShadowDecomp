@@ -14,10 +14,10 @@
  *   jr ra; addiu sp,sp,0x10
  * Writes 5 through the pointer returned by the getter and returns -1.
  */
-extern int *func_00127528();
+extern int *__errno();
 
-int func_00111F90(void) {
-    int *p = func_00127528();
+int open(void) {
+    int *p = __errno();
 
     *p = 5;
     return -1;

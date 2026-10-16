@@ -32,14 +32,14 @@ glabel func_00118380
 .align 2
   .L001183C8:
     /* 183C8 001183C8 1400043C */  lui        $a0, %hi(D_00138AC0)
-    /* 183CC 001183CC BE23040C */  jal        func_00108EF8
+    /* 183CC 001183CC BE23040C */  jal        scePrintf
     /* 183D0 001183D0 C08A8424 */   addiu     $a0, $a0, %lo(D_00138AC0)
     /* 183D4 001183D4 1400043C */  lui        $a0, %hi(D_00138AF8)
     /* 183D8 001183D8 2D286002 */  daddu      $a1, $s3, $zero
     /* 183DC 001183DC F88A8424 */  addiu      $a0, $a0, %lo(D_00138AF8)
     /* 183E0 001183E0 2D302002 */  daddu      $a2, $s1, $zero
     /* 183E4 001183E4 2D384002 */  daddu      $a3, $s2, $zero
-    /* 183E8 001183E8 BE23040C */  jal        func_00108EF8
+    /* 183E8 001183E8 BE23040C */  jal        scePrintf
     /* 183EC 001183EC 2D400002 */   daddu     $a4, $s0, $zero
     /* 183F0 001183F0 09000010 */  b          .L00118418
     /* 183F4 001183F4 E1FD0224 */   addiu     $v0, $zero, -0x21F

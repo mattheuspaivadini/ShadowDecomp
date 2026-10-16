@@ -3,6 +3,6 @@
  */
 extern int sceStdioCCode();
 
-int func_0010C230(int a0) {
+int sceRmdir(int a0) {
     return sceStdioCCode(a0, 8);
 }

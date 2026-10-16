@@ -9,9 +9,9 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00107470, 0x68
+nonmatching DisableIntc, 0x68
 
-glabel func_00107470
+glabel DisableIntc
     /* 7470 00107470 D0FFBD27 */  addiu      $sp, $sp, -0x30
     /* 7474 00107474 1000B1FF */  sd         $s1, 0x10($sp)
     /* 7478 00107478 2000BFFF */  sd         $ra, 0x20($sp)
@@ -22,17 +22,17 @@ glabel func_00107470
     /* 748C 0010748C 24800202 */  and        $s0, $s0, $v0
     /* 7490 00107490 03000012 */  beqz       $s0, .L001074A0
     /* 7494 00107494 00000000 */   nop
-    /* 7498 00107498 C83E040C */  jal        func_0010FB20
+    /* 7498 00107498 C83E040C */  jal        DIntr
     /* 749C 0010749C 00000000 */   nop
 .align 2
   .L001074A0:
-    /* 74A0 001074A0 4C1B040C */  jal        func_00106D30
+    /* 74A0 001074A0 4C1B040C */  jal        _DisableIntc
     /* 74A4 001074A4 2D202002 */   daddu     $a0, $s1, $zero
     /* 74A8 001074A8 2D884000 */  daddu      $s1, $v0, $zero
     /* 74AC 001074AC 0F000000 */  sync
     /* 74B0 001074B0 04000012 */  beqz       $s0, .L001074C4
     /* 74B4 001074B4 2D102002 */   daddu     $v0, $s1, $zero
-    /* 74B8 001074B8 DC3E040C */  jal        func_0010FB70
+    /* 74B8 001074B8 DC3E040C */  jal        EIntr
     /* 74BC 001074BC 00000000 */   nop
     /* 74C0 001074C0 2D102002 */  daddu      $v0, $s1, $zero
 .align 2
@@ -42,4 +42,4 @@ glabel func_00107470
     /* 74CC 001074CC 0000B0DF */  ld         $s0, 0x0($sp)
     /* 74D0 001074D0 0800E003 */  jr         $ra
     /* 74D4 001074D4 3000BD27 */   addiu     $sp, $sp, 0x30
-endlabel func_00107470
+endlabel DisableIntc

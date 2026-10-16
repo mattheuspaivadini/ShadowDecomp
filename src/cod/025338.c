@@ -25,18 +25,18 @@ struct D25768 {
     unsigned long long pad18;       /* 0x18 */
 };
 
-int func_001271B0(long long *in, struct D25768 *out);
+int __unpack_d(long long *in, struct D25768 *out);
 struct D25768 *func_00125080(struct D25768 *a, struct D25768 *b,
                              struct D25768 *c);
-int func_001270D8(void *buf);
+int __pack_d(void *buf);
 
-int func_00125338(long long a0, long long a1) {
+int dpsub(long long a0, long long a1) {
     struct D25768 pa;
     struct D25768 pb;
     struct D25768 pc;
 
-    func_001271B0(&a0, &pa);
-    func_001271B0(&a1, &pb);
+    __unpack_d(&a0, &pa);
+    __unpack_d(&a1, &pb);
     pb.sign ^= 1;
-    return func_001270D8(func_00125080(&pa, &pb, &pc));
+    return __pack_d(func_00125080(&pa, &pb, &pc));
 }

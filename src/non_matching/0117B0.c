@@ -10,14 +10,14 @@ struct S011750 {
 };
 
 extern struct S011750 *D_0014AC80[];   /* lui/%lo -> non-small */
-int func_0010FB20(void);
-int func_0010FB70(void);
-int func_00110DB8(void);
-int func_001114D8(int a0, int a1, int (*a2)(), void *a3);
-int func_00111050(int a0);
+int DIntr(void);
+int EIntr(void);
+int AllocTimerCounter(void);
+int SetTimerHandler(int a0, int a1, int (*a2)(), void *a3);
+int StartTimerCounter(int a0);
 int func_00111750(int a0, int a1, int a2, void *a3);
 
-int func_001117B0(int a0, int (*a1)(), int a2) {
+int SetTimerAlarm(int a0, int (*a1)(), int a2) {
     struct S011750 *n;
     struct S011750 *old;
     int guard;
@@ -25,31 +25,31 @@ int func_001117B0(int a0, int (*a1)(), int a2) {
 
     if (a1 == 0)
         return 0x80000016;
-    guard = func_0010FB20();
+    guard = DIntr();
     n = D_0014AC80[0];
     if (n != 0)
         D_0014AC80[0] = n->next;
     if (n == 0) {
         if (guard != 0)
-            func_0010FB70();
+            EIntr();
         return 0x80008005;
     }
-    r = func_00110DB8();
+    r = AllocTimerCounter();
     if (r < 0) {
         old = D_0014AC80[0];
         D_0014AC80[0] = n;
         n->next = old;
         n->field04 = 0;
         if (guard != 0)
-            func_0010FB70();
+            EIntr();
         return r;
     }
     n->fn = a1;
     n->field0C = a2;
     n->field04 = r;
-    func_001114D8(r, a0, func_00111750, n);
-    func_00111050(r);
+    SetTimerHandler(r, a0, func_00111750, n);
+    StartTimerCounter(r);
     if (guard != 0)
-        func_0010FB70();
+        EIntr();
     return ((int)n << 4) | (r & 0xFE) | 1;
 }

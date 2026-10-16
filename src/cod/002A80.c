@@ -23,7 +23,7 @@
  * 0028F0/002930, which 002C58 proves is 296; nop in the `jalr` shadow) */
 extern int D_0013B790[256];
 
-void func_00102A80(void (*cb)(int)) {
+void LoaderSysExternalThreadListCallBack(void (*cb)(int)) {
     int i;
     int *p = D_0013B790;
 

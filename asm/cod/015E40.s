@@ -29,7 +29,7 @@ glabel sceDbcCreateSocket
 .align 2
   .L00115E7C:
     /* 15E7C 00115E7C 1500143C */  lui        $s4, %hi(D_00150DC0)
-    /* 15E80 00115E80 081C040C */  jal        func_00107020
+    /* 15E80 00115E80 081C040C */  jal        WaitSema
     /* 15E84 00115E84 C00D848E */   lw        $a0, %lo(D_00150DC0)($s4)
     /* 15E88 00115E88 0000028E */  lw         $v0, 0x0($s0)
     /* 15E8C 00115E8C 1500073C */  lui        $a3, %hi(D_0014EA00)
@@ -69,20 +69,20 @@ glabel sceDbcCreateSocket
     /* 15F0C 00115F0C 90000824 */  addiu      $a4, $zero, 0x90
     /* 15F10 00115F10 2D48E000 */  daddu      $a5, $a3, $zero
     /* 15F14 00115F14 90000A24 */  addiu      $a6, $zero, 0x90
-    /* 15F18 00115F18 6026040C */  jal        SceSifrpcCall
+    /* 15F18 00115F18 6026040C */  jal        sceSifCallRpc
     /* 15F1C 00115F1C 2D580000 */   daddu     $a7, $zero, $zero
     /* 15F20 00115F20 08004104 */  bgez       $v0, .L00115F44
     /* 15F24 00115F24 C00D848E */   lw        $a0, %lo(D_00150DC0)($s4)
     /* 15F28 00115F28 1400043C */  lui        $a0, %hi(D_00138680)
     /* 15F2C 00115F2C 165B040C */  jal        func_00116C58
     /* 15F30 00115F30 80868424 */   addiu     $a0, $a0, %lo(D_00138680)
-    /* 15F34 00115F34 001C040C */  jal        func_00107000
+    /* 15F34 00115F34 001C040C */  jal        SignalSema
     /* 15F38 00115F38 C00D848E */   lw        $a0, %lo(D_00150DC0)($s4)
     /* 15F3C 00115F3C 04000010 */  b          .L00115F50
     /* 15F40 00115F40 2D100000 */   daddu     $v0, $zero, $zero
 .align 2
   .L00115F44:
-    /* 15F44 00115F44 001C040C */  jal        func_00107000
+    /* 15F44 00115F44 001C040C */  jal        SignalSema
     /* 15F48 00115F48 2400308E */   lw        $s0, 0x24($s1)
     /* 15F4C 00115F4C 2D100002 */  daddu      $v0, $s0, $zero
 .align 2

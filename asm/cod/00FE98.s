@@ -14,7 +14,7 @@ glabel func_0010FE98
     /* FE98 0010FE98 D0FFBD27 */  addiu      $sp, $sp, -0x30
     /* FE9C 0010FE9C 1000B0FF */  sd         $s0, 0x10($sp)
     /* FEA0 0010FEA0 2000BFFF */  sd         $ra, 0x20($sp)
-    /* FEA4 0010FEA4 241C040C */  jal        func_00107090
+    /* FEA4 0010FEA4 241C040C */  jal        GetOsdConfigParam
     /* FEA8 0010FEA8 2D20A003 */   daddu     $a0, $sp, $zero
     /* FEAC 0010FEAC 0000A38F */  lw         $v1, 0x0($sp)
     /* FEB0 0010FEB0 FFFF023C */  lui        $v0, (0xFFFF1FFF >> 16)
@@ -23,11 +23,11 @@ glabel func_0010FE98
     /* FEBC 0010FEBC 24186200 */  and        $v1, $v1, $v0
     /* FEC0 0010FEC0 2D200002 */  daddu      $a0, $s0, $zero
     /* FEC4 0010FEC4 00206334 */  ori        $v1, $v1, 0x2000
-    /* FEC8 0010FEC8 201C040C */  jal        func_00107080
+    /* FEC8 0010FEC8 201C040C */  jal        SetOsdConfigParam
     /* FECC 0010FECC 0400A3AF */   sw        $v1, 0x4($sp)
-    /* FED0 0010FED0 241C040C */  jal        func_00107090
+    /* FED0 0010FED0 241C040C */  jal        GetOsdConfigParam
     /* FED4 0010FED4 2D200002 */   daddu     $a0, $s0, $zero
-    /* FED8 0010FED8 201C040C */  jal        func_00107080
+    /* FED8 0010FED8 201C040C */  jal        SetOsdConfigParam
     /* FEDC 0010FEDC 2D20A003 */   daddu     $a0, $sp, $zero
     /* FEE0 0010FEE0 0400A28F */  lw         $v0, 0x4($sp)
     /* FEE4 0010FEE4 2000BFDF */  ld         $ra, 0x20($sp)

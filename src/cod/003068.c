@@ -3,8 +3,8 @@
  * The parameter count follows the ps2sdk prototype (UNCONFIRMED for
  * this build); the code is a pure pass-through, so the count does not
  * change the emitted bytes. */
-int sceStdioRead(int a0, int a1, int a2);
+int sceRead(int a0, int a1, int a2);
 
-int func_00103068(int a0, int a1, int a2) {
-    return sceStdioRead(a0, a1, a2);
+int LoaderSysFRead(int a0, int a1, int a2) {
+    return sceRead(a0, a1, a2);
 }

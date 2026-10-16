@@ -10,18 +10,18 @@
  * `jal` + real epilogue (no tail `j`) and a filled `jal` shadow, i.e. no
  * sibling-call folding - the cc=29 form (cf. the matched 022E18.c).
  * MATCH GUESS: cc=29 */
-int func_001221D0(void);
+int sceNetcnfifInit(void);
 void func_00128FB0(char *dst, char *src);
-int func_00123260(char *dst, char *src, int n);
+int sce_call_rpc(char *dst, char *src, int n);
 
 extern int D_00167F00[];
 extern char D_00167EC0[];
 
-int func_001224C0(int a0, int a1, int a2, int a3) {
-    func_001221D0();
+int sceNetcnfifGetList(int a0, int a1, int a2, int a3) {
+    sceNetcnfifInit();
     func_00128FB0((char *)D_00167F00 + 0x10, (char *)a0);
     D_00167F00[0] = a3;
     D_00167F00[2] = a1;
     D_00167F00[3] = a2;
-    return func_00123260(D_00167EC0, (char *)D_00167F00, 1);
+    return sce_call_rpc(D_00167EC0, (char *)D_00167F00, 1);
 }

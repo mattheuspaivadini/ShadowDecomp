@@ -7,11 +7,11 @@
 #define EE_D_ENABLEW 0x1000F590u        /* DMAC disable (write)              */
 #define HWREG(a) (*(volatile unsigned int *)(a))
 
-int func_0010FB20(void);
-int func_0010FB70(void);
+int DIntr(void);
+int EIntr(void);
 
-int func_00114F58(unsigned int *a0) {
-    int r = func_0010FB20();
+int sceDmaPause(unsigned int *a0) {
+    int r = DIntr();
     unsigned int en;
     unsigned int v;
 
@@ -23,6 +23,6 @@ int func_00114F58(unsigned int *a0) {
     *a0 = v & 0xFFFFFEFFu;
     HWREG(EE_D_ENABLEW) = en;
     if (r != 0)
-        func_0010FB70();
+        EIntr();
     return v;
 }

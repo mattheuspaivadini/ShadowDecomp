@@ -1,7 +1,7 @@
-/* STATUS (Session 7, 2026-10-14): NON_MATCHING. best score 7 [cc=29, default].
- * init-once around a syscall stub; scheduling differs.
+/* STATUS (10, 2026-10-16): NON_MATCHING. best score 7 [cc=29].
+ * 
  * The original .s stays in the build (asm/cod/00A740.s); this C
- * draft (subagent-produced, Session 7) is kept for the record. */
+ * draft (10) is kept for the record. */
 /* asm/cod/00A740.s -> func_0010A740 @ 0x0010A740 (0x54 bytes, 21 insns)
  *
  * Init-once wrapper around the raw syscall stub func_00106FE0 (syscall 0x40,
@@ -23,7 +23,7 @@
 extern int D_0013231C __attribute__((section(".data")));
 extern char D_00137F68[];
 
-int func_00106FE0(void *args);
+int CreateSema(void *args);
 
 int func_0010A740(void) {
     int buf[8];
@@ -32,7 +32,7 @@ int func_0010A740(void) {
         buf[1] = 1;
         buf[5] = (int)D_00137F68;
         buf[2] = 1;
-        D_0013231C = func_00106FE0(buf);
+        D_0013231C = CreateSema(buf);
     }
     return D_0013231C;
 }

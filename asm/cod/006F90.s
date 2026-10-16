@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00106F90, 0x10
+nonmatching JoinThread, 0x10
 
-glabel func_00106F90
+glabel JoinThread
     /* 6F90 00106F90 3B000324 */  addiu      $v1, $zero, 0x3B
     /* 6F94 00106F94 0C000000 */  syscall    0 /* handwritten instruction */
     /* 6F98 00106F98 0800E003 */  jr         $ra
     /* 6F9C 00106F9C 00000000 */   nop
-endlabel func_00106F90
+endlabel JoinThread

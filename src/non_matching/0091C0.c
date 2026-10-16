@@ -8,8 +8,8 @@ struct S0091C0 {
     int    n;       /* 0x8 */
 };
 
-void func_0010FB20(void);
-void func_0010FB70(void);
+void DIntr(void);
+void EIntr(void);
 
 void *func_001091C0(struct S0091C0 *s) {
     int   i;
@@ -17,7 +17,7 @@ void *func_001091C0(struct S0091C0 *s) {
     int   k;
     char *p;
 
-    func_0010FB20();
+    DIntr();
     n = s->n;
     i = 0;
     if (n <= 0)
@@ -35,12 +35,12 @@ void *func_001091C0(struct S0091C0 *s) {
             }
             *(int *)(p + 0x14) = (int)p;
             *(int *)(p + 0x18) = i;
-            func_0010FB70();
+            EIntr();
             return p;
         }
         p += 0x40;
     }
 fail:
-    func_0010FB70();
+    EIntr();
     return 0;
 }

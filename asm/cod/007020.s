@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00107020, 0x10
+nonmatching WaitSema, 0x10
 
-glabel func_00107020
+glabel WaitSema
     /* 7020 00107020 44000324 */  addiu      $v1, $zero, 0x44
     /* 7024 00107024 0C000000 */  syscall    0 /* handwritten instruction */
     /* 7028 00107028 0800E003 */  jr         $ra
     /* 702C 0010702C 00000000 */   nop
-endlabel func_00107020
+endlabel WaitSema

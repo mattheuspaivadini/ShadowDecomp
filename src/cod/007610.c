@@ -6,9 +6,9 @@
  *   ld ra,0(sp); jr ra; addiu sp,sp,0x10
  * Flush wrapper: call, then fence with `sync`.
  */
-extern void func_00106D80();
+extern void _iEnableIntc();
 
-void func_00107610(void) {
-    func_00106D80();
+void iEnableIntc(void) {
+    _iEnableIntc();
     __asm__ __volatile__("sync" ::: "memory");
 }

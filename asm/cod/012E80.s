@@ -45,7 +45,7 @@ glabel func_00112E80
     /* 12EF0 00112EF0 00000000 */   nop
 .align 2
   .L00112EF4:
-    /* 12EF4 00112EF4 F41C040C */  jal        func_001073D0
+    /* 12EF4 00112EF4 F41C040C */  jal        isceSifSetDChain
     /* 12EF8 00112EF8 00000000 */   nop
     /* 12EFC 00112EFC 0800A38F */  lw         $v1, 0x8($sp)
     /* 12F00 00112F00 14006104 */  bgez       $v1, .L00112F54

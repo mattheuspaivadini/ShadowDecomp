@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00106FF0, 0x10
+nonmatching DeleteSema, 0x10
 
-glabel func_00106FF0
+glabel DeleteSema
     /* 6FF0 00106FF0 41000324 */  addiu      $v1, $zero, 0x41
     /* 6FF4 00106FF4 0C000000 */  syscall    0 /* handwritten instruction */
     /* 6FF8 00106FF8 0800E003 */  jr         $ra
     /* 6FFC 00106FFC 00000000 */   nop
-endlabel func_00106FF0
+endlabel DeleteSema

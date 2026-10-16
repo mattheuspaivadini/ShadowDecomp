@@ -79,7 +79,7 @@ glabel func_00101B88
     /* 1C7C 00101C7C 2D386002 */  daddu      $a3, $s3, $zero
     /* 1C80 00101C80 2D482002 */  daddu      $a5, $s1, $zero
     /* 1C84 00101C84 2D28E002 */  daddu      $a1, $s7, $zero
-    /* 1C88 00101C88 3E0B040C */  jal        func_00102CF8
+    /* 1C88 00101C88 3E0B040C */  jal        LoaderSysPrintf
     /* 1C8C 00101C8C 00648424 */   addiu     $a0, $a0, %lo(D_00136400)
     /* 1C90 00101C90 0400D5AE */  sw         $s5, 0x4($s6)
     /* 1C94 00101C94 0000B0DF */  ld         $s0, 0x0($sp)

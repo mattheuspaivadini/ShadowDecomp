@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00107060, 0x10
+nonmatching iReferSemaStatus, 0x10
 
-glabel func_00107060
+glabel iReferSemaStatus
     /* 7060 00107060 B8FF0324 */  addiu      $v1, $zero, -0x48
     /* 7064 00107064 0C000000 */  syscall    0 /* handwritten instruction */
     /* 7068 00107068 0800E003 */  jr         $ra
     /* 706C 0010706C 00000000 */   nop
-endlabel func_00107060
+endlabel iReferSemaStatus

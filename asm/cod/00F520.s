@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_0010F520, 0x10
+nonmatching ProbeTLBEntry, 0x10
 
-glabel func_0010F520
+glabel ProbeTLBEntry
     /* F520 0010F520 58000324 */  addiu      $v1, $zero, 0x58
     /* F524 0010F524 0C000000 */  syscall    0 /* handwritten instruction */
     /* F528 0010F528 0800E003 */  jr         $ra
     /* F52C 0010F52C 00000000 */   nop
-endlabel func_0010F520
+endlabel ProbeTLBEntry

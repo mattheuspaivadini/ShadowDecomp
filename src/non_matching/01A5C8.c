@@ -3,13 +3,13 @@
  * See docs/progress.md for the family classification. */
 /* func_0011A5C8 @ 0x0011A5C8 (0x38 bytes): if (a0 > 0)
  * func_00106E70(D_00151E20, a0), return 0; else 0x81010016. */
-int func_00106E70(int a, int b);
+int ChangeThreadPriority(int a, int b);
 
 extern int D_00151E20;
 
-int func_0011A5C8(int a0) {
+int sceMc2ChangeThreadPriority(int a0) {
     if (a0 > 0) {
-        func_00106E70(D_00151E20, a0);
+        ChangeThreadPriority(D_00151E20, a0);
         return 0;
     }
     return 0x81010016;

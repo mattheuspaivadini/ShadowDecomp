@@ -3,7 +3,7 @@
  * See docs/progress.md for the family classification. */
 /* func_0012F0D8 @ 0x0012F0D8 (0x68 bytes): record compare: sizes at 0x10,
  * then word-by-word compare from the end; 1 if a < b, -1 if a > b. */
-int func_0012F0D8(int *a, int *b) {
+int __mcmp(int *a, int *b) {
     int n = a[4];
     int i;
 

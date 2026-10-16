@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00107420, 0x10
+nonmatching PSMode, 0x10
 
-glabel func_00107420
+glabel PSMode
     /* 7420 00107420 7D000324 */  addiu      $v1, $zero, 0x7D
     /* 7424 00107424 0C000000 */  syscall    0 /* handwritten instruction */
     /* 7428 00107428 0800E003 */  jr         $ra
     /* 742C 0010742C 00000000 */   nop
-endlabel func_00107420
+endlabel PSMode

@@ -4,7 +4,7 @@
 int func_00118380(int a0, int a1, int *p, int a3, int a4);
 int func_00118490(int a0, int a1, int *p, int a3, int a4);
 
-int func_00118F98(int a0, int *p, int a2, int a3) {
+int sceInetGetNameServers(int a0, int *p, int a2, int a3) {
     int r;
 
     p[0] = a3;

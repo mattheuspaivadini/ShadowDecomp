@@ -2,6 +2,6 @@
  *   jr   $ra
  *    addiu $v0, $zero, 1
  */
-int func_00112080(void) {
+int isatty(void) {
     return 1;
 }

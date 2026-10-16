@@ -26,10 +26,10 @@ struct S12FA40 {
     int f54;                        /* 0x54 handle passed to the worker     */
 };
 
-long long func_00131218(int a0, int a1, int a2, int a3);
+long long _read_r(int a0, int a1, int a2, int a3);
 
-int func_0012FA40(struct S12FA40 *p, int a1, int a2) {
-    int r = func_00131218(p->f54, p->f0E, a1, a2);
+int __sread(struct S12FA40 *p, int a1, int a2) {
+    int r = _read_r(p->f54, p->f0E, a1, a2);
 
     if (r >= 0)
         p->f50 += r;

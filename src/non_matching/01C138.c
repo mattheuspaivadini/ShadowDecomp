@@ -39,7 +39,7 @@ struct R01C138 {
 extern struct R01C138 D_0015DF48[];
 extern char D_00138D08[];
 
-int func_0011C138(void) {
+int _sceMcFatInit(void) {
     int i;
 
     for (i = 1; i >= 0; i--) {

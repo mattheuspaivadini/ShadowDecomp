@@ -8,6 +8,6 @@
  */
 #include "symbols.h"
 
-void *func_00103CA8(void) {
+void *LoaderSysGetBootArg(void) {
     return D_0013CF90;
 }

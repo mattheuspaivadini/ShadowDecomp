@@ -23,7 +23,7 @@
 unsigned int func_001148B8(unsigned int x);
 int func_001147C0(unsigned *p);
 
-int func_00114C48(int *p, unsigned int x) {
+int sceDmaSend(int *p, unsigned int x) {
     int r;
     int v;
 

@@ -5,11 +5,11 @@
 extern int  D_00143C90[];   /* lui/%lo (thread handle) */
 extern char D_00137C88[];   /* "## internel error in libkernl.a!\n" */
 
-int  func_00107020(int a0);
-int  func_00106F10(unsigned char c);
-int  func_00106E90(unsigned char c);
-int  func_00106F50(unsigned char c);
-int  func_00108F78(char *msg);
+int  WaitSema(int a0);
+int  WakeupThread(unsigned char c);
+int  RotateThreadReadyQueue(unsigned char c);
+int  SuspendThread(unsigned char c);
+int  kprintf(char *msg);
 
 void func_00107690(char *a0) {
     unsigned char *t;
@@ -20,22 +20,22 @@ void func_00107690(char *a0) {
     t = (unsigned char *)(a0 + 8);
     u = (unsigned char *)(a0 + 9);
     for (;;) {
-        func_00107020(D_00143C90[0]);
+        WaitSema(D_00143C90[0]);
         n = *(int *)a0 & 0x1FF;
         *(int *)a0 = n + 1;
         c = t[n * 2];
         switch (c) {
         case 0:
-            func_00106F10(u[n * 2]);
+            WakeupThread(u[n * 2]);
             break;
         case 1:
-            func_00106E90(u[n * 2]);
+            RotateThreadReadyQueue(u[n * 2]);
             break;
         case 2:
-            func_00106F50(u[n * 2]);
+            SuspendThread(u[n * 2]);
             break;
         default:
-            func_00108F78(D_00137C88);
+            kprintf(D_00137C88);
             break;
         }
     }

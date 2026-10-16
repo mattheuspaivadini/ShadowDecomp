@@ -6,7 +6,7 @@
  * `bgezl` + load-in-delay-slot (same as the matched func_001190F8). */
 int func_00118380(int a0, int a1, int *p, int a3, int a4);
 
-int func_001188E0(int a0, int *p, int a2, int a3) {
+int sceInetOpen(int a0, int *p, int a2, int a3) {
     int r;
 
     p[0] = a2;

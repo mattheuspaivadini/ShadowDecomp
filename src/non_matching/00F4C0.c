@@ -5,7 +5,7 @@
  * unsigned) then func_0010F4B0(), else -1. */
 int func_0010F4B0(void);
 
-int func_0010F4C0(int a0) {
+int SetTLBEntry(int a0) {
     int r = a0 - 0xD;
 
     if ((unsigned)r < 0x23)

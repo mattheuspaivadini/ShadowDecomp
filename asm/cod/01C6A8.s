@@ -24,9 +24,9 @@ glabel func_0011C6A8
     /* 1C6D0 0011C6D0 9000BEFF */  sd         $fp, 0x90($sp)
     /* 1C6D4 0011C6D4 2D88A000 */  daddu      $s1, $a1, $zero
     /* 1C6D8 0011C6D8 8000B7FF */  sd         $s7, 0x80($sp)
-    /* 1C6DC 0011C6DC 1300023C */  lui        $v0, %hi(D_00135638)
+    /* 1C6DC 0011C6DC 1300023C */  lui        $v0, %hi(gSceMc2SysInfo)
     /* 1C6E0 0011C6E0 4000B3FF */  sd         $s3, 0x40($sp)
-    /* 1C6E4 0011C6E4 38564224 */  addiu      $v0, $v0, %lo(D_00135638)
+    /* 1C6E4 0011C6E4 38564224 */  addiu      $v0, $v0, %lo(gSceMc2SysInfo)
     /* 1C6E8 0011C6E8 A000BFFF */  sd         $ra, 0xA0($sp)
     /* 1C6EC 0011C6EC D8E77724 */  addiu      $s7, $v1, %lo(D_0015E7D8)
     /* 1C6F0 0011C6F0 5000B4FF */  sd         $s4, 0x50($sp)

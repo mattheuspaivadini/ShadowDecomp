@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00107010, 0x10
+nonmatching iSignalSema, 0x10
 
-glabel func_00107010
+glabel iSignalSema
     /* 7010 00107010 BDFF0324 */  addiu      $v1, $zero, -0x43
     /* 7014 00107014 0C000000 */  syscall    0 /* handwritten instruction */
     /* 7018 00107018 0800E003 */  jr         $ra
     /* 701C 0010701C 00000000 */   nop
-endlabel func_00107010
+endlabel iSignalSema

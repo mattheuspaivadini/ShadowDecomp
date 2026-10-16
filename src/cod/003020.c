@@ -3,8 +3,8 @@
  * The parameter count follows the ps2sdk prototype (UNCONFIRMED for
  * this build); the code is a pure pass-through, so the count does not
  * change the emitted bytes. */
-int sceStdioClose(int a0);
+int sceClose(int a0);
 
-int func_00103020(int a0) {
-    return sceStdioClose(a0);
+int LoaderSysFClose(int a0) {
+    return sceClose(a0);
 }

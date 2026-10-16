@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00106EB0, 0x10
+nonmatching ReleaseWaitThread, 0x10
 
-glabel func_00106EB0
+glabel ReleaseWaitThread
     /* 6EB0 00106EB0 2D000324 */  addiu      $v1, $zero, 0x2D
     /* 6EB4 00106EB4 0C000000 */  syscall    0 /* handwritten instruction */
     /* 6EB8 00106EB8 0800E003 */  jr         $ra
     /* 6EBC 00106EBC 00000000 */   nop
-endlabel func_00106EB0
+endlabel ReleaseWaitThread

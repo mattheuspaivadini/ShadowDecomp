@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00106CB0, 0x10
+nonmatching SetVInterruptHandler, 0x10
 
-glabel func_00106CB0
+glabel SetVInterruptHandler
     /* 6CB0 00106CB0 0F000324 */  addiu      $v1, $zero, 0xF
     /* 6CB4 00106CB4 0C000000 */  syscall    0 /* handwritten instruction */
     /* 6CB8 00106CB8 0800E003 */  jr         $ra
     /* 6CBC 00106CBC 00000000 */   nop
-endlabel func_00106CB0
+endlabel SetVInterruptHandler

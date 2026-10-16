@@ -55,7 +55,7 @@ glabel func_0010EC78
     /* ED14 0010ED14 00020824 */  addiu      $a4, $zero, 0x200
     /* ED18 0010ED18 2D480002 */  daddu      $a5, $s0, $zero
     /* ED1C 0010ED1C 10000A24 */  addiu      $a6, $zero, 0x10
-    /* ED20 0010ED20 6026040C */  jal        SceSifrpcCall
+    /* ED20 0010ED20 6026040C */  jal        sceSifCallRpc
     /* ED24 0010ED24 2D580000 */   daddu     $a7, $zero, $zero
     /* ED28 0010ED28 04004304 */  bgezl      $v0, .L0010ED3C
     /* ED2C 0010ED2C F8FF228E */   lw        $v0, -0x8($s1)

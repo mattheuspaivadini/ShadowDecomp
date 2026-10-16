@@ -2,7 +2,7 @@
  * session9 R1; residual class not auto-classified
  * The original .s stays in the build (asm/cod/02E704.s); this C
  * draft (Session 9) is kept for the record. */
-void *func_0012E704(void *p, int c, unsigned int n) {
+void *memchr(void *p, int c, unsigned int n) {
     unsigned char *q;
     unsigned char  cc;
     unsigned int   i;
@@ -41,3 +41,4 @@ void *func_0012E704(void *p, int c, unsigned int n) {
     }
     return 0;
 }
+/* func_0012E704 */

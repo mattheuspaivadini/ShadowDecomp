@@ -5,8 +5,8 @@
  *   ld ra,0(sp); jr ra; addiu sp,sp,0x10
  * Wrapper that calls with a constant first argument.
  */
-extern void func_001232F0();
+extern void sce_sync();
 
-void func_00122358(void) {
-    func_001232F0(1);
+void sceNetcnfifCheck(void) {
+    sce_sync(1);
 }

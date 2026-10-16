@@ -20,18 +20,18 @@
  * 0231A8), hence the unsigned literal.
  * MATCH GUESS: cc=29 (the func_0010FB20 wrapper family, e.g. the matched 010F40)
  */
-int func_0010FB20(void);
-int func_0010FB70(void);
+int DIntr(void);
+int EIntr(void);
 int func_00107FF8(int (*cb)(), int *p, int a1, int a2, int a3);
 int func_00108D68(int a, int b, int c);
 
-void func_00108E88(int a0, int a1) {
+void sceVprintf(int a0, int a1) {
     int buf;
     int g;
 
     buf = 0;
-    g = func_0010FB20();
+    g = DIntr();
     func_00107FF8(func_00108D68, &buf, 0xFFFFFFFF, a0, a1);
     if (g != 0)
-        func_0010FB70();
+        EIntr();
 }

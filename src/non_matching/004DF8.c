@@ -4,21 +4,21 @@
  * draft (Session 8) is kept for the record. */
 #include "symbols.h"
 
-int func_00115008(int a0);
-int func_001150B0(int *args, void *p);
+int scePad2Init(int a0);
+int scePad2CreateSocket(int *args, void *p);
 
-void func_00104DF8(void) {
+void padsysInit(void) {
     int   buf[3];
     int   i;
     char *p;
 
-    func_00115008(0);
+    scePad2Init(0);
     p = D_0013D840;
     for (i = 0; i < 2; i++) {
         buf[0] = 2;
         buf[1] = (i != 0);
         buf[2] = 0;
-        *(int *)(p + 0x11C) = func_001150B0(buf, p);
+        *(int *)(p + 0x11C) = scePad2CreateSocket(buf, p);
         *(int *)(p + 0x120) = 0;
         p += 0x140;
     }

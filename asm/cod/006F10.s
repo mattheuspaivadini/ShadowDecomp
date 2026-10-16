@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00106F10, 0x10
+nonmatching WakeupThread, 0x10
 
-glabel func_00106F10
+glabel WakeupThread
     /* 6F10 00106F10 33000324 */  addiu      $v1, $zero, 0x33
     /* 6F14 00106F14 0C000000 */  syscall    0 /* handwritten instruction */
     /* 6F18 00106F18 0800E003 */  jr         $ra
     /* 6F1C 00106F1C 00000000 */   nop
-endlabel func_00106F10
+endlabel WakeupThread

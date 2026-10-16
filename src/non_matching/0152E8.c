@@ -15,16 +15,16 @@ struct R0152E8 {
 extern struct R0152E8 D_0014B598[];
 extern char D_0014B5AC[];
 
-int func_001153B8(int index);
+int scePad2GetState(int index);
 int func_00115650(int index);
 void *func_00115710(int index);
 int func_0012821C(int dst, char *src, int n);
 int func_001157D8(char *dst, char *src);
 
-int func_001152E8(int index, int a1) {
+int scePad2GetButtonProfile(int index, int a1) {
     struct R0152E8 *s0;
 
-    func_001153B8(index);
+    scePad2GetState(index);
     if (D_0014B598[index].f04 == 0) {
         if (func_00115650(index) < 0)
             return -1;

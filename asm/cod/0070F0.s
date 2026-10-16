@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_001070F0, 0x10
+nonmatching RFU081_DeleteEventFlag, 0x10
 
-glabel func_001070F0
+glabel RFU081_DeleteEventFlag
     /* 70F0 001070F0 51000324 */  addiu      $v1, $zero, 0x51
     /* 70F4 001070F4 0C000000 */  syscall    0 /* handwritten instruction */
     /* 70F8 001070F8 0800E003 */  jr         $ra
     /* 70FC 001070FC 00000000 */   nop
-endlabel func_001070F0
+endlabel RFU081_DeleteEventFlag

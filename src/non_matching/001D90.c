@@ -21,12 +21,12 @@ struct Req00101D90 {
 
 struct Ctx00101D90 *func_001013C8(void);
 void func_001283D0(void *p, int a1, int a2);
-void func_00101CC8(int a0);
-int  func_00106DE0(void *p);
-void func_00102790(int a0);
-void func_00107AD0(int a0, int a1);
+void _execProgWithThread(int a0);
+int  CreateThread(void *p);
+void LoaderSysEntryExternalThreadList(int a0);
+void StartThread(int a0, int a1);
 
-int func_00101D90(int a0, int a1) {
+int execProgWithThread(int a0, int a1) {
     struct Req00101D90 req;
     struct Req00101D90 tmp;
     struct Ctx00101D90 *p;
@@ -36,15 +36,15 @@ int func_00101D90(int a0, int a1) {
     if (p == 0)
         return 0;
     func_001283D0(&req, 0, 0x30);
-    req.f4 = (int)func_00101CC8;
+    req.f4 = (int)_execProgWithThread;
     req.f8 = ((unsigned int)D_00139E04 + 0xF) / 0x10 * 0x10;
     D_00139E04 = req.f8 + p->f40;
     req.fC = p->f40;
     req.f10 = 0x00141D70;
     req.f14 = a1;
     tmp = req;
-    r = func_00106DE0(&tmp);
-    func_00102790(r);
-    func_00107AD0(r, (int)p);
+    r = CreateThread(&tmp);
+    LoaderSysEntryExternalThreadList(r);
+    StartThread(r, (int)p);
     return tmp.f8;
 }

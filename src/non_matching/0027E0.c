@@ -6,7 +6,7 @@
  */
 extern int D_0013BB90[256];
 
-void func_001027E0(int value) {
+void LoaderSysEntryExternalSemaList(int value) {
     int i = 0;
 
     while (D_0013BB90[i] >= 0) {

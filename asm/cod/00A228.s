@@ -43,14 +43,14 @@ glabel func_0010A228
     /* A294 0010A294 0000A2AF */  sw         $v0, 0x0($sp)
     /* A298 0010A298 2D48A002 */  daddu      $a5, $s5, $zero
     /* A29C 0010A29C 2D508002 */  daddu      $a6, $s4, $zero
-    /* A2A0 0010A2A0 6026040C */  jal        SceSifrpcCall
+    /* A2A0 0010A2A0 6026040C */  jal        sceSifCallRpc
     /* A2A4 0010A2A4 2D586002 */   daddu     $a7, $s3, $zero
     /* A2A8 0010A2A8 C2870200 */  srl        $s0, $v0, 31
     /* A2AC 0010A2AC 0C000012 */  beqz       $s0, .L0010A2E0
     /* A2B0 0010A2B0 C800A28F */   lw        $v0, 0xC8($sp)
     /* A2B4 0010A2B4 0A004014 */  bnez       $v0, .L0010A2E0
     /* A2B8 0010A2B8 E8030224 */   addiu     $v0, $zero, 0x3E8
-    /* A2BC 0010A2BC 821E040C */  jal        func_00107A08
+    /* A2BC 0010A2BC 821E040C */  jal        DelayThread
     /* A2C0 0010A2C0 18202202 */   mult      $a0, $s1, $v0
     /* A2C4 0010A2C4 7F00232A */  slti       $v1, $s1, 0x7F
     /* A2C8 0010A2C8 01006054 */  bnel       $v1, $zero, .L0010A2D0

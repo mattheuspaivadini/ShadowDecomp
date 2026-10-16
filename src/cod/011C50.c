@@ -37,7 +37,7 @@ extern void *D_00133938[];   /* array => non-small (absolute addressing) */
 extern int D_0013393C[];
 extern char D_0014AC88[];
 
-int func_00111C50(int index) {
+int sceSifRemoveRebootNotifyHandler(int index) {
     void *base;
     unsigned int count;
 

@@ -13,7 +13,7 @@
  * (a plain `!= 0` would emit `sltu` - cf. matched func_0012E6D0), and the
  * literal `1 - x` explains the `addiu $v0,$zero,1` + `subu`.
  * MATCH GUESS: cc=296 (0x12F8xx/0x12FBxx stdio family is 2.96) */
-int func_0012F9B8(long long x) {
+int isinf(long long x) {
     int lo;
     int hi;
     unsigned int v;

@@ -14,7 +14,7 @@ nonmatching func_00123180, 0x24
 glabel func_00123180
     /* 23180 00123180 F0FFBD27 */  addiu      $sp, $sp, -0x10
     /* 23184 00123184 0000BFFF */  sd         $ra, 0x0($sp)
-    /* 23188 00123188 041C040C */  jal        func_00107010
+    /* 23188 00123188 041C040C */  jal        iSignalSema
     /* 2318C 0012318C 00000000 */   nop
     /* 23190 00123190 0F000000 */  sync
     /* 23194 00123194 38000042 */  ei /* handwritten instruction */

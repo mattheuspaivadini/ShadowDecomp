@@ -3,5 +3,5 @@
  *   jr   $ra
  *    nop
  */
-void func_001032F0(void) {
+void LoaderSysSendAbort(void) {
 }

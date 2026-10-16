@@ -20,9 +20,9 @@ glabel LoaderSysDumpIopModuleIdentifiers
     /* 3270 00103270 0800B1FF */  sd         $s1, 0x8($sp)
     /* 3274 00103274 1000B2FF */  sd         $s2, 0x10($sp)
     /* 3278 00103278 2000BFFF */  sd         $ra, 0x20($sp)
-    /* 327C 0010327C 3E0B040C */  jal        func_00102CF8
+    /* 327C 0010327C 3E0B040C */  jal        LoaderSysPrintf
     /* 3280 00103280 2D800000 */   daddu     $s0, $zero, $zero
-    /* 3284 00103284 3E0B040C */  jal        func_00102CF8
+    /* 3284 00103284 3E0B040C */  jal        LoaderSysPrintf
     /* 3288 00103288 686A6426 */   addiu     $a0, $s3, %lo(D_00136A68)
     /* 328C 0010328C 9882838F */  lw         $v1, %gp_rel(D_0013A008)($gp)
     /* 3290 00103290 0F006018 */  blez       $v1, .L001032D0
@@ -36,7 +36,7 @@ glabel LoaderSysDumpIopModuleIdentifiers
     /* 32A8 001032A8 01001026 */  addiu      $s0, $s0, 0x1
     /* 32AC 001032AC 2D302002 */  daddu      $a2, $s1, $zero
     /* 32B0 001032B0 10003126 */  addiu      $s1, $s1, 0x10
-    /* 32B4 001032B4 3E0B040C */  jal        func_00102CF8
+    /* 32B4 001032B4 3E0B040C */  jal        LoaderSysPrintf
     /* 32B8 001032B8 B06A4426 */   addiu     $a0, $s2, %lo(D_00136AB0)
     /* 32BC 001032BC 9882838F */  lw         $v1, %gp_rel(D_0013A008)($gp)
     /* 32C0 001032C0 2A180302 */  slt        $v1, $s0, $v1
@@ -50,7 +50,7 @@ glabel LoaderSysDumpIopModuleIdentifiers
     /* 32D8 001032D8 0800B1DF */  ld         $s1, 0x8($sp)
     /* 32DC 001032DC 1000B2DF */  ld         $s2, 0x10($sp)
     /* 32E0 001032E0 2000BFDF */  ld         $ra, 0x20($sp)
-    /* 32E4 001032E4 3E0B0408 */  j          func_00102CF8
+    /* 32E4 001032E4 3E0B0408 */  j          LoaderSysPrintf
     /* 32E8 001032E8 3000BD27 */   addiu     $sp, $sp, 0x30
 endlabel LoaderSysDumpIopModuleIdentifiers
     /* 32EC 001032EC 00000000 */  nop

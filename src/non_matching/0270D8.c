@@ -10,7 +10,7 @@ struct D25768 {
     unsigned long long mant;    /* 0x10 */
 };
 
-long long func_001270D8(struct D25768 *b, int unused, long long src) {
+long long __pack_d(struct D25768 *b, int unused, long long src) {
     unsigned int       t;
     unsigned long long m;
     int                e;
@@ -43,3 +43,4 @@ long long func_001270D8(struct D25768 *b, int unused, long long src) {
     src = (src & 0x7FFFFFFFFFFFFFFFLL) | ((long long)b->sign << 63);
     return src;
 }
+/* func_001270D8 */

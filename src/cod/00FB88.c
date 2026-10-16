@@ -27,9 +27,9 @@ struct S00FB88 {
 
 extern int D_00138250[];   /* lui/%lo: the address is what gets stored */
 extern int D_00138260[];
-extern __attribute__((section(".data"))) int D_001329A0;   /* non-small scalar */
-extern __attribute__((section(".data"))) int D_001329A4;   /* non-small scalar */
-extern int func_00106FE0(void *param);
+extern __attribute__((section(".data"))) int __sce_sema_id;   /* non-small scalar */
+extern __attribute__((section(".data"))) int __sce_eh_sema_id;   /* non-small scalar */
+extern int CreateSema(void *param);
 
 void func_0010FB88(void) {
     struct S00FB88 a;
@@ -41,6 +41,6 @@ void func_0010FB88(void) {
     b.f04 = 1;
     b.f08 = 1;
     b.f14 = D_00138260;
-    D_001329A0 = func_00106FE0(&a);
-    D_001329A4 = func_00106FE0(&b);
+    __sce_sema_id = CreateSema(&a);
+    __sce_eh_sema_id = CreateSema(&b);
 }

@@ -32,7 +32,7 @@ glabel sceDbcInit
 .align 2
   .L00115AD0:
     /* 15AD0 00115AD0 2D200000 */  daddu      $a0, $zero, $zero
-    /* 15AD4 00115AD4 FE23040C */  jal        func_00108FF8
+    /* 15AD4 00115AD4 FE23040C */  jal        sceSifInitRpc
     /* 15AD8 00115AD8 C00DE0AE */   sw        $zero, %lo(D_00150DC0)($s7)
     /* 15ADC 00115ADC 0B000010 */  b          .L00115B0C
     /* 15AE0 00115AE0 1500113C */   lui       $s1, %hi(D_0014E900)
@@ -56,7 +56,7 @@ glabel sceDbcInit
     /* 15B10 00115B10 0080053C */  lui        $a1, (0x80001300 >> 16)
     /* 15B14 00115B14 2D200002 */  daddu      $a0, $s0, $zero
     /* 15B18 00115B18 0013A534 */  ori        $a1, $a1, (0x80001300 & 0xFFFF)
-    /* 15B1C 00115B1C E825040C */  jal        SceSifrpcBind
+    /* 15B1C 00115B1C E825040C */  jal        sceSifBindRpc
     /* 15B20 00115B20 2D300000 */   daddu     $a2, $zero, $zero
     /* 15B24 00115B24 5A004004 */  bltz       $v0, .L00115C90
     /* 15B28 00115B28 1400043C */   lui       $a0, %hi(D_001385C0)
@@ -70,14 +70,14 @@ glabel sceDbcInit
     /* 15B48 00115B48 03111000 */  sra        $v0, $s0, 4
     /* 15B4C 00115B4C 0C004310 */  beq        $v0, $v1, .L00115B80
     /* 15B50 00115B50 1400043C */   lui       $a0, %hi(D_001385D8)
-    /* 15B54 00115B54 BE23040C */  jal        func_00108EF8
+    /* 15B54 00115B54 BE23040C */  jal        scePrintf
     /* 15B58 00115B58 D8858424 */   addiu     $a0, $a0, %lo(D_001385D8)
     /* 15B5C 00115B5C 1400043C */  lui        $a0, %hi(D_00138600)
     /* 15B60 00115B60 FF000832 */  andi       $a4, $s0, 0xFF
     /* 15B64 00115B64 00868424 */  addiu      $a0, $a0, %lo(D_00138600)
     /* 15B68 00115B68 03000524 */  addiu      $a1, $zero, 0x3
     /* 15B6C 00115B6C 10000624 */  addiu      $a2, $zero, 0x10
-    /* 15B70 00115B70 BE23040C */  jal        func_00108EF8
+    /* 15B70 00115B70 BE23040C */  jal        scePrintf
     /* 15B74 00115B74 033A1000 */   sra       $a3, $s0, 8
     /* 15B78 00115B78 5F000010 */  b          .L00115CF8
     /* 15B7C 00115B7C 2D100000 */   daddu     $v0, $zero, $zero
@@ -104,7 +104,7 @@ glabel sceDbcInit
     /* 15BB0 00115BB0 0080053C */  lui        $a1, (0x8000131C >> 16)
     /* 15BB4 00115BB4 2D200002 */  daddu      $a0, $s0, $zero
     /* 15BB8 00115BB8 1C13A534 */  ori        $a1, $a1, (0x8000131C & 0xFFFF)
-    /* 15BBC 00115BBC E825040C */  jal        SceSifrpcBind
+    /* 15BBC 00115BBC E825040C */  jal        sceSifBindRpc
     /* 15BC0 00115BC0 2D300000 */   daddu     $a2, $zero, $zero
     /* 15BC4 00115BC4 32004004 */  bltz       $v0, .L00115C90
     /* 15BC8 00115BC8 1400043C */   lui       $a0, %hi(D_001385C0)
@@ -140,7 +140,7 @@ glabel sceDbcInit
   .L00115C24:
     /* 15C24 00115C24 21203602 */  addu       $a0, $s1, $s6
     /* 15C28 00115C28 21285302 */  addu       $a1, $s2, $s3
-    /* 15C2C 00115C2C E825040C */  jal        SceSifrpcBind
+    /* 15C2C 00115C2C E825040C */  jal        sceSifBindRpc
     /* 15C30 00115C30 2D300000 */   daddu     $a2, $zero, $zero
     /* 15C34 00115C34 16004004 */  bltz       $v0, .L00115C90
     /* 15C38 00115C38 1400043C */   lui       $a0, %hi(D_001385C0)
@@ -159,7 +159,7 @@ glabel sceDbcInit
     /* 15C6C 00115C6C 0800A3AF */  sw         $v1, 0x8($sp)
     /* 15C70 00115C70 2D20A003 */  daddu      $a0, $sp, $zero
     /* 15C74 00115C74 0400A5AF */  sw         $a1, 0x4($sp)
-    /* 15C78 00115C78 F81B040C */  jal        func_00106FE0
+    /* 15C78 00115C78 F81B040C */  jal        CreateSema
     /* 15C7C 00115C7C 1400A2AF */   sw        $v0, 0x14($sp)
     /* 15C80 00115C80 07004104 */  bgez       $v0, .L00115CA0
     /* 15C84 00115C84 C00DE2AE */   sw        $v0, %lo(D_00150DC0)($s7)

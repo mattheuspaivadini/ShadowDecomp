@@ -1,7 +1,7 @@
-/* STATUS (Session 7, 2026-10-14): NON_MATCHING. best score 6 [cc=296, default].
- * signed-offset block walk + list push.
+/* STATUS (10, 2026-10-16): NON_MATCHING. best score 6 [cc=296].
+ * 
  * The original .s stays in the build (asm/cod/0262F8.s); this C
- * draft (subagent-produced, Session 7) is kept for the record. */
+ * draft (10) is kept for the record. */
 /* asm/cod/0262F8.s -> func_001262F8 @ 0x001262F8 (0x8C bytes, 35 insns)
  * Walk an offset-linked block list starting at p and account for every block:
  *   p[0] is the offset to the next block (the next header is p + p[0] + 4, so

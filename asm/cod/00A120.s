@@ -18,7 +18,7 @@ glabel func_0010A120
     /* A130 0010A130 2000BFFF */  sd         $ra, 0x20($sp)
     /* A134 0010A134 2C28040C */  jal        func_0010A0B0
     /* A138 0010A138 2D800000 */   daddu     $s0, $zero, $zero
-    /* A13C 0010A13C 081C040C */  jal        func_00107020
+    /* A13C 0010A13C 081C040C */  jal        WaitSema
     /* A140 0010A140 2023248E */   lw        $a0, %lo(D_00132320)($s1)
     /* A144 0010A144 1400033C */  lui        $v1, %hi(D_00146EC0)
     /* A148 0010A148 C06E6524 */  addiu      $a1, $v1, %lo(D_00146EC0)
@@ -38,7 +38,7 @@ glabel func_0010A120
     /* A178 0010A178 00000000 */   nop
 .align 2
   .L0010A17C:
-    /* A17C 0010A17C 001C040C */  jal        func_00107000
+    /* A17C 0010A17C 001C040C */  jal        SignalSema
     /* A180 0010A180 2023248E */   lw        $a0, %lo(D_00132320)($s1)
     /* A184 0010A184 2D100002 */  daddu      $v0, $s0, $zero
     /* A188 0010A188 2000BFDF */  ld         $ra, 0x20($sp)

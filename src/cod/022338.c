@@ -5,8 +5,8 @@
  *   ld ra,0(sp); jr ra; addiu sp,sp,0x10
  * A plain wrapper: call and return the callee's value.
  */
-extern int func_001232F0();
+extern int sce_sync();
 
-int func_00122338(void) {
-    return func_001232F0();
+int sceNetcnfifSync(void) {
+    return sce_sync();
 }

@@ -22,13 +22,13 @@ glabel func_001033B0
     /* 33D0 001033D0 2000B4FF */  sd         $s4, 0x20($sp)
     /* 33D4 001033D4 2800B5FF */  sd         $s5, 0x28($sp)
     /* 33D8 001033D8 3000BFFF */  sd         $ra, 0x30($sp)
-    /* 33DC 001033DC FE23040C */  jal        func_00108FF8
+    /* 33DC 001033DC FE23040C */  jal        sceSifInitRpc
     /* 33E0 001033E0 1400133C */   lui       $s3, %hi(D_0013A028)
-    /* 33E4 001033E4 3A37040C */  jal        func_0010DCE8
+    /* 33E4 001033E4 3A37040C */  jal        sceSifInitIopHeap
     /* 33E8 001033E8 00000000 */   nop
     /* 33EC 001033EC 1300053C */  lui        $a1, %hi(D_00136B98)
     /* 33F0 001033F0 00FF0424 */  addiu      $a0, $zero, -0x100
-    /* 33F4 001033F4 5216040C */  jal        func_00105948
+    /* 33F4 001033F4 5216040C */  jal        PutString
     /* 33F8 001033F8 986BA524 */   addiu     $a1, $a1, %lo(D_00136B98)
     /* 33FC 001033FC 1400053C */  lui        $a1, %hi(D_0013A038)
     /* 3400 00103400 1300063C */  lui        $a2, %hi(D_00136BB8)
@@ -37,94 +37,94 @@ glabel func_001033B0
     /* 340C 0010340C B86BC624 */  addiu      $a2, $a2, %lo(D_00136BB8)
     /* 3410 00103410 C86BE724 */  addiu      $a3, $a3, %lo(D_00136BC8)
     /* 3414 00103414 38A0A524 */  addiu      $a1, $a1, %lo(D_0013A038)
-    /* 3418 00103418 5216040C */  jal        func_00105948
+    /* 3418 00103418 5216040C */  jal        PutString
     /* 341C 0010341C 00C08434 */   ori       $a0, $a0, (0x80FFC000 & 0xFFFF)
     /* 3420 00103420 1400053C */  lui        $a1, %hi(D_0013A040)
     /* 3424 00103424 40A0A524 */  addiu      $a1, $a1, %lo(D_0013A040)
-    /* 3428 00103428 6416040C */  jal        func_00105990
+    /* 3428 00103428 6416040C */  jal        PutStringS
     /* 342C 0010342C 00FF0424 */   addiu     $a0, $zero, -0x100
     /* 3430 00103430 1300053C */  lui        $a1, %hi(D_00136BD8)
     /* 3434 00103434 C080043C */  lui        $a0, (0x80C0FF00 >> 16)
     /* 3438 00103438 D86BA524 */  addiu      $a1, $a1, %lo(D_00136BD8)
-    /* 343C 0010343C 6416040C */  jal        func_00105990
+    /* 343C 0010343C 6416040C */  jal        PutStringS
     /* 3440 00103440 00FF8434 */   ori       $a0, $a0, (0x80C0FF00 & 0xFFFF)
-    /* 3444 00103444 AC5E040C */  jal        func_00117AB0
+    /* 3444 00103444 AC5E040C */  jal        sceCdInit
     /* 3448 00103448 2D200000 */   daddu     $a0, $zero, $zero
-    /* 344C 0010344C A260040C */  jal        func_00118288
+    /* 344C 0010344C A260040C */  jal        sceCdMmode
     /* 3450 00103450 02000424 */   addiu     $a0, $zero, 0x2
     /* 3454 00103454 C080043C */  lui        $a0, (0x80C0FF00 >> 16)
     /* 3458 00103458 00FF8434 */  ori        $a0, $a0, (0x80C0FF00 & 0xFFFF)
-    /* 345C 0010345C 6416040C */  jal        func_00105990
+    /* 345C 0010345C 6416040C */  jal        PutStringS
     /* 3460 00103460 28A06526 */   addiu     $a1, $s3, %lo(D_0013A028)
     /* 3464 00103464 1300023C */  lui        $v0, %hi(D_00136BF8)
     /* 3468 00103468 1300053C */  lui        $a1, %hi(D_00136AE8)
     /* 346C 0010346C FF00043C */  lui        $a0, (0xFFFF00 >> 16)
     /* 3470 00103470 E86AA524 */  addiu      $a1, $a1, %lo(D_00136AE8)
     /* 3474 00103474 00FF8434 */  ori        $a0, $a0, (0xFFFF00 & 0xFFFF)
-    /* 3478 00103478 5216040C */  jal        func_00105948
+    /* 3478 00103478 5216040C */  jal        PutString
     /* 347C 0010347C F86B5024 */   addiu     $s0, $v0, %lo(D_00136BF8)
     /* 3480 00103480 FF40043C */  lui        $a0, (0x40FFFF80 >> 16)
     /* 3484 00103484 18A04526 */  addiu      $a1, $s2, %lo(D_0013A018)
     /* 3488 00103488 80FF8434 */  ori        $a0, $a0, (0x40FFFF80 & 0xFFFF)
-    /* 348C 0010348C 5216040C */  jal        func_00105948
+    /* 348C 0010348C 5216040C */  jal        PutString
     /* 3490 00103490 2D300002 */   daddu     $a2, $s0, $zero
     /* 3494 00103494 FF00043C */  lui        $a0, (0xFFFF00 >> 16)
     /* 3498 00103498 00FF8434 */  ori        $a0, $a0, (0xFFFF00 & 0xFFFF)
-    /* 349C 0010349C 6416040C */  jal        func_00105990
+    /* 349C 0010349C 6416040C */  jal        PutStringS
     /* 34A0 001034A0 20A02526 */   addiu     $a1, $s1, %lo(D_0013A020)
     /* 34A4 001034A4 00000000 */  nop
 .align 2
   .L001034A8:
-    /* 34A8 001034A8 5A3C040C */  jal        func_0010F168
+    /* 34A8 001034A8 5A3C040C */  jal        sceSifRebootIop
     /* 34AC 001034AC 2D200002 */   daddu     $a0, $s0, $zero
     /* 34B0 001034B0 FDFF4010 */  beqz       $v0, .L001034A8
     /* 34B4 001034B4 00000000 */   nop
 .align 2
   .L001034B8:
-    /* 34B8 001034B8 463C040C */  jal        func_0010F118
+    /* 34B8 001034B8 463C040C */  jal        sceSifSyncIop
     /* 34BC 001034BC 00000000 */   nop
     /* 34C0 001034C0 FDFF4010 */  beqz       $v0, .L001034B8
     /* 34C4 001034C4 28A07426 */   addiu     $s4, $s3, %lo(D_0013A028)
     /* 34C8 001034C8 FF00043C */  lui        $a0, (0xFFFF00 >> 16)
     /* 34CC 001034CC 2D288002 */  daddu      $a1, $s4, $zero
-    /* 34D0 001034D0 6416040C */  jal        func_00105990
+    /* 34D0 001034D0 6416040C */  jal        PutStringS
     /* 34D4 001034D4 00FF8434 */   ori       $a0, $a0, (0xFFFF00 & 0xFFFF)
-    /* 34D8 001034D8 FE23040C */  jal        func_00108FF8
+    /* 34D8 001034D8 FE23040C */  jal        sceSifInitRpc
     /* 34DC 001034DC 2D200000 */   daddu     $a0, $zero, $zero
-    /* 34E0 001034E0 F238040C */  jal        func_0010E3C8
+    /* 34E0 001034E0 F238040C */  jal        sceSifLoadFileReset
     /* 34E4 001034E4 1300153C */   lui       $s5, %hi(D_00136B00)
-    /* 34E8 001034E8 D62A040C */  jal        func_0010AB58
+    /* 34E8 001034E8 D62A040C */  jal        sceFsReset
     /* 34EC 001034EC 00000000 */   nop
-    /* 34F0 001034F0 AC5E040C */  jal        func_00117AB0
+    /* 34F0 001034F0 AC5E040C */  jal        sceCdInit
     /* 34F4 001034F4 2D200000 */   daddu     $a0, $zero, $zero
-    /* 34F8 001034F8 A260040C */  jal        func_00118288
+    /* 34F8 001034F8 A260040C */  jal        sceCdMmode
     /* 34FC 001034FC 02000424 */   addiu     $a0, $zero, 0x2
-    /* 3500 00103500 D813040C */  jal        func_00104F60
+    /* 3500 00103500 D813040C */  jal        PreparePowerOff
     /* 3504 00103504 00000000 */   nop
-    /* 3508 00103508 F238040C */  jal        func_0010E3C8
+    /* 3508 00103508 F238040C */  jal        sceSifLoadFileReset
     /* 350C 0010350C 00000000 */   nop
-    /* 3510 00103510 D62A040C */  jal        func_0010AB58
+    /* 3510 00103510 D62A040C */  jal        sceFsReset
     /* 3514 00103514 00000000 */   nop
-    /* 3518 00103518 5052040C */  jal        func_00114940
+    /* 3518 00103518 5052040C */  jal        sceDmaReset
     /* 351C 0010351C 01000424 */   addiu     $a0, $zero, 0x1
     /* 3520 00103520 1300033C */  lui        $v1, %hi(D_00136C10)
     /* 3524 00103524 8040043C */  lui        $a0, (0x4080FF00 >> 16)
     /* 3528 00103528 006BA526 */  addiu      $a1, $s5, %lo(D_00136B00)
     /* 352C 0010352C 00FF8434 */  ori        $a0, $a0, (0x4080FF00 & 0xFFFF)
-    /* 3530 00103530 5216040C */  jal        func_00105948
+    /* 3530 00103530 5216040C */  jal        PutString
     /* 3534 00103534 106C7024 */   addiu     $s0, $v1, %lo(D_00136C10)
     /* 3538 00103538 C080043C */  lui        $a0, (0x80C0FF00 >> 16)
     /* 353C 0010353C 2D300002 */  daddu      $a2, $s0, $zero
     /* 3540 00103540 00FF8434 */  ori        $a0, $a0, (0x80C0FF00 & 0xFFFF)
-    /* 3544 00103544 5216040C */  jal        func_00105948
+    /* 3544 00103544 5216040C */  jal        PutString
     /* 3548 00103548 18A04526 */   addiu     $a1, $s2, %lo(D_0013A018)
     /* 354C 0010354C 8040043C */  lui        $a0, (0x4080FF00 >> 16)
     /* 3550 00103550 20A02526 */  addiu      $a1, $s1, %lo(D_0013A020)
-    /* 3554 00103554 6416040C */  jal        func_00105990
+    /* 3554 00103554 6416040C */  jal        PutStringS
     /* 3558 00103558 00FF8434 */   ori       $a0, $a0, (0x4080FF00 & 0xFFFF)
     /* 355C 0010355C 2D200002 */  daddu      $a0, $s0, $zero
     /* 3560 00103560 2D280000 */  daddu      $a1, $zero, $zero
-    /* 3564 00103564 0E3B040C */  jal        func_0010EC38
+    /* 3564 00103564 0E3B040C */  jal        sceSifLoadModule
     /* 3568 00103568 2D300000 */   daddu     $a2, $zero, $zero
     /* 356C 0010356C 0A004304 */  bgezl      $v0, .L00103598
     /* 3570 00103570 8040043C */   lui       $a0, (0x4080FF00 >> 16)
@@ -133,14 +133,14 @@ glabel func_001033B0
     /* 357C 0010357C 2D384000 */  daddu      $a3, $v0, $zero
     /* 3580 00103580 106BA524 */  addiu      $a1, $a1, %lo(D_00136B10)
     /* 3584 00103584 2D300002 */  daddu      $a2, $s0, $zero
-    /* 3588 00103588 6416040C */  jal        func_00105990
+    /* 3588 00103588 6416040C */  jal        PutStringS
     /* 358C 0010358C 00408434 */   ori       $a0, $a0, (0xFF804000 & 0xFFFF)
     /* 3590 00103590 05000010 */  b          .L001035A8
     /* 3594 00103594 FFFF0224 */   addiu     $v0, $zero, -0x1
 .align 2
   .L00103598:
     /* 3598 00103598 2D288002 */  daddu      $a1, $s4, $zero
-    /* 359C 0010359C 6416040C */  jal        func_00105990
+    /* 359C 0010359C 6416040C */  jal        PutStringS
     /* 35A0 001035A0 00FF8434 */   ori       $a0, $a0, (0x4080FF00 & 0xFFFF)
     /* 35A4 001035A4 2D100000 */  daddu      $v0, $zero, $zero
 .align 2
@@ -165,20 +165,20 @@ glabel func_001033B0
     /* 35DC 001035DC 8040043C */  lui        $a0, (0x4080FF00 >> 16)
     /* 35E0 001035E0 006BA526 */  addiu      $a1, $s5, %lo(D_00136B00)
     /* 35E4 001035E4 00FF8434 */  ori        $a0, $a0, (0x4080FF00 & 0xFFFF)
-    /* 35E8 001035E8 5216040C */  jal        func_00105948
+    /* 35E8 001035E8 5216040C */  jal        PutString
     /* 35EC 001035EC 306C5024 */   addiu     $s0, $v0, %lo(D_00136C30)
     /* 35F0 001035F0 C080043C */  lui        $a0, (0x80C0FF00 >> 16)
     /* 35F4 001035F4 2D300002 */  daddu      $a2, $s0, $zero
     /* 35F8 001035F8 00FF8434 */  ori        $a0, $a0, (0x80C0FF00 & 0xFFFF)
-    /* 35FC 001035FC 5216040C */  jal        func_00105948
+    /* 35FC 001035FC 5216040C */  jal        PutString
     /* 3600 00103600 18A04526 */   addiu     $a1, $s2, %lo(D_0013A018)
     /* 3604 00103604 8040043C */  lui        $a0, (0x4080FF00 >> 16)
     /* 3608 00103608 20A02526 */  addiu      $a1, $s1, %lo(D_0013A020)
-    /* 360C 0010360C 6416040C */  jal        func_00105990
+    /* 360C 0010360C 6416040C */  jal        PutStringS
     /* 3610 00103610 00FF8434 */   ori       $a0, $a0, (0x4080FF00 & 0xFFFF)
     /* 3614 00103614 2D200002 */  daddu      $a0, $s0, $zero
     /* 3618 00103618 2D280000 */  daddu      $a1, $zero, $zero
-    /* 361C 0010361C 0E3B040C */  jal        func_0010EC38
+    /* 361C 0010361C 0E3B040C */  jal        sceSifLoadModule
     /* 3620 00103620 2D300000 */   daddu     $a2, $zero, $zero
     /* 3624 00103624 0A004304 */  bgezl      $v0, .L00103650
     /* 3628 00103628 8040043C */   lui       $a0, (0x4080FF00 >> 16)
@@ -187,14 +187,14 @@ glabel func_001033B0
     /* 3634 00103634 2D384000 */  daddu      $a3, $v0, $zero
     /* 3638 00103638 106BA524 */  addiu      $a1, $a1, %lo(D_00136B10)
     /* 363C 0010363C 2D300002 */  daddu      $a2, $s0, $zero
-    /* 3640 00103640 6416040C */  jal        func_00105990
+    /* 3640 00103640 6416040C */  jal        PutStringS
     /* 3644 00103644 00408434 */   ori       $a0, $a0, (0xFF804000 & 0xFFFF)
     /* 3648 00103648 05000010 */  b          .L00103660
     /* 364C 0010364C FFFF0224 */   addiu     $v0, $zero, -0x1
 .align 2
   .L00103650:
     /* 3650 00103650 28A06526 */  addiu      $a1, $s3, %lo(D_0013A028)
-    /* 3654 00103654 6416040C */  jal        func_00105990
+    /* 3654 00103654 6416040C */  jal        PutStringS
     /* 3658 00103658 00FF8434 */   ori       $a0, $a0, (0x4080FF00 & 0xFFFF)
     /* 365C 0010365C 2D100000 */  daddu      $v0, $zero, $zero
 .align 2
@@ -219,20 +219,20 @@ glabel func_001033B0
     /* 3694 00103694 8040043C */  lui        $a0, (0x4080FF00 >> 16)
     /* 3698 00103698 006BA526 */  addiu      $a1, $s5, %lo(D_00136B00)
     /* 369C 0010369C 00FF8434 */  ori        $a0, $a0, (0x4080FF00 & 0xFFFF)
-    /* 36A0 001036A0 5216040C */  jal        func_00105948
+    /* 36A0 001036A0 5216040C */  jal        PutString
     /* 36A4 001036A4 506C5024 */   addiu     $s0, $v0, %lo(D_00136C50)
     /* 36A8 001036A8 C080043C */  lui        $a0, (0x80C0FF00 >> 16)
     /* 36AC 001036AC 2D300002 */  daddu      $a2, $s0, $zero
     /* 36B0 001036B0 00FF8434 */  ori        $a0, $a0, (0x80C0FF00 & 0xFFFF)
-    /* 36B4 001036B4 5216040C */  jal        func_00105948
+    /* 36B4 001036B4 5216040C */  jal        PutString
     /* 36B8 001036B8 18A04526 */   addiu     $a1, $s2, %lo(D_0013A018)
     /* 36BC 001036BC 8040043C */  lui        $a0, (0x4080FF00 >> 16)
     /* 36C0 001036C0 20A02526 */  addiu      $a1, $s1, %lo(D_0013A020)
-    /* 36C4 001036C4 6416040C */  jal        func_00105990
+    /* 36C4 001036C4 6416040C */  jal        PutStringS
     /* 36C8 001036C8 00FF8434 */   ori       $a0, $a0, (0x4080FF00 & 0xFFFF)
     /* 36CC 001036CC 2D200002 */  daddu      $a0, $s0, $zero
     /* 36D0 001036D0 2D280000 */  daddu      $a1, $zero, $zero
-    /* 36D4 001036D4 0E3B040C */  jal        func_0010EC38
+    /* 36D4 001036D4 0E3B040C */  jal        sceSifLoadModule
     /* 36D8 001036D8 2D300000 */   daddu     $a2, $zero, $zero
     /* 36DC 001036DC 0A004304 */  bgezl      $v0, .L00103708
     /* 36E0 001036E0 8040043C */   lui       $a0, (0x4080FF00 >> 16)
@@ -241,14 +241,14 @@ glabel func_001033B0
     /* 36EC 001036EC 2D384000 */  daddu      $a3, $v0, $zero
     /* 36F0 001036F0 106BA524 */  addiu      $a1, $a1, %lo(D_00136B10)
     /* 36F4 001036F4 2D300002 */  daddu      $a2, $s0, $zero
-    /* 36F8 001036F8 6416040C */  jal        func_00105990
+    /* 36F8 001036F8 6416040C */  jal        PutStringS
     /* 36FC 001036FC 00408434 */   ori       $a0, $a0, (0xFF804000 & 0xFFFF)
     /* 3700 00103700 05000010 */  b          .L00103718
     /* 3704 00103704 FFFF0224 */   addiu     $v0, $zero, -0x1
 .align 2
   .L00103708:
     /* 3708 00103708 28A06526 */  addiu      $a1, $s3, %lo(D_0013A028)
-    /* 370C 0010370C 6416040C */  jal        func_00105990
+    /* 370C 0010370C 6416040C */  jal        PutStringS
     /* 3710 00103710 00FF8434 */   ori       $a0, $a0, (0x4080FF00 & 0xFFFF)
     /* 3714 00103714 2D100000 */  daddu      $v0, $zero, $zero
 .align 2
@@ -273,20 +273,20 @@ glabel func_001033B0
     /* 374C 0010374C 8040043C */  lui        $a0, (0x4080FF00 >> 16)
     /* 3750 00103750 006BA526 */  addiu      $a1, $s5, %lo(D_00136B00)
     /* 3754 00103754 00FF8434 */  ori        $a0, $a0, (0x4080FF00 & 0xFFFF)
-    /* 3758 00103758 5216040C */  jal        func_00105948
+    /* 3758 00103758 5216040C */  jal        PutString
     /* 375C 0010375C 706C5024 */   addiu     $s0, $v0, %lo(D_00136C70)
     /* 3760 00103760 C080043C */  lui        $a0, (0x80C0FF00 >> 16)
     /* 3764 00103764 2D300002 */  daddu      $a2, $s0, $zero
     /* 3768 00103768 00FF8434 */  ori        $a0, $a0, (0x80C0FF00 & 0xFFFF)
-    /* 376C 0010376C 5216040C */  jal        func_00105948
+    /* 376C 0010376C 5216040C */  jal        PutString
     /* 3770 00103770 18A04526 */   addiu     $a1, $s2, %lo(D_0013A018)
     /* 3774 00103774 8040043C */  lui        $a0, (0x4080FF00 >> 16)
     /* 3778 00103778 20A02526 */  addiu      $a1, $s1, %lo(D_0013A020)
-    /* 377C 0010377C 6416040C */  jal        func_00105990
+    /* 377C 0010377C 6416040C */  jal        PutStringS
     /* 3780 00103780 00FF8434 */   ori       $a0, $a0, (0x4080FF00 & 0xFFFF)
     /* 3784 00103784 2D200002 */  daddu      $a0, $s0, $zero
     /* 3788 00103788 2D280000 */  daddu      $a1, $zero, $zero
-    /* 378C 0010378C 0E3B040C */  jal        func_0010EC38
+    /* 378C 0010378C 0E3B040C */  jal        sceSifLoadModule
     /* 3790 00103790 2D300000 */   daddu     $a2, $zero, $zero
     /* 3794 00103794 0A004304 */  bgezl      $v0, .L001037C0
     /* 3798 00103798 8040043C */   lui       $a0, (0x4080FF00 >> 16)
@@ -295,14 +295,14 @@ glabel func_001033B0
     /* 37A4 001037A4 2D384000 */  daddu      $a3, $v0, $zero
     /* 37A8 001037A8 106BA524 */  addiu      $a1, $a1, %lo(D_00136B10)
     /* 37AC 001037AC 2D300002 */  daddu      $a2, $s0, $zero
-    /* 37B0 001037B0 6416040C */  jal        func_00105990
+    /* 37B0 001037B0 6416040C */  jal        PutStringS
     /* 37B4 001037B4 00408434 */   ori       $a0, $a0, (0xFF804000 & 0xFFFF)
     /* 37B8 001037B8 05000010 */  b          .L001037D0
     /* 37BC 001037BC FFFF0224 */   addiu     $v0, $zero, -0x1
 .align 2
   .L001037C0:
     /* 37C0 001037C0 28A06526 */  addiu      $a1, $s3, %lo(D_0013A028)
-    /* 37C4 001037C4 6416040C */  jal        func_00105990
+    /* 37C4 001037C4 6416040C */  jal        PutStringS
     /* 37C8 001037C8 00FF8434 */   ori       $a0, $a0, (0x4080FF00 & 0xFFFF)
     /* 37CC 001037CC 2D100000 */  daddu      $v0, $zero, $zero
 .align 2
@@ -323,34 +323,34 @@ glabel func_001033B0
   .L001037F8:
     /* 37F8 001037F8 D00C040C */  jal        setNewIopIdentifier
     /* 37FC 001037FC 60A08424 */   addiu     $a0, $a0, %lo(D_0013A060)
-    /* 3800 00103800 F238040C */  jal        func_0010E3C8
+    /* 3800 00103800 F238040C */  jal        sceSifLoadFileReset
     /* 3804 00103804 00000000 */   nop
-    /* 3808 00103808 D62A040C */  jal        func_0010AB58
+    /* 3808 00103808 D62A040C */  jal        sceFsReset
     /* 380C 0010380C 00000000 */   nop
-    /* 3810 00103810 5052040C */  jal        func_00114940
+    /* 3810 00103810 5052040C */  jal        sceDmaReset
     /* 3814 00103814 01000424 */   addiu     $a0, $zero, 0x1
     /* 3818 00103818 A256040C */  jal        sceDbcInit
     /* 381C 0010381C 00000000 */   nop
-    /* 3820 00103820 7E13040C */  jal        func_00104DF8
+    /* 3820 00103820 7E13040C */  jal        padsysInit
     /* 3824 00103824 00000000 */   nop
     /* 3828 00103828 1300023C */  lui        $v0, %hi(D_00136C90)
     /* 382C 0010382C 8040043C */  lui        $a0, (0x4080FF00 >> 16)
     /* 3830 00103830 006BA526 */  addiu      $a1, $s5, %lo(D_00136B00)
     /* 3834 00103834 00FF8434 */  ori        $a0, $a0, (0x4080FF00 & 0xFFFF)
-    /* 3838 00103838 5216040C */  jal        func_00105948
+    /* 3838 00103838 5216040C */  jal        PutString
     /* 383C 0010383C 906C5024 */   addiu     $s0, $v0, %lo(D_00136C90)
     /* 3840 00103840 C080043C */  lui        $a0, (0x80C0FF00 >> 16)
     /* 3844 00103844 2D300002 */  daddu      $a2, $s0, $zero
     /* 3848 00103848 00FF8434 */  ori        $a0, $a0, (0x80C0FF00 & 0xFFFF)
-    /* 384C 0010384C 5216040C */  jal        func_00105948
+    /* 384C 0010384C 5216040C */  jal        PutString
     /* 3850 00103850 18A04526 */   addiu     $a1, $s2, %lo(D_0013A018)
     /* 3854 00103854 8040043C */  lui        $a0, (0x4080FF00 >> 16)
     /* 3858 00103858 20A02526 */  addiu      $a1, $s1, %lo(D_0013A020)
-    /* 385C 0010385C 6416040C */  jal        func_00105990
+    /* 385C 0010385C 6416040C */  jal        PutStringS
     /* 3860 00103860 00FF8434 */   ori       $a0, $a0, (0x4080FF00 & 0xFFFF)
     /* 3864 00103864 2D200002 */  daddu      $a0, $s0, $zero
     /* 3868 00103868 2D280000 */  daddu      $a1, $zero, $zero
-    /* 386C 0010386C 0E3B040C */  jal        func_0010EC38
+    /* 386C 0010386C 0E3B040C */  jal        sceSifLoadModule
     /* 3870 00103870 2D300000 */   daddu     $a2, $zero, $zero
     /* 3874 00103874 0A004304 */  bgezl      $v0, .L001038A0
     /* 3878 00103878 8040043C */   lui       $a0, (0x4080FF00 >> 16)
@@ -359,14 +359,14 @@ glabel func_001033B0
     /* 3884 00103884 2D384000 */  daddu      $a3, $v0, $zero
     /* 3888 00103888 106BA524 */  addiu      $a1, $a1, %lo(D_00136B10)
     /* 388C 0010388C 2D300002 */  daddu      $a2, $s0, $zero
-    /* 3890 00103890 6416040C */  jal        func_00105990
+    /* 3890 00103890 6416040C */  jal        PutStringS
     /* 3894 00103894 00408434 */   ori       $a0, $a0, (0xFF804000 & 0xFFFF)
     /* 3898 00103898 05000010 */  b          .L001038B0
     /* 389C 0010389C FFFF0224 */   addiu     $v0, $zero, -0x1
 .align 2
   .L001038A0:
     /* 38A0 001038A0 28A06526 */  addiu      $a1, $s3, %lo(D_0013A028)
-    /* 38A4 001038A4 6416040C */  jal        func_00105990
+    /* 38A4 001038A4 6416040C */  jal        PutStringS
     /* 38A8 001038A8 00FF8434 */   ori       $a0, $a0, (0x4080FF00 & 0xFFFF)
     /* 38AC 001038AC 2D100000 */  daddu      $v0, $zero, $zero
 .align 2
@@ -391,20 +391,20 @@ glabel func_001033B0
     /* 38E4 001038E4 8040043C */  lui        $a0, (0x4080FF00 >> 16)
     /* 38E8 001038E8 006BA526 */  addiu      $a1, $s5, %lo(D_00136B00)
     /* 38EC 001038EC 00FF8434 */  ori        $a0, $a0, (0x4080FF00 & 0xFFFF)
-    /* 38F0 001038F0 5216040C */  jal        func_00105948
+    /* 38F0 001038F0 5216040C */  jal        PutString
     /* 38F4 001038F4 B06C5024 */   addiu     $s0, $v0, %lo(D_00136CB0)
     /* 38F8 001038F8 C080043C */  lui        $a0, (0x80C0FF00 >> 16)
     /* 38FC 001038FC 2D300002 */  daddu      $a2, $s0, $zero
     /* 3900 00103900 18A04526 */  addiu      $a1, $s2, %lo(D_0013A018)
-    /* 3904 00103904 5216040C */  jal        func_00105948
+    /* 3904 00103904 5216040C */  jal        PutString
     /* 3908 00103908 00FF8434 */   ori       $a0, $a0, (0x80C0FF00 & 0xFFFF)
     /* 390C 0010390C 8040043C */  lui        $a0, (0x4080FF00 >> 16)
     /* 3910 00103910 20A02526 */  addiu      $a1, $s1, %lo(D_0013A020)
-    /* 3914 00103914 6416040C */  jal        func_00105990
+    /* 3914 00103914 6416040C */  jal        PutStringS
     /* 3918 00103918 00FF8434 */   ori       $a0, $a0, (0x4080FF00 & 0xFFFF)
     /* 391C 0010391C 2D200002 */  daddu      $a0, $s0, $zero
     /* 3920 00103920 2D280000 */  daddu      $a1, $zero, $zero
-    /* 3924 00103924 0E3B040C */  jal        func_0010EC38
+    /* 3924 00103924 0E3B040C */  jal        sceSifLoadModule
     /* 3928 00103928 2D300000 */   daddu     $a2, $zero, $zero
     /* 392C 0010392C 0A004304 */  bgezl      $v0, .L00103958
     /* 3930 00103930 8040043C */   lui       $a0, (0x4080FF00 >> 16)
@@ -413,14 +413,14 @@ glabel func_001033B0
     /* 393C 0010393C 2D384000 */  daddu      $a3, $v0, $zero
     /* 3940 00103940 106BA524 */  addiu      $a1, $a1, %lo(D_00136B10)
     /* 3944 00103944 2D300002 */  daddu      $a2, $s0, $zero
-    /* 3948 00103948 6416040C */  jal        func_00105990
+    /* 3948 00103948 6416040C */  jal        PutStringS
     /* 394C 0010394C 00408434 */   ori       $a0, $a0, (0xFF804000 & 0xFFFF)
     /* 3950 00103950 05000010 */  b          .L00103968
     /* 3954 00103954 FFFF0224 */   addiu     $v0, $zero, -0x1
 .align 2
   .L00103958:
     /* 3958 00103958 28A06526 */  addiu      $a1, $s3, %lo(D_0013A028)
-    /* 395C 0010395C 6416040C */  jal        func_00105990
+    /* 395C 0010395C 6416040C */  jal        PutStringS
     /* 3960 00103960 00FF8434 */   ori       $a0, $a0, (0x4080FF00 & 0xFFFF)
     /* 3964 00103964 2D100000 */  daddu      $v0, $zero, $zero
 .align 2
@@ -448,7 +448,7 @@ glabel func_001033B0
     /* 39A8 001039A8 2000B4DF */  ld         $s4, 0x20($sp)
     /* 39AC 001039AC 2800B5DF */  ld         $s5, 0x28($sp)
     /* 39B0 001039B0 3000BFDF */  ld         $ra, 0x30($sp)
-    /* 39B4 001039B4 B6140408 */  j          func_001052D8
+    /* 39B4 001039B4 B6140408 */  j          usbSerialSysInit
     /* 39B8 001039B8 4000BD27 */   addiu     $sp, $sp, 0x40
 endlabel func_001033B0
     /* 39BC 001039BC 00000000 */  nop

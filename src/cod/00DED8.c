@@ -5,8 +5,8 @@
  *   ld ra,0(sp); jr ra; addiu sp,sp,0x10
  * A plain wrapper: call and fall through to the epilogue (no sibling call).
  */
-extern void func_0010DE60();
+extern void sceSifFreeSysMemory();
 
-void func_0010DED8(void) {
-    func_0010DE60();
+void sceSifFreeIopHeap(void) {
+    sceSifFreeSysMemory();
 }

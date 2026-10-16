@@ -35,7 +35,7 @@ glabel func_0011C8B0
     /* 1C8FC 0011C8FC 80F09126 */  addiu      $s1, $s4, %lo(D_0015F080)
     /* 1C900 0011C900 2D204002 */  daddu      $a0, $s2, $zero
     /* 1C904 0011C904 2D282002 */  daddu      $a1, $s1, $zero
-    /* 1C908 0011C908 3483040C */  jal        func_00120CD0
+    /* 1C908 0011C908 3483040C */  jal        _sceMcpReadUserClust
     /* 1C90C 0011C90C 01000724 */   addiu     $a3, $zero, 0x1
     /* 1C910 0011C910 04004014 */  bnez       $v0, .L0011C924
     /* 1C914 0011C914 401A1000 */   sll       $v1, $s0, 9

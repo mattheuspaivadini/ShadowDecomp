@@ -472,3 +472,19 @@
 0229B0 = src/cod/0229B0.c cc=29               # empty-asm register pin on strcpy return value
 022A38 = src/cod/022A38.c cc=29               # empty-asm register pin on strcpy return value
 022CE0 = src/cod/022CE0.c cc=29               # empty-asm register pin on strcpy return value
+001A50 = src/cod/001A50.c cc=29               # LoaderSysResetSystem (matched after T004 split of 0x00101AA0)
+027460 = src/cod/027460.c                     # atexit (matched after T004 split from 027448)
+027448 = src/cod/027448.c -fno-optimize-sibling-calls# abort (matched after T004 split of 027460)
+00A7C8 = src/cod/00A7C8.c cc=29               # SignalSema tail call
+00AB58 = src/cod/00AB58.c cc=29               # sceFsReset: D_00132314 .data attribute
+012B98 = src/cod/012B98.c cc=29               # sceSifExitCmd: D_0014B354 array decl
+02EC38 = src/cod/02EC38.c                     # _i2b: exact newlib mprec.c BigInt
+002BD8 = src/cod/002BD8.c                     # LoaderSysDeleteAllExternalThreadExceptMe: matching
+02EAF8 = src/cod/02EAF8.c                     # _hi0bits: matching
+02E3F8 = src/cod/02E3F8.c                     # _fwalk: exact newlib fwalk loop form
+02EB78 = src/cod/02EB78.c                     # _lo0bits: exact newlib mprec.c lo0bits
+00FC90 = src/cod/00FC90.c cc=29               # GetSystemCallEntry cc=29
+00E3C8 = src/cod/00E3C8.c cc=29               # sceSifLoadFileReset cc=29
+007768 = src/cod/007768.c cc=29               # InitThread cc=29
+010120 = src/cod/010120.c cc=29               # ExecPS2 cc=29
+0311B8 = src/cod/0311B8.c                     # _lseek_r cc=296

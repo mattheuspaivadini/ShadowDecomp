@@ -27,17 +27,17 @@ union C11670 {
     float value;
 };
 
-float func_00124B90(int a0);
+float __floatdisf(int a0);
 
-float func_00111670(long long a0) {
+float TimerBusClock2Freq(long long a0) {
     union C11670 c;
     float f;
 
     if (a0 < 0) {
-        f = func_00124B90((int)(((unsigned long long)a0 >> 1) | (a0 & 1)));
+        f = __floatdisf((int)(((unsigned long long)a0 >> 1) | (a0 & 1)));
         f = f + f;
     } else {
-        f = func_00124B90((int)a0);
+        f = __floatdisf((int)a0);
     }
     c.bits = 0x4D0CA000u;
     return c.value / f;

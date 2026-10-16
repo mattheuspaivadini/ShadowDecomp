@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00106C90, 0x10
+nonmatching SetVTLBRefillHandler, 0x10
 
-glabel func_00106C90
+glabel SetVTLBRefillHandler
     /* 6C90 00106C90 0D000324 */  addiu      $v1, $zero, 0xD
     /* 6C94 00106C94 0C000000 */  syscall    0 /* handwritten instruction */
     /* 6C98 00106C98 0800E003 */  jr         $ra
     /* 6C9C 00106C9C 00000000 */   nop
-endlabel func_00106C90
+endlabel SetVTLBRefillHandler

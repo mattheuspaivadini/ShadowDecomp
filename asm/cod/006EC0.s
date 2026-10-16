@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00106EC0, 0x10
+nonmatching iReleaseWaitThread, 0x10
 
-glabel func_00106EC0
+glabel iReleaseWaitThread
     /* 6EC0 00106EC0 D2FF0324 */  addiu      $v1, $zero, -0x2E
     /* 6EC4 00106EC4 0C000000 */  syscall    0 /* handwritten instruction */
     /* 6EC8 00106EC8 0800E003 */  jr         $ra
     /* 6ECC 00106ECC 00000000 */   nop
-endlabel func_00106EC0
+endlabel iReleaseWaitThread

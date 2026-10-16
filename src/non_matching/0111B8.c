@@ -1,7 +1,7 @@
-/* STATUS (Session 8, 2026-10-14): NON_MATCHING. best score 7 [cc=29].
- * R2 w45a_3: 3-way OR validation with inline error block
+/* STATUS (10, 2026-10-16): NON_MATCHING. best score 7 [cc=29].
+ * 
  * The original .s stays in the build (asm/cod/0111B8.s); this C
- * draft (Session 8) is kept for the record. */
+ * draft (10) is kept for the record. */
 struct S111B8 {
     int       f00;   /* 0x00 */
     int       f04;   /* 0x04 */
@@ -25,7 +25,7 @@ int func_0010FB20(void);
 int func_0010FB70(void);
 long long func_00110C78(void);
 
-long long func_001111B8(int a0, long long a1) {
+long long SetTimerCount(int a0, long long a1) {
     struct S111B8 *p;
     int guard;
     long long t;

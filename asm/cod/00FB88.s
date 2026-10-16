@@ -24,15 +24,15 @@ glabel func_0010FB88
     /* FBB0 0010FBB0 3400A5AF */  sw         $a1, 0x34($sp)
     /* FBB4 0010FBB4 0400A3AF */  sw         $v1, 0x4($sp)
     /* FBB8 0010FBB8 0800A3AF */  sw         $v1, 0x8($sp)
-    /* FBBC 0010FBBC F81B040C */  jal        func_00106FE0
+    /* FBBC 0010FBBC F81B040C */  jal        CreateSema
     /* FBC0 0010FBC0 2400A3AF */   sw        $v1, 0x24($sp)
-    /* FBC4 0010FBC4 1300033C */  lui        $v1, %hi(D_001329A0)
+    /* FBC4 0010FBC4 1300033C */  lui        $v1, %hi(__sce_sema_id)
     /* FBC8 0010FBC8 2000A427 */  addiu      $a0, $sp, 0x20
-    /* FBCC 0010FBCC F81B040C */  jal        func_00106FE0
-    /* FBD0 0010FBD0 A02962AC */   sw        $v0, %lo(D_001329A0)($v1)
-    /* FBD4 0010FBD4 1300033C */  lui        $v1, %hi(D_001329A4)
+    /* FBCC 0010FBCC F81B040C */  jal        CreateSema
+    /* FBD0 0010FBD0 A02962AC */   sw        $v0, %lo(__sce_sema_id)($v1)
+    /* FBD4 0010FBD4 1300033C */  lui        $v1, %hi(__sce_eh_sema_id)
     /* FBD8 0010FBD8 4000BFDF */  ld         $ra, 0x40($sp)
-    /* FBDC 0010FBDC A42962AC */  sw         $v0, %lo(D_001329A4)($v1)
+    /* FBDC 0010FBDC A42962AC */  sw         $v0, %lo(__sce_eh_sema_id)($v1)
     /* FBE0 0010FBE0 0800E003 */  jr         $ra
     /* FBE4 0010FBE4 5000BD27 */   addiu     $sp, $sp, 0x50
 endlabel func_0010FB88

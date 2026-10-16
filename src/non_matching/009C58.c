@@ -15,15 +15,15 @@ struct N09C58 {
     struct N09C58  *f40;    /* 0x40 */
 };
 
-int func_0010FB20(void);
-int func_0010FB70(void);
+int DIntr(void);
+int EIntr(void);
 
-int func_00109C58(int a0, int a1, int a2, int a3, int a4, int a5,
+int sceSifRegisterRpc(int a0, int a1, int a2, int a3, int a4, int a5,
                   struct N09C58 *a6) {
     struct N09C58 *p = (struct N09C58 *)a0;
     struct N09C58 *q;
 
-    func_0010FB20();
+    DIntr();
     p->f3C = 0;
     p->f38 = 0;
     p->f00 = a1;
@@ -40,5 +40,6 @@ int func_00109C58(int a0, int a1, int a2, int a3, int a4, int a5,
             q = q->f38;
         q->f38 = p;
     }
-    return func_0010FB70();
+    return EIntr();
 }
+/* func_00109C58 */

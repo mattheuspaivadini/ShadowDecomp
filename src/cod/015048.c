@@ -26,16 +26,16 @@ struct S015048 {
 extern struct S015048 D_0014B598[];   /* .bss 0x0014B598: 16 records */
 extern int D_001339E8[];              /* .data 0x001339E8 (libpad2 block) */
 
-int func_001151B8(int index);
+int scePad2DeleteSocket(int index);
 
-int func_00115048(void) {
+int scePad2End(void) {
     int i;
     int r;
 
     D_001339E8[0] = 0;
     for (i = 0; i < 0x10; i++) {
         if (D_0014B598[i].field0 != 0) {
-            r = func_001151B8(i);
+            r = scePad2DeleteSocket(i);
             if (r < 0)
                 return r;
         }

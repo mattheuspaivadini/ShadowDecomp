@@ -23,7 +23,7 @@ glabel func_001156A8
     /* 156CC 001156CC 80006224 */  addiu      $v0, $v1, 0x80
     /* 156D0 001156D0 0400A2AF */  sw         $v0, 0x4($sp)
     /* 156D4 001156D4 FF008524 */  addiu      $a1, $a0, 0xFF
-    /* 156D8 001156D8 30C6040C */  jal        func_001318C0
+    /* 156D8 001156D8 30C6040C */  jal        SyncDCache
     /* 156DC 001156DC 0000A3AF */   sw        $v1, 0x0($sp)
     /* 156E0 001156E0 0000A48F */  lw         $a0, 0x0($sp)
     /* 156E4 001156E4 0400A58F */  lw         $a1, 0x4($sp)

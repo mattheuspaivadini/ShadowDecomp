@@ -5,32 +5,32 @@
 extern int D_0013B790[];    /* lui/%lo */
 extern int D_0013C790[];    /* lui/%lo */
 
-int  func_00106ED0(void);
-int  func_00106E70(int a0, int a1);
-int  func_00102438(void);
-int  func_00106E30(void);
-int  func_00106DF0(int a0);
-int  func_00102500(void);
-int  func_001032F8(void);
-int  func_00108FF8(int a0);
-int  func_0010DCE8(void);
-int  func_0010DED8(int a0);
+int  GetThreadId(void);
+int  ChangeThreadPriority(int a0, int a1);
+int  LoaderSysDeleteAllExternalIntcHandler(void);
+int  TerminateThread(void);
+int  DeleteThread(int a0);
+int  LoaderSysDeleteAllExternalSema(void);
+int  LoaderSysFlushPrint(void);
+int  sceSifInitRpc(int a0);
+int  sceSifInitIopHeap(void);
+int  sceSifFreeIopHeap(int a0);
 
-void func_00102608(void) {
+void LoaderSysExecuteRecoveryFirstProcess(void) {
     int i;
     int v;
     int t;
     int *p;
 
     i = 0xFF;
-    func_00106E70(func_00106ED0(), 1);
-    func_00102438();
-    t = func_00106ED0();
+    ChangeThreadPriority(GetThreadId(), 1);
+    LoaderSysDeleteAllExternalIntcHandler();
+    t = GetThreadId();
     p = D_0013B790;
     v = *p;
     while (i >= 0) {
         if (v != t && v >= 0)
-            func_00106E70(v, 0x7F);
+            ChangeThreadPriority(v, 0x7F);
         i--;
         p++;
         v = *p;
@@ -40,22 +40,22 @@ void func_00102608(void) {
         int n;
         int *q;
 
-        t = func_00106ED0();
+        t = GetThreadId();
         n = -1;
         q = D_0013B790;
         for (j = 0xFF; j >= 0; j--) {
             if (*q != t && *q >= 0) {
-                func_00106E30();
-                func_00106DF0(*q);
+                TerminateThread();
+                DeleteThread(*q);
                 *q = n;
             }
             q++;
         }
     }
-    func_00102500();
-    func_001032F8();
-    func_00108FF8(0);
-    func_0010DCE8();
+    LoaderSysDeleteAllExternalSema();
+    LoaderSysFlushPrint();
+    sceSifInitRpc(0);
+    sceSifInitIopHeap();
     {
         int j;
         int *q;
@@ -63,7 +63,7 @@ void func_00102608(void) {
         q = D_0013C790;
         for (j = 0xFF; j >= 0; j--) {
             if (*q != 0) {
-                func_0010DED8(*q);
+                sceSifFreeIopHeap(*q);
                 *q = 0;
             }
             q++;

@@ -16,7 +16,7 @@
  * MATCH GUESS: cc=296 (014C30/014FF0 in this block are 2.96; weak) */
 extern void func_001147C0(int *p);
 
-void func_00114DA0(int *p) {
+void sceDmaRecv(int *p) {
     int v;
 
     func_001147C0(p);

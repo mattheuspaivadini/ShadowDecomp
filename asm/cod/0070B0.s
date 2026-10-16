@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_001070B0, 0x10
+nonmatching GetGsVParam, 0x10
 
-glabel func_001070B0
+glabel GetGsVParam
     /* 70B0 001070B0 4D000324 */  addiu      $v1, $zero, 0x4D
     /* 70B4 001070B4 0C000000 */  syscall    0 /* handwritten instruction */
     /* 70B8 001070B8 0800E003 */  jr         $ra
     /* 70BC 001070BC 00000000 */   nop
-endlabel func_001070B0
+endlabel GetGsVParam

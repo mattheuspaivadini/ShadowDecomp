@@ -17,11 +17,11 @@
 extern int D_0014E900[];   /* .bss 0x0014E900, 0x50 bytes (lui/%lo) */
 extern int D_0014EA00[];   /* .bss 0x0014EA00, 0xC0 bytes (lui/%lo) */
 
-int SceSifrpcCall(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
+int sceSifCallRpc(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
                   int a7, int a8);
 
 int func_00115A30(void) {
-    SceSifrpcCall((int)D_0014E900, (int)0x80001363, 0, (int)D_0014EA00, 0x90,
+    sceSifCallRpc((int)D_0014E900, (int)0x80001363, 0, (int)D_0014EA00, 0x90,
                   (int)D_0014EA00, 0x90, 0, 0);
     return D_0014EA00[0];
 }

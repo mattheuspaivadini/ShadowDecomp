@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00107110, 0x10
+nonmatching RFU083_iSetEventFlag, 0x10
 
-glabel func_00107110
+glabel RFU083_iSetEventFlag
     /* 7110 00107110 ADFF0324 */  addiu      $v1, $zero, -0x53
     /* 7114 00107114 0C000000 */  syscall    0 /* handwritten instruction */
     /* 7118 00107118 0800E003 */  jr         $ra
     /* 711C 0010711C 00000000 */   nop
-endlabel func_00107110
+endlabel RFU083_iSetEventFlag

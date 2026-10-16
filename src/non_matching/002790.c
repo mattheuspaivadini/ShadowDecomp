@@ -27,7 +27,7 @@
  */
 extern int D_0013B790[256];
 
-void func_00102790(int value) {
+void LoaderSysEntryExternalThreadList(int value) {
     int i = 0;
 
     while (D_0013B790[i] >= 0) {

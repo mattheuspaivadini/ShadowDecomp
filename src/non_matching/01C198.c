@@ -30,7 +30,7 @@ struct R01C198 {
 extern struct R01C198 D_0015DF48[];
 extern char D_00138D08[];
 
-int func_0011C198(int index) {
+int _sceMcFatInit2(int index) {
     struct R01C198 *p = &D_0015DF48[index];
 
     p->field800 = -1;

@@ -7,6 +7,6 @@
  */
 extern void sceStdioCCode();
 
-void func_0010C058(int a0) {
+void sceRemove(int a0) {
     sceStdioCCode(a0, 6);
 }

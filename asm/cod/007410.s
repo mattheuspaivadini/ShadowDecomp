@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00107410, 0x10
+nonmatching Deci2Call, 0x10
 
-glabel func_00107410
+glabel Deci2Call
     /* 7410 00107410 7C000324 */  addiu      $v1, $zero, 0x7C
     /* 7414 00107414 0C000000 */  syscall    0 /* handwritten instruction */
     /* 7418 00107418 0800E003 */  jr         $ra
     /* 741C 0010741C 00000000 */   nop
-endlabel func_00107410
+endlabel Deci2Call

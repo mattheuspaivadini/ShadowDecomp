@@ -1,7 +1,6 @@
-/* STATUS (Session 7, 2026-10-14): NON_MATCHING. best score 9 [cc=29, default].
- * shutdown sequence; merged second routine not derivable from C.
- * The original .s stays in the build (asm/cod/001A50.s); this C
- * draft (subagent-produced, Session 7) is kept for the record. */
+/* asm/cod/001A50.s -> LoaderSysResetSystem.
+ * LoaderSysResetSystem (matched after T004 split of 0x00101AA0)
+ * MATCHED (Session 12). */
 /* asm/cod/001A50.s -> func_00101A50 @ 0x00101A50 (0x70 bytes declared, 28
  * insns; the reachable part is the first 16 insns, 0x00101A50-0x00101A9C)
  *
@@ -28,20 +27,20 @@
  * residual.
  * MATCH GUESS: cc=296 (0x00101xxx cluster; the jal delay slots are `nop`) */
 extern char D_00139E50[];       /* .sdata "\n", addressed absolutely here */
-extern int D_0013A084;          /* .sdata scalar: gp-relative */
+extern int loaderThreadId;          /* .sdata scalar: gp-relative */
 
-void func_00102608(void);
-void func_00105948(int a0, int a1, ...);
-int func_00106ED0(void);
-int func_00106E70(int a0, int a1);
-int func_00106F10(int a0);
-void func_00106F00(void);
+void LoaderSysExecuteRecoveryFirstProcess(void);
+void PutString(int a0, int a1, ...);
+int GetThreadId(void);
+int ChangeThreadPriority(int a0, int a1);
+int WakeupThread(int a0);
+void SleepThread(void);
 
-void func_00101A50(void) {
-    func_00102608();
-    func_00105948(0xFF603000, (int)D_00139E50);
-    func_00106E70(func_00106ED0(), 0x7F);
-    func_00106F10(D_0013A084);
+void LoaderSysResetSystem(void) {
+    LoaderSysExecuteRecoveryFirstProcess();
+    PutString(0xFF603000, (int)D_00139E50);
+    ChangeThreadPriority(GetThreadId(), 0x7F);
+    WakeupThread(loaderThreadId);
     for (;;)
-        func_00106F00();
+        SleepThread();
 }

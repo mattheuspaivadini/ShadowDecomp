@@ -22,7 +22,7 @@
  */
 extern int D_0013B790[256];
 
-int func_001028F0(int key) {
+int LoaderSysDeleteExternalThreadList(int key) {
     int i;
 
     for (i = 0; i < 256; i++) {

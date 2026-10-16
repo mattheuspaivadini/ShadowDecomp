@@ -1,7 +1,7 @@
-/* STATUS (Session 7, 2026-10-14): NON_MATCHING. best score 7 [cc=296, default].
- * 0x60-byte print context + variadic call.
+/* STATUS (10, 2026-10-16): NON_MATCHING. best score 7 [cc=296].
+ * 
  * The original .s stays in the build (asm/cod/02C048.s); this C
- * draft (subagent-produced, Session 7) is kept for the record. */
+ * draft (10) is kept for the record. */
 /* asm/cod/02C048.s -> func_0012C048 @ 0x0012C048 (0x54 bytes, 21 insns)
  *
  * Print-context wrapper: build the 0x58+/0x60-byte "print context" block on the
@@ -31,7 +31,7 @@ struct S12C048 {
     char  pad58[4];     /* 0x58..0x5B (locals end 0x5C -> $ra at 0x60) */
 };
 
-int D_00135C60[];   /* .data 0x00135C60: lui/%lo (non-small) */
+int _impure_ptr[];   /* .data 0x00135C60: lui/%lo (non-small) */
 int func_00129930(void *ctx, ...);
 
 void func_0012C048(char *buf, char *fmt) {
@@ -41,7 +41,7 @@ void func_0012C048(char *buf, char *fmt) {
     ctx.f08 = 0x7FFFFFFF;
     ctx.f0C = 0x208;
     ctx.p10 = buf;
-    ctx.f54 = D_00135C60[0];
+    ctx.f54 = _impure_ptr[0];
     ctx.p00 = buf;
     func_00129930(&ctx, fmt);
     *ctx.p00 = 0;

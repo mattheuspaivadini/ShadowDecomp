@@ -1,8 +1,8 @@
-/* STATUS (Session 7, 2026-10-14): NON_MATCHING. best score 7 [cc=29, default].
- * free-list pop; block layout differs.
+/* STATUS (10, 2026-10-16): NON_MATCHING. best score 7 [cc=29].
+ * 
  * The original .s stays in the build (asm/cod/009E50.s); this C
- * draft (subagent-produced, Session 7) is kept for the record. */
-/* asm/cod/009E50.s -> func_00109E50 @ 0x00109E50 (0x58 bytes, 22 insns)
+ * draft (10) is kept for the record. */
+/* asm/cod/009E50.s -> sceSifGetNextRequest @ 0x00109E50 (0x58 bytes, 22 insns)
  *
  * Free-list allocate inside the func_0010FB20/func_0010FB70 guard pair:
  *
@@ -25,13 +25,13 @@ struct N09E50 {
     int next;                       /* 0x3C */
 };
 
-int func_0010FB20(void);
-int func_0010FB70(void);
+int DIntr(void);
+int EIntr(void);
 
-int func_00109E50(int *a0) {
+int sceSifGetNextRequest(int *a0) {
     int n;
 
-    func_0010FB20();
+    DIntr();
     n = a0[3];
     if (n != 0) {
         a0[1] = 1;
@@ -39,6 +39,6 @@ int func_00109E50(int *a0) {
     } else {
         a0[1] = 0;
     }
-    func_0010FB70();
+    EIntr();
     return n;
 }

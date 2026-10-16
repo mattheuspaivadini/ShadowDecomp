@@ -25,12 +25,12 @@ glabel entry
     /* 30 00100030 00000000 */  nop
     /* 34 00100034 FAFF2014 */  bnez       $at, .L00100020
     /* 38 00100038 10004224 */   addiu     $v0, $v0, 0x10
-    /* 3C 0010003C 1400043C */  lui        $a0, %hi(D_00141D70)
+    /* 3C 0010003C 1400043C */  lui        $a0, %hi(_gp)
     /* 40 00100040 FE01053C */  lui        $a1, %hi(D_1FE0000)
     /* 44 00100044 0200063C */  lui        $a2, %hi(D_20000)
     /* 48 00100048 1400073C */  lui        $a3, %hi(D_0013A200)
     /* 4C 0010004C 1000083C */  lui        $a4, %hi(func_001000C8)
-    /* 50 00100050 701D8424 */  addiu      $a0, $a0, %lo(D_00141D70)
+    /* 50 00100050 701D8424 */  addiu      $a0, $a0, %lo(_gp)
     /* 54 00100054 0000A524 */  addiu      $a1, $a1, %lo(D_1FE0000)
     /* 58 00100058 0000C624 */  addiu      $a2, $a2, %lo(D_20000)
     /* 5C 0010005C 00A2E724 */  addiu      $a3, $a3, %lo(D_0013A200)
@@ -45,9 +45,9 @@ glabel entry
     /* 80 00100080 0000A524 */  addiu      $a1, $a1, %lo(D_40000)
     /* 84 00100084 3D000324 */  addiu      $v1, $zero, 0x3D
     /* 88 00100088 0C000000 */  syscall    0 /* handwritten instruction */
-    /* 8C 0010008C 763F040C */  jal        func_0010FDD8
+    /* 8C 0010008C 763F040C */  jal        _InitSys
     /* 90 00100090 00000000 */   nop
-    /* 94 00100094 981C040C */  jal        func_00107260
+    /* 94 00100094 981C040C */  jal        FlushCache
     /* 98 00100098 2D200000 */   daddu     $a0, $zero, $zero
     /* 9C 0010009C 38000042 */  ei /* handwritten instruction */
     /* A0 001000A0 1400023C */  lui        $v0, %hi(D_0013A200)
@@ -55,7 +55,7 @@ glabel entry
     /* A8 001000A8 0000448C */  lw         $a0, 0x0($v0)
     /* AC 001000AC D00E040C */  jal        start
     /* B0 001000B0 04004524 */   addiu     $a1, $v0, 0x4
-    /* B4 001000B4 76400408 */  j          func_001101D8
+    /* B4 001000B4 76400408 */  j          Exit
     /* B8 001000B8 2D204000 */   daddu     $a0, $v0, $zero
 endlabel entry
     /* BC 001000BC 00000000 */  nop

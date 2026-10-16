@@ -11,16 +11,16 @@
  * for the result. The three saves are 8 bytes apart ($s0, $s1, $ra) - the
  * cc=296 slot layout, as in the matched sibling 0277C0.
  * MATCH GUESS: cc=296 */
-int D_00135C60[];   /* .data 0x00135C60: lui/%lo (non-small) */
-extern void func_00128490(int a0);
-extern int func_00127A60(int a0, int a1);
-extern void func_00128510(int a0);
+int _impure_ptr[];   /* .data 0x00135C60: lui/%lo (non-small) */
+extern void __malloc_lock(int a0);
+extern int _malloc_r(int a0, int a1);
+extern void __malloc_unlock(int a0);
 
-int func_00127768(int a0) {
+int malloc(int a0) {
     int r;
 
-    func_00128490(D_00135C60[0]);
-    r = func_00127A60(D_00135C60[0], a0);
-    func_00128510(D_00135C60[0]);
+    __malloc_lock(_impure_ptr[0]);
+    r = _malloc_r(_impure_ptr[0], a0);
+    __malloc_unlock(_impure_ptr[0]);
     return r;
 }

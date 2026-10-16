@@ -16,7 +16,7 @@ glabel func_001199A0
     /* 199A8 001199A8 1300023C */   lui       $v0, %hi(D_00135618)
     /* 199AC 001199AC 01000424 */  addiu      $a0, $zero, 0x1
     /* 199B0 001199B0 185640AC */  sw         $zero, %lo(D_00135618)($v0)
-    /* 199B4 001199B4 3A4A0408 */  j          func_001128E8
+    /* 199B4 001199B4 3A4A0408 */  j          sceSifSetSreg
     /* 199B8 001199B8 2D280000 */   daddu     $a1, $zero, $zero
 .align 2
   .L001199BC:

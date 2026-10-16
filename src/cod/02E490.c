@@ -6,7 +6,7 @@ extern char D_00139B38[];   /* absolute lui/addiu */
 
 int func_00128E6C(int a0, int a1);
 
-int func_0012E490(int *a0, int a1, int a2) {
+int _setlocale_r(int *a0, int a1, int a2) {
     if (a2 != 0) {
         if (func_00128E6C(a2, (int)D_00139B48) != 0) {
             if (func_00128E6C(a2, (int)D_00139B38) != 0)

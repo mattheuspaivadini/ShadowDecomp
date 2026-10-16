@@ -34,11 +34,11 @@ glabel func_00107E20
   .L00107E6C:
     /* 7E6C 00107E6C 2D980000 */  daddu      $s3, $zero, $zero
     /* 7E70 00107E70 2D200002 */  daddu      $a0, $s0, $zero
-    /* 7E74 00107E74 DA95040C */  jal        func_00125768
+    /* 7E74 00107E74 DA95040C */  jal        dpcmp
     /* 7E78 00107E78 2D286002 */   daddu     $a1, $s3, $zero
     /* 7E7C 00107E7C 0C004104 */  bgez       $v0, .L00107EB0
     /* 7E80 00107E80 2D280002 */   daddu     $a1, $s0, $zero
-    /* 7E84 00107E84 CE94040C */  jal        func_00125338
+    /* 7E84 00107E84 CE94040C */  jal        dpsub
     /* 7E88 00107E88 2D206002 */   daddu     $a0, $s3, $zero
     /* 7E8C 00107E8C 01001424 */  addiu      $s4, $zero, 0x1
     /* 7E90 00107E90 2D804000 */  daddu      $s0, $v0, $zero
@@ -53,7 +53,7 @@ glabel func_00107E20
   .L00107EB0:
     /* 7EB0 00107EB0 1300013C */  lui        $at, %hi(D_00137CF8)
     /* 7EB4 00107EB4 F87C25DC */  ld         $a1, %lo(D_00137CF8)($at)
-    /* 7EB8 00107EB8 DA95040C */  jal        func_00125768
+    /* 7EB8 00107EB8 DA95040C */  jal        dpcmp
     /* 7EBC 00107EBC 2D200002 */   daddu     $a0, $s0, $zero
     /* 7EC0 00107EC0 10004104 */  bgez       $v0, .L00107F04
     /* 7EC4 00107EC4 1300133C */   lui       $s3, %hi(D_00137CE0)
@@ -63,14 +63,14 @@ glabel func_00107E20
   .L00107ED0:
     /* 7ED0 00107ED0 48800534 */  ori        $a1, $zero, 0x8048
     /* 7ED4 00107ED4 FC2B0500 */  dsll32     $a1, $a1, 15
-    /* 7ED8 00107ED8 E894040C */  jal        func_001253A0
+    /* 7ED8 00107ED8 E894040C */  jal        dpmul
     /* 7EDC 00107EDC FFFF5226 */   addiu     $s2, $s2, -0x1
     /* 7EE0 00107EE0 2D804000 */  daddu      $s0, $v0, $zero
 .align 2
   .L00107EE4:
     /* 7EE4 00107EE4 1300013C */  lui        $at, %hi(D_00137D00)
     /* 7EE8 00107EE8 007D25DC */  ld         $a1, %lo(D_00137D00)($at)
-    /* 7EEC 00107EEC DA95040C */  jal        func_00125768
+    /* 7EEC 00107EEC DA95040C */  jal        dpcmp
     /* 7EF0 00107EF0 2D200002 */   daddu     $a0, $s0, $zero
     /* 7EF4 00107EF4 F6FF4004 */  bltz       $v0, .L00107ED0
     /* 7EF8 00107EF8 2D200002 */   daddu     $a0, $s0, $zero
@@ -80,7 +80,7 @@ glabel func_00107E20
   .L00107F04:
     /* 7F04 00107F04 C0FF0534 */  ori        $a1, $zero, 0xFFC0
     /* 7F08 00107F08 BC2B0500 */  dsll32     $a1, $a1, 14
-    /* 7F0C 00107F0C DA95040C */  jal        func_00125768
+    /* 7F0C 00107F0C DA95040C */  jal        dpcmp
     /* 7F10 00107F10 2D200002 */   daddu     $a0, $s0, $zero
     /* 7F14 00107F14 0F004004 */  bltz       $v0, .L00107F54
     /* 7F18 00107F18 1300133C */   lui       $s3, %hi(D_00137CE0)
@@ -91,14 +91,14 @@ glabel func_00107E20
   .L00107F28:
     /* 7F28 00107F28 48800534 */  ori        $a1, $zero, 0x8048
     /* 7F2C 00107F2C FC2B0500 */  dsll32     $a1, $a1, 15
-    /* 7F30 00107F30 8A95040C */  jal        func_00125628
+    /* 7F30 00107F30 8A95040C */  jal        dpdiv
     /* 7F34 00107F34 01005226 */   addiu     $s2, $s2, 0x1
     /* 7F38 00107F38 2D804000 */  daddu      $s0, $v0, $zero
 .align 2
   .L00107F3C:
     /* 7F3C 00107F3C C0FF0534 */  ori        $a1, $zero, 0xFFC0
     /* 7F40 00107F40 BC2B0500 */  dsll32     $a1, $a1, 14
-    /* 7F44 00107F44 DA95040C */  jal        func_00125768
+    /* 7F44 00107F44 DA95040C */  jal        dpcmp
     /* 7F48 00107F48 2D200002 */   daddu     $a0, $s0, $zero
     /* 7F4C 00107F4C F6FF4104 */  bgez       $v0, .L00107F28
     /* 7F50 00107F50 2D200002 */   daddu     $a0, $s0, $zero
@@ -106,9 +106,9 @@ glabel func_00107E20
   .L00107F54:
     /* 7F54 00107F54 1300013C */  lui        $at, %hi(D_00137D08)
     /* 7F58 00107F58 087D25DC */  ld         $a1, %lo(D_00137D08)($at)
-    /* 7F5C 00107F5C E894040C */  jal        func_001253A0
+    /* 7F5C 00107F5C E894040C */  jal        dpmul
     /* 7F60 00107F60 2D200002 */   daddu     $a0, $s0, $zero
-    /* 7F64 00107F64 1E93040C */  jal        func_00124C78
+    /* 7F64 00107F64 1E93040C */  jal        __fixunsdfdi
     /* 7F68 00107F68 2D204000 */   daddu     $a0, $v0, $zero
     /* 7F6C 00107F6C 641F040C */  jal        func_00107D90
     /* 7F70 00107F70 2D204000 */   daddu     $a0, $v0, $zero

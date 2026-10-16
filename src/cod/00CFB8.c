@@ -3,6 +3,6 @@
  */
 extern int sceStdioCCode();
 
-int func_0010CFB8(int a0) {
+int sceChdir(int a0) {
     return sceStdioCCode(a0, 0x12);
 }

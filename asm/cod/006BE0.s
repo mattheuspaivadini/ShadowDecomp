@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00106BE0, 0x10
+nonmatching SetGsCrt, 0x10
 
-glabel func_00106BE0
+glabel SetGsCrt
     /* 6BE0 00106BE0 02000324 */  addiu      $v1, $zero, 0x2
     /* 6BE4 00106BE4 0C000000 */  syscall    0 /* handwritten instruction */
     /* 6BE8 00106BE8 0800E003 */  jr         $ra
     /* 6BEC 00106BEC 00000000 */   nop
-endlabel func_00106BE0
+endlabel SetGsCrt

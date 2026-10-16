@@ -5,6 +5,6 @@
  */
 #include "symbols.h"
 
-void *func_00113520(void) {
+void *sceGsGetGParam(void) {
     return &D_00133970;
 }

@@ -33,7 +33,7 @@ glabel OutputLinkerScriptFile
     /* 5D4 001005D4 2D200002 */  daddu      $a0, $s0, $zero
     /* 5D8 001005D8 02060524 */  addiu      $a1, $zero, 0x602
     /* 5DC 001005DC 2D300000 */  daddu      $a2, $zero, $zero
-    /* 5E0 001005E0 020C040C */  jal        func_00103008
+    /* 5E0 001005E0 020C040C */  jal        LoaderSysFOpen
     /* 5E4 001005E4 2D880000 */   daddu     $s1, $zero, $zero
     /* 5E8 001005E8 2DA84000 */  daddu      $s5, $v0, $zero
     /* 5EC 001005EC 1C00628E */  lw         $v0, 0x1C($s3)
@@ -74,7 +74,7 @@ glabel OutputLinkerScriptFile
     /* 670 00100670 0500C010 */  beqz       $a2, .L00100688
     /* 674 00100674 00000000 */   nop
     /* 678 00100678 1084848F */  lw         $a0, %gp_rel(D_0013A180)($gp)
-    /* 67C 0010067C 200C040C */  jal        func_00103080
+    /* 67C 0010067C 200C040C */  jal        LoaderSysFWrite
     /* 680 00100680 48A34526 */   addiu     $a1, $s2, %lo(D_0013A348)
     /* 684 00100684 D08080AF */  sw         $zero, %gp_rel(D_00139E40)($gp)
 .align 2
@@ -88,7 +88,7 @@ glabel OutputLinkerScriptFile
     /* 6A0 001006A0 00000000 */   nop
     /* 6A4 001006A4 1084848F */  lw         $a0, %gp_rel(D_0013A180)($gp)
     /* 6A8 001006A8 2D304000 */  daddu      $a2, $v0, $zero
-    /* 6AC 001006AC 200C040C */  jal        func_00103080
+    /* 6AC 001006AC 200C040C */  jal        LoaderSysFWrite
     /* 6B0 001006B0 2D280002 */   daddu     $a1, $s0, $zero
     /* 6B4 001006B4 0F000010 */  b          .L001006F4
     /* 6B8 001006B8 1C00628E */   lw        $v0, 0x1C($s3)
@@ -132,7 +132,7 @@ glabel OutputLinkerScriptFile
     /* 730 00100730 00000000 */   nop
     /* 734 00100734 1400053C */  lui        $a1, %hi(D_0013A348)
     /* 738 00100738 1084848F */  lw         $a0, %gp_rel(D_0013A180)($gp)
-    /* 73C 0010073C 200C040C */  jal        func_00103080
+    /* 73C 0010073C 200C040C */  jal        LoaderSysFWrite
     /* 740 00100740 48A3A524 */   addiu     $a1, $a1, %lo(D_0013A348)
     /* 744 00100744 D08080AF */  sw         $zero, %gp_rel(D_00139E40)($gp)
 .align 2
@@ -146,7 +146,7 @@ glabel OutputLinkerScriptFile
     /* 760 00100760 2D200002 */   daddu     $a0, $s0, $zero
     /* 764 00100764 1084848F */  lw         $a0, %gp_rel(D_0013A180)($gp)
     /* 768 00100768 2D280002 */  daddu      $a1, $s0, $zero
-    /* 76C 0010076C 200C040C */  jal        func_00103080
+    /* 76C 0010076C 200C040C */  jal        LoaderSysFWrite
     /* 770 00100770 2D304000 */   daddu     $a2, $v0, $zero
     /* 774 00100774 11000010 */  b          .L001007BC
     /* 778 00100778 4000628E */   lw        $v0, 0x40($s3)
@@ -242,7 +242,7 @@ glabel OutputLinkerScriptFile
     /* 8A8 001008A8 0500C010 */  beqz       $a2, .L001008C0
     /* 8AC 001008AC 00000000 */   nop
     /* 8B0 001008B0 1084848F */  lw         $a0, %gp_rel(D_0013A180)($gp)
-    /* 8B4 001008B4 200C040C */  jal        func_00103080
+    /* 8B4 001008B4 200C040C */  jal        LoaderSysFWrite
     /* 8B8 001008B8 48A3C526 */   addiu     $a1, $s6, %lo(D_0013A348)
     /* 8BC 001008BC D08080AF */  sw         $zero, %gp_rel(D_00139E40)($gp)
 .align 2
@@ -256,7 +256,7 @@ glabel OutputLinkerScriptFile
     /* 8D8 001008D8 2D200002 */   daddu     $a0, $s0, $zero
     /* 8DC 001008DC 1084848F */  lw         $a0, %gp_rel(D_0013A180)($gp)
     /* 8E0 001008E0 2D280002 */  daddu      $a1, $s0, $zero
-    /* 8E4 001008E4 200C040C */  jal        func_00103080
+    /* 8E4 001008E4 200C040C */  jal        LoaderSysFWrite
     /* 8E8 001008E8 2D304000 */   daddu     $a2, $v0, $zero
     /* 8EC 001008EC 0F000010 */  b          .L0010092C
     /* 8F0 001008F0 4000628E */   lw        $v0, 0x40($s3)
@@ -301,7 +301,7 @@ glabel OutputLinkerScriptFile
     /* 96C 0010096C 00000000 */   nop
     /* 970 00100970 1400053C */  lui        $a1, %hi(D_0013A348)
     /* 974 00100974 1084848F */  lw         $a0, %gp_rel(D_0013A180)($gp)
-    /* 978 00100978 200C040C */  jal        func_00103080
+    /* 978 00100978 200C040C */  jal        LoaderSysFWrite
     /* 97C 0010097C 48A3A524 */   addiu     $a1, $a1, %lo(D_0013A348)
     /* 980 00100980 D08080AF */  sw         $zero, %gp_rel(D_00139E40)($gp)
 .align 2
@@ -315,7 +315,7 @@ glabel OutputLinkerScriptFile
     /* 99C 0010099C 2D200002 */   daddu     $a0, $s0, $zero
     /* 9A0 001009A0 1084848F */  lw         $a0, %gp_rel(D_0013A180)($gp)
     /* 9A4 001009A4 2D280002 */  daddu      $a1, $s0, $zero
-    /* 9A8 001009A8 200C040C */  jal        func_00103080
+    /* 9A8 001009A8 200C040C */  jal        LoaderSysFWrite
     /* 9AC 001009AC 2D304000 */   daddu     $a2, $v0, $zero
     /* 9B0 001009B0 10000010 */  b          .L001009F4
     /* 9B4 001009B4 1084828F */   lw        $v0, %gp_rel(D_0013A180)($gp)
@@ -344,12 +344,12 @@ glabel OutputLinkerScriptFile
     /* A00 00100A00 00000000 */   nop
     /* A04 00100A04 1400053C */  lui        $a1, %hi(D_0013A348)
     /* A08 00100A08 2D20A002 */  daddu      $a0, $s5, $zero
-    /* A0C 00100A0C 200C040C */  jal        func_00103080
+    /* A0C 00100A0C 200C040C */  jal        LoaderSysFWrite
     /* A10 00100A10 48A3A524 */   addiu     $a1, $a1, %lo(D_0013A348)
     /* A14 00100A14 D08080AF */  sw         $zero, %gp_rel(D_00139E40)($gp)
 .align 2
   .L00100A18:
-    /* A18 00100A18 080C040C */  jal        func_00103020
+    /* A18 00100A18 080C040C */  jal        LoaderSysFClose
     /* A1C 00100A1C 2D20A002 */   daddu     $a0, $s5, $zero
     /* A20 00100A20 01000224 */  addiu      $v0, $zero, 0x1
     /* A24 00100A24 0004B0DF */  ld         $s0, 0x400($sp)

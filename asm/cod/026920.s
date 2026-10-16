@@ -225,7 +225,7 @@ glabel func_00126920
     /* 26BDC 00126BDC 2D100002 */   daddu     $v0, $s0, $zero
 .align 2
   jlabel .L00126BE0
-    /* 26BE0 00126BE0 DA9D040C */  jal        func_00127768
+    /* 26BE0 00126BE0 DA9D040C */  jal        malloc
     /* 26BE4 00126BE4 80040424 */   addiu     $a0, $zero, 0x480
     /* 26BE8 00126BE8 2D182002 */  daddu      $v1, $s1, $zero
     /* 26BEC 00126BEC 2D204000 */  daddu      $a0, $v0, $zero
@@ -268,7 +268,7 @@ glabel func_00126920
     /* 26C68 00126C68 00000000 */  nop
     /* 26C6C 00126C6C F4FF6214 */  bne        $v1, $v0, .L00126C40
     /* 26C70 00126C70 2000A524 */   addiu     $a1, $a1, 0x20
-    /* 26C74 00126C74 F09D040C */  jal        func_001277C0
+    /* 26C74 00126C74 F09D040C */  jal        free
     /* 26C78 00126C78 00000000 */   nop
     /* 26C7C 00126C7C 35000010 */  b          .L00126D54
     /* 26C80 00126C80 2D100002 */   daddu     $v0, $s0, $zero

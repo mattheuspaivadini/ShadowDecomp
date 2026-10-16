@@ -18,14 +18,14 @@ struct S013148 {
     int *field0C;                   /* 0x0C block to credit */
 };
 
-int *func_00113098(struct S013148 *p);
+int *sceVif1PkTerminate(struct S013148 *p);
 
-int func_00113148(struct S013148 *p, int tag) {
+int sceVif1PkEnd(struct S013148 *p, int tag) {
     int *q;
     int *r;
     int *next;
 
-    r = func_00113098(p);
+    r = sceVif1PkTerminate(p);
     q = p->field00;
     p->field08 = r;
     q[0] = tag | 0x70000000;

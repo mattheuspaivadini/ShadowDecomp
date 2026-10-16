@@ -45,7 +45,7 @@ struct S015008 {
 
 extern struct S015008 D_0014B598[];
 
-int func_00115008(void) {
+int scePad2Init(void) {
     int base;
     int p;
     int end;

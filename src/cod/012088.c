@@ -15,7 +15,7 @@ struct S00112088 {
     long long field48;   /* 0x48 */
 };
 
-int func_00112088(int unused, struct S00112088 *p) {
+int fstat(int unused, struct S00112088 *p) {
     p->field48 = 0;
     p->field04 = 0x2000;
     return 0;

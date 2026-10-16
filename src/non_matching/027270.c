@@ -11,7 +11,7 @@ struct R027270 {
     unsigned long long pad18;   /* 0x18 */
 };
 
-int func_00127270(struct R027270 *a, struct R027270 *b) {
+int __fpcmp_parts_d(struct R027270 *a, struct R027270 *b) {
     if (a->type < 2 || b->type < 2)
         return 1;
     if (a->type == 4) {
@@ -40,3 +40,4 @@ int func_00127270(struct R027270 *a, struct R027270 *b) {
         return a->sign == 0 ? -1 : 1;
     return 0;
 }
+/* func_00127270 */

@@ -19,12 +19,12 @@ struct Strip0140 {
 };
 
 extern int D_00138508[];    /* .data 0x00138508: per-channel "in use" flags */
-extern int D_001339B0[];    /* .data 0x001339B0: per-channel strip pointers */
+extern int dch[];    /* .data 0x001339B0: per-channel strip pointers */
 
 extern void func_001148E0(unsigned char *p, int n);
-extern void func_00114A20(void *env);
+extern void sceDmaPutEnv(void *env);
 
-int func_00114940(int a0) {
+int sceDmaReset(int a0) {
     unsigned int old;
     unsigned long long env[4];      /* 0x14 live bytes, 0x20-byte slot */
     struct Strip0140 *p;
@@ -33,7 +33,7 @@ int func_00114940(int a0) {
     old = HWREG(EE_D_CTRL) & 1;
     for (i = 9; i >= 0; i--) {
         if (D_00138508[i] != 0) {
-            p = (struct Strip0140 *)D_001339B0[i];
+            p = (struct Strip0140 *)dch[i];
             p->f80 = 0;
             p->f00 = 0;
             p->f30 = 0;
@@ -45,7 +45,7 @@ int func_00114940(int a0) {
     HWREG(EE_D_STAT) = 0xFF1F;
     HWREG(EE_D_STAT) = HWREG(EE_D_STAT) & 0xFF1F0000;
     func_001148E0((unsigned char *)env, 0x14);
-    func_00114A20(env);
+    sceDmaPutEnv(env);
     if (a0 == 1)
         HWREG(EE_D_CTRL) = HWREG(EE_D_CTRL) | 1;
     return old;

@@ -17,8 +17,8 @@ struct R021E88 {
 
 extern struct R021E88 D_00163CC8[];
 
-int func_001161A0(int x);
+int sceDbcGetConnection(int x);
 
-int func_00121E88(int index) {
-    return func_001161A0(D_00163CC8[index].field04) != 3;
+int _sceMcCoreGetConnection(int index) {
+    return sceDbcGetConnection(D_00163CC8[index].field04) != 3;
 }

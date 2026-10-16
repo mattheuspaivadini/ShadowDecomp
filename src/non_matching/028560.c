@@ -21,9 +21,9 @@
  * (asm/cod/029930.s: $a0 = the handle stored at 0x54 of the FILE, $a1 = the
  * FILE, $a2 = format, $a3 = va_list).
  * MATCH GUESS: cc=296 (the printf family: the matched 002FE8/003FF8 are cc=296) */
-int vfprintf(int a0, int a1, char *fmt, int ap);
+int _vfprintf_r(int a0, int a1, char *fmt, int ap);
 
-int func_00128560(int a0, int a1, ...) {
-    return vfprintf(a0, (int)*(int **)(a0 + 8), (char *)a1,
+int _printf_r(int a0, int a1, ...) {
+    return _vfprintf_r(a0, (int)*(int **)(a0 + 8), (char *)a1,
                     (int)__builtin_saveregs());
 }

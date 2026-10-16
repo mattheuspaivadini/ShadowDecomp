@@ -37,17 +37,17 @@ struct File02D8C8 {
     struct Node02D8C8 node; /* 0x1D8 */
 };
 
-extern void func_0012DA00(int a0);
-extern int func_0012D850(int a0, int a1);
+extern void __sinit(int a0);
+extern int __sfmoreglue(int a0, int a1);
 
-struct Ent02D8C8 *func_0012D8C8(struct File02D8C8 *p) {
+struct Ent02D8C8 *__sfp(struct File02D8C8 *p) {
     struct Node02D8C8 *n;
     struct Ent02D8C8 *e;
     int t;
     int i;
 
     if (p->f38 == 0)
-        func_0012DA00((int)p);
+        __sinit((int)p);
     n = &p->node;
     for (;;) {
         i = n->count - 1;
@@ -63,7 +63,7 @@ struct Ent02D8C8 *func_0012D8C8(struct File02D8C8 *p) {
             n = (struct Node02D8C8 *)t;
             continue;
         }
-        t = func_0012D850((int)p, 4);
+        t = __sfmoreglue((int)p, 4);
         n->next = t;
         if (t == 0) {
             p->f00 = 0xC;
@@ -87,3 +87,4 @@ found:
     e->f0C = 1;
     return e;
 }
+/* func_0012D8C8 */

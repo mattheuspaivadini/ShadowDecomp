@@ -29,7 +29,7 @@ struct P0028A0 {
 
 extern struct P0028A0 D_0013BF90[];
 
-int func_001028A0(int key) {
+int LoaderSysDeleteExternalIntcHandlerList(int key) {
     int i;
 
     for (i = 0; i < 256; i++) {

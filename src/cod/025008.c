@@ -23,11 +23,11 @@
  */
 extern int D_00169F88[];    /* .bss 0x00169F88, 4 bytes: array => lui/%lo */
 
-void func_00124F48(void);
+void __do_global_ctors(void);
 
-void func_00125008(void) {
+void __main(void) {
     if (D_00169F88[0] != 0)
         return;
     D_00169F88[0] = 1;
-    func_00124F48();
+    __do_global_ctors();
 }

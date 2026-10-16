@@ -32,13 +32,13 @@ glabel sceSifMCallRpc
     /* 19F60 00119F60 0600C013 */  beqz       $fp, .L00119F7C
     /* 19F64 00119F64 2000B0FF */   sd        $s0, 0x20($sp)
     /* 19F68 00119F68 1400043C */  lui        $a0, %hi(D_00138B28)
-    /* 19F6C 00119F6C BE23040C */  jal        func_00108EF8
+    /* 19F6C 00119F6C BE23040C */  jal        scePrintf
     /* 19F70 00119F70 288B8424 */   addiu     $a0, $a0, %lo(D_00138B28)
     /* 19F74 00119F74 78000010 */  b          .L0011A158
     /* 19F78 00119F78 FFFF0224 */   addiu     $v0, $zero, -0x1
 .align 2
   .L00119F7C:
-    /* 19F7C 00119F7C 081C040C */  jal        func_00107020
+    /* 19F7C 00119F7C 081C040C */  jal        WaitSema
     /* 19F80 00119F80 2800448E */   lw        $a0, 0x28($s2)
     /* 19F84 00119F84 3F008332 */  andi       $v1, $s4, 0x3F
     /* 19F88 00119F88 06006010 */  beqz       $v1, .L00119FA4
@@ -59,7 +59,7 @@ glabel sceSifMCallRpc
     /* 19FBC 00119FBC 2D30A002 */  daddu      $a2, $s5, $zero
 .align 2
   .L00119FC0:
-    /* 19FC0 00119FC0 BE23040C */  jal        func_00108EF8
+    /* 19FC0 00119FC0 BE23040C */  jal        scePrintf
     /* 19FC4 00119FC4 00000000 */   nop
     /* 19FC8 00119FC8 63000010 */  b          .L0011A158
     /* 19FCC 00119FCC FFFF0224 */   addiu     $v0, $zero, -0x1
@@ -91,7 +91,7 @@ glabel sceSifMCallRpc
     /* 1A02C 0011A02C 2A107102 */  slt        $v0, $s3, $s1
     /* 1A030 0011A030 2D282002 */  daddu      $a1, $s1, $zero
     /* 1A034 0011A034 2D208002 */  daddu      $a0, $s4, $zero
-    /* 1A038 0011A038 F24B040C */  jal        func_00112FC8
+    /* 1A038 0011A038 F24B040C */  jal        sceSifWriteBackDCache
     /* 1A03C 0011A03C 0A286202 */   movz      $a1, $s3, $v0
     /* 1A040 0011A040 0A000010 */  b          .L0011A06C
     /* 1A044 0011A044 0100C233 */   andi      $v0, $fp, 0x1
@@ -99,13 +99,13 @@ glabel sceSifMCallRpc
   .L0011A048:
     /* 1A048 0011A048 0300601A */  blez       $s3, .L0011A058
     /* 1A04C 0011A04C 2D208002 */   daddu     $a0, $s4, $zero
-    /* 1A050 0011A050 F24B040C */  jal        func_00112FC8
+    /* 1A050 0011A050 F24B040C */  jal        sceSifWriteBackDCache
     /* 1A054 0011A054 2D286002 */   daddu     $a1, $s3, $zero
 .align 2
   .L0011A058:
     /* 1A058 0011A058 0300201A */  blez       $s1, .L0011A068
     /* 1A05C 0011A05C 2D20A002 */   daddu     $a0, $s5, $zero
-    /* 1A060 0011A060 F24B040C */  jal        func_00112FC8
+    /* 1A060 0011A060 F24B040C */  jal        sceSifWriteBackDCache
     /* 1A064 0011A064 2D282002 */   daddu     $a1, $s1, $zero
 .align 2
   .L0011A068:
@@ -131,7 +131,7 @@ glabel sceSifMCallRpc
     /* 1A09C 0011A09C 2D486002 */  daddu      $a5, $s3, $zero
     /* 1A0A0 0011A0A0 1A008434 */  ori        $a0, $a0, (0x8000001A & 0xFFFF)
     /* 1A0A4 0011A0A4 2D280002 */  daddu      $a1, $s0, $zero
-    /* 1A0A8 0011A0A8 804B040C */  jal        func_00112E00
+    /* 1A0A8 0011A0A8 804B040C */  jal        sceSifSendCmd
     /* 1A0AC 0011A0AC 40000624 */   addiu     $a2, $zero, 0x40
     /* 1A0B0 0011A0B0 29004014 */  bnez       $v0, .L0011A158
     /* 1A0B4 0011A0B4 2D100000 */   daddu     $v0, $zero, $zero
@@ -146,7 +146,7 @@ glabel sceSifMCallRpc
     /* 1A0D0 0011A0D0 0800A0AF */  sw         $zero, 0x8($sp)
     /* 1A0D4 0011A0D4 1400A2AF */  sw         $v0, 0x14($sp)
     /* 1A0D8 0011A0D8 2D20A003 */  daddu      $a0, $sp, $zero
-    /* 1A0DC 0011A0DC F81B040C */  jal        func_00106FE0
+    /* 1A0DC 0011A0DC F81B040C */  jal        CreateSema
     /* 1A0E0 0011A0E0 0400B5AF */   sw        $s5, 0x4($sp)
     /* 1A0E4 0011A0E4 2D884000 */  daddu      $s1, $v0, $zero
     /* 1A0E8 0011A0E8 05002106 */  bgez       $s1, .L0011A100
@@ -164,21 +164,21 @@ glabel sceSifMCallRpc
     /* 1A110 0011A110 1400488E */  lw         $a4, 0x14($s2)
     /* 1A114 0011A114 1A008434 */  ori        $a0, $a0, (0x8000001A & 0xFFFF)
     /* 1A118 0011A118 2D280002 */  daddu      $a1, $s0, $zero
-    /* 1A11C 0011A11C 804B040C */  jal        func_00112E00
+    /* 1A11C 0011A11C 804B040C */  jal        sceSifSendCmd
     /* 1A120 0011A120 40000624 */   addiu     $a2, $zero, 0x40
     /* 1A124 0011A124 07004014 */  bnez       $v0, .L0011A144
     /* 1A128 0011A128 00000000 */   nop
     /* 1A12C 0011A12C A866040C */  jal        func_00119AA0
     /* 1A130 0011A130 2D200002 */   daddu     $a0, $s0, $zero
-    /* 1A134 0011A134 FC1B040C */  jal        func_00106FF0
+    /* 1A134 0011A134 FC1B040C */  jal        DeleteSema
     /* 1A138 0011A138 2D202002 */   daddu     $a0, $s1, $zero
     /* 1A13C 0011A13C 06000010 */  b          .L0011A158
     /* 1A140 0011A140 FEFF0224 */   addiu     $v0, $zero, -0x2
 .align 2
   .L0011A144:
-    /* 1A144 0011A144 081C040C */  jal        func_00107020
+    /* 1A144 0011A144 081C040C */  jal        WaitSema
     /* 1A148 0011A148 2D202002 */   daddu     $a0, $s1, $zero
-    /* 1A14C 0011A14C FC1B040C */  jal        func_00106FF0
+    /* 1A14C 0011A14C FC1B040C */  jal        DeleteSema
     /* 1A150 0011A150 2D202002 */   daddu     $a0, $s1, $zero
     /* 1A154 0011A154 2D100000 */  daddu      $v0, $zero, $zero
 .align 2

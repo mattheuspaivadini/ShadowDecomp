@@ -6,12 +6,12 @@
  * (unsigned long long)buf[3] << 30 - the zero-extending `lwu` means the buffer
  * element is unsigned.
  * MATCH GUESS: cc=296 (0x1258xx/0x1259xx family is 2.96-only) */
-extern int func_00127048(float *f, unsigned int *out);
-extern int func_00125870(int a0, int a1, int a2, long long a3);
+extern int __unpack_f(float *f, unsigned int *out);
+extern int __make_dp(int a0, int a1, int a2, long long a3);
 
-int func_00125040(float f) {
+int fptodp(float f) {
     unsigned int buf[4];
 
-    func_00127048(&f, buf);
-    return func_00125870(buf[0], buf[1], buf[2], (unsigned long long)buf[3] << 30);
+    __unpack_f(&f, buf);
+    return __make_dp(buf[0], buf[1], buf[2], (unsigned long long)buf[3] << 30);
 }

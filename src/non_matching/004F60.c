@@ -47,30 +47,30 @@ struct S004F60Thread {
     char  pad[0x18];/* 0x18-0x2F (UNCONFIRMED slot size) */
 };
 
-int  func_00106FE0(void *param);          /* syscall 0x40: CreateSema  */
-int  func_00106DE0(void *param);          /* syscall 0x20: CreateThread */
-int  func_00107AD0(int thread, int a1);
-void func_00117138(int entry, int arg);
+int  CreateSema(void *param);          /* syscall 0x40: CreateSema  */
+int  CreateThread(void *param);          /* syscall 0x20: CreateThread */
+int  StartThread(int thread, int a1);
+void sceCdPOffCallback(int entry, int arg);
 int  func_00104FF0(void);                 /* the thread entry point   */
 
 extern int  D_0013A118;      /* .sbss, %gp_rel: the semaphore handle     */
 extern char D_0013DAC0[];    /* thread stack (lui/%lo address)           */
-extern char D_00141D70[];    /* _gp itself (lui/%lo address)             */
+extern char _gp[];    /* _gp itself (lui/%lo address)             */
 extern char D_001050A0[];    /* entry installed by func_00117138         */
 
-void func_00104F60(void) {
+void PreparePowerOff(void) {
     struct S004F60Sema sema;
     struct S004F60Thread th;
 
     sema.max = 1;
     sema.init = 0;
     sema.option = 0;
-    D_0013A118 = func_00106FE0(&sema);
+    D_0013A118 = CreateSema(&sema);
     th.entry = (void *)func_00104FF0;
     th.stack = D_0013DAC0;
     th.size = 0x1000;
-    th.gp = (int)D_00141D70;
+    th.gp = (int)_gp;
     th.option = 1;
-    func_00107AD0(func_00106DE0(&th), 0);
-    func_00117138((int)D_001050A0, 0);
+    StartThread(CreateThread(&th), 0);
+    sceCdPOffCallback((int)D_001050A0, 0);
 }

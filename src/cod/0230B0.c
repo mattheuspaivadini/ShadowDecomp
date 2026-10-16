@@ -5,14 +5,14 @@
 extern int D_00169F10[];
 extern int D_00169F58[];
 
-void func_00109D28(int a0, int a1);
-void func_00109DC0(int a0);
-void func_00106E30(int a0);
-void func_00106DF0(int a0);
+void sceSifRemoveRpc(int a0, int a1);
+void sceSifRemoveRpcQueue(int a0);
+void TerminateThread(int a0);
+void DeleteThread(int a0);
 
-void func_001230B0(int a0) {
-    func_00109D28((int)D_00169F10, (int)D_00169F58);
-    func_00109DC0((int)D_00169F58);
-    func_00106E30(a0);
-    func_00106DF0(a0);
+void sce_delete_callback_thread(int a0) {
+    sceSifRemoveRpc((int)D_00169F10, (int)D_00169F58);
+    sceSifRemoveRpcQueue((int)D_00169F58);
+    TerminateThread(a0);
+    DeleteThread(a0);
 }

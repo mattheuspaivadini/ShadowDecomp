@@ -17,26 +17,26 @@
  * statements (the -1 and both success returns share the .L0012336C epilogue
  * entry, -0x65 has its own at .L00123370).
  * MATCH GUESS: cc=29 (D_00135960 accessor family: 0231A8/023208) */
-void func_00107020(int a0);
-int func_00107030(int a0);
+void WaitSema(int a0);
+int PollSema(int a0);
 int func_00123208(void);
 
 extern int D_00135960[];   /* .data 0x00135960, 4 bytes - array => lui/%lo */
 
-int func_001232F0(int a0) {
+int sce_sync(int a0) {
     int r;
 
     r = 1;
     if (D_00135960[0] < 0)
         return -1;
     if (a0 == 0) {
-        func_00107020(D_00135960[0]);
+        WaitSema(D_00135960[0]);
         func_00123208();
         r = 0;
         return r;
     }
     if (a0 == r) {
-        if (func_00107030(D_00135960[0]) == -1)
+        if (PollSema(D_00135960[0]) == -1)
             return r;
         func_00123208();
         r = 0;

@@ -2,7 +2,7 @@
  * R1 wave4c: unreachable 2nd range test (slti/bltz)
  * The original .s stays in the build (asm/cod/0018B8.s); this C
  * draft (Session 8) is kept for the record. */
-int func_001018B8(int *a0, int a1) {
+int RelocateSelfSymbol(int *a0, int a1) {
     int n = a0[0x24 / 4] - 1;
     int *e = (int *)a0[0x28 / 4];
     int *tab = (int *)a0[0x30 / 4];
@@ -29,3 +29,4 @@ int func_001018B8(int *a0, int a1) {
     } while (n != -1);
     return 1;
 }
+/* func_001018B8 */

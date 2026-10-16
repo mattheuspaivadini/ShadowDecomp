@@ -38,7 +38,7 @@ struct S00133918 {
 
 extern struct S00133918 D_00133918;
 
-int func_00110EF0(int *out0, int *out1) {
+int iGetTimerUsedUnusedCounters(int *out0, int *out1) {
     if (D_00133918.field08 >= 0) {
         if (out0)
             *out0 = D_00133918.field10;

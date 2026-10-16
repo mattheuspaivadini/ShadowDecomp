@@ -161,7 +161,7 @@ glabel func_0011D9E8
     /* 1DBCC 0011DBCC 2D20E002 */  daddu      $a0, $s7, $zero
     /* 1DBD0 0011DBD0 2D28A003 */  daddu      $a1, $sp, $zero
     /* 1DBD4 0011DBD4 2D306002 */  daddu      $a2, $s3, $zero
-    /* 1DBD8 0011DBD8 3483040C */  jal        func_00120CD0
+    /* 1DBD8 0011DBD8 3483040C */  jal        _sceMcpReadUserClust
     /* 1DBDC 0011DBDC 01000724 */   addiu     $a3, $zero, 0x1
     /* 1DBE0 0011DBE0 04004014 */  bnez       $v0, .L0011DBF4
     /* 1DBE4 0011DBE4 0404A88F */   lw        $a4, 0x404($sp)

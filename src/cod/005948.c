@@ -4,5 +4,5 @@
  * $a2..$a7 spilled, no body). Evidence: the shape is reproduced
  * byte-for-byte by a plain variadic function with 2 fixed argument(s)
  * (probe: build/tmp/probe_va.c). */
-void func_00105948(int a0, int a1, ...) {
+void PutString(int a0, int a1, ...) {
 }

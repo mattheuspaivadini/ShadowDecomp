@@ -17,19 +17,19 @@
  * MATCH GUESS: cc=296 */
 int func_0010E238(void);
 int func_0010E338(void);
-int SceSifrpcCall(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
+int sceSifCallRpc(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
                   int a7, int a8);
 
 extern int D_00147380[];   /* .bss/.data, outside small-data -> lui/%lo */
 extern int D_00147580[];   /* .bss transfer buffer          -> lui/addiu */
 
-int func_0010E810(int a0) {
+int sceSifUnloadModule(int a0) {
     if (func_0010E238() < 0)
         return 0xFFFF0000;
     if (func_0010E338() != 0)
         return 0xFFFEFFFC;
     D_00147380[0] = a0;
-    if (SceSifrpcCall((int)D_00147580, 0x8, 0, (int)D_00147380, 4,
+    if (sceSifCallRpc((int)D_00147580, 0x8, 0, (int)D_00147380, 4,
                       (int)D_00147380, 4, 0, 0) < 0)
         return 0xFFFEFFFF;
     return D_00147380[0];

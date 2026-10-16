@@ -23,7 +23,7 @@
  * MATCH GUESS: cc=296 (delay slots filled; the 0x24-record indexing is
  * func_001211B8's own, this caller only builds the block)
  */
-int func_001211B8(int index, int *src);
+int _sceMcCoreSetCardSpec(int index, int *src);
 
 int func_0011CAC0(int index, int *rec) {
     unsigned short w28;
@@ -34,5 +34,5 @@ int func_0011CAC0(int index, int *rec) {
     buf[1] = *(unsigned short *)((char *)rec + 0x2C);
     buf[3] = 1;
     buf[2] = (*(int *)((char *)rec + 0x30) << 10) / w28;
-    return func_001211B8(index, buf);
+    return _sceMcCoreSetCardSpec(index, buf);
 }

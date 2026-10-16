@@ -40,7 +40,7 @@ glabel func_0011E0B0
     /* 1E110 0011E110 80F07226 */  addiu      $s2, $s3, %lo(D_0015F080)
     /* 1E114 0011E114 2D300002 */  daddu      $a2, $s0, $zero
     /* 1E118 0011E118 2D284002 */  daddu      $a1, $s2, $zero
-    /* 1E11C 0011E11C 3483040C */  jal        func_00120CD0
+    /* 1E11C 0011E11C 3483040C */  jal        _sceMcpReadUserClust
     /* 1E120 0011E120 01000724 */   addiu     $a3, $zero, 0x1
     /* 1E124 0011E124 3F004010 */  beqz       $v0, .L0011E224
     /* 1E128 0011E128 401A1100 */   sll       $v1, $s1, 9
@@ -95,7 +95,7 @@ glabel func_0011E0B0
   .L0011E1D8:
     /* 1E1D8 0011E1D8 80F06526 */  addiu      $a1, $s3, %lo(D_0015F080)
     /* 1E1DC 0011E1DC 2D300002 */  daddu      $a2, $s0, $zero
-    /* 1E1E0 0011E1E0 3C83040C */  jal        func_00120CF0
+    /* 1E1E0 0011E1E0 3C83040C */  jal        _sceMcpWriteUserClust
     /* 1E1E4 0011E1E4 01000724 */   addiu     $a3, $zero, 0x1
     /* 1E1E8 0011E1E8 0BA80200 */  movn       $s5, $zero, $v0
     /* 1E1EC 0011E1EC 0F000010 */  b          .L0011E22C

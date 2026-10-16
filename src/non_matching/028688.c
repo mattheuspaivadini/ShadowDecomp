@@ -2,9 +2,9 @@
  * session9 R1; residual class not auto-classified
  * The original .s stays in the build (asm/cod/028688.s); this C
  * draft (Session 9) is kept for the record. */
-int func_00127A60(int a0, int a1);
+int _malloc_r(int a0, int a1);
 
-int func_00128688(int a0) {
+int _init_signal_r(int a0) {
     int *p;
     int *q;
     int r;
@@ -13,7 +13,7 @@ int func_00128688(int a0) {
     p = (int *)a0;
     if (p[0x75] != 0)
         return 0;
-    r = func_00127A60(a0, 0x80);
+    r = _malloc_r(a0, 0x80);
     p[0x75] = r;
     if (r == 0)
         return -1;
@@ -26,3 +26,4 @@ int func_00128688(int a0) {
     } while (i >= 0);
     return 0;
 }
+/* func_00128688 */

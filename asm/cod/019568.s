@@ -23,7 +23,7 @@ glabel func_00119568
     /* 1958C 0011958C 7004BFFF */  sd         $ra, 0x470($sp)
     /* 19590 00119590 2004B1FF */  sd         $s1, 0x420($sp)
     /* 19594 00119594 1004B0FF */  sd         $s0, 0x410($sp)
-    /* 19598 00119598 7463040C */  jal        func_00118DD0
+    /* 19598 00119598 7463040C */  jal        sceInetGetInterfaceList
     /* 1959C 0011959C 2D30A003 */   daddu     $a2, $sp, $zero
     /* 195A0 001195A0 2D904000 */  daddu      $s2, $v0, $zero
     /* 195A4 001195A4 03004106 */  bgez       $s2, .L001195B4
@@ -51,7 +51,7 @@ glabel func_00119568
     /* 195DC 001195DC 2D286002 */  daddu      $a1, $s3, $zero
     /* 195E0 001195E0 08000724 */  addiu      $a3, $zero, 0x8
     /* 195E4 001195E4 0004A827 */  addiu      $a4, $sp, 0x400
-    /* 195E8 001195E8 9663040C */  jal        func_00118E58
+    /* 195E8 001195E8 9663040C */  jal        sceInetInterfaceControl
     /* 195EC 001195EC 04000924 */   addiu     $a5, $zero, 0x4
     /* 195F0 001195F0 EEFF4004 */  bltz       $v0, .L001195AC
     /* 195F4 001195F4 0004A28F */   lw        $v0, 0x400($sp)

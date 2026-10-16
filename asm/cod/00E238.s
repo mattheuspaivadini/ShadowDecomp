@@ -26,7 +26,7 @@ glabel func_0010E238
     /* E260 0010E260 0080053C */  lui        $a1, (0x80000006 >> 16)
     /* E264 0010E264 2D200002 */  daddu      $a0, $s0, $zero
     /* E268 0010E268 0600A534 */  ori        $a1, $a1, (0x80000006 & 0xFFFF)
-    /* E26C 0010E26C E825040C */  jal        SceSifrpcBind
+    /* E26C 0010E26C E825040C */  jal        sceSifBindRpc
     /* E270 0010E270 2D300000 */   daddu     $a2, $zero, $zero
     /* E274 0010E274 03004304 */  bgezl      $v0, .L0010E284
     /* E278 0010E278 2400028E */   lw        $v0, 0x24($s0)
@@ -45,7 +45,7 @@ glabel func_0010E238
     /* E2A4 0010E2A4 2D400000 */  daddu      $a4, $zero, $zero
     /* E2A8 0010E2A8 80732926 */  addiu      $a5, $s1, %lo(D_00147380)
     /* E2AC 0010E2AC 04000A24 */  addiu      $a6, $zero, 0x4
-    /* E2B0 0010E2B0 6026040C */  jal        SceSifrpcCall
+    /* E2B0 0010E2B0 6026040C */  jal        sceSifCallRpc
     /* E2B4 0010E2B4 2D580000 */   daddu     $a7, $zero, $zero
     /* E2B8 0010E2B8 04004104 */  bgez       $v0, .L0010E2CC
     /* E2BC 0010E2BC 1400033C */   lui       $v1, %hi(D_001475A8)

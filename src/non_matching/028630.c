@@ -19,14 +19,14 @@
  * ($s0, $s1, $ra) - the cc=296 slot layout.
  * MATCH GUESS: cc=296 */
 extern int D_0013A180[];   /* 0x0013A18C = D_0013A180 + 0xC: lui/%lo */
-extern int func_00111FD0(int a0);
+extern int sbrk(int a0);
 
-void func_00128630(int a0, int a1) {
+void _sbrk_r(int a0, int a1) {
     int *p = &D_0013A180[3];
     int r;
 
     *p = 0;
-    r = func_00111FD0(a1);
+    r = sbrk(a1);
     if (r == -1) {
         int v = *p;
 

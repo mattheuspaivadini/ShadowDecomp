@@ -40,14 +40,14 @@ extern int D_00145940[16];  /* .bss 0x00145940, 0x40 bytes -> lui/%lo */
 extern char D_00137EC8[];   /* .rodata: the semaphore name -> lui/%lo */
 
 int func_001091C0(int a0);
-int func_00106FE0(int a0);
-int func_00106FF0(int a0);
-int func_00107020(int a0);
+int CreateSema(int a0);
+int DeleteSema(int a0);
+int WaitSema(int a0);
 int func_00109268(int a0);
-int func_00112FC8(int a0, int a1);
-int func_00112E00(int a0, int a1, int a2, int a3, int a4, int a5);
+int sceSifWriteBackDCache(int a0, int a1);
+int sceSifSendCmd(int a0, int a1, int a2, int a3, int a4, int a5);
 
-int SceSifrpcCall(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
+int sceSifCallRpc(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
                   int a7, int a8) {
     struct RpcCd *cd;
     struct RpcCall *call;
@@ -74,12 +74,12 @@ int SceSifrpcCall(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
 
     if (!(a2 & 2)) {
         if (a3 == a5) {
-            func_00112FC8(a3, a4 < a6 ? a4 : a6);
+            sceSifWriteBackDCache(a3, a4 < a6 ? a4 : a6);
         } else {
             if (a4 > 0)
-                func_00112FC8(a3, a4);
+                sceSifWriteBackDCache(a3, a4);
             if (a6 > 0)
-                func_00112FC8(a5, a6);
+                sceSifWriteBackDCache(a5, a6);
         }
     }
 
@@ -89,7 +89,7 @@ int SceSifrpcCall(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
         else
             call->f30 = 1;
         cd->f08 = -1;
-        if (func_00112E00(0x8000000A, (int)call, 0x40, a3, cd->f14, a4) == 0) {
+        if (sceSifSendCmd(0x8000000A, (int)call, 0x40, a3, cd->f14, a4) == 0) {
             func_00109268((int)call);
             return -2;
         }
@@ -99,18 +99,18 @@ int SceSifrpcCall(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
     sema.init_count = 0;
     sema.option = (int)D_00137EC8;
     sema.max_count = 1;
-    cd->f08 = func_00106FE0((int)&sema);
+    cd->f08 = CreateSema((int)&sema);
     if (cd->f08 < 0) {
         func_00109268((int)call);
         return -3;
     }
     call->f30 = 1;
-    if (func_00112E00(0x8000000A, (int)call, 0x40, a3, cd->f14, a4) == 0) {
-        func_00106FF0(cd->f08);
+    if (sceSifSendCmd(0x8000000A, (int)call, 0x40, a3, cd->f14, a4) == 0) {
+        DeleteSema(cd->f08);
         func_00109268((int)call);
         return -2;
     }
-    func_00107020(cd->f08);
-    func_00106FF0(cd->f08);
+    WaitSema(cd->f08);
+    DeleteSema(cd->f08);
     return 0;
 }

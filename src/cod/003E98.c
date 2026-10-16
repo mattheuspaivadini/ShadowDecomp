@@ -24,18 +24,18 @@ extern char D_0013A018[];   /* lui/%lo */
 extern char D_0013A020[];   /* lui/%lo */
 extern char D_0013A028[];   /* lui/%lo */
 
-void func_00105948(int a0, int a1, ...);
-void func_00105990(int a0, int a1, ...);
-int  func_0010F168(char *s);
-int  func_0010F118(void);
+void PutString(int a0, int a1, ...);
+void PutStringS(int a0, int a1, ...);
+int  sceSifRebootIop(char *s);
+int  sceSifSyncIop(void);
 
-void func_00103E98(char *a0) {
-    func_00105948(0xFFFF00, (int)D_00136AE8);
-    func_00105948(0x40FFFF80, (int)D_0013A018, (int)a0);
-    func_00105990(0xFFFF00, (int)D_0013A020);
-    while (func_0010F168(a0) == 0)
+void LoaderSysRebootIop(char *a0) {
+    PutString(0xFFFF00, (int)D_00136AE8);
+    PutString(0x40FFFF80, (int)D_0013A018, (int)a0);
+    PutStringS(0xFFFF00, (int)D_0013A020);
+    while (sceSifRebootIop(a0) == 0)
         ;
-    while (func_0010F118() == 0)
+    while (sceSifSyncIop() == 0)
         ;
-    func_00105990(0xFFFF00, (int)D_0013A028);
+    PutStringS(0xFFFF00, (int)D_0013A028);
 }

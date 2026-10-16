@@ -39,7 +39,7 @@ glabel func_00129878
     /* 298DC 001298DC 2D884000 */  daddu      $s1, $v0, $zero
     /* 298E0 001298E0 05002006 */  bltz       $s1, .L001298F8
     /* 298E4 001298E4 2D20A003 */   daddu     $a0, $sp, $zero
-    /* 298E8 001298E8 B6B5040C */  jal        func_0012D6D8
+    /* 298E8 001298E8 B6B5040C */  jal        fflush
     /* 298EC 001298EC 00000000 */   nop
     /* 298F0 001298F0 FFFF0324 */  addiu      $v1, $zero, -0x1
     /* 298F4 001298F4 0B886200 */  movn       $s1, $v1, $v0

@@ -3,11 +3,11 @@
  * MATCHED (Session 7). */
 /* v01: void prototypes for the wrapper and the tail callee. */
 void func_00110118(int a0);
-void func_00106C00(int a0);
+void _Exit(int a0);
 
-void func_001101D8(int a0) {
+void Exit(int a0) {
     int saved = a0;
 
     func_00110118(a0);
-    func_00106C00(saved);
+    _Exit(saved);
 }

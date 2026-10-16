@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00107270, 0x10
+nonmatching CpuConfig, 0x10
 
-glabel func_00107270
+glabel CpuConfig
     /* 7270 00107270 66000324 */  addiu      $v1, $zero, 0x66
     /* 7274 00107274 0C000000 */  syscall    0 /* handwritten instruction */
     /* 7278 00107278 0800E003 */  jr         $ra
     /* 727C 0010727C 00000000 */   nop
-endlabel func_00107270
+endlabel CpuConfig

@@ -7,27 +7,27 @@ extern int D_00151E2C[];
 extern int D_00151E24[];
 extern int D_00151900[];
 
-int  func_001220B0(int key);
-void func_00107020(int a0);
-void func_00107000(int a0);
+int  _sceMcCoreChangeSocketTypeDbc2Mc(int key);
+void WaitSema(int a0);
+void SignalSema(int a0);
 
-int func_0011A798(int a0, int a1) {
+int sceMc2GetInfoAsync(int a0, int a1) {
     int id;
 
     if (D_00135630[0] == 0)
         return 0x81018001;
-    id = func_001220B0(a0);
+    id = _sceMcCoreChangeSocketTypeDbc2Mc(a0);
     if (id < 0)
         return 0x81018002;
-    func_00107020(D_00151E2C[0]);
+    WaitSema(D_00151E2C[0]);
     if (D_00151900[1] != 0) {
-        func_00107000(D_00151E2C[0]);
+        SignalSema(D_00151E2C[0]);
         return 0x81010010;
     }
     D_00151900[0] = id;
     D_00151900[3] = a1;
     D_00151900[1] = 2;
-    func_00107000(D_00151E24[0]);
-    func_00107000(D_00151E2C[0]);
+    SignalSema(D_00151E24[0]);
+    SignalSema(D_00151E2C[0]);
     return 0;
 }

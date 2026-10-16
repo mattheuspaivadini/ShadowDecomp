@@ -3,8 +3,8 @@
  * The parameter count follows the ps2sdk prototype (UNCONFIRMED for
  * this build); the code is a pure pass-through, so the count does not
  * change the emitted bytes. */
-int sceStdioLseek64(int a0, int a1, int a2, int a3);
+int sceLseek64(int a0, int a1, int a2, int a3);
 
-int func_00103050(int a0, int a1, int a2, int a3) {
-    return sceStdioLseek64(a0, a1, a2, a3);
+int LoaderSysFSeek64(int a0, int a1, int a2, int a3) {
+    return sceLseek64(a0, a1, a2, a3);
 }

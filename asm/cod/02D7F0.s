@@ -11,14 +11,14 @@
 nonmatching func_0012D7F0, 0x5C
 
 glabel func_0012D7F0
-    /* 2D7F0 0012D7F0 1300023C */  lui        $v0, %hi(func_0012FA40)
-    /* 2D7F4 0012D7F4 1300033C */  lui        $v1, %hi(func_0012FAA8)
-    /* 2D7F8 0012D7F8 1300083C */  lui        $a4, %hi(func_0012FB28)
-    /* 2D7FC 0012D7FC 1300093C */  lui        $a5, %hi(func_0012FB90)
-    /* 2D800 0012D800 40FA4224 */  addiu      $v0, $v0, %lo(func_0012FA40)
-    /* 2D804 0012D804 A8FA6324 */  addiu      $v1, $v1, %lo(func_0012FAA8)
-    /* 2D808 0012D808 28FB0825 */  addiu      $a4, $a4, %lo(func_0012FB28)
-    /* 2D80C 0012D80C 90FB2925 */  addiu      $a5, $a5, %lo(func_0012FB90)
+    /* 2D7F0 0012D7F0 1300023C */  lui        $v0, %hi(__sread)
+    /* 2D7F4 0012D7F4 1300033C */  lui        $v1, %hi(__swrite)
+    /* 2D7F8 0012D7F8 1300083C */  lui        $a4, %hi(__sseek)
+    /* 2D7FC 0012D7FC 1300093C */  lui        $a5, %hi(__sclose)
+    /* 2D800 0012D800 40FA4224 */  addiu      $v0, $v0, %lo(__sread)
+    /* 2D804 0012D804 A8FA6324 */  addiu      $v1, $v1, %lo(__swrite)
+    /* 2D808 0012D808 28FB0825 */  addiu      $a4, $a4, %lo(__sseek)
+    /* 2D80C 0012D80C 90FB2925 */  addiu      $a5, $a5, %lo(__sclose)
     /* 2D810 0012D810 540087AC */  sw         $a3, 0x54($a0)
     /* 2D814 0012D814 0C0085A4 */  sh         $a1, 0xC($a0)
     /* 2D818 0012D818 0E0086A4 */  sh         $a2, 0xE($a0)

@@ -24,10 +24,10 @@
  * 296) */
 extern int D_0013B790[256];
 
-void func_00106E30(int a0);
-void func_00106DF0(int a0);
+void TerminateThread(int a0);
+void DeleteThread(int a0);
 
-void func_00102B68(void) {
+void LoaderSysDeleteAllExternalThread(void) {
     int value = -1;
     int i;
     int *p = D_0013B790;
@@ -36,8 +36,8 @@ void func_00102B68(void) {
         int v = *p;
 
         if (v >= 0) {
-            func_00106E30(v);
-            func_00106DF0(*p);
+            TerminateThread(v);
+            DeleteThread(*p);
             *p = value;
         }
         p++;

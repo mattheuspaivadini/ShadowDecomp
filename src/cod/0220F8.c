@@ -30,7 +30,7 @@ struct S0220F8 {
 
 extern struct S0220F8 D_00163CC8[];
 
-int func_001220F8(int i) {
+int _sceMcCoreChangeSocketTypeMc2Dbc(int i) {
     if (D_00163CC8[i].field0 == 0)
         return -1;
     return D_00163CC8[i].field4;

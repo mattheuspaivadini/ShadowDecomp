@@ -24,13 +24,13 @@ struct S12C0F8_P {         /* the object at s->f54 */
     int  f38;              /* 0x38 */
 };
 
-extern int D_00135C60[];
+extern int _impure_ptr[];
 
-void func_0012DA00(int a0);
-void func_0012DBB0(int a0);
-int  func_0012E578(int a0);
+void __sinit(int a0);
+void _free_r(int a0);
+int  __smakebuf(int a0);
 
-int func_0012C0F8(struct S12C0F8 *s) {
+int __swsetup(struct S12C0F8 *s) {
     struct S12C0F8_P *p;
     int x;
     int b;
@@ -38,11 +38,11 @@ int func_0012C0F8(struct S12C0F8 *s) {
 
     p = (struct S12C0F8_P *)s->f54;
     if (p == 0) {
-        p = (struct S12C0F8_P *)D_00135C60[0];
+        p = (struct S12C0F8_P *)_impure_ptr[0];
         s->f54 = (int)p;
     }
     if (p->f38 == 0)
-        func_0012DA00((int)p);
+        __sinit((int)p);
     x = s->f0C;
     if ((x & 8) == 0) {
         if ((x & 0x10) == 0)
@@ -51,7 +51,7 @@ int func_0012C0F8(struct S12C0F8 *s) {
             b = s->f30;
             if (b != 0) {
                 if (b != (int)&s->f40) {
-                    func_0012DBB0(s->f54);
+                    _free_r(s->f54);
                     x = s->f0C;
                 }
                 s->f30 = 0;
@@ -64,7 +64,7 @@ int func_0012C0F8(struct S12C0F8 *s) {
         s->f0C = x | 8;
     }
     if (s->f10 == 0) {
-        func_0012E578((int)s);
+        __smakebuf((int)s);
         x = s->f0C;
     } else {
         x = s->f0C;
@@ -78,3 +78,4 @@ int func_0012C0F8(struct S12C0F8 *s) {
     }
     return 0;
 }
+/* func_0012C0F8 */

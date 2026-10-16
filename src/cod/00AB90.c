@@ -7,19 +7,19 @@ extern int D_00146600[];
 extern int D_001470C0[];
 
 int func_0010A798(int a0);
-int func_0010A8C0(void);
+int sceFsInit(void);
 int func_0010AAC8(void);
 int func_0010A120(void);
 int func_0010A7C8(void);
 int func_0010A228(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
                   int a7, int a8, int a9);
 
-int func_0010AB90(int a0, int a1) {
+int sceFsSetIopBuf(int a0, int a1) {
     int r;
 
     func_0010A798(0xFE);
     if (D_00132314 == 0)
-        func_0010A8C0();
+        sceFsInit();
     if (func_0010AAC8() != 0) {
         func_0010A7C8();
         return 0xFFFEFFFC;

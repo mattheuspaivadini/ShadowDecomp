@@ -42,7 +42,7 @@ struct R0211B8 {                /* 0x24-byte record */
 
 extern struct R0211B8 D_00163CC8[];
 
-int func_001211B8(int index, struct B0211B8 *src) {
+int _sceMcCoreSetCardSpec(int index, struct B0211B8 *src) {
     D_00163CC8[index].blk = *src;
     return 1;
 }

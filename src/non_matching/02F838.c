@@ -27,16 +27,16 @@ struct S02F838 {
     struct N02F838 *f54;
 };
 
-extern int D_00135C60[];
+extern int _impure_ptr[];
 
-int func_0012DA00(int node);
-int func_0012D6D8(struct S02F838 *p);
-int func_0012DBB0(int node, int buf);
-int func_0012E578(struct S02F838 *p);
-int func_0012E3F8(int node, void (*fn)(int));
+int __sinit(int node);
+int fflush(struct S02F838 *p);
+int _free_r(int node, int buf);
+int __smakebuf(struct S02F838 *p);
+int _fwalk(int node, void (*fn)(int));
 void func_0012F800(int node);
 
-int func_0012F838(struct S02F838 *p) {
+int __srefill(struct S02F838 *p) {
     struct N02F838 *node;
     int b;
     int cb_arg;
@@ -45,11 +45,11 @@ int func_0012F838(struct S02F838 *p) {
 
     node = p->f54;
     if (node == 0) {
-        node = (struct N02F838 *)D_00135C60[0];
+        node = (struct N02F838 *)_impure_ptr[0];
         p->f54 = node;
     }
     if (node->f38 == 0)
-        func_0012DA00((int)node);
+        __sinit((int)node);
     if (p->f0C & 0x20)
         return -1;
     p->f04 = 0;
@@ -58,7 +58,7 @@ int func_0012F838(struct S02F838 *p) {
         if (b == 0)
             goto run;
         if (b != (int)((char *)p + 0x40))
-            func_0012DBB0((int)node, b);
+            _free_r((int)node, b);
         p->f30 = 0;
         p->f04 = p->f3C;
         if (p->f3C == 0)
@@ -70,7 +70,7 @@ int func_0012F838(struct S02F838 *p) {
         return -1;
     v = p->f0C;
     if (v & 8) {
-        if (func_0012D6D8(p) != 0)
+        if (fflush(p) != 0)
             return -1;
         v = p->f0C;
         p->f08 = 0;
@@ -81,9 +81,9 @@ int func_0012F838(struct S02F838 *p) {
     p->f0C = v | 4;
 run:
     if (p->f10 == 0)
-        func_0012E578(p);
+        __smakebuf(p);
     if ((p->f0C & 3) != 0)
-        func_0012E3F8((int)node, func_0012F800);
+        _fwalk((int)node, func_0012F800);
     cb_arg = p->f10;
     p->f00 = cb_arg;
     r = ((int (*)(int, int, int))p->f20)(p->f1C, cb_arg, p->f14);

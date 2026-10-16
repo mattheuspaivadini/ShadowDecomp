@@ -5,6 +5,6 @@
  */
 extern int func_0010EC78();
 
-int func_0010ED80(int a0, int a1, int a2) {
+int sceSifLoadElfPart(int a0, int a1, int a2) {
     return func_0010EC78(a0, a1, a2, 1);
 }

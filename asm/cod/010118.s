@@ -11,6 +11,6 @@
 nonmatching func_00110118, 0x8
 
 glabel func_00110118
-    /* 10118 00110118 543D0408 */  j          func_0010F550
+    /* 10118 00110118 543D0408 */  j          InitTLB
     /* 1011C 0011011C 00000000 */   nop
 endlabel func_00110118

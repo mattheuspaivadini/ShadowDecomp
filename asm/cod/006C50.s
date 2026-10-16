@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00106C50, 0x10
+nonmatching RFU009, 0x10
 
-glabel func_00106C50
+glabel RFU009
     /* 6C50 00106C50 09000324 */  addiu      $v1, $zero, 0x9
     /* 6C54 00106C54 0C000000 */  syscall    0 /* handwritten instruction */
     /* 6C58 00106C58 0800E003 */  jr         $ra
     /* 6C5C 00106C5C 00000000 */   nop
-endlabel func_00106C50
+endlabel RFU009

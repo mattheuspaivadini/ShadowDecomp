@@ -26,15 +26,15 @@ extern char D_00136948[];
 extern char D_00136980[];
 extern char D_001369C0[];
 
-int func_00108FF8(int x);
-int func_0010DCE8(void);
-int func_0010DDE0(int a, int b, int c);
-int func_00102CF8(const char *fmt, ...);
-int func_00107260(int x);
-int func_001073A0(Block16 *args, int x);
-int func_00107380(int handle);
-int func_0010E9D0(int mem, int a, int b);
-int func_0010DE60(int mem);
+int sceSifInitRpc(int x);
+int sceSifInitIopHeap(void);
+int sceSifAllocSysMemory(int a, int b, int c);
+int LoaderSysPrintf(const char *fmt, ...);
+int FlushCache(int x);
+int sceSifSetDma(Block16 *args, int x);
+int sceSifDmaStat(int handle);
+int sceSifLoadModuleBuffer(int mem, int a, int b);
+int sceSifFreeSysMemory(int mem);
 int func_00128E6C(char *record, const char *module);
 int func_001290C4(const char *s);
 int func_001293B8(char *dst, const char *src, int len);
@@ -47,26 +47,26 @@ static int _loadIopModuleFromEEBuffer(int src, int size, int arg3, int arg4) {
     int ret;
 
     size4 = (size + 3) & -4;
-    func_00108FF8(0);
-    func_0010DCE8();
-    mem = func_0010DDE0(1, size4, 0);
-    func_00102CF8(D_00136900, mem, size4);
-    func_00107260(0);
+    sceSifInitRpc(0);
+    sceSifInitIopHeap();
+    mem = sceSifAllocSysMemory(1, size4, 0);
+    LoaderSysPrintf(D_00136900, mem, size4);
+    FlushCache(0);
     args.w0 = src;
     args.w1 = mem;
     args.w2 = size4;
     args.w3 = 0;
-    handle = func_001073A0(&args, 1);
-    while (func_00107380(handle) >= 0)
+    handle = sceSifSetDma(&args, 1);
+    while (sceSifDmaStat(handle) >= 0)
         ;
-    func_00102CF8(D_00136948);
-    func_0010E9D0(mem, arg3, arg4);
-    ret = func_0010DE60(mem);
+    LoaderSysPrintf(D_00136948);
+    sceSifLoadModuleBuffer(mem, arg3, arg4);
+    ret = sceSifFreeSysMemory(mem);
     return ret;
 }
 
 static int setNewIopIdentifier(const char *module) {
-    func_00102CF8(D_00136980, module, D_0013A008);
+    LoaderSysPrintf(D_00136980, module, D_0013A008);
     func_001293B8(D_0013CB90 + D_0013A008 * 16, module,
                   func_001290C4(module));
     D_0013A008 = D_0013A008 + 1;
@@ -83,7 +83,7 @@ int LoaderSysLoadIopModuleFromEEBuffer(const char *module, int src, int size,
                 break;
         }
         if (index < D_0013A008) {
-            func_00102CF8(D_001369C0, module, index);
+            LoaderSysPrintf(D_001369C0, module, index);
             return 0;
         }
         ret = _loadIopModuleFromEEBuffer(src, size, arg3, arg4);

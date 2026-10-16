@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00106D60, 0x10
+nonmatching SetAlarm, 0x10
 
-glabel func_00106D60
+glabel SetAlarm
     /* 6D60 00106D60 FC000324 */  addiu      $v1, $zero, 0xFC
     /* 6D64 00106D64 0C000000 */  syscall    0 /* handwritten instruction */
     /* 6D68 00106D68 0800E003 */  jr         $ra
     /* 6D6C 00106D6C 00000000 */   nop
-endlabel func_00106D60
+endlabel SetAlarm

@@ -18,7 +18,7 @@ glabel func_00104090
     /* 40A0 001040A0 2D280000 */  daddu      $a1, $zero, $zero
     /* 40A4 001040A4 2D300000 */  daddu      $a2, $zero, $zero
     /* 40A8 001040A8 0800BFFF */  sd         $ra, 0x8($sp)
-    /* 40AC 001040AC 2E0F040C */  jal        func_00103CB8
+    /* 40AC 001040AC 2E0F040C */  jal        LoaderSysLoadIopModule
     /* 40B0 001040B0 E06D4424 */   addiu     $a0, $v0, %lo(D_00136DE0)
     /* 40B4 001040B4 D7004204 */  bltzl      $v0, .L00104414
     /* 40B8 001040B8 FFFF0224 */   addiu     $v0, $zero, -0x1
@@ -29,7 +29,7 @@ glabel func_00104090
     /* 40CC 001040CC 1300063C */  lui        $a2, %hi(D_00136E20)
     /* 40D0 001040D0 006E8424 */  addiu      $a0, $a0, %lo(D_00136E00)
     /* 40D4 001040D4 206EC624 */  addiu      $a2, $a2, %lo(D_00136E20)
-    /* 40D8 001040D8 2E0F040C */  jal        func_00103CB8
+    /* 40D8 001040D8 2E0F040C */  jal        LoaderSysLoadIopModule
     /* 40DC 001040DC 46000524 */   addiu     $a1, $zero, 0x46
     /* 40E0 001040E0 CC004204 */  bltzl      $v0, .L00104414
     /* 40E4 001040E4 FFFF0224 */   addiu     $v0, $zero, -0x1
@@ -40,7 +40,7 @@ glabel func_00104090
     /* 40F8 001040F8 1300063C */  lui        $a2, %hi(D_00136E88)
     /* 40FC 001040FC 686E8424 */  addiu      $a0, $a0, %lo(D_00136E68)
     /* 4100 00104100 886EC624 */  addiu      $a2, $a2, %lo(D_00136E88)
-    /* 4104 00104104 2E0F040C */  jal        func_00103CB8
+    /* 4104 00104104 2E0F040C */  jal        LoaderSysLoadIopModule
     /* 4108 00104108 14000524 */   addiu     $a1, $zero, 0x14
     /* 410C 0010410C C1004204 */  bltzl      $v0, .L00104414
     /* 4110 00104110 FFFF0224 */   addiu     $v0, $zero, -0x1
@@ -62,7 +62,7 @@ glabel func_00104090
     /* 4148 00104148 1300043C */  lui        $a0, %hi(D_00136EA0)
     /* 414C 0010414C 2D280000 */  daddu      $a1, $zero, $zero
     /* 4150 00104150 A06E8424 */  addiu      $a0, $a0, %lo(D_00136EA0)
-    /* 4154 00104154 2E0F040C */  jal        func_00103CB8
+    /* 4154 00104154 2E0F040C */  jal        LoaderSysLoadIopModule
     /* 4158 00104158 2D300000 */   daddu     $a2, $zero, $zero
     /* 415C 0010415C AD004204 */  bltzl      $v0, .L00104414
     /* 4160 00104160 FFFF0224 */   addiu     $v0, $zero, -0x1
@@ -72,7 +72,7 @@ glabel func_00104090
     /* 4170 00104170 1300043C */  lui        $a0, %hi(D_00136EC0)
     /* 4174 00104174 C06E8424 */  addiu      $a0, $a0, %lo(D_00136EC0)
     /* 4178 00104178 2D280000 */  daddu      $a1, $zero, $zero
-    /* 417C 0010417C 2E0F040C */  jal        func_00103CB8
+    /* 417C 0010417C 2E0F040C */  jal        LoaderSysLoadIopModule
     /* 4180 00104180 2D300000 */   daddu     $a2, $zero, $zero
     /* 4184 00104184 A3004204 */  bltzl      $v0, .L00104414
     /* 4188 00104188 FFFF0224 */   addiu     $v0, $zero, -0x1
@@ -86,7 +86,7 @@ glabel func_00104090
     /* 41A0 001041A0 1300043C */  lui        $a0, %hi(D_00136EA0)
     /* 41A4 001041A4 2D280000 */  daddu      $a1, $zero, $zero
     /* 41A8 001041A8 A06E8424 */  addiu      $a0, $a0, %lo(D_00136EA0)
-    /* 41AC 001041AC 2E0F040C */  jal        func_00103CB8
+    /* 41AC 001041AC 2E0F040C */  jal        LoaderSysLoadIopModule
     /* 41B0 001041B0 2D300000 */   daddu     $a2, $zero, $zero
     /* 41B4 001041B4 97004204 */  bltzl      $v0, .L00104414
     /* 41B8 001041B8 FFFF0224 */   addiu     $v0, $zero, -0x1
@@ -100,7 +100,7 @@ glabel func_00104090
     /* 41D0 001041D0 1300043C */  lui        $a0, %hi(D_00136EE0)
     /* 41D4 001041D4 2D280000 */  daddu      $a1, $zero, $zero
     /* 41D8 001041D8 E06E8424 */  addiu      $a0, $a0, %lo(D_00136EE0)
-    /* 41DC 001041DC 2E0F040C */  jal        func_00103CB8
+    /* 41DC 001041DC 2E0F040C */  jal        LoaderSysLoadIopModule
     /* 41E0 001041E0 2D300000 */   daddu     $a2, $zero, $zero
     /* 41E4 001041E4 8B004204 */  bltzl      $v0, .L00104414
     /* 41E8 001041E8 FFFF0224 */   addiu     $v0, $zero, -0x1
@@ -110,7 +110,7 @@ glabel func_00104090
     /* 41F8 001041F8 1300043C */  lui        $a0, %hi(D_00136F00)
     /* 41FC 001041FC 006F8424 */  addiu      $a0, $a0, %lo(D_00136F00)
     /* 4200 00104200 2D280000 */  daddu      $a1, $zero, $zero
-    /* 4204 00104204 2E0F040C */  jal        func_00103CB8
+    /* 4204 00104204 2E0F040C */  jal        LoaderSysLoadIopModule
     /* 4208 00104208 2D300000 */   daddu     $a2, $zero, $zero
     /* 420C 0010420C 81004204 */  bltzl      $v0, .L00104414
     /* 4210 00104210 FFFF0224 */   addiu     $v0, $zero, -0x1
@@ -144,7 +144,7 @@ glabel func_00104090
     /* 4260 00104260 1300043C */  lui        $a0, %hi(D_00136F20)
     /* 4264 00104264 2D280000 */  daddu      $a1, $zero, $zero
     /* 4268 00104268 206F8424 */  addiu      $a0, $a0, %lo(D_00136F20)
-    /* 426C 0010426C 2E0F040C */  jal        func_00103CB8
+    /* 426C 0010426C 2E0F040C */  jal        LoaderSysLoadIopModule
     /* 4270 00104270 2D300000 */   daddu     $a2, $zero, $zero
     /* 4274 00104274 67004204 */  bltzl      $v0, .L00104414
     /* 4278 00104278 FFFF0224 */   addiu     $v0, $zero, -0x1
@@ -154,7 +154,7 @@ glabel func_00104090
     /* 4288 00104288 1300043C */  lui        $a0, %hi(D_00136F40)
     /* 428C 0010428C 406F8424 */  addiu      $a0, $a0, %lo(D_00136F40)
     /* 4290 00104290 2D280000 */  daddu      $a1, $zero, $zero
-    /* 4294 00104294 2E0F040C */  jal        func_00103CB8
+    /* 4294 00104294 2E0F040C */  jal        LoaderSysLoadIopModule
     /* 4298 00104298 2D300000 */   daddu     $a2, $zero, $zero
     /* 429C 0010429C 5D004204 */  bltzl      $v0, .L00104414
     /* 42A0 001042A0 FFFF0224 */   addiu     $v0, $zero, -0x1
@@ -168,7 +168,7 @@ glabel func_00104090
     /* 42B8 001042B8 1300043C */  lui        $a0, %hi(D_00136F20)
     /* 42BC 001042BC 2D280000 */  daddu      $a1, $zero, $zero
     /* 42C0 001042C0 206F8424 */  addiu      $a0, $a0, %lo(D_00136F20)
-    /* 42C4 001042C4 2E0F040C */  jal        func_00103CB8
+    /* 42C4 001042C4 2E0F040C */  jal        LoaderSysLoadIopModule
     /* 42C8 001042C8 2D300000 */   daddu     $a2, $zero, $zero
     /* 42CC 001042CC 51004204 */  bltzl      $v0, .L00104414
     /* 42D0 001042D0 FFFF0224 */   addiu     $v0, $zero, -0x1
@@ -180,7 +180,7 @@ glabel func_00104090
     /* 42E8 001042E8 606F8424 */  addiu      $a0, $a0, %lo(D_00136F60)
     /* 42EC 001042EC D0A05024 */  addiu      $s0, $v0, %lo(D_0013A0D0)
     /* 42F0 001042F0 01000524 */  addiu      $a1, $zero, 0x1
-    /* 42F4 001042F4 2E0F040C */  jal        func_00103CB8
+    /* 42F4 001042F4 2E0F040C */  jal        LoaderSysLoadIopModule
     /* 42F8 001042F8 2D300002 */   daddu     $a2, $s0, $zero
     /* 42FC 001042FC 45004204 */  bltzl      $v0, .L00104414
     /* 4300 00104300 FFFF0224 */   addiu     $v0, $zero, -0x1
@@ -194,32 +194,32 @@ glabel func_00104090
     /* 4318 00104318 1300043C */  lui        $a0, %hi(D_00136EA0)
     /* 431C 0010431C 2D280000 */  daddu      $a1, $zero, $zero
     /* 4320 00104320 A06E8424 */  addiu      $a0, $a0, %lo(D_00136EA0)
-    /* 4324 00104324 2E0F040C */  jal        func_00103CB8
+    /* 4324 00104324 2E0F040C */  jal        LoaderSysLoadIopModule
     /* 4328 00104328 2D300000 */   daddu     $a2, $zero, $zero
     /* 432C 0010432C 1300043C */  lui        $a0, %hi(D_00136EC0)
     /* 4330 00104330 C06E8424 */  addiu      $a0, $a0, %lo(D_00136EC0)
     /* 4334 00104334 2D280000 */  daddu      $a1, $zero, $zero
-    /* 4338 00104338 2E0F040C */  jal        func_00103CB8
+    /* 4338 00104338 2E0F040C */  jal        LoaderSysLoadIopModule
     /* 433C 0010433C 2D300000 */   daddu     $a2, $zero, $zero
     /* 4340 00104340 1300043C */  lui        $a0, %hi(D_00136EE0)
     /* 4344 00104344 E06E8424 */  addiu      $a0, $a0, %lo(D_00136EE0)
     /* 4348 00104348 2D280000 */  daddu      $a1, $zero, $zero
-    /* 434C 0010434C 2E0F040C */  jal        func_00103CB8
+    /* 434C 0010434C 2E0F040C */  jal        LoaderSysLoadIopModule
     /* 4350 00104350 2D300000 */   daddu     $a2, $zero, $zero
     /* 4354 00104354 1300043C */  lui        $a0, %hi(D_00136F00)
     /* 4358 00104358 006F8424 */  addiu      $a0, $a0, %lo(D_00136F00)
     /* 435C 0010435C 2D280000 */  daddu      $a1, $zero, $zero
-    /* 4360 00104360 2E0F040C */  jal        func_00103CB8
+    /* 4360 00104360 2E0F040C */  jal        LoaderSysLoadIopModule
     /* 4364 00104364 2D300000 */   daddu     $a2, $zero, $zero
     /* 4368 00104368 1300043C */  lui        $a0, %hi(D_00136F20)
     /* 436C 0010436C 206F8424 */  addiu      $a0, $a0, %lo(D_00136F20)
     /* 4370 00104370 2D280000 */  daddu      $a1, $zero, $zero
-    /* 4374 00104374 2E0F040C */  jal        func_00103CB8
+    /* 4374 00104374 2E0F040C */  jal        LoaderSysLoadIopModule
     /* 4378 00104378 2D300000 */   daddu     $a2, $zero, $zero
     /* 437C 0010437C 1300043C */  lui        $a0, %hi(D_00136F40)
     /* 4380 00104380 406F8424 */  addiu      $a0, $a0, %lo(D_00136F40)
     /* 4384 00104384 2D280000 */  daddu      $a1, $zero, $zero
-    /* 4388 00104388 2E0F040C */  jal        func_00103CB8
+    /* 4388 00104388 2E0F040C */  jal        LoaderSysLoadIopModule
     /* 438C 0010438C 2D300000 */   daddu     $a2, $zero, $zero
     /* 4390 00104390 1300043C */  lui        $a0, %hi(D_00136F78)
 .align 2
@@ -228,7 +228,7 @@ glabel func_00104090
 .align 2
   .L00104398:
     /* 4398 00104398 786F8424 */  addiu      $a0, $a0, %lo(D_00136F78)
-    /* 439C 0010439C 2E0F040C */  jal        func_00103CB8
+    /* 439C 0010439C 2E0F040C */  jal        LoaderSysLoadIopModule
     /* 43A0 001043A0 2D300000 */   daddu     $a2, $zero, $zero
     /* 43A4 001043A4 1B004204 */  bltzl      $v0, .L00104414
     /* 43A8 001043A8 FFFF0224 */   addiu     $v0, $zero, -0x1
@@ -238,7 +238,7 @@ glabel func_00104090
     /* 43B8 001043B8 1300043C */  lui        $a0, %hi(D_00136F98)
     /* 43BC 001043BC 986F8424 */  addiu      $a0, $a0, %lo(D_00136F98)
     /* 43C0 001043C0 2D280000 */  daddu      $a1, $zero, $zero
-    /* 43C4 001043C4 2E0F040C */  jal        func_00103CB8
+    /* 43C4 001043C4 2E0F040C */  jal        LoaderSysLoadIopModule
     /* 43C8 001043C8 2D300000 */   daddu     $a2, $zero, $zero
     /* 43CC 001043CC 11004204 */  bltzl      $v0, .L00104414
     /* 43D0 001043D0 FFFF0224 */   addiu     $v0, $zero, -0x1
@@ -248,7 +248,7 @@ glabel func_00104090
     /* 43E0 001043E0 1300043C */  lui        $a0, %hi(D_00136FB8)
     /* 43E4 001043E4 B86F8424 */  addiu      $a0, $a0, %lo(D_00136FB8)
     /* 43E8 001043E8 2D280000 */  daddu      $a1, $zero, $zero
-    /* 43EC 001043EC 2E0F040C */  jal        func_00103CB8
+    /* 43EC 001043EC 2E0F040C */  jal        LoaderSysLoadIopModule
     /* 43F0 001043F0 2D300000 */   daddu     $a2, $zero, $zero
     /* 43F4 001043F4 04004304 */  bgezl      $v0, .L00104408
     /* 43F8 001043F8 1300043C */   lui       $a0, %hi(D_00136FD8)

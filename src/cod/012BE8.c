@@ -14,7 +14,7 @@ struct S0014B358 {
 
 extern struct S0014B358 D_0014B358;
 
-int func_00112BE8(int a, int b) {
+int sceSifSetSysCmdBuffer(int a, int b) {
     int v = D_0014B358.field0C;
     D_0014B358.field10 = b;
     D_0014B358.field0C = a;

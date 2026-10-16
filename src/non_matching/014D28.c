@@ -5,7 +5,7 @@
 unsigned int func_001148B8(unsigned int x);
 int func_001147C0(unsigned *p);
 
-int func_00114D28(int *p, unsigned int x, int v) {
+int sceDmaSendI(int *p, unsigned int x, int v) {
     int r;
     int w;
 

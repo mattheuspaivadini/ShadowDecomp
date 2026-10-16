@@ -2,5 +2,5 @@
  *   jr   $ra
  *    nop
  */
-void func_00103E90(void) {
+void LoaderSysHookPoint(void) {
 }

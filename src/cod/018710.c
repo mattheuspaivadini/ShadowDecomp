@@ -5,7 +5,7 @@ int func_00118438(int a0, int a1, int a2, int a3, int a4);
 int func_00118380(int a0, int a1, int a2, int a3, int a4);
 int func_00118578(int a0, int a1, int a2);
 
-int func_00118710(int a0, int *a1, int a2, int a3, int a4) {
+int sceInetAddress2String(int a0, int *a1, int a2, int a3, int a4) {
     int r;
 
     a1[0] = a3;

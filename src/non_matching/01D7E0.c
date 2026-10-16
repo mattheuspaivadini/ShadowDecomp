@@ -17,19 +17,19 @@ struct R01D7E0 {
 extern struct R01D7E0 D_0015DF48[];
 
 extern char D_00138D08[];
-extern int func_00121E88(void);
-extern int func_00120470(int a0, int *a1);
-extern int func_00121D58(int a0, int a1);
+extern int _sceMcCoreGetConnection(void);
+extern int _sceMcpGetCardSpec(int a0, int *a1);
+extern int _sceMcCoreBlockErase(int a0, int a1);
 
-int func_0011D7E0(int index) {
+int _sceMcFatUnFormat(int index) {
     int tmp[4];
     struct R01D7E0 *p;
     int n;
     int i;
 
-    if (func_00121E88() == 0)
+    if (_sceMcCoreGetConnection() == 0)
         return 0x81010013;
-    if (func_00120470(index, tmp) == 0)
+    if (_sceMcpGetCardSpec(index, tmp) == 0)
         return 0x8101006F;
     p = &D_0015DF48[index];
     p->f894 = 0;
@@ -43,7 +43,7 @@ int func_0011D7E0(int index) {
     if (n <= 0)
         return 0;
     for (i = 0; i < n; i++) {
-        if (func_00121D58(index, i) == 0)
+        if (_sceMcCoreBlockErase(index, i) == 0)
             return 0x8101006F;
     }
     return 0;

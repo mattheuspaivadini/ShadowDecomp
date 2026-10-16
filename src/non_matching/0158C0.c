@@ -4,7 +4,7 @@
  * draft (Session 8) is kept for the record. */
 int sceDbcReceiveData(int a0, int a1, void *a2, int a3);
 
-int func_001158C0(int a0, int a1) {
+int sceVibGetProfile(int a0, int a1) {
     unsigned long long v;
     int buf;
     int r;
@@ -22,3 +22,4 @@ int func_001158C0(int a0, int a1) {
         return buf;
     return r;
 }
+/* func_001158C0 */

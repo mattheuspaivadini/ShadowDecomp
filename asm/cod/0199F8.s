@@ -15,7 +15,7 @@ glabel func_001199F8
     /* 199FC 001199FC 1000B1FF */  sd         $s1, 0x10($sp)
     /* 19A00 00119A00 0000B0FF */  sd         $s0, 0x0($sp)
     /* 19A04 00119A04 2000BFFF */  sd         $ra, 0x20($sp)
-    /* 19A08 00119A08 C83E040C */  jal        func_0010FB20
+    /* 19A08 00119A08 C83E040C */  jal        DIntr
     /* 19A0C 00119A0C 2D888000 */   daddu     $s1, $a0, $zero
     /* 19A10 00119A10 0800248E */  lw         $a0, 0x8($s1)
     /* 19A14 00119A14 2D180000 */  daddu      $v1, $zero, $zero
@@ -42,7 +42,7 @@ glabel func_001199F8
 .align 2
   .L00119A60:
     /* 19A60 00119A60 140010AE */  sw         $s0, 0x14($s0)
-    /* 19A64 00119A64 DC3E040C */  jal        func_0010FB70
+    /* 19A64 00119A64 DC3E040C */  jal        EIntr
     /* 19A68 00119A68 180003AE */   sw        $v1, 0x18($s0)
     /* 19A6C 00119A6C 07000010 */  b          .L00119A8C
     /* 19A70 00119A70 2D100002 */   daddu     $v0, $s0, $zero
@@ -53,7 +53,7 @@ glabel func_001199F8
     /* 19A7C 00119A7C 40001026 */   addiu     $s0, $s0, 0x40
 .align 2
   .L00119A80:
-    /* 19A80 00119A80 DC3E040C */  jal        func_0010FB70
+    /* 19A80 00119A80 DC3E040C */  jal        EIntr
     /* 19A84 00119A84 00000000 */   nop
     /* 19A88 00119A88 2D100000 */  daddu      $v0, $zero, $zero
 .align 2

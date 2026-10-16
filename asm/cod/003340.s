@@ -19,7 +19,7 @@ glabel setNewIopIdentifier
     /* 3354 00103354 2D282002 */  daddu      $a1, $s1, $zero
     /* 3358 00103358 0000B0FF */  sd         $s0, 0x0($sp)
     /* 335C 0010335C 1000BFFF */  sd         $ra, 0x10($sp)
-    /* 3360 00103360 3E0B040C */  jal        func_00102CF8
+    /* 3360 00103360 3E0B040C */  jal        LoaderSysPrintf
     /* 3364 00103364 80698424 */   addiu     $a0, $a0, %lo(D_00136980)
     /* 3368 00103368 98828327 */  addiu      $v1, $gp, %gp_rel(D_0013A008)
     /* 336C 0010336C 2D202002 */  daddu      $a0, $s1, $zero

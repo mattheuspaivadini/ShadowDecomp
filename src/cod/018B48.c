@@ -4,7 +4,7 @@
 int func_00118438(int a0, int a1, int a2, int a3, int a4);
 int func_00118380(int a0, int a1, int *p, int a3, int a4);
 
-int func_00118B48(int a0, int *p, int a2, int a3, int a4, int *q, int a6) {
+int sceInetSend(int a0, int *p, int a2, int a3, int a4, int *q, int a6) {
     int r;
 
     p[0] = a2;

@@ -10,14 +10,14 @@ struct S10588 {
 };
 
 extern struct S10588 D_00133918;
-int func_0010FB20(void);
-int func_00106CE0(int a0, int a1);
-int func_00107470(int a0);
-int func_00110410(int a0);
-int func_00110400(int a0);
-int func_0010FB70(void);
+int DIntr(void);
+int RemoveIntcHandler(int a0, int a1);
+int DisableIntc(int a0);
+int SetT2_MODE(int a0);
+int SetT2_COUNT(int a0);
+int EIntr(void);
 
-int func_00110588(void) {
+int EndTimer(void) {
     int guard;
     int r;
 
@@ -25,18 +25,18 @@ int func_00110588(void) {
         return 0x80008001;
     if (D_00133918.f10 != 0)
         return 0x80000010;
-    guard = func_0010FB20();
-    if (func_00106CE0(0xB, D_00133918.f08) != 0) {
+    guard = DIntr();
+    if (RemoveIntcHandler(0xB, D_00133918.f08) != 0) {
         r = -1;
     } else {
-        func_00107470(0xB);
-        func_00110410(0xC00);
-        func_00110400(0);
+        DisableIntc(0xB);
+        SetT2_MODE(0xC00);
+        SetT2_COUNT(0);
         r = -1;
     }
     D_00133918.base = 0;
     D_00133918.f08 = r;
     if (guard != 0)
-        func_0010FB70();
+        EIntr();
     return 0;
 }

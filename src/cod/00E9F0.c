@@ -7,6 +7,6 @@
  */
 extern int func_0010E400();
 
-int func_0010E9F0(int a0, int a1, int a2, int a3) {
+int sceSifLoadStartModuleBuffer(int a0, int a1, int a2, int a3) {
     return func_0010E400(a0, a1, a2, a3);
 }

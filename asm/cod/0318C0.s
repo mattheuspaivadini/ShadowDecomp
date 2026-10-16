@@ -9,9 +9,9 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_001318C0, 0x7C
+nonmatching SyncDCache, 0x7C
 
-glabel func_001318C0
+glabel SyncDCache
     /* 318C0 001318C0 C0FFBD27 */  addiu      $sp, $sp, -0x40
     /* 318C4 001318C4 2000B2FF */  sd         $s2, 0x20($sp)
     /* 318C8 001318C8 1000B1FF */  sd         $s1, 0x10($sp)
@@ -24,21 +24,21 @@ glabel func_001318C0
     /* 318E4 001318E4 24800202 */  and        $s0, $s0, $v0
     /* 318E8 001318E8 03000012 */  beqz       $s0, .L001318F8
     /* 318EC 001318EC 00000000 */   nop
-    /* 318F0 001318F0 C83E040C */  jal        func_0010FB20
+    /* 318F0 001318F0 C83E040C */  jal        DIntr
     /* 318F4 001318F4 00000000 */   nop
 .align 2
   .L001318F8:
     /* 318F8 001318F8 FFFF043C */  lui        $a0, (0xFFFFFFC0 >> 16)
     /* 318FC 001318FC C0FF8434 */  ori        $a0, $a0, (0xFFFFFFC0 & 0xFFFF)
     /* 31900 00131900 24282402 */  and        $a1, $s1, $a0
-    /* 31904 00131904 06C6040C */  jal        func_00131818
+    /* 31904 00131904 06C6040C */  jal        _sceSDC
     /* 31908 00131908 24204402 */   and       $a0, $s2, $a0
     /* 3190C 0013190C 06000012 */  beqz       $s0, .L00131928
     /* 31910 00131910 3000BFDF */   ld        $ra, 0x30($sp)
     /* 31914 00131914 2000B2DF */  ld         $s2, 0x20($sp)
     /* 31918 00131918 1000B1DF */  ld         $s1, 0x10($sp)
     /* 3191C 0013191C 0000B0DF */  ld         $s0, 0x0($sp)
-    /* 31920 00131920 DC3E0408 */  j          func_0010FB70
+    /* 31920 00131920 DC3E0408 */  j          EIntr
     /* 31924 00131924 4000BD27 */   addiu     $sp, $sp, 0x40
 .align 2
   .L00131928:
@@ -47,5 +47,5 @@ glabel func_001318C0
     /* 31930 00131930 0000B0DF */  ld         $s0, 0x0($sp)
     /* 31934 00131934 0800E003 */  jr         $ra
     /* 31938 00131938 4000BD27 */   addiu     $sp, $sp, 0x40
-endlabel func_001318C0
+endlabel SyncDCache
     /* 3193C 0013193C 00000000 */  nop

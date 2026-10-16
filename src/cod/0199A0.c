@@ -21,11 +21,11 @@
  * MATCH GUESS: cc=29 */
 extern __attribute__((section(".data"))) int D_00135618;   /* .data 0x00135618 */
 
-int func_001128E8(int index, int value);
+int sceSifSetSreg(int index, int value);
 
 void func_001199A0(int a0) {
     if (a0 == 1) {
         D_00135618 = 0;
-        func_001128E8(1, 0);
+        sceSifSetSreg(1, 0);
     }
 }

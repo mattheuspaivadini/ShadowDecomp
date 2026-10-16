@@ -20,7 +20,7 @@ void *func_001156A8(int index);
 int func_0012821C(int dst, char *src, int n);
 int func_001157D8(char *dst, char *src);
 
-int func_00115210(int index, int a1) {
+int scePad2Read(int index, int a1) {
     struct R015210 *s0;
 
     if (D_0014B598[index].f00 == 0)

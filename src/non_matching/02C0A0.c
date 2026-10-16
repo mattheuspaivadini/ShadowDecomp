@@ -32,7 +32,7 @@ struct S12C0A0 {
 
 int func_00129930(void *ctx, ...);
 
-void func_0012C0A0(int file, char *buf, char *fmt, int ap) {
+void vsprintf_r(int file, char *buf, char *fmt, int ap) {
     struct S12C0A0 ctx;
 
     ctx.f54 = file;

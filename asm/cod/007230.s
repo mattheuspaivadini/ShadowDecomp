@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00107230, 0x10
+nonmatching EnableCache, 0x10
 
-glabel func_00107230
+glabel EnableCache
     /* 7230 00107230 61000324 */  addiu      $v1, $zero, 0x61
     /* 7234 00107234 0C000000 */  syscall    0 /* handwritten instruction */
     /* 7238 00107238 0800E003 */  jr         $ra
     /* 723C 0010723C 00000000 */   nop
-endlabel func_00107230
+endlabel EnableCache

@@ -6,7 +6,7 @@ struct P13F10 {
     long long q[8];
 };
 
-int func_00113F10(struct P13F10 *p, short a1, short a2, short a3, short a4,
+int sceGsSetDefTexEnv(struct P13F10 *p, short a1, short a2, short a3, short a4,
                   short a5, short a6, short a7, short t0, short t1, short t2,
                   short t3) {
     if (a1 != 0)
@@ -32,3 +32,4 @@ int func_00113F10(struct P13F10 *p, short a1, short a2, short a3, short a4,
     __asm__ __volatile__("sync" ::: "memory");
     return 4;
 }
+/* func_00113F10 */

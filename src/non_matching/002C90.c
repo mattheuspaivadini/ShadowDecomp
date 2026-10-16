@@ -1,7 +1,7 @@
-/* STATUS (Session 7, 2026-10-14): NON_MATCHING. best score 4 [cc=296, default].
- * 256-entry pointer table release loop.
+/* STATUS (10, 2026-10-16): NON_MATCHING. best score 4 [cc=296].
+ * 
  * The original .s stays in the build (asm/cod/002C90.s); this C
- * draft (subagent-produced, Session 7) is kept for the record. */
+ * draft (10) is kept for the record. */
 /* asm/cod/002C90.s -> func_00102C90 @ 0x00102C90 (0x64 bytes, 25 insns)
  *
  * Release/clear the 256-entry pointer table D_0013C790 (.bss, 0x400 bytes):
@@ -22,20 +22,20 @@
  */
 #include "symbols.h"
 
-int func_00108FF8(int x);
-void func_0010DCE8(void);
-void func_0010DED8(void);
+int sceSifInitRpc(int x);
+void sceSifInitIopHeap(void);
+void sceSifFreeIopHeap(void);
 
-void func_00102C90(void) {
+void LoaderSysDeleteAllExternalIopMemory(void) {
     int i;
     int *p;
 
-    func_00108FF8(0);
-    func_0010DCE8();
+    sceSifInitRpc(0);
+    sceSifInitIopHeap();
     p = (int *)D_0013C790;
     for (i = 0xFF; i >= 0; i--) {
         if (*p != 0) {
-            func_0010DED8();
+            sceSifFreeIopHeap();
             *p = 0;
         }
         p++;

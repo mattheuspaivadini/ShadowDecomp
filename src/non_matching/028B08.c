@@ -2,9 +2,9 @@
  * session9 R1; residual class not auto-classified
  * The original .s stays in the build (asm/cod/028B08.s); this C
  * draft (Session 9) is kept for the record. */
-extern int D_00135C60[];         /* .data 0x00135C60: lui/%lo (non-small) */
+extern int _impure_ptr[];         /* .data 0x00135C60: lui/%lo (non-small) */
 extern int func_001290C4(char *s);
-extern int func_0012B2B8(int a0, int a1, int a2, int a3);
+extern int __svfscanf(int a0, int a1, int a2, int a3);
 int func_00128B00(void);
 
 struct S028B08 {                 /* the pseudo-FILE built on the stack */
@@ -25,7 +25,7 @@ struct S028B08 {                 /* the pseudo-FILE built on the stack */
     int   field54;               /* 0x54: the real FILE */
 };
 
-int func_00128B08(char *buf, char *fmt, ...) {
+int sscanf(char *buf, char *fmt, ...) {
     struct S028B08 f;
     int n;
 
@@ -35,10 +35,10 @@ int func_00128B08(char *buf, char *fmt, ...) {
     f.flags = 4;
     f.bf_size = n;
     f.field20 = (int)func_00128B00;
-    f.field54 = D_00135C60[0];
+    f.field54 = _impure_ptr[0];
     f.r = n;
     f.field30 = 0;
     f.field44 = 0;
-    return func_0012B2B8((int)&f, (int)fmt, (int)((char *)&f + 0x90),
-                         D_00135C60[0]);
+    return __svfscanf((int)&f, (int)fmt, (int)((char *)&f + 0x90),
+                         _impure_ptr[0]);
 }

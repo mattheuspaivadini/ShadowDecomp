@@ -30,11 +30,11 @@ D_SMALL int D_0013A170;   /* .sbss,  _gp-0x3C00  func_00106380 */
 
 /* ---- .data / .rodata / .bss : absolute addressing (declared non-small) */
 #define D_ABS extern __attribute__((section(".data")))
-D_ABS int D_001329A4;         /* .data   0x001329A4  func_0010FBE8 */
+D_ABS int __sce_eh_sema_id;   /* .data   0x001329A4  __sceKernlGetEhSemaId (was D_001329A4) */
 D_ABS int D_00133920;         /* .data   0x00133920  func_00110640 */
 D_ABS int D_00133940;         /* .data   0x00133940  func_00111D50 */
 D_ABS int D_00133970;         /* .data   0x00133970  func_00113520 */
-D_ABS int D_00135C60;         /* .data   0x00135C60  func_00127528 */
+D_ABS int _impure_ptr;        /* .data   0x00135C60  __errno (was D_00135C60) */
 D_ABS int D_00135958;         /* .data   0x00135958  func_00122448 */
 
 /* .bss / .rodata objects of unknown size: unknown size is already non-small. */

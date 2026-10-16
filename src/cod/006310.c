@@ -17,16 +17,16 @@
  * MATCH GUESS: cc=296 (sibling tail call: `ld`s then `j` with the frame teardown
  * in the delay slot)
  */
-int func_00114020(long long *p, short a1);
+int sceGsSetDefAlphaEnv(long long *p, short a1);
 int sceGsSyncPath(int mode, int timeout);
 int sceGsPutDrawEnv(void *env);
 int func_001059D8(void);
 extern int D_001321A0[];   /* .data 0x001321A0, 0xA0 bytes, address taken (lui/%lo) */
 
-void func_00106310(void) {
+void ExecBaseProc(void) {
     long long *p = (long long *)((unsigned int)D_001321A0 | 0x20000000);
 
-    func_00114020(p + 4, 0);
+    sceGsSetDefAlphaEnv(p + 4, 0);
     p[4] = 0x48;
     p[2] = 0x20000;
     p[3] = 0x47;

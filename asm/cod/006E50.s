@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00106E50, 0x10
+nonmatching DisableDispatchThread, 0x10
 
-glabel func_00106E50
+glabel DisableDispatchThread
     /* 6E50 00106E50 27000324 */  addiu      $v1, $zero, 0x27
     /* 6E54 00106E54 0C000000 */  syscall    0 /* handwritten instruction */
     /* 6E58 00106E58 0800E003 */  jr         $ra
     /* 6E5C 00106E5C 00000000 */   nop
-endlabel func_00106E50
+endlabel DisableDispatchThread

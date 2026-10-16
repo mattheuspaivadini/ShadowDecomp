@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00106DC0, 0x10
+nonmatching iSetAlarm, 0x10
 
-glabel func_00106DC0
+glabel iSetAlarm
     /* 6DC0 00106DC0 02FF0324 */  addiu      $v1, $zero, -0xFE
     /* 6DC4 00106DC4 0C000000 */  syscall    0 /* handwritten instruction */
     /* 6DC8 00106DC8 0800E003 */  jr         $ra
     /* 6DCC 00106DCC 00000000 */   nop
-endlabel func_00106DC0
+endlabel iSetAlarm

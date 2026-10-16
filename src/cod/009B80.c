@@ -33,7 +33,7 @@ struct S009B80 {
     int  field18;   /* 0x18 */
 };
 
-int func_00109B80(int *a) {
+int sceSifCheckStatRpc(int *a) {
     struct S009B80 *p = (struct S009B80 *)a[0];
 
     if (p == 0)

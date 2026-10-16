@@ -14,7 +14,7 @@ nonmatching func_00107C48, 0x28
 glabel func_00107C48
     /* 7C48 00107C48 F0FFBD27 */  addiu      $sp, $sp, -0x10
     /* 7C4C 00107C4C 0000BFFF */  sd         $ra, 0x0($sp)
-    /* 7C50 00107C50 041C040C */  jal        func_00107010
+    /* 7C50 00107C50 041C040C */  jal        iSignalSema
     /* 7C54 00107C54 2D20E000 */   daddu     $a0, $a3, $zero
     /* 7C58 00107C58 0F000000 */  sync
     /* 7C5C 00107C5C 38000042 */  ei /* handwritten instruction */

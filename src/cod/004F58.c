@@ -6,6 +6,6 @@
  */
 #include "symbols.h"
 
-void func_00104F58(int value) {
+void LoaderSysSetPowerOffCallBackFunc(int value) {
     D_0013A11C = value;
 }

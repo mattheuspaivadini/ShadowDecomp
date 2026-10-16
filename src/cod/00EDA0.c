@@ -8,6 +8,6 @@ int func_0010EC78(int a, const char *b, int c, int d);
 
 extern char D_00138198[];
 
-void func_0010EDA0(int a, int b) {
+void sceSifLoadElf(int a, int b) {
     func_0010EC78(a, D_00138198, b, 1);
 }

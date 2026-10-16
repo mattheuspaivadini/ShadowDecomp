@@ -31,7 +31,7 @@ struct T133918 {
 
 extern struct T133918 D_00133918;
 
-unsigned long long func_00110C78(void) {
+unsigned long long iGetTimerSystemTime(void) {
     volatile unsigned int *t2;
     unsigned int count;
     unsigned int mode;

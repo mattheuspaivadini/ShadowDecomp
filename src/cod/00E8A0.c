@@ -7,10 +7,10 @@ extern int D_00147580[];   /* .bss transfer buffer (lui/%lo) */
 int func_0010E238(void);
 int func_0010E338(void);
 int func_001293B8(int dst, int src, int len);
-int SceSifrpcCall(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
+int sceSifCallRpc(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
                   int a7, int a8);
 
-int func_0010E8A0(int a0) {
+int sceSifSearchModuleByName(int a0) {
     char *p;
 
     if (func_0010E238() < 0)
@@ -20,7 +20,7 @@ int func_0010E8A0(int a0) {
     func_001293B8((int)D_00147388, a0, 0xFC);
     p = (char *)D_00147388 - 8;
     p[0x103] = 0;
-    if (SceSifrpcCall((int)D_00147580, 9, 0, (int)p, 0x200, (int)p, 4, 0, 0) < 0)
+    if (sceSifCallRpc((int)D_00147580, 9, 0, (int)p, 0x200, (int)p, 4, 0, 0) < 0)
         return 0xFFFEFFFF;
     return *(int *)((char *)D_00147388 - 8);
 }

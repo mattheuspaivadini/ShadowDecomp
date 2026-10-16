@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00106FE0, 0x10
+nonmatching CreateSema, 0x10
 
-glabel func_00106FE0
+glabel CreateSema
     /* 6FE0 00106FE0 40000324 */  addiu      $v1, $zero, 0x40
     /* 6FE4 00106FE4 0C000000 */  syscall    0 /* handwritten instruction */
     /* 6FE8 00106FE8 0800E003 */  jr         $ra
     /* 6FEC 00106FEC 00000000 */   nop
-endlabel func_00106FE0
+endlabel CreateSema

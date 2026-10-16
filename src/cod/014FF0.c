@@ -5,7 +5,7 @@
  *   jr    $ra
  *    andi $v0, $v0, 1
  */
-int func_00114FF0(unsigned int *p, unsigned int value) {
+int sceDmaRestart(unsigned int *p, unsigned int value) {
     unsigned int old = *p;
     *p = value;
     return (old >> 8) & 1;

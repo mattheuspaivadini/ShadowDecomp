@@ -31,12 +31,13 @@ def promote(stem: str, cc: str, flags: list[str], note: str,
     text = src.read_text(encoding="utf-8")
     m = re.match(r"\s*/\*.*?\*/\s*", text, re.S)
     body = text[m.end():] if m else text
-    if f"func_" not in body and "D_" not in body:
+    if "(" not in body or "{" not in body:
         return f"{stem}: suspicious body"
-    sym = re.search(r"\b(func_[0-9A-Fa-f]+)\s*\(", body)
-    header = (f"/* asm/cod/{stem}.s -> {sym.group(1) if sym else stem}.\n"
+    sym_m = re.search(r"\b([A-Za-z_]\w*)\s*\([^;]*\)\s*\{", body)
+    sym_name = sym_m.group(1) if sym_m else stem
+    header = (f"/* asm/cod/{stem}.s -> {sym_name}.\n"
               f" * {note}\n"
-              f" * MATCHED (Session 8). */\n")
+              f" * MATCHED (Session 12). */\n")
     out = ROOT / "src" / "cod" / f"{stem}.c"
     out.write_text(header + body, encoding="utf-8")
 

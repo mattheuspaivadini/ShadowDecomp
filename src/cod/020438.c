@@ -18,7 +18,7 @@
  */
 extern char D_0015F480[];
 
-int func_00120438(void) {
+int _sceMcpInit(void) {
     char *p = D_0015F480;
     char *end = D_0015F480 + 0x4020;
 

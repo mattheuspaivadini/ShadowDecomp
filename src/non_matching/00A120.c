@@ -1,7 +1,7 @@
-/* STATUS (Session 8, 2026-10-14): NON_MATCHING. best score 5 [cc=29].
- * R4 w25a_0: conditional count++ must if-convert to movn
+/* STATUS (10, 2026-10-16): NON_MATCHING. best score 5 [cc=29].
+ * 
  * The original .s stays in the build (asm/cod/00A120.s); this C
- * draft (Session 8) is kept for the record. */
+ * draft (10) is kept for the record. */
 extern int  D_00132320 __attribute__((section(".data")));
 extern char D_00146EC0[];   /* .bss 0x200 bytes = 32 x 0x10 records */
 

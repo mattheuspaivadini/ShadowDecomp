@@ -2,16 +2,16 @@
  * Same as func_00122BD8 with command 9.
  * MATCHED (Session 7). */
 /* v10: mirror the matched 022DA0 (int wrapper, `return` the command call). */
-int func_001221D0(void);
+int sceNetcnfifInit(void);
 void func_00128FB0(char *dst, char *src);
-int func_00123260(char *dst, char *src, int n);
+int sce_call_rpc(char *dst, char *src, int n);
 
 extern char D_00167F00[];
 extern char D_00167EC0[];
 
-int func_00122C88(int a0) {int lit_0 = 0x10;
+int sceNetcnfifCheckAdditionalAT(int a0) {int lit_0 = 0x10;
 
-    func_001221D0();
+    sceNetcnfifInit();
     func_00128FB0(D_00167F00 + lit_0, (char *)a0);
-    return func_00123260(D_00167EC0, D_00167F00, 9);
+    return sce_call_rpc(D_00167EC0, D_00167F00, 9);
 }

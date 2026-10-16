@@ -26,13 +26,13 @@
  * (`int id = f(); g(...); return id;`), never a tail call.
  * MATCH GUESS: cc=29 (the 0221xx/0222xx family is cc=29 throughout)
  */
-int  func_00122128(void);
+int  sceNetcnfifSetup(void);
 int  func_001283D0(void *dst, int value, int size);
 
 extern int D_00167F00[];    /* .bss 0x00167F00, 0x1000 bytes */
 
-int func_001221D0(void) {
-    int id = func_00122128();
+int sceNetcnfifInit(void) {
+    int id = sceNetcnfifSetup();
 
     func_001283D0(D_00167F00, 0, 0x310);
     return id;

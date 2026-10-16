@@ -4,10 +4,10 @@
  * draft (Session 8) is kept for the record. */
 extern char D_001384A8[];
 
-int  sceStdioOpen(int a0, int a1, int a2);
-int  sceStdioRead(int a0, int a1, int a2);
-int  sceStdioClose(int a0);
-int  func_00127500(int a0);
+int  sceOpen(int a0, int a1, int a2);
+int  sceRead(int a0, int a1, int a2);
+int  sceClose(int a0);
+int  atoi(int a0);
 
 int func_00114108(void) {
     char buf[0x100];
@@ -15,18 +15,18 @@ int func_00114108(void) {
     int fd;
     int i;
 
-    fd = sceStdioOpen(D_001384A8, 1);
+    fd = sceOpen(D_001384A8, 1);
     if (fd < 0)
         return -1;
     i = 0;
     p = buf;
     while (i < 0x100) {
-        sceStdioRead(fd, p, 1);
+        sceRead(fd, p, 1);
         if (*p == 0)
             break;
         i++;
         p++;
     }
-    sceStdioClose(fd);
-    return 0x1315670 < func_00127500(&buf[i - 9]);
+    sceClose(fd);
+    return 0x1315670 < atoi(&buf[i - 9]);
 }

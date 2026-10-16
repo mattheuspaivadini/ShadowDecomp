@@ -23,7 +23,7 @@ glabel func_0011B458
     /* 1B47C 0011B47C 201E4226 */  addiu      $v0, $s2, %lo(D_00151E20)
 .align 2
   .L0011B480:
-    /* 1B480 0011B480 081C040C */  jal        func_00107020
+    /* 1B480 0011B480 081C040C */  jal        WaitSema
     /* 1B484 0011B484 0400448C */   lw        $a0, 0x4($v0)
     /* 1B488 0011B488 00192326 */  addiu      $v1, $s1, %lo(D_00151900)
     /* 1B48C 0011B48C 0400628C */  lw         $v0, 0x4($v1)
@@ -40,7 +40,7 @@ glabel func_0011B458
   jlabel .L0011B4B4
     /* 1B4B4 0011B4B4 00193026 */  addiu      $s0, $s1, %lo(D_00151900)
     /* 1B4B8 0011B4B8 0019248E */  lw         $a0, %lo(D_00151900)($s1)
-    /* 1B4BC 0011B4BC C672040C */  jal        func_0011CB18
+    /* 1B4BC 0011B4BC C672040C */  jal        _sceMcFatGetInfo
     /* 1B4C0 0011B4C0 0C00058E */   lw        $a1, 0xC($s0)
     /* 1B4C4 0011B4C4 5C000010 */  b          .L0011B638
     /* 1B4C8 0011B4C8 080002AE */   sw        $v0, 0x8($s0)
@@ -51,7 +51,7 @@ glabel func_0011B458
     /* 1B4D4 0011B4D4 0C00068E */  lw         $a2, 0xC($s0)
     /* 1B4D8 0011B4D8 1C040526 */  addiu      $a1, $s0, 0x41C
     /* 1B4DC 0011B4DC 1000078E */  lw         $a3, 0x10($s0)
-    /* 1B4E0 0011B4E0 027C040C */  jal        func_0011F008
+    /* 1B4E0 0011B4E0 027C040C */  jal        _sceMcFatReadFile
     /* 1B4E4 0011B4E4 1400088E */   lw        $a4, 0x14($s0)
     /* 1B4E8 0011B4E8 53000010 */  b          .L0011B638
     /* 1B4EC 0011B4EC 080002AE */   sw        $v0, 0x8($s0)
@@ -62,14 +62,14 @@ glabel func_0011B458
     /* 1B4F8 0011B4F8 0C00068E */  lw         $a2, 0xC($s0)
     /* 1B4FC 0011B4FC 1C040526 */  addiu      $a1, $s0, 0x41C
     /* 1B500 0011B500 1000078E */  lw         $a3, 0x10($s0)
-    /* 1B504 0011B504 847C040C */  jal        func_0011F210
+    /* 1B504 0011B504 847C040C */  jal        _sceMcFatWriteFile
     /* 1B508 0011B508 1400088E */   lw        $a4, 0x14($s0)
     /* 1B50C 0011B50C 4A000010 */  b          .L0011B638
     /* 1B510 0011B510 080002AE */   sw        $v0, 0x8($s0)
 .align 2
   jlabel .L0011B514
     /* 1B514 0011B514 0019248E */  lw         $a0, 0x1900($s1)
-    /* 1B518 0011B518 AC73040C */  jal        func_0011CEB0
+    /* 1B518 0011B518 AC73040C */  jal        _sceMcFatFormat
     /* 1B51C 0011B51C 00193026 */   addiu     $s0, $s1, 0x1900
     /* 1B520 0011B520 45000010 */  b          .L0011B638
     /* 1B524 0011B524 080002AE */   sw        $v0, 0x8($s0)
@@ -78,7 +78,7 @@ glabel func_0011B458
     /* 1B528 0011B528 00193026 */  addiu      $s0, $s1, 0x1900
     /* 1B52C 0011B52C 0019248E */  lw         $a0, 0x1900($s1)
     /* 1B530 0011B530 0C00068E */  lw         $a2, 0xC($s0)
-    /* 1B534 0011B534 9E7A040C */  jal        func_0011EA78
+    /* 1B534 0011B534 9E7A040C */  jal        _sceMcFatCreateFile
     /* 1B538 0011B538 1C040526 */   addiu     $a1, $s0, 0x41C
     /* 1B53C 0011B53C 3E000010 */  b          .L0011B638
     /* 1B540 0011B540 080002AE */   sw        $v0, 0x8($s0)
@@ -86,7 +86,7 @@ glabel func_0011B458
   jlabel .L0011B544
     /* 1B544 0011B544 00193026 */  addiu      $s0, $s1, 0x1900
     /* 1B548 0011B548 0019248E */  lw         $a0, 0x1900($s1)
-    /* 1B54C 0011B54C FC7D040C */  jal        func_0011F7F0
+    /* 1B54C 0011B54C FC7D040C */  jal        _sceMcFatDeleteFile
     /* 1B550 0011B550 1C040526 */   addiu     $a1, $s0, 0x41C
     /* 1B554 0011B554 38000010 */  b          .L0011B638
     /* 1B558 0011B558 080002AE */   sw        $v0, 0x8($s0)
@@ -95,7 +95,7 @@ glabel func_0011B458
     /* 1B55C 0011B55C 00193026 */  addiu      $s0, $s1, 0x1900
     /* 1B560 0011B560 0019248E */  lw         $a0, 0x1900($s1)
     /* 1B564 0011B564 0C00068E */  lw         $a2, 0xC($s0)
-    /* 1B568 0011B568 9E7A040C */  jal        func_0011EA78
+    /* 1B568 0011B568 9E7A040C */  jal        _sceMcFatCreateFile
     /* 1B56C 0011B56C 1C040526 */   addiu     $a1, $s0, 0x41C
     /* 1B570 0011B570 31000010 */  b          .L0011B638
     /* 1B574 0011B574 080002AE */   sw        $v0, 0x8($s0)
@@ -104,7 +104,7 @@ glabel func_0011B458
     /* 1B578 0011B578 00193026 */  addiu      $s0, $s1, 0x1900
     /* 1B57C 0011B57C 0019248E */  lw         $a0, 0x1900($s1)
     /* 1B580 0011B580 0C00068E */  lw         $a2, 0xC($s0)
-    /* 1B584 0011B584 887E040C */  jal        func_0011FA20
+    /* 1B584 0011B584 887E040C */  jal        _sceMcFatChDir
     /* 1B588 0011B588 1C040526 */   addiu     $a1, $s0, 0x41C
     /* 1B58C 0011B58C 2A000010 */  b          .L0011B638
     /* 1B590 0011B590 080002AE */   sw        $v0, 0x8($s0)
@@ -116,7 +116,7 @@ glabel func_0011B458
     /* 1B5A0 0011B5A0 1C040526 */  addiu      $a1, $s0, 0x41C
     /* 1B5A4 0011B5A4 1000078E */  lw         $a3, 0x10($s0)
     /* 1B5A8 0011B5A8 1400088E */  lw         $a4, 0x14($s0)
-    /* 1B5AC 0011B5AC D27E040C */  jal        func_0011FB48
+    /* 1B5AC 0011B5AC D27E040C */  jal        _sceMcFatGetDir
     /* 1B5B0 0011B5B0 1800098E */   lw        $a5, 0x18($s0)
     /* 1B5B4 0011B5B4 20000010 */  b          .L0011B638
     /* 1B5B8 0011B5B8 080002AE */   sw        $v0, 0x8($s0)
@@ -125,7 +125,7 @@ glabel func_0011B458
     /* 1B5BC 0011B5BC 00193026 */  addiu      $s0, $s1, 0x1900
     /* 1B5C0 0011B5C0 0019248E */  lw         $a0, 0x1900($s1)
     /* 1B5C4 0011B5C4 0C000696 */  lhu        $a2, 0xC($s0)
-    /* 1B5C8 0011B5C8 1A80040C */  jal        func_00120068
+    /* 1B5C8 0011B5C8 1A80040C */  jal        _sceMcFatSetAttr
     /* 1B5CC 0011B5CC 1C040526 */   addiu     $a1, $s0, 0x41C
     /* 1B5D0 0011B5D0 19000010 */  b          .L0011B638
     /* 1B5D4 0011B5D4 080002AE */   sw        $v0, 0x8($s0)
@@ -134,14 +134,14 @@ glabel func_0011B458
     /* 1B5D8 0011B5D8 00193026 */  addiu      $s0, $s1, 0x1900
     /* 1B5DC 0011B5DC 0019248E */  lw         $a0, 0x1900($s1)
     /* 1B5E0 0011B5E0 1C040526 */  addiu      $a1, $s0, 0x41C
-    /* 1B5E4 0011B5E4 7C80040C */  jal        func_001201F0
+    /* 1B5E4 0011B5E4 7C80040C */  jal        _sceMcFatRename
     /* 1B5E8 0011B5E8 9C040626 */   addiu     $a2, $s0, 0x49C
     /* 1B5EC 0011B5EC 12000010 */  b          .L0011B638
     /* 1B5F0 0011B5F0 080002AE */   sw        $v0, 0x8($s0)
 .align 2
   jlabel .L0011B5F4
     /* 1B5F4 0011B5F4 0019248E */  lw         $a0, 0x1900($s1)
-    /* 1B5F8 0011B5F8 F875040C */  jal        func_0011D7E0
+    /* 1B5F8 0011B5F8 F875040C */  jal        _sceMcFatUnFormat
     /* 1B5FC 0011B5FC 00193026 */   addiu     $s0, $s1, 0x1900
     /* 1B600 0011B600 0D000010 */  b          .L0011B638
     /* 1B604 0011B604 080002AE */   sw        $v0, 0x8($s0)
@@ -150,7 +150,7 @@ glabel func_0011B458
     /* 1B608 0011B608 00193026 */  addiu      $s0, $s1, 0x1900
     /* 1B60C 0011B60C 0019248E */  lw         $a0, 0x1900($s1)
     /* 1B610 0011B610 0C00068E */  lw         $a2, 0xC($s0)
-    /* 1B614 0011B614 627A040C */  jal        func_0011E988
+    /* 1B614 0011B614 627A040C */  jal        _sceMcFatSearchFile
     /* 1B618 0011B618 1C040526 */   addiu     $a1, $s0, 0x41C
     /* 1B61C 0011B61C 06000010 */  b          .L0011B638
     /* 1B620 0011B620 080002AE */   sw        $v0, 0x8($s0)
@@ -158,7 +158,7 @@ glabel func_0011B458
   jlabel .L0011B624
     /* 1B624 0011B624 00193026 */  addiu      $s0, $s1, 0x1900
     /* 1B628 0011B628 0019248E */  lw         $a0, 0x1900($s1)
-    /* 1B62C 0011B62C DC80040C */  jal        func_00120370
+    /* 1B62C 0011B62C DC80040C */  jal        _sceMcFatGetEntSpace
     /* 1B630 0011B630 1C040526 */   addiu     $a1, $s0, 0x41C
     /* 1B634 0011B634 080002AE */  sw         $v0, 0x8($s0)
 .align 2
@@ -175,7 +175,7 @@ glabel func_0011B458
     /* 1B65C 0011B65C 201E4226 */  addiu      $v0, $s2, %lo(D_00151E20)
 .align 2
   .L0011B660:
-    /* 1B660 0011B660 001C040C */  jal        func_00107000
+    /* 1B660 0011B660 001C040C */  jal        SignalSema
     /* 1B664 0011B664 0800448C */   lw        $a0, 0x8($v0)
     /* 1B668 0011B668 85FF0010 */  b          .L0011B480
     /* 1B66C 0011B66C 201E4226 */   addiu     $v0, $s2, %lo(D_00151E20)

@@ -13,15 +13,15 @@
  * MATCH GUESS: cc=296 */
 #include "symbols.h"
 
-extern int func_001275A0(int a0, int a1, int a2);
-extern void func_00128490(int a0);
-extern void func_00128510(int a0);
+extern int _memalign_r(int a0, int a1, int a2);
+extern void __malloc_lock(int a0);
+extern void __malloc_unlock(int a0);
 
-int func_00127538(int a0, int a1) {
+int memalign(int a0, int a1) {
     int r;
 
-    func_00128490(D_00135C60);
-    r = func_001275A0(D_00135C60, a0, a1);
-    func_00128510(D_00135C60);
+    __malloc_lock(_impure_ptr);
+    r = _memalign_r(_impure_ptr, a0, a1);
+    __malloc_unlock(_impure_ptr);
     return r;
 }

@@ -9,9 +9,9 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00111FD0, 0xAC
+nonmatching sbrk, 0xAC
 
-glabel func_00111FD0
+glabel sbrk
     /* 11FD0 00111FD0 C0FFBD27 */  addiu      $sp, $sp, -0x40
     /* 11FD4 00111FD4 3000BFFF */  sd         $ra, 0x30($sp)
     /* 11FD8 00111FD8 2000B2FF */  sd         $s2, 0x20($sp)
@@ -38,12 +38,12 @@ glabel func_00111FD0
     /* 1201C 0011201C 4439428E */  lw         $v0, %lo(D_00133944)($s2)
 .align 2
   .L00112020:
-    /* 12020 00112020 F01B040C */  jal        func_00106FC0
+    /* 12020 00112020 F01B040C */  jal        EndOfHeap
     /* 12024 00112024 21804400 */   addu      $s0, $v0, $a0
     /* 12028 00112028 2B105000 */  sltu       $v0, $v0, $s0
     /* 1202C 0011202C 0A004010 */  beqz       $v0, .L00112058
     /* 12030 00112030 4439428E */   lw        $v0, %lo(D_00133944)($s2)
-    /* 12034 00112034 4A9D040C */  jal        func_00127528
+    /* 12034 00112034 4A9D040C */  jal        __errno
     /* 12038 00112038 00000000 */   nop
     /* 1203C 0011203C 0C000324 */  addiu      $v1, $zero, 0xC
     /* 12040 00112040 02002012 */  beqz       $s1, .L0011204C
@@ -67,5 +67,5 @@ glabel func_00111FD0
     /* 12070 00112070 0000B0DF */  ld         $s0, 0x0($sp)
     /* 12074 00112074 0800E003 */  jr         $ra
     /* 12078 00112078 4000BD27 */   addiu     $sp, $sp, 0x40
-endlabel func_00111FD0
+endlabel sbrk
     /* 1207C 0011207C 00000000 */  nop

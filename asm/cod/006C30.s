@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00106C30, 0x10
+nonmatching _ExecPS2, 0x10
 
-glabel func_00106C30
+glabel _ExecPS2
     /* 6C30 00106C30 07000324 */  addiu      $v1, $zero, 0x7
     /* 6C34 00106C34 0C000000 */  syscall    0 /* handwritten instruction */
     /* 6C38 00106C38 0800E003 */  jr         $ra
     /* 6C3C 00106C3C 00000000 */   nop
-endlabel func_00106C30
+endlabel _ExecPS2

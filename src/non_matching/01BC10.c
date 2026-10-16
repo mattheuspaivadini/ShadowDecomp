@@ -1,7 +1,7 @@
-/* STATUS (Session 9, 2026-10-15): NON_MATCHING. best score 6 [cc=wine:ee-gcc2.95.2-273a].
- * session9 R2 waveA; residual class not auto-classified
+/* STATUS (10, 2026-10-16): NON_MATCHING. best score 6 [cc=wine:ee-gcc2.95.2-273a].
+ * 
  * The original .s stays in the build (asm/cod/01BC10.s); this C
- * draft (Session 9) is kept for the record. */
+ * draft (10) is kept for the record. */
 extern char D_00138CF0[];
 extern char D_00138CF8[];
 

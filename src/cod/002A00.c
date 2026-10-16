@@ -18,7 +18,7 @@
  */
 extern int D_0013BB90[256];
 
-void func_00102A00(void) {
+void LoaderSysInitExternalSemaList(void) {
     int value = -1;
     int i;
 

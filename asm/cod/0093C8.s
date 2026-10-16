@@ -19,7 +19,7 @@ glabel func_001093C8
     /* 93DC 001093DC 40000624 */  addiu      $a2, $zero, 0x40
     /* 93E0 001093E0 2400A78C */  lw         $a3, 0x24($a1)
     /* 93E4 001093E4 2800A88C */  lw         $a4, 0x28($a1)
-    /* 93E8 001093E8 904B040C */  jal        func_00112E40
+    /* 93E8 001093E8 904B040C */  jal        isceSifSendCmd
     /* 93EC 001093EC 2C00A98C */   lw        $a5, 0x2C($a1)
     /* 93F0 001093F0 00080324 */  addiu      $v1, $zero, 0x800
     /* 93F4 001093F4 0000BFDF */  ld         $ra, 0x0($sp)

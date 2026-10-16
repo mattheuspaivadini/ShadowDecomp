@@ -11,21 +11,21 @@
  * argument. Frame 0x60: $s0-$s3 + $ra at 0x10..0x50 plus the stack argument.
  * MATCH GUESS: cc=29 (0231A8/023208 D_00135960 family; filled jal shadows) */
 int func_001231A8(void);
-int func_00108EF8(const char *msg, int a1);
-int SceSifrpcCall(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
+int scePrintf(const char *msg, int a1);
+int sceSifCallRpc(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
                   int a7, int a8);
 void func_00123180(int a0);
 
 extern char D_00138E08[];
 
-int func_00123260(int a0, int a1, int a2) {
+int sce_call_rpc(int a0, int a1, int a2) {
     int h;
 
     h = func_001231A8();
     if (h < 0) {
-        func_00108EF8(D_00138E08, a2);
+        scePrintf(D_00138E08, a2);
         return h;
     }
-    return SceSifrpcCall(a0, a2, 1, a1, 0x1000, a1, 0x1000, (int)func_00123180,
+    return sceSifCallRpc(a0, a2, 1, a1, 0x1000, a1, 0x1000, (int)func_00123180,
                          h);
 }

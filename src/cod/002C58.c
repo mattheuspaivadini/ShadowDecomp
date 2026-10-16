@@ -31,7 +31,7 @@
  */
 #include "symbols.h"
 
-void func_00102C58(void) {
+void LoaderSysInitExternalIopMemoryList(void) {
     int *p = (int *)D_0013C790;
     int i;
 

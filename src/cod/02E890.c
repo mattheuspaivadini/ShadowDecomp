@@ -36,7 +36,7 @@ struct S02E890_B {
     int field04;   /* 0x04: bucket index */
 };
 
-void func_0012E890(struct S02E890_A *a, struct S02E890_B *b) {
+void _Bfree(struct S02E890_A *a, struct S02E890_B *b) {
     if (b != 0) {
         b->field00 = a->field4C[b->field04];
         a->field4C[b->field04] = (int)b;

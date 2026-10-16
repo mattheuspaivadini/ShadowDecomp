@@ -30,7 +30,7 @@ glabel func_0011C320
     /* 1C360 0011C360 0004A524 */  addiu      $a1, $a1, 0x400
     /* 1C364 0011C364 2D200002 */  daddu      $a0, $s0, $zero
     /* 1C368 0011C368 2128E500 */  addu       $a1, $a3, $a1
-    /* 1C36C 0011C36C D281040C */  jal        func_00120748
+    /* 1C36C 0011C36C D281040C */  jal        _sceMcpWriteClust
     /* 1C370 0011C370 01000724 */   addiu     $a3, $zero, 0x1
     /* 1C374 0011C374 04004014 */  bnez       $v0, .L0011C388
     /* 1C378 0011C378 98080324 */   addiu     $v1, $zero, 0x898

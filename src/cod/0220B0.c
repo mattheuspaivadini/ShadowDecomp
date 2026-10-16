@@ -30,7 +30,7 @@ struct R0220B0 {
 
 extern struct R0220B0 D_00163CC8[];
 
-int func_001220B0(int key) {
+int _sceMcCoreChangeSocketTypeDbc2Mc(int key) {
     int i;
 
     for (i = 0; i < 2; i++) {

@@ -47,7 +47,7 @@ struct D10D48 {
 
 extern struct D10D48 D_00133918;
 
-int func_00110D48(void) {
+int iAllocTimerCounter(void) {
     struct N10D48 *n;
     unsigned int v;
 

@@ -1,8 +1,8 @@
-/* STATUS (Session 7, 2026-10-14): NON_MATCHING. best score 7 [cc=29, default].
- * list unlink under the func_0010FB20 guard.
+/* STATUS (10, 2026-10-16): NON_MATCHING. best score 7 [cc=29].
+ * 
  * The original .s stays in the build (asm/cod/009DC0.s); this C
- * draft (subagent-produced, Session 7) is kept for the record. */
-/* asm/cod/009DC0.s -> func_00109DC0 @ 0x00109DC0 (0x90 bytes, 36 insns)
+ * draft (10) is kept for the record. */
+/* asm/cod/009DC0.s -> sceSifRemoveRpcQueue @ 0x00109DC0 (0x90 bytes, 36 insns)
  *
  * Unlink a node from the singly-linked list headed at D_00145940+0x28 (node
  * forward link at +0x14), inside the func_0010FB20/func_0010FB70 guard pair.
@@ -35,13 +35,13 @@ struct L09DC0 {
 
 extern struct L09DC0 D_00145940;   /* .bss/.data, outside small-data -> lui/%lo */
 
-int func_0010FB20(void);
-int func_0010FB70(void);
+int DIntr(void);
+int EIntr(void);
 
-struct N09DC0 *func_00109DC0(struct N09DC0 *target) {
+struct N09DC0 *sceSifRemoveRpcQueue(struct N09DC0 *target) {
     struct N09DC0 *p;
 
-    func_0010FB20();
+    DIntr();
     p = D_00145940.head;
     if (p == target) {
         D_00145940.head = p->next;
@@ -51,6 +51,6 @@ struct N09DC0 *func_00109DC0(struct N09DC0 *target) {
         if (p != 0)
             p->next = target->next;
     }
-    func_0010FB70();
+    EIntr();
     return p;
 }

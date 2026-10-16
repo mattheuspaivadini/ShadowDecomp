@@ -24,7 +24,7 @@ glabel sceMc2Init
     /* 1A1B0 0011A1B0 9000B1FF */  sd         $s1, 0x90($sp)
     /* 1A1B4 0011A1B4 03005214 */  bne        $v0, $s2, .L0011A1C4
     /* 1A1B8 0011A1B8 8000B0FF */   sd        $s0, 0x80($sp)
-    /* 1A1BC 0011A1BC CC68040C */  jal        func_0011A330
+    /* 1A1BC 0011A1BC CC68040C */  jal        sceMc2End
     /* 1A1C0 0011A1C0 00000000 */   nop
 .align 2
   .L0011A1C4:
@@ -43,7 +43,7 @@ glabel sceMc2Init
     /* 1A1F4 0011A1F4 0800A2AE */  sw         $v0, 0x8($s5)
     /* 1A1F8 0011A1F8 2D202002 */  daddu      $a0, $s1, $zero
     /* 1A1FC 0011A1FC 6800B2AF */  sw         $s2, 0x68($sp)
-    /* 1A200 0011A200 F81B040C */  jal        func_00106FE0
+    /* 1A200 0011A200 F81B040C */  jal        CreateSema
     /* 1A204 0011A204 6400B3AF */   sw        $s3, 0x64($sp)
     /* 1A208 0011A208 31004004 */  bltz       $v0, .L0011A2D0
     /* 1A20C 0011A20C 2C1E02AE */   sw        $v0, %lo(D_00151E2C)($s0)
@@ -52,7 +52,7 @@ glabel sceMc2Init
     /* 1A218 0011A218 288C4224 */  addiu      $v0, $v0, %lo(D_00138C28)
     /* 1A21C 0011A21C 6400B3AF */  sw         $s3, 0x64($sp)
     /* 1A220 0011A220 7400A2AF */  sw         $v0, 0x74($sp)
-    /* 1A224 0011A224 F81B040C */  jal        func_00106FE0
+    /* 1A224 0011A224 F81B040C */  jal        CreateSema
     /* 1A228 0011A228 2D202002 */   daddu     $a0, $s1, $zero
     /* 1A22C 0011A22C 28004004 */  bltz       $v0, .L0011A2D0
     /* 1A230 0011A230 0400A2AE */   sw        $v0, 0x4($s5)
@@ -61,17 +61,17 @@ glabel sceMc2Init
     /* 1A23C 0011A23C 408C4224 */  addiu      $v0, $v0, %lo(D_00138C40)
     /* 1A240 0011A240 2D202002 */  daddu      $a0, $s1, $zero
     /* 1A244 0011A244 7400A2AF */  sw         $v0, 0x74($sp)
-    /* 1A248 0011A248 F81B040C */  jal        func_00106FE0
+    /* 1A248 0011A248 F81B040C */  jal        CreateSema
     /* 1A24C 0011A24C 6800A0AF */   sw        $zero, 0x68($sp)
     /* 1A250 0011A250 1F004004 */  bltz       $v0, .L0011A2D0
     /* 1A254 0011A254 0800A2AE */   sw        $v0, 0x8($s5)
     /* 1A258 0011A258 1200033C */  lui        $v1, %hi(func_0011B458)
     /* 1A25C 0011A25C 1500053C */  lui        $a1, %hi(D_00151E40)
-    /* 1A260 0011A260 1400063C */  lui        $a2, %hi(D_00141D70)
+    /* 1A260 0011A260 1400063C */  lui        $a2, %hi(_gp)
     /* 1A264 0011A264 1400073C */  lui        $a3, %hi(D_00138C50)
     /* 1A268 0011A268 58B46324 */  addiu      $v1, $v1, %lo(func_0011B458)
     /* 1A26C 0011A26C 401EA524 */  addiu      $a1, $a1, %lo(D_00151E40)
-    /* 1A270 0011A270 701DC624 */  addiu      $a2, $a2, %lo(D_00141D70)
+    /* 1A270 0011A270 701DC624 */  addiu      $a2, $a2, %lo(_gp)
     /* 1A274 0011A274 508CE724 */  addiu      $a3, $a3, %lo(D_00138C50)
     /* 1A278 0011A278 1500023C */  lui        $v0, %hi(D_00151904)
     /* 1A27C 0011A27C 00C00834 */  ori        $a4, $zero, 0xC000
@@ -82,36 +82,36 @@ glabel sceMc2Init
     /* 1A290 0011A290 0C00A8AF */  sw         $a4, 0xC($sp)
     /* 1A294 0011A294 1000A6AF */  sw         $a2, 0x10($sp)
     /* 1A298 0011A298 2000A7AF */  sw         $a3, 0x20($sp)
-    /* 1A29C 0011A29C 781B040C */  jal        func_00106DE0
+    /* 1A29C 0011A29C 781B040C */  jal        CreateThread
     /* 1A2A0 0011A2A0 1400B2AF */   sw        $s2, 0x14($sp)
     /* 1A2A4 0011A2A4 06004104 */  bgez       $v0, .L0011A2C0
     /* 1A2A8 0011A2A8 201EC2AE */   sw        $v0, %lo(D_00151E20)($s6)
-    /* 1A2AC 0011A2AC CC68040C */  jal        func_0011A330
+    /* 1A2AC 0011A2AC CC68040C */  jal        sceMc2End
     /* 1A2B0 0011A2B0 305692AE */   sw        $s2, %lo(D_00135630)($s4)
     /* 1A2B4 0011A2B4 0181023C */  lui        $v0, (0x81018004 >> 16)
     /* 1A2B8 0011A2B8 13000010 */  b          .L0011A308
     /* 1A2BC 0011A2BC 04804234 */   ori       $v0, $v0, (0x81018004 & 0xFFFF)
 .align 2
   .L0011A2C0:
-    /* 1A2C0 0011A2C0 2284040C */  jal        func_00121088
+    /* 1A2C0 0011A2C0 2284040C */  jal        _sceMcCoreInit
     /* 1A2C4 0011A2C4 00000000 */   nop
     /* 1A2C8 0011A2C8 06004014 */  bnez       $v0, .L0011A2E4
     /* 1A2CC 0011A2CC 00000000 */   nop
 .align 2
   .L0011A2D0:
-    /* 1A2D0 0011A2D0 CC68040C */  jal        func_0011A330
+    /* 1A2D0 0011A2D0 CC68040C */  jal        sceMc2End
     /* 1A2D4 0011A2D4 305692AE */   sw        $s2, %lo(D_00135630)($s4)
     /* 1A2D8 0011A2D8 0181023C */  lui        $v0, (0x81018003 >> 16)
     /* 1A2DC 0011A2DC 0A000010 */  b          .L0011A308
     /* 1A2E0 0011A2E0 03804234 */   ori       $v0, $v0, (0x81018003 & 0xFFFF)
 .align 2
   .L0011A2E4:
-    /* 1A2E4 0011A2E4 0E81040C */  jal        func_00120438
+    /* 1A2E4 0011A2E4 0E81040C */  jal        _sceMcpInit
     /* 1A2E8 0011A2E8 00000000 */   nop
-    /* 1A2EC 0011A2EC 4E70040C */  jal        func_0011C138
+    /* 1A2EC 0011A2EC 4E70040C */  jal        _sceMcFatInit
     /* 1A2F0 0011A2F0 00000000 */   nop
     /* 1A2F4 0011A2F4 201EC48E */  lw         $a0, %lo(D_00151E20)($s6)
-    /* 1A2F8 0011A2F8 B41E040C */  jal        func_00107AD0
+    /* 1A2F8 0011A2F8 B41E040C */  jal        StartThread
     /* 1A2FC 0011A2FC 2D280000 */   daddu     $a1, $zero, $zero
     /* 1A300 0011A300 305692AE */  sw         $s2, %lo(D_00135630)($s4)
     /* 1A304 0011A304 2D100000 */  daddu      $v0, $zero, $zero

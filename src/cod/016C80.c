@@ -20,24 +20,24 @@
  * left to the scoring loop.
  * MATCH GUESS: cc=29 (the func_0010FB20 wrapper family)
  */
-int func_00117798(int a0);
-int func_0010FB20(void);
-int func_0010FB70(void);
+int sceCdSync(int a0);
+int DIntr(void);
+int EIntr(void);
 
 extern int D_00150E00[];   /* .bss 0x00150E00: installed entry address */
 extern int D_00150E04[];   /* .bss 0x00150E04: caller $gp value        */
 
-int func_00116C80(int a0) {
+int sceCdCallback(int a0) {
     int a;
     int old;
 
-    if (func_00117798(1) != 0)
+    if (sceCdSync(1) != 0)
         return 0;
-    a = func_0010FB20();
+    a = DIntr();
     old = D_00150E00[0];
     D_00150E00[0] = a0;
     __asm__ __volatile__("sw $gp, %0" ::"m"(D_00150E04[0]) : "memory");
     if (a != 0)
-        func_0010FB70();
+        EIntr();
     return old;
 }

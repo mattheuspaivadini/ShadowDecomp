@@ -25,7 +25,7 @@ extern int D_0013A07C;          /* gp-relative counter (small scalar) */
 
 int func_001283D0(void *dst, int value, int size);
 
-void func_00103F28(void) {
+void loaderExecResetCallback(void) {
     int i;
     int *p = D_0013CFA0;
 

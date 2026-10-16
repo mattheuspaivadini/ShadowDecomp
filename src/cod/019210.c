@@ -3,7 +3,7 @@
  * MATCHED (Session 8). */
 int func_00118380(int a0, int a1, int *a2, int a3, int a4);
 
-int func_00119210(int a0, int *p, int v, int *q) {
+int sceInetCtlGetState(int a0, int *p, int v, int *q) {
     p[0] = v;
     if (q != 0)
         p[1] = q[0];

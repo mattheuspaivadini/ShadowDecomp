@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00106FC0, 0x10
+nonmatching EndOfHeap, 0x10
 
-glabel func_00106FC0
+glabel EndOfHeap
     /* 6FC0 00106FC0 3E000324 */  addiu      $v1, $zero, 0x3E
     /* 6FC4 00106FC4 0C000000 */  syscall    0 /* handwritten instruction */
     /* 6FC8 00106FC8 0800E003 */  jr         $ra
     /* 6FCC 00106FCC 00000000 */   nop
-endlabel func_00106FC0
+endlabel EndOfHeap

@@ -12,7 +12,7 @@ nonmatching func_0010A7C8, 0xC
 
 glabel func_0010A7C8
     /* A7C8 0010A7C8 1300023C */  lui        $v0, %hi(D_0013231C)
-    /* A7CC 0010A7CC 001C0408 */  j          func_00107000
+    /* A7CC 0010A7CC 001C0408 */  j          SignalSema
     /* A7D0 0010A7D0 1C23448C */   lw        $a0, %lo(D_0013231C)($v0)
 endlabel func_0010A7C8
     /* A7D4 0010A7D4 00000000 */  nop

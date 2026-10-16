@@ -14,13 +14,13 @@ glabel func_0011DC60
     /* 1DC60 0011DC60 30FBBD27 */  addiu      $sp, $sp, -0x4D0
     /* 1DC64 0011DC64 84010324 */  addiu      $v1, $zero, 0x184
     /* 1DC68 0011DC68 A004B7FF */  sd         $s7, 0x4A0($sp)
-    /* 1DC6C 0011DC6C 1300023C */  lui        $v0, %hi(D_00135638)
+    /* 1DC6C 0011DC6C 1300023C */  lui        $v0, %hi(gSceMc2SysInfo)
     /* 1DC70 0011DC70 2DB88000 */  daddu      $s7, $a0, $zero
     /* 1DC74 0011DC74 B004BEFF */  sd         $fp, 0x4B0($sp)
     /* 1DC78 0011DC78 1818E302 */  mult       $v1, $s7, $v1
     /* 1DC7C 0011DC7C 8004B5FF */  sd         $s5, 0x480($sp)
     /* 1DC80 0011DC80 4004B1FF */  sd         $s1, 0x440($sp)
-    /* 1DC84 0011DC84 38564224 */  addiu      $v0, $v0, %lo(D_00135638)
+    /* 1DC84 0011DC84 38564224 */  addiu      $v0, $v0, %lo(gSceMc2SysInfo)
     /* 1DC88 0011DC88 2404A7AF */  sw         $a3, 0x424($sp)
     /* 1DC8C 0011DC8C 2DA8C000 */  daddu      $s5, $a2, $zero
     /* 1DC90 0011DC90 C004BFFF */  sd         $ra, 0x4C0($sp)

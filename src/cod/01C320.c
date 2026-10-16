@@ -19,11 +19,11 @@ struct R01C320 {
 
 extern struct R01C320 D_0015DF48[];   /* .bss 0x0015DF48, 0x898-byte records */
 
-int func_00120748(int a0, int a1, int a2, int a3);
+int _sceMcpWriteClust(int a0, int a1, int a2, int a3);
 
 int func_0011C320(int index) {
     if (D_0015DF48[index].field800 > 0 && D_0015DF48[index].field894 == 1) {
-        if (func_00120748(index, (int)D_0015DF48 + 0x400 + index * 0x898,
+        if (_sceMcpWriteClust(index, (int)D_0015DF48 + 0x400 + index * 0x898,
                           D_0015DF48[index].field800, 1) == 0)
             return 0;
     }

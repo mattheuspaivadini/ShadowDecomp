@@ -11,12 +11,12 @@ struct D25768 {
     unsigned long long pad18;       /* 0x18 */
 };
 
-int func_001271B0(long long *in, struct D25768 *out);
+int __unpack_d(long long *in, struct D25768 *out);
 
-int func_001258F8(long long a0) {
+int dptoul(long long a0) {
     struct D25768 pa;
 
-    func_001271B0(&a0, &pa);
+    __unpack_d(&a0, &pa);
     if (pa.type == 2)
         return 0;
     if (pa.type < 2)
@@ -33,3 +33,4 @@ int func_001258F8(long long a0) {
         return (int)(pa.mant >> (0x3C - pa.exp));
     return (int)(pa.mant << (pa.exp - 0x3C));
 }
+/* func_001258F8 */

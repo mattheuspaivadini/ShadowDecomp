@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00107380, 0x10
+nonmatching sceSifDmaStat, 0x10
 
-glabel func_00107380
+glabel sceSifDmaStat
     /* 7380 00107380 76000324 */  addiu      $v1, $zero, 0x76
     /* 7384 00107384 0C000000 */  syscall    0 /* handwritten instruction */
     /* 7388 00107388 0800E003 */  jr         $ra
     /* 738C 0010738C 00000000 */   nop
-endlabel func_00107380
+endlabel sceSifDmaStat

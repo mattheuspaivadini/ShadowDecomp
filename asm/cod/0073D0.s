@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_001073D0, 0x10
+nonmatching isceSifSetDChain, 0x10
 
-glabel func_001073D0
+glabel isceSifSetDChain
     /* 73D0 001073D0 88FF0324 */  addiu      $v1, $zero, -0x78
     /* 73D4 001073D4 0C000000 */  syscall    0 /* handwritten instruction */
     /* 73D8 001073D8 0800E003 */  jr         $ra
     /* 73DC 001073DC 00000000 */   nop
-endlabel func_001073D0
+endlabel isceSifSetDChain

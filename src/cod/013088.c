@@ -5,7 +5,7 @@
  *   jr   $ra
  *    sw  $v0, 0x0($a0)
  */
-int func_00113088(int *p) {
+int sceVif1PkReset(int *p) {
     int v = p[1];
     p[2] = 0;
     p[0] = v;

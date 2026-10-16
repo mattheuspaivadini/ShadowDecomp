@@ -21,7 +21,7 @@ glabel func_001021E0
     /* 21FC 001021FC 1000B2FF */  sd         $s2, 0x10($sp)
     /* 2200 00102200 2D902002 */  daddu      $s2, $s1, $zero
     /* 2204 00102204 2000B4FF */  sd         $s4, 0x20($sp)
-    /* 2208 00102208 1300143C */  lui        $s4, %hi(D_00131D80)
+    /* 2208 00102208 1300143C */  lui        $s4, %hi(eeRegInfo)
     /* 220C 0010220C 2800B5FF */  sd         $s5, 0x28($sp)
     /* 2210 00102210 2DA8C000 */  daddu      $s5, $a2, $zero
     /* 2214 00102214 3000B6FF */  sd         $s6, 0x30($sp)
@@ -30,61 +30,61 @@ glabel func_001021E0
     /* 2220 00102220 2DB8E000 */  daddu      $s7, $a3, $zero
     /* 2224 00102224 4000BEFF */  sd         $fp, 0x40($sp)
     /* 2228 00102228 4800BFFF */  sd         $ra, 0x48($sp)
-    /* 222C 0010222C B41B040C */  jal        func_00106ED0
+    /* 222C 0010222C B41B040C */  jal        GetThreadId
     /* 2230 00102230 2DF00001 */   daddu     $fp, $a4, $zero
     /* 2234 00102234 14001C3C */  lui        $gp, %hi(_gp)
     /* 2238 00102238 701D9C27 */  addiu      $gp, $gp, %lo(_gp)
-    /* 223C 0010223C 8209040C */  jal        func_00102608
+    /* 223C 0010223C 8209040C */  jal        LoaderSysExecuteRecoveryFirstProcess
     /* 2240 00102240 2D804000 */   daddu     $s0, $v0, $zero
     /* 2244 00102244 2D200002 */  daddu      $a0, $s0, $zero
     /* 2248 00102248 7F000524 */  addiu      $a1, $zero, 0x7F
-    /* 224C 0010224C 9C1B040C */  jal        func_00106E70
+    /* 224C 0010224C 9C1B040C */  jal        ChangeThreadPriority
     /* 2250 00102250 2D880000 */   daddu     $s1, $zero, $zero
-    /* 2254 00102254 DC3E040C */  jal        func_0010FB70
+    /* 2254 00102254 DC3E040C */  jal        EIntr
     /* 2258 00102258 00000000 */   nop
     /* 225C 0010225C 1300043C */  lui        $a0, %hi(D_001367E0)
     /* 2260 00102260 2D280002 */  daddu      $a1, $s0, $zero
     /* 2264 00102264 E0678424 */  addiu      $a0, $a0, %lo(D_001367E0)
-    /* 2268 00102268 3E0B040C */  jal        func_00102CF8
-    /* 226C 0010226C 801D9026 */   addiu     $s0, $s4, %lo(D_00131D80)
+    /* 2268 00102268 3E0B040C */  jal        LoaderSysPrintf
+    /* 226C 0010226C 801D9026 */   addiu     $s0, $s4, %lo(eeRegInfo)
 .align 2
   .L00102270:
     /* 2270 00102270 0000428E */  lw         $v0, 0x0($s2)
     /* 2274 00102274 10005226 */  addiu      $s2, $s2, 0x10
     /* 2278 00102278 2D202002 */  daddu      $a0, $s1, $zero
     /* 227C 0010227C 01003126 */  addiu      $s1, $s1, 0x1
-    /* 2280 00102280 A01C040C */  jal        func_00107280
+    /* 2280 00102280 A01C040C */  jal        iGetCop0
     /* 2284 00102284 000002AE */   sw        $v0, 0x0($s0)
     /* 2288 00102288 2000232A */  slti       $v1, $s1, 0x20
     /* 228C 0010228C 000102AE */  sw         $v0, 0x100($s0)
     /* 2290 00102290 F7FF6014 */  bnez       $v1, .L00102270
     /* 2294 00102294 08001026 */   addiu     $s0, $s0, 0x8
-    /* 2298 00102298 801D9226 */  addiu      $s2, $s4, %lo(D_00131D80)
+    /* 2298 00102298 801D9226 */  addiu      $s2, $s4, %lo(eeRegInfo)
     /* 229C 0010229C 1400113C */  lui        $s1, %hi(D_00139FF0)
     /* 22A0 001022A0 F09F3126 */  addiu      $s1, $s1, %lo(D_00139FF0)
     /* 22A4 001022A4 680153AE */  sw         $s3, 0x168($s2)
     /* 22A8 001022A8 700155AE */  sw         $s5, 0x170($s2)
     /* 22AC 001022AC 2D282002 */  daddu      $a1, $s1, $zero
     /* 22B0 001022B0 00FF0424 */  addiu      $a0, $zero, -0x100
-    /* 22B4 001022B4 5216040C */  jal        func_00105948
+    /* 22B4 001022B4 5216040C */  jal        PutString
     /* 22B8 001022B8 1300103C */   lui       $s0, %hi(D_00136818)
     /* 22BC 001022BC 80FF043C */  lui        $a0, (0xFF802000 >> 16)
     /* 22C0 001022C0 18681026 */  addiu      $s0, $s0, %lo(D_00136818)
     /* 22C4 001022C4 00208434 */  ori        $a0, $a0, (0xFF802000 & 0xFFFF)
-    /* 22C8 001022C8 5216040C */  jal        func_00105948
+    /* 22C8 001022C8 5216040C */  jal        PutString
     /* 22CC 001022CC 2D280002 */   daddu     $a1, $s0, $zero
     /* 22D0 001022D0 1300053C */  lui        $a1, %hi(D_00136850)
     /* 22D4 001022D4 80FF043C */  lui        $a0, (0xFF802000 >> 16)
     /* 22D8 001022D8 5068A524 */  addiu      $a1, $a1, %lo(D_00136850)
-    /* 22DC 001022DC 5216040C */  jal        func_00105948
+    /* 22DC 001022DC 5216040C */  jal        PutString
     /* 22E0 001022E0 00208434 */   ori       $a0, $a0, (0xFF802000 & 0xFFFF)
     /* 22E4 001022E4 80FF043C */  lui        $a0, (0xFF802000 >> 16)
     /* 22E8 001022E8 2D280002 */  daddu      $a1, $s0, $zero
-    /* 22EC 001022EC 5216040C */  jal        func_00105948
+    /* 22EC 001022EC 5216040C */  jal        PutString
     /* 22F0 001022F0 00208434 */   ori       $a0, $a0, (0xFF802000 & 0xFFFF)
     /* 22F4 001022F4 60FF043C */  lui        $a0, (0xFF603000 >> 16)
     /* 22F8 001022F8 2D282002 */  daddu      $a1, $s1, $zero
-    /* 22FC 001022FC 5216040C */  jal        func_00105948
+    /* 22FC 001022FC 5216040C */  jal        PutString
     /* 2300 00102300 00308434 */   ori       $a0, $a0, (0xFF603000 & 0xFFFF)
     /* 2304 00102304 2D20C002 */  daddu      $a0, $s6, $zero
     /* 2308 00102308 2D286002 */  daddu      $a1, $s3, $zero
@@ -106,7 +106,7 @@ glabel func_001021E0
     /* 2348 00102348 3800B7DF */  ld         $s7, 0x38($sp)
     /* 234C 0010234C 4000BEDF */  ld         $fp, 0x40($sp)
     /* 2350 00102350 4800BFDF */  ld         $ra, 0x48($sp)
-    /* 2354 00102354 FE020408 */  j          func_00100BF8
+    /* 2354 00102354 FE020408 */  j          LoaderSysJumpRecoverPointNoStateSetting
     /* 2358 00102358 5000BD27 */   addiu     $sp, $sp, 0x50
 endlabel func_001021E0
     /* 235C 0010235C 00000000 */  nop

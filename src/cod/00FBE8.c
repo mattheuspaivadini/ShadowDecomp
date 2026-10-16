@@ -5,6 +5,6 @@
  */
 #include "symbols.h"
 
-int func_0010FBE8(void) {
-    return D_001329A4;
+int __sceKernlGetEhSemaId(void) {
+    return __sce_eh_sema_id;
 }

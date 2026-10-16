@@ -10,14 +10,14 @@ struct P031B10 {                 /* the func_001271B0 part block */
     long long mant;              /* 0x10 */
 };
 
-extern void func_001271B0(long long *in, struct P031B10 *out);
+extern void __unpack_d(long long *in, struct P031B10 *out);
 
-int func_00131B10(long long x) {
+int dptoli(long long x) {
     struct P031B10 out;
     int n;
     int v;
 
-    func_001271B0(&x, &out);
+    __unpack_d(&x, &out);
     if (out.type == 2)
         return 0;
     if (out.type < 2u)

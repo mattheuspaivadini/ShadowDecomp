@@ -5,8 +5,8 @@
  *   ld ra,0(sp); jr ra; addiu sp,sp,0x10
  * A plain wrapper: call and return the callee's value.
  */
-extern int func_00120B90();
+extern int _sceMcpReadUserClustOnCache();
 
-int func_00120CD0(void) {
-    return func_00120B90();
+int _sceMcpReadUserClust(void) {
+    return _sceMcpReadUserClustOnCache();
 }

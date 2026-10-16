@@ -45,15 +45,15 @@ extern char D_00138B50[];
 extern char D_00138B60[];
 extern int D_001518C0[];
 
-int func_00108EF8(const char *msg);
-int func_00106FE0(void *param);
-int func_00106FF0(int sema);
-int func_00107020(int sema);
+int scePrintf(const char *msg);
+int CreateSema(void *param);
+int DeleteSema(int sema);
+int WaitSema(int sema);
 int func_001199F8(int pool);
 void func_00119AA0(void *node);
-int func_00112E00(int a0, int a1, int a2, int a3, int a4, int a5);
+int sceSifSendCmd(int a0, int a1, int a2, int a3, int a4, int a5);
 
-int SceMrpcBind(int a0, int a1, int a2, int a3, int a4, int a5) {
+int sceSifMBindRpcParam(int a0, int a1, int a2, int a3, int a4, int a5) {
     struct C019C08 *c;
     struct N019C08 *n;
     struct SemaParam_019C08 buf;
@@ -61,16 +61,16 @@ int SceMrpcBind(int a0, int a1, int a2, int a3, int a4, int a5) {
 
     c = (struct C019C08 *)a0;
     if (a2 != 0) {
-        func_00108EF8(D_00138B28);
+        scePrintf(D_00138B28);
         return -1;
     }
     buf.f08 = 1;
     buf.f14 = (int)D_00138B50;
     buf.f04 = 1;
-    c->f28 = func_00106FE0(&buf);
+    c->f28 = CreateSema(&buf);
     if (c->f28 < 0)
         return -3;
-    func_00107020(c->f28);
+    WaitSema(c->f28);
     c->f10 = a1;
     c->f24 = 0;
     c->f30 = a3;
@@ -78,7 +78,7 @@ int SceMrpcBind(int a0, int a1, int a2, int a3, int a4, int a5) {
     c->f38 = a5;
     n = (struct N019C08 *)func_001199F8((int)D_001518C0);
     if (n == 0) {
-        func_00106FF0(c->f28);
+        DeleteSema(c->f28);
         return -1;
     }
     c->f00 = (int)n;
@@ -92,22 +92,22 @@ int SceMrpcBind(int a0, int a1, int a2, int a3, int a4, int a5) {
     buf.f04 = 1;
     buf.f14 = (int)D_00138B60;
     buf.f08 = 0;
-    c->f08 = func_00106FE0(&buf);
+    c->f08 = CreateSema(&buf);
     if (c->f08 < 0) {
         func_00119AA0(n);
-        func_00106FF0(c->f28);
+        DeleteSema(c->f28);
         return -3;
     }
-    r = func_00112E00(0x80000019, (int)n, 0x40, 0, 0, 0);
+    r = sceSifSendCmd(0x80000019, (int)n, 0x40, 0, 0, 0);
     if (r == 0) {
         func_00119AA0(n);
-        func_00106FF0(c->f08);
-        func_00106FF0(c->f28);
+        DeleteSema(c->f08);
+        DeleteSema(c->f28);
         return -2;
     }
-    func_00107020(c->f08);
-    func_00106FF0(c->f08);
+    WaitSema(c->f08);
+    DeleteSema(c->f08);
     if (c->f24 == 0)
-        func_00106FF0(c->f28);
+        DeleteSema(c->f28);
     return 0;
 }

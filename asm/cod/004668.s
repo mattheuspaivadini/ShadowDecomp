@@ -33,7 +33,7 @@ glabel func_00104668
     /* 46B4 001046B4 1300133C */  lui        $s3, %hi(D_00131FA0)
     /* 46B8 001046B8 21986302 */  addu       $s3, $s3, $v1
     /* 46BC 001046BC A01F738E */  lw         $s3, %lo(D_00131FA0)($s3)
-    /* 46C0 001046C0 6416040C */  jal        func_00105990
+    /* 46C0 001046C0 6416040C */  jal        PutStringS
     /* 46C4 001046C4 80705524 */   addiu     $s5, $v0, %lo(D_00137080)
     /* 46C8 001046C8 0E000010 */  b          .L00104704
     /* 46CC 001046CC 1300043C */   lui       $a0, %hi(D_001370E8)
@@ -42,7 +42,7 @@ glabel func_00104668
     /* 46D0 001046D0 1300053C */  lui        $a1, %hi(D_001370B8)
     /* 46D4 001046D4 8080043C */  lui        $a0, (0x8080FF00 >> 16)
     /* 46D8 001046D8 B870A524 */  addiu      $a1, $a1, %lo(D_001370B8)
-    /* 46DC 001046DC 6416040C */  jal        func_00105990
+    /* 46DC 001046DC 6416040C */  jal        PutStringS
     /* 46E0 001046E0 00FF8434 */   ori       $a0, $a0, (0x8080FF00 & 0xFFFF)
     /* 46E4 001046E4 1300023C */  lui        $v0, %hi(D_001370D0)
     /* 46E8 001046E8 80181000 */  sll        $v1, $s0, 2
@@ -60,7 +60,7 @@ glabel func_00104668
     /* 4710 00104710 00D0D426 */   addiu     $s4, $s6, %lo(D_0013D000)
     /* 4714 00104714 40000424 */  addiu      $a0, $zero, 0x40
     /* 4718 00104718 40130524 */  addiu      $a1, $zero, 0x1340
-    /* 471C 0010471C 4E9D040C */  jal        func_00127538
+    /* 471C 0010471C 4E9D040C */  jal        memalign
     /* 4720 00104720 40009226 */   addiu     $s2, $s4, 0x40
     /* 4724 00104724 2D884000 */  daddu      $s1, $v0, $zero
     /* 4728 00104728 0B002012 */  beqz       $s1, .L00104758
@@ -73,7 +73,7 @@ glabel func_00104668
     /* 4744 00104744 0A11040C */  jal        load_set_conf_only
     /* 4748 00104748 2D302002 */   daddu     $a2, $s1, $zero
     /* 474C 0010474C 2D202002 */  daddu      $a0, $s1, $zero
-    /* 4750 00104750 F09D040C */  jal        func_001277C0
+    /* 4750 00104750 F09D040C */  jal        free
     /* 4754 00104754 2D804000 */   daddu     $s0, $v0, $zero
 .align 2
   .L00104758:
@@ -90,7 +90,7 @@ glabel func_00104668
     /* 4778 00104778 2D200002 */  daddu      $a0, $s0, $zero
     /* 477C 0010477C 2D282002 */  daddu      $a1, $s1, $zero
     /* 4780 00104780 2D304002 */  daddu      $a2, $s2, $zero
-    /* 4784 00104784 DE65040C */  jal        get_interface_id
+    /* 4784 00104784 DE65040C */  jal        sceLibnetWaitGetInterfaceID
     /* 4788 00104788 01000724 */   addiu     $a3, $zero, 0x1
     /* 478C 0010478C 04004104 */  bgez       $v0, .L001047A0
     /* 4790 00104790 1484868F */   lw        $a2, %gp_rel(D_0013A180 + 0x4)($gp)
@@ -100,15 +100,15 @@ glabel func_00104668
 .align 2
   .L001047A0:
     /* 47A0 001047A0 2D200002 */  daddu      $a0, $s0, $zero
-    /* 47A4 001047A4 4E64040C */  jal        func_00119138
+    /* 47A4 001047A4 4E64040C */  jal        sceInetCtlUpInterface
     /* 47A8 001047A8 2D282002 */   daddu     $a1, $s1, $zero
-    /* 47AC 001047AC 1300083C */  lui        $a4, %hi(D_00131FC0)
+    /* 47AC 001047AC 1300083C */  lui        $a4, %hi(myaddr)
     /* 47B0 001047B0 2D200002 */  daddu      $a0, $s0, $zero
     /* 47B4 001047B4 2D282002 */  daddu      $a1, $s1, $zero
     /* 47B8 001047B8 2D304002 */  daddu      $a2, $s2, $zero
-    /* 47BC 001047BC C01F0825 */  addiu      $a4, $a4, %lo(D_00131FC0)
+    /* 47BC 001047BC C01F0825 */  addiu      $a4, $a4, %lo(myaddr)
     /* 47C0 001047C0 01000724 */  addiu      $a3, $zero, 0x1
-    /* 47C4 001047C4 0266040C */  jal        wait_get_addr_only
+    /* 47C4 001047C4 0266040C */  jal        sceLibnetWaitGetAddress
     /* 47C8 001047C8 2D480000 */   daddu     $a5, $zero, $zero
     /* 47CC 001047CC 06004104 */  bgez       $v0, .L001047E8
     /* 47D0 001047D0 01000224 */   addiu     $v0, $zero, 0x1

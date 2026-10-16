@@ -3,7 +3,7 @@
  * return 0. */
 int func_00114830(int *p, int a1, int a2);
 
-int func_00114F20(int *p, int a1, int a2, int a3) {
+int sceDmaWatch(int *p, int a1, int a2, int a3) {
     if (a2 == 1)
         return (unsigned)p[4] < (unsigned)a1;
     func_00114830(p, a1, a3);

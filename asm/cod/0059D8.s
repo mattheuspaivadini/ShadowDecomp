@@ -114,7 +114,7 @@ glabel func_001059D8
     /* 5B38 00105B38 E08380E7 */  swc1       $f0, %gp_rel(D_0013A150)($gp)
     /* 5B3C 00105B3C 24100046 */  .word      0x46001024                    # cvt.w.s    $f0, $f2 # 00000000 <InstrIdType: CPU_COP1_FPUS>
     /* 5B40 00105B40 E88380E7 */  swc1       $f0, %gp_rel(D_0013A158)($gp)
-    /* 5B44 00105B44 0215040C */  jal        func_00105408
+    /* 5B44 00105B44 0215040C */  jal        PutFont
     /* 5B48 00105B48 38FF6626 */   addiu     $a2, $s3, -0xC8
     /* 5B4C 00105B4C 1000A97B */  lq         $a5, 0x10($sp)
     /* 5B50 00105B50 0000A87B */  lq         $a4, 0x0($sp)

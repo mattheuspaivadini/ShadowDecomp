@@ -1,8 +1,8 @@
-/* STATUS (Session 9, 2026-10-15): NON_MATCHING. best score 7 [cc=29].
- * session9 R2 waveA; residual class not auto-classified
+/* STATUS (10, 2026-10-16): NON_MATCHING. best score 7 [cc=29].
+ * 
  * The original .s stays in the build (asm/cod/01C7D8.s); this C
- * draft (Session 9) is kept for the record. */
-extern char D_00135638[];   /* 0x184-stride records (lui/%lo) */
+ * draft (10) is kept for the record. */
+extern char gSceMc2SysInfo[];   /* 0x184-stride records (lui/%lo) */
 extern char D_0015DF48[];   /* 0x898-stride records (lui/%lo) */
 
 int func_0011C3B0(int index, int slot, int *out);
@@ -14,7 +14,7 @@ int func_0011C7D8(int index, int *out) {
     int n;
     int r;
 
-    base = D_00135638 + index * 0x184;
+    base = gSceMc2SysInfo + index * 0x184;
     p = D_0015DF48 + index * 0x898;
     *out = 0;
     i = *(int *)(p + 0x890);

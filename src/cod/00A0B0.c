@@ -33,7 +33,7 @@ extern int D_00132320 __attribute__((section(".data")));
 extern int D_00132324 __attribute__((section(".data")));
 extern int D_00137EE0[];   /* the semaphore option tables (lui/%lo) */
 extern int D_00137EF0[];
-int func_00106FE0(void *args);
+int CreateSema(void *args);
 
 void func_0010A0B0(void) {
     struct S00A0B0 buf;
@@ -43,7 +43,7 @@ void func_0010A0B0(void) {
     buf.f04 = 1;
     buf.f14 = D_00137EE0;
     buf.f08 = 1;
-    D_00132320 = func_00106FE0(&buf);
+    D_00132320 = CreateSema(&buf);
     buf.f14 = D_00137EF0;
-    D_00132324 = func_00106FE0(&buf);
+    D_00132324 = CreateSema(&buf);
 }

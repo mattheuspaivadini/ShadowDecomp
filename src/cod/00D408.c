@@ -3,6 +3,6 @@
  */
 extern int sceStdioCCode();
 
-int func_0010D408(int a0) {
+int sceUmount(int a0) {
     return sceStdioCCode(a0, 0x15);
 }

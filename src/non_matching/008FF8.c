@@ -21,31 +21,31 @@ extern int D_00144940[];
 extern int D_00145140[];
 extern int D_00145940[];   /* 0x40 bytes */
 
-extern int  func_0010FB20(void);
-extern int  func_0010FB70(void);
-extern void func_00112918(void);
-extern void func_00112C00(int id, int handler, int data);
-extern int  func_001073F0(int id);
-extern void func_00112E00(int a0, int a1, int a2, int a3, int a4, int a5);
-extern int  func_001128D0(int a0);
-extern int  func_001073E0(int a0, int a1);
+extern int  DIntr(void);
+extern int  EIntr(void);
+extern void sceSifInitCmd(void);
+extern void sceSifAddCmdHandler(int id, int handler, int data);
+extern int  sceSifGetReg(int id);
+extern void sceSifSendCmd(int a0, int a1, int a2, int a3, int a4, int a5);
+extern int  sceSifGetSreg(int a0);
+extern int  sceSifSetReg(int a0, int a1);
 extern void func_001092F8(void);
 extern void func_001096D0(void);
 extern void func_001098F0(void);
 extern void func_00109408(void);
 
-int func_00108FF8(void) {
+int sceSifInitRpc(void) {
     struct R08FF8 *q;
     int base;
     int r;
 
-    func_0010FB20();
+    DIntr();
     if (D_00132288 != 0)
-        return func_0010FB70();
+        return EIntr();
     D_00132288 = 1;
-    func_0010FB70();
-    func_00112918();
-    func_0010FB20();
+    EIntr();
+    sceSifInitCmd();
+    DIntr();
     base = (int)D_00144140;
     q = (struct R08FF8 *)D_00145940;
     q->f20 = 0x20;
@@ -58,17 +58,17 @@ int func_00108FF8(void) {
     q->f10 = 0;
     q->f18 = 0x20;
     q->f24 = 0;
-    func_00112C00(0x80000008, (int)func_001092F8, (int)q);
-    func_00112C00(0x80000009, (int)func_001096D0, (int)q);
-    func_00112C00(0x8000000A, (int)func_001098F0, (int)q);
-    func_00112C00(0x8000000C, (int)func_00109408, (int)q);
-    func_0010FB70();
-    r = func_001073F0(0x80000002);
+    sceSifAddCmdHandler(0x80000008, (int)func_001092F8, (int)q);
+    sceSifAddCmdHandler(0x80000009, (int)func_001096D0, (int)q);
+    sceSifAddCmdHandler(0x8000000A, (int)func_001098F0, (int)q);
+    sceSifAddCmdHandler(0x8000000C, (int)func_00109408, (int)q);
+    EIntr();
+    r = sceSifGetReg(0x80000002);
     if (r != 0)
         return r;
     *(int *)((char *)D_00144140 + 0x4C) = 1;
-    func_00112E00(0x80000002, (int)((char *)D_00144140 + 0x40), 0x10, 0, 0, 0);
-    while (func_001128D0(0) == 0)
+    sceSifSendCmd(0x80000002, (int)((char *)D_00144140 + 0x40), 0x10, 0, 0, 0);
+    while (sceSifGetSreg(0) == 0)
         ;
-    return func_001073E0(0x80000002, 1);
+    return sceSifSetReg(0x80000002, 1);
 }

@@ -7,7 +7,7 @@
  * See docs/non-matching-backlog.md. */
  *
  * Look up the record at `index` (stride 0x184), read the unsigned short at
- * +0x2A and forward func_00121A70(index, a1, a2 * w, a3 * w). The two scaled
+ * +0x2A and forward _sceMcCoreReadPage(index, a1, a2 * w, a3 * w). The two scaled
  * arguments are computed with the R5900 `mult $zero,rs,rt` + `mflo` shape
  * (the 2.9 generation emits the 3-operand mult for a runtime multiplier).
  *
@@ -22,12 +22,13 @@ struct R020708 {
     char rest[0x184 - 0x2C];     /* stride 0x184 */
 };
 
-extern struct R020708 D_00135638[];
+extern struct R020708 gSceMc2SysInfo[];
 
-int func_00121A70(int a0, int a1, int a2, int a3);
+int _sceMcCoreReadPage(int a0, int a1, int a2, int a3);
 
-int func_00120708(int index, int a1, int a2, int a3) {
-    unsigned short w = D_00135638[index].w;
+int _sceMcpReadClust(int index, int a1, int a2, int a3) {
+    unsigned short w = gSceMc2SysInfo[index].w;
 
-    return func_00121A70(index, a1, a2 * w, a3 * w);
+    return _sceMcCoreReadPage(index, a1, a2 * w, a3 * w);
 }
+/* func_00120708 */

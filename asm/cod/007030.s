@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00107030, 0x10
+nonmatching PollSema, 0x10
 
-glabel func_00107030
+glabel PollSema
     /* 7030 00107030 45000324 */  addiu      $v1, $zero, 0x45
     /* 7034 00107034 0C000000 */  syscall    0 /* handwritten instruction */
     /* 7038 00107038 0800E003 */  jr         $ra
     /* 703C 0010703C 00000000 */   nop
-endlabel func_00107030
+endlabel PollSema

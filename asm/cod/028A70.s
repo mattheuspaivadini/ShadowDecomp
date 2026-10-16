@@ -11,9 +11,9 @@
 nonmatching func_00128A70, 0x90
 
 glabel func_00128A70
-    /* 28A70 00128A70 1300023C */  lui        $v0, %hi(D_00135C60)
+    /* 28A70 00128A70 1300023C */  lui        $v0, %hi(_impure_ptr)
     /* 28A74 00128A74 40FFBD27 */  addiu      $sp, $sp, -0xC0
-    /* 28A78 00128A78 605C4D8C */  lw         $t1, %lo(D_00135C60)($v0)
+    /* 28A78 00128A78 605C4D8C */  lw         $t1, %lo(_impure_ptr)($v0)
     /* 28A7C 00128A7C 08020224 */  addiu      $v0, $zero, 0x208
     /* 28A80 00128A80 FF7F033C */  lui        $v1, (0x7FFFFFFF >> 16)
     /* 28A84 00128A84 2D608000 */  daddu      $t0, $a0, $zero

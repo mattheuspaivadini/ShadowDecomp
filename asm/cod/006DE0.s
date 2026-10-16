@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00106DE0, 0x10
+nonmatching CreateThread, 0x10
 
-glabel func_00106DE0
+glabel CreateThread
     /* 6DE0 00106DE0 20000324 */  addiu      $v1, $zero, 0x20
     /* 6DE4 00106DE4 0C000000 */  syscall    0 /* handwritten instruction */
     /* 6DE8 00106DE8 0800E003 */  jr         $ra
     /* 6DEC 00106DEC 00000000 */   nop
-endlabel func_00106DE0
+endlabel CreateThread

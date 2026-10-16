@@ -28,7 +28,7 @@
  */
 int func_00128E6C(char *record, const char *module);
 
-int func_00101B20(const char *a0, char **a1) {
+int _checkExistString(const char *a0, char **a1) {
     char **p;
     char *e;
 

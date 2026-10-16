@@ -34,7 +34,7 @@
 
 extern char D_00133980[];   /* .data 0x00133980, 0x20-byte VIF1 packet template */
 
-void func_00113530(void) {
+void sceGsResetPath(void) {
     unsigned int vu0;
     unsigned int quad;
 

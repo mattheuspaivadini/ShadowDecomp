@@ -7,8 +7,8 @@
  * See docs/non-matching-backlog.md. */
  *
  * Look up the record at `index` (stride 0x184), read the unsigned short at
- * +0x2A and forward func_00121A90(index, a1, a2 * w, a3 * w). Same shape as
- * func_00120708 (see the note there about the 0x184 stride).
+ * +0x2A and forward _sceMcCoreWritePage(index, a1, a2 * w, a3 * w). Same shape as
+ * _sceMcpReadClust (see the note there about the 0x184 stride).
  *
  * MATCHED (Session 6, step 3) with cc=29.
  */
@@ -18,12 +18,13 @@ struct R020748 {
     char rest[0x184 - 0x2C];     /* stride 0x184 */
 };
 
-extern struct R020748 D_00135638[];
+extern struct R020748 gSceMc2SysInfo[];
 
-int func_00121A90(int a0, int a1, int a2, int a3);
+int _sceMcCoreWritePage(int a0, int a1, int a2, int a3);
 
-int func_00120748(int index, int a1, int a2, int a3) {
-    unsigned short w = D_00135638[index].w;
+int _sceMcpWriteClust(int index, int a1, int a2, int a3) {
+    unsigned short w = gSceMc2SysInfo[index].w;
 
-    return func_00121A90(index, a1, a2 * w, a3 * w);
+    return _sceMcCoreWritePage(index, a1, a2 * w, a3 * w);
 }
+/* func_00120748 */

@@ -54,52 +54,52 @@ glabel LoaderSysLoadIopModuleFromEEBuffer
     /* 2DF8 00102DF8 FCFF0224 */  addiu      $v0, $zero, -0x4
     /* 2DFC 00102DFC 03007026 */  addiu      $s0, $s3, 0x3
     /* 2E00 00102E00 24800202 */  and        $s0, $s0, $v0
-    /* 2E04 00102E04 FE23040C */  jal        func_00108FF8
+    /* 2E04 00102E04 FE23040C */  jal        sceSifInitRpc
     /* 2E08 00102E08 2D200000 */   daddu     $a0, $zero, $zero
-    /* 2E0C 00102E0C 3A37040C */  jal        func_0010DCE8
+    /* 2E0C 00102E0C 3A37040C */  jal        sceSifInitIopHeap
     /* 2E10 00102E10 00000000 */   nop
     /* 2E14 00102E14 2D280002 */  daddu      $a1, $s0, $zero
     /* 2E18 00102E18 01000424 */  addiu      $a0, $zero, 0x1
-    /* 2E1C 00102E1C 7837040C */  jal        func_0010DDE0
+    /* 2E1C 00102E1C 7837040C */  jal        sceSifAllocSysMemory
     /* 2E20 00102E20 2D300000 */   daddu     $a2, $zero, $zero
     /* 2E24 00102E24 1300043C */  lui        $a0, %hi(D_00136900)
     /* 2E28 00102E28 2D884000 */  daddu      $s1, $v0, $zero
     /* 2E2C 00102E2C 2D300002 */  daddu      $a2, $s0, $zero
     /* 2E30 00102E30 2D282002 */  daddu      $a1, $s1, $zero
-    /* 2E34 00102E34 3E0B040C */  jal        func_00102CF8
+    /* 2E34 00102E34 3E0B040C */  jal        LoaderSysPrintf
     /* 2E38 00102E38 00698424 */   addiu     $a0, $a0, %lo(D_00136900)
-    /* 2E3C 00102E3C 981C040C */  jal        func_00107260
+    /* 2E3C 00102E3C 981C040C */  jal        FlushCache
     /* 2E40 00102E40 2D200000 */   daddu     $a0, $zero, $zero
     /* 2E44 00102E44 01000524 */  addiu      $a1, $zero, 0x1
     /* 2E48 00102E48 2D20A003 */  daddu      $a0, $sp, $zero
     /* 2E4C 00102E4C 0800B0AF */  sw         $s0, 0x8($sp)
     /* 2E50 00102E50 0000B4AF */  sw         $s4, 0x0($sp)
     /* 2E54 00102E54 0400B1AF */  sw         $s1, 0x4($sp)
-    /* 2E58 00102E58 E81C040C */  jal        func_001073A0
+    /* 2E58 00102E58 E81C040C */  jal        sceSifSetDma
     /* 2E5C 00102E5C 0C00A0AF */   sw        $zero, 0xC($sp)
     /* 2E60 00102E60 2D804000 */  daddu      $s0, $v0, $zero
     /* 2E64 00102E64 00000000 */  nop
 .align 2
   .L00102E68:
-    /* 2E68 00102E68 E01C040C */  jal        func_00107380
+    /* 2E68 00102E68 E01C040C */  jal        sceSifDmaStat
     /* 2E6C 00102E6C 2D200002 */   daddu     $a0, $s0, $zero
     /* 2E70 00102E70 FDFF4104 */  bgez       $v0, .L00102E68
     /* 2E74 00102E74 00000000 */   nop
     /* 2E78 00102E78 1300043C */  lui        $a0, %hi(D_00136948)
-    /* 2E7C 00102E7C 3E0B040C */  jal        func_00102CF8
+    /* 2E7C 00102E7C 3E0B040C */  jal        LoaderSysPrintf
     /* 2E80 00102E80 48698424 */   addiu     $a0, $a0, %lo(D_00136948)
     /* 2E84 00102E84 2D202002 */  daddu      $a0, $s1, $zero
     /* 2E88 00102E88 2D28A002 */  daddu      $a1, $s5, $zero
-    /* 2E8C 00102E8C 743A040C */  jal        func_0010E9D0
+    /* 2E8C 00102E8C 743A040C */  jal        sceSifLoadModuleBuffer
     /* 2E90 00102E90 2D30C002 */   daddu     $a2, $s6, $zero
     /* 2E94 00102E94 2D202002 */  daddu      $a0, $s1, $zero
-    /* 2E98 00102E98 9837040C */  jal        func_0010DE60
+    /* 2E98 00102E98 9837040C */  jal        sceSifFreeSysMemory
     /* 2E9C 00102E9C 2D804000 */   daddu     $s0, $v0, $zero
     /* 2EA0 00102EA0 43000006 */  bltz       $s0, .L00102FB0
     /* 2EA4 00102EA4 9882868F */   lw        $a2, %gp_rel(D_0013A008)($gp)
     /* 2EA8 00102EA8 1300043C */  lui        $a0, %hi(D_00136980)
     /* 2EAC 00102EAC 2D284002 */  daddu      $a1, $s2, $zero
-    /* 2EB0 00102EB0 3E0B040C */  jal        func_00102CF8
+    /* 2EB0 00102EB0 3E0B040C */  jal        LoaderSysPrintf
     /* 2EB4 00102EB4 80698424 */   addiu     $a0, $a0, %lo(D_00136980)
     /* 2EB8 00102EB8 31A4040C */  jal        func_001290C4
     /* 2EBC 00102EBC 2D204002 */   daddu     $a0, $s2, $zero
@@ -122,7 +122,7 @@ glabel LoaderSysLoadIopModuleFromEEBuffer
 .align 2
   .L00102EF8:
     /* 2EF8 00102EF8 2D284002 */  daddu      $a1, $s2, $zero
-    /* 2EFC 00102EFC 3E0B040C */  jal        func_00102CF8
+    /* 2EFC 00102EFC 3E0B040C */  jal        LoaderSysPrintf
     /* 2F00 00102F00 C0698424 */   addiu     $a0, $a0, %lo(D_001369C0)
     /* 2F04 00102F04 2B000010 */  b          .L00102FB4
     /* 2F08 00102F08 2D100000 */   daddu     $v0, $zero, $zero
@@ -131,45 +131,45 @@ glabel LoaderSysLoadIopModuleFromEEBuffer
   .L00102F10:
     /* 2F10 00102F10 FCFF0224 */  addiu      $v0, $zero, -0x4
     /* 2F14 00102F14 03007026 */  addiu      $s0, $s3, 0x3
-    /* 2F18 00102F18 FE23040C */  jal        func_00108FF8
+    /* 2F18 00102F18 FE23040C */  jal        sceSifInitRpc
     /* 2F1C 00102F1C 24800202 */   and       $s0, $s0, $v0
-    /* 2F20 00102F20 3A37040C */  jal        func_0010DCE8
+    /* 2F20 00102F20 3A37040C */  jal        sceSifInitIopHeap
     /* 2F24 00102F24 00000000 */   nop
     /* 2F28 00102F28 01000424 */  addiu      $a0, $zero, 0x1
     /* 2F2C 00102F2C 2D280002 */  daddu      $a1, $s0, $zero
-    /* 2F30 00102F30 7837040C */  jal        func_0010DDE0
+    /* 2F30 00102F30 7837040C */  jal        sceSifAllocSysMemory
     /* 2F34 00102F34 2D300000 */   daddu     $a2, $zero, $zero
     /* 2F38 00102F38 1300043C */  lui        $a0, %hi(D_00136900)
     /* 2F3C 00102F3C 2D884000 */  daddu      $s1, $v0, $zero
     /* 2F40 00102F40 2D300002 */  daddu      $a2, $s0, $zero
     /* 2F44 00102F44 2D282002 */  daddu      $a1, $s1, $zero
-    /* 2F48 00102F48 3E0B040C */  jal        func_00102CF8
+    /* 2F48 00102F48 3E0B040C */  jal        LoaderSysPrintf
     /* 2F4C 00102F4C 00698424 */   addiu     $a0, $a0, %lo(D_00136900)
-    /* 2F50 00102F50 981C040C */  jal        func_00107260
+    /* 2F50 00102F50 981C040C */  jal        FlushCache
     /* 2F54 00102F54 2D200000 */   daddu     $a0, $zero, $zero
     /* 2F58 00102F58 01000524 */  addiu      $a1, $zero, 0x1
     /* 2F5C 00102F5C 1000A427 */  addiu      $a0, $sp, 0x10
     /* 2F60 00102F60 1800B0AF */  sw         $s0, 0x18($sp)
     /* 2F64 00102F64 1000B4AF */  sw         $s4, 0x10($sp)
     /* 2F68 00102F68 1400B1AF */  sw         $s1, 0x14($sp)
-    /* 2F6C 00102F6C E81C040C */  jal        func_001073A0
+    /* 2F6C 00102F6C E81C040C */  jal        sceSifSetDma
     /* 2F70 00102F70 1C00A0AF */   sw        $zero, 0x1C($sp)
     /* 2F74 00102F74 2D804000 */  daddu      $s0, $v0, $zero
 .align 2
   .L00102F78:
-    /* 2F78 00102F78 E01C040C */  jal        func_00107380
+    /* 2F78 00102F78 E01C040C */  jal        sceSifDmaStat
     /* 2F7C 00102F7C 2D200002 */   daddu     $a0, $s0, $zero
     /* 2F80 00102F80 FDFF4104 */  bgez       $v0, .L00102F78
     /* 2F84 00102F84 00000000 */   nop
     /* 2F88 00102F88 1300043C */  lui        $a0, %hi(D_00136948)
-    /* 2F8C 00102F8C 3E0B040C */  jal        func_00102CF8
+    /* 2F8C 00102F8C 3E0B040C */  jal        LoaderSysPrintf
     /* 2F90 00102F90 48698424 */   addiu     $a0, $a0, %lo(D_00136948)
     /* 2F94 00102F94 2D202002 */  daddu      $a0, $s1, $zero
     /* 2F98 00102F98 2D28A002 */  daddu      $a1, $s5, $zero
-    /* 2F9C 00102F9C 743A040C */  jal        func_0010E9D0
+    /* 2F9C 00102F9C 743A040C */  jal        sceSifLoadModuleBuffer
     /* 2FA0 00102FA0 2D30C002 */   daddu     $a2, $s6, $zero
     /* 2FA4 00102FA4 2D202002 */  daddu      $a0, $s1, $zero
-    /* 2FA8 00102FA8 9837040C */  jal        func_0010DE60
+    /* 2FA8 00102FA8 9837040C */  jal        sceSifFreeSysMemory
     /* 2FAC 00102FAC 2D804000 */   daddu     $s0, $v0, $zero
 .align 2
   .L00102FB0:

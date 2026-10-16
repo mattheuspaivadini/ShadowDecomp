@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_001073E0, 0x10
+nonmatching sceSifSetReg, 0x10
 
-glabel func_001073E0
+glabel sceSifSetReg
     /* 73E0 001073E0 79000324 */  addiu      $v1, $zero, 0x79
     /* 73E4 001073E4 0C000000 */  syscall    0 /* handwritten instruction */
     /* 73E8 001073E8 0800E003 */  jr         $ra
     /* 73EC 001073EC 00000000 */   nop
-endlabel func_001073E0
+endlabel sceSifSetReg

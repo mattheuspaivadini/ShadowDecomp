@@ -5,8 +5,8 @@
  *   ld ra,0(sp); jr ra; addiu sp,sp,0x10
  * A plain wrapper: call and return the callee's value.
  */
-extern int func_001211F8();
+extern int _sceMcCoreGetCardSpec();
 
-int func_00120470(void) {
-    return func_001211F8();
+int _sceMcpGetCardSpec(void) {
+    return _sceMcCoreGetCardSpec();
 }

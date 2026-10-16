@@ -18,16 +18,16 @@ extern int D_001471C0[];   /* .bss 0x001471C0, 0x40 bytes */
 extern int D_00147200[];   /* .bss 0x00147200, 0x40 bytes */
 extern int D_00147240[];   /* .bss 0x00147240, 0x40 bytes */
 
-int SceSifrpcCall(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
+int sceSifCallRpc(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
                   int a7, int a8);
 
-int func_0010DD70(int a0) {
+int sceSifAllocIopHeap(int a0) {
     int r;
 
     if (D_0013232C < 0)
         return 0;
     D_00147240[0] = a0;
-    r = SceSifrpcCall((int)D_001471C0, 1, 0, (int)D_00147240, 4,
+    r = sceSifCallRpc((int)D_001471C0, 1, 0, (int)D_00147240, 4,
                       (int)D_00147200, 4, 0, 0);
     if (r < 0)
         return 0;

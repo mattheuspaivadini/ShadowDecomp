@@ -17,7 +17,7 @@
  * `a0` is unused by the body; semantics UNCONFIRMED (looks like a guarded
  * get-or-store with a local fallback).
  */
-int func_0012E6D0(int unused, int *dst, unsigned char *src, int flag) {
+int _mbtowc_r(int unused, int *dst, unsigned char *src, int flag) {
     int local;
     int *p = dst ? dst : &local;
 

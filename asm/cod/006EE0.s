@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00106EE0, 0x10
+nonmatching ReferThreadStatus, 0x10
 
-glabel func_00106EE0
+glabel ReferThreadStatus
     /* 6EE0 00106EE0 30000324 */  addiu      $v1, $zero, 0x30
     /* 6EE4 00106EE4 0C000000 */  syscall    0 /* handwritten instruction */
     /* 6EE8 00106EE8 0800E003 */  jr         $ra
     /* 6EEC 00106EEC 00000000 */   nop
-endlabel func_00106EE0
+endlabel ReferThreadStatus

@@ -33,17 +33,17 @@ struct S169F90 {
 
 extern __attribute__((section(".data"))) struct S169F90 *D_00169F90;
 
-int func_00107020(int a0);
-int func_00107000(int a0);
+int WaitSema(int a0);
+int SignalSema(int a0);
 
-void func_001260A8(int key, struct S169F90 *node) {
+void __register_frame_info(int key, struct S169F90 *node) {
     node->key = key;
     node->f04 = 0;
     node->f00 = 0;
     node->f0C = 0;
     node->f10 = 0;
-    func_00107020(D_001329A4);
+    WaitSema(__sce_eh_sema_id);
     node->f14 = D_00169F90;
     D_00169F90 = node;
-    func_00107000(D_001329A4);
+    SignalSema(__sce_eh_sema_id);
 }

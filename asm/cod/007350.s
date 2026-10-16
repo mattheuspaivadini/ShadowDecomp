@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00107350, 0x10
+nonmatching SetVSyncFlag, 0x10
 
-glabel func_00107350
+glabel SetVSyncFlag
     /* 7350 00107350 73000324 */  addiu      $v1, $zero, 0x73
     /* 7354 00107354 0C000000 */  syscall    0 /* handwritten instruction */
     /* 7358 00107358 0800E003 */  jr         $ra
     /* 735C 0010735C 00000000 */   nop
-endlabel func_00107350
+endlabel SetVSyncFlag

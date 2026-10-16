@@ -1,8 +1,8 @@
 /* asm/cod/028930.s -> func_00128930 @ 0x00128930
  * Tail-call trampoline (with a frame;
  * cc=296 keeps the frame). */
-int D_00135C60[];
+int _impure_ptr[];
 
-void func_00128930(void) {
-    func_00128688(D_00135C60[0]);
+void _init_signal(void) {
+    _init_signal_r(_impure_ptr[0]);
 }

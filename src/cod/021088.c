@@ -17,9 +17,9 @@ extern int D_00138D68[];   /* semaphore option table (lui/%lo) */
 extern int D_00163CC0[];   /* .bss 0x00163CC0, 8 bytes */
 extern int D_00163CC8[];   /* .bss 0x00163CC8, 0x24-byte records */
 
-int func_00106FE0(void *args);
+int CreateSema(void *args);
 
-int func_00121088(void) {
+int _sceMcCoreInit(void) {
     int buf[8];
     int p;
     int end;
@@ -29,7 +29,7 @@ int func_00121088(void) {
     buf[1] = 0x7F;
     buf[5] = (int)D_00138D68;
     buf[2] = 0;
-    r = func_00106FE0(buf);
+    r = CreateSema(buf);
     D_00163CC0[0] = r;
     if (r < 0)
         return 0;

@@ -4,11 +4,11 @@
  * draft (Session 8) is kept for the record. */
 #include "symbols.h"
 
-int func_00106FF0(int a0);
-int func_00107050(int a0, int *a1);
+int DeleteSema(int a0);
+int ReferSemaStatus(int a0, int *a1);
 extern int D_00131F80[];
 
-void func_00102500(void) {
+void LoaderSysDeleteAllExternalSema(void) {
     int value = -1;
     int buf[8];
     int *p;
@@ -20,7 +20,7 @@ void func_00102500(void) {
     p = D_0013BB90;
     for (i = 0xFF; i >= 0; i--) {
         if (*p >= 0) {
-            func_00106FF0(*p);
+            DeleteSema(*p);
             *p = value;
         }
         p++;
@@ -33,7 +33,7 @@ void func_00102500(void) {
     }
     for (i = 0; i < 0x100; i++) {
         found = 0;
-        if (func_00107050(i, buf) == i) {
+        if (ReferSemaStatus(i, buf) == i) {
             t = buf[4];
             for (j = 0; j < 3; j++) {
                 if (D_00131F80[j] == t) {
@@ -44,6 +44,6 @@ void func_00102500(void) {
         }
         if (!found)
             continue;
-        func_00106FF0(i);
+        DeleteSema(i);
     }
 }

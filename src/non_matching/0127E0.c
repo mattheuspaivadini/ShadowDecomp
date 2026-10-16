@@ -25,16 +25,16 @@ extern struct S0127E0 D_0014AFD0;
 extern int D_0014B000[];
 extern int D_0014B140[];
 
-int  func_00107260(int a0);
-int  func_00112120(int a0, int a1, int a2);
+int  FlushCache(int a0);
+int  sceDeci2Open(int a0, int a1, int a2);
 int  func_00112358(int a0);
 void func_00112400(void);
 
-int func_001127E0(void) {
+int sceTtyInit(void) {
     struct P0127E0 *pkt;
 
-    func_00107260(0);
-    D_0014AFD0.f00 = func_00112120(0x210, (int)&D_0014AFD0, (int)func_00112400);
+    FlushCache(0);
+    D_0014AFD0.f00 = sceDeci2Open(0x210, (int)&D_0014AFD0, (int)func_00112400);
     if (D_0014AFD0.f00 < 0)
         return 0;
     pkt = (struct P0127E0 *)((int)D_0014B000 | 0x20000002);

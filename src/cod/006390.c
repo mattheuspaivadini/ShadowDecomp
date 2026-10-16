@@ -10,7 +10,7 @@ struct E006390 {
 extern struct E006390 D_0013A160;    /* .sdata, gp-relative template record */
 extern struct E006390 D_0013ED90[];  /* .bss: 40 rows x 60 records */
 
-void func_00106390(void) {
+void ScrollDisplay(void) {
     int i;
     int j;
 

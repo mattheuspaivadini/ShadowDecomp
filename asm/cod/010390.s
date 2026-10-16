@@ -9,9 +9,9 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00110390, 0x70
+nonmatching SetT2, 0x70
 
-glabel func_00110390
+glabel SetT2
     /* 10390 00110390 00600340 */  mfc0       $v1, $12 /* handwritten instruction */
     /* 10394 00110394 0100023C */  lui        $v0, (0x10000 >> 16)
     /* 10398 00110398 24186200 */  and        $v1, $v1, $v0
@@ -44,4 +44,4 @@ glabel func_00110390
     /* 103F4 001103F4 18000042 */  eret /* handwritten instruction */
     /* 103F8 001103F8 0800E003 */  jr         $ra
     /* 103FC 001103FC 00000000 */   nop
-endlabel func_00110390
+endlabel SetT2

@@ -9,9 +9,9 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00131818, 0xA4
+nonmatching _sceSDC, 0xA4
 
-glabel func_00131818
+glabel _sceSDC
     /* 31818 00131818 FFFF073C */  lui        $a3, (0xFFFFF000 >> 16)
     /* 3181C 0013181C 2D300000 */  daddu      $a2, $zero, $zero
     /* 31820 00131820 00F0E734 */  ori        $a3, $a3, (0xFFFFF000 & 0xFFFF)
@@ -59,5 +59,5 @@ glabel func_00131818
     /* 318B0 001318B0 00000000 */   nop
     /* 318B4 001318B4 0800E003 */  jr         $ra
     /* 318B8 001318B8 00000000 */   nop
-endlabel func_00131818
+endlabel _sceSDC
     /* 318BC 001318BC 00000000 */  nop

@@ -28,15 +28,15 @@ struct P009EA8 {
 
 extern int D_00145940[];
 
-int func_00112FC8(int a0, int a1);
-int func_0010FB20(void);
-int func_0010FB70(void);
+int sceSifWriteBackDCache(int a0, int a1);
+int DIntr(void);
+int EIntr(void);
 int func_00109288(int a0, int a1);
 int func_001092B8(int a0, int a1);
-int func_00112E00(int a0, int a1, int a2, int a3, int a4, int a5);
-int func_001073A0(int a0, int a1);
+int sceSifSendCmd(int a0, int a1, int a2, int a3, int a4, int a5);
+int sceSifSetDma(int a0, int a1);
 
-void func_00109EA8(struct D009EA8 *p) {
+void sceSifExecRequest(struct D009EA8 *p) {
     struct P009EA8 *pkt;
     int list[8];
     int data;
@@ -50,20 +50,20 @@ void func_00109EA8(struct D009EA8 *p) {
     if (data != 0)
         len = p->f2C;
     if (p->f0C > 0)
-        func_00112FC8(p->f08, p->f0C);
+        sceSifWriteBackDCache(p->f08, p->f0C);
     if (len > 0)
-        func_00112FC8(data, len);
-    func_0010FB20();
+        sceSifWriteBackDCache(data, len);
+    DIntr();
     if (p->f34 & 4)
         pkt = (struct P009EA8 *)func_001092B8((int)D_00145940, p->f34 >> 16);
     else
         pkt = (struct P009EA8 *)func_00109288((int)D_00145940, p->f34 >> 16);
-    func_0010FB70();
+    EIntr();
     pkt->f20 = 0x8000000A;
     pkt->f1C = p->f1C;
     if (p->f30 != 0) {
         do {
-            r = func_00112E00(0x80000008, (int)pkt, 0x40, data, p->f28, len);
+            r = sceSifSendCmd(0x80000008, (int)pkt, 0x40, data, p->f28, len);
         } while (r == 0);
     } else {
         pkt->f18 = 0;
@@ -81,7 +81,7 @@ void func_00109EA8(struct D009EA8 *p) {
         list[4 * n + 2] = 0x40;
         list[4 * n + 3] = 0;
         n++;
-        while (func_001073A0((int)list, n) == 0) {
+        while (sceSifSetDma((int)list, n) == 0) {
             t = 0x000F0000;
             do {
                 t--;

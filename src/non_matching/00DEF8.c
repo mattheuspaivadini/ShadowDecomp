@@ -7,10 +7,10 @@ extern unsigned char D_00147280[];
 extern int D_001471C0[];
 extern int D_00147200[];
 
-int SceSifrpcCall(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
+int sceSifCallRpc(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
                   int a7, int a8);
 
-int func_0010DEF8(unsigned char *a0, int a1) {
+int sceSifLoadIopHeap(unsigned char *a0, int a1) {
     unsigned char c;
     int n;
     int r;
@@ -38,7 +38,7 @@ int func_0010DEF8(unsigned char *a0, int a1) {
         *(int *)D_00147280 = a1;
     }
     D_00147280[0xFF] = 0;
-    r = SceSifrpcCall((int)D_001471C0, 3, 0, (int)D_00147280, n + 5,
+    r = sceSifCallRpc((int)D_001471C0, 3, 0, (int)D_00147280, n + 5,
                       (int)D_00147200, 4, 0, 0);
     if (r < 0)
         return -1;

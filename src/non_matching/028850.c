@@ -6,14 +6,14 @@
  * found (probes + dbr source archaeology, notes_11a.md).
  * The original .s stays in the build (asm/cod/028850.s); this C
  * draft (Session 9) is kept for the record. */
-extern int func_00128688(int a0);
+extern int _init_signal_r(int a0);
 
 struct S028850 {
     char pad00[0x1D4];
     int *table;                 /* 0x1D4: 32-entry handler table (028688) */
 };
 
-int func_00128850(struct S028850 *p, unsigned int i) {
+int __sigtramp_r(struct S028850 *p, unsigned int i) {
     int *tbl;
     int h;
 
@@ -21,7 +21,7 @@ int func_00128850(struct S028850 *p, unsigned int i) {
         return -1;
     tbl = p->table;
     if (tbl == 0) {
-        if (func_00128688((int)p) != 0)
+        if (_init_signal_r((int)p) != 0)
             return -1;
         tbl = p->table;
     }
@@ -36,3 +36,4 @@ int func_00128850(struct S028850 *p, unsigned int i) {
     ((void (*)(unsigned int))h)(i);
     return 0;
 }
+/* func_00128850 */

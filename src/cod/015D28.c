@@ -8,9 +8,9 @@
  * MATCH GUESS: cc=29 (0x015008/0x0183xx wrapper tier; weak) */
 extern int D_00133A28[];   /* .data 0x00133A28: lui/%lo (non-small) */
 extern int D_00150DC0[];   /* .bss  0x00150DC0: 0x40 bytes, lui/%lo */
-extern int func_00106FF0(int a0);
+extern int DeleteSema(int a0);
 
-int func_00115D28(void) {
+int sceDbcEnd(void) {
     int v;
 
     if (D_00133A28[0] == 0)
@@ -19,6 +19,6 @@ int func_00115D28(void) {
     v = D_00150DC0[0];
     if (v < 0)
         return 1;
-    func_00106FF0(v);
+    DeleteSema(v);
     return 1;
 }

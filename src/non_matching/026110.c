@@ -3,6 +3,7 @@
  * 02D9C0 fails to compile. Kept for Session 7. */
  * Tail-call trampoline (with a frame;
  * cc=296 keeps the frame). */
-void func_00126110(void) {
-    func_001260A8(0x18);
+void __register_frame(void) {
+    __register_frame_info(0x18);
 }
+/* func_00126110 */

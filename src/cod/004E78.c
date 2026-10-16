@@ -15,6 +15,6 @@
  */
 extern char D_0013D840[];
 
-char *func_00104E78(int x) {
+char *padSysGet(int x) {
     return &D_0013D840[x * 320];
 }

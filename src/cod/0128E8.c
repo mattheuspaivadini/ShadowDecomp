@@ -13,7 +13,7 @@
  */
 #include "symbols.h"
 
-int func_001128E8(int index, int value) {
+int sceSifSetSreg(int index, int value) {
     D_0014B500[index] = value;
     return value;
 }

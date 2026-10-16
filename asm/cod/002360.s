@@ -18,28 +18,28 @@ glabel func_00102360
     /* 2370 00102370 1000B2FF */  sd         $s2, 0x10($sp)
     /* 2374 00102374 2D902002 */  daddu      $s2, $s1, $zero
     /* 2378 00102378 1800B3FF */  sd         $s3, 0x18($sp)
-    /* 237C 0010237C 1300133C */  lui        $s3, %hi(D_00131D80)
+    /* 237C 0010237C 1300133C */  lui        $s3, %hi(eeRegInfo)
     /* 2380 00102380 2000B4FF */  sd         $s4, 0x20($sp)
     /* 2384 00102384 2DA0A000 */  daddu      $s4, $a1, $zero
     /* 2388 00102388 2800B5FF */  sd         $s5, 0x28($sp)
     /* 238C 0010238C 3000BFFF */  sd         $ra, 0x30($sp)
-    /* 2390 00102390 B41B040C */  jal        func_00106ED0
+    /* 2390 00102390 B41B040C */  jal        GetThreadId
     /* 2394 00102394 2DA8C000 */   daddu     $s5, $a2, $zero
     /* 2398 00102398 14001C3C */  lui        $gp, %hi(_gp)
     /* 239C 0010239C 701D9C27 */  addiu      $gp, $gp, %lo(_gp)
-    /* 23A0 001023A0 8209040C */  jal        func_00102608
+    /* 23A0 001023A0 8209040C */  jal        LoaderSysExecuteRecoveryFirstProcess
     /* 23A4 001023A4 2D804000 */   daddu     $s0, $v0, $zero
     /* 23A8 001023A8 2D200002 */  daddu      $a0, $s0, $zero
     /* 23AC 001023AC 7F000524 */  addiu      $a1, $zero, 0x7F
-    /* 23B0 001023B0 9C1B040C */  jal        func_00106E70
+    /* 23B0 001023B0 9C1B040C */  jal        ChangeThreadPriority
     /* 23B4 001023B4 2D880000 */   daddu     $s1, $zero, $zero
-    /* 23B8 001023B8 DC3E040C */  jal        func_0010FB70
+    /* 23B8 001023B8 DC3E040C */  jal        EIntr
     /* 23BC 001023BC 00000000 */   nop
     /* 23C0 001023C0 1300043C */  lui        $a0, %hi(D_001368A0)
     /* 23C4 001023C4 2D280002 */  daddu      $a1, $s0, $zero
     /* 23C8 001023C8 A0688424 */  addiu      $a0, $a0, %lo(D_001368A0)
-    /* 23CC 001023CC 3E0B040C */  jal        func_00102CF8
-    /* 23D0 001023D0 801D7026 */   addiu     $s0, $s3, %lo(D_00131D80)
+    /* 23CC 001023CC 3E0B040C */  jal        LoaderSysPrintf
+    /* 23D0 001023D0 801D7026 */   addiu     $s0, $s3, %lo(eeRegInfo)
     /* 23D4 001023D4 00000000 */  nop
 .align 2
   .L001023D8:
@@ -47,13 +47,13 @@ glabel func_00102360
     /* 23DC 001023DC 10005226 */  addiu      $s2, $s2, 0x10
     /* 23E0 001023E0 2D202002 */  daddu      $a0, $s1, $zero
     /* 23E4 001023E4 01003126 */  addiu      $s1, $s1, 0x1
-    /* 23E8 001023E8 A01C040C */  jal        func_00107280
+    /* 23E8 001023E8 A01C040C */  jal        iGetCop0
     /* 23EC 001023EC 000002AE */   sw        $v0, 0x0($s0)
     /* 23F0 001023F0 2000232A */  slti       $v1, $s1, 0x20
     /* 23F4 001023F4 000102AE */  sw         $v0, 0x100($s0)
     /* 23F8 001023F8 F7FF6014 */  bnez       $v1, .L001023D8
     /* 23FC 001023FC 08001026 */   addiu     $s0, $s0, 0x8
-    /* 2400 00102400 801D6226 */  addiu      $v0, $s3, %lo(D_00131D80)
+    /* 2400 00102400 801D6226 */  addiu      $v0, $s3, %lo(eeRegInfo)
     /* 2404 00102404 1800B3DF */  ld         $s3, 0x18($sp)
     /* 2408 00102408 700155AC */  sw         $s5, 0x170($v0)
     /* 240C 0010240C 1300043C */  lui        $a0, %hi(D_001368E0)
@@ -65,6 +65,6 @@ glabel func_00102360
     /* 2424 00102424 2000B4DF */  ld         $s4, 0x20($sp)
     /* 2428 00102428 2800B5DF */  ld         $s5, 0x28($sp)
     /* 242C 0010242C 3000BFDF */  ld         $ra, 0x30($sp)
-    /* 2430 00102430 FE020408 */  j          func_00100BF8
+    /* 2430 00102430 FE020408 */  j          LoaderSysJumpRecoverPointNoStateSetting
     /* 2434 00102434 4000BD27 */   addiu     $sp, $sp, 0x40
 endlabel func_00102360

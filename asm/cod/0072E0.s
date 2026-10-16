@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_001072E0, 0x10
+nonmatching SetOsdConfigParam2, 0x10
 
-glabel func_001072E0
+glabel SetOsdConfigParam2
     /* 72E0 001072E0 6E000324 */  addiu      $v1, $zero, 0x6E
     /* 72E4 001072E4 0C000000 */  syscall    0 /* handwritten instruction */
     /* 72E8 001072E8 0800E003 */  jr         $ra
     /* 72EC 001072EC 00000000 */   nop
-endlabel func_001072E0
+endlabel SetOsdConfigParam2

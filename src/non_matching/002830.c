@@ -35,7 +35,7 @@
  */
 extern int D_0013C790[256];
 
-int func_00102830(int value) {
+int LoaderSysEntryExternalIopMemoryList(int value) {
     int i;
 
     if (value == 0)

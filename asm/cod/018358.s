@@ -14,7 +14,7 @@ glabel sceCdChgSys
     /* 18358 00118358 F0FFBD27 */  addiu      $sp, $sp, -0x10
     /* 1835C 0011835C 1400043C */  lui        $a0, %hi(D_00138A98)
     /* 18360 00118360 0000BFFF */  sd         $ra, 0x0($sp)
-    /* 18364 00118364 BE23040C */  jal        func_00108EF8
+    /* 18364 00118364 BE23040C */  jal        scePrintf
     /* 18368 00118368 988A8424 */   addiu     $a0, $a0, %lo(D_00138A98)
     /* 1836C 0011836C 0000BFDF */  ld         $ra, 0x0($sp)
     /* 18370 00118370 02000224 */  addiu      $v0, $zero, 0x2

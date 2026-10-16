@@ -104,9 +104,9 @@ nonmatching D_0014147F, 0x8F1
 dlabel D_0014147F
     /* 0014147F */ .space 0x8F1
 
-nonmatching D_00141D70, 0x1B20
+nonmatching _gp, 0x1B20
 
-dlabel D_00141D70
+dlabel _gp
     /* 00141D70 */ .space 0x1B20
 
 nonmatching D_00143890, 0x400
@@ -699,7 +699,12 @@ nonmatching D_00169F8C, 0x4
 dlabel D_00169F8C
     /* 00169F8C */ .space 0x04
 
-nonmatching D_00169F90, 0x398
+nonmatching D_00169F90, 0x8
 
 dlabel D_00169F90
-    /* 00169F90 */ .space 0x398
+    /* 00169F90 */ .space 0x08
+
+nonmatching key_value, 0x390
+
+dlabel key_value
+    /* 00169F98 */ .space 0x390

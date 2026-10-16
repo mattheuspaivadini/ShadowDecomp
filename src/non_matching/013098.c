@@ -36,7 +36,7 @@ struct A00113098 {
     int  field08;   /* 0x08 saved block */
 };
 
-int func_00113098(struct A00113098 *a0) {
+int sceVif1PkTerminate(struct A00113098 *a0) {
     int *p = (int *)a0->field00;
     struct A00113098 *s = (struct A00113098 *)a0->field08;
 

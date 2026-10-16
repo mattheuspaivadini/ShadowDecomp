@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00106E00, 0x10
+nonmatching _StartThread, 0x10
 
-glabel func_00106E00
+glabel _StartThread
     /* 6E00 00106E00 22000324 */  addiu      $v1, $zero, 0x22
     /* 6E04 00106E04 0C000000 */  syscall    0 /* handwritten instruction */
     /* 6E08 00106E08 0800E003 */  jr         $ra
     /* 6E0C 00106E0C 00000000 */   nop
-endlabel func_00106E00
+endlabel _StartThread

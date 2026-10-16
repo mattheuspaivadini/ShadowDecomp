@@ -25,7 +25,7 @@ glabel func_00107CA8
     /* 7CD4 00107CD4 842220AE */  sw         $zero, %lo(D_00132284)($s1)
     /* 7CD8 00107CD8 A0404226 */  addiu      $v0, $s2, %lo(D_001440A0)
     /* 7CDC 00107CDC 2D204000 */  daddu      $a0, $v0, $zero
-    /* 7CE0 00107CE0 CC48040C */  jal        func_00112330
+    /* 7CE0 00107CE0 CC48040C */  jal        kputs
     /* 7CE4 00107CE4 7F0040A0 */   sb        $zero, 0x7F($v0)
     /* 7CE8 00107CE8 02000010 */  b          .L00107CF4
     /* 7CEC 00107CEC 8422258E */   lw        $a1, %lo(D_00132284)($s1)
@@ -47,7 +47,7 @@ glabel func_00107CA8
     /* 7D1C 00107D1C 1000B1DF */  ld         $s1, 0x10($sp)
     /* 7D20 00107D20 0000B0DF */  ld         $s0, 0x0($sp)
     /* 7D24 00107D24 010060A0 */  sb         $zero, 0x1($v1)
-    /* 7D28 00107D28 CC480408 */  j          func_00112330
+    /* 7D28 00107D28 CC480408 */  j          kputs
     /* 7D2C 00107D2C 4000BD27 */   addiu     $sp, $sp, 0x40
 .align 2
   .L00107D30:

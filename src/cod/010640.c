@@ -27,7 +27,7 @@
  */
 #include "symbols.h"
 
-int func_00110640(void) {
+int GetTimerPreScaleFactor(void) {
     if (D_00133920 < 0) {
         return 0x80008001;
     }

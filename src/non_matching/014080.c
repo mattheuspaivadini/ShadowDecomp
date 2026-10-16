@@ -2,7 +2,7 @@
  * R4 w25a_2: dsll/dsll32 hoisting across the branch
  * The original .s stays in the build (asm/cod/014080.s); this C
  * draft (Session 8) is kept for the record. */
-void func_00114080(int a0, int a1, int a2, int a3) {
+void sceGsSetHalfOffset(int a0, int a1, int a2, int a3) {
     unsigned long long v;
     long long w;
     long long h;
@@ -25,3 +25,4 @@ void func_00114080(int a0, int a1, int a2, int a3) {
         hi = (y << 4) << 32;
     *(long long *)(a0 + 0x20) = (x << 4) | hi;
 }
+/* func_00114080 */

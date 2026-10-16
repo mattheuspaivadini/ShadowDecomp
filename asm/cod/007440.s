@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00107440, 0x10
+nonmatching GetMemorySize, 0x10
 
-glabel func_00107440
+glabel GetMemorySize
     /* 7440 00107440 7F000324 */  addiu      $v1, $zero, 0x7F
     /* 7444 00107444 0C000000 */  syscall    0 /* handwritten instruction */
     /* 7448 00107448 0800E003 */  jr         $ra
     /* 744C 0010744C 00000000 */   nop
-endlabel func_00107440
+endlabel GetMemorySize

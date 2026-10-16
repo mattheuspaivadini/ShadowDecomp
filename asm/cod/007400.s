@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00107400, 0x10
+nonmatching _ExecOSD, 0x10
 
-glabel func_00107400
+glabel _ExecOSD
     /* 7400 00107400 7B000324 */  addiu      $v1, $zero, 0x7B
     /* 7404 00107404 0C000000 */  syscall    0 /* handwritten instruction */
     /* 7408 00107408 0800E003 */  jr         $ra
     /* 740C 0010740C 00000000 */   nop
-endlabel func_00107400
+endlabel _ExecOSD

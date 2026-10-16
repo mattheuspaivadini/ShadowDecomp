@@ -1,7 +1,7 @@
-/* STATUS (Session 7, 2026-10-14): NON_MATCHING. best score 5 [cc=29, default].
- * varargs wrapper; the varargs area offset and the post-call arithmetic scheduling differ (stdarg.h is absent, __builtin_saveregs used).
+/* STATUS (10, 2026-10-16): NON_MATCHING. best score 5 [cc=29].
+ * 
  * The original .s stays in the build (asm/cod/008DB8.s); this C
- * draft (subagent-produced, Session 7) is kept for the record. */
+ * draft (10) is kept for the record. */
 /* asm/cod/008DB8.s -> func_00108DB8 @ 0x00108DB8 (0x4C bytes, 19 insns)
  * Variadic shim forwarding the caller's callback: the incoming vararg
  * registers are spilled by the EE-GCC varargs prologue (a4..a7 ->

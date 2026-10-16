@@ -7,13 +7,13 @@
  * in the source is load-bearing: buf[1] first, then buf[0], then buf[2] in the
  * jal delay slot. Baseline (buf[0] first) is 4 instructions off.
  */
-void func_00107410(int op, int *buf);
+void Deci2Call(int op, int *buf);
 
-void func_001121E8(unsigned char a0, int a1, int a2) {
+void sceDeci2GrpOpen(unsigned char a0, int a1, int a2) {
     int buf[8];
 
     buf[1] = a1;
     buf[0] = a0;
     buf[2] = a2;
-    func_00107410(0x20, buf);
+    Deci2Call(0x20, buf);
 }

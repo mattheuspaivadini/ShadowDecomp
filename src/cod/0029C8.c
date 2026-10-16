@@ -29,7 +29,7 @@
  */
 #include "symbols.h"
 
-void func_001029C8(void) {
+void LoaderSysInitExternalIntcHandlerList(void) {
     int value = -1;
     int *p = (int *)D_0013BF90;
     int i;

@@ -18,8 +18,8 @@ struct S020F18 {
     char bytes[0x184];
 };
 
-extern struct S020F18 D_00135638[];
+extern struct S020F18 gSceMc2SysInfo[];
 
-struct S020F18 *func_00120F18(int i) {
-    return (struct S020F18 *)((char *)D_00135638 + i * 0x184);
+struct S020F18 *_SceMcComGetSysInfo(int i) {
+    return (struct S020F18 *)((char *)gSceMc2SysInfo + i * 0x184);
 }

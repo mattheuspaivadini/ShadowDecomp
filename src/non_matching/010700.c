@@ -4,23 +4,23 @@
  * draft (Session 8) is kept for the record. */
 #include "symbols.h"
 
-int func_0010FB20(void);
-int func_0010FB70(void);
-void func_00110410(unsigned int a0);
+int DIntr(void);
+int EIntr(void);
+void SetT2_MODE(unsigned int a0);
 
-int func_00110700(void) {
+int StopTimerSystemTime(void) {
     int g;
     unsigned int mode;
 
-    g = func_0010FB20();
+    g = DIntr();
     mode = HWREG(EE_T2_MODE);
     if (mode & 0x80) {
-        func_00110410(mode & 0xFFFFF37Fu);
+        SetT2_MODE(mode & 0xFFFFF37Fu);
         if (g != 0)
-            func_0010FB70();
+            EIntr();
         return 1;
     }
     if (g != 0)
-        func_0010FB70();
+        EIntr();
     return 0;
 }

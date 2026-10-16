@@ -2,6 +2,6 @@
  *   jr   $ra
  *    addiu $v0, $zero, 1
  */
-int func_001120A0(void) {
+int getpid(void) {
     return 1;
 }

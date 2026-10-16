@@ -13,14 +13,14 @@
  * D_0013A180 + 0xC (lui/%lo, non-small). Three 8-byte-spaced saves.
  * MATCH GUESS: cc=296 */
 extern int D_0013A180[];   /* 0x0013A18C = D_0013A180 + 0xC: lui/%lo */
-extern int func_00111FB8(int a0);
+extern int close(int a0);
 
-void func_00131100(int a0, int a1) {
+void _close_r(int a0, int a1) {
     int *p = &D_0013A180[3];
     int r;
 
     *p = 0;
-    r = func_00111FB8(a1);
+    r = close(a1);
     if (r == -1) {
         int v = *p;
 

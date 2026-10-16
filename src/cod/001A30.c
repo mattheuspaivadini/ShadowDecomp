@@ -8,6 +8,6 @@
  */
 #include "symbols.h"
 
-void func_00101A30(int size) {
+void SetHeapStartPoint(int size) {
     D_00139E04 = (size + 15) & ~15;
 }

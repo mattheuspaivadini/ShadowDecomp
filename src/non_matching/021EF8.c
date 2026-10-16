@@ -38,7 +38,7 @@ int func_00121EC0(void);
 int func_001283D0(void *dst, int value, int size);
 int sceDbcCreateSocket(int *a0, int a1, int a2);
 
-int func_00121EF8(int *a0) {
+int _sceMcCoreCreateSocket(int *a0) {
     struct S021EF8_REQ req;
     int i;
     int s;

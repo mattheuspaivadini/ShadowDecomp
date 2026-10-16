@@ -10,13 +10,13 @@ struct R020D58 {
     unsigned short d;   /* 0x2C */
 };
 
-extern struct R020D58 D_00135638[];
+extern struct R020D58 gSceMc2SysInfo[];
 
-int func_00120D10(int index, int key);
+int _sceMcpIsSpeckOutBlock(int index, int key);
 
-int func_00120D58(int index, int a1) {
-    unsigned short w = D_00135638[index].w;
-    unsigned short d = D_00135638[index].d;
+int _sceMcpIsSpeckOutClust(int index, int a1) {
+    unsigned short w = gSceMc2SysInfo[index].w;
+    unsigned short d = gSceMc2SysInfo[index].d;
 
-    return func_00120D10(index, a1 * w / d);
+    return _sceMcpIsSpeckOutBlock(index, a1 * w / d);
 }

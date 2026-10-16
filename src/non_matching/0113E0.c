@@ -27,10 +27,10 @@ struct T113E0 {
 extern struct T113E0 D_00133918;
 int func_00110998(void *a0);
 int func_00110910(void *a0);
-long long func_00110C78(void);
+long long iGetTimerSystemTime(void);
 int func_00110780(long long a0);
 
-int func_001113E0(int a0, long long a1, int a2, int a3) {
+int iSetTimerHandler(int a0, long long a1, int a2, int a3) {
     struct S113E0 *p;
     int m;
 
@@ -55,6 +55,6 @@ int func_001113E0(int a0, long long a1, int a2, int a3) {
         if (p->f0C & 1)
             func_00110910(p);
     }
-    func_00110780(func_00110C78());
+    func_00110780(iGetTimerSystemTime());
     return 0;
 }

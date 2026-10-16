@@ -19,11 +19,11 @@
  * D_001339B0 is in .data (outside the gp window): 10 ints = 40 bytes, i.e.
  * not a small-data object, which is why the access is absolute.
  */
-extern int D_001339B0[];
+extern int dch[];
 
-int func_00114918(unsigned int idx) {
+int sceDmaGetChan(unsigned int idx) {
     if (idx < 10u) {
-        return D_001339B0[idx];
+        return dch[idx];
     }
     return 0;
 }

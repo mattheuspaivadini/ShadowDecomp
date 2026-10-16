@@ -2,7 +2,7 @@
  * session9 R1; residual class not auto-classified
  * The original .s stays in the build (asm/cod/02F2D0.s); this C
  * draft (Session 9) is kept for the record. */
-long long func_0012F2D0(long long x, long long y) {
+long long _ulp(long long x, long long y) {
     int e;
     int n;
     long long v;
@@ -26,3 +26,4 @@ long long func_0012F2D0(long long x, long long y) {
         v = 1;
     return ((y & 0xFFFFFFFFLL) & 0xFFFFFFFF00000000LL) | ((v << 32) >> 32);
 }
+/* func_0012F2D0 */

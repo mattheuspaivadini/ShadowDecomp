@@ -12,10 +12,10 @@
  * revisions; declaring the local *before* the call also fails (it needs $s0
  * and a 0x20 stack frame).
  */
-int func_001073F0(int x);
+int sceSifGetReg(int x);
 
-int func_0010F0F0(void) {
-    int r = func_001073F0(4);
+int sceSifIsAliveIop(void) {
+    int r = sceSifGetReg(4);
     int lit = 0x10000;
 
     return (r & lit) != 0;

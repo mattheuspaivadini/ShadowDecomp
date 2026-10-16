@@ -100,7 +100,7 @@ glabel func_0012C240
     /* 2C370 0012C370 2D28C001 */  daddu      $a1, $t2, $zero
 .align 2
   .L0012C374:
-    /* 2C374 0012C374 36BC040C */  jal        func_0012F0D8
+    /* 2C374 0012C374 36BC040C */  jal        __mcmp
     /* 2C378 0012C378 2D208002 */   daddu     $a0, $s4, $zero
     /* 2C37C 0012C37C 30004004 */  bltz       $v0, .L0012C440
     /* 2C380 0012C380 2D58C002 */   daddu     $a7, $s6, $zero

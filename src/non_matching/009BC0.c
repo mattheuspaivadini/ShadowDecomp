@@ -1,12 +1,12 @@
-/* STATUS (Session 8, 2026-10-14): NON_MATCHING. best score 5 [cc=29].
- * R1 wave4c: zero node + append at +0x28 + tail j
+/* STATUS (10, 2026-10-16): NON_MATCHING. best score 5 [cc=29].
+ * 
  * The original .s stays in the build (asm/cod/009BC0.s); this C
- * draft (Session 8) is kept for the record. */
+ * draft (10) is kept for the record. */
 extern char D_00145940[];               /* lui/%lo - non-small */
 int func_0010FB20(void);
 int func_0010FB70(void);
 
-void func_00109BC0(int *a0, int a1) {
+void sceSifSetRpcQueue(int *a0, int a1) {
     int *p;
     int *head;
 

@@ -6,7 +6,7 @@ void func_0012C048(void *ctx, int fmt, void *ap);
 void func_001285C0(char *buf);
 void func_001290C4(char *buf);
 
-void func_00102CF8(int fmt, ...) {
+void LoaderSysPrintf(int fmt, ...) {
     char buf[0x100];
 
     func_0012C048(buf, fmt, __builtin_saveregs());

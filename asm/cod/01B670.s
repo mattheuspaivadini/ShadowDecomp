@@ -32,13 +32,13 @@ glabel func_0011B670
   .L0011B6AC:
     /* 1B6AC 0011B6AC 05008014 */  bnez       $a0, .L0011B6C4
     /* 1B6B0 0011B6B0 1500023C */   lui       $v0, %hi(D_00151E28)
-    /* 1B6B4 0011B6B4 081C040C */  jal        func_00107020
+    /* 1B6B4 0011B6B4 081C040C */  jal        WaitSema
     /* 1B6B8 0011B6B8 281E448C */   lw        $a0, %lo(D_00151E28)($v0)
     /* 1B6BC 0011B6BC 05000010 */  b          .L0011B6D4
     /* 1B6C0 0011B6C0 00000000 */   nop
 .align 2
   .L0011B6C4:
-    /* 1B6C4 0011B6C4 0C1C040C */  jal        func_00107030
+    /* 1B6C4 0011B6C4 0C1C040C */  jal        PollSema
     /* 1B6C8 0011B6C8 281E448C */   lw        $a0, %lo(D_00151E28)($v0)
     /* 1B6CC 0011B6CC 0B004004 */  bltz       $v0, .L0011B6FC
     /* 1B6D0 0011B6D0 2D100000 */   daddu     $v0, $zero, $zero

@@ -24,7 +24,7 @@ glabel func_001231A8
     /* 231D0 001231D0 0400A3AF */  sw         $v1, 0x4($sp)
     /* 231D4 001231D4 1400A2AF */  sw         $v0, 0x14($sp)
     /* 231D8 001231D8 2D20A003 */  daddu      $a0, $sp, $zero
-    /* 231DC 001231DC F81B040C */  jal        func_00106FE0
+    /* 231DC 001231DC F81B040C */  jal        CreateSema
     /* 231E0 001231E0 0800A0AF */   sw        $zero, 0x8($sp)
     /* 231E4 001231E4 605902AE */  sw         $v0, %lo(D_00135960)($s0)
     /* 231E8 001231E8 6059028E */  lw         $v0, %lo(D_00135960)($s0)

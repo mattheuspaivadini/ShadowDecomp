@@ -58,7 +58,7 @@ struct S98A {
     struct S98N *f34;   /* 0x34 */
 };
 
-void func_00107858(int code);
+void iWakeupThread(int code);
 
 void func_001098F0(struct S98A *a0) {
     struct S98N *a1;
@@ -80,5 +80,5 @@ void func_001098F0(struct S98A *a0) {
     a1->f30 = a0->f30;
     a1->f34 = a0->f10;
     if (a2->f00 >= 0 && a2->f04 == 0)
-        func_00107858(a2->f00);
+        iWakeupThread(a2->f00);
 }

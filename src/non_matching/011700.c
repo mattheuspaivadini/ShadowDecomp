@@ -7,7 +7,7 @@
 extern char D_0014A880[];
 extern int D_0014AC80 __attribute__((section(".data")));
 
-int func_00111700(void) {
+int _InitAlarm(void) {
     int *p = (int *)(D_0014A880 + 0x3F0);
     int *q = (int *)(D_0014A880 + 0x400);
     int i;

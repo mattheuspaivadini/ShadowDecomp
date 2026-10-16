@@ -17,40 +17,40 @@ glabel func_00117098
     /* 170A4 001170A4 1000BFFF */  sd         $ra, 0x10($sp)
     /* 170A8 001170A8 09006010 */  beqz       $v1, .L001170D0
     /* 170AC 001170AC 0000B0FF */   sd        $s0, 0x0($sp)
-    /* 170B0 001170B0 1300033C */  lui        $v1, %hi(D_00133AA0)
+    /* 170B0 001170B0 1300033C */  lui        $v1, %hi(sceCdCbfunc_num)
     /* 170B4 001170B4 FFFF0224 */  addiu      $v0, $zero, -0x1
-    /* 170B8 001170B8 A03A62AC */  sw         $v0, %lo(D_00133AA0)($v1)
+    /* 170B8 001170B8 A03A62AC */  sw         $v0, %lo(sceCdCbfunc_num)($v1)
     /* 170BC 001170BC 1300103C */  lui        $s0, %hi(D_00133A60)
-    /* 170C0 001170C0 001C040C */  jal        func_00107000
+    /* 170C0 001170C0 001C040C */  jal        SignalSema
     /* 170C4 001170C4 603A048E */   lw        $a0, %lo(D_00133A60)($s0)
     /* 170C8 001170C8 03000010 */  b          .L001170D8
-    /* 170CC 001170CC 1300023C */   lui       $v0, %hi(D_00133A68)
+    /* 170CC 001170CC 1300023C */   lui       $v0, %hi(_sceCd_ncmd_semid)
 .align 2
   .L001170D0:
     /* 170D0 001170D0 1300103C */  lui        $s0, %hi(D_00133A60)
-    /* 170D4 001170D4 1300023C */  lui        $v0, %hi(D_00133A68)
+    /* 170D4 001170D4 1300023C */  lui        $v0, %hi(_sceCd_ncmd_semid)
 .align 2
   .L001170D8:
-    /* 170D8 001170D8 FC1B040C */  jal        func_00106FF0
-    /* 170DC 001170DC 683A448C */   lw        $a0, %lo(D_00133A68)($v0)
-    /* 170E0 001170E0 1300033C */  lui        $v1, %hi(D_00133A6C)
-    /* 170E4 001170E4 FC1B040C */  jal        func_00106FF0
-    /* 170E8 001170E8 6C3A648C */   lw        $a0, %lo(D_00133A6C)($v1)
-    /* 170EC 001170EC 1300033C */  lui        $v1, %hi(D_00133A70)
-    /* 170F0 001170F0 FC1B040C */  jal        func_00106FF0
-    /* 170F4 001170F4 703A648C */   lw        $a0, %lo(D_00133A70)($v1)
-    /* 170F8 001170F8 FC1B040C */  jal        func_00106FF0
+    /* 170D8 001170D8 FC1B040C */  jal        DeleteSema
+    /* 170DC 001170DC 683A448C */   lw        $a0, %lo(_sceCd_ncmd_semid)($v0)
+    /* 170E0 001170E0 1300033C */  lui        $v1, %hi(_sceCd_scmd_semid)
+    /* 170E4 001170E4 FC1B040C */  jal        DeleteSema
+    /* 170E8 001170E8 6C3A648C */   lw        $a0, %lo(_sceCd_scmd_semid)($v1)
+    /* 170EC 001170EC 1300033C */  lui        $v1, %hi(_sceCd_rcmd_semid)
+    /* 170F0 001170F0 FC1B040C */  jal        DeleteSema
+    /* 170F4 001170F4 703A648C */   lw        $a0, %lo(_sceCd_rcmd_semid)($v1)
+    /* 170F8 001170F8 FC1B040C */  jal        DeleteSema
     /* 170FC 001170FC 603A048E */   lw        $a0, %lo(D_00133A60)($s0)
-    /* 17100 00117100 C83E040C */  jal        func_0010FB20
+    /* 17100 00117100 C83E040C */  jal        DIntr
     /* 17104 00117104 00000000 */   nop
     /* 17108 00117108 0080043C */  lui        $a0, (0x80000012 >> 16)
     /* 1710C 0011710C 2D804000 */  daddu      $s0, $v0, $zero
-    /* 17110 00117110 1E4B040C */  jal        func_00112C78
+    /* 17110 00117110 1E4B040C */  jal        sceSifRemoveCmdHandler
     /* 17114 00117114 12008434 */   ori       $a0, $a0, (0x80000012 & 0xFFFF)
     /* 17118 00117118 04000012 */  beqz       $s0, .L0011712C
     /* 1711C 0011711C 1000BFDF */   ld        $ra, 0x10($sp)
     /* 17120 00117120 0000B0DF */  ld         $s0, 0x0($sp)
-    /* 17124 00117124 DC3E0408 */  j          func_0010FB70
+    /* 17124 00117124 DC3E0408 */  j          EIntr
     /* 17128 00117128 2000BD27 */   addiu     $sp, $sp, 0x20
 .align 2
   .L0011712C:

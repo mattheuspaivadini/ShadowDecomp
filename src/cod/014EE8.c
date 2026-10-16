@@ -24,7 +24,7 @@
  */
 int func_001147C0(unsigned *p);
 
-int func_00114EE8(unsigned *p, int a1) {
+int sceDmaSync(unsigned *p, int a1) {
     if (a1 == 1)
         return (*p >> 8) & 1;
     func_001147C0(p);

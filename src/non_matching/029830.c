@@ -3,13 +3,13 @@
 /* asm/cod/029830.s -> func_00129830 @ 0x00129830
  * If the third word of the block is set, run func_0012E018 and clear words
  * 1 and 2; otherwise just clear word 1 and return 0. */
-int func_0012E018(void);
+int __sfvwrite(void);
 
 int func_00129830(int a0, int *p) {
     int r;
 
     if (p[2] != 0) {
-        r = func_0012E018();
+        r = __sfvwrite();
         p[1] = 0;
         p[2] = 0;
         return r;

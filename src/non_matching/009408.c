@@ -4,8 +4,8 @@
  * draft (Session 8) is kept for the record. */
 extern int func_00109288(int a0);
 extern int func_001092B8(int a0, int a1);
-extern int func_00112E40(int cmd, void *p, int size, int a, int b, int c);
-extern int func_001118E0(int a0, void (*a1)(), void *a2);
+extern int isceSifSendCmd(int cmd, void *p, int size, int a, int b, int c);
+extern int iSetTimerAlarm(int a0, void (*a1)(), void *a2);
 extern int func_001093C8(int a0, int a1, int a2, char *p);
 
 int func_00109408(int a0, int a1) {
@@ -25,8 +25,8 @@ int func_00109408(int a0, int a1) {
     q[9] = p[8];
     q[10] = p[9];
     q[11] = p[10];
-    r = func_00112E40(0x80000008, q, 0x40, p[8], p[9], p[10]);
+    r = isceSifSendCmd(0x80000008, q, 0x40, p[8], p[9], p[10]);
     if (r != 0)
         return r;
-    return func_001118E0(0x800, func_001093C8, q);
+    return iSetTimerAlarm(0x800, func_001093C8, q);
 }

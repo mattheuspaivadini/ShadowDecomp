@@ -19,13 +19,13 @@
  * slot layout). $v0 is never set by this function (it is left as the last
  * callee's result), so it returns nothing.
  * MATCH GUESS: cc=29 */
-void func_00114530(int env);
+void sceGsPutDispEnv(int env);
 void sceGsPutDrawEnv(int env);
 
-void func_00113B00(int p, int flag) {
+void sceGsSwapDBuff(int p, int flag) {
     int f = flag & 1;
 
-    func_00114530(p + f * 0x28);
+    sceGsPutDispEnv(p + f * 0x28);
     if (f != 0)
         sceGsPutDrawEnv(p + 0x140);
     else

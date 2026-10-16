@@ -16,7 +16,7 @@ glabel func_00121058
     /* 2105C 0012105C F0FFBD27 */  addiu      $sp, $sp, -0x10
     /* 21060 00121060 C03C448C */  lw         $a0, %lo(D_00163CC0)($v0)
     /* 21064 00121064 0000BFFF */  sd         $ra, 0x0($sp)
-    /* 21068 00121068 041C040C */  jal        func_00107010
+    /* 21068 00121068 041C040C */  jal        iSignalSema
     /* 2106C 0012106C 00000000 */   nop
     /* 21070 00121070 0F000000 */  sync
     /* 21074 00121074 38000042 */  ei /* handwritten instruction */

@@ -1,7 +1,7 @@
-/* STATUS (Session 8, 2026-10-14): NON_MATCHING. best score 5 [cc=29].
- * R4 w25a_1: publishes D_00133938/D_0013393C then fill
+/* STATUS (10, 2026-10-16): NON_MATCHING. best score 5 [cc=29].
+ * 
  * The original .s stays in the build (asm/cod/011B18.s); this C
- * draft (Session 8) is kept for the record. */
+ * draft (10) is kept for the record. */
 int func_0010FB20(void);
 int func_0010FB70(void);
 int func_001283D0(void *dst, int value, int size);
@@ -9,7 +9,7 @@ int func_001283D0(void *dst, int value, int size);
 extern int D_00133938[];
 extern int D_0013393C[];
 
-int func_00111B18(int a0, int a1) {
+int sceSifSetRebootNotifyBuffer(int a0, int a1) {
     int g;
     int old;
 

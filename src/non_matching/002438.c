@@ -4,15 +4,15 @@
  * draft (Session 8) is kept for the record. */
 #include "symbols.h"
 
-void func_00107470(int a0);
-void func_00106CE0(int a0, int a1);
+void DisableIntc(int a0);
+void RemoveIntcHandler(int a0, int a1);
 
 struct Pair00102438 {
     int f0;     /* 0x00 */
     int f4;     /* 0x04 */
 };
 
-void func_00102438(void) {
+void LoaderSysDeleteAllExternalIntcHandler(void) {
     int value = -1;
     struct Pair00102438 *t = (struct Pair00102438 *)D_0013BF90;
     int *p;
@@ -21,8 +21,8 @@ void func_00102438(void) {
     for (i = 0; i < 0x100; i++) {
         if (t[i].f4 < 0)
             continue;
-        func_00107470(t[i].f0);
-        func_00106CE0(t[i].f0, t[i].f4);
+        DisableIntc(t[i].f0);
+        RemoveIntcHandler(t[i].f0, t[i].f4);
         t[i].f4 = value;
         t[i].f0 = value;
     }

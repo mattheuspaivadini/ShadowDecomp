@@ -23,7 +23,7 @@
 extern volatile int D_00135960[];   /* .data 0x00135960, 4 bytes (lui/%lo) */
 extern int D_00138DF0[];            /* the semaphore option table (lui/%lo) */
 
-int func_00106FE0(void *args);
+int CreateSema(void *args);
 
 int func_001231A8(void) {
     int buf[8];
@@ -33,7 +33,7 @@ int func_001231A8(void) {
     buf[1] = 1;
     buf[5] = (int)D_00138DF0;
     buf[2] = 0;
-    D_00135960[0] = func_00106FE0(buf);
+    D_00135960[0] = CreateSema(buf);
     if (D_00135960[0] < 0)
         return -1;
     return D_00135960[0];

@@ -16,12 +16,12 @@
 extern int D_00163CC0[];   /* .bss 0x00163CC0, 8 bytes - array => lui/%lo */
 extern int D_00165DC0[];   /* .bss 0x00165DC0, 0x80 bytes */
 
-void func_00107020(int a0);
-void func_001318C0(int a0, int a1);
+void WaitSema(int a0);
+void SyncDCache(int a0, int a1);
 
 int func_00121000(void) {
-    func_00107020(D_00163CC0[0]);
-    func_001318C0((int)D_00165DC0, (int)D_00165DC0 + 0x7F);
+    WaitSema(D_00163CC0[0]);
+    SyncDCache((int)D_00165DC0, (int)D_00165DC0 + 0x7F);
     if (D_00165DC0[0] <= 0)
         D_00165DC0[2] = 0;
     return (int)D_00165DC0;

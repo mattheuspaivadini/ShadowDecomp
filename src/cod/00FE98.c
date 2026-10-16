@@ -17,18 +17,18 @@
  * is the `== 0` test. Frame 0x30: only $s0 (= &buf[1]) + $ra are saved.
  * MATCH GUESS: cc=296
  */
-void func_00107090(int *p);
-void func_00107080(int *p);
+void GetOsdConfigParam(int *p);
+void SetOsdConfigParam(int *p);
 
 int func_0010FE98(void) {
     unsigned int buf[2];
     unsigned int v;
 
-    func_00107090((int *)buf);
+    GetOsdConfigParam((int *)buf);
     v = buf[0];
     buf[1] = (v & 0xFFFF1FFF) | 0x2000;
-    func_00107080((int *)&buf[1]);
-    func_00107090((int *)&buf[1]);
-    func_00107080((int *)buf);
+    SetOsdConfigParam((int *)&buf[1]);
+    GetOsdConfigParam((int *)&buf[1]);
+    SetOsdConfigParam((int *)buf);
     return ((buf[1] >> 13) & 7) == 0;
 }

@@ -15,11 +15,11 @@
  * MATCH GUESS: cc=29 (0x01C1xx / func_001220F8 error-code family) */
 extern int D_00135630[];   /* .data 0x00135630, 4 bytes - array => lui/%lo */
 
-int func_00121EF8(void);
-int func_0011C198(int index);
-int func_001220F8(int i);
+int _sceMcCoreCreateSocket(void);
+int _sceMcFatInit2(int index);
+int _sceMcCoreChangeSocketTypeMc2Dbc(int i);
 
-int func_0011A408(int *p) {
+int sceMc2CreateSocket(int *p) {
     int r;
 
     if (D_00135630[0] == 0)
@@ -28,9 +28,9 @@ int func_0011A408(int *p) {
         return 0x81010016;
     if (p[2] != 0)
         return 0x81010016;
-    r = func_00121EF8();
+    r = _sceMcCoreCreateSocket();
     if (r < 0)
         return 0x81010017;
-    func_0011C198(r);
-    return func_001220F8(r);
+    _sceMcFatInit2(r);
+    return _sceMcCoreChangeSocketTypeMc2Dbc(r);
 }

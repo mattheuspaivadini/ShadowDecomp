@@ -1,7 +1,7 @@
-/* STATUS (Session 7, 2026-10-14): NON_MATCHING. best score 5 [cc=29, default].
- * indirect call through node->fn + push onto a list.
+/* STATUS (10, 2026-10-16): NON_MATCHING. best score 5 [cc=29].
+ * 
  * The original .s stays in the build (asm/cod/011750.s); this C
- * draft (subagent-produced, Session 7) is kept for the record. */
+ * draft (10) is kept for the record. */
 /* asm/cod/011750.s -> func_00111750 @ 0x00111750 (0x5C bytes, 23 insns)
  *
  * Dispatch a0 (masked with 0xFE) into a node's handler; when the handler

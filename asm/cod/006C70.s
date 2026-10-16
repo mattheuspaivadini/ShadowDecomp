@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00106C70, 0x10
+nonmatching RemoveSbusIntcHandler, 0x10
 
-glabel func_00106C70
+glabel RemoveSbusIntcHandler
     /* 6C70 00106C70 0B000324 */  addiu      $v1, $zero, 0xB
     /* 6C74 00106C74 0C000000 */  syscall    0 /* handwritten instruction */
     /* 6C78 00106C78 0800E003 */  jr         $ra
     /* 6C7C 00106C7C 00000000 */   nop
-endlabel func_00106C70
+endlabel RemoveSbusIntcHandler

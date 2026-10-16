@@ -35,26 +35,26 @@ extern char D_00138B28[];      /* .rodata: the "SceMrpcUnbind" name */
 extern int  D_00138B70[];      /* .rodata: the semaphore option table */
 extern char D_001518C0[];      /* allocator state (passed by address) */
 
-void func_00108EF8(char *name, int arg);
-int  func_00107020(int sema);
-int  func_00107000(int sema);
+void scePrintf(char *name, int arg);
+int  WaitSema(int sema);
+int  SignalSema(int sema);
 void *func_001199F8(void *state);
-int  func_00106FE0(void *param);
+int  CreateSema(void *param);
 void func_00119AA0(void *rec);
-int  func_00106FF0(int sema);
-int  func_00112E00(int cmd, int arg, int size, int a3, int a4, int a5);
+int  DeleteSema(int sema);
+int  sceSifSendCmd(int cmd, int arg, int size, int a3, int a4, int a5);
 
-int func_00119DD8(struct S19DD8_A *s1, int a1) {
+int sceSifMUnBindRpc(struct S19DD8_A *s1, int a1) {
     struct S19DD8_REC  *s0;
     struct S19DD8_SEMA  sema;
     int t;
     int s2;
 
     if (a1 != 0) {
-        func_00108EF8(D_00138B28, a1);
+        scePrintf(D_00138B28, a1);
         return -1;
     }
-    func_00107020(s1->f28);
+    WaitSema(s1->f28);
     s0 = func_001199F8(D_001518C0);
     if (s0 == 0)
         return -1;
@@ -68,20 +68,20 @@ int func_00119DD8(struct S19DD8_A *s1, int a1) {
     sema.f14 = (int)D_00138B70;
     sema.f08 = 0;
     sema.f04 = 1;
-    s1->f08 = func_00106FE0(&sema);
+    s1->f08 = CreateSema(&sema);
     s2 = s1->f08;
     if (s2 < 0) {
         func_00119AA0(s0);
         return -3;
     }
-    if (func_00112E00(0x8000001D, (int)s0, 0x40, 0, 0, 0) == 0) {
+    if (sceSifSendCmd(0x8000001D, (int)s0, 0x40, 0, 0, 0) == 0) {
         func_00119AA0(s0);
-        func_00106FF0(s2);
+        DeleteSema(s2);
         return -2;
     }
-    func_00107020(s2);
-    func_00106FF0(s2);
+    WaitSema(s2);
+    DeleteSema(s2);
     if (s1->f2C == 1)
-        func_00106FF0(s1->f28);
+        DeleteSema(s1->f28);
     return s1->f2C;
 }

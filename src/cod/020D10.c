@@ -11,10 +11,10 @@ struct R020D10 {
     char pad150[0x34];
 };
 
-extern struct R020D10 D_00135638[];
+extern struct R020D10 gSceMc2SysInfo[];
 
-int func_00120D10(int index, int key) {
-    struct R020D10 *r = &D_00135638[index];
+int _sceMcpIsSpeckOutBlock(int index, int key) {
+    struct R020D10 *r = &gSceMc2SysInfo[index];
     int i;
 
     for (i = 0; i < 32; i++) {

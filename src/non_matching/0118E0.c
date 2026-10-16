@@ -10,12 +10,12 @@ struct S0118E0 {
 };
 
 extern struct S0118E0 *D_0014AC80[];   /* lui/%lo -> non-small */
-int func_00110D48(void);
-int func_001113E0(int a0, long long a1, int (*a2)(), void *a3);
-int func_00110FA0(int a0);
+int iAllocTimerCounter(void);
+int iSetTimerHandler(int a0, long long a1, int (*a2)(), void *a3);
+int iStartTimerCounter(int a0);
 int func_00111750(int a0, int a1, int a2, void *a3);
 
-int func_001118E0(int a0, int (*a1)(), int a2) {
+int iSetTimerAlarm(int a0, int (*a1)(), int a2) {
     struct S0118E0 *n;
     struct S0118E0 *old;
     int r;
@@ -27,7 +27,7 @@ int func_001118E0(int a0, int (*a1)(), int a2) {
         D_0014AC80[0] = n->next;
     if (n == 0)
         return 0x80008005;
-    r = func_00110D48();
+    r = iAllocTimerCounter();
     if (r < 0) {
         old = D_0014AC80[0];
         D_0014AC80[0] = n;
@@ -38,7 +38,7 @@ int func_001118E0(int a0, int (*a1)(), int a2) {
     n->fn = a1;
     n->field0C = a2;
     n->field04 = r;
-    func_001113E0(r, (long long)a0, func_00111750, n);
-    func_00110FA0(r);
+    iSetTimerHandler(r, (long long)a0, func_00111750, n);
+    iStartTimerCounter(r);
     return ((int)n << 4) | (r & 0xFE) | 1;
 }

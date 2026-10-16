@@ -7,7 +7,7 @@
  */
 extern int D_0013C790[256];
 
-int func_00102970(int key) {
+int LoaderSysDeleteExternalIopMemoryList(int key) {
     int i = 0;
 
     do {

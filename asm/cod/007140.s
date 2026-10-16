@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00107140, 0x10
+nonmatching RFU086_WaitEvnetFlag, 0x10
 
-glabel func_00107140
+glabel RFU086_WaitEvnetFlag
     /* 7140 00107140 56000324 */  addiu      $v1, $zero, 0x56
     /* 7144 00107144 0C000000 */  syscall    0 /* handwritten instruction */
     /* 7148 00107148 0800E003 */  jr         $ra
     /* 714C 0010714C 00000000 */   nop
-endlabel func_00107140
+endlabel RFU086_WaitEvnetFlag

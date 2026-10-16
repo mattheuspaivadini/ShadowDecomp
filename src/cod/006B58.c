@@ -26,7 +26,7 @@ struct E006B58 {
 
 extern struct E006B58 D_0013ED90[];
 
-void func_00106B58(int a0, unsigned char a1) {
+void PutChar(int a0, unsigned char a1) {
     int idx = D_0013A170 * 60 + D_0013A16C;
 
     D_0013ED90[idx].field00 = a0;

@@ -7,7 +7,7 @@ struct S {
     u_long128 *last;
 };
 
-void func_00113228(struct S *p, u_long128 value) {
+void sceVif1PkOpenGifTag(struct S *p, u_long128 value) {
     u_long128 *q = p->write;
     u_long128 *next = q + 1;
 

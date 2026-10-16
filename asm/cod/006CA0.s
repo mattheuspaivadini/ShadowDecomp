@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00106CA0, 0x10
+nonmatching SetVCommonHandler, 0x10
 
-glabel func_00106CA0
+glabel SetVCommonHandler
     /* 6CA0 00106CA0 0E000324 */  addiu      $v1, $zero, 0xE
     /* 6CA4 00106CA4 0C000000 */  syscall    0 /* handwritten instruction */
     /* 6CA8 00106CA8 0800E003 */  jr         $ra
     /* 6CAC 00106CAC 00000000 */   nop
-endlabel func_00106CA0
+endlabel SetVCommonHandler

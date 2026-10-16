@@ -28,13 +28,13 @@ struct S0131A0 {
     int *field0C;                   /* 0x0C block to credit */
 };
 
-void func_001132E8(struct S0131A0 *p, int a1, int a2);
+void sceVif1PkAlign(struct S0131A0 *p, int a1, int a2);
 
-void func_001131A0(struct S0131A0 *p, int flag) {
+void sceVif1PkOpenDirectCode(struct S0131A0 *p, int flag) {
     int *q;
     int v;
 
-    func_001132E8(p, 2, 3);
+    sceVif1PkAlign(p, 2, 3);
     q = p->field00;
     v = flag ? (int)0xD0000000 : (int)0x50000000;
     p->field00 = (int *)((char *)q + 4);

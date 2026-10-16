@@ -11,6 +11,6 @@
 nonmatching func_001000C0, 0x8
 
 glabel func_001000C0
-    /* C0 001000C0 76400408 */  j          func_001101D8
+    /* C0 001000C0 76400408 */  j          Exit
     /* C4 001000C4 2D200000 */   daddu     $a0, $zero, $zero
 endlabel func_001000C0

@@ -4,5 +4,5 @@
  * $a1..$a7 spilled, no body). Evidence: the shape is reproduced
  * byte-for-byte by a plain variadic function with 1 fixed argument(s)
  * (probe: build/tmp/probe_va.c). */
-void func_00103FF8(int a0, ...) {
+void memprintf(int a0, ...) {
 }

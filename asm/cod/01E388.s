@@ -41,7 +41,7 @@ glabel func_0011E388
     /* 1E3EC 0011E3EC 1600053C */  lui        $a1, %hi(D_0015F080)
     /* 1E3F0 0011E3F0 80F0A524 */  addiu      $a1, $a1, %lo(D_0015F080)
     /* 1E3F4 0011E3F4 2D304002 */  daddu      $a2, $s2, $zero
-    /* 1E3F8 0011E3F8 3483040C */  jal        func_00120CD0
+    /* 1E3F8 0011E3F8 3483040C */  jal        _sceMcpReadUserClust
     /* 1E3FC 0011E3FC 01000724 */   addiu     $a3, $zero, 0x1
     /* 1E400 0011E400 06014010 */  beqz       $v0, .L0011E81C
     /* 1E404 0011E404 2DB00000 */   daddu     $s6, $zero, $zero
@@ -174,7 +174,7 @@ glabel func_0011E388
     /* 1E5A8 0011E5A8 2D208002 */  daddu      $a0, $s4, $zero
     /* 1E5AC 0011E5AC 80F0C524 */  addiu      $a1, $a2, %lo(D_0015F080)
     /* 1E5B0 0011E5B0 01000724 */  addiu      $a3, $zero, 0x1
-    /* 1E5B4 0011E5B4 3C83040C */  jal        func_00120CF0
+    /* 1E5B4 0011E5B4 3C83040C */  jal        _sceMcpWriteUserClust
     /* 1E5B8 0011E5B8 2D304002 */   daddu     $a2, $s2, $zero
     /* 1E5BC 0011E5BC 98004050 */  beql       $v0, $zero, .L0011E820
     /* 1E5C0 0011E5C0 000037AE */   sw        $s7, 0x0($s1)
@@ -306,7 +306,7 @@ glabel func_0011E388
     /* 1E780 0011E780 1600023C */  lui        $v0, %hi(D_0015F080)
     /* 1E784 0011E784 2D208002 */  daddu      $a0, $s4, $zero
     /* 1E788 0011E788 80F04524 */  addiu      $a1, $v0, %lo(D_0015F080)
-    /* 1E78C 0011E78C 3C83040C */  jal        func_00120CF0
+    /* 1E78C 0011E78C 3C83040C */  jal        _sceMcpWriteUserClust
     /* 1E790 0011E790 01000724 */   addiu     $a3, $zero, 0x1
     /* 1E794 0011E794 21004010 */  beqz       $v0, .L0011E81C
     /* 1E798 0011E798 1002A68F */   lw        $a2, 0x210($sp)

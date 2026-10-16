@@ -1,7 +1,7 @@
-/* STATUS (Session 8, 2026-10-14): NON_MATCHING. best score 6 [cc=296].
- * R1 wave4c: banners + per-module loop + tail j
+/* STATUS (10, 2026-10-16): NON_MATCHING. best score 6 [cc=296].
+ * 
  * The original .s stays in the build (asm/cod/003258.s); this C
- * draft (Session 8) is kept for the record. */
+ * draft (10) is kept for the record. */
 extern char D_00136A20[];              /* lui/%lo - non-small */
 extern char D_00136A68[];              /* lui/%lo - non-small */
 extern char D_00136AB0[];              /* lui/%lo - non-small */

@@ -6,7 +6,7 @@
  */
 #include "symbols.h"
 
-int func_00122448(int value) {
+int sceNetcnfifSetFNoDecode(int value) {
     D_00135958 = value;
     return 0;
 }

@@ -19,14 +19,14 @@
  * is the same literal the flag byte gets; the emission order of the three
  * stores is data[1], data[0], info.
  * MATCH GUESS: cc=29 */
-int func_00115940(int a0, int a1, void *a2, int a3, void *a4, int a5);
+int sceVibSetActParam(int a0, int a1, void *a2, int a3, void *a4, int a5);
 
-int func_00104EF8(int a0, unsigned char *a1) {
+int padSysVibSetAcrParam(int a0, unsigned char *a1) {
     unsigned char data[2];
     unsigned char info;
 
     info = 3;
     data[0] = (unsigned char)((a1[0] & 1) | ((a1[1] & 0x7F) << 1));
     data[1] = (unsigned char)((a1[1] & 0x80) >> 7);
-    return func_00115940(*(int *)(a0 + 0x11C), 1, &info, 2, data, 3);
+    return sceVibSetActParam(*(int *)(a0 + 0x11C), 1, &info, 2, data, 3);
 }

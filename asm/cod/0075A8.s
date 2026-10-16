@@ -9,9 +9,9 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_001075A8, 0x68
+nonmatching EnableDmac, 0x68
 
-glabel func_001075A8
+glabel EnableDmac
     /* 75A8 001075A8 D0FFBD27 */  addiu      $sp, $sp, -0x30
     /* 75AC 001075AC 1000B1FF */  sd         $s1, 0x10($sp)
     /* 75B0 001075B0 2000BFFF */  sd         $ra, 0x20($sp)
@@ -22,17 +22,17 @@ glabel func_001075A8
     /* 75C4 001075C4 24800202 */  and        $s0, $s0, $v0
     /* 75C8 001075C8 03000012 */  beqz       $s0, .L001075D8
     /* 75CC 001075CC 00000000 */   nop
-    /* 75D0 001075D0 C83E040C */  jal        func_0010FB20
+    /* 75D0 001075D0 C83E040C */  jal        DIntr
     /* 75D4 001075D4 00000000 */   nop
 .align 2
   .L001075D8:
-    /* 75D8 001075D8 501B040C */  jal        func_00106D40
+    /* 75D8 001075D8 501B040C */  jal        _EnableDmac
     /* 75DC 001075DC 2D202002 */   daddu     $a0, $s1, $zero
     /* 75E0 001075E0 2D884000 */  daddu      $s1, $v0, $zero
     /* 75E4 001075E4 0F000000 */  sync
     /* 75E8 001075E8 04000012 */  beqz       $s0, .L001075FC
     /* 75EC 001075EC 2D102002 */   daddu     $v0, $s1, $zero
-    /* 75F0 001075F0 DC3E040C */  jal        func_0010FB70
+    /* 75F0 001075F0 DC3E040C */  jal        EIntr
     /* 75F4 001075F4 00000000 */   nop
     /* 75F8 001075F8 2D102002 */  daddu      $v0, $s1, $zero
 .align 2
@@ -42,4 +42,4 @@ glabel func_001075A8
     /* 7604 00107604 0000B0DF */  ld         $s0, 0x0($sp)
     /* 7608 00107608 0800E003 */  jr         $ra
     /* 760C 0010760C 3000BD27 */   addiu     $sp, $sp, 0x30
-endlabel func_001075A8
+endlabel EnableDmac

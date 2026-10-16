@@ -16,7 +16,7 @@ glabel func_0010A798
     /* A7A0 0010A7A0 D029040C */  jal        func_0010A740
     /* A7A4 0010A7A4 00000000 */   nop
     /* A7A8 0010A7A8 1300023C */  lui        $v0, %hi(D_0013231C)
-    /* A7AC 0010A7AC 081C040C */  jal        func_00107020
+    /* A7AC 0010A7AC 081C040C */  jal        WaitSema
     /* A7B0 0010A7B0 1C23448C */   lw        $a0, %lo(D_0013231C)($v0)
     /* A7B4 0010A7B4 0000BFDF */  ld         $ra, 0x0($sp)
     /* A7B8 0010A7B8 2D100000 */  daddu      $v0, $zero, $zero

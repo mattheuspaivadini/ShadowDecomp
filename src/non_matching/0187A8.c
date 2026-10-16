@@ -18,7 +18,7 @@ int func_00118438(int a0, int a1, int a2, int a3, int a4);
 int func_00118380(int a0, int a1, int *p, int a3, int a4);
 int func_00118578(int a0, int a1, int a2);
 
-int func_001187A8(int a0, struct S0187A8 *p, int a2, int a3, int a4, int a5,
+int sceInetAddress2Name(int a0, struct S0187A8 *p, int a2, int a3, int a4, int a5,
                   int a6, int a7, int a8) {
     int r;
 

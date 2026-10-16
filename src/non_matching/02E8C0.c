@@ -2,11 +2,11 @@
  * session9 R2 waveA; residual class not auto-classified
  * The original .s stays in the build (asm/cod/02E8C0.s); this C
  * draft (Session 9) is kept for the record. */
-int *func_0012E7E8(int a0, int a1);
+int *_Balloc(int a0, int a1);
 int  func_0012821C(int dst, int src, int n);
-void func_0012E890(int a0, int *b);
+void _Bfree(int a0, int *b);
 
-int *func_0012E8C0(int a0, int *b, int m, int carry) {
+int *_multadd(int a0, int *b, int m, int carry) {
     int n;
     int i;
     int v;
@@ -30,9 +30,9 @@ int *func_0012E8C0(int a0, int *b, int m, int carry) {
     } while (i < n);
     if (carry != 0) {
         if (n >= b[2]) {
-            p = func_0012E7E8(a0, b[1] + 1);
+            p = _Balloc(a0, b[1] + 1);
             func_0012821C((int)p + 0xC, (int)(b + 3), (b[4] << 2) + 8);
-            func_0012E890(a0, b);
+            _Bfree(a0, b);
             b = p;
         }
         b[n + 5] = carry;

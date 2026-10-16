@@ -6,7 +6,7 @@ extern int D_00139E04;
 extern char D_00136400[];
 
 int func_0012821C(int a0, int a1, int a2);
-void func_00102CF8(int a0, int a1, int a2, int a3, int a4, int a5);
+void LoaderSysPrintf(int a0, int a1, int a2, int a3, int a4, int a5);
 
 struct Rec00101B88 {
     int f0;         /* 0x00 */
@@ -50,7 +50,7 @@ int func_00101B88(int a0, int a1, int *a2) {
         p++;
         dst++;
     }
-    func_00102CF8((int)D_00136400, a1, a2[2], (int)dst, a2[3], s1);
+    LoaderSysPrintf((int)D_00136400, a1, a2[2], (int)dst, a2[3], s1);
     a2[1] = n;
     D_00139E04 = a1;
     return 0;

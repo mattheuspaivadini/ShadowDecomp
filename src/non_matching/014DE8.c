@@ -13,7 +13,7 @@ struct S014DE8 {
 unsigned int func_001148B8(unsigned int x);
 int  func_001147C0(unsigned int *p);
 
-void func_00114DE8(struct S014DE8 *p, unsigned int a1, int a2) {
+void sceDmaRecvN(struct S014DE8 *p, unsigned int a1, int a2) {
     unsigned int r;
 
     r = func_001148B8(a1);

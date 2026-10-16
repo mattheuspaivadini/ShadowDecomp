@@ -2,7 +2,7 @@
  * session9 R1; residual class not auto-classified
  * The original .s stays in the build (asm/cod/02BF48.s); this C
  * draft (Session 9) is kept for the record. */
-char *func_0012BF48(unsigned char *tbl, char *s) {
+char *__sccl(unsigned char *tbl, char *s) {
     char c;
     char prev;
     char end;
@@ -52,3 +52,4 @@ char *func_0012BF48(unsigned char *tbl, char *s) {
         prev = c;
     }
 }
+/* func_0012BF48 */

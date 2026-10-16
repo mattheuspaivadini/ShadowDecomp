@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00107150, 0x10
+nonmatching RFU087_PollEvnetFlag, 0x10
 
-glabel func_00107150
+glabel RFU087_PollEvnetFlag
     /* 7150 00107150 57000324 */  addiu      $v1, $zero, 0x57
     /* 7154 00107154 0C000000 */  syscall    0 /* handwritten instruction */
     /* 7158 00107158 0800E003 */  jr         $ra
     /* 715C 0010715C 00000000 */   nop
-endlabel func_00107150
+endlabel RFU087_PollEvnetFlag

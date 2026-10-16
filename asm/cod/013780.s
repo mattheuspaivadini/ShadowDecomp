@@ -58,7 +58,7 @@ glabel sceGsPutDrawEnv
 .align 2
   .L00113820:
     /* 13820 00113820 1400043C */  lui        $a0, %hi(D_001382E8)
-    /* 13824 00113824 BE23040C */  jal        func_00108EF8
+    /* 13824 00113824 BE23040C */  jal        scePrintf
     /* 13828 00113828 E8828424 */   addiu     $a0, $a0, %lo(D_001382E8)
     /* 1382C 0011382C 0B000010 */  b          .L0011385C
     /* 13830 00113830 FFFF0224 */   addiu     $v0, $zero, -0x1

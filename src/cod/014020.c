@@ -18,7 +18,7 @@
  * Build a small transfer list of 64-bit words (DMA/GS packet fragment) and
  * fence with `sync`. Constant roles UNCONFIRMED.
  */
-int func_00114020(long long *p, short a1) {
+int sceGsSetDefAlphaEnv(long long *p, short a1) {
     p[1] = 0x42;
     p[0] = 0x44;
     p[3] = 0x49;

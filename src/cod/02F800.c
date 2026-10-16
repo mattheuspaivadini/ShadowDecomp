@@ -22,10 +22,10 @@
  * UNCONFIRMED (int assumed, only its value is forwarded).
  * MATCH GUESS: cc=296
  */
-int func_0012D6D8(unsigned char *p);
+int fflush(unsigned char *p);
 
 int func_0012F800(unsigned char *p) {
     if ((*(unsigned short *)(p + 0xC) & 9) == 9)
-        return func_0012D6D8(p);
+        return fflush(p);
     return 0;
 }

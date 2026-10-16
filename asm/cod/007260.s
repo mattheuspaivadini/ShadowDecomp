@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00107260, 0x10
+nonmatching FlushCache, 0x10
 
-glabel func_00107260
+glabel FlushCache
     /* 7260 00107260 64000324 */  addiu      $v1, $zero, 0x64
     /* 7264 00107264 0C000000 */  syscall    0 /* handwritten instruction */
     /* 7268 00107268 0800E003 */  jr         $ra
     /* 726C 0010726C 00000000 */   nop
-endlabel func_00107260
+endlabel FlushCache

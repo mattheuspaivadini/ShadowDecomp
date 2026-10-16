@@ -14,7 +14,7 @@ glabel func_0011C7D8
     /* 1C7D8 0011C7D8 90FFBD27 */  addiu      $sp, $sp, -0x70
     /* 1C7DC 0011C7DC 98080624 */  addiu      $a2, $zero, 0x898
     /* 1C7E0 0011C7E0 4000B4FF */  sd         $s4, 0x40($sp)
-    /* 1C7E4 0011C7E4 1300023C */  lui        $v0, %hi(D_00135638)
+    /* 1C7E4 0011C7E4 1300023C */  lui        $v0, %hi(gSceMc2SysInfo)
     /* 1C7E8 0011C7E8 2DA08000 */  daddu      $s4, $a0, $zero
     /* 1C7EC 0011C7EC 2000B2FF */  sd         $s2, 0x20($sp)
     /* 1C7F0 0011C7F0 84010424 */  addiu      $a0, $zero, 0x184
@@ -26,7 +26,7 @@ glabel func_0011C7D8
     /* 1C808 0011C808 6000BFFF */  sd         $ra, 0x60($sp)
     /* 1C80C 0011C80C 1600033C */  lui        $v1, %hi(D_0015DF48)
     /* 1C810 0011C810 5000B5FF */  sd         $s5, 0x50($sp)
-    /* 1C814 0011C814 38564224 */  addiu      $v0, $v0, %lo(D_00135638)
+    /* 1C814 0011C814 38564224 */  addiu      $v0, $v0, %lo(gSceMc2SysInfo)
     /* 1C818 0011C818 0000B0FF */  sd         $s0, 0x0($sp)
     /* 1C81C 0011C81C 48DF6324 */  addiu      $v1, $v1, %lo(D_0015DF48)
     /* 1C820 0011C820 000040AE */  sw         $zero, 0x0($s2)

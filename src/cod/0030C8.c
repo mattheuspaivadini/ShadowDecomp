@@ -3,8 +3,8 @@
  * The parameter count follows the ps2sdk prototype (UNCONFIRMED for
  * this build); the code is a pure pass-through, so the count does not
  * change the emitted bytes. */
-int sceStdioMkdir(int a0, int a1);
+int sceMkdir(int a0, int a1);
 
-int func_001030C8(int a0, int a1) {
-    return sceStdioMkdir(a0, a1);
+int LoaderSysMkdir(int a0, int a1) {
+    return sceMkdir(a0, a1);
 }

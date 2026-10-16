@@ -7,8 +7,8 @@ extern int D_00147580[];
 extern unsigned char D_00147380[];
 extern unsigned char D_001475A8[];
 
-int func_001097A0(int a0, int a1, int a2);
-int SceSifrpcCall(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
+int sceSifBindRpc(int a0, int a1, int a2);
+int sceSifCallRpc(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
                   int a7, int a8);
 
 int func_0010E238(void) {
@@ -18,11 +18,11 @@ int func_0010E238(void) {
     if (D_00132330 >= 0)
         return 0;
     for (;;) {
-        if (func_001097A0((int)D_00147580, 0x80000006, 0) < 0)
+        if (sceSifBindRpc((int)D_00147580, 0x80000006, 0) < 0)
             return -1;
         if (D_00147580[9] != 0) {
             D_00132330 = 0;
-            r = SceSifrpcCall((int)D_00147580, 0xFF, 0, 0, 0,
+            r = sceSifCallRpc((int)D_00147580, 0xFF, 0, 0, 0,
                               (int)D_00147380, 4, 0, 0);
             if (r < 0)
                 return 0xFFFEFFFF;

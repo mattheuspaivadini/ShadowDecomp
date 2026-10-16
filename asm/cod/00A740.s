@@ -25,7 +25,7 @@ glabel func_0010A740
     /* A76C 0010A76C 0400A3AF */  sw         $v1, 0x4($sp)
     /* A770 0010A770 1400A2AF */  sw         $v0, 0x14($sp)
     /* A774 0010A774 2D20A003 */  daddu      $a0, $sp, $zero
-    /* A778 0010A778 F81B040C */  jal        func_00106FE0
+    /* A778 0010A778 F81B040C */  jal        CreateSema
     /* A77C 0010A77C 0800A3AF */   sw        $v1, 0x8($sp)
     /* A780 0010A780 1C2302AE */  sw         $v0, %lo(D_0013231C)($s0)
     /* A784 0010A784 3000BFDF */  ld         $ra, 0x30($sp)

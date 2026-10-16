@@ -10,7 +10,7 @@
  */
 int func_0011B670(int a0, int a1, int a2);
 
-int func_0011B740(int a0, int a1) {
+int sceMc2Sync(int a0, int a1) {
     int r = func_0011B670(0, a0, a1);
 
     return r;

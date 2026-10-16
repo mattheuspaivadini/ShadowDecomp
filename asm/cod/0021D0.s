@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_001021D0, 0xC
+nonmatching setCop0Epc, 0xC
 
-glabel func_001021D0
+glabel setCop0Epc
     /* 21D0 001021D0 00708440 */  mtc0       $a0, $14 /* handwritten instruction */
     /* 21D4 001021D4 0800E003 */  jr         $ra
     /* 21D8 001021D8 00000000 */   nop
-endlabel func_001021D0
+endlabel setCop0Epc
     /* 21DC 001021DC 00000000 */  nop

@@ -6,13 +6,13 @@ struct S133970B {
     unsigned long long word00;      /* 0x00 */
 };
 
-void *func_00113520(void);
+void *sceGsGetGParam(void);
 
-short func_001145F0(short a0, short a1, short a2) {
+short sceGszbufaddr(short a0, short a1, short a2) {
     int h = a1;
     int m = a0;
     int w = a2;
-    struct S133970B *p = (struct S133970B *)func_00113520();
+    struct S133970B *p = (struct S133970B *)sceGsGetGParam();
     int t;
     int u;
     int prod;
@@ -34,3 +34,4 @@ short func_001145F0(short a0, short a1, short a2) {
         return (short)(prod * 2);
     return (short)prod;
 }
+/* func_001145F0 */

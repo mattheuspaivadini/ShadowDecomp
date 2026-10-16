@@ -11,7 +11,7 @@ struct B0154F8 {
 
 extern char D_0014B598[];   /* non-small: lui/addiu %lo, records of 0x334 */
 
-int func_001154F8(int index, unsigned char *data, int sub) {
+int scePad2GetButtonInfo(int index, unsigned char *data, int sub) {
     struct B0154F8 t;
 
     t = *(struct B0154F8 *)(D_0014B598 + index * 0x334 + sub * 16 + 0x14);

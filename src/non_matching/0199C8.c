@@ -26,11 +26,11 @@
  */
 extern int D_00135618[];    /* .data 0x00135618: array => lui/%lo, not %gp_rel */
 
-int func_00112C78(int index);
-int func_00111C50(int index);
+int sceSifRemoveCmdHandler(int index);
+int sceSifRemoveRebootNotifyHandler(int index);
 
-int func_001199C8(void) {
+int sceSifMExitRpc(void) {
     D_00135618[0] = 0;
-    func_00112C78((int)0x80000018);
-    return func_00111C50((int)0x80000014);
+    sceSifRemoveCmdHandler((int)0x80000018);
+    return sceSifRemoveRebootNotifyHandler((int)0x80000014);
 }

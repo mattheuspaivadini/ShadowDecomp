@@ -2,15 +2,15 @@
  * func_0010FB20(); then func_00110D48() *with no argument setup* (the asm has
  * a bare `jal` - the callee takes no arguments); if the first result is
  * non-zero, func_0010FB70(); the second result is returned. */
-int func_0010FB20(void);
-int func_00110D48(void);
-int func_0010FB70(void);
+int DIntr(void);
+int iAllocTimerCounter(void);
+int EIntr(void);
 
-int func_00110DB8(void) {
-    int a = func_0010FB20();
-    int b = func_00110D48();
+int AllocTimerCounter(void) {
+    int a = DIntr();
+    int b = iAllocTimerCounter();
 
     if (a != 0)
-        func_0010FB70();
+        EIntr();
     return b;
 }

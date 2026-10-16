@@ -9,9 +9,9 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00107A08, 0xC8
+nonmatching DelayThread, 0xC8
 
-glabel func_00107A08
+glabel DelayThread
     /* 7A08 00107A08 B0FFBD27 */  addiu      $sp, $sp, -0x50
     /* 7A0C 00107A0C 3000B1FF */  sd         $s1, 0x30($sp)
     /* 7A10 00107A10 4000BFFF */  sd         $ra, 0x40($sp)
@@ -32,7 +32,7 @@ glabel func_00107A08
     /* 7A44 00107A44 0400A3AF */  sw         $v1, 0x4($sp)
     /* 7A48 00107A48 1400A2AF */  sw         $v0, 0x14($sp)
     /* 7A4C 00107A4C 2D20A003 */  daddu      $a0, $sp, $zero
-    /* 7A50 00107A50 F81B040C */  jal        func_00106FE0
+    /* 7A50 00107A50 F81B040C */  jal        CreateSema
     /* 7A54 00107A54 0800A0AF */   sw        $zero, 0x8($sp)
     /* 7A58 00107A58 2D804000 */  daddu      $s0, $v0, $zero
     /* 7A5C 00107A5C 04000106 */  bgez       $s0, .L00107A70
@@ -42,25 +42,25 @@ glabel func_00107A08
     /* 7A6C 00107A6C 03804234 */   ori       $v0, $v0, (0x80008003 & 0xFFFF)
 .align 2
   .L00107A70:
-    /* 7A70 00107A70 8045040C */  jal        func_00111600
+    /* 7A70 00107A70 8045040C */  jal        TimerUSec2BusClock
     /* 7A74 00107A74 2D200000 */   daddu     $a0, $zero, $zero
     /* 7A78 00107A78 1000053C */  lui        $a1, %hi(func_00107C48)
     /* 7A7C 00107A7C 2D204000 */  daddu      $a0, $v0, $zero
     /* 7A80 00107A80 487CA524 */  addiu      $a1, $a1, %lo(func_00107C48)
-    /* 7A84 00107A84 EC45040C */  jal        func_001117B0
+    /* 7A84 00107A84 EC45040C */  jal        SetTimerAlarm
     /* 7A88 00107A88 2D300002 */   daddu     $a2, $s0, $zero
     /* 7A8C 00107A8C 2D884000 */  daddu      $s1, $v0, $zero
     /* 7A90 00107A90 05002106 */  bgez       $s1, .L00107AA8
     /* 7A94 00107A94 00000000 */   nop
-    /* 7A98 00107A98 FC1B040C */  jal        func_00106FF0
+    /* 7A98 00107A98 FC1B040C */  jal        DeleteSema
     /* 7A9C 00107A9C 2D200002 */   daddu     $a0, $s0, $zero
     /* 7AA0 00107AA0 06000010 */  b          .L00107ABC
     /* 7AA4 00107AA4 2D102002 */   daddu     $v0, $s1, $zero
 .align 2
   .L00107AA8:
-    /* 7AA8 00107AA8 081C040C */  jal        func_00107020
+    /* 7AA8 00107AA8 081C040C */  jal        WaitSema
     /* 7AAC 00107AAC 2D200002 */   daddu     $a0, $s0, $zero
-    /* 7AB0 00107AB0 FC1B040C */  jal        func_00106FF0
+    /* 7AB0 00107AB0 FC1B040C */  jal        DeleteSema
     /* 7AB4 00107AB4 2D200002 */   daddu     $a0, $s0, $zero
     /* 7AB8 00107AB8 2D100000 */  daddu      $v0, $zero, $zero
 .align 2
@@ -70,4 +70,4 @@ glabel func_00107A08
     /* 7AC4 00107AC4 2000B0DF */  ld         $s0, 0x20($sp)
     /* 7AC8 00107AC8 0800E003 */  jr         $ra
     /* 7ACC 00107ACC 5000BD27 */   addiu     $sp, $sp, 0x50
-endlabel func_00107A08
+endlabel DelayThread

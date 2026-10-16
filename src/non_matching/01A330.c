@@ -8,33 +8,33 @@ extern int D_00151E20[];   /* handles +0x0 / +0x4 / +0x8 (lui/%lo) */
 extern int D_00151E2C[];
 extern char D_00138C68[];
 
-int func_0011B740(int a0, int a1);
-int func_00106E30(int a0);
-void func_00108EF8(const char *msg);
-void func_00106DF0(int a0);
-void func_00106FF0(int a0);
-void func_00121118(void);
+int sceMc2Sync(int a0, int a1);
+int TerminateThread(int a0);
+void scePrintf(const char *msg);
+void DeleteThread(int a0);
+void DeleteSema(int a0);
+void _sceMcCoreEnd(void);
 
-int func_0011A330(void) {
+int sceMc2End(void) {
     int a;
 
     if (D_00135630[0] == 0)
         return 0x81018001;
     if (D_00151904[0] != 0)
-        func_0011B740(0, 0);
+        sceMc2Sync(0, 0);
     a = D_00151E20[0];
     if (a >= 0) {
-        if (func_00106E30(a) < 0)
-            func_00108EF8(D_00138C68);
-        func_00106DF0(a);
+        if (TerminateThread(a) < 0)
+            scePrintf(D_00138C68);
+        DeleteThread(a);
     }
     if (D_00151E20[1] >= 0)
-        func_00106FF0(D_00151E20[1]);
+        DeleteSema(D_00151E20[1]);
     if (D_00151E20[2] >= 0)
-        func_00106FF0(D_00151E20[2]);
+        DeleteSema(D_00151E20[2]);
     if (D_00151E2C[0] >= 0)
-        func_00106FF0(D_00151E2C[0]);
-    func_00121118();
+        DeleteSema(D_00151E2C[0]);
+    _sceMcCoreEnd();
     D_00135630[0] = 0;
     return 0;
 }

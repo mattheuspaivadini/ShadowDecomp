@@ -20,7 +20,7 @@ glabel start
     /* 3B58 00103B58 0000B0FF */  sd         $s0, 0x0($sp)
     /* 3B5C 00103B5C 1800B3FF */  sd         $s3, 0x18($sp)
     /* 3B60 00103B60 2800BFFF */  sd         $ra, 0x28($sp)
-    /* 3B64 00103B64 0294040C */  jal        func_00125008
+    /* 3B64 00103B64 0294040C */  jal        __main
     /* 3B68 00103B68 2DA0A000 */   daddu     $s4, $a1, $zero
     /* 3B6C 00103B6C 1300043C */  lui        $a0, %hi(D_00136D88)
     /* 3B70 00103B70 2D284002 */  daddu      $a1, $s2, $zero
@@ -59,13 +59,13 @@ glabel start
     /* 3BDC 00103BDC 90CF40A0 */  sb         $zero, %lo(D_0013CF90)($v0)
 .align 2
   .L00103BE0:
-    /* 3BE0 00103BE0 B41B040C */  jal        func_00106ED0
+    /* 3BE0 00103BE0 B41B040C */  jal        GetThreadId
     /* 3BE4 00103BE4 00000000 */   nop
-    /* 3BE8 00103BE8 2619040C */  jal        func_00106498
-    /* 3BEC 00103BEC 148382AF */   sw        $v0, %gp_rel(D_0013A084)($gp)
+    /* 3BE8 00103BE8 2619040C */  jal        InitDisp
+    /* 3BEC 00103BEC 148382AF */   sw        $v0, %gp_rel(loaderThreadId)($gp)
     /* 3BF0 00103BF0 FF07053C */  lui        $a1, (0x7FFFF00 >> 16)
     /* 3BF4 00103BF4 0002043C */  lui        $a0, (0x2000000 >> 16)
-    /* 3BF8 00103BF8 2210040C */  jal        func_00104088
+    /* 3BF8 00103BF8 2210040C */  jal        initmemprintf
     /* 3BFC 00103BFC 00FFA534 */   ori       $a1, $a1, (0x7FFFF00 & 0xFFFF)
     /* 3C00 00103C00 EC0C040C */  jal        func_001033B0
     /* 3C04 00103C04 00000000 */   nop
@@ -81,25 +81,25 @@ glabel start
     /* 3C2C 00103C2C F0FF0424 */  addiu      $a0, $zero, -0x10
     /* 3C30 00103C30 0F004224 */  addiu      $v0, $v0, 0xF
     /* 3C34 00103C34 24104400 */  and        $v0, $v0, $a0
-    /* 3C38 00103C38 3008040C */  jal        func_001020C0
+    /* 3C38 00103C38 3008040C */  jal        InitException
     /* 3C3C 00103C3C A08282AF */   sw        $v0, %gp_rel(D_0013A010)($gp)
-    /* 3C40 00103C40 720A040C */  jal        func_001029C8
+    /* 3C40 00103C40 720A040C */  jal        LoaderSysInitExternalIntcHandlerList
     /* 3C44 00103C44 00000000 */   nop
-    /* 3C48 00103C48 900A040C */  jal        func_00102A40
+    /* 3C48 00103C48 900A040C */  jal        LoaderSysInitExternalThreadList
     /* 3C4C 00103C4C 00000000 */   nop
-    /* 3C50 00103C50 800A040C */  jal        func_00102A00
+    /* 3C50 00103C50 800A040C */  jal        LoaderSysInitExternalSemaList
     /* 3C54 00103C54 00000000 */   nop
-    /* 3C58 00103C58 160B040C */  jal        func_00102C58
+    /* 3C58 00103C58 160B040C */  jal        LoaderSysInitExternalIopMemoryList
     /* 3C5C 00103C5C 00000000 */   nop
-    /* 3C60 00103C60 1483848F */  lw         $a0, %gp_rel(D_0013A084)($gp)
-    /* 3C64 00103C64 9C1B040C */  jal        func_00106E70
+    /* 3C60 00103C60 1483848F */  lw         $a0, %gp_rel(loaderThreadId)($gp)
+    /* 3C64 00103C64 9C1B040C */  jal        ChangeThreadPriority
     /* 3C68 00103C68 01000524 */   addiu     $a1, $zero, 0x1
     /* 3C6C 00103C6C 1300053C */  lui        $a1, %hi(D_00136DB8)
     /* 3C70 00103C70 B86DA524 */  addiu      $a1, $a1, %lo(D_00136DB8)
-    /* 3C74 00103C74 6416040C */  jal        func_00105990
+    /* 3C74 00103C74 6416040C */  jal        PutStringS
     /* 3C78 00103C78 00FF0424 */   addiu     $a0, $zero, -0x100
-    /* 3C7C 00103C7C 700E040C */  jal        func_001039C0
-    /* 3C80 00103C80 10839DAF */   sw        $sp, %gp_rel(D_0013A080)($gp)
+    /* 3C7C 00103C7C 700E040C */  jal        loaderLoop
+    /* 3C80 00103C80 10839DAF */   sw        $sp, %gp_rel(spReg)($gp)
     /* 3C84 00103C84 0000B0DF */  ld         $s0, 0x0($sp)
     /* 3C88 00103C88 2D100000 */  daddu      $v0, $zero, $zero
     /* 3C8C 00103C8C 0800B1DF */  ld         $s1, 0x8($sp)

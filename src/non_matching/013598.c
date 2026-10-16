@@ -21,9 +21,9 @@ struct D13598 {
     unsigned long long q78;   /* 0x78 id 0x47        */
 };
 
-extern int func_001145F0(short a0, short a1, short a2);
+extern int sceGszbufaddr(short a0, short a1, short a2);
 
-int func_00113598(struct D13598 *p, short a1, short a2, short a3, short a4,
+int sceGsSetDefDrawEnv(struct D13598 *p, short a1, short a2, short a3, short a4,
                   short a5) {
     unsigned long long fbw;
     unsigned long long v;
@@ -33,11 +33,11 @@ int func_00113598(struct D13598 *p, short a1, short a2, short a3, short a4,
     p->q00 = ((fbw & 0x3F) << 16) | ((unsigned long long)(a1 & 0xF) << 24);
     p->q18 = 0x4E;
     if (a4 == 0)
-        v = ((unsigned long long)(int)func_001145F0(a1, a2, a3)
+        v = ((unsigned long long)(int)sceGszbufaddr(a1, a2, a3)
              | ((unsigned long long)(a5 & 0xF) << 24)
              | 0x100000000ULL);
     else
-        v = ((unsigned long long)(int)func_001145F0(a1, a2, a3)
+        v = ((unsigned long long)(int)sceGszbufaddr(a1, a2, a3)
              | ((unsigned long long)(a5 & 0xF) << 24));
     p->q10 = v;
     p->q20 = (((0x800 - (long long)(a2 >> 1)) << 4)
@@ -62,3 +62,4 @@ int func_00113598(struct D13598 *p, short a1, short a2, short a3, short a4,
     __asm__ __volatile__("sync" ::: "memory");
     return 8;
 }
+/* func_00113598 */

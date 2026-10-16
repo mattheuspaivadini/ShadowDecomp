@@ -3,6 +3,6 @@
  *   jr   $ra
  *    addiu $v0, $zero, -1
  */
-int func_00111FB8(void) {
+int close(void) {
     return -1;
 }

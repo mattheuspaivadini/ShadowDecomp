@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00107280, 0x10
+nonmatching iGetCop0, 0x10
 
-glabel func_00107280
+glabel iGetCop0
     /* 7280 00107280 99FF0324 */  addiu      $v1, $zero, -0x67
     /* 7284 00107284 0C000000 */  syscall    0 /* handwritten instruction */
     /* 7288 00107288 0800E003 */  jr         $ra
     /* 728C 0010728C 00000000 */   nop
-endlabel func_00107280
+endlabel iGetCop0

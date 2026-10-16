@@ -32,7 +32,7 @@ extern char  D_001385B8[];   /* .rodata 0x001385B8: unknown size => absolute */
 
 void func_00128FB0(void *dst, void *src);
 
-void func_00115888(unsigned int index, void *dst) {
+void scePad2StateIntToStr(unsigned int index, void *dst) {
     if (index < 4) {
         func_00128FB0(dst, D_001339F8[index]);
         return;

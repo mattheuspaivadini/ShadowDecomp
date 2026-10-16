@@ -11,40 +11,40 @@
  * stored); the others are addresses (declared as arrays so they are absolute,
  * not small data).
  */
-extern int D_00133A68[];
-extern int D_00133A6C[];
-extern char D_00133AC0[];
-extern char D_00133B40[];
-extern char D_00134C10[];
-extern char D_00134C40[];
-extern char D_00135080[];
-extern char D_001355C0[];
+extern int _sceCd_ncmd_semid[];
+extern int _sceCd_scmd_semid[];
+extern char _sceCd_ncmdrdata[];
+extern char _sceCd_ncmdsdata[];
+extern char _sceCd_cd_ncmd[];
+extern char _sceCd_scmdrdata[];
+extern char _sceCd_scmdsdata[];
+extern char _sceCd_cd_scmd[];
 
-int func_00117A00(int id, int *out) {
+int _sceCdSC(int id, int *out) {
     switch (id) {
     case 0x8001:
-        *out = D_00133A68[0];
+        *out = _sceCd_ncmd_semid[0];
         break;
     case 0x8003:
-        *out = (int)D_00133AC0;
+        *out = (int)_sceCd_ncmdrdata;
         break;
     case 0x8002:
-        *out = (int)D_00133B40;
+        *out = (int)_sceCd_ncmdsdata;
         break;
     case 0x8004:
-        *out = (int)D_00134C10;
+        *out = (int)_sceCd_cd_ncmd;
         break;
     case 0x8011:
-        *out = D_00133A6C[0];
+        *out = _sceCd_scmd_semid[0];
         break;
     case 0x8013:
-        *out = (int)D_00134C40;
+        *out = (int)_sceCd_scmdrdata;
         break;
     case 0x8012:
-        *out = (int)D_00135080;
+        *out = (int)_sceCd_scmdsdata;
         break;
     case 0x8014:
-        *out = (int)D_001355C0;
+        *out = (int)_sceCd_cd_scmd;
         break;
     default:
         *out = 0;

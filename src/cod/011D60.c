@@ -23,22 +23,22 @@
 
 #define EE_INTC_I_STAT 0x1000F000u   /* EE INTC status (write-1-to-clear) */
 
-int  func_0010FB20(void);
-void func_0010FB70(void);
+int  DIntr(void);
+void EIntr(void);
 
-void func_00111D60(void) {
+void VSync(void) {
     int g;
 
-    g = func_0010FB20();
+    g = DIntr();
     HWREG(EE_INTC_I_STAT) = 4;
     __asm__ __volatile__("sync" ::: "memory");
     if (g != 0)
-        func_0010FB70();
+        EIntr();
     while ((HWREG(EE_INTC_I_STAT) & 4) == 0)
         ;
-    g = func_0010FB20();
+    g = DIntr();
     HWREG(EE_INTC_I_STAT) = 4;
     __asm__ __volatile__("sync" ::: "memory");
     if (g != 0)
-        func_0010FB70();
+        EIntr();
 }

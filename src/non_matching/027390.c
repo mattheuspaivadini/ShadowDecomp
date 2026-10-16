@@ -7,7 +7,7 @@ union F32_27390 {
     float f;
 };
 
-float func_00127390(int *p, int a1, unsigned int bits) {
+float __pack_f(int *p, int a1, unsigned int bits) {
     int type = p[0];
     int mant = p[3];
     int sign = p[1];
@@ -43,3 +43,4 @@ float func_00127390(int *p, int a1, unsigned int bits) {
     u.w = (u.w & 0x7FFFFFFF) | ((unsigned int)sign << 31);
     return u.f;
 }
+/* func_00127390 */

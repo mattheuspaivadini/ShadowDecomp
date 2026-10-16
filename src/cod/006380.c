@@ -5,7 +5,7 @@
  */
 #include "symbols.h"
 
-void func_00106380(int a, int b) {
+void SetLocate(int a, int b) {
     D_0013A16C = a;
     D_0013A170 = b;
 }

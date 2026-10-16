@@ -3,6 +3,6 @@
  *   jr   $ra
  *    addiu $v0, $zero, 2
  */
-int func_00102FE0(void) {
+int LoaderSysCheckCDBootMode(void) {
     return 2;
 }

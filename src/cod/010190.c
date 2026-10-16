@@ -7,13 +7,13 @@
  * MATCH GUESS: cc=29 (0x010118/0x0104xx are 2.9 tail-call shapes) */
 extern int func_00110000(int a0, int a1, int a2);
 extern void func_00110118(void);
-extern void func_00106C20(int a0, int a1, int a2);
-extern int D_001326B0[];   /* .data 0x001326B0: lui/%lo (non-small) */
+extern void _LoadExecPS2(int a0, int a1, int a2);
+extern int _kExecArg[];   /* .data 0x001326B0: lui/%lo (non-small) */
 
-void func_00110190(int a0, int a1, int a2) {
+void LoadExecPS2(int a0, int a1, int a2) {
     int r;
 
     r = func_00110000(a0, a1, a2);
     func_00110118();
-    func_00106C20(r, a1, D_001326B0[0] + 4);
+    _LoadExecPS2(r, a1, _kExecArg[0] + 4);
 }

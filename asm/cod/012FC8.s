@@ -9,9 +9,9 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00112FC8, 0xAC
+nonmatching sceSifWriteBackDCache, 0xAC
 
-glabel func_00112FC8
+glabel sceSifWriteBackDCache
     /* 12FC8 00112FC8 FFFF193C */  lui        $t9, (0xFFFFFFC0 >> 16)
     /* 12FCC 00112FCC C0FF3937 */  ori        $t9, $t9, (0xFFFFFFC0 & 0xFFFF)
     /* 12FD0 00112FD0 2600A018 */  blez       $a1, .L0011306C
@@ -63,4 +63,4 @@ glabel func_00112FC8
   .L0011306C:
     /* 1306C 0011306C 0800E003 */  jr         $ra
     /* 13070 00113070 00000000 */   nop
-endlabel func_00112FC8
+endlabel sceSifWriteBackDCache

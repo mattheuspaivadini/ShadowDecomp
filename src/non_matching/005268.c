@@ -21,11 +21,11 @@
  * MATCH GUESS: cc=296 (0x0050B8/02C048 print family; both jal delay slots filled)
  */
 void func_0012C048(void *ctx, int fmt, void *ap);
-void func_001050B8(char *buf);
+void usbSerialSysPutString(char *buf);
 
-void func_00105268(int fmt, ...) {
+void usbSerialSysPrintf(int fmt, ...) {
     char buf[0x100];
 
     func_0012C048(buf, fmt, __builtin_saveregs());
-    func_001050B8(buf);
+    usbSerialSysPutString(buf);
 }

@@ -15,7 +15,7 @@ int func_00115710(int index);
 void func_001155D8(int index);
 int sceDbcReceiveData(int index, int tag, int *size, unsigned char *data);
 
-int func_001153B8(int index) {
+int scePad2GetState(int index) {
     struct S0153B8 *rec;
     int *p;
     long long tag;

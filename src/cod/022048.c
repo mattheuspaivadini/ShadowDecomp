@@ -23,11 +23,11 @@ struct R022048 {
 
 extern struct R022048 D_00163CC8[];   /* .bss 0x00163CC8 */
 
-int  func_00122018(unsigned int i);
+int  _sceMcCoreCheckSocket(unsigned int i);
 int  sceDbcDeleteSocket(int id);
 
-int func_00122048(int index) {
-    if (func_00122018(index) == 0)
+int _sceMcCoreDeleteSocket(int index) {
+    if (_sceMcCoreCheckSocket(index) == 0)
         return 0;
     sceDbcDeleteSocket(D_00163CC8[index].field4);
     D_00163CC8[index].field0 = 0;

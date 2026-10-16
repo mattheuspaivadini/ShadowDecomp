@@ -18,7 +18,7 @@
  */
 #include "symbols.h"
 
-unsigned int func_00114C30(unsigned int value) {
+unsigned int sceDmaPutStallAddr(unsigned int value) {
     unsigned int old = HWREG(EE_D_STADR);
     HWREG(EE_D_STADR) = value;
     return old;

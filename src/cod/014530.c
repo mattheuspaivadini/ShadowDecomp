@@ -17,10 +17,10 @@ struct GSDISPENV {                 /* 0x28 bytes */
     unsigned long long f20;        /* 0x20  EXTDATA/BGCOLOR */
 };
 
-void *func_00113520(void);
+void *sceGsGetGParam(void);
 
-void func_00114530(struct GSDISPENV *env) {
-    struct S133970 *p = (struct S133970 *)func_00113520();
+void sceGsPutDispEnv(struct GSDISPENV *env) {
+    struct S133970 *p = (struct S133970 *)sceGsGetGParam();
 
     if (p->f06 == 1) {
         *(volatile unsigned long long *)0x12000000u = env->f00;

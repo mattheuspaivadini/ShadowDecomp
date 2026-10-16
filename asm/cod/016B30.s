@@ -24,7 +24,7 @@ glabel sceDbcReceiveData
     /* 16B58 00116B58 C00D848E */  lw         $a0, %lo(D_00150DC0)($s4)
     /* 16B5C 00116B5C 3000B2FF */  sd         $s2, 0x30($sp)
     /* 16B60 00116B60 7000BFFF */  sd         $ra, 0x70($sp)
-    /* 16B64 00116B64 081C040C */  jal        func_00107020
+    /* 16B64 00116B64 081C040C */  jal        WaitSema
     /* 16B68 00116B68 2D80A000 */   daddu     $s0, $a1, $zero
     /* 16B6C 00116B6C 1500033C */  lui        $v1, %hi(D_0014EA00)
     /* 16B70 00116B70 1500043C */  lui        $a0, %hi(D_0014E900)
@@ -42,14 +42,14 @@ glabel sceDbcReceiveData
     /* 16BA0 00116BA0 2D484002 */  daddu      $a5, $s2, $zero
     /* 16BA4 00116BA4 080042AE */  sw         $v0, 0x8($s2)
     /* 16BA8 00116BA8 90000A24 */  addiu      $a6, $zero, 0x90
-    /* 16BAC 00116BAC 6026040C */  jal        SceSifrpcCall
+    /* 16BAC 00116BAC 6026040C */  jal        sceSifCallRpc
     /* 16BB0 00116BB0 2D580000 */   daddu     $a7, $zero, $zero
     /* 16BB4 00116BB4 08004304 */  bgezl      $v0, .L00116BD8
     /* 16BB8 00116BB8 8C00508E */   lw        $s0, 0x8C($s2)
     /* 16BBC 00116BBC 1400043C */  lui        $a0, %hi(D_00138848)
     /* 16BC0 00116BC0 165B040C */  jal        func_00116C58
     /* 16BC4 00116BC4 48888424 */   addiu     $a0, $a0, %lo(D_00138848)
-    /* 16BC8 00116BC8 001C040C */  jal        func_00107000
+    /* 16BC8 00116BC8 001C040C */  jal        SignalSema
     /* 16BCC 00116BCC C00D848E */   lw        $a0, %lo(D_00150DC0)($s4)
     /* 16BD0 00116BD0 17000010 */  b          .L00116C30
     /* 16BD4 00116BD4 2D100000 */   daddu     $v0, $zero, $zero
@@ -80,7 +80,7 @@ glabel sceDbcReceiveData
     /* 16C20 00116C20 8C00508E */  lw         $s0, 0x8C($s2)
 .align 2
   .L00116C24:
-    /* 16C24 00116C24 001C040C */  jal        func_00107000
+    /* 16C24 00116C24 001C040C */  jal        SignalSema
     /* 16C28 00116C28 C00D848E */   lw        $a0, %lo(D_00150DC0)($s4)
     /* 16C2C 00116C2C 2D100002 */  daddu      $v0, $s0, $zero
 .align 2

@@ -2,12 +2,12 @@
  * session9 R2 waveA; residual class not auto-classified
  * The original .s stays in the build (asm/cod/024B90.s); this C
  * draft (Session 9) is kept for the record. */
-long long func_001257B8(int x);
-long long func_001253A0(long long a, long long b);
-long long func_001252E0(long long a, long long b);
-float func_001258A0(long long a);
+long long litodp(int x);
+long long dpmul(long long a, long long b);
+long long dpadd(long long a, long long b);
+float dptofp(long long a);
 
-float func_00124B90(long long x) {
+float __floatdisf(long long x) {
     long long a;
     long long b;
     long long lo;
@@ -15,12 +15,13 @@ float func_00124B90(long long x) {
     if ((unsigned long long)(x + 0x1FFFFFFFFFFFFFLL) > 0x3FFFFFFFFFFFFEULL
         && (x & 0x7FF) != 0)
         x |= 0x800;
-    a = func_001257B8((int)(x >> 32));
-    a = func_001253A0(a, 0x40F0000000000000LL);
-    a = func_001253A0(a, 0x40F0000000000000LL);
+    a = litodp((int)(x >> 32));
+    a = dpmul(a, 0x40F0000000000000LL);
+    a = dpmul(a, 0x40F0000000000000LL);
     lo = (long long)(int)(x & 0xFFFFFFFF);
-    b = func_001257B8((int)lo);
+    b = litodp((int)lo);
     if (lo < 0)
-        b = func_001252E0(b, 0x41F0000000000000LL);
-    return func_001258A0(func_001252E0(a, b));
+        b = dpadd(b, 0x41F0000000000000LL);
+    return dptofp(dpadd(a, b));
 }
+/* func_00124B90 */

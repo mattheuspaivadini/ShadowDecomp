@@ -18,6 +18,6 @@
 extern char D_00139FF8[];            /* .sdata 0x00139FF8, "%s" */
 int func_001285C0(char *fmt, ...);
 
-void func_00102FE8(char *a0) {
+void LoaderSysPutString(char *a0) {
     func_001285C0(D_00139FF8, a0);
 }

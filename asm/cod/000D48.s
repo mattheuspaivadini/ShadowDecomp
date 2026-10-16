@@ -25,17 +25,17 @@ glabel func_00100D48
     /* D74 00100D74 9804B7FF */  sd         $s7, 0x498($sp)
     /* D78 00100D78 A004BEFF */  sd         $fp, 0x4A0($sp)
     /* D7C 00100D7C A804BFFF */  sd         $ra, 0x4A8($sp)
-    /* D80 00100D80 3E0B040C */  jal        func_00102CF8
+    /* D80 00100D80 3E0B040C */  jal        LoaderSysPrintf
     /* D84 00100D84 48648424 */   addiu     $a0, $a0, %lo(D_00136448)
     /* D88 00100D88 5004A48F */  lw         $a0, 0x450($sp)
-    /* D8C 00100D8C 380C040C */  jal        func_001030E0
+    /* D8C 00100D8C 380C040C */  jal        LoaderSysGetstat
     /* D90 00100D90 2D28A003 */   daddu     $a1, $sp, $zero
     /* D94 00100D94 2D804000 */  daddu      $s0, $v0, $zero
     /* D98 00100D98 09000016 */  bnez       $s0, .L00100DC0
     /* D9C 00100D9C 1300053C */   lui       $a1, %hi(D_00136460)
     /* DA0 00100DA0 5004A48F */  lw         $a0, 0x450($sp)
     /* DA4 00100DA4 01000524 */  addiu      $a1, $zero, 0x1
-    /* DA8 00100DA8 020C040C */  jal        func_00103008
+    /* DA8 00100DA8 020C040C */  jal        LoaderSysFOpen
     /* DAC 00100DAC 2D300000 */   daddu     $a2, $zero, $zero
     /* DB0 00100DB0 2D804000 */  daddu      $s0, $v0, $zero
     /* DB4 00100DB4 0A000106 */  bgez       $s0, .L00100DE0
@@ -46,7 +46,7 @@ glabel func_00100D48
     /* DC0 00100DC0 5004A68F */  lw         $a2, 0x450($sp)
     /* DC4 00100DC4 6064A524 */  addiu      $a1, $a1, %lo(D_00136460)
     /* DC8 00100DC8 2D380002 */  daddu      $a3, $s0, $zero
-    /* DCC 00100DCC 5216040C */  jal        func_00105948
+    /* DCC 00100DCC 5216040C */  jal        PutString
     /* DD0 00100DD0 00FF0424 */   addiu     $a0, $zero, -0x100
     /* DD4 00100DD4 E2000010 */  b          .L00101160
     /* DD8 00100DD8 2D100000 */   daddu     $v0, $zero, $zero
@@ -72,9 +72,9 @@ glabel func_00100D48
     /* E18 00100E18 80A90300 */  sll        $s5, $v1, 6
     /* E1C 00100E1C 2D28A002 */  daddu      $a1, $s5, $zero
     /* E20 00100E20 2110B102 */  addu       $v0, $s5, $s1
-    /* E24 00100E24 1A0C040C */  jal        func_00103068
+    /* E24 00100E24 1A0C040C */  jal        LoaderSysFRead
     /* E28 00100E28 948082AF */   sw        $v0, %gp_rel(D_00139E04)($gp)
-    /* E2C 00100E2C 080C040C */  jal        func_00103020
+    /* E2C 00100E2C 080C040C */  jal        LoaderSysFClose
     /* E30 00100E30 2D200002 */   daddu     $a0, $s0, $zero
     /* E34 00100E34 2D400000 */  daddu      $a4, $zero, $zero
     /* E38 00100E38 2D20A002 */  daddu      $a0, $s5, $zero
@@ -96,7 +96,7 @@ glabel func_00100D48
     /* E68 00100E68 2130B102 */  addu       $a2, $s5, $s1
     /* E6C 00100E6C 88648424 */  addiu      $a0, $a0, %lo(D_00136488)
     /* E70 00100E70 2D384002 */  daddu      $a3, $s2, $zero
-    /* E74 00100E74 3E0B040C */  jal        func_00102CF8
+    /* E74 00100E74 3E0B040C */  jal        LoaderSysPrintf
     /* E78 00100E78 2D28A002 */   daddu     $a1, $s5, $zero
     /* E7C 00100E7C 0001023C */  lui        $v0, (0x1000000 >> 16)
     /* E80 00100E80 1001033C */  lui        $v1, (0x1100000 >> 16)
@@ -104,13 +104,13 @@ glabel func_00100D48
     /* E88 00100E88 4800A2AF */  sw         $v0, 0x48($sp)
     /* E8C 00100E8C 4C00A3AF */  sw         $v1, 0x4C($sp)
     /* E90 00100E90 4000B5AF */  sw         $s5, 0x40($sp)
-    /* E94 00100E94 2E01040C */  jal        func_001004B8
+    /* E94 00100E94 2E01040C */  jal        RelocateElfInfoHeader
     /* E98 00100E98 4400A0AF */   sw        $zero, 0x44($sp)
     /* E9C 00100E9C 1300033C */  lui        $v1, %hi(D_00131CB8)
     /* EA0 00100EA0 0000A48E */  lw         $a0, 0x0($s5)
     /* EA4 00100EA4 B81C628C */  lw         $v0, %lo(D_00131CB8)($v1)
     /* EA8 00100EA8 2B008214 */  bne        $a0, $v0, .L00100F58
-    /* EAC 00100EAC 1000023C */   lui       $v0, %hi(func_00102CF8)
+    /* EAC 00100EAC 1000023C */   lui       $v0, %hi(LoaderSysPrintf)
     /* EB0 00100EB0 3800A28E */  lw         $v0, 0x38($s5)
     /* EB4 00100EB4 43800200 */  sra        $s0, $v0, 1
     /* EB8 00100EB8 0F00001A */  blez       $s0, .L00100EF8
@@ -143,7 +143,7 @@ glabel func_00100D48
     /* F0C 00100F0C E206040C */  jal        func_00101B88
     /* F10 00100F10 21284500 */   addu      $a1, $v0, $a1
     /* F14 00100F14 1000005A */  blezl      $s0, .L00100F58
-    /* F18 00100F18 1000023C */   lui       $v0, %hi(func_00102CF8)
+    /* F18 00100F18 1000023C */   lui       $v0, %hi(LoaderSysPrintf)
     /* F1C 00100F1C C0101000 */  sll        $v0, $s0, 3
     /* F20 00100F20 3C00A68E */  lw         $a2, 0x3C($s5)
     /* F24 00100F24 23105000 */  subu       $v0, $v0, $s0
@@ -160,20 +160,20 @@ glabel func_00100D48
     /* F48 00100F48 00000000 */  nop
     /* F4C 00100F4C FAFF6014 */  bnez       $v1, .L00100F38
     /* F50 00100F50 1C004224 */   addiu     $v0, $v0, 0x1C
-    /* F54 00100F54 1000023C */  lui        $v0, %hi(func_00102CF8)
+    /* F54 00100F54 1000023C */  lui        $v0, %hi(LoaderSysPrintf)
 .align 2
   .L00100F58:
     /* F58 00100F58 1000053C */  lui        $a1, %hi(func_00101AC0)
     /* F5C 00100F5C 1000063C */  lui        $a2, %hi(func_00101AF0)
-    /* F60 00100F60 F82C4724 */  addiu      $a3, $v0, %lo(func_00102CF8)
+    /* F60 00100F60 F82C4724 */  addiu      $a3, $v0, %lo(LoaderSysPrintf)
     /* F64 00100F64 C01AA524 */  addiu      $a1, $a1, %lo(func_00101AC0)
     /* F68 00100F68 F01AC624 */  addiu      $a2, $a2, %lo(func_00101AF0)
-    /* F6C 00100F6C 9E00040C */  jal        func_00100278
+    /* F6C 00100F6C 9E00040C */  jal        DecodeSection
     /* F70 00100F70 2D20A002 */   daddu     $a0, $s5, $zero
-    /* F74 00100F74 1000023C */  lui        $v0, %hi(D_00101AA0)
+    /* F74 00100F74 1000023C */  lui        $v0, %hi(func_00101AA0)
     /* F78 00100F78 2400A78E */  lw         $a3, 0x24($s5)
     /* F7C 00100F7C FFFF0324 */  addiu      $v1, $zero, -0x1
-    /* F80 00100F80 A01A4C24 */  addiu      $t0, $v0, %lo(D_00101AA0)
+    /* F80 00100F80 A01A4C24 */  addiu      $t0, $v0, %lo(func_00101AA0)
     /* F84 00100F84 2800A58E */  lw         $a1, 0x28($s5)
     /* F88 00100F88 FFFFE724 */  addiu      $a3, $a3, -0x1
     /* F8C 00100F8C 3400A68E */  lw         $a2, 0x34($s5)
@@ -249,7 +249,7 @@ glabel func_00100D48
   .L00101060:
     /* 1060 00101060 01001026 */  addiu      $s0, $s0, 0x1
     /* 1064 00101064 2D208002 */  daddu      $a0, $s4, $zero
-    /* 1068 00101068 3400040C */  jal        func_001000D0
+    /* 1068 00101068 3400040C */  jal        ResolveRelocation
     /* 106C 0010106C 2D282002 */   daddu     $a1, $s1, $zero
     /* 1070 00101070 2A181202 */  slt        $v1, $s0, $s2
     /* 1074 00101074 FAFF6014 */  bnez       $v1, .L00101060
@@ -307,7 +307,7 @@ glabel func_00100D48
   .L00101108:
     /* 1108 00101108 01001026 */  addiu      $s0, $s0, 0x1
     /* 110C 0010110C 2D20A002 */  daddu      $a0, $s5, $zero
-    /* 1110 00101110 3400040C */  jal        func_001000D0
+    /* 1110 00101110 3400040C */  jal        ResolveRelocation
     /* 1114 00101114 2D282002 */   daddu     $a1, $s1, $zero
     /* 1118 00101118 2A181202 */  slt        $v1, $s0, $s2
     /* 111C 0010111C FAFF6014 */  bnez       $v1, .L00101108
@@ -328,10 +328,10 @@ glabel func_00100D48
     /* 1140 00101140 9CA2040C */  jal        func_00128A70
     /* 1144 00101144 589EA524 */   addiu     $a1, $a1, %lo(D_00139E58)
     /* 1148 00101148 2D20A002 */  daddu      $a0, $s5, $zero
-    /* 114C 0010114C 1000023C */  lui        $v0, %hi(func_00102CF8)
+    /* 114C 0010114C 1000023C */  lui        $v0, %hi(LoaderSysPrintf)
     /* 1150 00101150 2D280002 */  daddu      $a1, $s0, $zero
     /* 1154 00101154 6401040C */  jal        OutputLinkerScriptFile
-    /* 1158 00101158 F82C4624 */   addiu     $a2, $v0, %lo(func_00102CF8)
+    /* 1158 00101158 F82C4624 */   addiu     $a2, $v0, %lo(LoaderSysPrintf)
     /* 115C 0010115C 2D10A002 */  daddu      $v0, $s5, $zero
 .align 2
   .L00101160:

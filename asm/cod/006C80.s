@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00106C80, 0x10
+nonmatching Interrupt2Iop, 0x10
 
-glabel func_00106C80
+glabel Interrupt2Iop
     /* 6C80 00106C80 0C000324 */  addiu      $v1, $zero, 0xC
     /* 6C84 00106C84 0C000000 */  syscall    0 /* handwritten instruction */
     /* 6C88 00106C88 0800E003 */  jr         $ra
     /* 6C8C 00106C8C 00000000 */   nop
-endlabel func_00106C80
+endlabel Interrupt2Iop

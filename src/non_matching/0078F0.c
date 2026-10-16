@@ -6,9 +6,9 @@ extern int  D_00132280 __attribute__((section(".data")));
 extern int  D_00143C90 __attribute__((section(".data")));
 extern char D_00143C98[];   /* .data entry table, absolute */
 
-void func_00107010(int a0);
+void iSignalSema(int a0);
 
-int func_001078F0(unsigned int a0) {
+int iRotateThreadReadyQueue(unsigned int a0) {
     int   n;
     char *p;
 
@@ -21,6 +21,6 @@ int func_001078F0(unsigned int a0) {
     p = D_00143C98 + n * 2;
     p[8] = 1;
     p[9] = a0;
-    func_00107010(D_00143C90);
+    iSignalSema(D_00143C90);
     return a0;
 }

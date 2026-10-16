@@ -12,14 +12,14 @@
  * once into $s0, and a0 is kept in $s1 across the three calls. The saves are 16
  * bytes apart ($s0 at 0x00, $s1 at 0x10, $ra at 0x20) - the cc=29 slot layout.
  * MATCH GUESS: cc=29 */
-extern int D_00132668[];   /* .data 0x00132668: lui/%lo (non-small) */
-extern void func_0010F7C0(void);
-extern int func_00106C90(int a0, void (*a1)(void));
+extern int _kTLBRefillHandler[];   /* .data 0x00132668: lui/%lo (non-small) */
+extern void _kTLBException(void);
+extern int SetVTLBRefillHandler(int a0, void (*a1)(void));
 
-int func_0010F278(int a0) {
-    D_00132668[0] = a0;
-    func_00106C90(1, func_0010F7C0);
-    func_00106C90(2, func_0010F7C0);
-    func_00106C90(3, func_0010F7C0);
+int SetTLBHandler(int a0) {
+    _kTLBRefillHandler[0] = a0;
+    SetVTLBRefillHandler(1, _kTLBException);
+    SetVTLBRefillHandler(2, _kTLBException);
+    SetVTLBRefillHandler(3, _kTLBException);
     return a0;
 }

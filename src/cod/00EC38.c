@@ -9,7 +9,7 @@
  */
 extern int func_0010EA10();
 
-int func_0010EC38(int a0, int a1, int a2) {
+int sceSifLoadModule(int a0, int a1, int a2) {
     int local[4];
 
     return func_0010EA10(a0, a1, a2, local, 0);

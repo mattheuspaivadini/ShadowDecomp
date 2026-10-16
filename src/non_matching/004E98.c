@@ -16,13 +16,13 @@
  * of `bgezl` (only the r >= 0 path needs it). $s0/$s1/$ra are 8 bytes apart.
  * MATCH GUESS: cc=296 */
 extern char D_0013D840[];   /* .bss 0x0013D840: lui/%lo (non-small) */
-int func_00115210(int a0, unsigned char *a1);
+int scePad2Read(int a0, unsigned char *a1);
 
-int func_00104E98(void) {
+int padSysReadForLoader(void) {
     unsigned char *p = (unsigned char *)(D_0013D840 + 0x104);
     int r;
 
-    r = func_00115210(*(int *)(D_0013D840 + 0x11C), p);
+    r = scePad2Read(*(int *)(D_0013D840 + 0x11C), p);
     if (r < 0)
         return 0;
     return ((unsigned int)p[0] << 8 | D_0013D840[0x105]) ^ 0xFFFF;

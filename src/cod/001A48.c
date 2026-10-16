@@ -4,6 +4,6 @@
  */
 #include "symbols.h"
 
-int func_00101A48(void) {
+int GetHeapCurrentPoint(void) {
     return D_00139E04;
 }

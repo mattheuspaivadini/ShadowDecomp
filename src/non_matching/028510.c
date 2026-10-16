@@ -17,18 +17,18 @@
  */
 extern int D_001360C4 __attribute__((section(".data")));
 extern int D_001360C0 __attribute__((section(".data")));
-extern int D_001329A0 __attribute__((section(".data")));
+extern int __sce_sema_id __attribute__((section(".data")));
 
-int func_00107000(int a0);
+int SignalSema(int a0);
 
-int func_00128510(void) {
+int __malloc_unlock(void) {
     int r;
 
     r = D_001360C4 - 1;
     D_001360C4 = r;
     if (r == 0) {
         D_001360C0 = -1;
-        return func_00107000(D_001329A0);
+        return SignalSema(__sce_sema_id);
     }
     return r;
 }

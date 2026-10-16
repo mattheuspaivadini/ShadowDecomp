@@ -25,7 +25,7 @@ struct S015710 {
 
 extern struct S015710 D_0014B598[];   /* .bss 0x0014B598: 16 records */
 
-void func_001318C0(int a0, int a1);
+void SyncDCache(int a0, int a1);
 
 int func_00115710(int index) {
     int *p;
@@ -33,7 +33,7 @@ int func_00115710(int index) {
 
     p = D_0014B598[index].buf;
     q = (int *)((char *)p + 0x80);
-    func_001318C0((int)p, (int)p + 0x100);
+    SyncDCache((int)p, (int)p + 0x100);
     return (*(int *)((char *)p + 0x7C) < *(int *)((char *)q + 0x7C))
                ? (int)q
                : (int)p;

@@ -1,7 +1,7 @@
-/* STATUS (Session 7, 2026-10-14): NON_MATCHING. best score 7 [cc=29, default].
- * varargs wrapper (same family as 008DB8).
+/* STATUS (10, 2026-10-16): NON_MATCHING. best score 7 [cc=29].
+ * 
  * The original .s stays in the build (asm/cod/008E40.s); this C
- * draft (subagent-produced, Session 7) is kept for the record. */
+ * draft (10) is kept for the record. */
 /* asm/cod/008E40.s -> func_00108E40 @ 0x00108E40 (0x48 bytes, 18 insns)
  * Variadic shim with a FIXED callback: a0 is copied into the one-word stack
  * buffer at sp+0x0, the incoming vararg registers are spilled by the EE-GCC
@@ -16,7 +16,7 @@
 extern int func_00108D10(void);
 extern int func_00107FF8(int (*cb)(), int *p, int a1, int a2, int ap);
 
-int func_00108E40(int a0, int a1, int a2, ...) {
+int sceSnprintf(int a0, int a1, int a2, ...) {
     int buf;
     int r;
 

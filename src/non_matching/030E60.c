@@ -22,27 +22,27 @@ struct F30E60 {
     int             dev54;    /* 0x54 the device handle         */
 };
 
-extern int  D_00135C60[];   /* .data, non-small -> lui/%lo */
-extern void func_0012DA00(int dev);
-extern int  func_0012D6D8(struct F30E60 *p);
-extern int  func_00130D78(struct F30E60 *p);
+extern int  _impure_ptr[];   /* .data, non-small -> lui/%lo */
+extern void __sinit(int dev);
+extern int  fflush(struct F30E60 *p);
+extern int  __submore(struct F30E60 *p);
 
-int func_00130E60(int c, struct F30E60 *p) {
+int ungetc(int c, struct F30E60 *p) {
     int r;
     char *q;
 
     if (c == -1)
         return -1;
     if (p->dev54 == 0)
-        p->dev54 = D_00135C60[0];
+        p->dev54 = _impure_ptr[0];
     if (*(int *)(p->dev54 + 0x38) == 0)
-        func_0012DA00(p->dev54);
+        __sinit(p->dev54);
     p->flags = (unsigned short)(p->flags & 0xFFDF);
     if (!(p->flags & 4)) {
         if (!(p->flags & 0x10))
             return -1;
         if (p->flags & 8) {
-            r = func_0012D6D8(p);
+            r = fflush(p);
             if (r != 0)
                 return -1;
             p->w = 0;
@@ -54,7 +54,7 @@ int func_00130E60(int c, struct F30E60 *p) {
     c = c & 0xFF;
     if (p->u_base != 0) {
         if (p->r >= p->u_size) {
-            r = func_00130D78(p);
+            r = __submore(p);
             if (r != 0)
                 return -1;
         }
@@ -81,3 +81,4 @@ int func_00130E60(int c, struct F30E60 *p) {
     p->r = 1;
     return c;
 }
+/* func_00130E60 */

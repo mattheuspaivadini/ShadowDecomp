@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_001073A0, 0x10
+nonmatching sceSifSetDma, 0x10
 
-glabel func_001073A0
+glabel sceSifSetDma
     /* 73A0 001073A0 77000324 */  addiu      $v1, $zero, 0x77
     /* 73A4 001073A4 0C000000 */  syscall    0 /* handwritten instruction */
     /* 73A8 001073A8 0800E003 */  jr         $ra
     /* 73AC 001073AC 00000000 */   nop
-endlabel func_001073A0
+endlabel sceSifSetDma

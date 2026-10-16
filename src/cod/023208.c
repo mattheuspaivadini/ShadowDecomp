@@ -17,9 +17,9 @@
  * MATCH GUESS: cc=29 (the whole func_0010FB20 wrapper family, e.g. the matched
  * 010EA0.c/010DB8.c, is cc=29)
  */
-int  func_0010FB20(void);
-int  func_0010FB70(void);
-int  func_00106FF0(int a0);
+int  DIntr(void);
+int  EIntr(void);
+int  DeleteSema(int a0);
 
 extern int D_00135960[];   /* .data 0x00135960, 4 bytes - array => lui/%lo */
 
@@ -27,12 +27,12 @@ int func_00123208(void) {
     int a;
     int v;
 
-    a = func_0010FB20();
+    a = DIntr();
     v = D_00135960[0];
     D_00135960[0] = -1;
     if (a != 0)
-        func_0010FB70();
+        EIntr();
     if (v >= 0)
-        func_00106FF0(v);
+        DeleteSema(v);
     return 0;
 }

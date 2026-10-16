@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00107460, 0x10
+nonmatching QueryIntrContext, 0x10
 
-glabel func_00107460
+glabel QueryIntrContext
     /* 7460 00107460 00600240 */  mfc0       $v0, $12 /* handwritten instruction */
     /* 7464 00107464 01004238 */  xori       $v0, $v0, 0x1
     /* 7468 00107468 0800E003 */  jr         $ra
     /* 746C 0010746C 01004230 */   andi      $v0, $v0, 0x1
-endlabel func_00107460
+endlabel QueryIntrContext

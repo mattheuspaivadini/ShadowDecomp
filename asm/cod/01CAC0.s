@@ -30,7 +30,7 @@ glabel func_0011CAC0
   .L0011CAFC:
     /* 1CAFC 0011CAFC 0C00A9AF */  sw         $a5, 0xC($sp)
     /* 1CB00 0011CB00 12100000 */  mflo       $v0
-    /* 1CB04 0011CB04 6E84040C */  jal        func_001211B8
+    /* 1CB04 0011CB04 6E84040C */  jal        _sceMcCoreSetCardSpec
     /* 1CB08 0011CB08 0800A2AF */   sw        $v0, 0x8($sp)
     /* 1CB0C 0011CB0C 1000BFDF */  ld         $ra, 0x10($sp)
     /* 1CB10 0011CB10 0800E003 */  jr         $ra

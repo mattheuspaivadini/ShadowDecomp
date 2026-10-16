@@ -4,9 +4,9 @@
  * draft (Session 8) is kept for the record. */
 extern int D_0014AC80[];   /* .bss 0x0014AC80: free-list head */
 
-int func_00110E00(int a0);
+int iFreeTimerCounter(int a0);
 
-int func_00111A78(int a0) {
+int iReleaseTimerAlarm(int a0) {
     int *p;
     int  r;
     int  old;
@@ -16,7 +16,7 @@ int func_00111A78(int a0) {
         return 0x80008002;
     if ((a0 ^ p[1]) & 0xFF)
         return 0x80008002;
-    r = func_00110E00(p[1]);
+    r = iFreeTimerCounter(p[1]);
     if (r != 0)
         return r;
     old = D_0014AC80[0];

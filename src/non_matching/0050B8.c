@@ -11,14 +11,14 @@ extern int D_0013EB00[];    /* .bss 0x0013EB00 (the staging buffer) -> lui/%lo *
 extern int D_0013EB40[];    /* .bss 0x0013EB40 (the reply) -> lui/%lo */
 extern int D_0013EAC0[];    /* .bss 0x0013EAC0 (the request) -> lui/%lo */
 
-int SceSifrpcCall(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
+int sceSifCallRpc(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
                   int a7, int a8);
 int func_001290C4(char *a0);
 void func_00128FB0(int a0, int a1);
-void func_00107020(int a0);
+void WaitSema(int a0);
 int func_001053F0(void);
 
-int func_001050B8(char *a0) {
+int usbSerialSysPutString(char *a0) {
     int total;
     int chunk;
     int n;
@@ -48,8 +48,8 @@ int func_001050B8(char *a0) {
                 q++;
             } while (--n != 0);
         }
-        func_00107020(*(int *)((char *)&D_0013A180 + 8));
-        r = SceSifrpcCall((int)D_0013EAC0, 0x10, 0, (int)D_0013EB00, 0x40,
+        WaitSema(*(int *)((char *)&D_0013A180 + 8));
+        r = sceSifCallRpc((int)D_0013EAC0, 0x10, 0, (int)D_0013EB00, 0x40,
                           (int)D_0013EB40, 0x20, (int)func_001053F0, 0);
         if (r != 0)
             return r;

@@ -6,6 +6,6 @@
  */
 extern char D_0014B358[];
 
-char *func_00112908(void) {
+char *sceSifGetDataTable(void) {
     return D_0014B358;
 }

@@ -6,10 +6,10 @@ extern int D_001471C0[];   /* .bss 0x001471C0, 0x40 bytes */
 extern int D_00147200[];   /* .bss 0x00147200, 0x40 bytes */
 extern int D_00147240[];   /* .bss 0x00147240, 0x40 bytes */
 
-int SceSifrpcCall(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
+int sceSifCallRpc(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
                   int a7, int a8);
 
-int func_0010DDE0(int a0, int a1, int a2) {
+int sceSifAllocSysMemory(int a0, int a1, int a2) {
     int r;
 
     if (D_0013232C < 0)
@@ -17,7 +17,7 @@ int func_0010DDE0(int a0, int a1, int a2) {
     D_00147240[0] = a1;
     D_00147240[1] = a0;
     D_00147240[2] = a2;
-    r = SceSifrpcCall((int)D_001471C0, 4, 0, (int)D_00147240, 0xC,
+    r = sceSifCallRpc((int)D_001471C0, 4, 0, (int)D_00147240, 0xC,
                       (int)D_00147200, 4, 0, 0);
     if (r < 0)
         return 0;

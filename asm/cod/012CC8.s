@@ -45,7 +45,7 @@ glabel func_00112CC8
     /* 12D3C 00112D3C 0800A5AF */  sw         $a1, 0x8($sp)
     /* 12D40 00112D40 08006010 */  beqz       $v1, .L00112D64
     /* 12D44 00112D44 0C00A0AF */   sw        $zero, 0xC($sp)
-    /* 12D48 00112D48 F24B040C */  jal        func_00112FC8
+    /* 12D48 00112D48 F24B040C */  jal        sceSifWriteBackDCache
     /* 12D4C 00112D4C 00000000 */   nop
     /* 12D50 00112D50 05000010 */  b          .L00112D68
     /* 12D54 00112D54 00291200 */   sll       $a1, $s2, 4
@@ -77,18 +77,18 @@ glabel func_00112CC8
     /* 12DA4 00112DA4 000082AC */  sw         $v0, 0x0($a0)
     /* 12DA8 00112DA8 2D282002 */  daddu      $a1, $s1, $zero
     /* 12DAC 00112DAC 2D200002 */  daddu      $a0, $s0, $zero
-    /* 12DB0 00112DB0 F24B040C */  jal        func_00112FC8
+    /* 12DB0 00112DB0 F24B040C */  jal        sceSifWriteBackDCache
     /* 12DB4 00112DB4 01005226 */   addiu     $s2, $s2, 0x1
     /* 12DB8 00112DB8 01006232 */  andi       $v0, $s3, 0x1
     /* 12DBC 00112DBC 05004010 */  beqz       $v0, .L00112DD4
     /* 12DC0 00112DC0 2D284002 */   daddu     $a1, $s2, $zero
-    /* 12DC4 00112DC4 EC1C040C */  jal        func_001073B0
+    /* 12DC4 00112DC4 EC1C040C */  jal        isceSifSetDma
     /* 12DC8 00112DC8 2D20A003 */   daddu     $a0, $sp, $zero
     /* 12DCC 00112DCC 04000010 */  b          .L00112DE0
     /* 12DD0 00112DD0 7000BFDF */   ld        $ra, 0x70($sp)
 .align 2
   .L00112DD4:
-    /* 12DD4 00112DD4 E81C040C */  jal        func_001073A0
+    /* 12DD4 00112DD4 E81C040C */  jal        sceSifSetDma
     /* 12DD8 00112DD8 2D20A003 */   daddu     $a0, $sp, $zero
 .align 2
   .L00112DDC:

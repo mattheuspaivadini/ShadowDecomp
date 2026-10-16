@@ -4,16 +4,16 @@
  * draft (Session 8) is kept for the record. */
 #include "symbols.h"
 
-int func_001127E0(int a0);
-int func_00112598(int a0, int a1);
+int sceTtyInit(int a0);
+int sceTtyWrite(int a0, int a1);
 
-int func_00111E98(int a0, int a1, int a2) {
+int write(int a0, int a1, int a2) {
     if ((unsigned int)(a0 - 1) >= 2)
         return -1;
     if (D_00133940 == 0) {
-        if (func_001127E0(a1) == 0)
+        if (sceTtyInit(a1) == 0)
             return -1;
         D_00133940 = 1;
     }
-    return func_00112598(a1, a2);
+    return sceTtyWrite(a1, a2);
 }

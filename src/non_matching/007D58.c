@@ -1,7 +1,7 @@
-/* STATUS (Session 7, 2026-10-14): NON_MATCHING. best score 5 [cc=29, default].
- * shape/allocation difference.
+/* STATUS (10, 2026-10-16): NON_MATCHING. best score 5 [cc=29].
+ * 
  * The original .s stays in the build (asm/cod/007D58.s); this C
- * draft (subagent-produced, Session 7) is kept for the record. */
+ * draft (10) is kept for the record. */
 /* asm/cod/007D58.s -> func_00107D58 @ 0x00107D58 (0x34 bytes, 13 insns)
  *
  * Mode-select wrapper for func_00107C70 (the SIO2 register writer that polls

@@ -32,10 +32,10 @@ struct S02D7F0 {
     int   field54;   /* 0x54 */
 };
 
-extern void func_0012FA40(void);
-extern void func_0012FAA8(void);
-extern void func_0012FB28(void);
-extern void func_0012FB90(void);
+extern void __sread(void);
+extern void __swrite(void);
+extern void __sseek(void);
+extern void __sclose(void);
 
 void func_0012D7F0(struct S02D7F0 *p, short a1, short a2, int a3) {
     p->field00 = 0;
@@ -47,9 +47,9 @@ void func_0012D7F0(struct S02D7F0 *p, short a1, short a2, int a3) {
     p->field14 = 0;
     p->field18 = 0;
     p->field1C = (int)p;
-    p->field20 = (int)func_0012FA40;
-    p->field24 = (int)func_0012FAA8;
-    p->field28 = (int)func_0012FB28;
-    p->field2C = (int)func_0012FB90;
+    p->field20 = (int)__sread;
+    p->field24 = (int)__swrite;
+    p->field28 = (int)__sseek;
+    p->field2C = (int)__sclose;
     p->field54 = a3;
 }

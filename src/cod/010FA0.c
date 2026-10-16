@@ -20,11 +20,11 @@ struct H10FA0 {
 
 extern struct H10FA0 D_00133918;
 
-unsigned long long func_00110C78(void);
+unsigned long long iGetTimerSystemTime(void);
 void func_00110910(struct N10FA0 *n);
 void func_00110780(unsigned long long t);
 
-unsigned int func_00110FA0(int a0) {
+unsigned int iStartTimerCounter(int a0) {
     struct N10FA0 *p;
     struct H10FA0 *h;
     unsigned int f;
@@ -39,7 +39,7 @@ unsigned int func_00110FA0(int a0) {
         return 0x80000010u;
     if (p->flags & 1)
         return 1;
-    t = func_00110C78();
+    t = iGetTimerSystemTime();
     f = p->flags;
     p->f10 = t;
     f |= 1;

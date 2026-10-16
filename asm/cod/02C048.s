@@ -11,9 +11,9 @@
 nonmatching func_0012C048, 0x54
 
 glabel func_0012C048
-    /* 2C048 0012C048 1300023C */  lui        $v0, %hi(D_00135C60)
+    /* 2C048 0012C048 1300023C */  lui        $v0, %hi(_impure_ptr)
     /* 2C04C 0012C04C 90FFBD27 */  addiu      $sp, $sp, -0x70
-    /* 2C050 0012C050 605C488C */  lw         $a4, %lo(D_00135C60)($v0)
+    /* 2C050 0012C050 605C488C */  lw         $a4, %lo(_impure_ptr)($v0)
     /* 2C054 0012C054 08020224 */  addiu      $v0, $zero, 0x208
     /* 2C058 0012C058 FF7F033C */  lui        $v1, (0x7FFFFFFF >> 16)
     /* 2C05C 0012C05C 2D388000 */  daddu      $a3, $a0, $zero

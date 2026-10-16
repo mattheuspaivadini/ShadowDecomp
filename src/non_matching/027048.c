@@ -28,7 +28,7 @@
  *
  * Decompose the 32-bit IEEE754 word at *in into {type, sign, exp, mantissa}.
  */
-int func_00127048(unsigned int *in, int *out) {
+int __unpack_f(unsigned int *in, int *out) {
     unsigned int bits = *in;
     unsigned int exp = (bits >> 23) & 0xFF;
     unsigned int sign = bits >> 31;

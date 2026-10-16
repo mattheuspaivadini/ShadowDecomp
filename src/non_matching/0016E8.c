@@ -4,7 +4,7 @@
  * draft (Session 8) is kept for the record. */
 extern char D_00136100[];
 
-void func_001000D0(int a0, int a1, int a2);
+void ResolveRelocation(int a0, int a1, int a2);
 void func_001285C0(int a0, int a1);
 
 struct Rec001016E8 {
@@ -22,7 +22,7 @@ struct Mod001016E8 {
     struct Rec001016E8 *f3C;    /* 0x3C */
 };
 
-int func_001016E8(struct Mod001016E8 *p) {
+int RelocateCode(struct Mod001016E8 *p) {
     struct Rec001016E8 *r;
     int n;
     int i;
@@ -40,7 +40,7 @@ int func_001016E8(struct Mod001016E8 *p) {
                     i = 0;
                     while (i < c) {
                         i++;
-                        func_001000D0((int)p, (int)r, i);
+                        ResolveRelocation((int)p, (int)r, i);
                     }
                 }
             }

@@ -25,10 +25,10 @@ glabel func_00120F30
     /* 20F5C 00120F5C 5000BFFF */  sd         $ra, 0x50($sp)
     /* 20F60 00120F60 C05D1126 */  addiu      $s1, $s0, %lo(D_00165DC0)
     /* 20F64 00120F64 405940AE */  sw         $zero, %lo(D_00135940)($s2)
-    /* 20F68 00120F68 081C040C */  jal        func_00107020
+    /* 20F68 00120F68 081C040C */  jal        WaitSema
     /* 20F6C 00120F6C 80003326 */   addiu     $s3, $s1, 0x80
     /* 20F70 00120F70 2D202002 */  daddu      $a0, $s1, $zero
-    /* 20F74 00120F74 30C6040C */  jal        func_001318C0
+    /* 20F74 00120F74 30C6040C */  jal        SyncDCache
     /* 20F78 00120F78 FF002526 */   addiu     $a1, $s1, 0xFF
     /* 20F7C 00120F7C C05D038E */  lw         $v1, %lo(D_00165DC0)($s0)
     /* 20F80 00120F80 4059428E */  lw         $v0, %lo(D_00135940)($s2)

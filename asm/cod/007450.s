@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00107450, 0x10
+nonmatching _InitTLB, 0x10
 
-glabel func_00107450
+glabel _InitTLB
     /* 7450 00107450 82000324 */  addiu      $v1, $zero, 0x82
     /* 7454 00107454 0C000000 */  syscall    0 /* handwritten instruction */
     /* 7458 00107458 0800E003 */  jr         $ra
     /* 745C 0010745C 00000000 */   nop
-endlabel func_00107450
+endlabel _InitTLB

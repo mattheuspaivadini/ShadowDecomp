@@ -9,9 +9,9 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_0010FB20, 0x50
+nonmatching DIntr, 0x50
 
-glabel func_0010FB20
+glabel DIntr
     /* FB20 0010FB20 00600340 */  mfc0       $v1, $12 /* handwritten instruction */
     /* FB24 0010FB24 0100023C */  lui        $v0, (0x10000 >> 16)
     /* FB28 0010FB28 24186200 */  and        $v1, $v1, $v0
@@ -36,4 +36,4 @@ glabel func_0010FB20
     /* FB64 0010FB64 2D200000 */  daddu      $a0, $zero, $zero
     /* FB68 0010FB68 0800E003 */  jr         $ra
     /* FB6C 0010FB6C 2D108000 */   daddu     $v0, $a0, $zero
-endlabel func_0010FB20
+endlabel DIntr

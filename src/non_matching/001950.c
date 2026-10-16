@@ -19,7 +19,7 @@ struct Mod00101950 {
     struct Rec00101950 *f3C;    /* 0x3C */
 };
 
-void func_00101950(struct Mod00101950 *m, void (*cb)(struct Mod00101950 *, int)) {
+void DisposeRelocationElement(struct Mod00101950 *m, void (*cb)(struct Mod00101950 *, int)) {
     struct Rec00101950 *tab;
     int n;
     int sum;

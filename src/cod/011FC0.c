@@ -2,6 +2,6 @@
  *   jr   $ra
  *    addiu $v0, $zero, -1
  */
-int func_00111FC0(void) {
+int ioctl(void) {
     return -1;
 }

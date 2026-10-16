@@ -9,28 +9,28 @@ struct N119D0 {
 
 extern struct N119D0 *D_0014AC80[];
 
-int func_0010FB20(void);
-int func_0010FB70(void);
-int func_00110EA0(int a0);
+int DIntr(void);
+int EIntr(void);
+int FreeTimerCounter(int a0);
 
-unsigned int func_001119D0(int a0) {
+unsigned int ReleaseTimerAlarm(int a0) {
     int g;
     struct N119D0 *p;
     struct N119D0 *old;
 
-    g = func_0010FB20();
+    g = DIntr();
     p = (struct N119D0 *)(((unsigned int)a0 >> 8) << 4);
     if (a0 < 0 || ((a0 ^ p->id) & 0xFF) != 0) {
         if (g != 0)
-            func_0010FB70();
+            EIntr();
         return 0x80008002u;
     }
-    func_00110EA0(p->id);
+    FreeTimerCounter(p->id);
     old = D_0014AC80[0];
     D_0014AC80[0] = p;
     p->next = old;
     p->id = 0;
     if (g != 0)
-        func_0010FB70();
+        EIntr();
     return 0;
 }

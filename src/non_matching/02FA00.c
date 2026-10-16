@@ -14,7 +14,7 @@
  * operands are unsigned.  Trailing `subu`+`srl 31` = the sign of the
  * 0x7FF00000 gap.
  * MATCH GUESS: cc=296 (0x12F8xx/0x12FBxx stdio family is 2.96) */
-int func_0012FA00(long long x) {
+int isnan(long long x) {
     int lo;
     int hi;
     unsigned int v;

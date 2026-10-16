@@ -12,6 +12,6 @@
  */
 int func_0011B670(int a0, int a1, int a2);
 
-int func_0011B718(int a0, int a1) {
+int sceMc2CheckAsync(int a0, int a1) {
     return func_0011B670(1, a0, a1);
 }

@@ -7,12 +7,12 @@
  * MATCH GUESS: cc=29 (0x010118/0x0104xx are 2.9 tail-call shapes) */
 extern int func_00110000(int *p, int a0, int a1);
 extern void func_00110118(void);
-extern void func_00107400(int a0, int a1);
+extern void _ExecOSD(int a0, int a1);
 extern int D_00138270[];   /* .rodata 0x00138270: 2 words, address taken */
-extern int D_001326B0[];   /* .data   0x001326B0 (non-small) */
+extern int _kExecArg[];   /* .data   0x001326B0 (non-small) */
 
-void func_00110200(int a0, int a1) {
+void ExecOSD(int a0, int a1) {
     func_00110000(D_00138270, a0, a1);
     func_00110118();
-    func_00107400(a0, D_001326B0[0] + 4);
+    _ExecOSD(a0, _kExecArg[0] + 4);
 }

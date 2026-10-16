@@ -148,7 +148,7 @@ glabel func_0010EA10
     /* EBE0 0010EBE0 00020824 */  addiu      $a4, $zero, 0x200
     /* EBE4 0010EBE4 2D480002 */  daddu      $a5, $s0, $zero
     /* EBE8 0010EBE8 08000A24 */  addiu      $a6, $zero, 0x8
-    /* EBEC 0010EBEC 6026040C */  jal        SceSifrpcCall
+    /* EBEC 0010EBEC 6026040C */  jal        sceSifCallRpc
     /* EBF0 0010EBF0 2D580000 */   daddu     $a7, $zero, $zero
     /* EBF4 0010EBF4 04004304 */  bgezl      $v0, .L0010EC08
     /* EBF8 0010EBF8 0400038E */   lw        $v1, 0x4($s0)

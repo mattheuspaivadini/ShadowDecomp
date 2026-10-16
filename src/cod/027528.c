@@ -5,6 +5,6 @@
  */
 #include "symbols.h"
 
-int func_00127528(void) {
-    return D_00135C60;
+int __errno(void) {
+    return _impure_ptr;
 }

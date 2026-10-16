@@ -9,9 +9,9 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00107540, 0x68
+nonmatching DisableDmac, 0x68
 
-glabel func_00107540
+glabel DisableDmac
     /* 7540 00107540 D0FFBD27 */  addiu      $sp, $sp, -0x30
     /* 7544 00107544 1000B1FF */  sd         $s1, 0x10($sp)
     /* 7548 00107548 2000BFFF */  sd         $ra, 0x20($sp)
@@ -22,17 +22,17 @@ glabel func_00107540
     /* 755C 0010755C 24800202 */  and        $s0, $s0, $v0
     /* 7560 00107560 03000012 */  beqz       $s0, .L00107570
     /* 7564 00107564 00000000 */   nop
-    /* 7568 00107568 C83E040C */  jal        func_0010FB20
+    /* 7568 00107568 C83E040C */  jal        DIntr
     /* 756C 0010756C 00000000 */   nop
 .align 2
   .L00107570:
-    /* 7570 00107570 541B040C */  jal        func_00106D50
+    /* 7570 00107570 541B040C */  jal        _DisableDmac
     /* 7574 00107574 2D202002 */   daddu     $a0, $s1, $zero
     /* 7578 00107578 2D884000 */  daddu      $s1, $v0, $zero
     /* 757C 0010757C 0F000000 */  sync
     /* 7580 00107580 04000012 */  beqz       $s0, .L00107594
     /* 7584 00107584 2D102002 */   daddu     $v0, $s1, $zero
-    /* 7588 00107588 DC3E040C */  jal        func_0010FB70
+    /* 7588 00107588 DC3E040C */  jal        EIntr
     /* 758C 0010758C 00000000 */   nop
     /* 7590 00107590 2D102002 */  daddu      $v0, $s1, $zero
 .align 2
@@ -42,4 +42,4 @@ glabel func_00107540
     /* 759C 0010759C 0000B0DF */  ld         $s0, 0x0($sp)
     /* 75A0 001075A0 0800E003 */  jr         $ra
     /* 75A4 001075A4 3000BD27 */   addiu     $sp, $sp, 0x30
-endlabel func_00107540
+endlabel DisableDmac

@@ -34,7 +34,7 @@ struct R14BF8 {
 
 extern struct R14BF8 D_0014B580;
 
-struct R14BF8 *func_00114BF8(struct R14BF8 *env) {
+struct R14BF8 *sceDmaGetEnv(struct R14BF8 *env) {
     *env = D_0014B580;
     return env;
 }

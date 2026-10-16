@@ -15,17 +15,17 @@
  * MATCH GUESS: cc=296 (both sceGsPutDrawEnv calls are `j` with the frame
  * teardown in the delay slot)
  */
-int func_00114080(void *dst, int a1, int a2, short a3);
+int sceGsSetHalfOffset(void *dst, int a1, int a2, short a3);
 void sceGsPutDrawEnv(void *env);
 
-void func_00106518(unsigned int a0, int a1, int a2) {
+void RestoreNormalDrawEnvironment(unsigned int a0, int a1, int a2) {
     char *p = (char *)(a0 | 0x20000000);
 
     if (a1 != 0) {
-        func_00114080(p + 0x150, 0x800, 0x800, (short)a2);
+        sceGsSetHalfOffset(p + 0x150, 0x800, 0x800, (short)a2);
         sceGsPutDrawEnv(p + 0x140);
     } else {
-        func_00114080(p + 0x60, 0x800, 0x800, (short)a2);
+        sceGsSetHalfOffset(p + 0x60, 0x800, 0x800, (short)a2);
         sceGsPutDrawEnv(p + 0x50);
     }
 }

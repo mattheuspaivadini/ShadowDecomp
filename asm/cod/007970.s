@@ -9,9 +9,9 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00107970, 0x98
+nonmatching iSuspendThread, 0x98
 
-glabel func_00107970
+glabel iSuspendThread
     /* 7970 00107970 E0FFBD27 */  addiu      $sp, $sp, -0x20
     /* 7974 00107974 1000BFFF */  sd         $ra, 0x10($sp)
     /* 7978 00107978 0000B0FF */  sd         $s0, 0x0($sp)
@@ -20,7 +20,7 @@ glabel func_00107970
     /* 7984 00107984 2D804000 */  daddu      $s0, $v0, $zero
     /* 7988 00107988 05000412 */  beq        $s0, $a0, .L001079A0
     /* 798C 0010798C 0001022E */   sltiu     $v0, $s0, 0x100
-    /* 7990 00107990 D81B040C */  jal        func_00106F60
+    /* 7990 00107990 D81B040C */  jal        _iSuspendThread
     /* 7994 00107994 00000000 */   nop
     /* 7998 00107998 18000010 */  b          .L001079FC
     /* 799C 0010799C 1000BFDF */   ld        $ra, 0x10($sp)
@@ -49,7 +49,7 @@ glabel func_00107970
     /* 79E0 001079E0 040062AC */  sw         $v0, 0x4($v1)
     /* 79E4 001079E4 0800A7A0 */  sb         $a3, 0x8($a1)
     /* 79E8 001079E8 2D18A000 */  daddu      $v1, $a1, $zero
-    /* 79EC 001079EC 041C040C */  jal        func_00107010
+    /* 79EC 001079EC 041C040C */  jal        iSignalSema
     /* 79F0 001079F0 090070A0 */   sb        $s0, 0x9($v1)
     /* 79F4 001079F4 2D100002 */  daddu      $v0, $s0, $zero
 .align 2
@@ -60,4 +60,4 @@ glabel func_00107970
     /* 79FC 001079FC 0000B0DF */  ld         $s0, 0x0($sp)
     /* 7A00 00107A00 0800E003 */  jr         $ra
     /* 7A04 00107A04 2000BD27 */   addiu     $sp, $sp, 0x20
-endlabel func_00107970
+endlabel iSuspendThread

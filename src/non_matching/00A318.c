@@ -24,16 +24,16 @@ struct S16 { char b[16]; };
 extern int D_00132320[];            /* .data 0x00132320, 4 bytes (lui/%lo) */
 extern struct S16 D_00146EC0[];     /* .bss  0x00146EC0, 0x200 bytes */
 int func_0010A0B0(void);
-int func_00107020(int a0);
-int func_00107000(int a0);
+int WaitSema(int a0);
+int SignalSema(int a0);
 
 int func_0010A318(unsigned int a0) {
     func_0010A0B0();
-    func_00107020(D_00132320[0]);
+    WaitSema(D_00132320[0]);
     if (a0 < 0x20) {
-        func_00107000(D_00132320[0]);
+        SignalSema(D_00132320[0]);
         return (int)&D_00146EC0[a0];
     }
-    func_00107000(D_00132320[0]);
+    SignalSema(D_00132320[0]);
     return 0;
 }

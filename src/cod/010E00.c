@@ -22,7 +22,7 @@ extern struct H10E00 D_00133918;
 
 void func_00110998(struct N10E00 *p);
 
-unsigned int func_00110E00(int a0) {
+unsigned int iFreeTimerCounter(int a0) {
     struct N10E00 *p;
     struct H10E00 *h;
     struct N10E00 *t;

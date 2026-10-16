@@ -31,7 +31,7 @@ glabel sceStdioCCode
     /* BEEC 0010BEEC 1423438C */  lw         $v1, %lo(D_00132314)($v0)
     /* BEF0 0010BEF0 04006054 */  bnel       $v1, $zero, .L0010BF04
     /* BEF4 0010BEF4 00002292 */   lbu       $v0, 0x0($s1)
-    /* BEF8 0010BEF8 302A040C */  jal        func_0010A8C0
+    /* BEF8 0010BEF8 302A040C */  jal        sceFsInit
     /* BEFC 0010BEFC 00000000 */   nop
     /* BF00 0010BF00 00002292 */  lbu        $v0, 0x0($s1)
 .align 2
@@ -80,7 +80,7 @@ glabel sceStdioCCode
     /* BF80 0010BF80 1000A427 */  addiu      $a0, $sp, 0x10
     /* BF84 0010BF84 2400A2AF */  sw         $v0, 0x24($sp)
     /* BF88 0010BF88 00669426 */  addiu      $s4, $s4, %lo(D_00146600)
-    /* BF8C 0010BF8C F81B040C */  jal        func_00106FE0
+    /* BF8C 0010BF8C F81B040C */  jal        CreateSema
     /* BF90 0010BF90 1800A0AF */   sw        $zero, 0x18($sp)
     /* BF94 0010BF94 2D884000 */  daddu      $s1, $v0, $zero
     /* BF98 0010BF98 040072AE */  sw         $s2, 0x4($s3)
@@ -100,7 +100,7 @@ glabel sceStdioCCode
     /* BFD0 0010BFD0 2D580000 */   daddu     $a7, $zero, $zero
     /* BFD4 0010BFD4 07004104 */  bgez       $v0, .L0010BFF4
     /* BFD8 0010BFD8 0020023C */   lui       $v0, (0x20000000 >> 16)
-    /* BFDC 0010BFDC FC1B040C */  jal        func_00106FF0
+    /* BFDC 0010BFDC FC1B040C */  jal        DeleteSema
     /* BFE0 0010BFE0 2D202002 */   daddu     $a0, $s1, $zero
     /* BFE4 0010BFE4 F229040C */  jal        func_0010A7C8
     /* BFE8 0010BFE8 00000000 */   nop
@@ -113,15 +113,15 @@ glabel sceStdioCCode
     /* BFFC 0010BFFC 0000508C */   lw        $s0, (0x20000000 & 0xFFFF)($v0)
     /* C000 0010C000 05000016 */  bnez       $s0, .L0010C018
     /* C004 0010C004 00000000 */   nop
-    /* C008 0010C008 FC1B040C */  jal        func_00106FF0
+    /* C008 0010C008 FC1B040C */  jal        DeleteSema
     /* C00C 0010C00C 2D202002 */   daddu     $a0, $s1, $zero
     /* C010 0010C010 06000010 */  b          .L0010C02C
     /* C014 0010C014 F5FF0224 */   addiu     $v0, $zero, -0xB
 .align 2
   .L0010C018:
-    /* C018 0010C018 081C040C */  jal        func_00107020
+    /* C018 0010C018 081C040C */  jal        WaitSema
     /* C01C 0010C01C 2D202002 */   daddu     $a0, $s1, $zero
-    /* C020 0010C020 FC1B040C */  jal        func_00106FF0
+    /* C020 0010C020 FC1B040C */  jal        DeleteSema
     /* C024 0010C024 2D202002 */   daddu     $a0, $s1, $zero
     /* C028 0010C028 3000A28F */  lw         $v0, 0x30($sp)
 .align 2

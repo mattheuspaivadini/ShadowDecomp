@@ -2,7 +2,7 @@
  * session9 R1; residual class not auto-classified
  * The original .s stays in the build (asm/cod/01E258.s); this C
  * draft (Session 9) is kept for the record. */
-int func_00120CD0(int a0, char *a1, unsigned int a2, int a3);
+int _sceMcpReadUserClust(int a0, char *a1, unsigned int a2, int a3);
 int func_0011C4C8(int a0, unsigned int a1, unsigned int *a2);
 
 extern char D_0015F080[];
@@ -15,7 +15,7 @@ int func_0011E258(int a0, int a1, int a2, unsigned int *a3) {
 
     *a3 = 0;
     for (;;) {
-        if (func_00120CD0(a0, D_0015F080, arg, 1) == 0) {
+        if (_sceMcpReadUserClust(a0, D_0015F080, arg, 1) == 0) {
             *a3 = 0x8101006F;
             return -1;
         }

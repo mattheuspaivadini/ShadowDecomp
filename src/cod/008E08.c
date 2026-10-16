@@ -6,7 +6,7 @@
 int func_00107FF8(int (*cb)(void), int *p, int a1, int a2, int a3);
 int func_00108D10(void);
 
-void func_00108E08(int a0, int a1, int a2, int a3) {
+void sceVsnprintf(int a0, int a1, int a2, int a3) {
     int buf;
 
     buf = a0;

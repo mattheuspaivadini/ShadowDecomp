@@ -14,11 +14,11 @@ glabel func_0011D8E0
     /* 1D8E0 0011D8E0 E0FFBD27 */  addiu      $sp, $sp, -0x20
     /* 1D8E4 0011D8E4 0000B0FF */  sd         $s0, 0x0($sp)
     /* 1D8E8 0011D8E8 1000BFFF */  sd         $ra, 0x10($sp)
-    /* 1D8EC 0011D8EC A287040C */  jal        func_00121E88
+    /* 1D8EC 0011D8EC A287040C */  jal        _sceMcCoreGetConnection
     /* 1D8F0 0011D8F0 2D808000 */   daddu     $s0, $a0, $zero
     /* 1D8F4 0011D8F4 19004010 */  beqz       $v0, .L0011D95C
     /* 1D8F8 0011D8F8 00000000 */   nop
-    /* 1D8FC 0011D8FC 2481040C */  jal        func_00120490
+    /* 1D8FC 0011D8FC 2481040C */  jal        _sceMcpCheckNewCard
     /* 1D900 0011D900 2D200002 */   daddu     $a0, $s0, $zero
     /* 1D904 0011D904 09004010 */  beqz       $v0, .L0011D92C
     /* 1D908 0011D908 1600033C */   lui       $v1, %hi(D_0015DF48)
@@ -44,7 +44,7 @@ glabel func_0011D8E0
     /* 1D948 0011D948 2F004234 */   ori       $v0, $v0, (0x8101002F & 0xFFFF)
 .align 2
   .L0011D94C:
-    /* 1D94C 0011D94C 2C81040C */  jal        func_001204B0
+    /* 1D94C 0011D94C 2C81040C */  jal        _sceMcpAuthentication
     /* 1D950 0011D950 2D200002 */   daddu     $a0, $s0, $zero
     /* 1D954 0011D954 04004014 */  bnez       $v0, .L0011D968
     /* 1D958 0011D958 00000000 */   nop
@@ -55,7 +55,7 @@ glabel func_0011D8E0
     /* 1D964 0011D964 13004234 */   ori       $v0, $v0, (0x81010013 & 0xFFFF)
 .align 2
   .L0011D968:
-    /* 1D968 0011D968 A685040C */  jal        func_00121698
+    /* 1D968 0011D968 A685040C */  jal        _sceMcCoreWriteBack
     /* 1D96C 0011D96C 2D200002 */   daddu     $a0, $s0, $zero
     /* 1D970 0011D970 2D100000 */  daddu      $v0, $zero, $zero
 .align 2

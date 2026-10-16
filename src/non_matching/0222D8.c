@@ -22,20 +22,20 @@
  * unprototyped `func_001230B0()`); only $a0 has to be live at the call.
  * MATCH GUESS: cc=29 (the 0221xx/0222xx family is cc=29 throughout, e.g. the
  * matched 0221D0.c; 16-byte-spaced $ra/$s0 frame) */
-int func_001230B0(int a0);
-int func_001221D0(void);
-int SceSifrpcCall(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
+int sce_delete_callback_thread(int a0);
+int sceNetcnfifInit(void);
+int sceSifCallRpc(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
                   int a7, int a8);
 
 extern char D_00167EC0[];   /* .bss 0x00167EC0, 0x40 bytes */
 extern char D_00167F00[];   /* .bss 0x00167F00, 0x1000 bytes */
 
-int func_001222D8(int a0) {
+int sceNetcnfifDeleteCallbackThread(int a0) {
     int r;
 
-    func_001230B0(a0);
-    func_001221D0();
-    r = SceSifrpcCall((int)D_00167EC0, 0xF, 0, (int)D_00167F00, 0x1000,
+    sce_delete_callback_thread(a0);
+    sceNetcnfifInit();
+    r = sceSifCallRpc((int)D_00167EC0, 0xF, 0, (int)D_00167F00, 0x1000,
                       (int)D_00167F00, 0x1000, 0, 0);
     if (r >= 0)
         r = 0;

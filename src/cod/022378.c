@@ -7,7 +7,7 @@ struct S022378 {
 
 extern char D_00167F00[];
 
-int func_00122378(char *dst) {
+int sceNetcnfifGetResult(char *dst) {
     *(struct S022378 *)dst = *(struct S022378 *)D_00167F00;
     return 0;
 }

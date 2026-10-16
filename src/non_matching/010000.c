@@ -6,7 +6,7 @@ int func_0010FFF0(int a0, int a1, int a2, int a3, int a4);
 int func_0010FFB0(int a0, int a1, int a2);
 int func_001290C4(int a0);
 
-extern int D_001326B0[];   /* lui/%lo -> non-small */
+extern int _kExecArg[];   /* lui/%lo -> non-small */
 extern int D_00133168[];   /* lui/addiu -> non-small */
 
 int func_00110000(int a0, int a1, int *a2) {
@@ -16,7 +16,7 @@ int func_00110000(int a0, int a1, int *a2) {
     int base;
     int end;
 
-    base = D_001326B0[0];
+    base = _kExecArg[0];
     end = base + 0x40;
     func_0010FFF0(D_00133168[0], D_00133168[1], (int)a2, (int)D_00133168,
                   end);

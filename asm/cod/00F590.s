@@ -17,11 +17,11 @@ glabel func_0010F590
     /* F598 0010F598 2000B2FF */  sd         $s2, 0x20($sp)
     /* F59C 0010F59C D0818424 */  addiu      $a0, $a0, %lo(D_001381D0)
     /* F5A0 0010F5A0 1000B1FF */  sd         $s1, 0x10($sp)
-    /* F5A4 0010F5A4 1300123C */  lui        $s2, %hi(D_00132968)
+    /* F5A4 0010F5A4 1300123C */  lui        $s2, %hi(TLBInfo)
     /* F5A8 0010F5A8 0000B0FF */  sd         $s0, 0x0($sp)
     /* F5AC 0010F5AC 3000BFFF */  sd         $ra, 0x30($sp)
-    /* F5B0 0010F5B0 68295026 */  addiu      $s0, $s2, %lo(D_00132968)
-    /* F5B4 0010F5B4 6829458E */  lw         $a1, %lo(D_00132968)($s2)
+    /* F5B0 0010F5B0 68295026 */  addiu      $s0, $s2, %lo(TLBInfo)
+    /* F5B4 0010F5B4 6829458E */  lw         $a1, %lo(TLBInfo)($s2)
     /* F5B8 0010F5B8 0400078E */  lw         $a3, 0x4($s0)
     /* F5BC 0010F5BC 0800098E */  lw         $a5, 0x8($s0)
     /* F5C0 0010F5C0 2D30A000 */  daddu      $a2, $a1, $zero
@@ -30,18 +30,18 @@ glabel func_0010F590
     /* F5CC 0010F5CC 2D40E000 */  daddu      $a4, $a3, $zero
     /* F5D0 0010F5D0 FFFFA524 */  addiu      $a1, $a1, -0x1
     /* F5D4 0010F5D4 FFFF2925 */  addiu      $a5, $a5, -0x1
-    /* F5D8 0010F5D8 DE23040C */  jal        func_00108F78
+    /* F5D8 0010F5D8 DE23040C */  jal        kprintf
     /* F5DC 0010F5DC FFFFE724 */   addiu     $a3, $a3, -0x1
     /* F5E0 0010F5E0 00308040 */  mtc0       $zero, $6 /* handwritten instruction */
     /* F5E4 0010F5E4 0F040000 */  sync.p
-    /* F5E8 0010F5E8 6829518E */  lw         $s1, %lo(D_00132968)($s2)
+    /* F5E8 0010F5E8 6829518E */  lw         $s1, %lo(TLBInfo)($s2)
     /* F5EC 0010F5EC 3100222A */  slti       $v0, $s1, 0x31
     /* F5F0 0010F5F0 06004014 */  bnez       $v0, .L0010F60C
     /* F5F4 0010F5F4 2DC80000 */   daddu     $t9, $zero, $zero
     /* F5F8 0010F5F8 1400043C */  lui        $a0, %hi(D_00138208)
-    /* F5FC 0010F5FC DE23040C */  jal        func_00108F78
+    /* F5FC 0010F5FC DE23040C */  jal        kprintf
     /* F600 0010F600 08828424 */   addiu     $a0, $a0, %lo(D_00138208)
-    /* F604 0010F604 7640040C */  jal        func_001101D8
+    /* F604 0010F604 7640040C */  jal        Exit
     /* F608 0010F608 01000424 */   addiu     $a0, $zero, 0x1
 .align 2
   .L0010F60C:
@@ -64,16 +64,16 @@ glabel func_0010F590
     /* F644 0010F644 0000058E */   lw        $a1, 0x0($s0)
 .align 2
   .L0010F648:
-    /* F648 0010F648 68295026 */  addiu      $s0, $s2, %lo(D_00132968)
+    /* F648 0010F648 68295026 */  addiu      $s0, $s2, %lo(TLBInfo)
     /* F64C 0010F64C 0400028E */  lw         $v0, 0x4($s0)
     /* F650 0010F650 21882203 */  addu       $s1, $t9, $v0
     /* F654 0010F654 3100232A */  slti       $v1, $s1, 0x31
     /* F658 0010F658 07006014 */  bnez       $v1, .L0010F678
     /* F65C 0010F65C 2A103103 */   slt       $v0, $t9, $s1
     /* F660 0010F660 1400043C */  lui        $a0, %hi(D_00138220)
-    /* F664 0010F664 DE23040C */  jal        func_00108F78
+    /* F664 0010F664 DE23040C */  jal        kprintf
     /* F668 0010F668 20828424 */   addiu     $a0, $a0, %lo(D_00138220)
-    /* F66C 0010F66C 7640040C */  jal        func_001101D8
+    /* F66C 0010F66C 7640040C */  jal        Exit
     /* F670 0010F670 01000424 */   addiu     $a0, $zero, 0x1
     /* F674 0010F674 2A103103 */  slt        $v0, $t9, $s1
 .align 2
@@ -96,7 +96,7 @@ glabel func_0010F590
     /* F6AC 0010F6AC 0000058E */   lw        $a1, 0x0($s0)
 .align 2
   .L0010F6B0:
-    /* F6B0 0010F6B0 68295026 */  addiu      $s0, $s2, %lo(D_00132968)
+    /* F6B0 0010F6B0 68295026 */  addiu      $s0, $s2, %lo(TLBInfo)
     /* F6B4 0010F6B4 0C0019AE */  sw         $t9, 0xC($s0)
     /* F6B8 0010F6B8 00309940 */  mtc0       $t9, $6 /* handwritten instruction */
     /* F6BC 0010F6BC 0F040000 */  sync.p
@@ -108,9 +108,9 @@ glabel func_0010F590
     /* F6D4 0010F6D4 07004014 */  bnez       $v0, .L0010F6F4
     /* F6D8 0010F6D8 2A103103 */   slt       $v0, $t9, $s1
     /* F6DC 0010F6DC 1400043C */  lui        $a0, %hi(D_00138238)
-    /* F6E0 0010F6E0 DE23040C */  jal        func_00108F78
+    /* F6E0 0010F6E0 DE23040C */  jal        kprintf
     /* F6E4 0010F6E4 38828424 */   addiu     $a0, $a0, %lo(D_00138238)
-    /* F6E8 0010F6E8 7640040C */  jal        func_001101D8
+    /* F6E8 0010F6E8 7640040C */  jal        Exit
     /* F6EC 0010F6EC 01000424 */   addiu     $a0, $zero, 0x1
     /* F6F0 0010F6F0 2A103103 */  slt        $v0, $t9, $s1
 .align 2

@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_00107300, 0x10
+nonmatching GsGetIMR, 0x10
 
-glabel func_00107300
+glabel GsGetIMR
     /* 7300 00107300 70000324 */  addiu      $v1, $zero, 0x70
     /* 7304 00107304 0C000000 */  syscall    0 /* handwritten instruction */
     /* 7308 00107308 0800E003 */  jr         $ra
     /* 730C 0010730C 00000000 */   nop
-endlabel func_00107300
+endlabel GsGetIMR

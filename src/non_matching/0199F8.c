@@ -1,9 +1,9 @@
-/* STATUS (Session 9, 2026-10-15): NON_MATCHING. best score 5 [cc=29].
- * session9 R1; residual class not auto-classified
+/* STATUS (10, 2026-10-16): NON_MATCHING. best score 5 [cc=29].
+ * 
  * The original .s stays in the build (asm/cod/0199F8.s); this C
- * draft (Session 9) is kept for the record. */
-int func_0010FB20(void);
-int func_0010FB70(void);
+ * draft (10) is kept for the record. */
+int DIntr(void);
+int EIntr(void);
 
 int func_001199F8(int a0) {
     int count;
@@ -12,7 +12,7 @@ int func_001199F8(int a0) {
     int idx;
     int n;
 
-    func_0010FB20();
+    DIntr();
     count = *(int *)(a0 + 8);
     p = *(char **)(a0 + 4);
     i = 0;
@@ -29,13 +29,13 @@ int func_001199F8(int a0) {
                 }
                 *(int *)(p + 0x14) = (int)p;
                 *(int *)(p + 0x18) = n;
-                func_0010FB70();
+                EIntr();
                 return (int)p;
             }
             i++;
             p += 0x40;
         } while (i < count);
     }
-    func_0010FB70();
+    EIntr();
     return 0;
 }

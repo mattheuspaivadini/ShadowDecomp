@@ -4,7 +4,7 @@
  */
 extern int D_0013BB90[256];
 
-int func_00102930(int key) {
+int LoaderSysDeleteExternalSemaList(int key) {
     int i;
 
     for (i = 0; i < 256; i++) {

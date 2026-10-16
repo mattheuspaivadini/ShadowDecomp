@@ -27,7 +27,7 @@ struct S001131F8 {
     int *field0C;   /* 0x0C */
 };
 
-void func_001131F8(struct S001131F8 *p) {
+void sceVif1PkCloseDirectCode(struct S001131F8 *p) {
     int *a = p->field00;
     int *b = p->field0C;
     unsigned n;

@@ -19,15 +19,15 @@ extern int D_00146600[];
 extern int D_001470C0[];
 
 int func_0010A798(int a0);
-int func_0010A8C0(void);
+int sceFsInit(void);
 int func_0010A7C8(void);
-int func_00106FE0(void *args);
-int func_00106FF0(int a0);
-int func_00107020(int a0);
+int CreateSema(void *args);
+int DeleteSema(int a0);
+int WaitSema(int a0);
 int func_0010A228(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
                   int a7, int a8, int a9);
 
-int sceStdioAddDrv(int a0) {
+int sceAddDrv(int a0) {
     struct Sema10C4D0 buf;
     int out;
     int h;
@@ -35,29 +35,29 @@ int sceStdioAddDrv(int a0) {
 
     func_0010A798(0xF);
     if (D_00132314 == 0)
-        func_0010A8C0();
+        sceFsInit();
     D_001459C0[3] = a0;
     buf.f04 = 1;
     buf.f14 = D_00138070;
     buf.f08 = 0;
-    h = func_00106FE0(&buf);
+    h = CreateSema(&buf);
     D_001459C0[0] = h;
     D_001459C0[1] = (int)&out;
     D_001459C0[2] = 4;
     r = func_0010A228((int)D_001470C0, 0xF, 0, (int)D_001459C0, 0x10,
                       (int)D_00146600, 4, 0, 0, 0);
     if (r < 0) {
-        func_00106FF0(h);
+        DeleteSema(h);
         func_0010A7C8();
         return -0xB;
     }
     r = *(int *)((unsigned int)D_00146600 | 0x20000000);
     func_0010A7C8();
     if (r == 0) {
-        func_00106FF0(h);
+        DeleteSema(h);
         return -0xB;
     }
-    func_00107020(h);
-    func_00106FF0(h);
+    WaitSema(h);
+    DeleteSema(h);
     return out;
 }

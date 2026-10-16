@@ -28,7 +28,7 @@ struct S021190 {
 
 extern struct S021190 D_00163CC8[];
 
-int func_00121190(int i, int a, int b) {
+int _sceMcCoreSetWriteBackHole(int i, int a, int b) {
     D_00163CC8[i].field1C = a;
     D_00163CC8[i].field20 = b;
     return 1;

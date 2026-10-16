@@ -2,5 +2,5 @@
  *   jr   $ra
  *    nop
  */
-void func_00104088(void) {
+void initmemprintf(void) {
 }

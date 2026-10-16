@@ -6,6 +6,6 @@
  */
 #include "symbols.h"
 
-void func_00111D50(void) {
+void sceResetttyinit(void) {
     D_00133940 = 0;
 }

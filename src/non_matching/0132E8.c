@@ -2,7 +2,7 @@
  * R4 w25a_2: clean guess but not byte-exact
  * The original .s stays in the build (asm/cod/0132E8.s); this C
  * draft (Session 8) is kept for the record. */
-void func_001132E8(unsigned int **a0, int a1, int a2) {
+void sceVif1PkAlign(unsigned int **a0, int a1, int a2) {
     unsigned int mask;
     unsigned int *p;
     unsigned int *end;
@@ -18,3 +18,4 @@ void func_001132E8(unsigned int **a0, int a1, int a2) {
         *a0 = p;
     }
 }
+/* func_001132E8 */

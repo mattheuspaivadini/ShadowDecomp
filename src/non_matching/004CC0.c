@@ -4,11 +4,11 @@
  * draft (Session 8) is kept for the record. */
 extern char D_0013D840[];   /* lui/%lo, 0x140-byte records */
 
-int func_001153B8(int a0);
-int func_001152E8(int a0, void *a1);
-int func_00115210(int a0, void *a1);
+int scePad2GetState(int a0);
+int scePad2GetButtonProfile(int a0, void *a1);
+int scePad2Read(int a0, void *a1);
 
-void func_00104CC0(void) {
+void padSysTickProc(void) {
     char *p;
     char *q;
     int i;
@@ -20,12 +20,12 @@ void func_00104CC0(void) {
     p = D_0013D840 + off;
     for (i = 0; i < 2; i++) {
         off += 0x140;
-        r = func_001153B8(*(int *)(p + 0x11C));
+        r = scePad2GetState(*(int *)(p + 0x11C));
         *(int *)(p + 0x118) = r;
         if (r == 1) {
             st = *(int *)(p + 0x120);
             if (st == 0) {
-                func_001152E8(*(int *)(p + 0x11C), p + 0x100);
+                scePad2GetButtonProfile(*(int *)(p + 0x11C), p + 0x100);
                 *(char *)(p + 0x105) = 0;
                 *(char *)(p + 0x104) = 0;
                 *(char *)(p + 0x109) = 0x7F;
@@ -35,7 +35,7 @@ void func_00104CC0(void) {
                 *(char *)(p + 0x106) = 0x7F;
             } else if (st == 1) {
                 q = p + 0x104;
-                func_00115210(*(int *)(p + 0x11C), q);
+                scePad2Read(*(int *)(p + 0x11C), q);
                 *(unsigned char *)q =
                     *(unsigned char *)(p + 0x100) & ~*(unsigned char *)q;
                 *(unsigned char *)(p + 0x105) =

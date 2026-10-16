@@ -1,9 +1,9 @@
-/* STATUS (Session 9, 2026-10-15): NON_MATCHING. best score 6 [cc=29].
- * session9 R2 waveA; residual class not auto-classified
+/* STATUS (10, 2026-10-16): NON_MATCHING. best score 6 [cc=29].
+ * 
  * The original .s stays in the build (asm/cod/019568.s); this C
- * draft (Session 9) is kept for the record. */
-int func_00118DD0(int a0, int a1, int a2, int a3);
-int func_00118E58(int a0, int a1, int a2, int a3, int a4, int a5);
+ * draft (10) is kept for the record. */
+int sceInetGetInterfaceList(int a0, int a1, int a2, int a3);
+int sceInetInterfaceControl(int a0, int a1, int a2, int a3, int a4, int a5);
 
 int func_00119568(int a0, int a1, int *out) {
     int buf[0x100];
@@ -11,13 +11,13 @@ int func_00119568(int a0, int a1, int *out) {
     int n;
     int i;
 
-    n = func_00118DD0(a0, a1, (int)buf, 0x100);
+    n = sceInetGetInterfaceList(a0, a1, (int)buf, 0x100);
     if (n < 0)
         return -1;
     if (n == 0)
         return -2;
     for (i = 0; i < n; i++) {
-        if (func_00118E58(a0, a1, buf[i], 8, (int)&v, 4) < 0)
+        if (sceInetInterfaceControl(a0, a1, buf[i], 8, (int)&v, 4) < 0)
             return -1;
         if (v & 2)
             break;

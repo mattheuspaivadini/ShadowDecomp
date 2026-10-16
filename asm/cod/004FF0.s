@@ -21,7 +21,7 @@ glabel func_00104FF0
     /* 500C 0010500C 1300123C */  lui        $s2, %hi(D_001373F0)
 .align 2
   .L00105010:
-    /* 5010 00105010 081C040C */  jal        func_00107020
+    /* 5010 00105010 081C040C */  jal        WaitSema
     /* 5014 00105014 A883848F */   lw        $a0, %gp_rel(D_0013A118)($gp)
     /* 5018 00105018 AC83828F */  lw         $v0, %gp_rel(D_0013A11C)($gp)
     /* 501C 0010501C 04004050 */  beql       $v0, $zero, .L00105030
@@ -32,14 +32,14 @@ glabel func_00104FF0
 .align 2
   .L00105030:
     /* 5030 00105030 F0734526 */  addiu      $a1, $s2, %lo(D_001373F0)
-    /* 5034 00105034 6416040C */  jal        func_00105990
+    /* 5034 00105034 6416040C */  jal        PutStringS
     /* 5038 00105038 80FF8434 */   ori       $a0, $a0, (0x4080FF80 & 0xFFFF)
     /* 503C 0010503C 20A12426 */  addiu      $a0, $s1, %lo(D_0013A120)
     /* 5040 00105040 03500524 */  addiu      $a1, $zero, 0x5003
     /* 5044 00105044 2D300000 */  daddu      $a2, $zero, $zero
     /* 5048 00105048 2D380000 */  daddu      $a3, $zero, $zero
     /* 504C 0010504C 2D400000 */  daddu      $a4, $zero, $zero
-    /* 5050 00105050 9A35040C */  jal        sceStdioDevctl
+    /* 5050 00105050 9A35040C */  jal        sceDevctl
     /* 5054 00105054 2D480000 */   daddu     $a5, $zero, $zero
     /* 5058 00105058 28A10426 */  addiu      $a0, $s0, %lo(D_0013A128)
     /* 505C 0010505C 00000000 */  nop
@@ -49,13 +49,13 @@ glabel func_00104FF0
     /* 5064 00105064 2D300000 */  daddu      $a2, $zero, $zero
     /* 5068 00105068 2D380000 */  daddu      $a3, $zero, $zero
     /* 506C 0010506C 2D400000 */  daddu      $a4, $zero, $zero
-    /* 5070 00105070 9A35040C */  jal        sceStdioDevctl
+    /* 5070 00105070 9A35040C */  jal        sceDevctl
     /* 5074 00105074 2D480000 */   daddu     $a5, $zero, $zero
     /* 5078 00105078 F9FF4204 */  bltzl      $v0, .L00105060
     /* 507C 0010507C 28A10426 */   addiu     $a0, $s0, %lo(D_0013A128)
 .align 2
   .L00105080:
-    /* 5080 00105080 7460040C */  jal        func_001181D0
+    /* 5080 00105080 7460040C */  jal        sceCdPowerOff
     /* 5084 00105084 2D20A003 */   daddu     $a0, $sp, $zero
     /* 5088 00105088 FDFF4010 */  beqz       $v0, .L00105080
     /* 508C 0010508C 0000A28F */   lw        $v0, 0x0($sp)
@@ -69,6 +69,6 @@ glabel func_00104FF0
     /* 50A4 001050A4 A883848F */  lw         $a0, %gp_rel(D_0013A118)($gp)
     /* 50A8 001050A8 0000BFFF */  sd         $ra, 0x0($sp)
     /* 50AC 001050AC 0000BFDF */  ld         $ra, 0x0($sp)
-    /* 50B0 001050B0 041C0408 */  j          func_00107010
+    /* 50B0 001050B0 041C0408 */  j          iSignalSema
     /* 50B4 001050B4 1000BD27 */   addiu     $sp, $sp, 0x10
 endlabel func_00104FF0

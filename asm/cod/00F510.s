@@ -9,11 +9,11 @@
 
 .align 3
 /* Handwritten function */
-nonmatching func_0010F510, 0x10
+nonmatching iGetTLBEntry, 0x10
 
-glabel func_0010F510
+glabel iGetTLBEntry
     /* F510 0010F510 A9FF0324 */  addiu      $v1, $zero, -0x57
     /* F514 0010F514 0C000000 */  syscall    0 /* handwritten instruction */
     /* F518 0010F518 0800E003 */  jr         $ra
     /* F51C 0010F51C 00000000 */   nop
-endlabel func_0010F510
+endlabel iGetTLBEntry

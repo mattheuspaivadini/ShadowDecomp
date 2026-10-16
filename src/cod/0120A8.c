@@ -9,10 +9,10 @@
  *   ld ra,0(sp); daddu v0,zero,zero; jr ra; addiu sp,sp,0x10
  * If the first argument is 1, call func_001101D8 with the second; return 0.
  */
-extern int func_001101D8();
+extern int Exit();
 
-int func_001120A8(int a0, int a1) {
+int kill(int a0, int a1) {
     if (a0 == 1)
-        func_001101D8(a1);
+        Exit(a1);
     return 0;
 }

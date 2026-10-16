@@ -247,15 +247,15 @@ glabel func_0010A388
 .align 2
   .L0010A6BC:
     /* A6BC 0010A6BC 19008104 */  bgez       $a0, .L0010A724
-    /* A6C0 0010A6C0 1300073C */   lui       $a3, %hi(D_00132290)
+    /* A6C0 0010A6C0 1300073C */   lui       $a3, %hi(_sceFs_q)
     /* A6C4 0010A6C4 23100400 */  negu       $v0, $a0
-    /* A6C8 0010A6C8 9022E38C */  lw         $v1, %lo(D_00132290)($a3)
+    /* A6C8 0010A6C8 9022E38C */  lw         $v1, %lo(_sceFs_q)($a3)
     /* A6CC 0010A6CC 2D284000 */  daddu      $a1, $v0, $zero
     /* A6D0 0010A6D0 0000A2AF */  sw         $v0, 0x0($sp)
     /* A6D4 0010A6D4 06006514 */  bne        $v1, $a1, .L0010A6F0
     /* A6D8 0010A6D8 2D300000 */   daddu     $a2, $zero, $zero
     /* A6DC 0010A6DC FFFF0224 */  addiu      $v0, $zero, -0x1
-    /* A6E0 0010A6E0 9022E2AC */  sw         $v0, %lo(D_00132290)($a3)
+    /* A6E0 0010A6E0 9022E2AC */  sw         $v0, %lo(_sceFs_q)($a3)
     /* A6E4 0010A6E4 12000010 */  b          .L0010A730
     /* A6E8 0010A6E8 3000BFDF */   ld        $ra, 0x30($sp)
     /* A6EC 0010A6EC 00000000 */  nop
@@ -266,7 +266,7 @@ glabel func_0010A388
   .L0010A6F4:
     /* A6F4 0010A6F4 2000C228 */  slti       $v0, $a2, 0x20
     /* A6F8 0010A6F8 0C004010 */  beqz       $v0, .L0010A72C
-    /* A6FC 0010A6FC 9022E224 */   addiu     $v0, $a3, %lo(D_00132290)
+    /* A6FC 0010A6FC 9022E224 */   addiu     $v0, $a3, %lo(_sceFs_q)
     /* A700 0010A700 80180600 */  sll        $v1, $a2, 2
     /* A704 0010A704 21186200 */  addu       $v1, $v1, $v0
     /* A708 0010A708 0000648C */  lw         $a0, 0x0($v1)
@@ -278,7 +278,7 @@ glabel func_0010A388
     /* A720 0010A720 3000BFDF */   ld        $ra, 0x30($sp)
 .align 2
   .L0010A724:
-    /* A724 0010A724 041C040C */  jal        func_00107010
+    /* A724 0010A724 041C040C */  jal        iSignalSema
     /* A728 0010A728 00000000 */   nop
 .align 2
   .L0010A72C:

@@ -1,7 +1,7 @@
-/* STATUS (Session 7, 2026-10-14): NON_MATCHING. best score 7 [cc=29, default].
- * 0x24-stride record + tail call; allocation differs.
+/* STATUS (10, 2026-10-16): NON_MATCHING. best score 7 [cc=29].
+ * 
  * The original .s stays in the build (asm/cod/021A70.s); this C
- * draft (subagent-produced, Session 7) is kept for the record. */
+ * draft (10) is kept for the record. */
 /* asm/cod/021A70.s -> func_00121A70 @ 0x00121A70 (0x1C bytes, 7 insns)
  *   addiu $v1, $zero, 0x24
  *   lui   $v0, %hi(D_00163CC8)
@@ -26,8 +26,8 @@ struct R021A70 {
 
 extern struct R021A70 D_00163CC8[];
 
-int func_001218D8(int a0, int a1, int a2, int a3, int a4);
+int _sceMcCoreReadPage2(int a0, int a1, int a2, int a3, int a4);
 
-int func_00121A70(int a0, int a1, int a2, int a3) {
-    return func_001218D8(a0, a1, a2, a3, D_00163CC8[a0].field14);
+int _sceMcCoreReadPage(int a0, int a1, int a2, int a3) {
+    return _sceMcCoreReadPage2(a0, a1, a2, a3, D_00163CC8[a0].field14);
 }

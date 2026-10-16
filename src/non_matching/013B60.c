@@ -9,20 +9,20 @@ struct S13B60 {
 };
 
 extern struct S13B60 D_00133970[];
-int func_00113520(void);
-int func_00111D60(void);
-long long func_00111DF0(void);
+int sceGsGetGParam(void);
+int VSync(void);
+long long VSync2(void);
 
-int func_00113B60(void) {
-    struct S13B60 *p = (struct S13B60 *)func_00113520();
+int sceGsSyncV(void) {
+    struct S13B60 *p = (struct S13B60 *)sceGsGetGParam();
 
     if (p->f08 == 0) {
-        func_00111D60();
+        VSync();
         if (p->f00 != 1)
             return 1;
         return (int)((*(volatile unsigned long long *)0x12001000U >> 13) & 1);
     } else {
-        long long r = func_00111DF0();
+        long long r = VSync2();
 
         if (p->f00 != 1)
             return 1;

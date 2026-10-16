@@ -15,6 +15,6 @@ glabel func_001053F0
     /* 53F4 001053F4 1884848F */  lw         $a0, %gp_rel(D_0013A180 + 0x8)($gp)
     /* 53F8 001053F8 0000BFFF */  sd         $ra, 0x0($sp)
     /* 53FC 001053FC 0000BFDF */  ld         $ra, 0x0($sp)
-    /* 5400 00105400 041C0408 */  j          func_00107010
+    /* 5400 00105400 041C0408 */  j          iSignalSema
     /* 5404 00105404 1000BD27 */   addiu     $sp, $sp, 0x10
 endlabel func_001053F0

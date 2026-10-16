@@ -14,11 +14,11 @@ glabel func_0011C200
     /* 1C200 0011C200 90FFBD27 */  addiu      $sp, $sp, -0x70
     /* 1C204 0011C204 84010324 */  addiu      $v1, $zero, 0x184
     /* 1C208 0011C208 1000B1FF */  sd         $s1, 0x10($sp)
-    /* 1C20C 0011C20C 1300023C */  lui        $v0, %hi(D_00135638)
+    /* 1C20C 0011C20C 1300023C */  lui        $v0, %hi(gSceMc2SysInfo)
     /* 1C210 0011C210 2D888000 */  daddu      $s1, $a0, $zero
     /* 1C214 0011C214 3000B3FF */  sd         $s3, 0x30($sp)
     /* 1C218 0011C218 18182302 */  mult       $v1, $s1, $v1
-    /* 1C21C 0011C21C 38564224 */  addiu      $v0, $v0, %lo(D_00135638)
+    /* 1C21C 0011C21C 38564224 */  addiu      $v0, $v0, %lo(gSceMc2SysInfo)
     /* 1C220 0011C220 2D98C000 */  daddu      $s3, $a2, $zero
     /* 1C224 0011C224 6000BFFF */  sd         $ra, 0x60($sp)
     /* 1C228 0011C228 5000B5FF */  sd         $s5, 0x50($sp)
@@ -53,7 +53,7 @@ glabel func_0011C200
     /* 1C294 0011C294 21102201 */  addu       $v0, $a5, $v0
     /* 1C298 0011C298 2D202002 */  daddu      $a0, $s1, $zero
     /* 1C29C 0011C29C 5000468C */  lw         $a2, 0x50($v0)
-    /* 1C2A0 0011C2A0 C281040C */  jal        func_00120708
+    /* 1C2A0 0011C2A0 C281040C */  jal        _sceMcpReadClust
     /* 1C2A4 0011C2A4 01000724 */   addiu     $a3, $zero, 0x1
     /* 1C2A8 0011C2A8 06004054 */  bnel       $v0, $zero, .L0011C2C4
     /* 1C2AC 0011C2AC 000050AE */   sw        $s0, 0x0($s2)

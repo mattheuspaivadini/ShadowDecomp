@@ -291,7 +291,7 @@ glabel func_00125B30
   .L00125E98:
     /* 25E98 00125E98 8E96040C */  jal        func_00125A38
     /* 25E9C 00125E9C 2D282002 */   daddu     $a1, $s1, $zero
-    /* 25EA0 00125EA0 F09D040C */  jal        func_001277C0
+    /* 25EA0 00125EA0 F09D040C */  jal        free
     /* 25EA4 00125EA4 0000248E */   lw        $a0, 0x0($s1)
     /* 25EA8 00125EA8 76000010 */  b          .L00126084
     /* 25EAC 00125EAC 0000188E */   lw        $t8, 0x0($s0)

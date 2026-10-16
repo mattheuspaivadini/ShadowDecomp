@@ -1,7 +1,7 @@
-/* STATUS (Session 9, 2026-10-15): NON_MATCHING. best score 6 [cc=29].
- * session9 R2 waveA; residual class not auto-classified
+/* STATUS (10, 2026-10-16): NON_MATCHING. best score 6 [cc=29].
+ * 
  * The original .s stays in the build (asm/cod/018650.s); this C
- * draft (Session 9) is kept for the record. */
+ * draft (10) is kept for the record. */
 struct S018650 {
     int f0;    /* 0x00 */
     int f4;    /* 0x04 */
@@ -14,7 +14,7 @@ int func_001184E8(int a0, int *a1, int a2, char *a3);
 int func_00118380(int a0, int a1, int *p, int a3, int a4);
 int func_00118490(int a0, int a1, int *p, int a3, int a4);
 
-int func_00118650(int a0, struct S018650 *p, int a2, int a3, char *a4, int a5,
+int sceInetName2Address(int a0, struct S018650 *p, int a2, int a3, char *a4, int a5,
                   int a6, int a7) {
     int r;
 
