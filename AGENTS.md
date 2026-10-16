@@ -192,26 +192,45 @@ Tips: use a function's constants, string references, and call patterns to infer 
 
 | Metric | Value |
 |--------|-------|
-| Current phase | Phases 1–4 done (**incl. step 6, ELF container**); **Phase 3 revision question resolved** (Session 8 added a **third** generation, `2.95.3-136`); **Phase 5 in progress (55 named symbols)**; Phase 6: **372 functions matched** |
-| ELF rebuild hash match | **YES — 237,952 bytes, SHA-1 `6f853f64…` (flat load image), still green with 372 functions from C** |
+| Current phase | Phases 1–4 done (**incl. step 6, ELF container**); **Phase 3 revision question resolved** (Session 8 added a **third** generation, `2.95.3-136`); **Phase 5 in progress (55 named symbols)**; Phase 6: **388 functions matched** |
+| ELF rebuild hash match | **YES — 237,952 bytes, SHA-1 `6f853f64…` (flat load image), still green with 388 functions from C** |
 | ELF container (whole file) | **YES — `build/SCUS_974.72.elf` byte-identical to the original: 242,940 bytes, SHA-1 `b715b349…`; 3 program headers, 16 sections, `e_entry 0x00100010`, `.mdebug.eabi64`, no `.symtab`** (`tools/containerize.py`) |
 | Functions named | **55 `.text` symbols** = `entry` + **54 evidence-derived names**: 17 verbatim self-naming log messages, 22 inferred from `SceStdio<Op>Sema` object names (UNCONFIRMED), 3 single inferences (UNCONFIRMED), 3 callee names from `func_00104668` failure diagnostics (Session 5, UNCONFIRMED), 2 Session-3 names, 5 SDK object/operation names (Session 10a, UNCONFIRMED), 2 more SDK names (Session 10a.2, UNCONFIRMED) |
 | String-evidenced name candidates | **61 functions** reference an identifier-bearing string; **50 named, 11 pending** (Session 10a applied 5 with no C body/caller; Session 10a.2 applied the 2 that Session 10a had reverted after they broke the link, via a pure symbol rename of the 21 matched C call sites) |
-| Functions matched (C) | **372 / 1036** (2.9-991111, 2.96 and 2.95.3-136 per TU; the wrapper tier uses a per-TU `-fno-optimize-sibling-calls` on cc=296 TUs only — the 2.9 `cc1` rejects the flag) |
-| Matched bytes | 27868 / 203,692 `.text` bytes = **13.681 %** (verified) |
+| Functions matched (C) | **388 / 1036** (2.9-991111, 2.96 and 2.95.3-136 per TU; the wrapper tier uses a per-TU `-fno-optimize-sibling-calls` on cc=296 TUs only — the 2.9 `cc1` rejects the flag) |
+| Matched bytes | 29340 / 203,692 `.text` bytes = **14.404 %** (verified) |
 | Compiler flags | `-O2 -g2 -G8` (per-TU `-g0` and `-fno-optimize-sibling-calls` overrides, the latter cc=296-only); `-O1`/`-Os` ruled out on 148 functions; `-O2 ≡ -O3` (not separable; Session 6 ran the decisive experiment — §2.4 of `docs/compiler.md`: plain static + `-O3` ≡ `inline` + `{-O2,-O3}`, so the `-O2` pin stays) |
 | Compilers | `ee-gcc2.96` (default) + `ee-gcc2.9-991111-01` (`cc=29`) + **`wine:ee-gcc2.95.3-136`** and `ee-gcc2.9-991111-xz`; matrix in `docs/compiler.md` §4.3, third-generation verdict in §4.4 |
 | `.text` disassembly (splat R5900) | accurate; **1036 per-function `.s` + 2 raw `textbin`** (`.text` header, `0x00113074` non-function hole) |
 | Ghidra EE-extension decode | **100 %** of `.text` (50,923/50,923) |
 | splat split coverage | 203 KB / 85.6 % of ROM |
 | Functions detected | 1036 after removing 1 splat boundary false positive (`0x00113074`) from spimdisasm's 1037 |
-| Non-matching attempts tracked | **308** (`src/non_matching/`; ledger: 308 near / 477 real pool remaining) |
+| Non-matching attempts tracked | **292** (`src/non_matching/`; ledger: 292 near / 461 real pool remaining) |
 | IOP modules inventoried | 11 IRX (ELF32 MIPS-I, R3000A) |
 | EE hardware registers referenced | **38 addresses** (`tools/scan_hw_regs.py`); the 2 that were unidentified are now **confirmed**: `0x10001010` = `T2_MODE` (Timer 2 mode/status), `0x1000E060` = `D_STADR` (DMAC stall address) — `docs/structs.md` §"Hardware registers" |
 
 ### Session log
 
-- **2026-10-16 (Session 12) — Master Plan execution (Waves B001–B006, A001–A002), +16 matched functions (356 → 372, 12.892 % → 13.681 %, 26,260 → 27,868 B).**
+- **2026-10-16 (Session 12) — Master Plan execution (Waves B001–B009, A001–A002), +32 matched functions (356 → 388, 12.892 % → 14.404 %, 26,260 → 29,340 B).**
+  - **Promotions (B007–B009):**
+    - `00F4C0` (`SetTLBEntry`, wine:2.95.3-136) — argument forwarding into `$a0` preserved branch delay `$ra` save.
+    - `013368` (`sceVif1PkAddGsData`, cc=296) — post-increment pointer store sequence.
+    - `014C48` (`sceDmaSend`, cc=29) — `sceDmaChan` volatile `tadr`, `0xFFFFFFFFU` unsigned comparison.
+    - `014CB0` (`sceDmaSendN`, cc=29) — volatile `madr`, `| 0x101`.
+    - `014D28` (`sceDmaSendI`, cc=29) — volatile `madr`, `| 0x109`.
+    - `014DA0` (`sceDmaRecv`, cc=29) — channel control bitmask manipulation.
+    - `01D988` (`func_0011D988`, cc=29) — conditional expression error code mapping.
+    - `028630` (`_sbrk_r`, cc=296) — authentic Newlib reentrant `sbrk` wrapper.
+    - `031100` (`_close_r`, cc=296) — authentic Newlib reentrant `close` wrapper.
+    - `013B00` (`sceGsSwapDBuff`, cc=29) — per-branch `__asm__ volatile("");` preventing sibling call.
+    - `01A5C8` (`sceMc2ChangeThreadPriority`, wine:2.95.3-136) — array declaration preventing `$gp` small-data access.
+    - `01A600` (`sceMc2iChangeThreadPriority`, wine:2.95.3-136) — identical twin calling `iChangeThreadPriority`.
+    - `028970` (`_kill_r`, cc=296) — authentic Newlib reentrant `kill` wrapper.
+    - `031158` (`_fstat_r`, cc=296) — authentic Newlib reentrant `fstat` wrapper.
+    - `004DF8` (`padsysInit`, cc=296) — `int buf[8]` stack frame allocating `0x20` local bytes.
+    - `01D8E0` (`func_0011D8E0`, cc=29) — array of `0x898`-byte structs indexing with `mult 0x898`.
+  - **Waves completed & tracked:** `B001` through `B009`, `A001`, `A002` marked `DONE` in `docs/plan/TASK_STATE.tsv`.
+  - **Gates:** `verify_fast.py` (388/388 byte-exact in 44s), `tools/build.py` (237,952 B flat image HASH MATCH + byte-identical 242,940 B ELF container).
   - **Promotions:**
     - `00AB58` (`sceFsReset`, cc=29) — fixed GP-relative `.data` section attribute on `D_00132314`.
     - `012B98` (`sceSifExitCmd`, cc=29) — array declaration on `D_0014B354` to avoid `-G8` small data.

@@ -1,14 +1,13 @@
-/* STATUS (Session 8, 2026-10-14): NON_MATCHING. best score 10 [cc=296].
- * R4 w25a_0: buf[0..2] store order
- * The original .s stays in the build (asm/cod/004DF8.s); this C
- * draft (Session 8) is kept for the record. */
+/* asm/cod/004DF8.s -> padsysInit.
+ * padsysInit: buf[8] 0x20 stack allocation
+ * MATCHED (Session 12). */
 #include "symbols.h"
 
 int scePad2Init(int a0);
 int scePad2CreateSocket(int *args, void *p);
 
 void padsysInit(void) {
-    int   buf[3];
+    int   buf[8];
     int   i;
     char *p;
 

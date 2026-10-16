@@ -488,3 +488,19 @@
 007768 = src/cod/007768.c cc=29               # InitThread cc=29
 010120 = src/cod/010120.c cc=29               # ExecPS2 cc=29
 0311B8 = src/cod/0311B8.c                     # _lseek_r cc=296
+00F4C0 = src/cod/00F4C0.c cc=wine:ee-gcc2.95.3-136# SetTLBEntry (SHN_ABS)
+013368 = src/cod/013368.c                     # sceVif1PkAddGsData (SHN_ABS)
+014C48 = src/cod/014C48.c cc=29               # sceDmaSend (SHN_ABS)
+014CB0 = src/cod/014CB0.c cc=29               # sceDmaSendN (SHN_ABS)
+014D28 = src/cod/014D28.c cc=29               # sceDmaSendI (SHN_ABS)
+014DA0 = src/cod/014DA0.c cc=29               # sceDmaRecv (SHN_ABS)
+031100 = src/cod/031100.c                     # _close_r (SHN_ABS)
+028630 = src/cod/028630.c                     # _sbrk_r (SHN_ABS)
+01D988 = src/cod/01D988.c cc=29               # func_0011D988 (ternary validation)
+031158 = src/cod/031158.c                     # _fstat_r (SHN_ABS)
+028970 = src/cod/028970.c                     # _kill_r (SHN_ABS)
+01A5C8 = src/cod/01A5C8.c cc=wine:ee-gcc2.95.3-136# sceMc2ChangeThreadPriority (SHN_ABS)
+01A600 = src/cod/01A600.c cc=wine:ee-gcc2.95.3-136# sceMc2iChangeThreadPriority (SHN_ABS)
+013B00 = src/cod/013B00.c cc=29               # sceGsSwapDBuff (SHN_ABS)
+004DF8 = src/cod/004DF8.c                     # padsysInit: buf[8] 0x20 stack allocation
+01D8E0 = src/cod/01D8E0.c cc=29               # func_0011D8E0: D_0015DF48 array indexing with mult 0x898

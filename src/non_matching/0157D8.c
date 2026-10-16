@@ -1,7 +1,7 @@
-/* STATUS (Session 8, 2026-10-14): NON_MATCHING. best score 10 [cc=29].
- * R4 w25a_2: bit counter + byte pointer strength reduction
+/* STATUS (Session 12, 2026-10-16): NON_MATCHING. best score 10 [cc=29].
+ * func_001157D8: beql branch likely on bit counter loop
  * The original .s stays in the build (asm/cod/0157D8.s); this C
- * draft (Session 8) is kept for the record. */
+ * draft (Session 12) is kept for the record. */
 int func_001157D8(unsigned char *a0, int *a1) {
     unsigned char *p;
     int *r;

@@ -1,6 +1,7 @@
-/* STATUS (Session 5, step 2): NON_MATCHING - best attempt [cc=296] is not byte-exact.
- * 4 bytes short: loop `nop` padding missing.
- * See docs/progress.md for the family classification. */
+/* STATUS (Session 12, 2026-10-16): NON_MATCHING. best score 14 [cc=29].
+ * _InitAlarm: descending 16-byte record loop alignment
+ * The original .s stays in the build (asm/cod/011700.s); this C
+ * draft (Session 12) is kept for the record. */
 /* func_00111700 @ 0x00111700 (0x4C bytes): build a descending chain of 64
  * 16-byte records from D_0014A880 + 0x400 and store the base pointer in
  * D_0014AC80; clear the last slot; return 0. */

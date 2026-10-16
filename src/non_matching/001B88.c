@@ -1,12 +1,12 @@
-/* STATUS (Session 8, 2026-10-14): NON_MATCHING. best score 9 [cc=296].
- * R2 w45a_0: block-layout (EABI a4/a5 + 0x1C ldl/ldr copy order)
+/* STATUS (Session 8, 2026-10-16): NON_MATCHING. best score 9 [cc=296].
+ * thread-init handler scheduling
  * The original .s stays in the build (asm/cod/001B88.s); this C
  * draft (Session 8) is kept for the record. */
 extern int D_00139E04;
 extern char D_00136400[];
 
 int func_0012821C(int a0, int a1, int a2);
-void LoaderSysPrintf(int a0, int a1, int a2, int a3, int a4, int a5);
+void func_00102CF8(int a0, int a1, int a2, int a3, int a4, int a5);
 
 struct Rec00101B88 {
     int f0;         /* 0x00 */
@@ -50,7 +50,7 @@ int func_00101B88(int a0, int a1, int *a2) {
         p++;
         dst++;
     }
-    LoaderSysPrintf((int)D_00136400, a1, a2[2], (int)dst, a2[3], s1);
+    func_00102CF8((int)D_00136400, a1, a2[2], (int)dst, a2[3], s1);
     a2[1] = n;
     D_00139E04 = a1;
     return 0;

@@ -1,5 +1,5 @@
-/* STATUS (Session 8, 2026-10-14): NON_MATCHING. best score 8 [cc=29].
- * R2 w45a_3: Timer-3 guard + 6-pair program
+/* STATUS (Session 8, 2026-10-16): NON_MATCHING. best score 8 [cc=29].
+ * timer-3 guard and loop reg-alloc
  * The original .s stays in the build (asm/cod/0102B8.s); this C
  * draft (Session 8) is kept for the record. */
 int func_00110250(int a0, int a1);
