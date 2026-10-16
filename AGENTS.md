@@ -729,3 +729,16 @@ Before ending, provide the user with:
 4. Assumptions and uncertainties.
 
 Then update sections 4 and 9 of this file and commit.
+
+## 11. Plan workflow (`docs/plan/`)
+
+All worker tasks, disc/coverage measurements, `.XFF` overlay specs, and pre-generated per-function context bundles live under `docs/plan/` and `build/plan/`:
+
+1. **Master plan & gap analysis:** [`docs/plan/PLAN.md`](file:///C:/Users/Matheus/Documents/ShadowDecomp/docs/plan/PLAN.md)
+2. **Task table & live state:** [`docs/plan/tasks.tsv`](file:///C:/Users/Matheus/Documents/ShadowDecomp/docs/plan/tasks.tsv) (54 dependency-ordered tasks across `WS-T`, `WS-D`, `WS-B`, `WS-A`, `WS-X`, `WS-C`, `WS-E`) and [`docs/plan/TASK_STATE.tsv`](file:///C:/Users/Matheus/Documents/ShadowDecomp/docs/plan/TASK_STATE.tsv)
+3. **Worker prompt:** [`docs/plan/WORKER_PROMPT.md`](file:///C:/Users/Matheus/Documents/ShadowDecomp/docs/plan/WORKER_PROMPT.md)
+4. **Tooling, REA & Ghidra headless scripts:** [`docs/plan/tooling.md`](file:///C:/Users/Matheus/Documents/ShadowDecomp/docs/plan/tooling.md) and `docs/plan/ghidra/`
+5. **Disc inventory & measured coverage:** [`docs/plan/disc_inventory.tsv`](file:///C:/Users/Matheus/Documents/ShadowDecomp/docs/plan/disc_inventory.tsv) and [`docs/plan/coverage.md`](file:///C:/Users/Matheus/Documents/ShadowDecomp/docs/plan/coverage.md)
+6. **Pre-generated worker context bundles (`489` functions) & `.XFF` symbol tables (`840` official `SCUS_974.72` function names + `5,972` overlay functions):** `build/plan/ctx/<stem>.md` and `build/plan/xff/` (regenerate anytime with `python docs/plan/scripts/xff_probe.py && python docs/plan/scripts/gen_context.py`).
+7. **Direction of truth for symbols:** `config/symbol_addrs.txt` is canonical; import into Ghidra via `docs/plan/ghidra/ImportRepoSymbols.java`. Never run slow `tools/verify_c.py` (~1.5 h); always gate tasks with `python build/s10/verify_fast.py` (~11 s) and `python docs/plan/scripts/check_plan.py`.
+
