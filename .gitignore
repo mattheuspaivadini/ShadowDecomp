@@ -25,6 +25,7 @@ build/
 *.bin.gd
 *.pak
 *.dat
+Shadow of the Colossus (USA)/* 
 
 # ============================================================================
 # Toolchains / large tools (installed locally, not part of the repo)

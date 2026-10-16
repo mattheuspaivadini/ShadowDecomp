@@ -192,24 +192,30 @@ Tips: use a function's constants, string references, and call patterns to infer 
 
 | Metric | Value |
 |--------|-------|
-| Current phase | Phases 1–4 done (**incl. step 6, ELF container**); **Phase 3 revision question resolved** (Session 8 added a **third** generation, `2.95.3-136`); **Phase 5 in progress (55 named symbols)**; Phase 6: **349 functions matched** |
-| ELF rebuild hash match | **YES — 237,952 bytes, SHA-1 `6f853f64…` (flat load image), still green with 349 functions from C** |
+| Current phase | Phases 1–4 done (**incl. step 6, ELF container**); **Phase 3 revision question resolved** (Session 8 added a **third** generation, `2.95.3-136`); **Phase 5 in progress (55 named symbols)**; Phase 6: **356 functions matched** |
+| ELF rebuild hash match | **YES — 237,952 bytes, SHA-1 `6f853f64…` (flat load image), still green with 356 functions from C** |
 | ELF container (whole file) | **YES — `build/SCUS_974.72.elf` byte-identical to the original: 242,940 bytes, SHA-1 `b715b349…`; 3 program headers, 16 sections, `e_entry 0x00100010`, `.mdebug.eabi64`, no `.symtab`** (`tools/containerize.py`) |
 | Functions named | **55 `.text` symbols** = `entry` + **54 evidence-derived names**: 17 verbatim self-naming log messages, 22 inferred from `SceStdio<Op>Sema` object names (UNCONFIRMED), 3 single inferences (UNCONFIRMED), 3 callee names from `func_00104668` failure diagnostics (Session 5, UNCONFIRMED), 2 Session-3 names, 5 SDK object/operation names (Session 10a, UNCONFIRMED), 2 more SDK names (Session 10a.2, UNCONFIRMED) |
 | String-evidenced name candidates | **61 functions** reference an identifier-bearing string; **50 named, 11 pending** (Session 10a applied 5 with no C body/caller; Session 10a.2 applied the 2 that Session 10a had reverted after they broke the link, via a pure symbol rename of the 21 matched C call sites) |
-| Functions matched (C) | **349 / 1036** (2.9-991111, 2.96 and 2.95.3-136 per TU; the wrapper tier uses a per-TU `-fno-optimize-sibling-calls` on cc=296 TUs only — the 2.9 `cc1` rejects the flag) |
-| Matched bytes | 25252 / 203,692 `.text` bytes = **12.397 %** (verified) |
+| Functions matched (C) | **356 / 1036** (2.9-991111, 2.96 and 2.95.3-136 per TU; the wrapper tier uses a per-TU `-fno-optimize-sibling-calls` on cc=296 TUs only — the 2.9 `cc1` rejects the flag) |
+| Matched bytes | 26260 / 203,692 `.text` bytes = **12.892 %** (verified) |
 | Compiler flags | `-O2 -g2 -G8` (per-TU `-g0` and `-fno-optimize-sibling-calls` overrides, the latter cc=296-only); `-O1`/`-Os` ruled out on 148 functions; `-O2 ≡ -O3` (not separable; Session 6 ran the decisive experiment — §2.4 of `docs/compiler.md`: plain static + `-O3` ≡ `inline` + `{-O2,-O3}`, so the `-O2` pin stays) |
 | Compilers | `ee-gcc2.96` (default) + `ee-gcc2.9-991111-01` (`cc=29`) + **`wine:ee-gcc2.95.3-136`** and `ee-gcc2.9-991111-xz`; matrix in `docs/compiler.md` §4.3, third-generation verdict in §4.4 |
 | `.text` disassembly (splat R5900) | accurate; **1036 per-function `.s` + 2 raw `textbin`** (`.text` header, `0x00113074` non-function hole) |
 | Ghidra EE-extension decode | **100 %** of `.text` (50,923/50,923) |
 | splat split coverage | 203 KB / 85.6 % of ROM |
 | Functions detected | 1036 after removing 1 splat boundary false positive (`0x00113074`) from spimdisasm's 1037 |
-| Non-matching attempts tracked | **323** (`src/non_matching/`; the 3 Session-11a promotions left it; per-tier hit rates in `docs/archive-2026-10-15-session9.md`) |
+| Non-matching attempts tracked | **316** (`src/non_matching/`; the 7 Session-11b promotions left it; ledger: 316 near / 489 real pool remaining) |
 | IOP modules inventoried | 11 IRX (ELF32 MIPS-I, R3000A) |
 | EE hardware registers referenced | **38 addresses** (`tools/scan_hw_regs.py`); the 2 that were unidentified are now **confirmed**: `0x10001010` = `T2_MODE` (Timer 2 mode/status), `0x1000E060` = `D_STADR` (DMAC stall address) — `docs/structs.md` §"Hardware registers" |
 
 ### Session log
+
+- **2026-10-16 (Session 11b-par) — parallel near-miss campaign, +7 functions (349 → 356, 12.397 % → 12.892 %, 25,252 → 26,260 B).**
+  - **Worker A:** 3 matches (`00A1A0` via empty-asm dummy return pin; `00AAC8`, `00E338` via local pointer temporaries in evaluation order); `028688` archived at score 2.
+  - **Worker B:** 4 matches (`022550`, `0229B0`, `022A38`, `022CE0` all via empty-asm register pin on strcpy return value, unlocking the full command family).
+  - **Gate:** HASH MATCH (237,952 B, `6f853f64…`) + container byte-identical + 356/356 byte-exact (`verify_fast.py`, 11 s; full verify_c.py NOT run).
+
 
 - **2026-10-15 (Session 11a) — near-miss campaign, +3 functions (346 → 349, 12.21 % → 12.397 %, 24,876 → 25,252 B).**
   - **New pattern — empty-asm register pin** `asm volatile ("" : "+r" (x));` (emits no code, forces the value

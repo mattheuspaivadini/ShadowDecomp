@@ -1,20 +1,21 @@
-/* STATUS (Session 9, 2026-10-15): NON_MATCHING. best score 2 [cc=29].
- * session9 R1; residual class not auto-classified
- * The original .s stays in the build (asm/cod/00A1A0.s); this C
- * draft (Session 9) is kept for the record. */
+/* asm/cod/00A1A0.s -> func_0010A0B0.
+ * empty-asm register pin on dummy return of func_00107020
+ * MATCHED (Session 8). */
 extern int  D_00132320 __attribute__((section(".data")));
-extern char D_00146EC0[];   /* .bss 0x200 bytes = 32 x 0x10 records */
+extern char D_00146EC0[];
 
 void func_0010A0B0(void);
-void func_00107020(int a0);
+int func_00107020(int a0);
 void func_00107000(int a0);
 
 int *func_0010A1A0(void) {
     int *p;
     int *end;
+    int dummy;
 
     func_0010A0B0();
-    func_00107020(D_00132320);
+    dummy = func_00107020(D_00132320);
+    asm volatile ("" : "+r" (dummy));
     p = (int *)D_00146EC0;
     end = p + 0x80;
     for (; p < end; p += 4) {

@@ -465,3 +465,10 @@
 010FA0 = src/cod/010FA0.c cc=29               # Session 11a: empty-asm +r pin forces D_00133918 base materialisation
 030AF0 = src/cod/030AF0.c cc=29               # Session 11a: empty-asm +r pin keeps the return value in a register before the tail call
 010E00 = src/cod/010E00.c cc=29               # Session 11a: asm memory barrier stops dbr annulling the store into the beqz delay
+00A1A0 = src/cod/00A1A0.c cc=29               # empty-asm register pin on dummy return of func_00107020
+00AAC8 = src/cod/00AAC8.c cc=29               # introduce local pointer temporaries in evaluation order
+00E338 = src/cod/00E338.c cc=29               # introduce local pointer temporaries in evaluation order
+022550 = src/cod/022550.c cc=29               # empty-asm register pin on strcpy return value
+0229B0 = src/cod/0229B0.c cc=29               # empty-asm register pin on strcpy return value
+022A38 = src/cod/022A38.c cc=29               # empty-asm register pin on strcpy return value
+022CE0 = src/cod/022CE0.c cc=29               # empty-asm register pin on strcpy return value
