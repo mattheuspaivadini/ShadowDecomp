@@ -1,24 +1,29 @@
-/* STATUS (Session 12, 2026-10-16): NON_MATCHING. best score 14 [cc=29].
- * _InitAlarm: descending 16-byte record loop alignment
+/* STATUS (Session 19, 2026-10-17): NON_MATCHING. best score 2 [cc=296 -g0 -fno-delayed-branch -G0].
+ * struct-array + pointer pair; residual = sw/addiu(i--) schedule in the short loop (2.9 cc1 schedules sw first but pads the loop with 3 nops; 2.96 pads 1 nop like the image but hoists i--)
  * The original .s stays in the build (asm/cod/011700.s); this C
- * draft (Session 12) is kept for the record. */
-/* func_00111700 @ 0x00111700 (0x4C bytes): build a descending chain of 64
- * 16-byte records from D_0014A880 + 0x400 and store the base pointer in
- * D_0014AC80; clear the last slot; return 0. */
-extern char D_0014A880[];
-extern int D_0014AC80 __attribute__((section(".data")));
+ * draft (Session 19) is kept for the record. */
+struct alarm {
+    struct alarm *next;
+    int f04;
+    int f08;
+    int f0C;
+};
+
+extern struct alarm D_0014A880[64];
+extern struct alarm *D_0014AC80;
 
 int _InitAlarm(void) {
-    int *p = (int *)(D_0014A880 + 0x3F0);
-    int *q = (int *)(D_0014A880 + 0x400);
+    struct alarm *p, *q;
     int i;
 
-    D_0014AC80 = (int)D_0014A880;
-    for (i = 0x3F; i >= 0; i--) {
-        *p = (int)q;
-        p = (int *)((char *)p - 0x10);
-        q = (int *)((char *)q - 0x10);
+    D_0014AC80 = D_0014A880;
+    p = &D_0014A880[63];
+    q = &D_0014A880[64];
+    for (i = 63; i >= 0; i--) {
+        p->next = q;
+        p--;
+        q--;
     }
-    *(int *)(D_0014A880 + 0x3F0) = 0;
+    D_0014A880[63].next = 0;
     return 0;
 }

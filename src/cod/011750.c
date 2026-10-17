@@ -1,7 +1,6 @@
-/* STATUS (10, 2026-10-16): NON_MATCHING. best score 5 [cc=29].
- * 
- * The original .s stays in the build (asm/cod/011750.s); this C
- * draft (10) is kept for the record. */
+/* asm/cod/011750.s -> func_00111750.
+ * timer alarm list push; volatile store keeps the stolen ld ra copy (Session 19)
+ * MATCHED. */
 /* asm/cod/011750.s -> func_00111750 @ 0x00111750 (0x5C bytes, 23 insns)
  *
  * Dispatch a0 (masked with 0xFE) into a node's handler; when the handler
@@ -28,7 +27,9 @@ struct S011750 {
     int             field0C;                     /* 0x0C */
 };
 
-extern struct S011750 *D_0014AC80[];   /* lui/%lo (non-small) */
+/* UNCONFIRMED: volatile list head (a volatile node->field04 matches too); the
+ * volatile store keeps dbr from deleting the redundant `ld $ra` copy. */
+extern volatile int D_0014AC80[];
 
 int func_00111750(int a0, int a1, int a2, struct S011750 *node) {
     struct S011750 *old;
@@ -38,8 +39,8 @@ int func_00111750(int a0, int a1, int a2, struct S011750 *node) {
                  node->field0C);
     if (r != 0)
         return r;
-    old = D_0014AC80[0];
-    D_0014AC80[0] = node;
+    old = (struct S011750 *)D_0014AC80[0];
+    D_0014AC80[0] = (int)node;
     node->next = old;
     node->field04 = 0;
     return -1;

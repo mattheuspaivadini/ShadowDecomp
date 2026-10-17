@@ -1,7 +1,7 @@
-/* STATUS (Session 7, 2026-10-14): NON_MATCHING. best score 20 [cc=29, default].
- * list pop/relink with tag word.
+/* STATUS (Session 19, 2026-10-17): NON_MATCHING. best score 9 [cc=ee-gcc2.9-991111-01-dtls13010 -g0 -fno-delayed-branch -G0].
+ * timer no-dbr TU config; volatile node pointer fixes the register roles; residual = D.f0C reload after its store and early n->next load (volatility mix unresolved)
  * The original .s stays in the build (asm/cod/010D48.s); this C
- * draft (subagent-produced, Session 7) is kept for the record. */
+ * draft (Session 19) is kept for the record. */
 /* asm/cod/010D48.s -> func_00110D48 @ 0x00110D48 (0x70 bytes, 28 insns)
  *
  * Pop the head node off the D_00133918 list at 0x14, stamp it with a
@@ -48,7 +48,7 @@ struct D10D48 {
 extern struct D10D48 D_00133918;
 
 int iAllocTimerCounter(void) {
-    struct N10D48 *n;
+    volatile struct N10D48 *n;
     unsigned int v;
 
     n = D_00133918.f14;

@@ -1,9 +1,8 @@
-/* STATUS (10, 2026-10-16): NON_MATCHING. best score 4 [cc=29].
- * 
- * The original .s stays in the build (asm/cod/00EEB8.s); this C
- * draft (10) is kept for the record. */
+/* asm/cod/00EEB8.s -> sceSifSetIopAddr.
+ * SCE libkernel sif; early-return error form selects movn (Session 19)
+ * MATCHED. */
 int func_0010E238(void);
-int func_00109980(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
+int sceSifCallRpc(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
                   int a7, int a8);
 
 extern int D_00147380[];   /* .data/.bss outside small-data -> lui/%lo */
@@ -22,6 +21,8 @@ int sceSifSetIopAddr(int a0, void *a1, int a2) {
         D_00147380[2] = *(int *)a1;
     else
         return 0xFFFEFFFE;
-    return (func_00109980((int)D_00147580, 2, 0, (int)D_00147380, 0x20,
-                          (int)D_00147380, 0x10, 0, 0) >= 0) ? 0 : 0xFFFEFFFF;
+    if (sceSifCallRpc((int)D_00147580, 2, 0, (int)D_00147380, 0x20,
+                          (int)D_00147380, 0x10, 0, 0) < 0)
+        return 0xFFFEFFFF;
+    return 0;
 }

@@ -1,7 +1,6 @@
-/* STATUS (10, 2026-10-16): NON_MATCHING. best score 5 [cc=29].
- * 
- * The original .s stays in the build (asm/cod/011B98.s); this C
- * draft (10) is kept for the record. */
+/* asm/cod/011B98.s -> sceSifAddRebootNotifyHandler.
+ * SCE sifcmd reboot notify; $gp captured with asm volatile move (Session 19)
+ * MATCHED. */
 typedef struct {
     void *func;
     void *arg;
@@ -20,7 +19,7 @@ int sceSifAddRebootNotifyHandler(unsigned int idx, void *func, void *arg) {
     SifRebootNotifyHandler *table;
     unsigned int max;
     int intr;
-    register void *gp_reg asm("gp");
+    void *gp;
 
     if ((int)idx < 0) {
         idx &= 0x7fffffff;
@@ -36,7 +35,8 @@ int sceSifAddRebootNotifyHandler(unsigned int idx, void *func, void *arg) {
     intr = DIntr();
     table[idx].func = func;
     table[idx].arg = arg;
-    table[idx].gp = gp_reg;
+    __asm__ volatile ("move %0, $gp" : "=r" (gp));
+    table[idx].gp = gp;
     if (intr) {
         EIntr();
     }
