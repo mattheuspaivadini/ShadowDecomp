@@ -298,8 +298,11 @@ def compile_object(obj_rel: str, src_rel: str) -> tuple[str, str]:
     if want == 0:
         return (obj_rel, "original object has an empty .text")
 
+    # the source tree is mirrored once per build (build_elf / --only), not per
+    # object: per-object staging made the build quadratic in the C count
     err = eegcc.compile_c(src_rel, obj, load_c_flags(stem_of(obj_rel)),
-                          compiler=load_c_compiler(stem_of(obj_rel)))
+                          compiler=load_c_compiler(stem_of(obj_rel)),
+                          stage=False)
     if err:
         return (obj_rel, f"ee-gcc: {err}")
 
@@ -465,6 +468,7 @@ def build_elf() -> int:
             return compile_object(obj_rel, c_sources[stem])
         return assemble(obj_rel)
 
+    eegcc.stage_sources()
     failures: list[tuple[str, str]] = []
     with concurrent.futures.ThreadPoolExecutor(max_workers=JOBS) as ex:
         for obj_rel, err in ex.map(build_one, refs):
@@ -545,6 +549,7 @@ def main() -> int:
 
     if args.only:
         c_sources = load_c_sources()
+        eegcc.stage_sources()
         failures = 0
         for stem in args.only:
             ref = next((r for r in object_refs() if stem_of(r) == stem), None)
