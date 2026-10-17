@@ -510,19 +510,72 @@ def mut_load_group(text):
     return out[:4]
 
 
+def mut_fresh_local(text):
+    """`x = expr;` -> `fresh = expr;` + every later use of `x` renamed, stopping
+    at a re-assignment of `x`.
+
+    Changing which pseudo holds a parameter-derived value (a fresh local instead
+    of the parameter) shifts the local-alloc priority and therefore the s-register
+    roles; this is the lever that matched 018380 (Session 20).
+    """
+    out = []
+    sb = split_body(text)
+    if not sb:
+        return out
+    head, body, tail = sb
+    code = code_part(body)
+    spans = find_statements(code)
+    seen = 0
+    for si, (a0, a1) in enumerate(spans):
+        stmt = body[a0:a1]
+        m = re.match(r"\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.+?);\s*$", stmt, re.S)
+        if not m:
+            continue
+        var, rhs = m.group(1), m.group(2)
+        if var in ("return", "if", "while", "for", "switch", "do", "else"):
+            continue
+        if "?" in rhs and ":" in rhs:
+            continue
+        end = len(body)
+        used = False
+        for (b0, b1) in spans[si + 1:]:
+            later = body[b0:b1]
+            if re.match(rf"\s*{re.escape(var)}\s*(=[^=]|\+=|-=|\+\+|--)", later):
+                end = b0
+                break
+            if re.search(rf"\b{re.escape(var)}\b", code[b0:b1]):
+                used = True
+        if not used:
+            continue
+        fresh = f"fresh_{seen}"
+        region = body[a1:end]
+        region_new = re.sub(rf"\b{re.escape(var)}\b", fresh, region)
+        new = "    int %s;\n" % fresh + body[:a0] + f"{fresh} = {rhs};" + region_new + body[end:]
+        out.append((f"fresh_local_{var}_{seen}", head + new + tail))
+        seen += 1
+        if seen >= 6:
+            break
+    return out
+
+
 MUTATIONS = [
     mut_swap_stmt, mut_arg_order, mut_local_hoist, mut_type_unsigned,
     mut_paren_assoc, mut_loop_form, mut_index_twice, mut_addr_cast,
     mut_plus_assign, mut_decl_split, mut_const_local, mut_negate_test,
-    mut_early_return, mut_load_group,
+    mut_early_return, mut_load_group, mut_fresh_local,
 ]
 
 
-def variants_for(text: str, with_pairs: bool, limit: int):
+def variants_for(text: str, with_pairs: bool, limit: int,
+                 kinds: list[str] | None = None, prefix: str = "v"):
     """{name: text} - single mutations plus (optionally) pairs."""
+    muts = MUTATIONS
+    if kinds:
+        muts = [fn for fn in MUTATIONS
+                if any(k in fn.__name__ for k in kinds)]
     out: dict[str, str] = {}
     singles = []
-    for fn in MUTATIONS:
+    for fn in muts:
         try:
             got = fn(text)
         except Exception:  # a coarse text mutation can always trip on odd input
@@ -530,7 +583,7 @@ def variants_for(text: str, with_pairs: bool, limit: int):
         for name, new in got:
             if new == text or not balanced(new):
                 continue
-            key = f"v{len(out) + 1:02d}_{name}"
+            key = f"{prefix}{len(out) + 1:02d}_{name}"
             if key not in out:
                 out[key] = new
                 singles.append((key, new))
@@ -549,7 +602,7 @@ def variants_for(text: str, with_pairs: bool, limit: int):
                         continue
                     if len(out) >= limit:
                         return out
-                    k = f"v{len(out) + 1:02d}_x_{key}_{name}"
+                    k = f"{prefix}{len(out) + 1:02d}_x_{key}_{name}"
                     out[k] = new2
     return out
 
@@ -561,8 +614,12 @@ def main() -> int:
     ap.add_argument("--pairs", action="store_true", help="also 2-mutation combinations")
     ap.add_argument("--limit", type=int, default=400)
     ap.add_argument("--clean", action="store_true", help="remove old generated variants first")
+    ap.add_argument("--kinds", default="",
+                    help="comma-separated mutation-name substrings to keep")
+    ap.add_argument("--prefix", default="v", help="variant filename prefix")
     args = ap.parse_args()
 
+    kinds = [k.strip() for k in args.kinds.split(",") if k.strip()]
     stems = args.stems
     if args.all or not stems:
         stems = sorted(p.stem for p in (ROOT / "src" / "non_matching").glob("*.c"))
@@ -583,7 +640,7 @@ def main() -> int:
         if not base.exists():
             base.write_text(src.read_text(encoding="utf-8"), encoding="utf-8")
         text = base.read_text(encoding="utf-8")
-        variants = variants_for(text, args.pairs, args.limit)
+        variants = variants_for(text, args.pairs, args.limit, kinds, args.prefix)
         for name, new in variants.items():
             (vdir / f"{name}.c").write_text(new, encoding="utf-8")
         print(f"  {stem}: {len(variants)} variants")

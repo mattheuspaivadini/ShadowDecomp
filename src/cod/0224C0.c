@@ -1,7 +1,6 @@
-/* STATUS (Session 7, 2026-10-14): NON_MATCHING. best score 22 [cc=29, default].
- * command family with 3 field stores.
- * The original .s stays in the build (asm/cod/0224C0.s); this C
- * draft (subagent-produced, Session 7) is kept for the record. */
+/* asm/cod/0224C0.s -> sceNetcnfifGetList.
+ * const_local_0x10_0: 0x10 materialised into a named local before the loop (Session 20)
+ * MATCHED. */
 /* asm/cod/0224C0.s -> func_001224C0 @ 0x001224C0 (0x8C bytes, 35 insns)
  * Transfer-family entry (022D68/022DA0/022E18): func_001221D0() resets the
  * D_00167F00 tracking block, the caller's buffer is copied into it at +0x10,
@@ -17,9 +16,10 @@ int sce_call_rpc(char *dst, char *src, int n);
 extern int D_00167F00[];
 extern char D_00167EC0[];
 
-int sceNetcnfifGetList(int a0, int a1, int a2, int a3) {
+int sceNetcnfifGetList(int a0, int a1, int a2, int a3) {int lit_0 = 0x10;
+
     sceNetcnfifInit();
-    func_00128FB0((char *)D_00167F00 + 0x10, (char *)a0);
+    func_00128FB0((char *)D_00167F00 + lit_0, (char *)a0);
     D_00167F00[0] = a3;
     D_00167F00[2] = a1;
     D_00167F00[3] = a2;

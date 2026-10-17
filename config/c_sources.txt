@@ -709,4 +709,7 @@
 020D58 = src/cod/020D58.c cc=ee-gcc2.9-991111-01-dtls13010 -g0 # sceMc2 sysinfo record; dtls13010 -g0
 00A228 = src/cod/00A228.c cc=29               # sceSif RPC retry loop; delay*2 (not <<1) reproduces the optimize_skip bnel+sll branch-likely (Session 20)
 01A408 = src/cod/01A408.c cc=29 -fno-schedule-insns # sceMc2CreateSocket; TU built with -fno-schedule-insns (Session 20)
-0098F0 = src/cod/0098F0.c cc=29 -fno-strict-aliasing# copy-order: explicit temporaries group the two loads; TU built with -fno-strict-aliasing (Session 20)
+0098F0 = src/cod/0098F0.c cc=29 -fno-strict-aliasing # copy-order: explicit temporaries group the two loads; TU built with -fno-strict-aliasing (Session 20)
+00EC78 = src/cod/00EC78.c cc=29               # swap_stmt_5: two statements reordered (Session 20, corrected permute_gen)
+0224C0 = src/cod/0224C0.c cc=29               # const_local_0x10_0: 0x10 materialised into a named local before the loop (Session 20)
+018380 = src/cod/018380.c cc=29               # sceSifMCallRpc size-check wrapper; aligned sizes in fresh locals n/m change the sreg allocation (Session 20)

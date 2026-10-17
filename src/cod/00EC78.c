@@ -1,7 +1,6 @@
-/* STATUS (Session 8, 2026-10-14): NON_MATCHING. best score 21 [cc=29].
- * R2 w45a_2: reg-alloc (reply load vs byte-store base)
- * The original .s stays in the build (asm/cod/00EC78.s); this C
- * draft (Session 8) is kept for the record. */
+/* asm/cod/00EC78.s -> func_0010EC78.
+ * swap_stmt_5: two statements reordered (Session 20, corrected permute_gen)
+ * MATCHED. */
 extern unsigned char D_00147388[];
 extern int D_00147580[];
 
@@ -20,8 +19,8 @@ int func_0010EC78(char *a0, char *a1, int *a2, int a3) {
         return 0xFFFF0000;
     if (func_0010E338() != 0)
         return 0xFFFEFFFC;
-    p = (char *)(D_00147388 - 8);
     func_001293B8((char *)D_00147388, a0, 0xFC);
+    p = (char *)(D_00147388 - 8);
     p[0x103] = 0;
     func_001293B8((char *)D_00147388 + 0xFC, a1, 0xFC);
     p[0x1FF] = 0;
