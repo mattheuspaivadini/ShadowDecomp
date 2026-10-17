@@ -591,3 +591,7 @@
 00CDB0 = src/cod/00CDB0.c cc=29               # SCE libkernel stdio sceRename over SIF RPC (sceClose/sceStdioCCode template)
 00D910 = src/cod/00D910.c cc=29               # SCE libkernel stdio sceSymlink over SIF RPC (sceClose/sceStdioCCode template)
 00DB08 = src/cod/00DB08.c cc=29               # SCE libkernel stdio sceReadlink over SIF RPC (sceClose/sceStdioCCode template)
+00C620 = src/cod/00C620.c cc=29               # SCE libkernel stdio sceDopen over SIF RPC (sceClose/sceStdioCCode template)
+00C250 = src/cod/00C250.c cc=29               # SCE libkernel stdio sceFormat over SIF RPC (sceClose/sceStdioCCode template)
+00D188 = src/cod/00D188.c cc=29               # SCE libkernel stdio sceMount over SIF RPC (sceClose/sceStdioCCode template)
+00BCC0 = src/cod/00BCC0.c cc=29               # SCE libkernel stdio sceIoctl2 over SIF RPC (sceClose/sceStdioCCode template)
