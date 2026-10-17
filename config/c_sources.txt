@@ -543,3 +543,7 @@
 02C0A0 = src/cod/02C0A0.c                     # Newlib 1.9.0 stdio/vsprintf.c vsprintf_r (authentic source)
 029930 = src/cod/029930.c                     # Newlib 1.9.0 stdio/vfprintf.c vfprintf (authentic source)
 028B08 = src/cod/028B08.c                     # Newlib 1.9.0 stdio/sscanf.c sscanf (authentic source)
+027808 = src/cod/027808.c                     # Newlib 1.9.0 stdlib/mallocr.c malloc_extend_top (static) (authentic source, include/newlib19_malloc.h)
+027A60 = src/cod/027A60.c                     # Newlib 1.9.0 stdlib/mallocr.c _malloc_r (mALLOc) (authentic source, include/newlib19_malloc.h)
+031278 = src/cod/031278.c                     # Newlib 1.9.0 stdlib/mallocr.c _realloc_r (rEALLOc) (authentic source, include/newlib19_malloc.h)
+031048 = src/cod/031048.c                     # Newlib 1.9.0 stdlib/mallocr.c _calloc_r (cALLOc) (authentic source, include/newlib19_malloc.h)
