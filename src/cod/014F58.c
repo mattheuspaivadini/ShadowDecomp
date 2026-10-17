@@ -1,7 +1,6 @@
-/* STATUS (Session 8, 2026-10-14): NON_MATCHING. best score 14 [cc=29].
- * R1 wave4c: DMAC hold (D_ENABLER bit16)
- * The original .s stays in the build (asm/cod/014F58.s); this C
- * draft (Session 8) is kept for the record. */
+/* asm/cod/014F58.s -> sceDmaPause.
+ * SCE libvifpk/libdma (cc=29)
+ * MATCHED. */
 #define EE_D_CTRL    0x1000E000u        /* DMAC control                      */
 #define EE_D_ENABLER 0x1000F520u        /* DMAC disabled status (read)       */
 #define EE_D_ENABLEW 0x1000F590u        /* DMAC disable (write)              */
@@ -10,7 +9,7 @@
 int DIntr(void);
 int EIntr(void);
 
-int sceDmaPause(unsigned int *a0) {
+int sceDmaPause(volatile unsigned int *a0) {
     int r = DIntr();
     unsigned int en;
     unsigned int v;
