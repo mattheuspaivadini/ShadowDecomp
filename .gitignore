@@ -53,6 +53,17 @@ tools/cc/*.tar.gz
 ghidra_project/
 
 # ============================================================================
+# Local working notes (kept on disk, NOT versioned)
+# Session logs, plans, decisions, archives and agent instructions. They are
+# regenerable or personal working state; the public-facing summary is README.md.
+# ============================================================================
+docs/
+CONTEXT.md
+AGENTS.md
+undefined_funcs_auto.txt
+undefined_syms_auto.txt
+
+# ============================================================================
 # Python
 # ============================================================================
 __pycache__/
