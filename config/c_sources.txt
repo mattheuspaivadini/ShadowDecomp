@@ -517,3 +517,12 @@
 0275A0 = src/cod/0275A0.c                     # Newlib mallocr.c _memalign_r (authentic source); size_t=32-bit, long=64-bit, MALLOC_ALIGNMENT=16, MINSIZE=16, no INT_MAX overflow guard
 02DBB0 = src/cod/02DBB0.c                     # Newlib mallocr.c _free_r (authentic fREe); size_t=32-bit, long=64-bit trim_threshold/top_pad, .data attr on the malloc globals
 02E018 = src/cod/02E018.c                     # Newlib fvwrite.c __sfvwrite (old non-reentrant revision, no asprintf path); COPY -> func_001282CC (memmove)
+02C0F8 = src/cod/02C0F8.c                     # Newlib 1.9.0 stdio/wsetup.c __swsetup (authentic source, include/newlib19.h)
+02D6D8 = src/cod/02D6D8.c                     # Newlib 1.9.0 stdio/fflush.c fflush (authentic source, include/newlib19.h)
+02D850 = src/cod/02D850.c                     # Newlib 1.9.0 stdio/findfp.c __sfmoreglue (authentic source, include/newlib19.h)
+02D8C8 = src/cod/02D8C8.c                     # Newlib 1.9.0 stdio/findfp.c __sfp (authentic source, include/newlib19.h)
+02D9C0 = src/cod/02D9C0.c                     # Newlib 1.9.0 stdio/findfp.c _cleanup_r (authentic source, include/newlib19.h)
+02F838 = src/cod/02F838.c                     # Newlib 1.9.0 stdio/refill.c __srefill (authentic source, include/newlib19.h)
+02FAA8 = src/cod/02FAA8.c                     # Newlib 1.9.0 stdio/stdio.c __swrite (authentic source, include/newlib19.h)
+02FB28 = src/cod/02FB28.c                     # Newlib 1.9.0 stdio/stdio.c __sseek (authentic source, include/newlib19.h)
+030E60 = src/cod/030E60.c                     # Newlib 1.9.0 stdio/ungetc.c ungetc (authentic source, include/newlib19.h)
