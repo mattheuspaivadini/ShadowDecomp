@@ -218,7 +218,7 @@ Tips: use a function's constants, string references, and call patterns to infer 
 | Ghidra EE-extension decode | **100 %** of `.text` (50,923/50,923) |
 | splat split coverage | 203 KB / 85.6 % of ROM |
 | Functions detected | **1042** real functions (`docs/ledger.json`: 1044 records = 1042 + 2 `textbin`); 1037 spimdisasm boundaries − 1 false positive (`0x00113074`) = 1036, then `T004` split 6 merged boundaries (+6) in Session 12 |
-| Non-matching attempts tracked | **296** (`src/non_matching/`; ledger: 296 near / 153 untouched / 195 asm-permanent → 449 real pool remaining) |
+| Non-matching attempts tracked | **296** (`src/non_matching/`; ledger: 296 near / 152 untouched / 195 asm-permanent → 448 real pool remaining) |
 | IOP modules inventoried | 11 IRX (ELF32 MIPS-I, R3000A) |
 | EE hardware registers referenced | **38 addresses** (`tools/scan_hw_regs.py`); the 2 that were unidentified are now **confirmed**: `0x10001010` = `T2_MODE` (Timer 2 mode/status), `0x1000E060` = `D_STADR` (DMAC stall address) — `docs/structs.md` §"Hardware registers" |
 
@@ -874,5 +874,5 @@ All worker tasks, disc/coverage measurements, `.XFF` overlay specs, and pre-gene
 3. **Worker prompt:** [`docs/plan/WORKER_PROMPT.md`](file:///C:/Users/Matheus/Documents/ShadowDecomp/docs/plan/WORKER_PROMPT.md)
 4. **Tooling, REA & Ghidra headless scripts:** [`docs/plan/tooling.md`](file:///C:/Users/Matheus/Documents/ShadowDecomp/docs/plan/tooling.md) and `docs/plan/ghidra/`
 5. **Disc inventory & measured coverage:** [`docs/plan/disc_inventory.tsv`](file:///C:/Users/Matheus/Documents/ShadowDecomp/docs/plan/disc_inventory.tsv) and [`docs/plan/coverage.md`](file:///C:/Users/Matheus/Documents/ShadowDecomp/docs/plan/coverage.md)
-6. **Pre-generated worker context bundles (`489` functions) & `.XFF` symbol tables (`840` official `SCUS_974.72` function names + `5,972` overlay functions):** `build/plan/ctx/<stem>.md` and `build/plan/xff/` (regenerate anytime with `python docs/plan/scripts/xff_probe.py && python docs/plan/scripts/gen_context.py`).
+6. **Pre-generated worker context bundles (`492` functions) & `.XFF` symbol tables (`840` official `SCUS_974.72` function names + `5,972` overlay functions):** `build/plan/ctx/<stem>.md` and `build/plan/xff/` (regenerate anytime with `python docs/plan/scripts/xff_probe.py && python docs/plan/scripts/gen_context.py`).
 7. **Direction of truth for symbols:** `config/symbol_addrs.txt` is canonical; import into Ghidra via `docs/plan/ghidra/ImportRepoSymbols.java`. Never run slow `tools/verify_c.py` (~1.5 h); always gate tasks with `python build/s10/verify_fast.py` (~11 s) and `python docs/plan/scripts/check_plan.py`.
