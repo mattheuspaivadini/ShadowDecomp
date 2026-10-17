@@ -1,7 +1,7 @@
-/* STATUS (Session 8, 2026-10-14): NON_MATCHING. best score 11 [cc=29].
- * R2 w45a_2: clean guess but not byte-exact
+/* STATUS (Session 19, 2026-10-17): NON_MATCHING. best score 6 [cc=29].
+ * void tail call (j EIntr) and re-read list head; residual = scheduler puts the p->f00 store first
  * The original .s stays in the build (asm/cod/009C58.s); this C
- * draft (Session 8) is kept for the record. */
+ * draft (Session 19) is kept for the record. */
 struct N09C58 {
     int             f00;    /* 0x00 */
     int             f04;    /* 0x04 */
@@ -16,9 +16,9 @@ struct N09C58 {
 };
 
 int DIntr(void);
-int EIntr(void);
+void EIntr(void);
 
-int sceSifRegisterRpc(int a0, int a1, int a2, int a3, int a4, int a5,
+void sceSifRegisterRpc(int a0, int a1, int a2, int a3, int a4, int a5,
                   struct N09C58 *a6) {
     struct N09C58 *p = (struct N09C58 *)a0;
     struct N09C58 *q;
@@ -27,19 +27,19 @@ int sceSifRegisterRpc(int a0, int a1, int a2, int a3, int a4, int a5,
     p->f3C = 0;
     p->f38 = 0;
     p->f00 = a1;
-    q = a6->f08;
     p->f04 = a2;
     p->f08 = a3;
     p->f10 = a4;
     p->f14 = a5;
     p->f40 = a6;
-    if (q == 0) {
+    if (a6->f08 == 0) {
         a6->f08 = (int)p;
     } else {
+        q = (struct N09C58 *)a6->f08;
         while (q->f38 != 0)
             q = q->f38;
         q->f38 = p;
     }
-    return EIntr();
+    EIntr();
 }
-/* func_00109C58 */
+/* sceSifRegisterRpc */

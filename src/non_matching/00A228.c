@@ -1,7 +1,7 @@
-/* STATUS (Session 8, 2026-10-14): NON_MATCHING. best score 11 [cc=29].
- * R2 w45a_2: scheduling (bnel delay + mult in the call delay)
+/* STATUS (Session 19, 2026-10-17): NON_MATCHING. best score 5 [cc=29].
+ * retrying sceSifCallRpc; barrier stops the movz if-conversion but also the optimize_skip bnel+sll the image has
  * The original .s stays in the build (asm/cod/00A228.s); this C
- * draft (Session 8) is kept for the record. */
+ * draft (Session 19) is kept for the record. */
 int sceSifCallRpc(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
                   int a7, int a8);
 int DelayThread(int usec);
@@ -19,8 +19,10 @@ int func_0010A228(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
         if (!neg || a9 != 0)
             break;
         DelayThread(delay * 1000);
-        if (delay < 0x7F)
+        if (delay < 0x7F) {
+            __asm__ volatile ("");
             delay <<= 1;
+        }
         tries++;
     } while (tries < 0x65);
     return neg;
