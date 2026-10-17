@@ -1,3 +1,7 @@
+/* asm/cod/0187A8.s -> sceInetAddress2Name.
+ * SCE libinet; variadic, optional 9th arg via va_arg (Session 19)
+ * MATCHED. */
+#include "stdarg.h"
 /* STATUS (Session 9, 2026-10-15): NON_MATCHING. best score 17 [cc=29].
  * session9 R2 waveA; residual class not auto-classified
  * The original .s stays in the build (asm/cod/0187A8.s); this C
@@ -19,7 +23,8 @@ int func_00118380(int a0, int a1, int *p, int a3, int a4);
 int func_00118578(int a0, int a1, int a2);
 
 int sceInetAddress2Name(int a0, struct S0187A8 *p, int a2, int a3, int a4, int a5,
-                  int a6, int a7, int a8) {
+                  int a6, int a7, ...) {
+    va_list ap;
     int r;
 
     p->f00 = a2;
@@ -30,9 +35,11 @@ int sceInetAddress2Name(int a0, struct S0187A8 *p, int a2, int a3, int a4, int a
     if (r < 0)
         return r;
     p->f20 = 0;
+    va_start(ap, a7);
     if (a2 & 0x80)
-        p->f20 = a8;
-    r = func_00118380(a0, 0x12, (int *)p, a3 + 0x20, 0x24);
+        p->f20 = va_arg(ap, int);
+    va_end(ap);
+    r = func_00118380(a0, 0x12, (int *)p, 0x24, a4 + 0x20);
     if (r < 0)
         return -0x21E;
     r = func_00118578(a3, (int)p, 8);

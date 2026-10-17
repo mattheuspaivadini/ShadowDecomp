@@ -1,7 +1,6 @@
-/* STATUS (10, 2026-10-16): NON_MATCHING. best score 6 [cc=29].
- * 
- * The original .s stays in the build (asm/cod/019568.s); this C
- * draft (10) is kept for the record. */
+/* asm/cod/019568.s -> func_00119568.
+ * SCE libnet interface scan; early -2 return after the loop (Session 19)
+ * MATCHED. */
 int sceInetGetInterfaceList(int a0, int a1, int a2, int a3);
 int sceInetInterfaceControl(int a0, int a1, int a2, int a3, int a4, int a5);
 
@@ -22,9 +21,8 @@ int func_00119568(int a0, int a1, int *out) {
         if (v & 2)
             break;
     }
-    if (i != n) {
-        *out = buf[i];
-        return 0;
-    }
-    return -2;
+    if (i == n)
+        return -2;
+    *out = buf[i];
+    return 0;
 }

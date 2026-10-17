@@ -73,6 +73,89 @@ SIZE_RE = re.compile(r"^nonmatching\s+\S+,\s*0x([0-9A-Fa-f]+)\s*$", re.M)
 DATA_SECTIONS = {".data", ".rodata", ".data_nop", ".sdata", ".sbss", ".bss",
                  ".lit4", ".text_nop", ".ctors", ".dtors", ".eh_frame"}
 
+# Jump tables (Session 19). A C function with a `switch` emits its table into
+# its own .rodata. The image already holds that table (asm/data/...rodata.s,
+# `jtbl_XXXXXXXX`, whose `.word .L...` entries name `jlabel`s of the function's
+# .s). Instead of moving data, the C object's .rodata is renamed to JTBL_SECTION
+# and linked as a NOLOAD output section *at the original table's address*: the
+# code's %hi/%lo then resolve to the original table, the image bytes keep coming
+# from the asm data, and the `jlabel`s are defined as absolute symbols. The
+# compiled table is checked word-for-word against the original first, so a
+# wrong case order cannot hide behind the original table.
+JTBL_SECTION = ".c_jtbl"
+OBJDUMP = eegcc.flag("EE_OBJDUMP", "mips-linux-gnu-objdump")
+ROM_FILE = ROOT / "build" / "SCUS_974.72.rom"
+
+
+def asm_jtbl_info(stem: str) -> tuple[list[int], dict[str, int]]:
+    """(sorted jtbl addresses, {jlabel name: vaddr}) of a function's .s."""
+    path = ROOT / "asm" / "cod" / f"{stem}.s"
+    if not path.exists():
+        return [], {}
+    lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
+    tbls = sorted({int(a, 16) for ln in lines
+                   for a in re.findall(r"%hi\(jtbl_([0-9A-Fa-f]{8})\)", ln)})
+    labels: dict[str, int] = {}
+    for i, ln in enumerate(lines):
+        m = re.match(r"\s*jlabel\s+(\S+)", ln)
+        if not m:
+            continue
+        for nxt in lines[i + 1:]:
+            mm = re.match(r"\s*/\*\s*[0-9A-Fa-f]+\s+([0-9A-Fa-f]{8})\s", nxt)
+            if mm:
+                labels[m.group(1)] = int(mm.group(1), 16)
+                break
+    return tbls, labels
+
+
+def stem_vaddr(stem: str) -> int | None:
+    for vaddr, s, _span, _k in cod_subsegments():
+        if s == stem:
+            return vaddr
+    return None
+
+
+def adopt_jump_tables(obj: Path, stem: str, size: int) -> str:
+    """Check a C object's .rodata against the original jump table(s) and rename
+    it to JTBL_SECTION. Returns an error string ('' on success)."""
+    tbls, _labels = asm_jtbl_info(stem)
+    if not tbls:
+        return "C object has .rodata but the function references no jtbl_"
+    vaddr = stem_vaddr(stem)
+    if vaddr is None:
+        return "function address unknown"
+    raw = str(obj) + ".rodata.bin"
+    r = subprocess.run([OBJCOPY, "-O", "binary", "-j", ".rodata", str(obj), raw],
+                       capture_output=True, text=True)
+    if r.returncode != 0:
+        return "objcopy .rodata extract failed"
+    data = Path(raw).read_bytes()
+    os.remove(raw)
+    if len(data) != size or size % 4:
+        return f".rodata size {len(data)} (expected {size}, word multiple)"
+    words = list(struct.unpack(f"<{size // 4}I", data))
+    rel = subprocess.run([OBJDUMP, "-r", "-j", ".rodata", str(obj)],
+                         capture_output=True, text=True).stdout
+    for m in re.finditer(r"^([0-9a-f]+)\s+(\S+)\s+(\S+)\s*$", rel, re.M):
+        off, typ, sym = int(m.group(1), 16), m.group(2), m.group(3)
+        if typ != "R_MIPS_32" or sym != ".text" or off % 4:
+            return f"unsupported .rodata relocation {typ} {sym}+{off:#x}"
+        words[off // 4] = (words[off // 4] + vaddr) & 0xFFFFFFFF
+    rom = ROM_FILE.read_bytes()
+    base = tbls[0] - ROM_BASE
+    orig = list(struct.unpack(f"<{size // 4}I", rom[base:base + size]))
+    if words != orig:
+        bad = next(i for i, (a, b) in enumerate(zip(words, orig)) if a != b)
+        return (f"jump table differs from jtbl_{tbls[0]:08X} at word {bad}: "
+                f"{words[bad]:#010x} != {orig[bad]:#010x}")
+    tmp = str(obj) + ".jt"
+    r = subprocess.run([OBJCOPY, f"--rename-section", f".rodata={JTBL_SECTION}",
+                        str(obj), tmp], capture_output=True, text=True)
+    if r.returncode != 0:
+        return "objcopy rename .rodata failed"
+    os.replace(tmp, obj)
+    return ""
+
 
 def _load_c_manifest() -> dict[str, tuple[str, list[str], str | None]]:
     """object stem -> (C source, extra flags, compiler) from config/c_sources.txt.
@@ -222,6 +305,11 @@ def compile_object(obj_rel: str, src_rel: str) -> tuple[str, str]:
 
     alloc = {k: v for k, v in eegcc.section_sizes(obj).items()
              if k in DATA_SECTIONS and v}
+    if list(alloc) == [".rodata"]:
+        jerr = adopt_jump_tables(obj, stem_of(obj_rel), alloc[".rodata"])
+        if jerr:
+            return (obj_rel, jerr)
+        alloc = {}
     if alloc:
         # A C object that contributes .rodata/.data/.sdata/.bss would be placed
         # by the linker script at the position of *this* function, shifting the
@@ -300,6 +388,24 @@ def cod_subsegments() -> list[tuple[int, str, int, str]]:
     return out
 
 
+def jump_table_sections(c_sources: dict[str, str]) -> list[str]:
+    """Linker-script lines placing each C object's adopted jump tables (NOLOAD,
+    at the original jtbl_ address) and defining its `jlabel`s absolutely."""
+    out: list[str] = []
+    for stem in sorted(c_sources):
+        obj = ROOT / "build" / "asm" / "cod" / f"{stem}.o"
+        if not obj.exists() or JTBL_SECTION not in eegcc.section_sizes(obj):
+            continue
+        tbls, labels = asm_jtbl_info(stem)
+        out.append(f"    /* jump tables of C object {stem} (original "
+                   f"jtbl_{tbls[0]:08X}; image bytes come from the asm data) */")
+        out.append(f"    .c_jtbl_{stem} {tbls[0]:#x} (NOLOAD) : "
+                   f"{{ build/asm/cod/{stem}.o({JTBL_SECTION}) }}")
+        for name, addr in sorted(labels.items(), key=lambda kv: kv[1]):
+            out.append(f'    "{name}" = {addr:#x};')
+    return out
+
+
 def patch_linker_script(c_sources: dict[str, str]) -> str:
     """Strip splat's ALIGN(.,16) and pin each C object's span.
 
@@ -315,6 +421,8 @@ def patch_linker_script(c_sources: dict[str, str]) -> str:
     for line in text.splitlines():
         if ". = ALIGN(., 16);" in line:
             continue
+        if line.strip().startswith("/DISCARD/"):
+            out.extend(jump_table_sections(c_sources))
         out.append(line)
         m = re.match(r"^\s+build/asm/cod/([0-9A-Fa-f]+)\.o\(\.text\*\);", line)
         if m and m.group(1) in c_sources and m.group(1) in spans:
@@ -375,6 +483,8 @@ def build_elf() -> int:
     link_cmd = [
         LD, "-EL",
         "-e", "entry",  # original e_entry = 0x00100010 (the `entry` symbol)
+        # the NOLOAD jump-table sections overlap the asm .rodata on purpose
+        "--no-check-sections",
         "-T", "undefined_syms_auto.txt",
         "-T", "undefined_funcs_auto.txt",
         "-Map", str(MAP),

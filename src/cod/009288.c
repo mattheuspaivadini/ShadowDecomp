@@ -1,7 +1,6 @@
-/* STATUS (10, 2026-10-16): NON_MATCHING. best score 6 [cc=296].
- * 
- * The original .s stays in the build (asm/cod/009288.s); this C
- * draft (10) is kept for the record. */
+/* asm/cod/009288.s -> func_00109288.
+ * SCE sifrpc ring cursor; record address computed before the cursor store (Session 19)
+ * MATCHED. */
 /* asm/cod/009288.s -> func_00109288 @ 0x00109288 (0x30 bytes, 11 insns)
  *
  * Cursor step through a table of 64-byte records hanging off the same object:
@@ -32,7 +31,8 @@ struct S009288 {
 
 int func_00109288(struct S009288 *p) {
     int rem = p->f24 % p->f18;
+    int r = p->f14 + rem * 64;
 
     p->f24 = rem + 1;
-    return p->f14 + rem * 64;
+    return r;
 }

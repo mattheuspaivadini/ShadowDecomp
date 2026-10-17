@@ -1,7 +1,6 @@
-/* STATUS (10, 2026-10-16): NON_MATCHING. best score 5 [cc=29].
- * 
- * The original .s stays in the build (asm/cod/0199F8.s); this C
- * draft (10) is kept for the record. */
+/* asm/cod/0199F8.s -> func_001199F8.
+ * free-slot scan + id counter skipping 0; explicit else arm keeps the n=1 rematerialisation (Session 19)
+ * MATCHED. */
 int DIntr(void);
 int EIntr(void);
 
@@ -21,12 +20,12 @@ int func_001199F8(int a0) {
             if ((*(int *)(p + 0x10) & 1) == 0) {
                 *(int *)(p + 0x10) = (i << 16) | 5;
                 idx = *(int *)a0;
-                n = idx + 1;
-                *(int *)a0 = n;
-                if (n == 1) {
+                *(int *)a0 = idx + 1;
+                if (idx + 1 == 1) {
                     *(int *)a0 = idx + 2;
                     n = 1;
-                }
+                } else
+                    n = idx + 1;
                 *(int *)(p + 0x14) = (int)p;
                 *(int *)(p + 0x18) = n;
                 EIntr();

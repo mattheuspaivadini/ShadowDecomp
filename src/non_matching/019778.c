@@ -1,7 +1,7 @@
-/* STATUS (10, 2026-10-16): NON_MATCHING. best score 6 [cc=29].
- * 
+/* STATUS (Session 19, 2026-10-17): NON_MATCHING. best score 4 [cc=29].
+ * asm barrier blocks the movn if-conversion; residual = the call result copied to v1 before the bltz
  * The original .s stays in the build (asm/cod/019778.s); this C
- * draft (10) is kept for the record. */
+ * draft (Session 19) is kept for the record. */
 /* asm/cod/019778.s -> get_interface_id @ 0x00119778 (0x8C bytes, 35 insns)
  * Three-stage id fetch: a2 == 0 -> -0x21C (the producer slot was not
  * initialised); func_00119568(a0, a1, a2) (the "get" path) succeeding (>= 0)
@@ -23,5 +23,6 @@ int sceLibnetWaitGetInterfaceID(int a0, int a1, int a2, int a3) {
     r = func_00119528(a0, a1, a2, a3);
     if (r < 0)
         return r;
+    __asm__ volatile ("");
     return 0;
 }
