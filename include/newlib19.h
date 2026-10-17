@@ -164,6 +164,9 @@ struct _reent
 
 extern struct _reent *_impure_ptr NL19_DATA;
 #define _REENT _impure_ptr
+#define _stdin_r(x)	((x)->_stdin)
+#define _stdout_r(x)	((x)->_stdout)
+#define _stderr_r(x)	((x)->_stderr)
 
 #define	__SLBF	0x0001		/* line buffered */
 #define	__SNBF	0x0002		/* unbuffered */
