@@ -702,3 +702,5 @@
 002970 = src/cod/002970.c                     # loader external IOP memory delete: inline search, returns the index (Session 19)
 002438 = src/cod/002438.c                     # loader: remove every external INTC handler, then inline list clear (Session 19)
 002608 = src/cod/002608.c                     # loader recovery: inline helpers for the thread/heap list sweeps (Session 19)
+002CF8 = src/cod/002CF8.c                     # loader printf: va_list into vsprintf, then printf (Session 19)
+005268 = src/cod/005268.c                     # usb serial printf: va_list into vsprintf (Session 19)
