@@ -633,3 +633,7 @@
 00A120 = src/cod/00A120.c cc=29               # SCE SDK, cc=29 (callee return types / statement shape from the image)
 002C90 = src/cod/002C90.c                     # loader (cc=296; SDK prototypes from the image)
 003340 = src/cod/003340.c                     # loader (cc=296; SDK prototypes from the image)
+004EF8 = src/cod/004EF8.c                     # padSysVibSetAcrParam (cc=296; sceVibSetActParam takes 5 args)
+022210 = src/cod/022210.c cc=29               # SCE SDK, cc=29 (callee arity / tail-call / base pin from the image)
+0102B8 = src/cod/0102B8.c cc=29               # SCE SDK, cc=29 (callee arity / tail-call / base pin from the image)
+009BC0 = src/cod/009BC0.c cc=29               # SCE SDK, cc=29 (callee arity / tail-call / base pin from the image)
