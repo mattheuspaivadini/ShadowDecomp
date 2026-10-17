@@ -679,3 +679,5 @@
 010C78 = src/cod/010C78.c cc=29               # timer iGetTimerSystemTime; SDK inline-asm time read (include/ee_timer.h) (Session 19)
 010CC8 = src/cod/010CC8.c cc=29               # timer GetTimerSystemTime; DIntr-guarded inline-asm time read (Session 19)
 010588 = src/cod/010588.c cc=29               # timer EndTimer; volatile counter-in-use word, handler removal guards the T2 reset (Session 19)
+004FF0 = src/cod/004FF0.c                     # power-off thread loop (boot game code); sceDevctl takes 6 args (Session 19)
+004F60 = src/cod/004F60.c                     # power-off thread setup (boot game code); $gp address via asm la (Session 19)
