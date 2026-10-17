@@ -1,7 +1,6 @@
-/* STATUS (10, 2026-10-16): NON_MATCHING. best score 7 [cc=29].
- * 
- * The original .s stays in the build (asm/cod/0111B8.s); this C
- * draft (10) is kept for the record. */
+/* asm/cod/0111B8.s -> SetTimerCount.
+ * timer SetTimerCount; empty-asm pin keeps the D_00133918 base, elapsed time added before the stores (Session 19)
+ * MATCHED. */
 struct S111B8 {
     int       f00;   /* 0x00 */
     int       f04;   /* 0x04 */
@@ -21,9 +20,9 @@ struct T111B8 {
 };
 
 extern struct T111B8 D_00133918;
-int func_0010FB20(void);
-int func_0010FB70(void);
-long long func_00110C78(void);
+int DIntr(void);
+int EIntr(void);
+long long iGetTimerSystemTime(void);
 
 long long SetTimerCount(int a0, long long a1) {
     struct S111B8 *p;
@@ -31,25 +30,31 @@ long long SetTimerCount(int a0, long long a1) {
     long long t;
     long long now;
     long long old;
+    struct T111B8 *tp;
 
     p = (struct S111B8 *)(((unsigned int)a0 >> 10) << 6);
-    guard = func_0010FB20();
-    if (a0 < 0 || (a0 & 0x3FF) != p->f08 || D_00133918.f1C == a0) {
-        if (guard != 0)
-            func_0010FB70();
-        return -1;
+    guard = DIntr();
+    if (a0 >= 0 && (a0 & 0x3FF) == p->f08) {
+        tp = &D_00133918;
+        __asm__ ("" : "+r" (tp));
+        if (tp->f1C != a0)
+            goto ok;
     }
+    if (guard != 0)
+        EIntr();
+    return -1;
+ok:
     t = p->f18;
     if (p->f0C & 1) {
-        now = func_00110C78();
+        now = iGetTimerSystemTime();
         old = p->f10;
         p->f18 = a1;
-        t = t + (now - old);
         p->f10 = now;
+        t = t + (now - old);
     } else {
         p->f18 = a1;
     }
     if (guard != 0)
-        func_0010FB70();
+        EIntr();
     return t;
 }

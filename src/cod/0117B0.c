@@ -1,10 +1,9 @@
-/* STATUS (Session 8, 2026-10-14): NON_MATCHING. best score 18 [cc=29].
- * R2 w45a_3: free-list pop/push-back
- * The original .s stays in the build (asm/cod/0117B0.s); this C
- * draft (Session 8) is kept for the record. */
+/* asm/cod/0117B0.s -> SetTimerAlarm.
+ * timer SetTimerAlarm; DIntr-guarded twin of iSetTimerAlarm (Session 19)
+ * MATCHED. */
 struct S011750 {
     struct S011750 *next;      /* 0x00 */
-    int             field04;   /* 0x04 */
+    volatile int    field04;   /* 0x04 */
     int           (*fn)();     /* 0x08 */
     int             field0C;   /* 0x0C */
 };
@@ -29,6 +28,9 @@ int SetTimerAlarm(int a0, int (*a1)(), int a2) {
     n = D_0014AC80[0];
     if (n != 0)
         D_0014AC80[0] = n->next;
+    /* UNCONFIRMED: the image re-tests n after the pop (no jump threading);
+     * the empty asm pin reproduces that, the original spelling is unknown. */
+    __asm__ ("" : "+r" (n));
     if (n == 0) {
         if (guard != 0)
             EIntr();

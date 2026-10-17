@@ -1,10 +1,9 @@
-/* STATUS (Session 8, 2026-10-14): NON_MATCHING. best score 17 [cc=29].
- * R2 w45a_3: unguarded sibling of 0117B0
- * The original .s stays in the build (asm/cod/0118E0.s); this C
- * draft (Session 8) is kept for the record. */
+/* asm/cod/0118E0.s -> iSetTimerAlarm.
+ * timer iSetTimerAlarm; pop re-tested (asm pin), volatile id (Session 19)
+ * MATCHED. */
 struct S0118E0 {
     struct S0118E0 *next;      /* 0x00 */
-    int             field04;   /* 0x04 */
+    volatile int    field04;   /* 0x04 */
     int           (*fn)();     /* 0x08 */
     int             field0C;   /* 0x0C */
 };
@@ -25,6 +24,9 @@ int iSetTimerAlarm(int a0, int (*a1)(), int a2) {
     n = D_0014AC80[0];
     if (n != 0)
         D_0014AC80[0] = n->next;
+    /* UNCONFIRMED: the image re-tests n after the pop (no jump threading);
+     * the empty asm pin reproduces that, the original spelling is unknown. */
+    __asm__ ("" : "+r" (n));
     if (n == 0)
         return 0x80008005;
     r = iAllocTimerCounter();

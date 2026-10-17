@@ -1,7 +1,6 @@
-/* STATUS (Session 8, 2026-10-14): NON_MATCHING. best score 13 [cc=29].
- * R2 w45a_3: sw $gp,0x2C($s0) has no C spelling
- * The original .s stays in the build (asm/cod/0113E0.s); this C
- * draft (Session 8) is kept for the record. */
+/* asm/cod/0113E0.s -> iSetTimerHandler.
+ * timer iSetTimerHandler; $gp saved with asm volatile (memory clobber forces the flag reload), base pin (Session 19)
+ * MATCHED. */
 struct S113E0 {
     int       f00;   /* 0x00 */
     int       f04;   /* 0x04 */
@@ -32,12 +31,15 @@ int func_00110780(long long a0);
 
 int iSetTimerHandler(int a0, long long a1, int a2, int a3) {
     struct S113E0 *p;
+    struct T113E0 *t;
     int m;
 
     p = (struct S113E0 *)(((unsigned int)a0 >> 10) << 6);
     if (a0 < 0 || (a0 & 0x3FF) != p->f08)
         return 0x80008002;
-    if (D_00133918.f1C == a0)
+    t = &D_00133918;
+    __asm__ ("" : "+r" (t));
+    if (t->f1C == a0)
         return 0x80000010;
     m = p->f0C;
     if (m & 2) {
@@ -48,9 +50,9 @@ int iSetTimerHandler(int a0, long long a1, int a2, int a3) {
     if (a2 == 0) {
         p->f0C = m & 0xFFFFFFFD;
     } else {
-        p->f0C = m | 2;
         p->f20 = a1;
-        p->f2C = 0;   /* UNCONFIRMED: the original stores $gp here */
+        p->f0C = m | 2;
+        __asm__ volatile ("sw $gp, 0x2c(%0)" : : "r" (p) : "memory");
         p->f30 = a3;
         if (p->f0C & 1)
             func_00110910(p);
