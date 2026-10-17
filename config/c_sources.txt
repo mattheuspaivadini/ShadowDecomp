@@ -704,3 +704,9 @@
 002608 = src/cod/002608.c                     # loader recovery: inline helpers for the thread/heap list sweeps (Session 19)
 002CF8 = src/cod/002CF8.c                     # loader printf: va_list into vsprintf, then printf (Session 19)
 005268 = src/cod/005268.c                     # usb serial printf: va_list into vsprintf (Session 19)
+011670 = src/cod/011670.c cc=29 -G0           # u64->float div; TU built with -G0 (immediate fp const)
+011700 = src/cod/011700.c cc=29 -G0           # counter init loop; -G0
+020D58 = src/cod/020D58.c cc=ee-gcc2.9-991111-01-dtls13010 -g0 # sceMc2 sysinfo record; dtls13010 -g0
+00A228 = src/cod/00A228.c cc=29               # sceSif RPC retry loop; delay*2 (not <<1) reproduces the optimize_skip bnel+sll branch-likely (Session 20)
+01A408 = src/cod/01A408.c cc=29 -fno-schedule-insns # sceMc2CreateSocket; TU built with -fno-schedule-insns (Session 20)
+0098F0 = src/cod/0098F0.c cc=29 -fno-strict-aliasing# copy-order: explicit temporaries group the two loads; TU built with -fno-strict-aliasing (Session 20)

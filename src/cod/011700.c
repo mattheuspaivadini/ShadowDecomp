@@ -1,7 +1,6 @@
-/* STATUS (Session 19, 2026-10-17): NON_MATCHING. best score 2 [cc=296 -g0 -fno-delayed-branch -G0].
- * struct-array + pointer pair; residual = sw/addiu(i--) schedule in the short loop (2.9 cc1 schedules sw first but pads the loop with 3 nops; 2.96 pads 1 nop like the image but hoists i--)
- * The original .s stays in the build (asm/cod/011700.s); this C
- * draft (Session 19) is kept for the record. */
+/* asm/cod/011700.s -> _InitAlarm.
+ * counter init loop; -G0
+ * MATCHED. */
 struct alarm {
     struct alarm *next;
     int f04;

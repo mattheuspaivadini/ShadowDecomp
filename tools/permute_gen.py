@@ -89,19 +89,36 @@ def find_statements(body: str):
 
 
 def split_body(text: str):
-    """(header, body, tail) around the outermost function body braces."""
-    m = re.search(r"\{", text)
-    if not m:
-        return None
-    start = m.start()
-    depth = 0
-    for i in range(start, len(text)):
+    """(header, body, tail) around the outermost FUNCTION body braces.
+
+    Skips leading `struct/union/enum ... ;` definitions (whose top-level brace
+    block is followed by `;`) so mutations target the function, not a type.
+    """
+    n = len(text)
+    i = 0
+    while i < n:
         if text[i] == "{":
-            depth += 1
-        elif text[i] == "}":
-            depth -= 1
-            if depth == 0:
-                return text[:start + 1], text[start + 1:i], text[i:]
+            depth = 0
+            j = i
+            while j < n:
+                if text[j] == "{":
+                    depth += 1
+                elif text[j] == "}":
+                    depth -= 1
+                    if depth == 0:
+                        break
+                j += 1
+            if j >= n:
+                return None
+            after = text[j + 1:]
+            before = text[:i].rstrip()
+            # a `} ;` / `} X;` (type or object declaration) block, or an
+            # initialiser (`= {`), is not the function body.
+            if re.match(r"\s*(;|[A-Za-z_*][\w\s\*]*;)", after) or before.endswith("="):
+                i = j + 1
+                continue
+            return text[:i + 1], text[i + 1:j], text[j:]
+        i += 1
     return None
 
 
@@ -453,11 +470,51 @@ def mut_early_return(text):
     return out
 
 
+_LVAL_RE = re.compile(r"^\s*([A-Za-z_][A-Za-z0-9_]*(?:\s*(?:\[[^\]]*\]|\.\w+|->\w+))+)\s*$")
+_ASSIGN_RE = re.compile(r"^\s*([A-Za-z_][A-Za-z0-9_]*(?:\s*(?:\[[^\]]*\]|\.\w+|->\w+))+)\s*=\s*(.+?)\s*;\s*$", re.S)
+
+
+def mut_load_group(text):
+    """A run of >=2 consecutive `lhs = <load>;` statements -> load all RHS into
+    `void *` temporaries first, then store, so the loads are emitted before the
+    stores (the `-fno-strict-aliasing` order the image shows)."""
+    out = []
+    sb = split_body(text)
+    if not sb:
+        return out
+    head, body, tail = sb
+    code = code_part(body)
+    spans = find_statements(code)
+    runs, cur = [], []
+    for a0, a1 in spans:
+        stmt = body[a0:a1]
+        m = _ASSIGN_RE.match(stmt)
+        if m and (m.group(2).strip() and "(" not in m.group(1)):
+            cur.append((a0, a1, m.group(1).strip(), m.group(2).strip()))
+        else:
+            if len(cur) >= 2:
+                runs.append(cur)
+            cur = []
+    if len(cur) >= 2:
+        runs.append(cur)
+    for ri, run in enumerate(runs):
+        lines = []
+        for k, (_a0, _a1, lhs, rhs) in enumerate(run):
+            lines.append(f"        void *__lg{ri}_{k} = (void *)({rhs});")
+        # second pass: store temps
+        stores = [f"        {lhs} = __lg{ri}_{k};"
+                  for k, (_a0, _a1, lhs, rhs) in enumerate(run)]
+        repl = "    {\n" + "\n".join(lines) + "\n" + "\n".join(stores) + "\n    }"
+        new = body[:run[0][0]] + repl + body[run[-1][1]:]
+        out.append((f"load_group_{ri}", head + new + tail))
+    return out[:4]
+
+
 MUTATIONS = [
     mut_swap_stmt, mut_arg_order, mut_local_hoist, mut_type_unsigned,
     mut_paren_assoc, mut_loop_form, mut_index_twice, mut_addr_cast,
     mut_plus_assign, mut_decl_split, mut_const_local, mut_negate_test,
-    mut_early_return,
+    mut_early_return, mut_load_group,
 ]
 
 

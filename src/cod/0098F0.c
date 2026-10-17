@@ -1,7 +1,6 @@
-/* STATUS (Session 7, 2026-10-14): NON_MATCHING. best score 19 [cc=29, default].
- * record link + 8 field copies.
- * The original .s stays in the build (asm/cod/0098F0.s); this C
- * draft (subagent-produced, Session 7) is kept for the record. */
+/* asm/cod/0098F0.s -> func_001098F0.
+ * copy-order: explicit temporaries group the two loads; TU built with -fno-strict-aliasing (Session 20)
+ * MATCHED. */
 /* asm/cod/0098F0.s -> func_001098F0 @ 0x001098F0 (0x8C bytes, 35 insns)
  *
  * Leaf helper over the object table D_00145940 (list head at +0x28; the nodes'
@@ -71,8 +70,12 @@ void func_001098F0(struct S98A *a0) {
     else
         a2->f10->f3C = a1;
     a2->f10 = a1;
-    a1->f20 = a0->f14;
-    a1->f1C = a0->f1C;
+    {
+        void *t1 = a0->f14;
+        void *t2 = a0->f1C;
+        a1->f20 = t1;
+        a1->f1C = t2;
+    }
     a1->f24 = a0->f20;
     a1->f0C = a0->f24;
     a1->f28 = a0->f28;

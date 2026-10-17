@@ -66,6 +66,9 @@ def main() -> int:
     ap.add_argument("--summary", action="store_true", help="print only the best table")
     ap.add_argument("--only", default="",
                     help="comma-separated variant names to compile (default: all)")
+    ap.add_argument("--only-contains", default="",
+                    help="comma-separated substrings; keep variants whose name "
+                         "contains any of them (default: all)")
     ap.add_argument("--verbose", action="store_true")
     ap.add_argument("--json", type=Path, default=None)
     args = ap.parse_args()
@@ -74,6 +77,7 @@ def main() -> int:
              if args.stems else backlog_stems())
     stems = list(dict.fromkeys(stems))  # dedupe: duplicate stems race on unlink
     only = {s.strip() for s in args.only.split(",") if s.strip()}
+    only_contains = [s.strip() for s in args.only_contains.split(",") if s.strip()]
     ccs = [c.strip() for c in args.cc.split(",") if c.strip()]
     if args.flag_sets:
         flag_sets = [[f for f in s.split() if f] for s in args.flag_sets.split(";")]
@@ -98,6 +102,9 @@ def main() -> int:
         variants = sorted(p for p in vdir.glob("*.c"))
         if only:
             variants = [p for p in variants if p.stem in only]
+        if only_contains:
+            variants = [p for p in variants
+                        if any(s in p.stem for s in only_contains)]
         if not variants:
             print(f"  no variants in {vdir} (use --baseline)")
             continue

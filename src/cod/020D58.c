@@ -1,7 +1,6 @@
-/* STATUS (Session 19, 2026-10-17): NON_MATCHING. best score 2 [cc=29].
- * full 0x184-byte record; residual = mflo placed before the jal instead of in its delay slot
- * The original .s stays in the build (asm/cod/020D58.s); this C
- * draft (Session 19) is kept for the record. */
+/* asm/cod/020D58.s -> _sceMcpIsSpeckOutClust.
+ * sceMc2 sysinfo record; dtls13010 -g0
+ * MATCHED. */
 struct R020D58 {
     char pad00[0x2A];
     unsigned short w;   /* 0x2A */

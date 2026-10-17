@@ -1,7 +1,6 @@
-/* STATUS (Session 7, 2026-10-14): NON_MATCHING. best score 3 [cc=29, default].
- * guarded record + two error codes.
- * The original .s stays in the build (asm/cod/01A408.s); this C
- * draft (subagent-produced, Session 7) is kept for the record. */
+/* asm/cod/01A408.s -> sceMc2CreateSocket.
+ * sceMc2CreateSocket; TU built with -fno-schedule-insns (Session 20)
+ * MATCHED. */
 /* asm/cod/01A408.s -> func_0011A408 @ 0x0011A408 (0x90 bytes, 36 insns)
  * Guarded connection set-up, returning 0x8101xxxx status codes:
  *   D_00135630 == 0                       -> 0x81018001 (not initialised)
