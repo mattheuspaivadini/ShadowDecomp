@@ -1,9 +1,8 @@
-/* STATUS (Session 9, 2026-10-15): NON_MATCHING. best score 3 [cc=29].
- * session9 R1; residual class not auto-classified
- * The original .s stays in the build (asm/cod/00FF00.s); this C
- * draft (Session 9) is kept for the record. */
+/* asm/cod/00FF00.s -> InitExecPS2.
+ * SCE SDK, cc=29 (callee return types / statement shape from the image)
+ * MATCHED. */
 int func_0010FE98(void);
-int func_0010FE88(void);
+int func_0010FE88(int a0);
 void func_0010FE30(int a0, int a1);
 void func_0010FE40(int a0, int *a1, int a2);
 void FlushCache(int a0);
@@ -24,7 +23,7 @@ void InitExecPS2(void) {
     func_0010FE30(SysExecPS2Entry[2], SysExecPS2Entry[3]);
     q = &SysExecPS2Entry[4];
     for (i = 2; i < 3; i++) {
-        func_0010FE30(*q, func_0010FE88());
+        func_0010FE30(*q, func_0010FE88(*q));
         q += 2;
     }
 }

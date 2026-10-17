@@ -1,7 +1,6 @@
-/* STATUS (10, 2026-10-16): NON_MATCHING. best score 4 [cc=296].
- * 
- * The original .s stays in the build (asm/cod/002C90.s); this C
- * draft (10) is kept for the record. */
+/* asm/cod/002C90.s -> if.
+ * loader (cc=296; SDK prototypes from the image)
+ * MATCHED. */
 /* asm/cod/002C90.s -> func_00102C90 @ 0x00102C90 (0x64 bytes, 25 insns)
  *
  * Release/clear the 256-entry pointer table D_0013C790 (.bss, 0x400 bytes):
@@ -23,8 +22,8 @@
 #include "symbols.h"
 
 int sceSifInitRpc(int x);
-void sceSifInitIopHeap(void);
-void sceSifFreeIopHeap(void);
+int sceSifInitIopHeap(void);
+int sceSifFreeIopHeap(void *addr);
 
 void LoaderSysDeleteAllExternalIopMemory(void) {
     int i;
@@ -33,9 +32,9 @@ void LoaderSysDeleteAllExternalIopMemory(void) {
     sceSifInitRpc(0);
     sceSifInitIopHeap();
     p = (int *)D_0013C790;
-    for (i = 0xFF; i >= 0; i--) {
+    for (i = 0; i < 0x100; i++) {
         if (*p != 0) {
-            sceSifFreeIopHeap();
+            sceSifFreeIopHeap((void *)*p);
             *p = 0;
         }
         p++;

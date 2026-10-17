@@ -1,7 +1,6 @@
-/* STATUS (Session 8, 2026-10-14): NON_MATCHING. best score 3 [cc=29].
- * R2 w45a_3: missing addiu $v0,$v0,0x3918 (address materialisation)
- * The original .s stays in the build (asm/cod/0110A0.s); this C
- * draft (Session 8) is kept for the record. */
+/* asm/cod/0110A0.s -> iStopTimerCounter.
+ * SCE SDK, cc=29 (callee return types / statement shape from the image)
+ * MATCHED. */
 struct S110A0 {
     int       f00;   /* 0x00 */
     int       f04;   /* 0x04 */
@@ -30,13 +29,14 @@ int iStopTimerCounter(int a0) {
     long long now;
     long long old;
     int m;
+    struct T110A0 *h;
 
     p = (struct S110A0 *)(((unsigned int)a0 >> 10) << 6);
-    if (a0 < 0)
+    if (a0 < 0 || (a0 & 0x3FF) != p->f08)
         return 0x80008002;
-    if ((a0 & 0x3FF) != p->f08)
-        return 0x80008002;
-    if (D_00133918.f1C != a0)
+    h = &D_00133918;
+    asm volatile ("" : "+r" (h));
+    if (h->f1C == a0)
         return 0x80000010;
     if ((p->f0C & 1) == 0)
         return 0;
