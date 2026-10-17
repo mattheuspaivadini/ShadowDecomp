@@ -204,13 +204,13 @@ Tips: use a function's constants, string references, and call patterns to infer 
 
 | Metric | Value |
 |--------|-------|
-| Current phase | Phases 1–4 done (**incl. step 6, ELF container**); **Phase 3 revision question resolved** (Session 8 added a **third** generation, `2.95.3-136`); **Phase 5 in progress (55 named symbols)**; Phase 6: **521 functions matched (half of 1042)** |
-| ELF rebuild hash match | **YES — 237,952 bytes, SHA-1 `6f853f64…` (flat load image), still green with 521 functions from C** |
+| Current phase | Phases 1–4 done (**incl. step 6, ELF container**); **Phase 3 revision question resolved** (Session 8 added a **third** generation, `2.95.3-136`); **Phase 5 in progress (55 named symbols)**; Phase 6: **524 functions matched** |
+| ELF rebuild hash match | **YES — 237,952 bytes, SHA-1 `6f853f64…` (flat load image), still green with 524 functions from C** |
 | ELF container (whole file) | **YES — `build/SCUS_974.72.elf` byte-identical to the original: 242,940 bytes, SHA-1 `b715b349…`; 3 program headers, 16 sections, `e_entry 0x00100010`, `.mdebug.eabi64`, no `.symtab`** (`tools/containerize.py`) |
 | Functions named | **55 `.text` symbols** = `entry` + **54 evidence-derived names**: 17 verbatim self-naming log messages, 22 inferred from `SceStdio<Op>Sema` object names (UNCONFIRMED), 3 single inferences (UNCONFIRMED), 3 callee names from `func_00104668` failure diagnostics (Session 5, UNCONFIRMED), 2 Session-3 names, 5 SDK object/operation names (Session 10a, UNCONFIRMED), 2 more SDK names (Session 10a.2, UNCONFIRMED) |
 | String-evidenced name candidates | **61 functions** reference an identifier-bearing string; **50 named, 11 pending** (Session 10a applied 5 with no C body/caller; Session 10a.2 applied the 2 that Session 10a had reverted after they broke the link, via a pure symbol rename of the 21 matched C call sites) |
-| Functions matched (C) | **521 / 1042** (2.9-991111, 2.96 and 2.95.3-136 per TU; the wrapper tier uses a per-TU `-fno-optimize-sibling-calls` on cc=296 TUs only — the 2.9 `cc1` rejects the flag) |
-| Matched bytes | 70600 / 203,692 `.text` bytes = **34.660 %** (verified) |
+| Functions matched (C) | **524 / 1042** (2.9-991111, 2.96 and 2.95.3-136 per TU; the wrapper tier uses a per-TU `-fno-optimize-sibling-calls` on cc=296 TUs only — the 2.9 `cc1` rejects the flag) |
+| Matched bytes | 70,784 / 203,692 `.text` bytes = **34.750 %** (verified) |
 | Fundamental types | **`int` 4 B, `void *` 4 B, `long`/`unsigned long` 8 B, `long long` 8 B, `double` 8 B** — probed with the pinned `ee-gcc2.96` (`build/s13/probe_long.c`): `long` is **64-bit** in this image's C, which is why routines such as `_malloc_trim_r` and `_strtol_r` do 64-bit arithmetic (`dsll32/dsrl32`, `__muldi3`, `__udivdi3`). `size_t` is 4 bytes in this SDK's headers; see `docs/compiler.md` §8 |
 | Compiler flags | `-O2 -g2 -G8` (per-TU `-g0` and `-fno-optimize-sibling-calls` overrides, the latter cc=296-only); `-O1`/`-Os` ruled out on 148 functions; `-O2 ≡ -O3` (not separable; Session 6 ran the decisive experiment — §2.4 of `docs/compiler.md`: plain static + `-O3` ≡ `inline` + `{-O2,-O3}`, so the `-O2` pin stays) |
 | Compilers | `ee-gcc2.96` (default) + `ee-gcc2.9-991111-01` (`cc=29`) + **`wine:ee-gcc2.95.3-136`** and `ee-gcc2.9-991111-xz`; matrix in `docs/compiler.md` §4.3, third-generation verdict in §4.4 |
@@ -218,11 +218,20 @@ Tips: use a function's constants, string references, and call patterns to infer 
 | Ghidra EE-extension decode | **100 %** of `.text` (50,923/50,923) |
 | splat split coverage | 203 KB / 85.6 % of ROM |
 | Functions detected | **1042** real functions (`docs/ledger.json`: 1044 records = 1042 + 2 `textbin`); 1037 spimdisasm boundaries − 1 false positive (`0x00113074`) = 1036, then `T004` split 6 merged boundaries (+6) in Session 12 |
-| Non-matching attempts tracked | **200** (`src/non_matching/`; ledger: 200 near / 126 untouched / 195 asm-permanent → 326 real pool remaining) |
+| Non-matching attempts tracked | **190** (`src/non_matching/`; ledger: 190 near / 123 untouched / 205 asm-permanent → 313 real pool remaining) |
 | IOP modules inventoried | 11 IRX (ELF32 MIPS-I, R3000A) |
 | EE hardware registers referenced | **38 addresses** (`tools/scan_hw_regs.py`); the 2 that were unidentified are now **confirmed**: `0x10001010` = `T2_MODE` (Timer 2 mode/status), `0x1000E060` = `D_STADR` (DMAC stall address) — `docs/structs.md` §"Hardware registers" |
 
 ### Session log
+
+- **2026-10-17 (Session 18) — 10 non-matching codes resolved from `src/non_matching/` (521 → 524 matched).**
+  - **Promoted to matching C (3):**
+    - `021A70` (`_sceMcCoreReadPage`, cc=29) — tail `j` lever: void prototype (`void _sceMcCoreReadPage2(...)`) allows cc=29 to emit direct tail `j` with delay slot loaded from struct offset `0x14`.
+    - `008E40` (`sceSnprintf`, cc=29) — standard variadic handling using `include/stdarg.h` (`va_start(ap, a2)` + `va_end(ap)`).
+    - `008DB8` (`func_00108DB8`, cc=29) — variadic callback forwarding using `include/stdarg.h` (`va_start(ap, a3)` + `va_end(ap)`), replacing raw builtin saveregs.
+  - **Classified as `asm-permanent` and archived (7):**
+    - Hand-vectorized R5900 MMI routines: `028188` (`memcmp`), `02821C` (`memcpy`), `0282CC` (`memmove`), `0283D0` (`memset`), `028FB0` (`strcpy`), `0290C4` (`strlen`), `02E704` (`memchr`). These use 128-bit MMI instructions (`lq`, `sq`, `pxor`, `pcpyh`, `pcpyld`, `psubb`, `pnor`, `pand`) not generated by EE-GCC from pure C. Formally added to `ASM_PERMANENT_EXTRA` in `tools/gen_ledger.py` matching `028BB0`/`028CDC`.
+  - **Gates:** `build/s10/verify_fast.py` 524/524 byte-exact (51s); `docs/ledger.json` regenerated (524 matched / 70,784 B / 190 near / 205 asm-permanent / 123 untouched).
 
 - **2026-10-16/17 (Session 17b) — half of the image: 401 → 521 functions (35,156 → 70,600 B = 34.660 %).**
   - **Library revisions pinned by first-scoring matches (all cc=296):** Newlib **1.9.0** (sourceware tag `newlib-1_9_0`:

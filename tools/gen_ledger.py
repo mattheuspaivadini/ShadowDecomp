@@ -53,8 +53,18 @@ ASM_PERMANENT_EXTRA = {
     "016D88": "gp save/restore; no C spelling (probe build/s8/sweep_gp*)",
     "019AC0": "gp save/restore; no C spelling (probe build/s8/sweep_gp*)",
     "0171B8": "gp save/restore; no C spelling (probe build/s8/sweep_gp*)",
+    "028188": "MMI memcmp: lq/pxor/pcpyud (hand-vectorised)",
+    "02821C": "MMI memcpy: lq/sq (hand-vectorised)",
+    "0282CC": "MMI memmove: lq/sq (hand-vectorised)",
+    "0283D0": "MMI memset: lq/sq (hand-vectorised)",
     "028BB0": "MMI strcat: lq/psubb/pnor/pcpyld/pcpyud (hand-vectorised)",
     "028CDC": "MMI strchr: lq/psubb/pnor/pcpyld/pcpyud/pxor (hand-vectorised)",
+    "028E6C": "MMI strcmp: lq/pxor/pcpyud (hand-vectorised)",
+    "028FB0": "MMI strcpy: lq/sq/psubb/pnor/pand/pcpyud (hand-vectorised)",
+    "0290C4": "MMI strlen: lq/psubb/pnor/pand/pcpyud (hand-vectorised)",
+    "029200": "MMI strncmp: lq/pxor/pcpyud (hand-vectorised)",
+    "0293B8": "MMI strncpy: lq/sq/psubb/pnor/pand/pcpyud (hand-vectorised)",
+    "02E704": "MMI memchr: lq/pxor/pcpyh/pcpyld (hand-vectorised)",
 }
 
 # "best score 4 [cc=29, default]" / "best score 14"
