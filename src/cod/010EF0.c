@@ -1,7 +1,6 @@
-/* STATUS (Session 12, 2026-10-16): NON_MATCHING. best score 3 [cc=29].
- * iGetTimerUsedUnusedCounters: lw v1, 0x10(v1) before addiu v0, 0x80 load delay scheduling
- * The original .s stays in the build (asm/cod/010EF0.s); this C
- * draft (Session 12) is kept for the record. */
+/* asm/cod/010EF0.s -> iGetTimerUsedUnusedCounters.
+ * timer TU: ee-gcc2.9-991111-01-dtls13010 -g0 -fno-delayed-branch -G0 (Session 19)
+ * MATCHED. */
 struct S00133918 {
     char pad00[0x08];
     int  field08;   /* 0x08 */
