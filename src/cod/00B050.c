@@ -1,0 +1,79 @@
+/* asm/cod/00B050.s -> sceClose.
+ * SCE libkernel stdio sceClose over SIF RPC (sceClose/sceStdioCCode template)
+ * MATCHED. */
+struct S00B050Fd {              /* 16-byte EE fd records at D_00146EC0 */
+    int iop_fd;                 /* 0x00 */
+    int used;                   /* 0x04 */
+    int f08;
+    int f0C;
+};
+
+struct S00B050Sema {            /* the kernel SemaParam */
+    int count;                  /* 0x00 */
+    int max_count;              /* 0x04 */
+    int init_count;             /* 0x08 */
+    int wait_threads;           /* 0x0C */
+    int attr;                   /* 0x10 */
+    char *option;               /* 0x14 */
+};
+
+extern int D_00132314 __attribute__((section(".data")));
+extern int D_001459C0[];
+extern int D_00146600[];
+extern int D_001470C0[];
+extern struct S00B050Fd D_00146EC0[];
+extern char D_00137F98[];       /* "SceStdioCloseSema" */
+
+struct S00B050Fd *func_0010A318(int fd);
+int func_0010A798(int a0);
+int func_0010A7C8(void);
+int func_0010A228(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
+                  int a7, int a8, int a9);
+int CreateSema(struct S00B050Sema *param);
+int DeleteSema(int sema);
+int WaitSema(int sema);
+
+int sceClose(int fd) {
+    struct S00B050Fd *f;
+    int *args = D_001459C0;
+    struct S00B050Sema sp;
+    int ret[4];
+    int sema;
+    int r;
+    int st;
+
+    f = func_0010A318(fd);
+    func_0010A798(1);
+    if (D_00132314 == 0 || f == 0 || f->used == 0) {
+        func_0010A7C8();
+        return -9;
+    }
+    args[3] = f->iop_fd;
+    args[4] = f - D_00146EC0;
+    sp.max_count = 1;
+    sp.option = D_00137F98;
+    sp.init_count = 0;
+    sema = CreateSema(&sp);
+    args[0] = sema;
+    args[1] = (int)ret;
+    args[2] = 4;
+    if (func_0010A228((int)D_001470C0, 1, 0, (int)args, 0x14,
+                      (int)D_00146600, 4, 0, 0, 0) < 0) {
+        DeleteSema(sema);
+        func_0010A7C8();
+        return -0xB;
+    }
+    f->used = 0;
+    st = *(int *)((unsigned int)D_00146600 | 0x20000000);
+    func_0010A7C8();
+    if (st == 0) {
+        DeleteSema(sema);
+        return -0xB;
+    }
+    WaitSema(sema);
+    DeleteSema(sema);
+    r = 0;
+    if (ret[0] <= -1)
+        r = ret[0];
+    return r;
+}
