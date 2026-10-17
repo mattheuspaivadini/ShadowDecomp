@@ -514,3 +514,4 @@
 02EC70 = src/cod/02EC70.c                     # Newlib mprec.c mult (Pack_32); official name _multiply
 02F140 = src/cod/02F140.c                     # Newlib mprec.c __mdiff (Pack_32); 16-bit limb Storeinc loops
 02DEA8 = src/cod/02DEA8.c                     # Newlib mallocr.c malloc_trim; size_t=32-bit, long=64-bit, .data attr for the sbrk_base global
+0275A0 = src/cod/0275A0.c                     # Newlib mallocr.c _memalign_r (authentic source); size_t=32-bit, long=64-bit, MALLOC_ALIGNMENT=16, MINSIZE=16, no INT_MAX overflow guard
