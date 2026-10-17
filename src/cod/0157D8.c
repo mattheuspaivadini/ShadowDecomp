@@ -1,7 +1,6 @@
-/* STATUS (Session 12, 2026-10-16): NON_MATCHING. best score 10 [cc=29].
- * func_001157D8: beql branch likely on bit counter loop
- * The original .s stays in the build (asm/cod/0157D8.s); this C
- * draft (Session 12) is kept for the record. */
+/* asm/cod/0157D8.s -> func_001157D8.
+ * SCE libdbc button map from a bitmask; init order fixes the register roles (Session 19)
+ * MATCHED. */
 int func_001157D8(unsigned char *a0, int *a1) {
     unsigned char *p;
     int *r;
@@ -10,9 +9,9 @@ int func_001157D8(unsigned char *a0, int *a1) {
     int n;
     int m;
 
+    bit = 0;
     n = 0;
     m = 0;
-    bit = 0;
     p = a0;
     r = a1;
     for (i = 0; i < 0x28; i++) {

@@ -1,13 +1,12 @@
-/* STATUS (Session 6, step 3): NON_MATCHING. Correct instruction sequence at cc=29 (mult stride + div), register roles and scheduling differ (15 edits).
- * See docs/non-matching-backlog.md. */
-/* asm/cod/020D58.s -> func_00120D58 @ 0x00120D58
- * Record lookup (stride 0x184, the 2.9 `mult $v1,$a0,$v1` shape): scale `a1`
- * by the unsigned short at +0x2A, divide by the unsigned short at +0x2C
- * (`div` + the divide-by-zero `break` guard) and forward to func_00120D10. */
+/* STATUS (Session 19, 2026-10-17): NON_MATCHING. best score 2 [cc=29].
+ * full 0x184-byte record; residual = mflo placed before the jal instead of in its delay slot
+ * The original .s stays in the build (asm/cod/020D58.s); this C
+ * draft (Session 19) is kept for the record. */
 struct R020D58 {
     char pad00[0x2A];
     unsigned short w;   /* 0x2A */
     unsigned short d;   /* 0x2C */
+    char pad2E[0x184 - 0x2E];
 };
 
 extern struct R020D58 gSceMc2SysInfo[];
@@ -15,8 +14,7 @@ extern struct R020D58 gSceMc2SysInfo[];
 int _sceMcpIsSpeckOutBlock(int index, int key);
 
 int _sceMcpIsSpeckOutClust(int index, int a1) {
-    unsigned short w = gSceMc2SysInfo[index].w;
-    unsigned short d = gSceMc2SysInfo[index].d;
+    struct R020D58 *r = &gSceMc2SysInfo[index];
 
-    return _sceMcpIsSpeckOutBlock(index, a1 * w / d);
+    return _sceMcpIsSpeckOutBlock(index, a1 * r->w / r->d);
 }

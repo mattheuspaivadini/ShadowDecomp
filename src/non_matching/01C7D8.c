@@ -1,7 +1,7 @@
-/* STATUS (10, 2026-10-16): NON_MATCHING. best score 7 [cc=29].
- * 
+/* STATUS (Session 19, 2026-10-17): NON_MATCHING. best score 5 [cc=29].
+ * p computed before base; residual = which hi/lo pair feeds the kept record pointer (s3)
  * The original .s stays in the build (asm/cod/01C7D8.s); this C
- * draft (10) is kept for the record. */
+ * draft (Session 19) is kept for the record. */
 extern char gSceMc2SysInfo[];   /* 0x184-stride records (lui/%lo) */
 extern char D_0015DF48[];   /* 0x898-stride records (lui/%lo) */
 
@@ -14,8 +14,8 @@ int func_0011C7D8(int index, int *out) {
     int n;
     int r;
 
-    base = gSceMc2SysInfo + index * 0x184;
     p = D_0015DF48 + index * 0x898;
+    base = gSceMc2SysInfo + index * 0x184;
     *out = 0;
     i = *(int *)(p + 0x890);
     n = 0;

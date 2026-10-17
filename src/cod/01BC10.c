@@ -1,7 +1,6 @@
-/* STATUS (10, 2026-10-16): NON_MATCHING. best score 6 [cc=wine:ee-gcc2.95.2-273a].
- * 
- * The original .s stays in the build (asm/cod/01BC10.s); this C
- * draft (10) is kept for the record. */
+/* asm/cod/01BC10.s -> func_0011BC10.
+ * SCE libmc file-name check (rejects . and ..) (Session 19)
+ * MATCHED. */
 extern char D_00138CF0[];
 extern char D_00138CF8[];
 
@@ -25,5 +24,10 @@ int func_0011BC10(char *a0) {
     }
     if (func_00128E6C(buf, D_00138CF0) == 0)
         return 0;
-    return func_00128E6C(buf, D_00138CF8) != 0;
+    if (func_00128E6C(buf, D_00138CF8) != 0)
+        return 1;
+    /* UNCONFIRMED: the empty asm keeps the 0/1 return as branches (no sltu
+     * store-flag); the original spelling is unknown. */
+    __asm__ volatile ("");
+    return 0;
 }
