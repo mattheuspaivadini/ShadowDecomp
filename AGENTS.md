@@ -226,6 +226,10 @@ Tips: use a function's constants, string references, and call patterns to infer 
 
 ### Session log
 
+- **2026-10-18 (Session 25) — requested three additional matches; no new promotion.**
+  - Rechecked the smallest remaining non-annul near-misses. A fresh compile of `001D90` retained its best score of **5** (no exact match); its residual is still the register allocation / stack-record copy shape. `004CC0` (score 3), `002360` (score 4), and `0091C0` (score 5) remain the closest documented residuals. The six known branch-annul cases were not revisited.
+  - No source, manifest, or symbol changes were made, so the verified baseline remains **688 matched / 26 near**, 101,528 bytes (49.844%), with the Session-24 flat-image and ELF-container hashes unchanged. The requested three additional matches remain outstanding.
+
 - **2026-10-18 (Session 24, branch `develop`) — one remaining near-miss resolved (687 → 688 matched).**
   - **Matched:** `016CE8` (`_sceCd_cd_callback`, `cc=29`). A function-local register variable pinned the callback condition to `$v0`, matching the original test sequence. Commit `92af953` contains only this function promotion and its `config/c_sources.txt` entry.
   - **Gates:** `verify_fast.py 016CE8` passed **1/1**; full `build.py` passed with flat-image SHA-1 `6f853f644a4279db18c15ceb8ee1d2a8b87a7b39` and byte-identical ELF container; final `verify_fast.py` passed **688/688**. Ledger: 688 matched / 26 near / 205 asm-permanent / 123 untouched; 101,528 matched bytes (49.844%).
