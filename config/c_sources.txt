@@ -783,3 +783,4 @@
 0020C0 = src/cod/0020C0.c                     # InitException; switch over the EE exception codes (0/8 skipped, 9 = break handler), typed eeRegInfo clear, $sp stored through a register-asm local (Session 23)
 0004B8 = src/cod/0004B8.c                     # RelocateElfInfoHeader; typed info header (int offsets -> void * pointers, TBAA groups the loads), section/relocation tables walked by index (Session 23)
 005BC8 = src/cod/005BC8.c                     # Sync; uncached double-buffer + alpha packet records, half-offset field read once before the branch (Session 23)
+021EF8 = src/cod/021EF8.c cc=29               # _sceMcCoreCreateSocket; request block padded to its real size (0x70 frame), fields copied in order, per-statement record indexing (Session 23)

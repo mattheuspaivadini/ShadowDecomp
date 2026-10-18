@@ -1,7 +1,6 @@
-/* STATUS (Session 9, 2026-10-15): NON_MATCHING. best score 14 [cc=29].
- * session9 R2 waveA; residual class not auto-classified
- * The original .s stays in the build (asm/cod/021EF8.s); this C
- * draft (Session 9) is kept for the record. */
+/* asm/cod/021EF8.s -> _sceMcCoreCreateSocket.
+ * _sceMcCoreCreateSocket; request block padded to its real size (0x70 frame), fields copied in order, per-statement record indexing (Session 23)
+ * MATCHED. */
 struct S021EF8_SUB {          /* 10-byte block copied from D_00138DC0 */
     unsigned short w0;        /* 0x00 */
     unsigned short w2;        /* 0x02 */
@@ -17,6 +16,7 @@ struct S021EF8_REQ {          /* the stack request block */
     int f0C;                  /* 0x0C */
     int f10;                  /* 0x10 */
     struct S021EF8_SUB sub;   /* 0x14 */
+    char pad1E[0x28 - 0x1E];
 };
 
 struct R021EF8 {              /* 0x24-byte D_00163CC8 record */
@@ -47,8 +47,8 @@ int _sceMcCoreCreateSocket(int *a0) {
     if (i < 0)
         return -1;
     req.f00 = a0[0];
-    req.f0C = a0[2];
     req.f08 = a0[1];
+    req.f0C = a0[2];
     req.f10 = a0[3];
     req.sub = D_00138DC0;
     req.f04 = 2;
