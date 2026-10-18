@@ -833,3 +833,4 @@
 019350 = src/cod/019350.c cc=29               # sceLibnetTerminate; unbind/retry loop with the empty 0x10000 delay loop, mirror of sceLibnetInitialize (019288) (Session 28).
 019670 = src/cod/019670.c cc=29               # Callee arity from the matched callees (func_00119568 takes 3 args); the 3-arg call fixes the prologue copy order, if (r < 0) return r keeps the slt/movn tail (Session 28).
 020370 = src/cod/020370.c cc=29               # Memory-card FAT entry-space query: card check, path resolve, directory lookup (0x81010011 = found), then func_0011E258 with an address-taken err (Session 28).
+01E988 = src/cod/01E988.c cc=29               # Memory-card FAT file lookup filling a file-info record (timestamps, size, attr, name) from the directory entry (Session 28).
