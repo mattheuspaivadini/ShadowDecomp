@@ -803,3 +803,4 @@
 01CA30 = src/cod/01CA30.c cc=29               # FAT chain length walk; loop entered by goto with the n++/mask step at the top, direct returns for error/end/invalid (Session 23)
 001CC8 = src/cod/001CC8.c                     # _execProgWithThread; version-id address built by an asm volatile (lui; nop; addiu; nop) like the original, PutStringS third argument pinned in a register, thread entry loaded first (Session 23)
 01C510 = src/cod/01C510.c cc=29               # result decoder of func_0011C4C8: r pinned in $a0 (register asm), error-path -1 materialised as lui/ori (UNCONFIRMED asm pair) (Session 23)
+016CE8 = src/cod/016CE8.c cc=29               # Callback condition pinned to v0 for original register order
