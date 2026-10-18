@@ -779,3 +779,4 @@
 001800 = src/cod/001800.c                     # FreeDecodedSection; typed module/section records, continue on unloaded sections, printf declared int-returning (Session 23)
 001950 = src/cod/001950.c                     # DisposeRelocationElement; typed 0x1C relocation records, third argument forwarded to the callback (Session 23)
 0016E8 = src/cod/0016E8.c                     # RelocateCode; typed relocation-section records, while (n--) walk, int-returning ResolveRelocation/printf (Session 23)
+0018B8 = src/cod/0018B8.c                     # RelocateSelfSymbol; Elf32_Sym walk with while (n--), switch on a cached st_shndx and on ELF_ST_TYPE 0..3 (Session 23)
