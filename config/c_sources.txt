@@ -826,3 +826,4 @@
 016E58 = src/cod/016E58.c cc=29               # ret = 1 initialised at the declaration and ret = 0 written after ChangeThreadPriority (Session 28).
 0204D0 = src/cod/0204D0.c cc=29               # Struct assignment of the 0x184-byte sys-info page (int-aligned block move; memcpy gives the unaligned lwl/lwr tail) (Session 28).
 0205E8 = src/cod/0205E8.c cc=29               # Struct assignment into the page buffer after the 0xFF fill (counterpart of 0204D0) (Session 28).
+018970 = src/cod/018970.c cc=29               # SCE libinet; receive counterpart of sceInetSend (018B48): request record, func_00118380 RPC, bounded copy-out via func_00118490 (Session 28).
