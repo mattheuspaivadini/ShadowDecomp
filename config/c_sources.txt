@@ -788,3 +788,4 @@
 01D7E0 = src/cod/01D7E0.c cc=29               # _sceMcFatUnFormat; per-statement FAT record indexing, _sceMcCoreGetConnection(port) arity, card-spec struct (Session 23)
 022EA8 = src/cod/022EA8.c cc=29               # RPC command dispatcher (0xC/0xD/0xE); callback pointers in .data, arguments evaluated before the null check, unsigned command (Session 23)
 019288 = src/cod/019288.c cc=29               # sceLibnetInitialize; 64-byte-aligned size check + the SIF bind/retry/delay loop (Session 23)
+009EA8 = src/cod/009EA8.c cc=29               # sceSifExecRequest (sifrpc sif_exec_request); typed server-data/rend packets, uniform sceSifDmaData fields, retry loop re-testing the SetDma result (Session 23)
