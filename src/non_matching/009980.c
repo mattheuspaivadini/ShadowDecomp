@@ -1,3 +1,8 @@
+/* STATUS (Session 22, 2026-10-17): NON_MATCHING. best score 2 [cc=29].
+ * sceSifCallRpc typed; residual = cd->server load scheduled after the call->client store (statement permutations did not close it)
+ * The original .s stays in the build (asm/cod/009980.s); this C
+ * draft (Session 22) is kept for the record. */
+struct RpcCd;
 /* STATUS (Session 8, 2026-10-14): NON_MATCHING. best score ? [cc=29].
  * R3 famC: the dispatcher itself (128 insns); the $gp store has no C spelling
  * The original .s stays in the build (asm/cod/009980.s); this C
@@ -5,8 +10,8 @@
 struct RpcCall {            /* the 0x40-byte packet returned by func_001091C0 */
     char pad00[0x14];
     int  f14;               /* 0x14 self pointer */
-    int  f18;               /* 0x18 rpc_id */
-    int  f1C;               /* 0x1C the client data */
+    int f18;
+    struct RpcCd * f1C;
     int  f20;               /* 0x20 rpc_number */
     int  f24;               /* 0x24 send_size */
     int  f28;               /* 0x28 recvbuf */
@@ -23,8 +28,8 @@ struct RpcCd {              /* the caller's SifRpcClientData */
     int  f14;               /* 0x14 buf (the send destination) */
     int  f18;               /* 0x18 the caller's $gp */
     int  f1C;               /* 0x1C end_function */
-    int  f20;               /* 0x20 end_param */
-    int  f24;               /* 0x24 server */
+    void * f20;
+    int f24;
 };
 
 struct EESema {
@@ -62,19 +67,19 @@ int sceSifCallRpc(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
     cd->f04 = call->f18;
     cd->f00 = (int)call;
     cd->f1C = a7;
-    __asm__ __volatile__("daddu %0, $gp, $zero" : "=r"(gp));
+    __asm__ __volatile__("move %0, $28" : "=r"(gp));
     cd->f18 = gp;
     call->f20 = a1;
     call->f24 = a4;
     call->f28 = a5;
     call->f2C = a6;
     call->f14 = (int)call;
-    call->f1C = (int)cd;
-    call->f34 = cd->f24;
+    call->f1C = (struct RpcCd *)cd;
+    call->f34 = (int)cd->f24;
 
     if (!(a2 & 2)) {
         if (a3 == a5) {
-            sceSifWriteBackDCache(a3, a4 < a6 ? a4 : a6);
+            sceSifWriteBackDCache(a3, a4 < a6 ? a6 : a4);
         } else {
             if (a4 > 0)
                 sceSifWriteBackDCache(a3, a4);
@@ -89,11 +94,10 @@ int sceSifCallRpc(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
         else
             call->f30 = 1;
         cd->f08 = -1;
-        if (sceSifSendCmd(0x8000000A, (int)call, 0x40, a3, cd->f14, a4) == 0) {
-            func_00109268((int)call);
-            return -2;
-        }
-        return 0;
+        if (sceSifSendCmd(0x8000000A, (int)call, 0x40, a3, cd->f14, a4) != 0)
+            return 0;
+        func_00109268((int)call);
+        return -2;
     }
 
     sema.init_count = 0;

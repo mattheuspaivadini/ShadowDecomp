@@ -1,7 +1,7 @@
-/* STATUS (Session 19, 2026-10-17): NON_MATCHING. best score 4 [cc=296].
- * inline clear/search helpers; residual = constant order in the clear loop and the threaded found=0 path
+/* STATUS (Session 22, 2026-10-17): NON_MATCHING. best score 2 [cc=296].
+ * clear-list -1 kept in a local fixes the constant order; residual = 2.96 dbr threads the found=0 jump into the beql target (open class)
  * The original .s stays in the build (asm/cod/002500.s); this C
- * draft (Session 19) is kept for the record. */
+ * draft (Session 22) is kept for the record. */
 extern int D_0013BB90[256];  /* external semaphore list, -1 = free */
 extern int D_00131F80[3];    /* the loader's own semaphore attributes */
 
@@ -11,8 +11,9 @@ int ReferSemaStatus(int sema, int *info);
 static inline void clear_list(void) {
     int i;
 
+    int v = -1;
     for (i = 255; i >= 0; i--)
-        D_0013BB90[i] = -1;
+        D_0013BB90[i] = v;
 }
 
 static inline int is_loader_sema(int attr) {

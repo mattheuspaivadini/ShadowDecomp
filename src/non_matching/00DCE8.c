@@ -1,29 +1,26 @@
-/* STATUS (Session 8, 2026-10-14): NON_MATCHING. best score 30 [cc=29].
- * R4 w25a_1: entry jumps over the wait block (4 literal nops)
+/* STATUS (Session 22, 2026-10-17): NON_MATCHING. best score 3 [cc=29].
+ * rotated bind/poll loop; residual = order of the init-flag store vs the return 0 (lui v0/v1)
  * The original .s stays in the build (asm/cod/00DCE8.s); this C
- * draft (Session 8) is kept for the record. */
-int sceSifBindRpc(int *a0, int a1, int a2);
-int DIntr(void);
+ * draft (Session 22) is kept for the record. */
+struct SifRpcClientData {
+    char pad00[0x24];
+    void *server;       /* 0x24 */
+};
+extern struct SifRpcClientData D_001471C0;
+extern int D_0013232C __attribute__((section(".data")));
 
-extern int D_001471C0[];
-extern int D_0013232C[];
+int sceSifBindRpc(struct SifRpcClientData *cd, int rpc, int mode);
 
 int sceSifInitIopHeap(void) {
-    int r;
     int i;
 
-    for (;;) {
-        r = sceSifBindRpc(D_001471C0, 0x80000003, 0);
-        if (r < 0)
+    while (1) {
+        if (sceSifBindRpc(&D_001471C0, 0x80000003, 0) < 0)
             return -1;
-        if (D_001471C0[9] != 0) {
-            D_0013232C[0] = 0;
-            return 0;
-        }
-        i = 0x100000;
-        while (i != -1) {
-            i--;
-            __asm__ __volatile__("nop\nnop\nnop\nnop");
-        }
+        if (D_001471C0.server != 0)
+            break;
+        for (i = 0x100000; --i != -1; )
+            ;
     }
+    return D_0013232C = 0;
 }
