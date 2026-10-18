@@ -822,3 +822,4 @@
 017138 = src/cod/017138.c cc=29               # $gp saved with a volatile asm store (same idiom as sceCdCallback 016C80); the asm keeps dbr from filling the beqz slot from above, so it takes the target's move v0 as in the original (Session 28).
 017798 = src/cod/017798.c cc=29               # Non-blocking path as one || test returning 1 / 0: two separate ifs let combine fold the second into sltu (Session 28).
 0053F0 = src/cod/0053F0.c                     # Frame + sibling call iSignalSema(D_0013A188) on the split .sbss sema word (Session 28).
+001AA0 = src/cod/001AA0.c                     # DecodeSection error callback: LoaderSysJumpRecoverPoint(fmt, $ra - 8) with $ra read through a local register variable (__builtin_return_address(0) loads through $ra in ee-gcc 2.96) (Session 28).
