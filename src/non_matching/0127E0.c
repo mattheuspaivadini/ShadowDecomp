@@ -1,9 +1,13 @@
+/* STATUS (Session 23, 2026-10-18): NON_MATCHING. best score 19 [cc=29].
+ * uncached packet base is |0x20000000 (fields 2/4/6/7/8) and f00 volatile (store+reload); residual = store scheduling of the record/packet fields (permute_stmts 400 variants: no gain)
+ * The original .s stays in the build (asm/cod/0127E0.s); this C
+ * draft (Session 23) is kept for the record. */
 /* STATUS (Session 9, 2026-10-15): NON_MATCHING. best score 23 [cc=29].
  * session9 R2 waveA; residual class not auto-classified
  * The original .s stays in the build (asm/cod/0127E0.s); this C
  * draft (Session 9) is kept for the record. */
 struct S0127E0 {
-    int f00;    /* 0x00 */
+    volatile int f00;    /* 0x00 */
     int f04;    /* 0x04 */
     int f08;    /* 0x08 */
     int f0C;    /* 0x0C */
@@ -37,11 +41,11 @@ int sceTtyInit(void) {
     D_0014AFD0.f00 = sceDeci2Open(0x210, (int)&D_0014AFD0, (int)func_00112400);
     if (D_0014AFD0.f00 < 0)
         return 0;
-    pkt = (struct P0127E0 *)((int)D_0014B000 | 0x20000002);
+    pkt = (struct P0127E0 *)((int)D_0014B000 | 0x20000000);
     D_0014AFD0.f0C = 0;
     D_0014AFD0.f04 = 0;
     D_0014AFD0.f08 = 0;
-    D_0014AFD0.f14 = (int)D_0014B140 | 0x20000002;
+    D_0014AFD0.f14 = (int)D_0014B140 | 0x20000000;
     D_0014AFD0.f10 = (int)pkt;
     pkt->f04 = 0x210;
     pkt->f06 = 0x45;

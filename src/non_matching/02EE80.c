@@ -1,56 +1,46 @@
-/* STATUS (Session 9, 2026-10-15): NON_MATCHING. best score 46 [cc=296].
- * session9 R2 waveA; residual class not auto-classified
+/* STATUS (Session 23, 2026-10-18): NON_MATCHING. best score 1 [cc=296] (was 46).
+ * Authentic Newlib 1.9.0 mprec.c pow5mult; p05 referenced through splat's D_00139B4C label (one word before the table). Residual = bnez (original) vs bnel after the _p5s load (dbr annul class; -g levels, -fno-thread-jumps and the 2.95/3.2 builds do not change it).
  * The original .s stays in the build (asm/cod/02EE80.s); this C
- * draft (Session 9) is kept for the record. */
-struct N02EE80 {
-    struct N02EE80 *f00;     /* 0x00 child link */
-};
+ * draft (Session 23) is kept for the record. */
+#include "newlib19_mprec.h"
 
-struct P02EE80 {             /* a0 */
-    char pad00[0x48];
-    struct N02EE80 *f48;     /* 0x48 */
-};
+/* p05[3] = {5, 25, 125} sits at 0x00139B50; splat's label D_00139B4C is one
+ * word before it, so p05[i - 1] is written D_00139B4C[i]. */
+extern const int D_00139B4C[];
 
-extern int D_00139B4C[];     /* absolute-addressed coefficient table */
+_Bigint *
+pow5mult (struct _reent * ptr, _Bigint * b, int k)
+{
+  _Bigint *b1, *p5, *p51;
+  int i;
 
-void *_multadd(struct P02EE80 *a0, void *a1, int coeff, int a3);
-void *_i2b(struct P02EE80 *a0, int size);
-void *_multiply(struct P02EE80 *a0, void *a1, void *a2);
-void _Bfree(struct P02EE80 *a0, void *node);
+  if ((i = k & 3) != 0)
+    b = multadd (ptr, b, D_00139B4C[i], 0);
 
-void *_pow5mult(struct P02EE80 *a0, void *a1, int a2) {
-    struct N02EE80 *n;
-    struct N02EE80 *v;
-    int k;
-
-    if ((a2 & 3) != 0)
-        a1 = _multadd(a0, a1, D_00139B4C[a2 & 3], 0);
-    k = a2 >> 2;
-    if (k == 0)
-        return a1;
-    n = a0->f48;
-    if (n == 0) {
-        n = _i2b(a0, 0x271);
-        a0->f48 = n;
-        n->f00 = 0;
+  if (!(k >>= 2))
+    return b;
+  if (!(p5 = ptr->_p5s))
+    {
+      /* first time */
+      p5 = ptr->_p5s = i2b (ptr, 625);
+      p5->_next = 0;
     }
-    for (;;) {
-        if (k & 1) {
-            v = _multiply(a0, a1, n);
-            _Bfree(a0, a1);
-            a1 = v;
-        }
-        k >>= 1;
-        if (k == 0)
-            break;
-        if (n->f00 != 0) {
-            n = n->f00;
-        } else {
-            v = _multiply(a0, n, n);
-            n->f00 = v;
-            v->f00 = 0;
-            n = v;
-        }
+  for (;;)
+    {
+      if (k & 1)
+	{
+	  b1 = mult (ptr, b, p5);
+	  Bfree (ptr, b);
+	  b = b1;
+	}
+      if (!(k >>= 1))
+	break;
+      if (!(p51 = p5->_next))
+	{
+	  p51 = p5->_next = mult (ptr, p5, p5);
+	  p51->_next = 0;
+	}
+      p5 = p51;
     }
-    return a1;
+  return b;
 }

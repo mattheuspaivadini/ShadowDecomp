@@ -101,7 +101,7 @@ glabel usbSerialSysPutString
 .align 2
   .L001051EC:
     /* 51EC 001051EC 081C040C */  jal        WaitSema
-    /* 51F0 001051F0 1884848F */   lw        $a0, %gp_rel(D_0013A180 + 0x8)($gp)
+    /* 51F0 001051F0 1884848F */   lw        $a0, %gp_rel(D_0013A188)($gp)
     /* 51F4 001051F4 C0EAE426 */  addiu      $a0, $s7, %lo(D_0013EAC0)
     /* 51F8 001051F8 10000524 */  addiu      $a1, $zero, 0x10
     /* 51FC 001051FC 2D300000 */  daddu      $a2, $zero, $zero

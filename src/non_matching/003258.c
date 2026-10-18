@@ -1,5 +1,6 @@
 /* STATUS (Session 19, 2026-10-17): NON_MATCHING. best score 1 [cc=296].
  * index form fixes the preheader; residual = blez vs blezl: our 2.96 dbr annuls a target-stolen insn when the fall-through call has its arg load in the jal delay (probe build/s19/probe n00 vs a4)
+ * Session 23: for/while/do-while/pointer-stride/row-array loop forms all keep the residual (blezl). The fall-through call already has its a0 load in the jal delay when dbr fills the blez slot, so mark_target_live_regs sees a0 live and annuls; no C shape changes that order.
  * The original .s stays in the build (asm/cod/003258.s); this C
  * draft (Session 19) is kept for the record. */
 extern char D_00136A20[];              /* lui/%lo - non-small */

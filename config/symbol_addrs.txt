@@ -1097,6 +1097,8 @@ spReg = 0x0013A080;
 loaderThreadId = 0x0013A084;
 SCREEN_WIDTH = 0x0013A130;
 SCREEN_HEIGHT = 0x0013A134;
+// 4-byte .sbss word read gp-relative by usbSerialSysPutString (0x001050B8); separate object (Session 26)
+D_0013A188 = 0x0013A188;
 errno = 0x0013A18C;
 _gp = 0x00141D70;
 key_value = 0x00169F98;
