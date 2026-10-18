@@ -816,3 +816,4 @@
 026548 = src/cod/026548.c                     # GCC 2000-06 frame-dwarf2.c find_fde (authentic source, include/frame2000.h); frame_init/search_fdes as NOTHROW_STUB so their calls are nothrow like in the original TU, which turns the annulled bnel into the original plain bne (Session 28).
 003258 = src/cod/003258.c                     # LoaderSysPrintf as NOTHROW_STUB (defined earlier in the loader TU): nothrow calls let dbr fill the loop-entry blez plainly, as in the original (Session 28).
 025B30 = src/cod/025B30.c                     # GCC 2000-06 frame.c end_fde_sort (authentic source, include/frame2000.h); fde_merge as NOTHROW_STUB (defined earlier in frame.c), free stays external - stubbing free breaks the match (Session 28).
+028850 = src/cod/028850.c                     # Newlib 1.9.0 signal.c _sigtramp_r; _init_signal_r as NOTHROW_STUB (defined earlier in signal.c) gives the plain bnez delay fill (Session 28).
