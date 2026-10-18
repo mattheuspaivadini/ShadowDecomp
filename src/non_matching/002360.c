@@ -1,39 +1,37 @@
-/* STATUS (Session 8, 2026-10-14): NON_MATCHING. best score 29 [cc=296].
- * R2 w45a_0: reg-alloc ($gp reload pair after the first call)
+/* STATUS (Session 23, 2026-10-18): NON_MATCHING. best score 4 [cc=296] (was 29).
+ * Exception-recovery entry: global register variable for $gp set with asm la (gives the a5 -> s1 -> s2 copy and the direct lui/addiu $gp), typed eeRegInfo gpr/cop0 tables, cop0[13]=epc / cop0[14]=cause. Residual = the thid move is emitted before the $gp asm instead of in the next jal slot (permute_stmts 600: no gain).
  * The original .s stays in the build (asm/cod/002360.s); this C
- * draft (Session 8) is kept for the record. */
+ * draft (Session 23) is kept for the record. */
+struct RegInfo { int gpr[32][2]; int cop0[32][2]; };
+extern struct RegInfo eeRegInfo;
+extern char _gp[];
+register void *gp_reg asm ("$28");
 extern char D_001368A0[];
 extern char D_001368E0[];
-extern int  eeRegInfo[];
-
-int  GetThreadId(int a0);
+int GetThreadId(void);
 void LoaderSysExecuteRecoveryFirstProcess(void);
-void ChangeThreadPriority(int a0, int a1);
-void EIntr(void);
-void LoaderSysPrintf(int a0, int a1);
-int  iGetCop0(int a0);
-void LoaderSysJumpRecoverPointNoStateSetting(int a0, ...);
+int ChangeThreadPriority(int thid, int prio);
+int EIntr(void);
+int LoaderSysPrintf(const char *fmt, ...);
+int iGetCop0(int reg);
+void LoaderSysJumpRecoverPointNoStateSetting(const char *fmt, ...);
 
-void func_00102360(int a0, int a1, int a2, int a3, int a4, int *a5) {
-    int *q;
-    int *p;
-    int t;
+void func_00102360(int a0, int epc, int cause, int a3, int a4, int (*regs)[4]) {
+    int thid;
     int i;
-
-    t = GetThreadId(a0);
+    int (*q)[4];
+    thid = GetThreadId();
+    __asm__ ("la %0, _gp" : "=r" (gp_reg));
     LoaderSysExecuteRecoveryFirstProcess();
-    ChangeThreadPriority(t, 0x7F);
+    ChangeThreadPriority(thid, 0x7F);
     EIntr();
-    LoaderSysPrintf((int)D_001368A0, t);
-    q = a5;
-    p = eeRegInfo;
-    for (i = 0; i < 0x20; i++) {
-        p[0] = q[0];
-        q += 4;
-        p[0x40] = iGetCop0(i);
-        p += 2;
+    LoaderSysPrintf(D_001368A0, thid);
+    q = regs;
+    for (i = 0; i < 32; i++) {
+        eeRegInfo.gpr[i][0] = q[i][0];
+        eeRegInfo.cop0[i][0] = iGetCop0(i);
     }
-    *(int *)((char *)eeRegInfo + 0x170) = a2;
-    *(int *)((char *)eeRegInfo + 0x168) = a1;
-    LoaderSysJumpRecoverPointNoStateSetting((int)D_001368E0);
+    eeRegInfo.cop0[13][0] = epc;
+    eeRegInfo.cop0[14][0] = cause;
+    LoaderSysJumpRecoverPointNoStateSetting(D_001368E0);
 }
