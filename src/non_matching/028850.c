@@ -4,6 +4,7 @@
  * (bnezl) where the original fills it PLAIN (bnez); the plain path needs
  * `!insn_sets_resource_p (sll, &opposite_needed, 1)` at the jal - no C lever
  * found (probes + dbr source archaeology, notes_11a.md).
+ * Session 23: authentic Newlib signalr.c shape, 4 _init_signal_r prototypes, (unsigned) range test, table local, and -g0/-fno-schedule-insns{,2}/-fno-strict-aliasing/-fno-expensive-optimizations: still bnezl (score 1). Same dbr liveness class as 003258.
  * The original .s stays in the build (asm/cod/028850.s); this C
  * draft (Session 9) is kept for the record. */
 extern int _init_signal_r(int a0);

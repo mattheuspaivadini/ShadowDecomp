@@ -1,17 +1,12 @@
-/* STATUS (Session 22, 2026-10-17): NON_MATCHING. best score 2 [cc=29].
- * sceSifCallRpc typed; residual = cd->server load scheduled after the call->client store (statement permutations did not close it)
- * The original .s stays in the build (asm/cod/009980.s); this C
- * draft (Session 22) is kept for the record. */
+/* asm/cod/009980.s -> sceSifCallRpc.
+ * sceSifCallRpc; client field int + server load before the client store (TBAA) (Session 23)
+ * MATCHED. */
 struct RpcCd;
-/* STATUS (Session 8, 2026-10-14): NON_MATCHING. best score ? [cc=29].
- * R3 famC: the dispatcher itself (128 insns); the $gp store has no C spelling
- * The original .s stays in the build (asm/cod/009980.s); this C
- * draft (Session 8) is kept for the record. */
 struct RpcCall {            /* the 0x40-byte packet returned by func_001091C0 */
     char pad00[0x14];
     int  f14;               /* 0x14 self pointer */
     int f18;
-    struct RpcCd * f1C;
+    int  f1C;               /* 0x1C client data (cd) */
     int  f20;               /* 0x20 rpc_number */
     int  f24;               /* 0x24 send_size */
     int  f28;               /* 0x28 recvbuf */
@@ -29,7 +24,7 @@ struct RpcCd {              /* the caller's SifRpcClientData */
     int  f18;               /* 0x18 the caller's $gp */
     int  f1C;               /* 0x1C end_function */
     void * f20;
-    int f24;
+    int f24;                /* 0x24 server */
 };
 
 struct EESema {
@@ -74,8 +69,8 @@ int sceSifCallRpc(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
     call->f28 = a5;
     call->f2C = a6;
     call->f14 = (int)call;
-    call->f1C = (struct RpcCd *)cd;
-    call->f34 = (int)cd->f24;
+    call->f34 = cd->f24;
+    call->f1C = (int)cd;
 
     if (!(a2 & 2)) {
         if (a3 == a5) {

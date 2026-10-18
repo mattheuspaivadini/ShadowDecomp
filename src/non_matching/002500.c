@@ -1,5 +1,6 @@
 /* STATUS (Session 22, 2026-10-17): NON_MATCHING. best score 2 [cc=296].
  * clear-list -1 kept in a local fixes the constant order; residual = 2.96 dbr threads the found=0 jump into the beql target (open class)
+ * Session 23: found-variable rewrites (found=0 default, if/else, &&, helper with break) and empty-asm pins on found: the pin restores the plain bne (no jump threading) but perturbs the inlined helper (score 15+). Best stays the Session-19 ternary (score 2).
  * The original .s stays in the build (asm/cod/002500.s); this C
  * draft (Session 22) is kept for the record. */
 extern int D_0013BB90[256];  /* external semaphore list, -1 = free */
