@@ -797,3 +797,4 @@
 0198B8 = src/cod/0198B8.c cc=29               # sceSifMInitRpc; typed rpc-queue record and SIF cmd handler registration, two statement swaps found by the permuter (Session 23)
 008FF8 = src/cod/008FF8.c cc=29               # sceSifInitRpc; void prototypes for the tail-called EIntr/sceSifSetReg, typed rpc data-queue record, store order from the permuter (Session 23)
 002D70 = src/cod/002D70.c                     # LoaderSysLoadIopModuleFromEEBuffer; three static inline helpers (find/setNew/load) at plain -O2 - resolves the -O2/-O3 question, load result taken before the heap free (Session 23)
+00EA10 = src/cod/00EA10.c cc=29               # module RPC request carrying a module path (strncpy to 0xFC, NUL-terminated) plus argument blob; twin of 00E400's request layout (Session 23)
