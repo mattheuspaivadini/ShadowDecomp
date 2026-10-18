@@ -1,41 +1,37 @@
-/* STATUS (Session 8, 2026-10-14): NON_MATCHING. best score 25 [cc=29].
- * R2 w45a_3: reg-alloc (5-arg descriptor call)
+/* STATUS (Session 23, 2026-10-18): NON_MATCHING. best score 7 [cc=29] (was 25).
+ * ExecPS2 argv packer: kernel arg slots + strings after slot+0x40, int-returning copy helpers (free v0), argc clamped to 15. Residual = &D_00133168 materialised in v0 and copied to a3 (original builds it straight into a3) plus the end/argv save order (permute_gen --pairs 800 + permute_types --locals 86: no gain).
  * The original .s stays in the build (asm/cod/010000.s); this C
- * draft (Session 8) is kept for the record. */
-int func_0010FFF0(int a0, int a1, int a2, int a3, int a4);
-int func_0010FFB0(int a0, int a1, int a2);
-int func_001290C4(int a0);
+ * draft (Session 23) is kept for the record. */
+extern int _kExecArg[];
+extern int D_00133168[];
+int func_0010FFF0(int a0, int a1, char **argv, int *p);
+int func_0010FFB0(void *dst, void *src, int n);
+int func_001290C4(const char *s);   /* strlen */
 
-extern int _kExecArg[];   /* lui/%lo -> non-small */
-extern int D_00133168[];   /* lui/addiu -> non-small */
-
-int func_00110000(int a0, int a1, int *a2) {
-    int arg;
+char *func_00110000(char *name, int argc, char **argv) {
+    char *ptr;
+    char **slot;
+    char *end;
     int n;
-    int len;
-    int base;
-    int end;
+    int i;
 
-    base = _kExecArg[0];
-    end = base + 0x40;
-    func_0010FFF0(D_00133168[0], D_00133168[1], (int)a2, (int)D_00133168,
-                  end);
-    n = a1 < 0x10 ? 0xF : a1;
-    func_0010FFB0(base, (int)&arg, 4);
-    base += 4;
-    len = func_001290C4(a0) + 1;
-    func_0010FFB0(arg, a0, len);
-    arg += len;
-    if (n > 0) {
-        do {
-            func_0010FFB0(base, (int)&arg, 4);
-            base += 4;
-            n--;
-            len = func_001290C4(*a2) + 1;
-            func_0010FFB0(arg, *a2, len);
-            a2++;
-            arg += len;
-        } while (n != 0);
+    slot = (char **)_kExecArg[0];
+    end = (char *)slot + 0x40;
+    ptr = end;
+    func_0010FFF0(D_00133168[0], D_00133168[1], argv, D_00133168);
+    if (argc >= 0x10)
+        argc = 0xF;
+    func_0010FFB0(slot, &ptr, 4);
+    slot++;
+    n = func_001290C4(name) + 1;
+    func_0010FFB0(ptr, name, n);
+    ptr += n;
+    for (i = 0; i < argc; i++) {
+        func_0010FFB0(slot, &ptr, 4);
+        slot++;
+        n = func_001290C4(argv[i]) + 1;
+        func_0010FFB0(ptr, argv[i], n);
+        ptr += n;
     }
     return end;
 }
