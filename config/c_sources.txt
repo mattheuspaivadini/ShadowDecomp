@@ -781,3 +781,4 @@
 0016E8 = src/cod/0016E8.c                     # RelocateCode; typed relocation-section records, while (n--) walk, int-returning ResolveRelocation/printf (Session 23)
 0018B8 = src/cod/0018B8.c                     # RelocateSelfSymbol; Elf32_Sym walk with while (n--), switch on a cached st_shndx and on ELF_ST_TYPE 0..3 (Session 23)
 0020C0 = src/cod/0020C0.c                     # InitException; switch over the EE exception codes (0/8 skipped, 9 = break handler), typed eeRegInfo clear, $sp stored through a register-asm local (Session 23)
+0004B8 = src/cod/0004B8.c                     # RelocateElfInfoHeader; typed info header (int offsets -> void * pointers, TBAA groups the loads), section/relocation tables walked by index (Session 23)
