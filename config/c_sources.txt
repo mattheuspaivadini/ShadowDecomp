@@ -831,3 +831,4 @@
 018BF8 = src/cod/018BF8.c cc=29               # SCE libinet; sceInetSend with the destination address staged through func_00118438 (9th argument on the stack) (Session 28).
 000BF8 = src/cod/000BF8.c                     # LoaderSysJumpRecoverPoint (000C80) without the eeRegInfo state capture: $gp via a global register variable, varargs into vsprintf (Session 28).
 019350 = src/cod/019350.c cc=29               # sceLibnetTerminate; unbind/retry loop with the empty 0x10000 delay loop, mirror of sceLibnetInitialize (019288) (Session 28).
+019670 = src/cod/019670.c cc=29               # Callee arity from the matched callees (func_00119568 takes 3 args); the 3-arg call fixes the prologue copy order, if (r < 0) return r keeps the slt/movn tail (Session 28).
