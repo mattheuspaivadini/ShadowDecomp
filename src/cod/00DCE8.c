@@ -1,7 +1,6 @@
-/* STATUS (Session 22, 2026-10-17): NON_MATCHING. best score 3 [cc=29].
- * rotated bind/poll loop; residual = order of the init-flag store vs the return 0 (lui v0/v1)
- * The original .s stays in the build (asm/cod/00DCE8.s); this C
- * draft (Session 22) is kept for the record. */
+/* asm/cod/00DCE8.s -> sceSifInitIopHeap.
+ * sceSifInitIopHeap; bind/retry loop + memory barrier before return (Session 23)
+ * MATCHED. */
 struct SifRpcClientData {
     char pad00[0x24];
     void *server;       /* 0x24 */
@@ -22,5 +21,7 @@ int sceSifInitIopHeap(void) {
         for (i = 0x100000; --i != -1; )
             ;
     }
-    return D_0013232C = 0;
+    D_0013232C = 0;
+    __asm__ volatile ("" ::: "memory");   /* keeps the store ahead of the return value (scheduling barrier) */
+    return 0;
 }
