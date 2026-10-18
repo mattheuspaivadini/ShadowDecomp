@@ -87,12 +87,13 @@ def apply(text: str, changes):
     return text
 
 
-def gen(stem: str, pairs: bool, limit: int, prefix: str, clean: bool) -> int:
-    src = ROOT / "src" / "non_matching" / f"{stem}.c"
+def gen(stem: str, pairs: bool, limit: int, prefix: str, clean: bool,
+        src: Path | None = None, out: Path | None = None) -> int:
+    src = src or ROOT / "src" / "non_matching" / f"{stem}.c"
     if not src.exists():
         return 0
     text = src.read_text(encoding="utf-8")
-    vdir = VARIANTS / stem
+    vdir = out or VARIANTS / stem
     vdir.mkdir(parents=True, exist_ok=True)
     if clean:
         for p in vdir.glob(f"{prefix}*.c"):
@@ -125,12 +126,14 @@ def main() -> int:
     ap.add_argument("--limit", type=int, default=400)
     ap.add_argument("--prefix", default="T22_")
     ap.add_argument("--clean", action="store_true")
+    ap.add_argument("--src", type=Path, default=None, help="draft to mutate")
+    ap.add_argument("--out", type=Path, default=None, help="variant directory")
     args = ap.parse_args()
     stems = args.stems
     if args.all:
         stems = sorted(p.stem for p in (ROOT / "src" / "non_matching").glob("*.c"))
     for s in stems:
-        print(f"{s}: {gen(s, args.pairs, args.limit, args.prefix, args.clean)} variants")
+        print(f"{s}: {gen(s, args.pairs, args.limit, args.prefix, args.clean, args.src, args.out)} variants")
     return 0
 
 
