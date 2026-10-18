@@ -793,3 +793,4 @@
 012710 = src/cod/012710.c cc=29               # sceTtyRead; typed tty/queue records with a volatile queue count, char store forces the queue-pointer reloads (Session 23)
 026800 = src/cod/026800.c                     # DWARF location-op decoder (DW_OP_reg/breg/regx/bregx/deref/plus_uconst); unsigned op switch with ranges, noreturn abort keeps p out of a saved register (Session 23)
 00E400 = src/cod/00E400.c cc=29               # module RPC request (fno 6): request record with an unaligned 0xFC-byte argument blob, id read before the result store (Session 23)
+00E608 = src/cod/00E608.c cc=29               # sceSifStopModule; twin of 00E400 with RPC fno 7 (Session 23)
