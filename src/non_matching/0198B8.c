@@ -1,7 +1,8 @@
 /* STATUS (Session 23, 2026-10-18): NON_MATCHING. best score 11 [cc=29].
  * void function + void tail-callee (cc=29 tail j), typed MR record; residual = $v0/$v1 roles of the record base vs the uncached buffer (permute_stmts 500: no gain)
  * The original .s stays in the build (asm/cod/0198B8.s); this C
- * draft (Session 23) is kept for the record. */
+ * draft (Session 23) is kept for the record. * Session 23 step 3: permute_types.py --pairs --locals (struct members, externs, locals and parameters) - all variants tie, so the residual is not type-driven.
+ */
 struct MR { int active; void *buf; int size; int f0C; int f10; };
 struct Pkt { char hdr[0x10]; int f10; int f14; };
 extern int D_00135618 __attribute__((section(".data")));
