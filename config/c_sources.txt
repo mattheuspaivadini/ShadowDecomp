@@ -820,3 +820,4 @@
 02E8C0 = src/cod/02E8C0.c                     # Newlib 1.9.0 mprec.c multadd (authentic source); Balloc/Bfree as NOTHROW_STUB (defined earlier in mprec.c) give the plain bnez delay fill (Session 28).
 02EE80 = src/cod/02EE80.c                     # Newlib 1.9.0 mprec.c pow5mult (authentic source); Bfree/multadd/i2b/mult as NOTHROW_STUB (defined earlier in mprec.c) give the plain bnez delay fill (Session 28).
 017138 = src/cod/017138.c cc=29               # $gp saved with a volatile asm store (same idiom as sceCdCallback 016C80); the asm keeps dbr from filling the beqz slot from above, so it takes the target's move v0 as in the original (Session 28).
+017798 = src/cod/017798.c cc=29               # Non-blocking path as one || test returning 1 / 0: two separate ifs let combine fold the second into sltu (Session 28).
