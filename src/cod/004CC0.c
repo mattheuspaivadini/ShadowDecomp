@@ -1,7 +1,6 @@
-/* STATUS (Session 23, 2026-10-18): NON_MATCHING. best score 3 [cc=296] (was 34).
- * Typed 0x140-byte pad records, switch on the init phase, case-0 store order from a full 7! permutation. Residual = the analog-reset tail is not cross-jumped as [109,108,107] between case 1 and the not-ready branch (5040 else orders, 72 case-1 orders, goto/inline-helper sharing: no gain).
- * The original .s stays in the build (asm/cod/004CC0.s); this C
- * draft (Session 23) is kept for the record. */
+/* asm/cod/004CC0.s -> padSysTickProc.
+ * Source order with the p-killing store last in each reset block: sched1's register-weight tie-break hoists the store carrying REG_DEAD(p), so analog[0] (0x106) must be written last for [109,108,107] to stay at the block tails and be cross-jumped (Session 26).
+ * MATCHED. */
 struct PadSys {
     char pad000[0x100];
     unsigned char prof[4];      /* 0x100 button profile */
@@ -41,21 +40,21 @@ void padSysTickProc(void) {
                 p->btn[0] = p->prof[0] & ~p->btn[0];
                 p->btn[1] = p->prof[1] & ~p->btn[1];
                 if (p->prof[2] == 0) {
-                    p->analog[0] = 0x7F;
                     p->analog[3] = 0x7F;
                     p->analog[2] = 0x7F;
                     p->analog[1] = 0x7F;
+                    p->analog[0] = 0x7F;
                 }
                 break;
             }
         } else {
-            p->analog[0] = 0x7F;
             p->phase = 0;
             p->btn[1] = 0;
             p->btn[0] = 0;
             p->analog[3] = 0x7F;
             p->analog[2] = 0x7F;
             p->analog[1] = 0x7F;
+            p->analog[0] = 0x7F;
         }
     }
 }
