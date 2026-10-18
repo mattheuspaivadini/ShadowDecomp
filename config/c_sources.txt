@@ -795,3 +795,4 @@
 00E400 = src/cod/00E400.c cc=29               # module RPC request (fno 6): request record with an unaligned 0xFC-byte argument blob, id read before the result store (Session 23)
 00E608 = src/cod/00E608.c cc=29               # sceSifStopModule; twin of 00E400 with RPC fno 7 (Session 23)
 0198B8 = src/cod/0198B8.c cc=29               # sceSifMInitRpc; typed rpc-queue record and SIF cmd handler registration, two statement swaps found by the permuter (Session 23)
+008FF8 = src/cod/008FF8.c cc=29               # sceSifInitRpc; void prototypes for the tail-called EIntr/sceSifSetReg, typed rpc data-queue record, store order from the permuter (Session 23)
