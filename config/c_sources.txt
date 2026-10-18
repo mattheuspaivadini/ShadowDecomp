@@ -799,3 +799,4 @@
 002D70 = src/cod/002D70.c                     # LoaderSysLoadIopModuleFromEEBuffer; three static inline helpers (find/setNew/load) at plain -O2 - resolves the -O2/-O3 question, load result taken before the heap free (Session 23)
 00EA10 = src/cod/00EA10.c cc=29               # module RPC request carrying a module path (strncpy to 0xFC, NUL-terminated) plus argument blob; twin of 00E400's request layout (Session 23)
 000C80 = src/cod/000C80.c                     # LoaderSysJumpRecoverPoint; $gp via a global register variable, re-entry address taken from the absolute symbol D_00100CD0 (a &&label is placed before the prologue by ee-gcc2.96), varargs into vsprintf (Session 23)
+007AD0 = src/cod/007AD0.c cc=29               # StartThread; the thread-context initialisation is a single asm volatile block (sq $0 x36, sll/sd arg, lw/sd sign-extension of four register slots through $8) between plain C status checks (Session 23)
