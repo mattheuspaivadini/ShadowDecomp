@@ -775,3 +775,4 @@
 01A330 = src/cod/01A330.c cc=29               # sceMc2End; thread/sema handle struct (Session 23)
 022128 = src/cod/022128.c cc=29               # sceNetcnfifSetup; bind/retry loop like sceSifInitIopHeap (Session 23)
 009980 = src/cod/009980.c cc=29               # sceSifCallRpc; client field int + server load before the client store (TBAA) (Session 23)
+016EF8 = src/cod/016EF8.c cc=29               # _sceCd_cd_read_intr; typed reply record copied through the uncached alias, the uncached destination computed first (Session 23)
