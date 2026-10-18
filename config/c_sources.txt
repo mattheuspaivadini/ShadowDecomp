@@ -778,3 +778,4 @@
 016EF8 = src/cod/016EF8.c cc=29               # _sceCd_cd_read_intr; typed reply record copied through the uncached alias, the uncached destination computed first (Session 23)
 001800 = src/cod/001800.c                     # FreeDecodedSection; typed module/section records, continue on unloaded sections, printf declared int-returning (Session 23)
 001950 = src/cod/001950.c                     # DisposeRelocationElement; typed 0x1C relocation records, third argument forwarded to the callback (Session 23)
+0016E8 = src/cod/0016E8.c                     # RelocateCode; typed relocation-section records, while (n--) walk, int-returning ResolveRelocation/printf (Session 23)
