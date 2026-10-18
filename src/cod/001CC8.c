@@ -1,7 +1,6 @@
-/* STATUS (Session 8, 2026-10-14): NON_MATCHING. best score 12 [cc=296].
- * R2 w45a_0: dead 0xFF804000 as func_00105990's $a0
- * The original .s stays in the build (asm/cod/001CC8.s); this C
- * draft (Session 8) is kept for the record. */
+/* asm/cod/001CC8.s -> _execProgWithThread.
+ * _execProgWithThread; version-id address built by an asm volatile (lui; nop; addiu; nop) like the original, PutStringS third argument pinned in a register, thread entry loaded first (Session 23)
+ * MATCHED. */
 extern int  HeapStart;     /* .sdata, right below D_00139E04 */
 extern int  D_00139E04;
 extern int  D_00131C44[];   /* .data slot, absolute address */
@@ -21,18 +20,24 @@ int _execProgWithThread(int a0) {
     int t;
     int r;
     int fn;
+    int vid;
 
     t = GetThreadId(a0);
     r = func_00100D48(a0);
     if (r != 0) {
+        fn = *(int *)(r + 0x10);
         D_00131C44[0] = r;
         HeapStart = D_00139E04;
-        fn = *(int *)(r + 0x10);
+        __asm__ volatile ("lui %0, %%hi(__loader_version_id__)
+	nop
+	addiu %0, %0, %%lo(__loader_version_id__)
+	nop" : "=r" (vid));
         FlushCache(0);
         FlushCache(2);
-        LoaderSysPrintf((int)D_001363D0, fn, (int)__loader_version_id__);
-        ((int (*)(int, int))fn)(1, (int)__loader_version_id__);
+        LoaderSysPrintf((int)D_001363D0, fn, vid);
+        ((int (*)(int, int))fn)(1, vid);
     } else {
+        __asm__ ("" : "+r" (r));
         PutStringS(0xFF804000, (int)D_00136508, r);
     }
     LoaderSysDeleteExternalThreadList(t);

@@ -801,3 +801,4 @@
 000C80 = src/cod/000C80.c                     # LoaderSysJumpRecoverPoint; $gp via a global register variable, re-entry address taken from the absolute symbol D_00100CD0 (a &&label is placed before the prologue by ee-gcc2.96), varargs into vsprintf (Session 23)
 007AD0 = src/cod/007AD0.c cc=29               # StartThread; the thread-context initialisation is a single asm volatile block (sq $0 x36, sll/sd arg, lw/sd sign-extension of four register slots through $8) between plain C status checks (Session 23)
 01CA30 = src/cod/01CA30.c cc=29               # FAT chain length walk; loop entered by goto with the n++/mask step at the top, direct returns for error/end/invalid (Session 23)
+001CC8 = src/cod/001CC8.c                     # _execProgWithThread; version-id address built by an asm volatile (lui; nop; addiu; nop) like the original, PutStringS third argument pinned in a register, thread entry loaded first (Session 23)
