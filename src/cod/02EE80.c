@@ -1,8 +1,14 @@
-/* STATUS (Session 23, 2026-10-18): NON_MATCHING. best score 1 [cc=296] (was 46).
- * Authentic Newlib 1.9.0 mprec.c pow5mult; p05 referenced through splat's D_00139B4C label (one word before the table). Residual = bnez (original) vs bnel after the _p5s load (dbr annul class; -g levels, -fno-thread-jumps and the 2.95/3.2 builds do not change it).
- * The original .s stays in the build (asm/cod/02EE80.s); this C
- * draft (Session 23) is kept for the record. */
+/* asm/cod/02EE80.s -> pow5mult.
+ * Newlib 1.9.0 mprec.c pow5mult (authentic source); Bfree/multadd/i2b/mult as NOTHROW_STUB (defined earlier in mprec.c) give the plain bnez delay fill (Session 28).
+ * MATCHED. */
+#include "nothrow_stub.h"
 #include "newlib19_mprec.h"
+
+/* mprec.c defines Bfree/multadd/i2b/mult before pow5mult (see nothrow_stub.h). */
+void NOTHROW_STUB Bfree (struct _reent *p, _Bigint *v) {}
+_Bigint * NOTHROW_STUB multadd (struct _reent *p, _Bigint *b, int m, int a) { return 0; }
+_Bigint * NOTHROW_STUB i2b (struct _reent *p, int i) { return 0; }
+_Bigint * NOTHROW_STUB mult (struct _reent *p, _Bigint *a, _Bigint *b) { return 0; }
 
 /* p05[3] = {5, 25, 125} sits at 0x00139B50; splat's label D_00139B4C is one
  * word before it, so p05[i - 1] is written D_00139B4C[i]. */
