@@ -1,7 +1,6 @@
-/* STATUS (Session 19, 2026-10-17): NON_MATCHING. best score 6 [cc=29].
- * request record as struct via a kept pointer (s1); residual = schedule of the first copy load/store pair
- * The original .s stays in the build (asm/cod/015E40.s); this C
- * draft (Session 19) is kept for the record. */
+/* asm/cod/015E40.s -> sceDbcCreateSocket.
+ * sceDbcCreateSocket; void * request fields 0x28/0x2C decouple TBAA so the copy loads interleave (Session 22)
+ * MATCHED. */
 int sceSifCallRpc(int a0, int a1, int a2, int a3, int a4, int a5, int a6,
                   int a7, int a8);
 int WaitSema(int a0);
@@ -25,8 +24,8 @@ struct dbc_req {
     int  f10;
     char name[16];      /* 0x14 */
     int  result;        /* 0x24 */
-    int  f28;
-    int  f2C;
+    void *f28;
+    void *f2C;
 };
 
 extern int D_0014E900[];    /* .bss 0x0014E900, lui/%lo */
@@ -44,9 +43,9 @@ int sceDbcCreateSocket(struct dbc_sock *s, int a1, int a2) {
         return 0;
     WaitSema(D_00150DC0[0]);
     q = (struct dbc_req *)D_0014EA00;
-    q->f00 = s->f00;
-    q->f28 = a1;
-    q->f2C = a2;
+    D_0014EA00[0] = s->f00;
+    q->f28 = (void *)a1;
+    q->f2C = (void *)a2;
     q->f04 = s->f04;
     q->f08 = s->f08;
     q->f0C = s->f0C;

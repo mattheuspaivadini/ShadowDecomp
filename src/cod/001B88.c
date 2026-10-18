@@ -1,7 +1,6 @@
-/* STATUS (Session 19, 2026-10-17): NON_MATCHING. best score 4 [cc=296].
- * for (i = 0; i < n; i++) fixes the blez guard; residual = schedule of the second memcpy's argument setup
- * The original .s stays in the build (asm/cod/001B88.s); this C
- * draft (Session 19) is kept for the record. */
+/* asm/cod/001B88.s -> func_00101B88.
+ * memcpy loop; void * dest field breaks the TBAA store/load dependence so the scheduler hoists the next load (Session 22)
+ * MATCHED. */
 extern int D_00139E04;
 extern char D_00136400[];
 
@@ -12,7 +11,7 @@ struct Rec00101B88 {
     int f0;         /* 0x00 */
     int f4;         /* 0x04 */
     int f8;         /* 0x08 */
-    int fC;         /* 0x0C */
+    void *fC;         /* 0x0C */
     int f10;        /* 0x10 */
     int f14;        /* 0x14 */
     int f18;        /* 0x18 */
@@ -41,8 +40,8 @@ int func_00101B88(int a0, int a1, int *a2) {
     for (i = 0; i < n; i++) {
         s0 = p->f4;
         *dst = *p;
-        func_0012821C(s1, p->fC, s0 * 8);
-        dst->fC = s1;
+        func_0012821C(s1, (int)p->fC, s0 * 8);
+        dst->fC = (void *)s1;
         s1 += s0 * 8;
         func_0012821C(s1, p->f10, s0 * 8);
         dst->f10 = s1;
