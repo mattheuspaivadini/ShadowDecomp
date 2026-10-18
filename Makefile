@@ -15,7 +15,7 @@ WSL   ?=
 REPO  := $(CURDIR)
 endif
 
-.PHONY: all build check targets diff report objdiff clean help verify matrix container elf-diff
+.PHONY: all build check targets diff report objdiff clean help verify matrix container elf-diff score fast
 
 all: check
 
@@ -52,6 +52,16 @@ objdiff: targets
 diff:
 	python tools/diff_func.py $(F)
 
+## Score drafts inside WSL (the scorers call the Linux EE-GCC, so they fail
+## from Windows Python):  make score STEMS=0053F0,001AA0 [DRAFTS=build/s28/drafts]
+DRAFTS ?= build/s28/drafts
+score:
+	$(WSL) bash -lc "cd $(REPO) && python3 tools/score_drafts.py --stems $(STEMS) --drafts-dir $(DRAFTS) --only-draft --jobs 4"
+
+## Fast per-function byte-exact check inside WSL:  make fast [STEMS="0053F0 001AA0"]
+fast:
+	$(WSL) bash -lc "cd $(REPO) && python3 build/s10/verify_fast.py $(STEMS) --jobs 4"
+
 ## Progress summary.
 report:
 	python tools/report.py
@@ -68,4 +78,6 @@ help:
 	@echo "make targets        also assemble objdiff target objects"
 	@echo "make objdiff        regenerate objdiff.json"
 	@echo "make diff F=<func>  build and diff one function"
+	@echo "make score STEMS=a,b  score drafts in \$$DRAFTS (WSL)"
+	@echo "make fast [STEMS=..]  verify_fast.py (WSL)"
 	@echo "make report         matched functions / matched bytes"
