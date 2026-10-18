@@ -805,3 +805,4 @@
 01C510 = src/cod/01C510.c cc=29               # result decoder of func_0011C4C8: r pinned in $a0 (register asm), error-path -1 materialised as lui/ori (UNCONFIRMED asm pair) (Session 23)
 016CE8 = src/cod/016CE8.c cc=29               # Callback condition pinned to v0 for original register order
 004CC0 = src/cod/004CC0.c                     # Source order with the p-killing store last in each reset block: sched1's register-weight tie-break hoists the store carrying REG_DEAD(p), so analog[0] (0x106) must be written last for [109,108,107] to stay at the block tails and be cross-jumped (Session 26).
+002360 = src/cod/002360.c                     # $gp set by plain C on an int-typed _gp (gp = (void *)&_gp): -G8 marks the symbol small, so movsi emits one unsplit la insn instead of an asm; reorg can then move the thread-id copy over it into the next jal slot (Session 26).
