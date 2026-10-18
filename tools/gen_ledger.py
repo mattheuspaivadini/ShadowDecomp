@@ -101,6 +101,25 @@ def read_scores() -> dict[str, int]:
     return scores
 
 
+def draft_attempts() -> dict[str, int]:
+    """stem -> number of local (gitignored) draft attempts: one per
+    `build/*/drafts/<stem>.c` (and `build/*/*/drafts/`) plus one for a
+    `build/permute/<stem>/` variant directory.  Without this, a stem with only
+    unpromoted, unarchived drafts reads as never attempted."""
+    out: dict[str, int] = {}
+    for pat in ("build/*/drafts/*.c", "build/*/*/drafts/*.c"):
+        for p in ROOT.glob(pat):
+            s = p.stem.upper()
+            out[s] = out.get(s, 0) + 1
+    permute = ROOT / "build" / "permute"
+    if permute.is_dir():
+        for d in permute.iterdir():
+            if d.is_dir():
+                s = d.name.upper()
+                out[s] = out.get(s, 0) + 1
+    return out
+
+
 def parse_cfg(entry: tuple[str, list[str], str | None]) -> dict:
     """(source, flags, compiler) -> {"source","cc","flags"}."""
     src, flags, compiler = entry
@@ -137,6 +156,7 @@ def main() -> int:
     subs = build.cod_subsegments()
     scores = read_scores()
     clusters = cluster_map()
+    drafts = draft_attempts()
 
     handwritten = set()
     syscall = set()
@@ -192,7 +212,7 @@ def main() -> int:
             "cluster": clusters.get(stem),
             "compiler_cfg": parse_cfg(c_manifest[stem]) if stem in c_manifest else None,
             "status": status,
-            "attempts": 1 if stem in archived else 0,
+            "attempts": (1 if stem in archived else 0) + drafts.get(stem, 0),
             "notes": notes,
         }
         funcs[stem] = rec
@@ -247,7 +267,7 @@ def main() -> int:
             n = r["insns"]
             tier = ("<=24" if n <= 24 else "25-44" if n <= 44 else
                     "45-80" if n <= 80 else "81-150" if n <= 150 else ">150")
-            attempted = r["status"].startswith("near")
+            attempted = r["status"].startswith("near") or r["attempts"] > 0
             agg[tier][0] += 1
             agg[tier][1] += r["size"]
             agg[tier][2] += 1 if attempted else 0
