@@ -813,3 +813,4 @@
 01C3B0 = src/cod/01C3B0.c cc=29               # Two separate error returns (one per failing call) instead of one || test: jump2 cross-jumps them back into one block, but at global-alloc time the extra *err reference gives err priority over idx*0x898 (s3/s4 roles) (Session 26).
 0161A0 = src/cod/0161A0.c cc=29               # Session 8 draft (never promoted), byte-exact at cc=29: SyncDCache + DIntr/EIntr-guarded 0x40-byte struct copy, same idiom as 016030 (Session 28).
 01C200 = src/cod/01C200.c cc=29               # Session 8 draft (never promoted), byte-exact at cc=29: cached directory-index lookup over D_0015DF48 (0x898-byte per-port cache, cf. 01C3B0) (Session 28).
+026548 = src/cod/026548.c                     # GCC 2000-06 frame-dwarf2.c find_fde (authentic source, include/frame2000.h); frame_init/search_fdes as NOTHROW_STUB so their calls are nothrow like in the original TU, which turns the annulled bnel into the original plain bne (Session 28).
