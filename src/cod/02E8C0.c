@@ -1,8 +1,12 @@
-/* STATUS (Session 23, 2026-10-18): NON_MATCHING. best score 1 [cc=296] (was 24).
- * Authentic Newlib 1.9.0 mprec.c multadd (include/newlib19_mprec.h). Residual = bnez (original) vs bnel on the wds >= maxwds test (dbr annul class, same as 028850).
- * The original .s stays in the build (asm/cod/02E8C0.s); this C
- * draft (Session 23) is kept for the record. */
+/* asm/cod/02E8C0.s -> multadd.
+ * Newlib 1.9.0 mprec.c multadd (authentic source); Balloc/Bfree as NOTHROW_STUB (defined earlier in mprec.c) give the plain bnez delay fill (Session 28).
+ * MATCHED. */
+#include "nothrow_stub.h"
 #include "newlib19_mprec.h"
+
+/* mprec.c defines Balloc/Bfree before multadd (see nothrow_stub.h). */
+_Bigint * NOTHROW_STUB Balloc (struct _reent *p, int k) { return 0; }
+void NOTHROW_STUB Bfree (struct _reent *p, _Bigint *v) {}
 
 _Bigint *
 multadd (struct _reent *ptr, _Bigint * b, int m, int a)
