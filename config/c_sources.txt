@@ -786,3 +786,4 @@
 021EF8 = src/cod/021EF8.c cc=29               # _sceMcCoreCreateSocket; request block padded to its real size (0x70 frame), fields copied in order, per-statement record indexing (Session 23)
 01E258 = src/cod/01E258.c cc=29               # FAT free-entry counter over a two-page cluster buffer; page pointer walk, the last-page adjustment written as an if (Session 23)
 01D7E0 = src/cod/01D7E0.c cc=29               # _sceMcFatUnFormat; per-statement FAT record indexing, _sceMcCoreGetConnection(port) arity, card-spec struct (Session 23)
+022EA8 = src/cod/022EA8.c cc=29               # RPC command dispatcher (0xC/0xD/0xE); callback pointers in .data, arguments evaluated before the null check, unsigned command (Session 23)
