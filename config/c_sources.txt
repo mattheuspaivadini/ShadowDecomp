@@ -828,3 +828,4 @@
 0205E8 = src/cod/0205E8.c cc=29               # Struct assignment into the page buffer after the 0xFF fill (counterpart of 0204D0) (Session 28).
 018970 = src/cod/018970.c cc=29               # SCE libinet; receive counterpart of sceInetSend (018B48): request record, func_00118380 RPC, bounded copy-out via func_00118490 (Session 28).
 018A38 = src/cod/018A38.c cc=29               # SCE libinet; sceInetRecv plus the source-address copy-out (9th argument on the stack) (Session 28).
+018BF8 = src/cod/018BF8.c cc=29               # SCE libinet; sceInetSend with the destination address staged through func_00118438 (9th argument on the stack) (Session 28).
