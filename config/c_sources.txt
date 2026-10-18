@@ -815,3 +815,4 @@
 01C200 = src/cod/01C200.c cc=29               # Session 8 draft (never promoted), byte-exact at cc=29: cached directory-index lookup over D_0015DF48 (0x898-byte per-port cache, cf. 01C3B0) (Session 28).
 026548 = src/cod/026548.c                     # GCC 2000-06 frame-dwarf2.c find_fde (authentic source, include/frame2000.h); frame_init/search_fdes as NOTHROW_STUB so their calls are nothrow like in the original TU, which turns the annulled bnel into the original plain bne (Session 28).
 003258 = src/cod/003258.c                     # LoaderSysPrintf as NOTHROW_STUB (defined earlier in the loader TU): nothrow calls let dbr fill the loop-entry blez plainly, as in the original (Session 28).
+025B30 = src/cod/025B30.c                     # GCC 2000-06 frame.c end_fde_sort (authentic source, include/frame2000.h); fde_merge as NOTHROW_STUB (defined earlier in frame.c), free stays external - stubbing free breaks the match (Session 28).
