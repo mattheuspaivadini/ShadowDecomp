@@ -855,3 +855,4 @@
 010430 = src/cod/010430.c cc=29                        # libkernel timer init: 128-entry alarm free list, INTC 11 handler, T2_MODE read into a local and or-ed step by step
 0175A8 = src/cod/0175A8.c cc=29                        # libcdvd N-command precheck: semaphore poll, sync, bind 0x80000595 with an empty busy-wait (R5900 short-loop nops come from the compiler); volatile semid
 0178A8 = src/cod/0178A8.c cc=29                        # libcdvd S-command precheck; twin of _sceCd_ncmd_prechk 0175A8 (bind 0x80000593, sceCdSyncS)
+0094D8 = src/cod/0094D8.c cc=29                        # SCE sifrpc other-data request (cmd 0x8000000C); sceSifBindRpc 0097A0 template
