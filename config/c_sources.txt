@@ -848,3 +848,4 @@
 020B90 = src/cod/020B90.c cc=29                        # libmc2 cluster read: copy the 0x400-byte cluster from the per-port cache when in range, else _sceMcpReadClust
 025628 = src/cod/025628.c                              # gcc-3.0 fp-bit.c L_div_df (SCE EE variant: no rounding step)
 0013C8 = src/cod/0013C8.c                              # loader: read the module-info file (name line + stack size parsed after the first ' '); buf pointer local keeps moduleInfo in one register
+006898 = src/cod/006898.c                              # boot GS: PRIM + RGBAQ (Q from D_0013A148) through a scratchpad VIF1 direct packet, sent on DMA ch1
