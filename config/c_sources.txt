@@ -852,3 +852,4 @@
 0097A0 = src/cod/0097A0.c cc=29                        # SCE sifrpc bind (cmd 0x80000009); same typed structs as sceSifCallRpc 009980; rpc_id load before the packet store
 00EF98 = src/cod/00EF98.c cc=29                        # SCE sif IOP reset packet (cid 0x80000003); 16-aligned packet makes the dsize bitfield a 64-bit ld/and/sd
 0069E8 = src/cod/0069E8.c                              # boot GS: PRIM|TME (+CTXT when a5) + RGBAQ through a scratchpad VIF1 packet; twin of SetPrimColor 006898
+010430 = src/cod/010430.c cc=29                        # libkernel timer init: 128-entry alarm free list, INTC 11 handler, T2_MODE read into a local and or-ed step by step
