@@ -863,3 +863,4 @@
 0201F0 = src/cod/0201F0.c cc=29                        # libmc FAT rename: build the new path next to the old one, validate the name, require new absent / old present, rewrite the entry name, flush
 0039C0 = src/cod/0039C0.c                              # loaderLoop; (long) cast keeps the end-symbol address unsplit (dla)
 020DA0 = src/cod/020DA0.c cc=29                        # _sceMcpMakeSpecoutBlock; early return 1 at the loop top, buffer pointer local
+017098 = src/cod/017098.c cc=29                        # CD shutdown: signal/delete the command semaphores; an empty asm memory barrier after the callback-number store keeps sched2 from hoisting the D_00133A60 load (Session 32).
