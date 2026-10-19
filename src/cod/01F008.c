@@ -1,10 +1,6 @@
-/* STATUS (Session 34, 2026-10-19): NON_MATCHING. best score 12 [cc=29].
- * _sceMcFatReadFile. Attribute test as two ifs, size -= 0x400 - pos, the -1 end marker as the asm
- * lui/ori pair inside if (total) before a do-while. Residual = the clamped size is computed into
- * total's register then copied (original: movn into size, then total = size).
- * Tried: ternary clamp, size/total role swap (32), test on size vs total.
- * The original .s stays in the build (asm/cod/01F008.s); this C
- * draft (Session 34) is kept for the record. */
+/* asm/cod/01F008.s -> _sceMcFatReadFile.
+ * _sceMcFatReadFile; clust read before total = size (fixes the size/total register roles), asm lui/ori end marker (Session 35)
+ * MATCHED. */
 struct McDirEnt {
     unsigned short attr;        /* 0x00 */
     unsigned short pad02;
@@ -43,8 +39,8 @@ int _sceMcFatReadFile(int port, const char *name, char *buf, int pos, int size) 
     if (ent.size < pos) return 0x81010016;
     if (size == 0) size = ent.size - pos;
     if (ent.size < size + pos) size = ent.size - pos;
-    total = size;
     clust = ent.clust;
+    total = size;
     if (total != 0) {
         __asm__ ("lui %0, 0xFFFF" : "=r" (m1));
         __asm__ ("ori %0, %0, 0xFFFF" : "+r" (m1));

@@ -888,3 +888,4 @@
 004990 = src/cod/004990.c                              # LoaderSysInitTCP; ldnet init, retry via goto, func_00104668 nothrow (defined earlier in the TU) (Session 35)
 004090 = src/cod/004090.c                              # ldnet IOP module set per network type; LOAD macro, two switches (jtbl_00136FF0 + case tree) (Session 35)
 01F7F0 = src/cod/01F7F0.c cc=29                        # _sceMcFatDeleteFile; unsigned cluster chain walk, sign test written as & 0x80000000 so the xor constant is shared (Session 35)
+01F008 = src/cod/01F008.c cc=29                        # _sceMcFatReadFile; clust read before total = size (fixes the size/total register roles), asm lui/ori end marker (Session 35)
