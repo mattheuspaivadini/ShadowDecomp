@@ -865,3 +865,4 @@
 020DA0 = src/cod/020DA0.c cc=29                        # _sceMcpMakeSpecoutBlock; early return 1 at the loop top, buffer pointer local
 017098 = src/cod/017098.c cc=29                        # CD shutdown: signal/delete the command semaphores; an empty asm memory barrier after the callback-number store keeps sched2 from hoisting the D_00133A60 load (Session 32).
 020F30 = src/cod/020F30.c cc=29                        # volatile counter reads; the first counter update is a plain (non-volatile) store so dbr fills the jump slot with it and tail-merges return a (Session 32).
+016FB0 = src/cod/016FB0.c cc=29                        # a0 pinned before the last initCount store (register asm) and an asm memory barrier before the cb_sem store (Session 32).

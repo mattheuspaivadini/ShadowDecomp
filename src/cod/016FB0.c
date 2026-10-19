@@ -1,9 +1,7 @@
-/* STATUS (Session 29, 2026-10-18): NON_MATCHING. best score 5 [cc=29].
- * section(".data") on the semid/cb globals fixes the $gp addressing; initCount-first ordering fixes the 4(sp)/8(sp) stores.
- * Residual: original fills `sw zero,8(sp)` into the last jal slot with `move a0,sp` hoisted and uses $v0 (not $a0) for the final cb_sem store.
- * Tried: volatile store, empty-asm barrier, 320 permute_gen variants (none < 5). */
 /* asm/cod/016FB0.s -> _sceCdInitSema.
- * Create the three CD command semaphores (n/s/rcmd, max 1, init 1) and the callback semaphore (init 0) when any id is still -1. */
+ * a0 pinned before the last initCount store (register asm) and an asm memory barrier before the cb_sem store (Session 32).
+ * MATCHED. */
+/* Create the three CD command semaphores (n/s/rcmd, max 1, init 1) and the callback semaphore (init 0) when any id is still -1. */
 struct SemaParam {
     int currentCount;   /* 0x00 */
     int maxCount;       /* 0x04 */
@@ -35,8 +33,13 @@ void _sceCdInitSema(void) {
         sema.option = (int)D_001388C8;
         _sceCd_rcmd_semid = CreateSema(&sema);
         sema.option = (int)D_001388D8;
-        *(volatile int *)&sema.initCount = 0;
-        D_00133A60 = CreateSema(&sema);
+        {
+            /* a0 set before the initCount store, which then fills the jal slot */
+            register struct SemaParam *p asm("$4") = &sema;
+            sema.initCount = 0;
+            D_00133A60 = CreateSema(p);
+        }
+        __asm__ __volatile__("" ::: "memory"); /* keeps the cb_sem address in v0 */
         _sceCd_c_cb_sem = 0;
     }
 }
