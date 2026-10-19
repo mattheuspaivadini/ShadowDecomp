@@ -871,3 +871,4 @@
 003B40 = src/cod/003B40.c                              # loader entry: argv echo, program name copy, loader init, heap start from two linker symbols (asm volatile lui;nop;addiu;nop), $sp saved, loaderLoop; __main called explicitly since the image names it start (Session 33).
 01C8B0 = src/cod/01C8B0.c cc=29                        # libmc directory-entry read: walk the FAT chain two entries per cluster, then a builtin 0x200 copy out of D_0015F080 (Session 34)
 01BFB0 = src/cod/01BFB0.c cc=29                        # libmc path normaliser (./.. tokens); the next-token call is repeated in every branch, so the / address is CSEd with the strcat (Session 34)
+021A90 = src/cod/021A90.c cc=29                        # libmc2 core RPC: copy count pages into the command buffer (cap 0x2000), clear+flush the reply area, send command 2 (Session 34)
