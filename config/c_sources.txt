@@ -870,3 +870,4 @@
 01FA20 = src/cod/01FA20.c cc=29                        # path buffer address pinned to s1 with a register asm local fixes the s1/s2 roles (Session 32).
 003B40 = src/cod/003B40.c                              # loader entry: argv echo, program name copy, loader init, heap start from two linker symbols (asm volatile lui;nop;addiu;nop), $sp saved, loaderLoop; __main called explicitly since the image names it start (Session 33).
 01C8B0 = src/cod/01C8B0.c cc=29                        # libmc directory-entry read: walk the FAT chain two entries per cluster, then a builtin 0x200 copy out of D_0015F080 (Session 34)
+01BFB0 = src/cod/01BFB0.c cc=29                        # libmc path normaliser (./.. tokens); the next-token call is repeated in every branch, so the / address is CSEd with the strcat (Session 34)
