@@ -890,3 +890,4 @@
 01F7F0 = src/cod/01F7F0.c cc=29                        # _sceMcFatDeleteFile; unsigned cluster chain walk, sign test written as & 0x80000000 so the xor constant is shared (Session 35)
 01F008 = src/cod/01F008.c cc=29                        # _sceMcFatReadFile; clust read before total = size (fixes the size/total register roles), asm lui/ori end marker (Session 35)
 006498 = src/cod/006498.c                              # InitDisp; ReinitDisp + ClearDisplay body expanded inline (template reloaded through gp per cell) + cursor reset (Session 35)
+005408 = src/cod/005408.c                              # PutFont; SetPrimColor body expanded inline (packet through a pointer local), glyph bits/positions set up after it, 8x8 XYZ2 pairs on a scratchpad VIF1 packet (Session 35)
