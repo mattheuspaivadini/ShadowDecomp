@@ -837,3 +837,4 @@
 0213D0 = src/cod/0213D0.c cc=29               # libmc2 _sceMcCoreCheckNewCard
 0214D0 = src/cod/0214D0.c cc=29               # libmc2 _sceMcCoreClearNewCardFlag
 0217D0 = src/cod/0217D0.c cc=29               # libmc2 _sceMcCoreReadClock
+021698 = src/cod/021698.c cc=29               # libmc2 _sceMcCoreWriteBack
