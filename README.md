@@ -16,11 +16,11 @@ copyrighted game material: you must supply your own legally owned copy of the di
 | Flat load image | **237,952 bytes**, SHA-1 `6f853f64…` — **HASH MATCH** |
 | ELF container | `SCUS_974.72` (242,940 bytes, SHA-1 `b715b349…`) — **byte-identical** |
 | Functions in the image | 1,042 real functions (+ 2 raw `textbin` regions) |
-| Functions matched from C | **597 / 1,042** (57.3 %) |
-| Matched code bytes | **81,152 / 203,692** `.text` bytes (**39.84 %**) |
-| Near-miss attempts | 117 drafts in `src/non_matching/` (1–2 instruction diffs and similar) |
+| Functions matched from C | **763 / 1,042** (73.2 %) |
+| Matched code bytes | **125,304 / 203,692** `.text` bytes (**61.52 %**) |
+| Near-miss attempts | 31 drafts in `src/non_matching/` (best ones 1–7 instruction diffs) |
 | Named symbols | 55 `.text` symbols (evidence-based names only) |
-| Remaining real pool | 240 (117 near-miss + 123 untouched) |
+| Remaining real pool | 74 (31 near-miss + 43 untouched) |
 
 Every matched function is gated by the image hash, so a change that breaks any
 function is caught immediately.

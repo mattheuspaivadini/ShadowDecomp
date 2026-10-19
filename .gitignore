@@ -41,7 +41,7 @@ tools/cc/*/
 tools/cc/*.tar.xz
 tools/cc/*.tar.gz
 .tools/
-
+tools/ghidra_scripts/DecompileList.java
 # ============================================================================
 # Analysis artifacts (large, regenerable)
 # ============================================================================
