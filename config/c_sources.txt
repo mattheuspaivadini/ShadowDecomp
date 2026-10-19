@@ -878,3 +878,4 @@
 0211F8 = src/cod/0211F8.c cc=29                        # libmc2 core RPC command 3: decode the little-endian spec bytes of the reply into the record block and copy it out; f24 = 0 written after the other zero fields (Session 34)
 01B458 = src/cod/01B458.c cc=29                        # libmc2 server thread: wait for a command, switch dispatch to the _sceMcFat* calls (case order follows the code layout, 16..24 are empty), remap 0x81019FFF, signal completion (Session 34)
 015A88 = src/cod/015A88.c cc=29                        # libdbc init: bind loops with an empty busy-wait, module version check, sema + work area; bind-failure block placed inside the sema-failure branch (Session 34)
+0207F8 = src/cod/0207F8.c cc=29                        # libmc2 write-back cache: start, extend (next cluster, under 8, same block) or flush and restart; each path has its own count++ and return, cross-jumped into one tail (Session 34)
