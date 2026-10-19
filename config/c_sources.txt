@@ -857,3 +857,4 @@
 0178A8 = src/cod/0178A8.c cc=29                        # libcdvd S-command precheck; twin of _sceCd_ncmd_prechk 0175A8 (bind 0x80000593, sceCdSyncS)
 0094D8 = src/cod/0094D8.c cc=29                        # SCE sifrpc other-data request (cmd 0x8000000C); sceSifBindRpc 0097A0 template
 004818 = src/cod/004818.c                              # loader boot menu: wait up to 30 frames for a pad button, switch on it (result set before each PutStringS)
+012598 = src/cod/012598.c cc=29                        # DECI2 tty write: '\n' -> '\r\n' into the uncached packet, send, poll until done; volatile socket/len/busy, void sceDeci2Poll
