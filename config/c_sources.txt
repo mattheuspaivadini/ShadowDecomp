@@ -874,3 +874,4 @@
 021A90 = src/cod/021A90.c cc=29                        # libmc2 core RPC: copy count pages into the command buffer (cap 0x2000), clear+flush the reply area, send command 2 (Session 34)
 013390 = src/cod/013390.c cc=29                        # libgraph reset by mode switch; GsPutIMR returns u_long (fixes the v0/v1 roles of the FFMode/VSCfunc pair) (Session 34)
 012400 = src/cod/012400.c cc=29                        # DECI2 tty event handler (recv/send/done); all Tty fields volatile, param reused as recv count and copy index, send result passed to the error kprintf (Session 34)
+01E0B0 = src/cod/01E0B0.c cc=29                        # libmc directory-entry write (pair of 01C8B0): FAT walk, read-modify-write of one 0x200 entry; the -1 end marker is an asm lui/ori pair as in 01C510 (Session 34)
