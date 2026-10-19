@@ -882,3 +882,4 @@
 013868 = src/cod/013868.c cc=29                        # sceGsSetDefDBuff; sceGsDBuff struct, GIF tag bitfields per tag, short half-zbuf local for DISPFB (Session 35)
 013BF8 = src/cod/013BF8.c cc=29                        # sceGsSyncPath; shared timeout counter, error labels in source order, msg pinned to a0, void scePrintf, register-pinned plain dump reads (Session 35)
 001190 = src/cod/001190.c                              # MoveElf; Elf32_Sym fix-up switch, RelocateCode body as a static inline, function addresses held in locals set between the calls (Session 35)
+001518 = src/cod/001518.c                              # LoaderSysRelocateOnlineElfInfo; MoveElf's symbol fix-up switch + RelocateCode static inline, caller-supplied callbacks (Session 35)
