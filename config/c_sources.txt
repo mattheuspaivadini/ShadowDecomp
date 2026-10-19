@@ -894,3 +894,4 @@
 005E38 = src/cod/005E38.c                              # LoaderSysDrawSprite; SetPrimColorTex body expanded inline per branch, per-branch packet tail with a block-local DMA channel (Session 35)
 0033B0 = src/cod/0033B0.c                              # loader IOP bring-up; module-load and IOP-reboot helpers expanded inline, int-returning sceDmaReset (Session 35)
 000A58 = src/cod/000A58.c                              # loader thread restart: gp/sp register variables, loaderThreadJumpCode label + patched jal emitted by asm, la for its address (Session 35)
+01DC60 = src/cod/01DC60.c cc=29                        # libmc FAT path lookup: strtok walk with func_0011D9E8 per component, struct copies to the caller entry, (base + unit)->root index order, bad-entry return as a tail label (Session 35)
