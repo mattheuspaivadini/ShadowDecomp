@@ -845,3 +845,4 @@
 01C6A8 = src/cod/01C6A8.c cc=29                        # libmc FAT free-cluster search from the per-unit hint (wraps once to 0); SysInfo pointer local as in 01C7D8
 01E858 = src/cod/01E858.c cc=29                        # libmc FAT: set an entry's modified time from a BCD sceCdCLOCK (static inline BCD helper; macro form misallocates the year)
 012CC8 = src/cod/012CC8.c cc=29                        # SCE sifcmd send-command core behind sceSifSendCmd/isceSifSendCmd (mode bit0 = isceSifSetDma, bit2 = write back src); int DMA fields keep the store order
+020B90 = src/cod/020B90.c cc=29                        # libmc2 cluster read: copy the 0x400-byte cluster from the per-port cache when in range, else _sceMcpReadClust
