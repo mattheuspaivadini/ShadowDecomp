@@ -1,7 +1,7 @@
-/* STATUS (Session 28, 2026-10-18): NON_MATCHING. best score 39 [cc=29].
- * Positional score; an aligned diff leaves ~12 lines. The original materialises &D_00163CC8[port].sock as lui/addiu %lo then a separate addiu +4 (we fold the +4 into %lo), so everything after shifts by one insn; rest = s1/s2 roles of the sock pointer and the D_00135944 base. Tried f[1] array field, rec pointer + &rec->sock, (int *)&rec[port] + 1, base + port * 9: no change.
- * The original .s stays in the build (asm/cod/0215A8.s); this C
- * draft (Session 28) is kept for the record. */
+/* asm/cod/0215A8.s -> _sceMcCoreAuthentication.
+ * libmc2 core RPC: send command 0xC; index D_00163CC8[port] per statement (a sock
+ * pointer local folds the +4 into %lo, the Session 28 blocker).
+ * MATCHED. */
 struct McCoreRec {
     int  field00;
     int  sock;                  /* 0x04 */
@@ -32,18 +32,17 @@ void func_00121058(void *arg);
 struct McCoreState *func_00120F30(void);
 
 int _sceMcCoreAuthentication(int port) {
-    int *sock = &D_00163CC8[port].sock;
     int size;
 
-    if (sceDbcGetConnection(*sock) == 3)
+    if (sceDbcGetConnection(D_00163CC8[port].sock) == 3)
         return 0;
-    size = 0x2080;
     D_00163D40.f14 = 0;
     D_00163D40.f18 = 0;
+    size = 0x2080;
     func_001283D0(D_00165DC0, 0, 0x100);
     SyncDCache(D_00165DC0, D_00165DC0 + 0xFF);
     D_00135944 = 0xC;
-    while (sceDbcSendData3(*sock, D_00135944, &size, &D_00163D40, func_00121058) != 1)
+    while (sceDbcSendData3(D_00163CC8[port].sock, D_00135944, &size, &D_00163D40, func_00121058) != 1)
         ;
     return func_00120F30()->f08 != 0;
 }
