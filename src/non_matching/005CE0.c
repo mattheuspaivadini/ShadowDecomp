@@ -1,5 +1,6 @@
 /* STATUS (Session 29, 2026-10-18): NON_MATCHING. best score 4 [cc=296].
  * Residual = 'move a0,zero' for sceGsResetGraph is scheduled before the SCREEN_WIDTH/HEIGHT stores (original: after). Tried int/short for all 16 parameter combinations, swapped stores, short SCREEN_*, a zero local; cc=29 changes size.
+ * Session 30 (2026-10-19): still 4. Haifa sched2 (-fsched-verbose) shows the whole function is one block and the four argument loads tie on priority, so LUID order (a0 first) wins; the original issues a0 last. Also tried: K&R and variadic prototypes, a 64-bit first parameter, (short)/0L/0U/char/short/long zero arguments, side effects inside each argument, inline wrappers with parameters, volatile/unsigned SCREEN_*, NOTHROW_STUB on sceGsSyncV/sceGsResetPath/sceDmaGetChan (measurement only), wine 2.95.3 (60).
  * The original .s stays in the build (asm/cod/005CE0.s); this C
  * draft (Session 29) is kept for the record. */
 typedef struct {
