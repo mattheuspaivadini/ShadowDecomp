@@ -835,3 +835,4 @@
 020370 = src/cod/020370.c cc=29               # Memory-card FAT entry-space query: card check, path resolve, directory lookup (0x81010011 = found), then func_0011E258 with an address-taken err (Session 28).
 01E988 = src/cod/01E988.c cc=29               # Memory-card FAT file lookup filling a file-info record (timestamps, size, attr, name) from the directory entry (Session 28).
 0213D0 = src/cod/0213D0.c cc=29               # libmc2 _sceMcCoreCheckNewCard
+0214D0 = src/cod/0214D0.c cc=29               # libmc2 _sceMcCoreClearNewCardFlag
