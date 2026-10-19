@@ -886,3 +886,4 @@
 001EC0 = src/cod/001EC0.c                              # exception register dump; switch on an unsigned mode (1/0/2 case tree), epc param reused as the row counter, u_long128 staging global (Session 35)
 004428 = src/cod/004428.c                              # load_set_conf_only; netcnfif sequence with an inline wait_result helper, second result kept in r (Session 35)
 004990 = src/cod/004990.c                              # LoaderSysInitTCP; ldnet init, retry via goto, func_00104668 nothrow (defined earlier in the TU) (Session 35)
+004090 = src/cod/004090.c                              # ldnet IOP module set per network type; LOAD macro, two switches (jtbl_00136FF0 + case tree) (Session 35)
