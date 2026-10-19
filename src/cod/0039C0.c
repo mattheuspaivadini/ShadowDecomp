@@ -1,7 +1,6 @@
-/* STATUS (Session 30, 2026-10-19): NON_MATCHING. best score 2 [cc=296].
- * Residual = the D_16A398 argument: the original emits lui/addiu a1 then lui/addiu a2, ours interleaves the two lui first. The callback loop is an indexed for (i < 10) that loop.c reverses. Tried D_16A398 as char[]/int[]/char/int with .bss/.data sections, an (int) cast, asm la (volatile and not), a fixed-arity PutStringS.
- * The original .s stays in the build (asm/cod/0039C0.s); this C
- * draft (Session 30) is kept for the record. */
+/* asm/cod/0039C0.s -> loaderLoop.
+ * loader main loop: run the program, call the per-run callbacks (indexed for, reversed by loop.c), clean up, repeat. The end-of-image address is passed as (long): a DImode symbol load is not split into HIGH/LO_SUM, so its lui/addiu stay together (one dla).
+ * MATCHED. */
 extern int D_0013A010;          /* .sdata: heap start for the next program */
 extern int D_0013A07C;          /* .sdata */
 extern int loaderThreadId;
@@ -45,7 +44,7 @@ void loaderLoop(void) {
     PutStringS(-0x100, D_00136CD0, gp_reg);
     PutStringS(-0x100, D_00136CE0, sp_reg);
     PutStringS(-0x100, D_00136CF0, p);
-    PutStringS(-0x100, D_00136D00, D_16A398);
+    PutStringS(-0x100, D_00136D00, (long)D_16A398);
     PutStringS(-0x100, D_00136D10, D_0013A010);
     func_001283D0(D_0013CFA0, 0, 0x28);
     D_0013A07C = 0;
