@@ -859,3 +859,4 @@
 004818 = src/cod/004818.c                              # loader boot menu: wait up to 30 frames for a pad button, switch on it (result set before each PutStringS)
 012598 = src/cod/012598.c cc=29                        # DECI2 tty write: '\n' -> '\r\n' into the uncached packet, send, poll until done; volatile socket/len/busy, void sceDeci2Poll
 0021E0 = src/cod/0021E0.c                              # loader exception handler: dump GPR/COP0 into eeRegInfo, banner, func_00101EC0, jump to the recover point; 002360 template
+020068 = src/cod/020068.c cc=29                        # libmc FAT set attributes: resolve path, mask mode (0xE7F0 | attr & 0x180F), stamp modified time from the card clock (inline BCD as 01E858), flush
