@@ -880,3 +880,4 @@
 015A88 = src/cod/015A88.c cc=29                        # libdbc init: bind loops with an empty busy-wait, module version check, sema + work area; bind-failure block placed inside the sema-failure branch (Session 34)
 0207F8 = src/cod/0207F8.c cc=29                        # libmc2 write-back cache: start, extend (next cluster, under 8, same block) or flush and restart; each path has its own count++ and return, cross-jumped into one tail (Session 34)
 013868 = src/cod/013868.c cc=29                        # sceGsSetDefDBuff; sceGsDBuff struct, GIF tag bitfields per tag, short half-zbuf local for DISPFB (Session 35)
+013BF8 = src/cod/013BF8.c cc=29                        # sceGsSyncPath; shared timeout counter, error labels in source order, msg pinned to a0, void scePrintf, register-pinned plain dump reads (Session 35)
