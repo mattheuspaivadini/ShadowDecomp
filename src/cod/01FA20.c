@@ -1,7 +1,6 @@
-/* STATUS (Session 28, 2026-10-18): NON_MATCHING. best score 12 [cc=29].
- * Only the s1/s2 roles differ (original: path -> s1, unit -> s2). Declaration order, a char *p alias of path and an inverted strcmp branch do not change the global-alloc order.
- * The original .s stays in the build (asm/cod/01FA20.s); this C
- * draft (Session 28) is kept for the record. */
+/* asm/cod/01FA20.s -> _sceMcFatChDir.
+ * path buffer address pinned to s1 with a register asm local fixes the s1/s2 roles (Session 32).
+ * MATCHED. */
 struct SceMcFatSlot {
     char cwd[0x898];
 };
@@ -23,7 +22,8 @@ char *func_00128BB0(char *dst, const char *src);
 
 int _sceMcFatChDir(int unit, const char *dir, char *cwd) {
     struct SceMcDirEntry entry;
-    char path[0x80];
+    char path_[0x80];
+    register char *path asm("$17") = path_; /* global alloc order: path -> s1, unit -> s2 */
     int ret;
 
     ret = func_0011D988(unit, dir, path);

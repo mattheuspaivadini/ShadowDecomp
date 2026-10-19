@@ -867,3 +867,4 @@
 020F30 = src/cod/020F30.c cc=29                        # volatile counter reads; the first counter update is a plain (non-volatile) store so dbr fills the jump slot with it and tail-merges return a (Session 32).
 016FB0 = src/cod/016FB0.c cc=29                        # a0 pinned before the last initCount store (register asm) and an asm memory barrier before the cb_sem store (Session 32).
 01B670 = src/cod/01B670.c cc=29                        # Poll failure as goto to a shared return 0; a2 pinned to s0 with a register asm local fixes the global-alloc roles (Session 32).
+01FA20 = src/cod/01FA20.c cc=29                        # path buffer address pinned to s1 with a register asm local fixes the s1/s2 roles (Session 32).
