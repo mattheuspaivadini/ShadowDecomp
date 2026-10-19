@@ -885,3 +885,4 @@
 001518 = src/cod/001518.c                              # LoaderSysRelocateOnlineElfInfo; MoveElf's symbol fix-up switch + RelocateCode static inline, caller-supplied callbacks (Session 35)
 001EC0 = src/cod/001EC0.c                              # exception register dump; switch on an unsigned mode (1/0/2 case tree), epc param reused as the row counter, u_long128 staging global (Session 35)
 004428 = src/cod/004428.c                              # load_set_conf_only; netcnfif sequence with an inline wait_result helper, second result kept in r (Session 35)
+004990 = src/cod/004990.c                              # LoaderSysInitTCP; ldnet init, retry via goto, func_00104668 nothrow (defined earlier in the TU) (Session 35)
