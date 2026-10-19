@@ -843,3 +843,4 @@
 021C20 = src/cod/021C20.c cc=29               # libmc2 _sceMcCoreWriteSameData
 01BE48 = src/cod/01BE48.c cc=29                        # strtok-like tokenizer with "quoted" tokens (strcpy into D_0015DE48 first; .bss save pointer)
 01C6A8 = src/cod/01C6A8.c cc=29                        # libmc FAT free-cluster search from the per-unit hint (wraps once to 0); SysInfo pointer local as in 01C7D8
+01E858 = src/cod/01E858.c cc=29                        # libmc FAT: set an entry's modified time from a BCD sceCdCLOCK (static inline BCD helper; macro form misallocates the year)
