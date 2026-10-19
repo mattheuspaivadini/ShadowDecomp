@@ -893,3 +893,4 @@
 005408 = src/cod/005408.c                              # PutFont; SetPrimColor body expanded inline (packet through a pointer local), glyph bits/positions set up after it, 8x8 XYZ2 pairs on a scratchpad VIF1 packet (Session 35)
 005E38 = src/cod/005E38.c                              # LoaderSysDrawSprite; SetPrimColorTex body expanded inline per branch, per-branch packet tail with a block-local DMA channel (Session 35)
 0033B0 = src/cod/0033B0.c                              # loader IOP bring-up; module-load and IOP-reboot helpers expanded inline, int-returning sceDmaReset (Session 35)
+000A58 = src/cod/000A58.c                              # loader thread restart: gp/sp register variables, loaderThreadJumpCode label + patched jal emitted by asm, la for its address (Session 35)
