@@ -841,3 +841,4 @@
 021D58 = src/cod/021D58.c cc=29               # libmc2 _sceMcCoreBlockErase
 0215A8 = src/cod/0215A8.c cc=29               # libmc2 _sceMcCoreAuthentication
 021C20 = src/cod/021C20.c cc=29               # libmc2 _sceMcCoreWriteSameData
+01BE48 = src/cod/01BE48.c cc=29                        # strtok-like tokenizer with "quoted" tokens (strcpy into D_0015DE48 first; .bss save pointer)
