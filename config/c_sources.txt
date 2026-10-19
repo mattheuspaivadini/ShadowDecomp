@@ -840,3 +840,4 @@
 021698 = src/cod/021698.c cc=29               # libmc2 _sceMcCoreWriteBack
 021D58 = src/cod/021D58.c cc=29               # libmc2 _sceMcCoreBlockErase
 0215A8 = src/cod/0215A8.c cc=29               # libmc2 _sceMcCoreAuthentication
+021C20 = src/cod/021C20.c cc=29               # libmc2 _sceMcCoreWriteSameData
