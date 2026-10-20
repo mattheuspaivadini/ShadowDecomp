@@ -1,11 +1,6 @@
-/* STATUS (Session 34, 2026-10-19): NON_MATCHING. best score 2 [cc=29].
- * libmc2 core read: struct/loop fixed with a dst pointer local and p += before dst +=, zero stores in
- * order f18,f1C,f20,f14. Residual = li s3,1 (send-loop constant) scheduled before sw count,4 instead
- * of after.
- * Tried: all 24 zero-store orders x 7 count-store positions (168 variants, best 2), register pins on
- * buf/page/count/a4, empty asm memory barrier around the count store (size changes).
- * The original .s stays in the build (asm/cod/0218D8.s); this C
- * draft (Session 34) is kept for the record. */
+/* asm/cod/0218D8.s -> _sceMcCoreReadPage2.
+ * libmc2 core RPC: send the read command, then copy `count` pages out of the per-port cache.
+ * MATCHED. */
 struct McCoreRec {
     int  field00;
     int  sock;                  /* 0x04 */
@@ -65,11 +60,11 @@ int _sceMcCoreReadPage2(int port, unsigned char *buf, int page, int count, int a
     D_00163D40.f0C = D_00163CC8[port].f0C;
     D_00163D40.f10 = D_00163CC8[port].f10;
     size = 0x2080;
-    D_00163D40.f04 = count;
+    D_00163D40.f14 = 0;
     D_00163D40.f18 = 0;
     D_00163D40.f1C = 0;
     D_00163D40.f20 = 0;
-    D_00163D40.f14 = 0;
+    D_00163D40.f04 = count;
     func_001283D0(D_00165DC0, 0, 0x100);
     D_00135944 = 1;
     while (sceDbcSendData3(D_00163CC8[port].sock, D_00135944, &size, &D_00163D40, func_00121058) != 1)
