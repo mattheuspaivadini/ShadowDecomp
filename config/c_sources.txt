@@ -908,3 +908,4 @@
 02C470 = src/cod/02C470.c                              # Newlib 1.9.0 stdlib/dtoa.c _dtoa_r (authentic source; strings by image label, .rodata = 3 literals + jtbl from 0x139AD0)
 0299A8 = src/cod/0299A8.c -G0                          # Newlib stdio/vfprintf.c _vfprintf_r (authentic source, older snapshot deltas; -G0 = literals in .rodata)
 02B2B8 = src/cod/02B2B8.c -G0                          # Newlib stdio/vfscanf.c __svfscanf (authentic source, older snapshot deltas; -G0 = literals in .rodata)
+0092F8 = src/cod/0092F8.c cc=29                        # SCE sifrpc _request_end; $gp swapped around end_function by a two-move asm (memory clobber); 3-node switch tree
