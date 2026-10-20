@@ -922,3 +922,4 @@
 00FB70 = src/cod/00FB70.c cc=29                        # SCE libkernl EIntr; Status read by an mfc0 asm, ei asm
 007858 = src/cod/007858.c cc=29                        # SCE libkernl iWakeupThread; inline iGetThreadId syscall asm, request ring
 007970 = src/cod/007970.c cc=29                        # SCE libkernl iSuspendThread; iWakeupThread twin (cmd 2)
+010390 = src/cod/010390.c cc=29                        # SCE libkernl SetT2; di/sync.p/mfc0 loop as one asm, eret via ErrorEPC
