@@ -916,3 +916,4 @@
 011FD0 = src/cod/011FD0.c cc=29                        # SCE libkernl sbrk; DI idiom (mfc0/di/sync.p as separate asm), ENOMEM past EndOfHeap
 007460 = src/cod/007460.c cc=29                        # SCE libkernl QueryIntrContext; Status read by an mfc0 asm
 007470 = src/cod/007470.c cc=29                        # SCE libkernl DisableIntc; Status read by an mfc0 asm
+0074D8 = src/cod/0074D8.c cc=29                        # SCE libkernl EnableIntc; Status read by an mfc0 asm
