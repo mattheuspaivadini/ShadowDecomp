@@ -16,10 +16,10 @@ copyrighted game material: you must supply your own legally owned copy of the di
 | Flat load image | **237,952 bytes**, SHA-1 `6f853f64…` — **HASH MATCH** |
 | ELF container | `SCUS_974.72` (242,940 bytes, SHA-1 `b715b349…`) — **byte-identical** |
 | Functions in the image | 1,042 real functions (+ 2 raw `textbin` regions) |
-| Functions matched from C | **804 / 1,042** (77.2 %) |
-| Matched code bytes | **163,320 / 203,692** `.text` bytes (**80.18 %**) |
-| Near-miss attempts | 47 drafts in `src/non_matching/` (best ones 1–7 instruction diffs) |
-| Named symbols | 55 `.text` symbols (evidence-based names only) |
+| Functions matched from C | **814 / 1,042** (78.1 %) |
+| Matched code bytes | **165,584 / 203,692** `.text` bytes (**81.29 %**) |
+| Near-miss attempts | 47 drafts in `src/non_matching/` (diff lines range from 1 to 315; the closest are 1–7) |
+| Named symbols | ~55 evidence-derived `.text` names, plus 840 SDK names imported from `KERNEL.XFF` |
 | Remaining real pool | 48 (47 near-miss + 1 untouched) |
 
 Every matched function is gated by the image hash, so a change that breaks any
@@ -34,7 +34,7 @@ function is caught immediately.
 | 3 | Pin the compiler (EE-GCC revision and flags) | Done — `-O2 -g2 -G8`, mixed generations per translation unit |
 | 4 | Split and rebuild (per-function assembly, byte-exact link, container) | Done |
 | 5 | Name functions and data from evidence | In progress |
-| 6 | Decompile functions to C, byte-exact | In progress (597 / 1,042) |
+| 6 | Decompile functions to C, byte-exact | In progress (814 / 1,042) |
 
 ---
 
@@ -55,8 +55,9 @@ function is caught immediately.
 - **Library provenance:** several libraries in the image are recognizable revisions:
   Newlib 1.9.0 (stdio, malloc, strtol, mprec, reent), GCC 2.95.3 `libgcc2`, and SCE SDK
   template families (SIF-RPC stdio, `sceMc2*` async, `sceVif1Pk*`, `sceDma*`).
-- **Hand-written assembly:** about 205 functions are MMI or syscall code that C cannot
-  express. They stay as `.s` by design (`asm-permanent` in the ledger).
+- **Hand-written assembly:** 180 functions are still classed `asm-permanent` in the ledger
+  (MMI string routines, syscall stubs and similar). Some functions once classed this way
+  turned out to be C with inline asm, so the list is re-checked as work goes on.
 
 ---
 
@@ -103,7 +104,10 @@ python tools/extract_iso.py "Shadow of the Colossus (USA).iso" extracted manifes
 make check            # or: python3 tools/build.py --jobs 8   (inside WSL)
 
 # Verify every C function byte-for-byte (fast gate, ~20 s)
-python build/s10/verify_fast.py
+python build/s10/verify_fast.py          # or: make fast   (runs it inside WSL)
+
+# Full slow verification (~1.5 h); not for routine gating
+make verify
 
 # Rebuild the ELF container and compare it with the original
 make container
@@ -136,7 +140,8 @@ Run `make help` for the full target list.
 - **Evidence over guesses.** Names come only from evidence (strings, object names, call
   graphs, SDK identities). Anything uncertain is marked `// UNCONFIRMED: <reason>`.
 - **Auto names** stay `func_XXXXXX` / `D_XXXXXX` until evidence exists.
-- **Commits:** `phaseN: short description` or `decomp: function_name (matching)`.
+- **Commits:** one function per commit: `decomp: <function_name> (<stem>) matching`,
+  `non-matching: <function_name> (<stem>) <old score> -> <new score>`, or `phaseN: ...`.
 - **Never commit** the ISO, extracted game files, original ELF/IRX/XFF binaries, or build outputs.
 
 ---
@@ -146,7 +151,7 @@ Run `make help` for the full target list.
 - The REA MCP toolset cannot analyze R5900 ELFs on Windows (its native lane is PE-only). Analysis uses splat, rabbitizer, Ghidra with the EE extension, and local scripts.
 - Overlay modules (`.XFF`: `KERNEL`, `MANAGER`, `GAMECORE`) are split but mostly not decompiled.
 - The remaining near-miss drafts are mostly register-allocation, scheduler or branch-layout differences. Some residual classes have no compiler flag that fixes them yet.
-- No remote repository is configured.
+- The `origin` remote points to `github.com/mattheuspaivadini/ShadowDecomp`; the ISO and the game-derived files are never pushed.
 
 ---
 
