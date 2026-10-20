@@ -902,3 +902,4 @@
 01FB48 = src/cod/01FB48.c cc=29                        # _sceMcFatGetDir; entries indexed as buffer[i] (two strength-reduced givs), nested filters with the skip count in the else arm, loop condition !done && length (Session 36)
 0253A0 = src/cod/0253A0.c                              # gcc fp-bit.c L_mul_df (SCE EE variant: 2.95.3 64x64 multiply, no rounding step)
 025080 = src/cod/025080.c                              # gcc fp-bit.c L_addsub_df _fpadd_parts (authentic source; out of line, dpadd/dpsub share it)
+026920 = src/cod/026920.c                              # GCC frame.c execute_cfa_insn (authentic source; def_cfa_expression revision, builtin memcpy)

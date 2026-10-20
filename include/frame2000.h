@@ -6,7 +6,8 @@
  *
  * SCE adaptations, all read off the image: the object mutex is the
  * __sce_eh_sema_id semaphore (WaitSema/SignalSema); FIRST_PSEUDO_REGISTER
- * is 123 (frame_state_internal is 0x480 bytes with 8-byte longs); the
+ * is 122 (frame_state_internal is 0x480 bytes with 8-byte longs and the
+ * base_offset/indirect fields); the
  * file-statics `objects' and fde_split's `marker' are the image's
  * D_00169F90 / D_00169F8C; the out-of-line statics keep their splat labels. */
 #ifndef FRAME2000_H
@@ -36,19 +37,25 @@ extern int SignalSema (int);
 #define __gthread_mutex_lock(m) WaitSema (__sce_eh_sema_id[0])
 #define __gthread_mutex_unlock(m) SignalSema (__sce_eh_sema_id[0])
 
-#define FIRST_PSEUDO_REGISTER 123
+#define FIRST_PSEUDO_REGISTER 122
 #define DWARF_FRAME_REGISTERS FIRST_PSEUDO_REGISTER
 
+/* The frame.h revision with DW_CFA_def_cfa_expression support (base_offset,
+   indirect): offsets read off execute_cfa_insn / decode_stack_op (026800):
+   cfa_offset 0x08, base_offset 0x10, args_size 0x18, reg_or_offset 0x20,
+   cfa_reg 0x3F8, saved 0x3FC, indirect 0x477.  */
 typedef struct frame_state
 {
   void *cfa;
   void *eh_ptr;
   long cfa_offset;
+  long base_offset;
   long args_size;
   long reg_or_offset[DWARF_FRAME_REGISTERS+1];
   unsigned short cfa_reg;
   unsigned short retaddr_column;
   char saved[DWARF_FRAME_REGISTERS+1];
+  char indirect;
 } frame_state;
 
 #define REG_UNSAVED 0
