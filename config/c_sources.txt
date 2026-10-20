@@ -914,3 +914,4 @@
 007A08 = src/cod/007A08.c cc=29                        # SCE libkernl DelayThread; Status read by an mfc0 asm, timer-alarm semaphore
 00A878 = src/cod/00A878.c cc=29                        # power-off callback dispatcher; $gp save+load in one asm, sync/ei asm
 011FD0 = src/cod/011FD0.c cc=29                        # SCE libkernl sbrk; DI idiom (mfc0/di/sync.p as separate asm), ENOMEM past EndOfHeap
+007460 = src/cod/007460.c cc=29                        # SCE libkernl QueryIntrContext; Status read by an mfc0 asm
