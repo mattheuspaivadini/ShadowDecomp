@@ -1,10 +1,6 @@
-/* STATUS (Session 35, 2026-10-19): NON_MATCHING. best score 4 [cc=29].
- * sceRead: nowait = async copy now placed after WaitSema through an empty asm volatile with +r on
- * async (a plain copy is hoisted above the call: s2 is call-saved). Residual = order of i = 0 and
- * the copy before the q[0] test (original: i = 0 first, copy in the bne slot). Tried: register
- * pins on async/nowait, copy in the for-init, second asm pin, statement orders.
- * The original .s stays in the build (asm/cod/00B408.s); this C
- * draft (Session 35) is kept for the record. */
+/* asm/cod/00B408.s -> sceRead.
+ * SCE libkernel stdio sceRead over SIF RPC; volatile asm fences with an m operand order the hi() reloads before i = 0 / nowait = 0 (Session 40)
+ * MATCHED. */
 struct Fd {                     /* 16-byte EE fd records at D_00146EC0 */
     int iop_fd;                 /* 0x00 */
     int mode;                   /* 0x04 */
@@ -84,8 +80,9 @@ int sceRead(int fd, void *buf, int size) {
     req->sema = sema;
     if (async) {
         WaitSema(D_00132324);
-        __asm__ __volatile__ ("" : "+r" (async));
         i = 0;
+        /* fence: the hi() of the queue address is computed before i = 0 and the copy follows it */
+        __asm__ __volatile__ ("" : : "m" (_sceFs_q[0]));
         nowait = async;
         for (; i < 32; i++) {
             if (_sceFs_q[i] == -1) {
@@ -96,6 +93,8 @@ int sceRead(int fd, void *buf, int size) {
         }
         SignalSema(D_00132324);
     } else {
+        /* fence: the hi() of the reply buffer is computed before nowait = 0 */
+        __asm__ __volatile__ ("" : : "m" (D_00146600[0]));
         nowait = 0;
     }
     if (!(mode & 0x20000000))

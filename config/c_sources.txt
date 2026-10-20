@@ -930,3 +930,4 @@
 0021D0 = src/cod/0021D0.c                              # loader setCop0Epc; mtc0 $14 asm
 00F590 = src/cod/00F590.c cc=29                        # SCE libkernl 32 MB TLB set-up; index as register asm $t9 local
 0109D0 = src/cod/0109D0.c cc=29                        # SCE libkernl timer alarm INTC handler; $gp per alarm as lw asm, volatile base read/plain store
+00B408 = src/cod/00B408.c cc=29               # SCE libkernel stdio sceRead over SIF RPC; volatile asm fences with an m operand order the hi() reloads before i = 0 / nowait = 0 (Session 40)
