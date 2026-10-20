@@ -904,3 +904,4 @@
 025080 = src/cod/025080.c                              # gcc fp-bit.c L_addsub_df _fpadd_parts (authentic source; out of line, dpadd/dpsub share it)
 026920 = src/cod/026920.c                              # GCC frame.c execute_cfa_insn (authentic source; def_cfa_expression revision, builtin memcpy)
 026D70 = src/cod/026D70.c                              # GCC frame.c __frame_state_for (authentic source; builtin memcpy, libc memset)
+02FBB0 = src/cod/02FBB0.c                              # Newlib 1.9.0 stdlib/strtod.c _strtod_r (authentic source; FLT_ROUNDS != 1, .rodata = jtbl + 3 literals at jtbl_00139C80)
