@@ -82,6 +82,9 @@ DATA_SECTIONS = {".data", ".rodata", ".data_nop", ".sdata", ".sbss", ".bss",
 # from the asm data, and the `jlabel`s are defined as absolute symbols. The
 # compiled table is checked word-for-word against the original first, so a
 # wrong case order cannot hide behind the original table.
+# Literals the compiler pools in the same .rodata (doubles, strings) may sit
+# before the table (Session 38: _dtoa_r): the section then maps to the table's
+# address minus the offset of its first table word, and is checked whole.
 JTBL_SECTION = ".c_jtbl"
 OBJDUMP = eegcc.flag("EE_OBJDUMP", "mips-linux-gnu-objdump")
 ROM_FILE = ROOT / "build" / "SCUS_974.72.rom"
@@ -115,6 +118,20 @@ def stem_vaddr(stem: str) -> int | None:
     return None
 
 
+def rodata_relocs(obj: Path, section: str) -> list[tuple[int, str, str]]:
+    """(offset, type, symbol) of the relocations in a C object's section."""
+    rel = subprocess.run([OBJDUMP, "-r", "-j", section, str(obj)],
+                         capture_output=True, text=True).stdout
+    return [(int(m.group(1), 16), m.group(2), m.group(3)) for m in
+            re.finditer(r"^([0-9a-f]+)\s+(\S+)\s+(\S+)\s*$", rel, re.M)]
+
+
+def rodata_base(tbls: list[int], relocs: list[tuple[int, str, str]]) -> int:
+    """Address of the C object's .rodata: first jtbl_ minus the offset of the
+    first table word (literals pooled before the table keep their place)."""
+    return tbls[0] - min((off for off, _t, _s in relocs), default=0)
+
+
 def adopt_jump_tables(obj: Path, stem: str, size: int) -> str:
     """Check a C object's .rodata against the original jump table(s) and rename
     it to JTBL_SECTION. Returns an error string ('' on success)."""
@@ -134,20 +151,18 @@ def adopt_jump_tables(obj: Path, stem: str, size: int) -> str:
     if len(data) != size or size % 4:
         return f".rodata size {len(data)} (expected {size}, word multiple)"
     words = list(struct.unpack(f"<{size // 4}I", data))
-    rel = subprocess.run([OBJDUMP, "-r", "-j", ".rodata", str(obj)],
-                         capture_output=True, text=True).stdout
-    for m in re.finditer(r"^([0-9a-f]+)\s+(\S+)\s+(\S+)\s*$", rel, re.M):
-        off, typ, sym = int(m.group(1), 16), m.group(2), m.group(3)
+    relocs = rodata_relocs(obj, ".rodata")
+    for off, typ, sym in relocs:
         if typ != "R_MIPS_32" or sym != ".text" or off % 4:
             return f"unsupported .rodata relocation {typ} {sym}+{off:#x}"
         words[off // 4] = (words[off // 4] + vaddr) & 0xFFFFFFFF
     rom = ROM_FILE.read_bytes()
-    base = tbls[0] - ROM_BASE
+    base = rodata_base(tbls, relocs) - ROM_BASE
     orig = list(struct.unpack(f"<{size // 4}I", rom[base:base + size]))
     if words != orig:
         bad = next(i for i, (a, b) in enumerate(zip(words, orig)) if a != b)
-        return (f"jump table differs from jtbl_{tbls[0]:08X} at word {bad}: "
-                f"{words[bad]:#010x} != {orig[bad]:#010x}")
+        return (f".rodata differs from the image at {base + ROM_BASE + 4 * bad:#x} "
+                f"(jtbl_{tbls[0]:08X}): {words[bad]:#010x} != {orig[bad]:#010x}")
     tmp = str(obj) + ".jt"
     r = subprocess.run([OBJCOPY, f"--rename-section", f".rodata={JTBL_SECTION}",
                         str(obj), tmp], capture_output=True, text=True)
@@ -400,9 +415,10 @@ def jump_table_sections(c_sources: dict[str, str]) -> list[str]:
         if not obj.exists() or JTBL_SECTION not in eegcc.section_sizes(obj):
             continue
         tbls, labels = asm_jtbl_info(stem)
+        base = rodata_base(tbls, rodata_relocs(obj, JTBL_SECTION))
         out.append(f"    /* jump tables of C object {stem} (original "
                    f"jtbl_{tbls[0]:08X}; image bytes come from the asm data) */")
-        out.append(f"    .c_jtbl_{stem} {tbls[0]:#x} (NOLOAD) : "
+        out.append(f"    .c_jtbl_{stem} {base:#x} (NOLOAD) : "
                    f"{{ build/asm/cod/{stem}.o({JTBL_SECTION}) }}")
         for name, addr in sorted(labels.items(), key=lambda kv: kv[1]):
             out.append(f'    "{name}" = {addr:#x};')
