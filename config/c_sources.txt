@@ -925,3 +925,4 @@
 010390 = src/cod/010390.c cc=29                        # SCE libkernl SetT2; di/sync.p/mfc0 loop as one asm, eret via ErrorEPC
 031818 = src/cod/031818.c cc=29                        # SCE libkernl _sceSDC; dcache way walk, sync/cache/mfc0 TagLo as asm
 0318C0 = src/cod/0318C0.c cc=29                        # SCE libkernl SyncDCache; DIntr/EIntr bracket, tail j EIntr
+031958 = src/cod/031958.c cc=29                        # SCE libkernl _sceIDC; _sceSDC twin (cache 0x16)
