@@ -909,3 +909,4 @@
 0299A8 = src/cod/0299A8.c -G0                          # Newlib stdio/vfprintf.c _vfprintf_r (authentic source, older snapshot deltas; -G0 = literals in .rodata)
 02B2B8 = src/cod/02B2B8.c -G0                          # Newlib stdio/vfscanf.c __svfscanf (authentic source, older snapshot deltas; -G0 = literals in .rodata)
 0092F8 = src/cod/0092F8.c cc=29                        # SCE sifrpc _request_end; $gp swapped around end_function by a two-move asm (memory clobber); 3-node switch tree
+019AC0 = src/cod/019AC0.c cc=29                        # SCE libmrpc _request_end (ids 0x80000019..1D); $gp swap asm as 0092F8; own after-switch cd local
