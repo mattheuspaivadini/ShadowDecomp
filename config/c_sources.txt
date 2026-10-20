@@ -900,3 +900,4 @@
 00ADC0 = src/cod/00ADC0.c cc=29                        # SCE libkernel stdio sceOpen over SIF RPC; req pinned to s1, st reused as the fd return, iop_fd stored before the mode update (Session 36)
 00D668 = src/cod/00D668.c cc=29                        # SCE libkernel stdio sceDevctl over SIF RPC; one ret word (bufp spill sits above it), command 0x4601 block write-back, store order from a grid (Session 36)
 01FB48 = src/cod/01FB48.c cc=29                        # _sceMcFatGetDir; entries indexed as buffer[i] (two strength-reduced givs), nested filters with the skip count in the else arm, loop condition !done && length (Session 36)
+0253A0 = src/cod/0253A0.c                              # gcc fp-bit.c L_mul_df (SCE EE variant: 2.95.3 64x64 multiply, no rounding step)
