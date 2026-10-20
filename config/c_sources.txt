@@ -923,3 +923,4 @@
 007858 = src/cod/007858.c cc=29                        # SCE libkernl iWakeupThread; inline iGetThreadId syscall asm, request ring
 007970 = src/cod/007970.c cc=29                        # SCE libkernl iSuspendThread; iWakeupThread twin (cmd 2)
 010390 = src/cod/010390.c cc=29                        # SCE libkernl SetT2; di/sync.p/mfc0 loop as one asm, eret via ErrorEPC
+031818 = src/cod/031818.c cc=29                        # SCE libkernl _sceSDC; dcache way walk, sync/cache/mfc0 TagLo as asm
