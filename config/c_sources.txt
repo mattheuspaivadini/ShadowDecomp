@@ -903,3 +903,4 @@
 0253A0 = src/cod/0253A0.c                              # gcc fp-bit.c L_mul_df (SCE EE variant: 2.95.3 64x64 multiply, no rounding step)
 025080 = src/cod/025080.c                              # gcc fp-bit.c L_addsub_df _fpadd_parts (authentic source; out of line, dpadd/dpsub share it)
 026920 = src/cod/026920.c                              # GCC frame.c execute_cfa_insn (authentic source; def_cfa_expression revision, builtin memcpy)
+026D70 = src/cod/026D70.c                              # GCC frame.c __frame_state_for (authentic source; builtin memcpy, libc memset)
