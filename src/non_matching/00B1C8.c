@@ -1,12 +1,12 @@
-/* STATUS (Session 36, 2026-10-20): NON_MATCHING. best score 7 [cc=29].
- * sceLseek, sceRead template (score = differing normalized asm lines). Residual = the async-branch
- * copy nowait = mode & 0x8000: the original issues i = 0 before the q[0] load and puts the copy in
- * the bne delay slot; ours keeps i = 0 in the slot (sched2 orders them right, dbr picks i = 0).
- * The else-branch zero is also two insns early. Tried: asm +r pins on async/i/mode, copy
- * before/after the loop and inside it, mode &= 0x8000 reuse, expression-only (gcse copy), inline
- * queue helper, i/loop types, cc 991111a/xz/dtls, -fno-schedule-insns(2).
+/* STATUS (Session 40, 2026-10-20): NON_MATCHING. best score 3 [cc=29] (was 7).
+ * sceLseek: same template as the matched sceRead (00B408). Levers: a volatile asm with an "m"(_sceFs_q[0])
+ * operand after i = 0 forces the hi() of the queue address before i = 0 and keeps the nowait copy after
+ * it (the copy lands in the bne slot, as in the image). Residual = the else-branch `move s2,zero`,
+ * which the image schedules after the two hi() luis. An asm "m" fence on D_001470C0/D_00146600 in the
+ * else branch fixes the order but swaps s5/s6 (hi(D_00132324) is allocated last); extra references
+ * to D_00132324, pins on sema, a join-side fence and swapped if/else layout all fail.
  * The original .s stays in the build (asm/cod/00B1C8.s); this C
- * draft (Session 36) is kept for the record. */
+ * draft (Session 40) is kept for the record. */
 struct Fd {                     /* 16-byte EE fd records at D_00146EC0 */
     int iop_fd;                 /* 0x00 */
     int mode;                   /* 0x04 */
@@ -84,8 +84,8 @@ int sceLseek(int fd, int offset, int whence) {
     req->sema = sema;
     if (async) {
         WaitSema(D_00132324);
-        __asm__ __volatile__ ("" : "+r" (async));
         i = 0;
+        __asm__ __volatile__ ("" : : "m" (_sceFs_q[0]));
         mode = async;
         for (; i < 32; i++) {
             if (_sceFs_q[i] == -1) {
