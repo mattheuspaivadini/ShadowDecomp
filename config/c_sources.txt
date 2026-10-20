@@ -899,3 +899,4 @@
 01F210 = src/cod/01F210.c cc=29                        # _sceMcFatWriteFile; prev = clust right before the next-cluster call, separate mode-test returns, final stamp after the loop break, prev pinned to s4 (Session 36)
 00ADC0 = src/cod/00ADC0.c cc=29                        # SCE libkernel stdio sceOpen over SIF RPC; req pinned to s1, st reused as the fd return, iop_fd stored before the mode update (Session 36)
 00D668 = src/cod/00D668.c cc=29                        # SCE libkernel stdio sceDevctl over SIF RPC; one ret word (bufp spill sits above it), command 0x4601 block write-back, store order from a grid (Session 36)
+01FB48 = src/cod/01FB48.c cc=29                        # _sceMcFatGetDir; entries indexed as buffer[i] (two strength-reduced givs), nested filters with the skip count in the else arm, loop condition !done && length (Session 36)
