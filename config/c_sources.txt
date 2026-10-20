@@ -919,3 +919,4 @@
 0074D8 = src/cod/0074D8.c cc=29                        # SCE libkernl EnableIntc; Status read by an mfc0 asm
 007540 = src/cod/007540.c cc=29                        # SCE libkernl DisableDmac; Status read by an mfc0 asm
 0075A8 = src/cod/0075A8.c cc=29                        # SCE libkernl EnableDmac; Status read by an mfc0 asm
+00FB70 = src/cod/00FB70.c cc=29                        # SCE libkernl EIntr; Status read by an mfc0 asm, ei asm
