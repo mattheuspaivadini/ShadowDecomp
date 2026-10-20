@@ -17,7 +17,7 @@ copyrighted game material: you must supply your own legally owned copy of the di
 | ELF container | `SCUS_974.72` (242,940 bytes, SHA-1 `b715b349…`) — **byte-identical** |
 | Functions in the image | 1,042 real functions (+ 2 raw `textbin` regions) |
 | Functions matched from C | **784 / 1,042** (75.2 %) |
-| Matched code bytes | **141,008 / 203,692** `.text` bytes (**69.23 %**) |
+| Matched code bytes | **141,416 / 203,692** `.text` bytes (**69.42 %**) |
 | Near-miss attempts | 44 drafts in `src/non_matching/` (best ones 1–7 instruction diffs) |
 | Named symbols | 55 `.text` symbols (evidence-based names only) |
 | Remaining real pool | 53 (44 near-miss + 9 untouched) |
