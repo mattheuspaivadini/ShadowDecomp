@@ -906,3 +906,4 @@
 026D70 = src/cod/026D70.c                              # GCC frame.c __frame_state_for (authentic source; builtin memcpy, libc memset)
 02FBB0 = src/cod/02FBB0.c                              # Newlib 1.9.0 stdlib/strtod.c _strtod_r (authentic source; FLT_ROUNDS != 1, .rodata = jtbl + 3 literals at jtbl_00139C80)
 02C470 = src/cod/02C470.c                              # Newlib 1.9.0 stdlib/dtoa.c _dtoa_r (authentic source; strings by image label, .rodata = 3 literals + jtbl from 0x139AD0)
+0299A8 = src/cod/0299A8.c -G0                          # Newlib stdio/vfprintf.c _vfprintf_r (authentic source, older snapshot deltas; -G0 = literals in .rodata)
