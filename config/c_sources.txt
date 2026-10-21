@@ -935,3 +935,4 @@
 015940 = src/cod/015940.c cc=29                   # SCE libvib sceVibSetActParam; size/n2 stores before the DbcParam bitfields, second memcpy destination as an int sum n2 + (int)&req + 8 (Session 41)
 017A00 = src/cod/017A00.c cc=29                   # SCE libcdvd _sceCdSC: linear id tests (goto dispatch), default jumps over the 0x8014 body, volatile _sceCd_scmd_semid keeps its load out of the slot (Session 41)
 016D88 = src/cod/016D88.c cc=29                   # SCE libcdvd _sceCd_cbLoop; $gp swap asm, volatile cb_sem, volatile read of sceCdCbfunc_number in the call test, empty asm fence after the exit-path semaphore store (Session 41)
+0000D0 = src/cod/0000D0.c                         # loader ResolveRelocation (R_MIPS_32/26/HI16/LO16): HI16 lookahead as a for(;;) with continue/break (error block ahead of the case), entry address as int sum (j << 3), s + (a << 16) in its own temp (Session 41)
