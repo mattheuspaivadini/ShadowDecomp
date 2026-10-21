@@ -1,4 +1,5 @@
-/* STATUS (Session 34, 2026-10-19): NON_MATCHING. best score 23 [cc=29].
+/* STATUS (Session 43, 2026-10-21): NON_MATCHING. best score 24 (was 42; sw.py diff lines).
+ * ver built as ver = (v0 - '0') * 10; ver += v2 - '0' (fixes the a1/a2 roles); info stores ordered [1],[0],[2] (load before the [0] store). Residual: v0/v1 swaps of 2200/base after ClearNewCardFlag and of f30/1000 in the limit (sched1 puts the constant first; the image has the other pseudo first). Tried: 11 address forms, 5 limit forms, -fno-schedule-insns (149), address fences (m/r) at every statement (168), fence grid (1008).
  * _sceMcFatGetInfo. ver and the free-entry count share one variable; version check fails when ver <
  * 11. Residual = v0/v1 pseudo order in the D_0015DF48 index after ClearNewCardFlag and in the
  * /1000*1000 limit, plus the final err test.
@@ -89,7 +90,7 @@ int _sceMcFatGetInfo(int port, int *info) {
             return 0x8101002F;
         }
         ver = (sys->ver[0] - '0') * 10;
-        ver = ver - '0' + sys->ver[2];
+        ver += sys->ver[2] - '0';
         if (ver < 11)
             return 0x81010086;
         func_0011CAC0(port, sys);
@@ -123,9 +124,9 @@ int _sceMcFatGetInfo(int port, int *info) {
         ver = func_0011C7D8(port, &err);
         if (err != 0)
             return err;
-        info[0] = 2;
         info[1] = D_0015DF48[port].f88C;
         info[2] = ver;
+        info[0] = 2;
     }
     if (D_0015DF48[port].f888 != 0) {
         D_0015DF48[port].f888 = 0;
