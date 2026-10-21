@@ -1,4 +1,5 @@
-/* STATUS (Session 42, 2026-10-21): NON_MATCHING. best score 38 (was 46; sw.py diff lines).
+/* STATUS (Session 44, 2026-10-21): NON_MATCHING. best score 34 (was 38; sw.py diff lines).
+ * isceSifSetDChain declared int (its return value lands in v0, so the cid reload after it takes v1 like the image). Residual: the copy-loop counter/pktquads copy (image: for-loop reversal with blez guard) and the gp/handler-base v0/v1 roles inside the set_gp paths; a 108-variant fence grid gave no gain.
  * Copy loop as for (i = pktquads; i > 0; i--) *d++ = *s++ with s = header gives the image's blez guard; plus the best fence of a 364-variant grid. Residual: sra/srl of the quad count and the a1/a2 copy roles.
  * SCE sifcmd interrupt handler (_SifCmdIntHandler): copy loop, isceSifSetDChain, system/user
  * dispatch on the handler $gp (static inline set_gp as 011CA8). Evidence: cid is reloaded three
@@ -41,7 +42,7 @@ struct SifCmdData {             /* D_0014B358 (sceSifGetDataTable) */
 
 extern struct SifCmdData D_0014B358;
 
-void isceSifSetDChain(void);
+int isceSifSetDChain(void);
 
 /* old = $gp, $gp = new (as in sceSifExecNotifyHandler 011CA8) */
 static __inline__ int set_gp(int gp)
