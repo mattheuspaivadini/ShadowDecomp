@@ -1,4 +1,5 @@
-/* STATUS (Session 35, 2026-10-19): NON_MATCHING. best score 57 [cc=296].
+/* STATUS (Session 42, 2026-10-21): NON_MATCHING. best score 80 (was 96; sw.py diff lines).
+ * Fence grid (build/s42/fence_grid.py: empty asm "+r" / asm volatile "r" use of each local after each statement): best single fence.
  * ld: module loader (stat/open/read, checksum inline helper, align_up inline so the /64 stays a
  * divu, RelocateSelfSymbol + RelocateCode inline, extra RelSet relocation walk). Residual =
  * fd/size register roles (s0/s1) and the rel-count loops counting in s0. Tried: decl orders, fd
@@ -167,6 +168,7 @@ struct ElfInfo *func_00100D48(char *name)
     e = (struct ElfInfo *)D_00139E04;
     D_00139E04 += size;
     LoaderSysFRead(fd, e, size);
+    asm("" : "+r"(fd));
     LoaderSysFClose(fd);
     LoaderSysPrintf(D_00136488, e, (char *)e + size, size64, checksum((unsigned char *)e, size));
     set.e = e;
