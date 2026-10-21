@@ -945,3 +945,4 @@
 01A188 = src/cod/01A188.c cc=29                   # SCE libmc2 sceMc2Init: three semaphores + server thread; each failure path written inline (CSE keeps the constant 1 in s2, jump2 cross-jumps them), handle -1 stores reordered for the sched tie (Session 41)
 000278 = src/cod/000278.c                         # loader DecodeSection: per-type log calls written out (no shared goto), misaligned-source branch first, first-address kept in a one-element stack array (Session 41)
 010D48 = src/cod/010D48.c cc=ee-gcc2.9-991111-01-dtls13010 -g0 -fno-delayed-branch -G0 # timer TU iAllocTimerCounter; volatile D.f0C, operand-only asm fence on the f10 increment (Session 42)
+010000 = src/cod/010000.c cc=29                   # ExecPS2 argv packer; a3-pinned D_00133168, empty asm on the end copy (Session 42)
