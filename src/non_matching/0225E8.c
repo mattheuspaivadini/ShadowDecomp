@@ -1,4 +1,5 @@
-/* STATUS (Session 35, 2026-10-19): NON_MATCHING. best score 129 [cc=29].
+/* STATUS (Session 42, 2026-10-21): NON_MATCHING. best score 230 (was 306; sw.py diff lines).
+ * Fence grid (build/s42/fence_grid.py: empty asm "+r" / asm volatile "r" use of each local after each statement): best single fence.
  * netcnfif load_entry_auto: two lists, every error frees both, strcmp of ifc sys_name against
  * attach_ifc/attach_dev as two calls (keeps the type test in the loop). Residual = register
  * allocation (original spills type and ifc to the frame, copies the first count into s0). Tried:
@@ -65,6 +66,7 @@ int sceNetcnfifLoadEntryAuto(char *fname, int flags, char *usr_name, sceNetcnfif
         return -1;
     }
     ifc_list = memalign(0x40, n * sizeof(sceNetcnfifList_t));
+    asm volatile("" : : "r"(ifc_list));
     if (ifc_list == 0) {
         free(ifc_list);
         free(dev_list);
