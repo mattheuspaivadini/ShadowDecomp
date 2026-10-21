@@ -1,10 +1,6 @@
-/* STATUS (Session 34, 2026-10-19): NON_MATCHING. best score 93 [cc=296].
- * DecodeSection. Same size; first is volatile (the original keeps it on the stack), type unsigned,
- * size==0 test moved after the switch. Residual = loop-invariant choice (original hoists the status-
- * name table into fp, ours the constant 2) and the s-register roles that follow from it.
- * Tried: cc=29 (552 bytes), volatile vs plain first, declaration order.
- * The original .s stays in the build (asm/cod/000278.s); this C
- * draft (Session 34) is kept for the record. */
+/* asm/cod/000278.s -> DecodeSection.
+ * loader DecodeSection: per-type log calls written out (no shared goto), misaligned-source branch first, first-address kept in a one-element stack array (Session 41)
+ * MATCHED. */
 struct Sect {
     void *addr;                 /* 0x00 */
     void *src;                  /* 0x04 */
@@ -38,12 +34,16 @@ void *func_001283D0(void *dst, int c, unsigned int size);         /* memset */
 
 void DecodeSection(struct ElfInfo *e, void *(*alloc)(int, int), void *(*alloc_high)(int),
                    int (*log)(const char *, ...)) {
-    struct Sect *sh = e->sect + 1;
-    volatile int first = 0;
-    int n = e->nsect;
-    int *names = e->names;
+    struct Sect *sh;
+    int first[1];
+    int n;
+    int *names;
     const char *fmt;
 
+    sh = e->sect + 1;
+    first[0] = 0;
+    n = e->nsect;
+    names = e->names;
     if (log != 0)
         log(D_00136218);
     n -= 2;
@@ -57,20 +57,20 @@ void DecodeSection(struct ElfInfo *e, void *(*alloc)(int, int), void *(*alloc_hi
                     sh->addr = alloc_high(sh->size);
                     func_0012821C(sh->addr, sh->src, sh->size);
                     sh->status = 2;
-                } else if (((int)sh->src & (sh->align - 1)) == 0) {
-                    sh->addr = sh->src;
-                } else {
+                } else if (((int)sh->src & (sh->align - 1)) != 0) {
                     sh->addr = alloc(sh->size, sh->align);
                     func_0012821C(sh->addr, sh->src, sh->size);
                     sh->status = 1;
+                } else {
+                    sh->addr = sh->src;
                 }
                 if (log == 0)
                     break;
                 if (sh->type == 1)
-                    fmt = D_00136230;
+                    log(D_00136230, e->strtab + *names, sh->addr, sh->size, D_00131CC0[sh->status]);
                 else
-                    fmt = D_00136258;
-                goto print;
+                    log(D_00136258, e->strtab + *names, sh->addr, sh->size, D_00131CC0[sh->status]);
+                break;
             case 8:
                 if (sh->high != 0) {
                     sh->addr = alloc_high(sh->size);
@@ -82,19 +82,17 @@ void DecodeSection(struct ElfInfo *e, void *(*alloc)(int, int), void *(*alloc_hi
                 func_001283D0(sh->addr, 0, sh->size);
                 if (log == 0)
                     break;
-                fmt = D_00136288;
-            print:
-                log(fmt, e->strtab + *names, sh->addr, sh->size, D_00131CC0[sh->status]);
+                log(D_00136288, e->strtab + *names, sh->addr, sh->size, D_00131CC0[sh->status]);
                 break;
             }
         } else {
             sh->addr = 0;
         }
-        if (first == 0)
-            first = (int)sh->addr;
+        if (first[0] == 0)
+            first[0] = (int)sh->addr;
         n--;
         sh++;
         names++;
     }
-    e->entry = first + e->base;
+    e->entry = first[0] + e->base;
 }
