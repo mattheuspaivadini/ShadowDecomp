@@ -1,5 +1,5 @@
 /* STATUS (Session 44, 2026-10-21): NON_MATCHING. best score 176 (was 230; sw.py diff lines).
- * Callee return types from their matched definitions (sceNetcnfif* are int): 230 -> 176. Residual unchanged in kind: register allocation (type/ifc spilled in the image).
+ * sceNetcnfifGetResult declared int as defined (022378): 230 -> 176. Residual unchanged in kind: register allocation (type/ifc spilled in the image).
  * Fence grid (build/s42/fence_grid.py: empty asm "+r" / asm volatile "r" use of each local after each statement): best single fence.
  * netcnfif load_entry_auto: two lists, every error frees both, strcmp of ifc sys_name against
  * attach_ifc/attach_dev as two calls (keeps the type test in the loop). Residual = register
