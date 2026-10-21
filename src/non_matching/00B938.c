@@ -1,4 +1,5 @@
-/* STATUS (Session 36, 2026-10-20): NON_MATCHING. best score 26 [cc=29].
+/* STATUS (Session 42, 2026-10-21): NON_MATCHING. best score 20 (was 30; sw.py diff lines).
+ * Fence grid (build/s42/fence_grid.py: empty asm "+r" / asm volatile "r" use of each local after each statement): best single fence.
  * sceIoctl: request 1 = any async request pending (scan _sceFs_q), 2/3 = 32/64-bit read of the
  * uncached status slot D_00146650[D_00132310], else a 0x400-byte argument block over RPC 5. Needs
  * D_00145988 in .bss. Residuals: the original keeps the case-1 constant in s5 (li s5,1 in the
@@ -73,6 +74,7 @@ int sceIoctl(int fd, int req, void *arg) {
     f = func_0010A318(fd);
     func_0010A798(5);
     D_00145988 = arg;
+    asm volatile("" : : "r"(arg));
     if (D_00132314 == 0)
         sceFsInit();
     if (f == 0 || f->mode == 0) {
