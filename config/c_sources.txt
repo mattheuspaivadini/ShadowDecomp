@@ -953,3 +953,4 @@
 01BCC8 = src/cod/01BCC8.c cc=29                   # wildcard matcher (? and *); empty asm on pat in the ? loop picks the cross-jump survivor (Session 42)
 00F168 = src/cod/00F168.c cc=29                   # sceSifRebootIop; inline strlen/strcat loops, asm use of arg after sceSifExitRpc (Session 42)
 01E388 = src/cod/01E388.c cc=29                   # libmc FAT add-entry; fail blocks as labels at the end of the while body (loop.c moves them out), index path joins the update tail via goto, volatile dot.cluster read keeps it out of the bnel slot (Session 43)
+00B678 = src/cod/00B678.c cc=29                   # sceWrite; sceRead template, nowait pinned to s4, head copy with its own index, else-branch fence computes buf & 0xF before nowait = 0 (gcse PRE insertion order) (Session 43)

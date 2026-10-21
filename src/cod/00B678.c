@@ -1,11 +1,6 @@
-/* STATUS (Session 42, 2026-10-21): NON_MATCHING. best score 16 (was 22; sw.py diff lines).
- * Fence grid (build/s42/fence_grid.py: empty asm "+r" / asm volatile "r" use of each local after each statement): best single fence of 1274; a second-level grid (on top of it) gave no further gain. sceRead-template fences (m operands on _sceFs_q/D_00146600) without the nowait pin: 44-58.
- * sceWrite: unaligned head (16 - buf & 15, written as (aligned + 16) - buf to keep the srl/sll +
- * subu shape) copied into the request, rest by DMA. nowait pinned to s4. Residuals: i = 0 vs
- * nowait copy (sceLseek class), async coalesces into s4 with the pin, and the head-copy loop swaps
- * a1/a2 (index vs request base).
- * The original .s stays in the build (asm/cod/00B678.s); this C
- * draft (Session 36) is kept for the record. */
+/* asm/cod/00B678.s -> sceWrite.
+ * sceWrite; sceRead template, nowait pinned to s4, head copy with its own index, else-branch fence computes buf & 0xF before nowait = 0 (gcse PRE insertion order) (Session 43)
+ * MATCHED. */
 struct Fd {                     /* 16-byte EE fd records at D_00146EC0 */
     int iop_fd;                 /* 0x00 */
     int mode;                   /* 0x04 */
@@ -89,7 +84,8 @@ int sceWrite(int fd, void *buf, int size) {
         WaitSema(D_00132324);
         __asm__ __volatile__ ("" : "+r" (async));
         i = 0;
-        asm volatile("" : : "r"(nowait));
+        /* fence: the hi() of the queue address is computed before i = 0 and the copy follows it */
+        asm volatile("" : : "r"(nowait), "m" (_sceFs_q[0]));
         nowait = async;
         for (; i < 32; i++) {
             if (_sceFs_q[i] == -1) {
@@ -100,6 +96,8 @@ int sceWrite(int fd, void *buf, int size) {
         }
         SignalSema(D_00132324);
     } else {
+        /* fence: buf & 0xF is computed here, so gcse does not append it after nowait = 0 */
+        asm volatile("" : : "r"((unsigned int)buf & 0xF));
         nowait = 0;
     }
     if (((unsigned int)buf & 0xF) == 0)
@@ -112,8 +110,8 @@ int sceWrite(int fd, void *buf, int size) {
         sceSifWriteBackDCache(buf, size);
     buf = (void *)((unsigned int)buf | 0x20000000);
     req->head = head;
-    for (i = 0; i < head; i++)
-        req->data[i] = ((char *)buf)[i];
+    { int j; for (j = 0; j < head; j++)
+        req->data[j] = ((char *)buf)[j]; }
     if (func_0010A228((int)D_001470C0, 3, 0, (int)&D_001459C0, 0x30, (int)D_00146600, 4, 0, 0, nowait) < 0) {
         DeleteSema(sema);
         func_0010A7C8();
