@@ -1,4 +1,5 @@
-/* STATUS (Session 34, 2026-10-19): NON_MATCHING. best score 82 [cc=296].
+/* STATUS (Session 41, 2026-10-21): NON_MATCHING. best score 66 (was 102; sw.py diff lines).
+ * Caller cp/cpi/&id locals assigned after load_conf (the image re-derives them from the same %hi), per-error printf + return 0. Residual: the image keeps %hi(D_0013D000) in s6 across memalign/load/free and adds the lo again for the caller; ours CSEs the full address. Manually inlined load_conf: same.
  * loader network bring-up (load_set_conf_only, interface id, address). CD branch assigns path/name
  * before PutStringS. Residual = the original keeps D_0013D000 and +0x40 in s-regs from before memalign
  * and re-derives them later from the same %hi register; error printf tails are cross-jumped.
@@ -48,9 +49,9 @@ int func_00104668(int from_mc, int idx) {
     char *path;
     char *name;
     int flag = 0;
-    const char *msg;
-    char *cp = D_0013D000;
-    char *cpi = cp + 0x40;
+    char *cp;
+    char *cpi;
+    int *id;
 
     if (from_mc == 0) {
         path = D_00137080;
@@ -64,15 +65,20 @@ int func_00104668(int from_mc, int idx) {
     }
     func_001285C0(D_001370E8);
     if (load_conf(path, name, flag) < 0) {
-        msg = D_00137108;
-    } else if (sceLibnetWaitGetInterfaceID(cp, cpi, &D_0013A180[1], 1) < 0) {
-        msg = D_00137128;
-    } else {
-        sceInetCtlUpInterface(cp, cpi, D_0013A180[1]);
-        if (sceLibnetWaitGetAddress(cp, cpi, &D_0013A180[1], 1, myaddr, 0) >= 0)
-            return 1;
-        msg = D_00137140;
+        func_001285C0(D_00137108);
+        return 0;
     }
-    func_001285C0(msg);
-    return 0;
+    cp = D_0013D000;
+    cpi = cp + 0x40;
+    id = &D_0013A180[1];
+    if (sceLibnetWaitGetInterfaceID(cp, cpi, id, 1) < 0) {
+        func_001285C0(D_00137128);
+        return 0;
+    }
+    sceInetCtlUpInterface(cp, cpi, D_0013A180[1]);
+    if (sceLibnetWaitGetAddress(cp, cpi, id, 1, myaddr, 0) < 0) {
+        func_001285C0(D_00137140);
+        return 0;
+    }
+    return 1;
 }
