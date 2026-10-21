@@ -1,10 +1,6 @@
-/* STATUS (Session 34, 2026-10-19): NON_MATCHING. best score 58 [cc=29].
- * sceMc2Init (3 semas + server thread). Frame fixed with an extra 0x30 local after the ThreadParam.
- * Residual = s-register roles (constant 1 in s2, &D_00151E20 in s5/s6) and the order of the -1 handle
- * stores.
- * Tried: declaration order, pad array vs second ThreadParam.
- * The original .s stays in the build (asm/cod/01A188.s); this C
- * draft (Session 34) is kept for the record. */
+/* asm/cod/01A188.s -> sceMc2Init.
+ * SCE libmc2 sceMc2Init: three semaphores + server thread; each failure path written inline (CSE keeps the constant 1 in s2, jump2 cross-jumps them), handle -1 stores reordered for the sched tie (Session 41)
+ * MATCHED. */
 struct SemaParam {
     int currentCount;
     int maxCount;
@@ -56,25 +52,37 @@ int sceMc2Init(void) {
     struct SemaParam sp;
 
     if (D_00135630[0] == 1) sceMc2End();
-    sp.option = (unsigned int)D_00138C10;
-    D_00151E2C[0] = -1;
     D_00151E20.thid = -1;
     D_00151E20.sema0 = -1;
     D_00151E20.sema1 = -1;
+    D_00151E2C[0] = -1;
+    sp.option = (unsigned int)D_00138C10;
     sp.initCount = 1;
     sp.maxCount = 0x7F;
     D_00151E2C[0] = CreateSema(&sp);
-    if (D_00151E2C[0] < 0) goto fail;
+    if (D_00151E2C[0] < 0) {
+        D_00135630[0] = 1;
+        sceMc2End();
+        return 0x81018003;
+    }
     sp.initCount = 0;
     sp.maxCount = 0x7F;
     sp.option = (unsigned int)D_00138C28;
     D_00151E20.sema0 = CreateSema(&sp);
-    if (D_00151E20.sema0 < 0) goto fail;
+    if (D_00151E20.sema0 < 0) {
+        D_00135630[0] = 1;
+        sceMc2End();
+        return 0x81018003;
+    }
     sp.maxCount = 0x7F;
     sp.option = (unsigned int)D_00138C40;
     sp.initCount = 0;
     D_00151E20.sema1 = CreateSema(&sp);
-    if (D_00151E20.sema1 < 0) goto fail;
+    if (D_00151E20.sema1 < 0) {
+        D_00135630[0] = 1;
+        sceMc2End();
+        return 0x81018003;
+    }
     D_00151904[0] = 0;
     tp.func = func_0011B458;
     tp.stack = D_00151E40;
@@ -88,14 +96,14 @@ int sceMc2Init(void) {
         sceMc2End();
         return 0x81018004;
     }
-    if (_sceMcCoreInit() == 0) goto fail;
+    if (_sceMcCoreInit() == 0) {
+        D_00135630[0] = 1;
+        sceMc2End();
+        return 0x81018003;
+    }
     _sceMcpInit();
     _sceMcFatInit();
     StartThread(D_00151E20.thid, 0);
     D_00135630[0] = 1;
     return 0;
-fail:
-    D_00135630[0] = 1;
-    sceMc2End();
-    return 0x81018003;
 }
