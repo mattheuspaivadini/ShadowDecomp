@@ -1,9 +1,6 @@
-/* STATUS (Session 34, 2026-10-19): NON_MATCHING. best score 159 [cc=29].
- * sceSifInitCmd. Structure follows the asm (handler table, sregs clear, DMAC/SIF setup, two SendCmd
- * paths). Not tuned: frame gets an extra s-reg and the address/constant registers differ.
- * Only the first draft was scored.
- * The original .s stays in the build (asm/cod/012918.s); this C
- * draft (Session 34) is kept for the record. */
+/* asm/cod/012918.s -> sceSifInitCmd.
+ * SCE sifcmd sceSifInitCmd: both clear loops indexed (the sregs loop is reversed by loop.c and its final i == 32 is reused for the D_STAT write), struct init in field order with sregs last, int-typed unused field (Session 41)
+ * MATCHED. */
 struct SifCmdHandler {
     void (*func)(void *, void *);
     void *data;
@@ -12,7 +9,7 @@ struct SifCmdHandler {
 
 struct SifCmdData {
     void *pktbuf;                       /* 0x00 uncached packet buffer */
-    void *unf;                          /* 0x04 */
+    int unf;                            /* 0x04 */
     void *iopbuf;                       /* 0x08 */
     struct SifCmdHandler *sys_handlers; /* 0x0C */
     int nr_sys;                         /* 0x10 */
@@ -66,23 +63,23 @@ void sceSifInitCmd(void) {
     }
     D_00133948 = 1;
     D_0014B358.pktbuf = UNCACHED(D_0014B280);
-    D_0014B358.sregs = D_0014B500;
-    D_0014B358.unf = UNCACHED(D_0014B300);
-    D_0014B358.nr_sys = 0x20;
+    D_0014B358.unf = (int)D_0014B300 | 0x20000000;
     D_0014B358.iopbuf = 0;
     D_0014B358.sys_handlers = D_0014B380;
+    D_0014B358.nr_sys = 0x20;
     D_0014B358.usr_handlers = 0;
     D_0014B358.nr_usr = 0;
-    for (h = D_0014B380; h < D_0014B380 + 0x20; h++) {
-        h->func = 0;
-        h->data = 0;
+    D_0014B358.sregs = D_0014B500;
+    for (i = 0; i < 32; i++) {
+        D_0014B380[i].func = 0;
+        D_0014B380[i].data = 0;
     }
-    for (i = 31; i >= 0; i--)
+    for (i = 0; i < 32; i++)
         D_0014B500[i] = 0;
     D_0014B380[0].func = func_001128C0;
     D_0014B380[1].func = func_001128A0;
-    D_0014B380[1].data = &D_0014B358;
     D_0014B380[0].data = &D_0014B358;
+    D_0014B380[1].data = &D_0014B358;
     EIntr();
     FlushCache(0);
     if (*D_STAT & 0x20)
