@@ -1,15 +1,6 @@
-/* STATUS (Session 36, 2026-10-20): NON_MATCHING. best score 12 [cc=29].
- * libmc FAT: add a directory entry (walk the dir clusters two entries at a time, remember the dot
- * entry, write new_ent into the first free slot or after index used slots, extend the chain with a
- * fresh cluster, then bump the parent length). Levers that worked: empty asm +r on the buffer walk
- * pointer (the original reloads ent->mode after the dot block copy, i.e. the walk pointer is not
- * known to point at D_0015F080), update block inside the new-cluster branch reached by goto, ent++
- * then ent->mode = 0, dc local for the dot cluster. Residual = block placement after cross-jump:
- * the original keeps the 0x8101006F error block at the very end (alloc-path write failure branches
- * to it) and does not share the sw of the 0x81010017 and bad blocks. Tried: fail labels (lose the
- * s7 hoist of 0x8101006F), while (read) loop, return-shape variants.
- * The original .s stays in the build (asm/cod/01E388.s); this C
- * draft (Session 36) is kept for the record. */
+/* asm/cod/01E388.s -> func_0011E388.
+ * libmc FAT add-entry; fail blocks as labels at the end of the while body (loop.c moves them out), index path joins the update tail via goto, volatile dot.cluster read keeps it out of the bnel slot (Session 43)
+ * MATCHED. */
 typedef struct {
     unsigned char resv2, sec, min, hour;
     unsigned char day, month;
@@ -56,10 +47,8 @@ int func_0011E388(int unit, struct SceMcDirEntry *new_ent, unsigned int clust, i
     is_root = clust == 0;
     count = 0;
     while (1) {
-        if (_sceMcpReadUserClust(unit, D_0015F080, clust, 1) == 0) {
-            *err = 0x8101006F;
-            return -1;
-        }
+        if (_sceMcpReadUserClust(unit, D_0015F080, clust, 1) == 0)
+            goto f6f;
         ent = (struct SceMcDirEntry *)D_0015F080;
         __asm__ ("" : "+r" (ent));
         for (i = 0; i < 2; i++) {
@@ -71,11 +60,9 @@ int func_0011E388(int unit, struct SceMcDirEntry *new_ent, unsigned int clust, i
                     *err = 0x8101006F;
                     return -1;
                 }
-                if (index != 0) {
-                    *err = 0;
-                    return count;
-                }
-                if ((dc = dot.cluster) == -1)
+                if (index != 0)
+                    goto done;
+                if ((dc = *(volatile int *)&dot.cluster) == -1)
                     goto bad;
                 goto update;
             }
@@ -118,12 +105,17 @@ int func_0011E388(int unit, struct SceMcDirEntry *new_ent, unsigned int clust, i
             parent.length++;
             if ((*err = func_0011E0B0(unit, &parent, dot.cluster, dot.dir_entry)) != 0)
                 return -1;
+        done:
             *err = 0;
             return count;
         }
         clust &= 0x7FFFFFFF;
+        continue;
+    bad:
+        *err = 0x81019002;
+        return -1;
+    f6f:
+        *err = 0x8101006F;
+        return -1;
     }
-bad:
-    *err = 0x81019002;
-    return -1;
 }
