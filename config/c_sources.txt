@@ -932,3 +932,4 @@
 0109D0 = src/cod/0109D0.c cc=29                        # SCE libkernl timer alarm INTC handler; $gp per alarm as lw asm, volatile base read/plain store
 00B408 = src/cod/00B408.c cc=29               # SCE libkernel stdio sceRead over SIF RPC; volatile asm fences with an m operand order the hi() reloads before i = 0 / nowait = 0 (Session 40)
 002500 = src/cod/002500.c                         # loader: delete every external sema, list clear, then sema sweep with the loader-attribute search inline and found = 1 jumping past found = 0 (Session 41)
+015940 = src/cod/015940.c cc=29                   # SCE libvib sceVibSetActParam; size/n2 stores before the DbcParam bitfields, second memcpy destination as an int sum n2 + (int)&req + 8 (Session 41)
