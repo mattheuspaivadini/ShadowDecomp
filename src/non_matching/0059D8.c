@@ -1,12 +1,12 @@
-/* STATUS (Session 44, 2026-10-21): NON_MATCHING. best score 77 (was 83; sw.py diff lines).
- * Scan loop condition order is (cell.c == ' ' && i >= 0): the image reads cell[-1] before the bound test, and this gives its loop shape. Residual: register roles (the image keeps 0x20 in t0 and y in fp; ours swaps the y counter into t0) and the color byte (ours lbu, image lw + sra/andi).
+/* STATUS (Session 44, 2026-10-21): NON_MATCHING. best score 54 (was 77; sw.py diff lines).
+ * Cell.color volatile and read once into a local (col = p->color): the image keeps one lw and extracts the bytes with sra/andi/srl (a plain field lets combine turn one extract into lbu). Residual: which y*60 site becomes its own giv (image: the scan pre-test uses a +60 giv and the render index uses (y*15)<<2; ours the reverse) and the 0x20 constant in t0 vs the y counter.
  * console renderer over the 40x60 cell screen (1D index y*60+x, signed color bytes, scale copied
  * per row, PutFont per non-space cell). Residual = the trailing-space scan loop shape (original:
  * test char, i-- in the bne slot, bgez back) and the caller-saved a4/a5 constants spilled with sq.
  * Tried: for/while/do forms of the scan, 2D array, unsigned color.
  * The original .s stays in the build (asm/cod/0059D8.s); this C
  * draft (Session 35) is kept for the record. */
-struct Cell { int color; char c; char pad[3]; };
+struct Cell { volatile int color; char c; char pad[3]; };
 extern struct Cell D_0013ED90[40 * 60];
 extern int D_0013A168;
 extern float D_00139D80;
@@ -20,6 +20,7 @@ void func_001059D8(void)
     int y, x, i, maxlen, start;
     struct Cell *p;
     float scale;
+    int col;
 
     maxlen = 60;
     for (y = 0; y < 40; y++) {
@@ -39,9 +40,10 @@ void func_001059D8(void)
         scale = D_00139D80;
         for (x = 0; x < 60; x++, p++) {
             if (p->c != ' ') {
-                D_0013A154 = ((p->color >> 16) & 0xff) * scale;
-                D_0013A150 = ((p->color >> 24) & 0xff) * scale;
-                D_0013A158 = ((p->color >> 8) & 0xff) * scale;
+                col = p->color;
+                D_0013A154 = ((col >> 16) & 0xff) * scale;
+                D_0013A150 = ((col >> 24) & 0xff) * scale;
+                D_0013A158 = ((col >> 8) & 0xff) * scale;
                 PutFont(p->c, x * 10 - 300, y * 10 - 200);
             }
         }
