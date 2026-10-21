@@ -1,4 +1,5 @@
-/* STATUS (Session 42, 2026-10-21): NON_MATCHING. best score 80 (was 96; sw.py diff lines).
+/* STATUS (Session 44, 2026-10-21): NON_MATCHING. best score 56 (was 80; sw.py diff lines).
+ * LoaderSysPrintf and DecodeSection declared void as defined (002CF8, 000278): fixes most register roles after those calls. Residual: the loader's open result copy (move a0,v0; move s0,a0), the rel-count loops counting in s0 vs s3, and a few schedule ties.
  * Fence grid (build/s42/fence_grid.py: empty asm "+r" / asm volatile "r" use of each local after each statement): best single fence.
  * ld: module loader (stat/open/read, checksum inline helper, align_up inline so the /64 stays a
  * divu, RelocateSelfSymbol + RelocateCode inline, extra RelSet relocation walk). Residual =
@@ -48,7 +49,7 @@ extern char D_00136448[];   /* "ld:\tload module \"%s\"\n" */
 extern char D_00136460[];   /* "Opening file \"%s\" failed(0x%x).\n" */
 extern char D_00136488[];   /* "ld:\t\t0x%08x - 0x%08x (0x%08x:%x)\n" */
 extern char D_00139E58[];   /* "%s.cmd" */
-int LoaderSysPrintf(const char *fmt, ...);
+void LoaderSysPrintf(const char *fmt, ...);
 int LoaderSysGetstat(const char *path, struct LoaderStat *st);
 int LoaderSysFOpen(const char *path, int mode, int perm);
 int LoaderSysFRead(int fd, void *buf, int size);
@@ -57,7 +58,7 @@ void PutString(int color, const char *fmt, ...);
 int func_001285C0(const char *fmt, ...);
 int func_00128A70(char *buf, const char *fmt, ...);
 void RelocateElfInfoHeader(struct ElfInfo *e);
-int DecodeSection(struct ElfInfo *e, void *a, void *b, void *c);
+void DecodeSection(struct ElfInfo *e, void *a, void *b, void *c);
 int ResolveRelocation(struct ElfInfo *m, struct Rel *r, int i);
 int func_00101B88(struct ElfInfo *e, int addr, struct RelSet *set);
 int OutputLinkerScriptFile(struct ElfInfo *e, char *name, void *cb);
