@@ -1,4 +1,5 @@
-/* STATUS (Session 41, 2026-10-21): NON_MATCHING. best score 17 (was 35; sw.py diff lines).
+/* STATUS (Session 44, 2026-10-21): NON_MATCHING. best score 9 (was 17; sw.py diff lines).
+ * A register asm pin of the 0x20000000 constant in $v1 (register int u asm("$3")) fixes the a0/v1/v0 roles of D_0014B140, the constant and D_0014B000 in one shot (120-permutation record-store grid x 4 pin sets). Residual: sched2 issues the three zero stores last (priority 1), the image issues sw zero,0xC right after lui v0; packet-store permutations (120) and a fence grid on pkt/u gave no gain.
  * Statement order found by a 360-permutation grid of the record stores x 120 packet-store orders (19 -> 14 instructions). Residual: register roles of the D_0014B140 / 0x20000000 / D_0014B000 values (image a0/v1/v0) and the f0C/f08 store slots. Tried cast types (int/unsigned) and f10/f14 field types, pkt derived from f10: no gain.
  * uncached packet base is |0x20000000 (fields 2/4/6/7/8) and f00 volatile (store+reload); residual = store scheduling of the record/packet fields (permute_stmts 400 variants: no gain)
  * The original .s stays in the build (asm/cod/0127E0.s); this C
@@ -42,17 +43,19 @@ int sceTtyInit(void) {
     D_0014AFD0.f00 = sceDeci2Open(0x210, (int)&D_0014AFD0, (int)func_00112400);
     if (D_0014AFD0.f00 < 0)
         return 0;
+    { register int u asm("$3") = 0x20000000;
     D_0014AFD0.f04 = 0;
-    D_0014AFD0.f14 = (int)D_0014B140 | 0x20000000;
-    pkt = (struct P0127E0 *)((int)D_0014B000 | 0x20000000);
+    D_0014AFD0.f14 = (int)D_0014B140 | u;
+    pkt = (struct P0127E0 *)((int)D_0014B000 | u);
     D_0014AFD0.f10 = (int)pkt;
-    D_0014AFD0.f0C = 0;
     D_0014AFD0.f08 = 0;
+    D_0014AFD0.f0C = 0;
     pkt->f04 = 0x210;
     pkt->f06 = 0x45;
     pkt->f07 = 0x48;
     pkt->f02 = 0;
     pkt->f08 = 0;
+    }
     D_0014AFD0.f18 = func_00112358(0x100);
     return 1;
 }
