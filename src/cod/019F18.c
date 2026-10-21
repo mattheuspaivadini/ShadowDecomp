@@ -1,20 +1,16 @@
-/* STATUS (Session 34, 2026-10-19): NON_MATCHING. best score 56 [cc=29].
- * sceSifMCallRpc (libmrpc). Residual = the two alignment printfs share one call, the $gp copy goes
- * through a temporary, has_end test order and sema store/test.
- * Tried: goto-shared printf, asm move from $gp, if/else swap, separate sema store; the asm $gp copy
- * shifts scheduling (620 vs 624 bytes).
- * The original .s stays in the build (asm/cod/019F18.s); this C
- * draft (Session 34) is kept for the record. */
+/* asm/cod/019F18.s -> sceSifMCallRpc.
+ * SCE libmrpc sceSifMCallRpc; int-typed record/client fields (self, recv, cd, gp, dest) fix the TBAA store order, $gp read by a volatile asm into a temp, plain sema field, has_end tested == 0 first (Session 41)
+ * MATCHED. */
 typedef struct { int count; int max_count; int init_count; int wait_threads; unsigned int attr; void *option; int pad[2]; } ee_sema_t;
 struct CD;
 struct Rec {
     char pad00[0x14];
-    struct Rec *self;           /* 0x14 */
+    int self;                   /* 0x14 */
     int f18;                    /* 0x18 */
-    struct CD *cd;              /* 0x1C */
+    int cd;                     /* 0x1C */
     int rpc;                    /* 0x20 */
     int ssize;                  /* 0x24 */
-    void *recv;                 /* 0x28 */
+    int recv;                   /* 0x28 */
     int rsize;                  /* 0x2C */
     int has_end;                /* 0x30 */
     int server;                 /* 0x34 */
@@ -23,18 +19,16 @@ struct Rec {
 struct CD {
     struct Rec *rec;            /* 0x00 */
     int f04;                    /* 0x04 */
-    volatile int sema;          /* 0x08 */
+    int sema;                   /* 0x08 */
     int f0C;                    /* 0x0C */
     int rpc;                    /* 0x10 */
-    void *dest;                 /* 0x14 */
-    void *gp;                   /* 0x18 */
+    int dest;                   /* 0x14 */
+    int gp;                     /* 0x18 */
     void (*end_func)(void *);   /* 0x1C */
     void *end_param;            /* 0x20 */
     int server;                 /* 0x24 */
-    volatile int csema;         /* 0x28 */
+    int csema;                  /* 0x28 */
 };
-
-register void *gp_reg asm ("$28");
 
 extern char D_00138B28[];
 extern char D_00138B80[];
@@ -77,13 +71,18 @@ int sceSifMCallRpc(struct CD *cd, int rpc, int mode, void *send, int ssize, void
     cd->f04 = r->f18;
     cd->rec = r;
     cd->end_func = end_func;
-    cd->gp = gp_reg;
+    {
+        void *g;
+
+        __asm__ __volatile__ ("move %0, $gp" : "=r" (g));
+        cd->gp = (int)g;
+    }
     r->rpc = rpc;
-    r->self = r;
+    r->self = (int)r;
     r->ssize = ssize;
-    r->recv = recv;
+    r->recv = (int)recv;
     r->rsize = rsize;
-    r->cd = cd;
+    r->cd = (int)cd;
     r->server = cd->server;
     if (send == recv) {
         sceSifWriteBackDCache(send, ssize < rsize ? rsize : ssize);
@@ -94,12 +93,12 @@ int sceSifMCallRpc(struct CD *cd, int rpc, int mode, void *send, int ssize, void
             sceSifWriteBackDCache(recv, rsize);
     }
     if (mode & 1) {
-        if (end_func != 0)
-            r->has_end = 1;
-        else
+        if (end_func == 0)
             r->has_end = 0;
+        else
+            r->has_end = 1;
         cd->sema = -1;
-        if (sceSifSendCmd(0x8000001A, r, 0x40, send, cd->dest, ssize) != 0)
+        if (sceSifSendCmd(0x8000001A, r, 0x40, send, (void *)cd->dest, ssize) != 0)
             return 0;
         func_00119AA0(r);
         return -2;
@@ -113,7 +112,7 @@ int sceSifMCallRpc(struct CD *cd, int rpc, int mode, void *send, int ssize, void
         return -3;
     }
     r->has_end = 1;
-    if (sceSifSendCmd(0x8000001A, r, 0x40, send, cd->dest, ssize) == 0) {
+    if (sceSifSendCmd(0x8000001A, r, 0x40, send, (void *)cd->dest, ssize) == 0) {
         func_00119AA0(r);
         DeleteSema(sema);
         return -2;

@@ -936,3 +936,4 @@
 017A00 = src/cod/017A00.c cc=29                   # SCE libcdvd _sceCdSC: linear id tests (goto dispatch), default jumps over the 0x8014 body, volatile _sceCd_scmd_semid keeps its load out of the slot (Session 41)
 016D88 = src/cod/016D88.c cc=29                   # SCE libcdvd _sceCd_cbLoop; $gp swap asm, volatile cb_sem, volatile read of sceCdCbfunc_number in the call test, empty asm fence after the exit-path semaphore store (Session 41)
 0000D0 = src/cod/0000D0.c                         # loader ResolveRelocation (R_MIPS_32/26/HI16/LO16): HI16 lookahead as a for(;;) with continue/break (error block ahead of the case), entry address as int sum (j << 3), s + (a << 16) in its own temp (Session 41)
+019F18 = src/cod/019F18.c cc=29                   # SCE libmrpc sceSifMCallRpc; int-typed record/client fields (self, recv, cd, gp, dest) fix the TBAA store order, $gp read by a volatile asm into a temp, plain sema field, has_end tested == 0 first (Session 41)
