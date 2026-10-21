@@ -1,7 +1,6 @@
-/* STATUS (Session 23, 2026-10-18): NON_MATCHING. best score 1 [cc=296] (was 27).
- * Rewritten from the SCE fp-bit pack_d template (FLOAT): zero test only, normal_exp > EXPBIAS+1 -> inf, and normal_exp == EXPBIAS+1 with the top fraction bit -> inf. Residual = beql (original) vs beqz on the > EXPBIAS+1 test (dbr annul class).
- * The original .s stays in the build (asm/cod/027390.s); this C
- * draft (Session 23) is kept for the record. */
+/* asm/cod/027390.s -> __pack_f.
+ * fp-bit pack_f (FLOAT); exp kept live at the normal-range entry by an asm use (beql slot) (Session 42)
+ * MATCHED. */
 #define FINE_GRAINED_LIBRARIES
 #define US_SOFTWARE_GOFAST
 #define FLOAT_BIT_ORDER_MISMATCH
@@ -41,6 +40,7 @@ __pack_f (fp_number_type *src)
 	}
       else
 	{
+	  asm volatile("" : : "r"(exp));	/* exp live here: reorg annuls the > EXPBIAS+1 slot (beql) */
 	  exp = src->normal_exp + EXPBIAS;
 	  if (src->normal_exp == EXPBIAS + 1 && (fraction & 0x80000000))
 	    {
