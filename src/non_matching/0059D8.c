@@ -1,4 +1,5 @@
-/* STATUS (Session 35, 2026-10-19): NON_MATCHING. best score 110 [cc=296].
+/* STATUS (Session 44, 2026-10-21): NON_MATCHING. best score 77 (was 83; sw.py diff lines).
+ * Scan loop condition order is (cell.c == ' ' && i >= 0): the image reads cell[-1] before the bound test, and this gives its loop shape. Residual: register roles (the image keeps 0x20 in t0 and y in fp; ours swaps the y counter into t0) and the color byte (ours lbu, image lw + sra/andi).
  * console renderer over the 40x60 cell screen (1D index y*60+x, signed color bytes, scale copied
  * per row, PutFont per non-space cell). Residual = the trailing-space scan loop shape (original:
  * test char, i-- in the bne slot, bgez back) and the caller-saved a4/a5 constants spilled with sq.
@@ -23,7 +24,7 @@ void func_001059D8(void)
     maxlen = 60;
     for (y = 0; y < 40; y++) {
         i = 59;
-        while (i >= 0 && D_0013ED90[y * 60 + i].c == ' ')
+        while (D_0013ED90[y * 60 + i].c == ' ' && i >= 0)
             i--;
         i++;
         if (maxlen < i)
