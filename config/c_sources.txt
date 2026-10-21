@@ -956,3 +956,4 @@
 00B678 = src/cod/00B678.c cc=29                   # sceWrite; sceRead template, nowait pinned to s4, head copy with its own index, else-branch fence computes buf & 0xF before nowait = 0 (gcse PRE insertion order) (Session 43)
 007D90 = src/cod/007D90.c cc=ee-gcc2.9-991111-01-dtls13010 -g0 # %e helper: double bit pattern -> capped fixed-point mantissa; bits and mantissa share one variable (Session 44)
 007E20 = src/cod/007E20.c cc=ee-gcc2.9-991111-01-dtls13010 -g0 -G0 # %e formatter; -G0 TU: the 0.1/0.1/1e6 literals are GAS li.d pool entries (adopted .rodata at 0x137CF8) (Session 44)
+0127E0 = src/cod/0127E0.c cc=29                   # SCE DECI2 sceTtyInit; record words f00..f0C volatile (their zero stores keep source order 0xC/4/8 ahead of the uncached-address ORs) (Session 44)
