@@ -1,4 +1,5 @@
-/* STATUS (Session 36, 2026-10-20): NON_MATCHING. best score 22 [cc=29].
+/* STATUS (Session 42, 2026-10-21): NON_MATCHING. best score 16 (was 22; sw.py diff lines).
+ * Fence grid (build/s42/fence_grid.py: empty asm "+r" / asm volatile "r" use of each local after each statement): best single fence of 1274; a second-level grid (on top of it) gave no further gain. sceRead-template fences (m operands on _sceFs_q/D_00146600) without the nowait pin: 44-58.
  * sceWrite: unaligned head (16 - buf & 15, written as (aligned + 16) - buf to keep the srl/sll +
  * subu shape) copied into the request, rest by DMA. nowait pinned to s4. Residuals: i = 0 vs
  * nowait copy (sceLseek class), async coalesces into s4 with the pin, and the head-copy loop swaps
@@ -88,6 +89,7 @@ int sceWrite(int fd, void *buf, int size) {
         WaitSema(D_00132324);
         __asm__ __volatile__ ("" : "+r" (async));
         i = 0;
+        asm volatile("" : : "r"(nowait));
         nowait = async;
         for (; i < 32; i++) {
             if (_sceFs_q[i] == -1) {
