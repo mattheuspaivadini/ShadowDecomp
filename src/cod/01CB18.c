@@ -1,12 +1,6 @@
-/* STATUS (Session 43, 2026-10-21): NON_MATCHING. best score 24 (was 42; sw.py diff lines).
- * ver built as ver = (v0 - '0') * 10; ver += v2 - '0' (fixes the a1/a2 roles); info stores ordered [1],[0],[2] (load before the [0] store). Residual: v0/v1 swaps of 2200/base after ClearNewCardFlag and of f30/1000 in the limit (sched1 puts the constant first; the image has the other pseudo first). Tried: 11 address forms, 5 limit forms, -fno-schedule-insns (149), address fences (m/r) at every statement (168), fence grid (1008).
- * _sceMcFatGetInfo. ver and the free-entry count share one variable; version check fails when ver <
- * 11. Residual = v0/v1 pseudo order in the D_0015DF48 index after ClearNewCardFlag and in the
- * /1000*1000 limit, plus the final err test.
- * Tried: five ver expressions, block-scoped count, if/else on err, store reorders, r reused for both
- * (105).
- * The original .s stays in the build (asm/cod/01CB18.s); this C
- * draft (Session 34) is kept for the record. */
+/* asm/cod/01CB18.s -> _sceMcFatGetInfo.
+ * libmc FAT get-info; _sceMcCoreClearNewCardFlag/_sceMcCoreWriteBack declared int as defined (fixes the v0/v1 roles after both calls) (Session 44)
+ * MATCHED. */
 struct F { char pad00[0x800]; int f800; int f804; char path[0x80]; int f888; int f88C; int f890; int f894; };
 struct Mc2SysInfo {
     char magic[0x1C];           /* 0x00 */
@@ -34,14 +28,14 @@ extern char D_00138CF8[];   /* ".." */
 
 int _sceMcCoreGetConnection(int port);
 int _sceMcpCheckNewCard(int port);
-void _sceMcCoreClearNewCardFlag(int port);
+int _sceMcCoreClearNewCardFlag(int port);
 int _sceMcpGetCardSpec(int port, struct Spec *spec);
 int _sceMcpReadSysInfo(int port);
 int func_00129200(const char *a, const char *b, int ver);   /* strncmp */
 int func_00128E6C(const char *a, const char *b);          /* strcmp */
 void func_0011CAC0(int port, struct Mc2SysInfo *sys);
 void _sceMcCoreSetWriteBackHole(int port, int a, int b);
-void _sceMcCoreWriteBack(int port);
+int _sceMcCoreWriteBack(int port);
 int _sceMcpIsSpeckOutClust(int port, int clust);
 int func_0011C8B0(int port, struct DirEnt *ent, int clust, int ver);
 int func_0011C7D8(int port, int *err);
