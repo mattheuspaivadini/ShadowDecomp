@@ -1,4 +1,5 @@
-/* STATUS (Session 29, 2026-10-18): NON_MATCHING. best score 4 [cc=296].
+/* STATUS (Session 42, 2026-10-21): NON_MATCHING. best score 2 (was 6; sw.py diff lines).
+ * moduleInfo.stack_size through an empty asm ("+r") fixes the move/lw order of the block-copy source; store order f14,f1C,f04,f0C,f10 (120-permutation grid). Residual: c+d addu issued before the f14 sum (the asm adds a cycle on the stack_size path). Tried: fence grids (+r / volatile use on a,b,c,d,s,info at every statement, 204 + 112 variants), sum temps with asm, a moduleInfo pointer local with asm x 120 store orders.
  * Residual = order of 'move a7,v0' vs 'lw 0x40(v0)' and of the two sums (a+b, c+d). Linker symbols via asm volatile (lui;nop;addiu;nop as in 001CC8). Tried all 120 orders of the five trailing stores, every position of the struct copy and of f04, unsigned/char * temporaries, unsigned stack_size/ModuleStackStart, a ModuleStackStart local; cc=29 changes size.
  * Session 30 (2026-10-19): still 4. Remaining = sched2 tie order: 'move a7,v0' (block-move source copy) must precede 'lw 0x40(v0)', and the f14 sum must precede c+d. Also tried: all 720 orders of the six trailing statements incl. the struct copy (best E14C0M = f14,f04,f1C,f0C,f10,copy), a moduleInfo pointer local (46+), char name[0x40] layout as in 0013C8, unsigned/void * info fields, int, unsigned, void * and char * for HeapStart and ModuleStackStart, -g0/-G0/-fno-strict-aliasing/-fno-schedule-insns{,2}.
  * Session 31 (2026-10-19): still 4. asm volatile memory barriers before/after each trailing statement: 45+ or size change (only after the copy keeps 4).
@@ -38,11 +39,11 @@ int LoaderSysGetMemoryInfo(struct LoaderMemoryInfo *info) {
     LA(c, D_16A398);
     info->f08 = c;
     LA(d, D_40000);
-    info->f14 = ModuleStackStart + moduleInfo.stack_size;
+    { int s = moduleInfo.stack_size; asm("" : "+r"(s)); info->f14 = ModuleStackStart + s; }
+    info->f1C = a;
     info->f04 = a + b;
     info->f0C = c + d;
     info->f10 = ModuleStackStart;
-    info->f1C = a;
     info->module = moduleInfo;
     return 1;
 }
