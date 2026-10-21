@@ -1,4 +1,5 @@
-/* STATUS (Session 41, 2026-10-21): NON_MATCHING. best score 28 (was 58; sw.py diff lines).
+/* STATUS (Session 44, 2026-10-21): NON_MATCHING. best score 16 (was 28; sw.py diff lines).
+ * is_section: the pre-test reads the table through a fresh zero (empty asm "+r" with an input from the outer index so loop.c cannot hoist it), the loop body loads the entry before i += 4 and the loop test reads it as int (a different TBAA type keeps gcse PRE from carrying it into the next iteration). Residual: the 2.96 ce pass (if-conversion, no -fno-if-conversion in this cc1) speculates the found flag = 1 above the strcmp test, so it cannot share v0 (image: li v0,1 in the beqz slot); return-style/branch-shape variants and two fence grids (210) did not avoid it.
  * is_section walks the table by byte offset ((int)D_00131CD0 + i, j = i; i += 4 before the strcmp) like the image's lui+addu+lw %lo. Residual: the image's first test uses a separate zero register and the loop reloads the entry at the top (ours carries the test value). Tried while/do/goto forms, -fno-strength-reduce/-fno-rerun-loop-opt/-fno-gcse.
  * linker-script writer with bwrite/bflush/is_section inline helpers. Residual = the section-name
  * table loop: the original keeps a byte offset (lui+addu+lw %lo) instead of a strength-reduced
@@ -63,17 +64,22 @@ static __inline__ void bflush(int fd)
     }
 }
 
-static __inline__ int is_section(char *name)
+static __inline__ int is_section(char *name, int dep)
 {
     int i;
     int j;
     char *p;
 
-    for (i = 0; *(char **)((int)D_00131CD0 + i) != 0; ) {
-        j = i;
-        i += 4;
-        if (func_00128E6C(*(char **)((int)D_00131CD0 + j), name) == 0)
-            return 1;
+    j = 0;
+    asm("" : "+r"(j) : "r"(dep));
+    if (*(char **)((int)D_00131CD0 + j) != 0) {
+        i = 0;
+        do {
+            p = *(char **)((int)D_00131CD0 + i);
+            i += 4;
+            if (func_00128E6C(p, name) == 0)
+                return 1;
+        } while (*(int *)((int)D_00131CD0 + i) != 0);
     }
     return 0;
 }
@@ -95,7 +101,7 @@ int OutputLinkerScriptFile(struct ElfInfo *e, char *name, void (*cb)(char *))
     }
     bwrite(fd, D_001362F8);
     for (j = 1; j < e->nsect; j++) {
-        if (is_section(e->shstrtab + e->shname[j])) {
+        if (is_section(e->shstrtab + e->shname[j], j)) {
             func_00128A70(buf, D_00136308, e->shstrtab + e->shname[j], e->sect[j].addr,
                           e->shstrtab + e->shname[j]);
             bwrite(fd, buf);
