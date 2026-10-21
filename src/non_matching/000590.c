@@ -1,4 +1,5 @@
-/* STATUS (Session 35, 2026-10-19): NON_MATCHING. best score 46 [cc=296].
+/* STATUS (Session 41, 2026-10-21): NON_MATCHING. best score 28 (was 58; sw.py diff lines).
+ * is_section walks the table by byte offset ((int)D_00131CD0 + i, j = i; i += 4 before the strcmp) like the image's lui+addu+lw %lo. Residual: the image's first test uses a separate zero register and the loop reloads the entry at the top (ours carries the test value). Tried while/do/goto forms, -fno-strength-reduce/-fno-rerun-loop-opt/-fno-gcse.
  * linker-script writer with bwrite/bflush/is_section inline helpers. Residual = the section-name
  * table loop: the original keeps a byte offset (lui+addu+lw %lo) instead of a strength-reduced
  * pointer, and the first index is a register zero (24 bytes short). Tried: sized table, while
@@ -65,11 +66,15 @@ static __inline__ void bflush(int fd)
 static __inline__ int is_section(char *name)
 {
     int i;
+    int j;
+    char *p;
 
-    i = 0;
-    while (D_00131CD0[i] != 0)
-        if (func_00128E6C(D_00131CD0[i++], name) == 0)
+    for (i = 0; *(char **)((int)D_00131CD0 + i) != 0; ) {
+        j = i;
+        i += 4;
+        if (func_00128E6C(*(char **)((int)D_00131CD0 + j), name) == 0)
             return 1;
+    }
     return 0;
 }
 
