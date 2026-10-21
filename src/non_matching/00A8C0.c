@@ -1,4 +1,5 @@
-/* STATUS (Session 34, 2026-10-19): NON_MATCHING. best score 10 [cc=29].
+/* STATUS (Session 41, 2026-10-21): NON_MATCHING. best score 6 (was 8; sw.py diff lines).
+ * A pointer local h = D_00147140 assigned before sceSifInitRpc keeps %hi in s0 and the full address in s1 (10 -> 6 instructions). Residual: prologue sched2 tie (image saves s0 first, then lui s0; ours sd s1 first). Tried store order, h types, struct H, pin on oldi, asm uses of h, 13 single flags.
  * sceFsInit. Non-gp globals via section attributes, oldi pinned to s0, first handler-data store before
  * sceSifInitRpc. Residual = %hi(D_00147140) should stay in s0 while s1 gets the full address.
  * Tried: pointer local, pinned pointer local, struct-typed D_00147140, D_00132314/D_00132318 store
@@ -35,17 +36,19 @@ int func_0010A228(struct FioCd *cd, int fno, int mode, void *send, int ssize, vo
                   void *end, void *param, int a9);
 
 int sceFsInit(void) {
-    register int oldi asm("$16");
+    int oldi;
     int i;
     struct Iob *p;
     int mode;
+    int *h;
 
-    D_00147140[0] = 0;
+    h = D_00147140;
     sceSifInitRpc(0);
-    D_00147140[1] = 0;
+    h[0] = 0;
+    h[1] = 0;
     oldi = DIntr();
     sceSifAddCmdHandler(0x80000011, func_0010A388, D_00147100);
-    sceSifAddCmdHandler(0x80000013, func_0010A878, D_00147140);
+    sceSifAddCmdHandler(0x80000013, func_0010A878, h);
     if (oldi) EIntr();
     for (;;) {
         if (sceSifBindRpc(&D_001470C0, 0x80000001, 0) < 0) return -22;
