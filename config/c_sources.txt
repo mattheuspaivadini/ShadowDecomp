@@ -949,3 +949,4 @@
 005CE0 = src/cod/005CE0.c                         # ReinitDisp; DMA/GS reset, mode argument through an empty asm (Session 42)
 0056D8 = src/cod/0056D8.c                         # console _putString; PutChar/ScrollDisplay inline, char-typed ternary join for the toupper store (Session 42)
 027390 = src/cod/027390.c                         # fp-bit pack_f (FLOAT); exp kept live at the normal-range entry by an asm use (beql slot) (Session 42)
+00A8C0 = src/cod/00A8C0.c cc=29                   # sceFsInit; handler-data pointer h with an empty asm between the two stores (Session 42)

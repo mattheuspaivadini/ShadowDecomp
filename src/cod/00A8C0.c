@@ -1,11 +1,6 @@
-/* STATUS (Session 41, 2026-10-21): NON_MATCHING. best score 6 (was 8; sw.py diff lines).
- * A pointer local h = D_00147140 assigned before sceSifInitRpc keeps %hi in s0 and the full address in s1 (10 -> 6 instructions). Residual: prologue sched2 tie (image saves s0 first, then lui s0; ours sd s1 first). Tried store order, h types, struct H, pin on oldi, asm uses of h, 13 single flags.
- * sceFsInit. Non-gp globals via section attributes, oldi pinned to s0, first handler-data store before
- * sceSifInitRpc. Residual = %hi(D_00147140) should stay in s0 while s1 gets the full address.
- * Tried: pointer local, pinned pointer local, struct-typed D_00147140, D_00132314/D_00132318 store
- * order.
- * The original .s stays in the build (asm/cod/00A8C0.s); this C
- * draft (Session 34) is kept for the record. */
+/* asm/cod/00A8C0.s -> sceFsInit.
+ * sceFsInit; handler-data pointer h with an empty asm between the two stores (Session 42)
+ * MATCHED. */
 struct Iob { int f0; int f4; int f8; int fC; };
 struct FioCd { char pad00[0x24]; int server; char pad28[0x18]; };
 struct FioBuf { void *a; void *b; };
@@ -45,6 +40,7 @@ int sceFsInit(void) {
     h = D_00147140;
     sceSifInitRpc(0);
     h[0] = 0;
+    asm("" : "+r"(h));    /* h[1] through a fresh copy: %hi stays in s0, the full address in s1 */
     h[1] = 0;
     oldi = DIntr();
     sceSifAddCmdHandler(0x80000011, func_0010A388, D_00147100);
