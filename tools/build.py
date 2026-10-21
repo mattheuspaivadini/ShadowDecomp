@@ -132,12 +132,40 @@ def rodata_base(tbls: list[int], relocs: list[tuple[int, str, str]]) -> int:
     return tbls[0] - min((off for off, _t, _s in relocs), default=0)
 
 
+def literal_base(obj: Path, stem: str) -> int | None:
+    """Address of a jump-table-free .rodata (Session 44: li.d literals that GAS
+    pools for a -G0 TU): the first %lo(.rodata+addend) of the C .text maps to
+    the image label the original instruction at the same offset names."""
+    lo = next((off for off, typ, sym in rodata_relocs(obj, ".text")
+               if typ == "R_MIPS_LO16" and sym in (".rodata", JTBL_SECTION)), None)
+    vaddr = stem_vaddr(stem)
+    if lo is None or vaddr is None:
+        return None
+    raw = str(obj) + ".text.bin"
+    subprocess.run([OBJCOPY, "-O", "binary", "-j", ".text", str(obj), raw], capture_output=True)
+    word = struct.unpack("<I", Path(raw).read_bytes()[lo:lo + 4])[0]
+    os.remove(raw)
+    addend = word & 0xFFFF
+    addend -= 0x10000 if addend & 0x8000 else 0
+    text = (ROOT / "asm" / "cod" / f"{stem}.s").read_text(encoding="utf-8", errors="replace")
+    m = re.search(r"/\*\s*[0-9A-Fa-f]+\s+%08X\s.*%%lo\(D_([0-9A-Fa-f]{8})\)" % (vaddr + lo), text)
+    return int(m.group(1), 16) - addend if m else None
+
+
+def adopted_base(obj: Path, stem: str, section: str) -> int | None:
+    """Address an adopted .rodata maps to: jump-table based, else literal based."""
+    tbls, _labels = asm_jtbl_info(stem)
+    if tbls:
+        return rodata_base(tbls, rodata_relocs(obj, section))
+    return literal_base(obj, stem)
+
+
 def adopt_jump_tables(obj: Path, stem: str, size: int) -> str:
     """Check a C object's .rodata against the original jump table(s) and rename
     it to JTBL_SECTION. Returns an error string ('' on success)."""
-    tbls, _labels = asm_jtbl_info(stem)
-    if not tbls:
-        return "C object has .rodata but the function references no jtbl_"
+    base = adopted_base(obj, stem, ".rodata")
+    if base is None:
+        return "C object has .rodata but no jtbl_ or image literal to place it"
     vaddr = stem_vaddr(stem)
     if vaddr is None:
         return "function address unknown"
@@ -157,12 +185,12 @@ def adopt_jump_tables(obj: Path, stem: str, size: int) -> str:
             return f"unsupported .rodata relocation {typ} {sym}+{off:#x}"
         words[off // 4] = (words[off // 4] + vaddr) & 0xFFFFFFFF
     rom = ROM_FILE.read_bytes()
-    base = rodata_base(tbls, relocs) - ROM_BASE
+    base -= ROM_BASE
     orig = list(struct.unpack(f"<{size // 4}I", rom[base:base + size]))
     if words != orig:
         bad = next(i for i, (a, b) in enumerate(zip(words, orig)) if a != b)
-        return (f".rodata differs from the image at {base + ROM_BASE + 4 * bad:#x} "
-                f"(jtbl_{tbls[0]:08X}): {words[bad]:#010x} != {orig[bad]:#010x}")
+        return (f".rodata differs from the image at {base + ROM_BASE + 4 * bad:#x}: "
+                f"{words[bad]:#010x} != {orig[bad]:#010x}")
     tmp = str(obj) + ".jt"
     r = subprocess.run([OBJCOPY, f"--rename-section", f".rodata={JTBL_SECTION}",
                         str(obj), tmp], capture_output=True, text=True)
@@ -414,10 +442,10 @@ def jump_table_sections(c_sources: dict[str, str]) -> list[str]:
         obj = ROOT / "build" / "asm" / "cod" / f"{stem}.o"
         if not obj.exists() or JTBL_SECTION not in eegcc.section_sizes(obj):
             continue
-        tbls, labels = asm_jtbl_info(stem)
-        base = rodata_base(tbls, rodata_relocs(obj, JTBL_SECTION))
-        out.append(f"    /* jump tables of C object {stem} (original "
-                   f"jtbl_{tbls[0]:08X}; image bytes come from the asm data) */")
+        _tbls, labels = asm_jtbl_info(stem)
+        base = adopted_base(obj, stem, JTBL_SECTION)
+        out.append(f"    /* adopted .rodata of C object {stem} at {base:#x} "
+                   f"(image bytes come from the asm data) */")
         out.append(f"    .c_jtbl_{stem} {base:#x} (NOLOAD) : "
                    f"{{ build/asm/cod/{stem}.o({JTBL_SECTION}) }}")
         for name, addr in sorted(labels.items(), key=lambda kv: kv[1]):
