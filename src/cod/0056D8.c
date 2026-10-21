@@ -1,11 +1,6 @@
-/* STATUS (Session 35, 2026-10-19): NON_MATCHING. best score 12 [cc=296].
- * console _putString with PutChar and ScrollDisplay expanded inline, newline order y++ / x = 0 /
- * D_0013A174 = 0, int toupper temp. Residual = the char join: the original stores raw lbu or the
- * movn result through one register without re-sign-extending (ours sll/sra). Tried: c as
- * int/char/uchar/short with int/char temps, (unsigned char) raw path, SetChar inline with char
- * params, ternary forms.
- * The original .s stays in the build (asm/cod/0056D8.s); this C
- * draft (Session 35) is kept for the record. */
+/* asm/cod/0056D8.s -> _putString.
+ * console _putString; PutChar/ScrollDisplay inline, char-typed ternary join for the toupper store (Session 42)
+ * MATCHED. */
 struct Cell { int color; unsigned char c; char pad[3]; };
 extern struct Cell D_0013ED90[40 * 60];
 extern struct Cell D_0013A160;
@@ -40,7 +35,6 @@ static __inline__ void ScrollDisplay(void) {
 void _putString(int color, char *s)
 {
     unsigned int i;
-    char c;
     int t;
     struct Cell *p;
 
@@ -61,12 +55,7 @@ void _putString(int color, char *s)
                 D_0013A178 = !D_0013A178;
             if (s[i] == '"')
                 D_0013A17C = !D_0013A17C;
-            if (D_0013A17C == 0) {
-                t = (_ctype_ + 1)[(int)s[i]] & 2 ? s[i] - 0x20 : s[i];
-                c = t;
-            } else
-                c = s[i];
-            p->c = c;
+            p->c = D_0013A17C != 0 ? s[i] : (char)(t = ((_ctype_ + 1)[(int)s[i]] & 2 ? s[i] - 0x20 : s[i]));
             D_0013A16C++;
         }
         if (D_0013A16C >= 60)
