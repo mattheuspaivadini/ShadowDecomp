@@ -1,9 +1,6 @@
-/* STATUS (Session 29, 2026-10-18): NON_MATCHING. best score 4 [cc=296].
- * Residual = 'move a0,zero' for sceGsResetGraph is scheduled before the SCREEN_WIDTH/HEIGHT stores (original: after). Tried int/short for all 16 parameter combinations, swapped stores, short SCREEN_*, a zero local; cc=29 changes size.
- * Session 30 (2026-10-19): still 4. Haifa sched2 (-fsched-verbose) shows the whole function is one block and the four argument loads tie on priority, so LUID order (a0 first) wins; the original issues a0 last. Also tried: K&R and variadic prototypes, a 64-bit first parameter, (short)/0L/0U/char/short/long zero arguments, side effects inside each argument, inline wrappers with parameters, volatile/unsigned SCREEN_*, NOTHROW_STUB on sceGsSyncV/sceGsResetPath/sceDmaGetChan (measurement only), wine 2.95.3 (60).
- * Session 31 (2026-10-19): still 4. sched1 already emits a0 first (LUID order 227<229<231<233), and sched2 keeps it. asm volatile memory barrier before the call: 62+; a live zero local for a0/a3 and explicit asm("$4")/asm("$7") register variables: 4.
- * The original .s stays in the build (asm/cod/005CE0.s); this C
- * draft (Session 29) is kept for the record. */
+/* asm/cod/005CE0.s -> ReinitDisp.
+ * ReinitDisp; DMA/GS reset, mode argument through an empty asm (Session 42)
+ * MATCHED. */
 typedef struct {
     unsigned int chcr;          /* 0x00 */
 } sceDmaChan;
@@ -41,7 +38,7 @@ void ReinitDisp(void) {
     sceGsSyncV(0);
     SCREEN_WIDTH = 640;
     SCREEN_HEIGHT = 448;
-    sceGsResetGraph(0, 1, 2, 0);
+    { short z = 0; asm("" : "+r"(z)); sceGsResetGraph(z, 1, 2, 0); }    /* mode 0 issued after the other arguments */
     sceGsSetDefDBuff(&D_0013EB60, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 2, 0, 1);
     sceGsSyncV(0);
     D_0013A138 = 0;
