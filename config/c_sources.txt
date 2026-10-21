@@ -940,3 +940,4 @@
 017FB0 = src/cod/017FB0.c cc=29                   # SCE libcdvd sceCdDiskReady (0175A8 template): volatile rcmd semid, bind retry with continue, bound flag cleared on the break path, counter set before the bound test, non-gp request word (Session 41)
 017D98 = src/cod/017D98.c cc=29                   # SCE libcdvd sceCdDiskReady_old (twin of 017FB0 over the S-command semaphore): old-module flag under DIntr, sceCdSyncS gate, bind retry with continue (Session 41)
 017288 = src/cod/017288.c cc=29                   # SCE libcdvd sceCdLayerSearchFile (0175A8 bind template): name copy tests the stored byte, uncached sceCdlFILE result copied with the builtin memcpy, separate wait counter (Session 41)
+019DD8 = src/cod/019DD8.c cc=29                   # SCE libmrpc sceSifMUnBindRpc; int-typed record/sema fields (as 019F18) order the stores by TBAA, cd->f10 read before the r->cd store, volatile first csema read (Session 41)

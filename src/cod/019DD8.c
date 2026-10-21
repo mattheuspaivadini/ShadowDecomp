@@ -1,10 +1,9 @@
-/* STATUS (Session 28, 2026-10-18): NON_MATCHING. best score 5 [cc=29].
- * First WaitSema reads csema through a volatile cast: a volatile load never enters a delay slot, which gives the original's unfilled jal slot (the final DeleteSema(cd->csema) stays plain and is slot-filled). Rec.f20 as void * fixes the option-pointer register (a1). Residual = r->cd/r->f20/r->f24 store vs cd->f10/cd->f24 load order (144-combination type grid over self/cd/f20/f24/f10 and permute_stmts: no gain).
- * The original .s stays in the build (asm/cod/019DD8.s); this C
- * draft (Session 28) is kept for the record. */
-typedef struct { int count; int max_count; int init_count; int wait_threads; unsigned int attr; void *option; int pad[2]; } ee_sema_t;
+/* asm/cod/019DD8.s -> sceSifMUnBindRpc.
+ * SCE libmrpc sceSifMUnBindRpc; int-typed record/sema fields (as 019F18) order the stores by TBAA, cd->f10 read before the r->cd store, volatile first csema read (Session 41)
+ * MATCHED. */
+typedef struct { int count; int max_count; int init_count; int wait_threads; unsigned int attr; int option; int pad[2]; } ee_sema_t;
 struct CD;
-struct Rec { char pad00[0x14]; int self; int f18; int cd; void * f20; int f24; char pad28[0x18]; };
+struct Rec { char pad00[0x14]; int self; int f18; int cd; int f20; int f24; char pad28[0x18]; };
 struct CD { struct Rec * rec; int f04; volatile int sema; int f0C; int f10; char pad14[0x10]; int f24; int csema; volatile int f2C; };
 extern char D_00138B28[];
 extern int D_00138B70[];
@@ -32,10 +31,10 @@ int sceSifMUnBindRpc(struct CD *cd, int mode) {
     cd->rec = r;
     cd->f04 = r->f18;
     r->self = (int)r;
+    r->f20 = cd->f10;
     r->cd = (int)cd;
-    r->f20 = (void *)cd->f10;
     r->f24 = (int)cd->f24;
-    s.option = D_00138B70;
+    s.option = (int)D_00138B70;
     s.init_count = 0;
     s.max_count = 1;
     cd->sema = CreateSema(&s);
