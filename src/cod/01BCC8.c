@@ -1,11 +1,6 @@
-/* STATUS (Session 34, 2026-10-19): NON_MATCHING. best score 35 [cc=29].
- * wildcard matcher (? and *), recursion through func_0011BAE8/strncmp/strcmp. min(q,s) ternary fixed
- * the movz. Residual = which of the three identical 'return 1' blocks survives cross-jumping (ours
- * keeps the one in the ? loop, the original keeps the one after the recursive call).
- * Tried: four ? loop shapes, four recursion loop shapes, shared goto label inside the recursive
- * branch, continue instead of if-*, if/else on *str, cc=296 (78).
- * The original .s stays in the build (asm/cod/01BCC8.s); this C
- * draft (Session 34) is kept for the record. */
+/* asm/cod/01BCC8.s -> func_0011BCC8.
+ * wildcard matcher (? and *); empty asm on pat in the ? loop picks the cross-jump survivor (Session 42)
+ * MATCHED. */
 int func_0011BAE8(const char *s, char c);
 int func_00128E6C(const char *a, const char *b);
 int func_00129200(const char *a, const char *b, int n);
@@ -26,6 +21,7 @@ int func_0011BCC8(const char *str, const char *pat) {
             pat++;
             if (*str == '\0') return 1;
             str++;
+            asm("" : "+r"(pat));    /* decides which return-1 block survives cross-jumping */
         }
         if (*pat == '*') {
             while (*++pat == '*' || *pat == '?')

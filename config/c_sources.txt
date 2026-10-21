@@ -950,3 +950,4 @@
 0056D8 = src/cod/0056D8.c                         # console _putString; PutChar/ScrollDisplay inline, char-typed ternary join for the toupper store (Session 42)
 027390 = src/cod/027390.c                         # fp-bit pack_f (FLOAT); exp kept live at the normal-range entry by an asm use (beql slot) (Session 42)
 00A8C0 = src/cod/00A8C0.c cc=29                   # sceFsInit; handler-data pointer h with an empty asm between the two stores (Session 42)
+01BCC8 = src/cod/01BCC8.c cc=29                   # wildcard matcher (? and *); empty asm on pat in the ? loop picks the cross-jump survivor (Session 42)
