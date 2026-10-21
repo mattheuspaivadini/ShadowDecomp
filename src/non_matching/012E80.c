@@ -1,4 +1,5 @@
-/* STATUS (Session 38, 2026-10-20): NON_MATCHING. best score 46 [cc=29].
+/* STATUS (Session 42, 2026-10-21): NON_MATCHING. best score 38 (was 46; sw.py diff lines).
+ * Copy loop as for (i = pktquads; i > 0; i--) *d++ = *s++ with s = header gives the image's blez guard; plus the best fence of a 364-variant grid. Residual: sra/srl of the quad count and the a1/a2 copy roles.
  * SCE sifcmd interrupt handler (_SifCmdIntHandler): copy loop, isceSifSetDChain, system/user
  * dispatch on the handler $gp (static inline set_gp as 011CA8). Evidence: cid is reloaded three
  * times and the bgez slot stays nop, so the header is read through a volatile pointer; frame 0xA0
@@ -62,10 +63,13 @@ int func_00112E80(void) {
     if (!(size = header->psize))
         return 0;
     pktquads = (size + 15) / 16;
+    asm volatile("" : : "r"(size));
     header->psize = 0;
-    pktbuf = (u128 *)cmd->pktbuf;
-    for (i = 0; i < pktquads; i++)
-        packet[i] = pktbuf[i];
+    {
+        u128 *s = (u128 *)header, *d = packet;
+        for (i = pktquads; i > 0; i--)
+            *d++ = *s++;
+    }
 
     isceSifSetDChain();
 
@@ -74,6 +78,7 @@ int func_00112E80(void) {
         id = header->cid & 0x7FFFFFFF;
         if (id < cmd->nr_sys_handlers) {
             handler = cmd->sys_cmd_handlers[id].handler;
+            asm volatile("" : : "r"(header));
             if (handler) {
                 gp = set_gp(cmd->sys_cmd_handlers[id].gp);
                 handler(packet, cmd->sys_cmd_handlers[id].harg);
