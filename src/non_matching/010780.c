@@ -1,4 +1,5 @@
-/* STATUS (Session 35, 2026-10-19): NON_MATCHING. best score 9 [cc=29].
+/* STATUS (Session 42, 2026-10-21): NON_MATCHING. best score 6 (was 14; sw.py diff lines).
+ * An empty asm ("+r") on t after t = k removes the stolen next-load; residual = loop tail inversion (ours bnezl top + b exit, image beql exit + b top). Tried: while/for/goto/&& loop shapes x fences, fence grids (two levels, 340 variants), shift computed before the loop.
  * timer compare re-arm over the sorted alarm list (struct N10910 keys f20+f10-f18). Residual =
  * loop tail: original ends the scan with beql exit + b top (t = k in the b slot), ours bnezl back
  * with the next-load stolen. Tried: while/for/goto loop shapes, key inline helper, nothrow SetT2
@@ -50,6 +51,7 @@ void func_00110780(unsigned long long now)
         if (k >= t + 0x7333)
             break;
         t = k;
+        asm("" : "+r"(t));
     }
     shift = mode & 3;
     if ((long long)(t - now) < 0x7333) {
