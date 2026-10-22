@@ -1,12 +1,6 @@
-/* STATUS (Session 44, 2026-10-21): NON_MATCHING. best score 176 (was 230; sw.py diff lines).
- * sceNetcnfifGetResult declared int as defined (022378): 230 -> 176. Residual unchanged in kind: register allocation (type/ifc spilled in the image).
- * Fence grid (build/s42/fence_grid.py: empty asm "+r" / asm volatile "r" use of each local after each statement): best single fence.
- * netcnfif load_entry_auto: two lists, every error frees both, strcmp of ifc sys_name against
- * attach_ifc/attach_dev as two calls (keeps the type test in the loop). Residual = register
- * allocation (original spills type and ifc to the frame, copies the first count into s0). Tried:
- * opt mask variable, 40 declaration orders, size copy variable.
- * The original .s stays in the build (asm/cod/0225E8.s); this C
- * draft (Session 35) is kept for the record. */
+/* asm/cod/0225E8.s -> sceNetcnfifLoadEntryAuto.
+ * netcnfif load_entry_auto; separate counts per list, an int p reused as size copy and list walker, attach-name mismatch via continue in both type arms, two no-code X refs on dev (fp vs stack for ifc) (Session 46)
+ * MATCHED. */
 typedef struct {
     int data;
     int f_no_decode;
@@ -42,8 +36,9 @@ int sceNetcnfifLoadEntryAuto(char *fname, int flags, char *usr_name, sceNetcnfif
 {
     sceNetcnfifArg_t if_arg;
     sceNetcnfifList_t *ifc_list = 0, *dev_list = 0;
-    sceNetcnfifList_t *p, *ifc = 0, *dev = 0;
-    int type, opt, sync, n, i, r;
+    sceNetcnfifList_t *ifc = 0, *dev = 0;
+    int p;
+    int type, opt, sync, n, m, i;
 
     type = flags & 0xFFFF;
     opt = flags & 0xFFFF0000;
@@ -66,15 +61,15 @@ int sceNetcnfifLoadEntryAuto(char *fname, int flags, char *usr_name, sceNetcnfif
         free(dev_list);
         return -1;
     }
-    ifc_list = memalign(0x40, n * sizeof(sceNetcnfifList_t));
-    asm volatile("" : : "r"(ifc_list));
+    p = n;      /* p first holds the list size, then walks the list as an int (keeps the image copy of n) */
+    ifc_list = memalign(0x40, p * sizeof(sceNetcnfifList_t));
     if (ifc_list == 0) {
         free(ifc_list);
         free(dev_list);
         return -2;
     }
     FlushCache(0);
-    sceNetcnfifGetList(fname, type, ifc_list, n);
+    sceNetcnfifGetList(fname, type, ifc_list, p);
     while (sceNetcnfifSync(sync))
         ;
     sceNetcnfifGetResult(&if_arg);
@@ -83,9 +78,9 @@ int sceNetcnfifLoadEntryAuto(char *fname, int flags, char *usr_name, sceNetcnfif
         free(dev_list);
         return -1;
     }
-    for (i = 0, p = ifc_list; i < n; i++, p++) {
-        if (func_00128E6C(usr_name, p->usr_name) == 0) {
-            ifc = p;
+    for (p = (int)ifc_list, i = 0; i < n; p += sizeof(sceNetcnfifList_t), i++) {
+        if (func_00128E6C(usr_name, ((sceNetcnfifList_t *)p)->usr_name) == 0) {
+            ifc = (sceNetcnfifList_t *)p;
             break;
         }
     }
@@ -99,20 +94,20 @@ int sceNetcnfifLoadEntryAuto(char *fname, int flags, char *usr_name, sceNetcnfif
     while (sceNetcnfifSync(sync))
         ;
     sceNetcnfifGetResult(&if_arg);
-    n = if_arg.data;
-    if (n <= 0) {
+    m = if_arg.data;
+    if (m <= 0) {
         free(ifc_list);
         free(dev_list);
         return -1;
     }
-    dev_list = memalign(0x40, n * sizeof(sceNetcnfifList_t));
+    dev_list = memalign(0x40, m * sizeof(sceNetcnfifList_t));
     if (dev_list == 0) {
         free(ifc_list);
         free(dev_list);
         return -2;
     }
     FlushCache(0);
-    sceNetcnfifGetList(fname, 0, dev_list, n);
+    sceNetcnfifGetList(fname, 0, dev_list, m);
     while (sceNetcnfifSync(sync))
         ;
     sceNetcnfifGetResult(&if_arg);
@@ -121,9 +116,9 @@ int sceNetcnfifLoadEntryAuto(char *fname, int flags, char *usr_name, sceNetcnfif
         free(dev_list);
         return -1;
     }
-    for (i = 0, p = dev_list; i < n; i++, p++) {
+    for (i = 0, p = (int)dev_list; i < m; i++, p += sizeof(sceNetcnfifList_t)) {
         FlushCache(0);
-        sceNetcnfifLoadEntry(fname, 0, p->usr_name, data);
+        sceNetcnfifLoadEntry(fname, 0, ((sceNetcnfifList_t *)p)->usr_name, data);
         while (sceNetcnfifSync(sync))
             ;
         sceNetcnfifGetResult(&if_arg);
@@ -132,18 +127,16 @@ int sceNetcnfifLoadEntryAuto(char *fname, int flags, char *usr_name, sceNetcnfif
             free(dev_list);
             return -1;
         }
-        if (type == 1)
-            r = func_00128E6C(ifc->sys_name, data->attach_ifc);
-        else
-            r = func_00128E6C(ifc->sys_name, data->attach_dev);
-        if (r == 0) {
-            if (dev != 0) {
-                free(ifc_list);
-                free(dev_list);
-                return -12;
-            }
-            dev = p;
+        if (type == 1) {
+            if (func_00128E6C(ifc->sys_name, data->attach_ifc) != 0) continue;
+        } else if (func_00128E6C(ifc->sys_name, data->attach_dev) != 0) continue;
+        if (dev != 0) {
+            free(ifc_list);
+            free(dev_list);
+            return -12;
         }
+        dev = (sceNetcnfifList_t *)p;
+        asm volatile("" : : "X"(dev), "X"(dev));    /* no code: two more refs give dev a saved register (fp) and leave ifc on the stack */
     }
     if (dev == 0) {
         free(ifc_list);
@@ -160,6 +153,7 @@ int sceNetcnfifLoadEntryAuto(char *fname, int flags, char *usr_name, sceNetcnfif
         free(dev_list);
         return -1;
     }
+    asm volatile("" : : "X"(dev_list));
     free(ifc_list);
     free(dev_list);
     return 0;
