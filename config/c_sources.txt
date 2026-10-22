@@ -992,3 +992,4 @@
 010250 = src/cod/010250.c cc=29                   # SCE libkernl syscall 0x74 (SetSyscall) trampoline used by InitAlarm (Session 48)
 010260 = src/cod/010260.c cc=29                   # SCE libkernl syscall 0x5A (Setupee) trampoline used by InitAlarm (Session 48)
 0102A8 = src/cod/0102A8.c cc=29                   # SCE libkernl syscall 0x5B (GetSyscall) trampoline used by InitAlarm (Session 48)
+0141A8 = src/cod/0141A8.c cc=29                   # SCE libgraph syscall 0x80 (GsGetCRTOffset) trampoline used by sceGsSetDefDispEnv (Session 48)
