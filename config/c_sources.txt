@@ -979,3 +979,4 @@
 00F500 = src/cod/00F500.c cc=29                   # SCE libkernl syscall 0x57 (GetTLBEntry) trampoline (Session 48)
 00F510 = src/cod/00F510.c cc=29                   # SCE libkernl syscall -0x57 (iGetTLBEntry) trampoline (Session 48)
 00F520 = src/cod/00F520.c cc=29                   # SCE libkernl syscall 0x58 (ProbeTLBEntry) trampoline (Session 48)
+00F530 = src/cod/00F530.c cc=29                   # SCE libkernl syscall -0x58 (iProbeTLBEntry) trampoline (Session 48)
