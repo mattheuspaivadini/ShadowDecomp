@@ -960,3 +960,4 @@
 00FB20 = src/cod/00FB20.c cc=ee-gcc2.9-991111-01-dtls13010 -g0 # SCE libkernl DIntr; dtls13010 toolchain fills the final jr slot, the R5900 short-loop nop pair is explicit (Session 44)
 01CB18 = src/cod/01CB18.c cc=29                   # libmc FAT get-info; _sceMcCoreClearNewCardFlag/_sceMcCoreWriteBack declared int as defined (fixes the v0/v1 roles after both calls) (Session 44)
 010780 = src/cod/010780.c cc=29                   # timer compare re-arm; redundant exit + dead store after t = k make expand_end_loop rotate the whole loop body (Session 45)
+003110 = src/cod/003110.c                         # LoaderSysGetMemoryInfo; char * info fields (no TBAA alias with the int stack_size load), stores f10,f14,f1C,f04,f0C (Session 45)
