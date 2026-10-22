@@ -1,5 +1,5 @@
-/* STATUS (Session 46, 2026-10-22): NON_MATCHING. best score 117 (was 145; sw.py diff lines).
- * The nfat loop counts in i from nfat - 1 directly (loop.c then keeps nfat - 1 in s7 like the image), the IsSpeckOutClust retry as do { r = ...; if (r == 1) clust++; } while (r != 0) (movz in the bnez slot). Residual: clust/nifc arithmetic schedule, i = 0 hoisted above the memset call, the hoisted ifc = si + 0x50, k/j/fp register roles.
+/* STATUS (Session 46, 2026-10-22): NON_MATCHING. best score 37 (was 117; sw.py diff lines).
+ * clust = spec.block * spec.page / 0x400 (no +0x3FF: the movn pair is the signed /1024), computed first into k and copied to clust after the nifc clamp (image: sra a1 + move s0,a1 in the bnez slot), an empty asm volatile after the backup_block1 store keeps sched1 from hoisting ifc = si + 0x50 above memset/strcat. Residual: the dead addiu a2 = &bad_block_list in the strncmp beqz slot, t0/t1 for the 43/256 constants, the f17C/f180 store order, i = 0 placement around the ifc memset, the ifc[i] addu operand order.
  * libmc FAT format: reset the per-port FAT cache, read the card spec and superblock, rebuild the
  * superblock (magic + version, geometry, backup blocks skipping bad blocks, indirect FAT list),
  * write the empty FAT and indirect clusters, mark good/bad allocatable clusters, write the root
@@ -177,6 +177,7 @@ int _sceMcFatFormat(int port) {
     si->f178 = -1;
     si->f17C = -1;
     si->backup_block1 = spec.size / spec.block - 1;
+    asm volatile("");
     ifc = si->ifc_list;
     while (_sceMcpIsSpeckOutBlock(port, si->backup_block1) != 0)
         si->backup_block1--;
@@ -184,13 +185,14 @@ int _sceMcFatFormat(int port) {
     while ((r = _sceMcpIsSpeckOutBlock(port, si->backup_block2)) != 0)
         si->backup_block2--;
     _sceMcCoreSetWriteBackHole(port, si->backup_block2, si->backup_block1);
+    k = spec.block * spec.page / 0x400;
     nfat = (si->clusters_per_card * 4 - 1) / 0x400 + 1;
     nifc = (nfat * 4 - 1) / 0x400 + 1;
-    clust = (spec.block * spec.page + 0x3FF) / 0x400;
     if (nifc > 32) {
         nifc = 32;
         nfat = 0x2000;
     }
+    clust = k;
     func_001283D0(ifc, 0, 0x80);
     for (i = r; i < nifc; i++) {
         do {
