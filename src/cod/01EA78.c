@@ -1,10 +1,6 @@
-/* STATUS (Session 35, 2026-10-19): NON_MATCHING. best score 228 [cc=29].
- * libmc FAT create: parent lookup, free-space check, entry init with inline BCD clock, '.' and
- * '..' cluster for directories. The original reads an uninitialised local (s3) in the parent-
- * length test. Residual = isdir and its copy live in s7/s6 (CSE merges ours), count test as movn.
- * Tried: dir copy variable (int/short/char), inline init/enough helpers, int mode.
- * The original .s stays in the build (asm/cod/01EA78.s); this C
- * draft (Session 35) is kept for the record. */
+/* asm/cod/01EA78.s -> _sceMcFatCreateFile.
+ * libmc FAT create; int mode, D_0015F080 entries through a walking pointer, a long copy of isdir for the ternaries (survives cprop: movn on s6), (unsigned)(n > 0) + free keeps the addu operand order (Session 46)
+ * MATCHED. */
 typedef struct {
     unsigned char resv2, sec, min, hour;
     unsigned char day, month;
@@ -55,15 +51,18 @@ int _sceMcpFlushCache(int unit);
 
 static __inline__ int BCD(unsigned char x) { return (x >> 4) * 10 + (x & 0xF); }
 
-int _sceMcFatCreateFile(int unit, const char *name, unsigned short mode)
+int _sceMcFatCreateFile(int unit, const char *name, int mode)
 {
     struct SceMcDirEntry parent;
     struct SceMcDirEntry ent;
     char path[0x80];
     sceCdCLOCK clk;
     int ret;
-    int isdir, top, free, n, clust, idx;
-    char *p;
+    int isdir;
+    long dir;
+    int top, free, n, clust, idx, i;
+    char *q;
+    struct SceMcDirEntry *p;
 
     ret = func_0011D8E0(unit);
     if (ret != 0)
@@ -74,13 +73,14 @@ int _sceMcFatCreateFile(int unit, const char *name, unsigned short mode)
     if (mode == 0)
         mode = 0x8417;
     isdir = mode & 0x20;
+    dir = isdir;
     if (isdir && func_0011BF68(path) >= 2)
         return 0x81019004;
     top = func_0011BF68(path) == 1;
     ret = func_0011DC60(unit, path, &parent, 0, 0);
     if (ret != (int)0x81010002)
         return ret;
-    if (!top && parent.length - n >= 0x14)
+    if (!top && parent.length - n >= 0x14)   /* n is read before it is set, as in the original (s3) */
         return 0x81010017;
     free = func_0011C7D8(unit, &ret);
     if (ret != 0)
@@ -88,7 +88,9 @@ int _sceMcFatCreateFile(int unit, const char *name, unsigned short mode)
     n = func_0011E258(unit, parent.cluster, parent.length, &ret);
     if (ret != 0)
         return ret;
-    if ((n > 0) + free < (isdir ? 2 : 1))
+    i = dir ? 2 : 1;
+    free = (unsigned)(n > 0) + free;
+    if (free < i)
         return 0x8101001C;
     if (isdir) {
         clust = func_0011C6A8(unit, &ret);
@@ -101,8 +103,8 @@ int _sceMcFatCreateFile(int unit, const char *name, unsigned short mode)
     _sceMcCoreReadClock(unit, &clk);
     func_001283D0(&ent, 0, 0x200);
     ent.mode = mode;
-    ent.cluster = isdir ? clust : -1;
-    ent.length = isdir ? 2 : 0;
+    ent.cluster = dir ? clust : -1;
+    ent.length = dir ? 2 : 0;
     ent.created.year = BCD(clk.year) + 2000;
     ent.created.month = BCD(clk.month);
     ent.created.day = BCD(clk.day);
@@ -114,42 +116,44 @@ int _sceMcFatCreateFile(int unit, const char *name, unsigned short mode)
     ent.dir_entry = 0;
     ent.modified = ent.created;
     ent.attr = 0;
-    p = func_00129578(path, '/');
-    *(struct McName *)ent.name = *(struct McName *)(p + 1);
+    q = func_00129578(path, '/');
+    *(struct McName *)ent.name = *(struct McName *)(q + 1);
     idx = func_0011E388(unit, &ent, parent.cluster, parent.length, &ret);
     if (idx < 0)
         return ret;
     if (isdir) {
-        func_001283D0(&D_0015F080[0], 0, 0x200);
-        D_0015F080[0].mode = 0x8427;
-        D_0015F080[0].created.year = BCD(clk.year) + 2000;
-        D_0015F080[0].created.month = BCD(clk.month);
-        D_0015F080[0].created.day = BCD(clk.day);
-        D_0015F080[0].created.hour = BCD(clk.hour);
-        D_0015F080[0].created.min = BCD(clk.minute);
-        D_0015F080[0].created.sec = BCD(clk.second);
-        D_0015F080[0].dir_entry = idx;
-        D_0015F080[0].length = 0;
-        D_0015F080[0].pad02 = 0;
-        D_0015F080[0].cluster = 0;
-        D_0015F080[0].modified = D_0015F080[0].created;
-        __builtin_memcpy(D_0015F080[0].name, D_00138CF0, 2);
-        func_001283D0(&D_0015F080[1], 0, 0x200);
-        D_0015F080[1].mode = 0x8427;
-        D_0015F080[1].created.year = BCD(clk.year) + 2000;
-        D_0015F080[1].created.month = BCD(clk.month);
-        D_0015F080[1].created.day = BCD(clk.day);
-        D_0015F080[1].created.hour = BCD(clk.hour);
-        D_0015F080[1].created.min = BCD(clk.minute);
-        D_0015F080[1].created.sec = BCD(clk.second);
-        D_0015F080[1].length = 0;
-        D_0015F080[1].pad02 = 0;
-        D_0015F080[1].created.resv2 = 0;
-        D_0015F080[1].cluster = 0;
-        D_0015F080[1].dir_entry = 0;
-        D_0015F080[1].modified = D_0015F080[1].created;
-        D_0015F080[1].attr = 0;
-        __builtin_memcpy(D_0015F080[1].name, D_00138CF8, 3);
+        p = D_0015F080;
+        func_001283D0(p, 0, 0x200);
+        p->mode = 0x8427;
+        p->created.year = BCD(clk.year) + 2000;
+        p->created.month = BCD(clk.month);
+        p->created.day = BCD(clk.day);
+        p->created.hour = BCD(clk.hour);
+        p->created.min = BCD(clk.minute);
+        p->created.sec = BCD(clk.second);
+        p->dir_entry = idx;
+        p->length = 0;
+        p->pad02 = 0;
+        p->cluster = 0;
+        p->modified = p->created;
+        __builtin_memcpy(p->name, D_00138CF0, 2);
+        p++;
+        func_001283D0(p, 0, 0x200);
+        p->mode = 0x8427;
+        p->created.year = BCD(clk.year) + 2000;
+        p->created.month = BCD(clk.month);
+        p->created.day = BCD(clk.day);
+        p->created.hour = BCD(clk.hour);
+        p->created.min = BCD(clk.minute);
+        p->created.sec = BCD(clk.second);
+        p->length = 0;
+        p->pad02 = 0;
+        p->created.resv2 = 0;
+        p->cluster = 0;
+        p->dir_entry = 0;
+        p->modified = p->created;
+        p->attr = 0;
+        __builtin_memcpy(p->name, D_00138CF8, 3);
         if (_sceMcpWriteUserClust(unit, D_0015F080, ent.cluster, 1) == 0)
             return 0x8101006F;
     }

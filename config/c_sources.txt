@@ -964,3 +964,4 @@
 00B938 = src/cod/00B938.c cc=29               # SCE stdio sceIoctl; local one = 1 used by the compare tree (li s5,1 in the prologue), empty asm on the first queue test keeps i = 0 out of the bne slot (Session 45)
 00B1C8 = src/cod/00B1C8.c cc=29               # SCE stdio sceLseek; else "m" fence orders the PRE luis, an "X"-operand empty asm adds hi() references to restore the s4/s5/s6 global-alloc order (Session 45)
 00D428 = src/cod/00D428.c cc=29               # SCE stdio sceLseek64; same fences as sceLseek (00B1C8) (Session 45)
+01EA78 = src/cod/01EA78.c cc=29                   # libmc FAT create; int mode, D_0015F080 entries through a walking pointer, a long copy of isdir for the ternaries (survives cprop: movn on s6), (unsigned)(n > 0) + free keeps the addu operand order (Session 46)
