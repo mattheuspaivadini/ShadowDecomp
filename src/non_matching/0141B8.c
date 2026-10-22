@@ -1,4 +1,5 @@
-/* STATUS (Session 35, 2026-10-19): NON_MATCHING. best score 147 [cc=29].
+/* STATUS (Session 46, 2026-10-22): NON_MATCHING. best score 114 (was 160; sw.py diff lines).
+ * SCE_GS_SET_DISPLAY terms ORed as magh, dh, dw, magv, dy, dx (a 120-order grid; the image tree is ((MAGH|DW)|(DX|DH))|DY, explicit trees score worse) and DISPFB written as (psm << 15) | (fbw << 9). Residual: the magh*w / dx*magh multiply order and the magh copy in the display arms; callee return types (void scePrintf) change nothing.
  * sceGsSetDefDispEnv; OutMode if-chain (NTSC/PAL/0x50/else scePrintf), smode2 via nested if with
  * direct stores, DX offset added in 64 bits through a long local. Residual = the DISPLAY OR-tree
  * order (original combines MAGH|DW and DX|DH before DY) and register roles in the PAL/NTSC arms.
@@ -15,9 +16,7 @@ typedef struct {
 #define SCE_GS_SET_DISPFB(fbp, fbw, psm, dbx, dby) \
     ((u_long)(fbp) | ((u_long)(fbw) << 9) | ((u_long)(psm) << 15) | \
      ((u_long)(dbx) << 32) | ((u_long)(dby) << 43))
-#define SCE_GS_SET_DISPLAY(dx, dy, magh, magv, dw, dh) \
-    ((u_long)(dx) | ((u_long)(dy) << 12) | ((u_long)(magh) << 23) | \
-     ((u_long)(magv) << 27) | ((u_long)(dw) << 32) | ((u_long)(dh) << 44))
+#define SCE_GS_SET_DISPLAY(dx, dy, magh, magv, dw, dh) (((u_long)(magh) << 23) | ((u_long)(dh) << 44) | ((u_long)(dw) << 32) | ((u_long)(magv) << 27) | ((u_long)(dy) << 12) | (u_long)(dx))
 
 extern char D_001384B8[];
 sceGsGParam *sceGsGetGParam(void);
@@ -46,7 +45,7 @@ void sceGsSetDefDispEnv(sceGsDispEnv *disp, short psm, short w, short h, short d
             disp->smode2 = 3;
     } else
         disp->smode2 = 2;
-    disp->dispfb = SCE_GS_SET_DISPFB(0, ((w + 63) >> 6) & 0x3f, psm & 0xf, 0, 0);
+    disp->dispfb = ((u_long)(psm & 0xf) << 15) | ((u_long)(((w + 63) >> 6) & 0x3f) << 9);
     if (gp->sceGsOutMode == 2) {
         if (gp->sceGsInterMode == 1) {
             magh = (w + 2559) / w;
