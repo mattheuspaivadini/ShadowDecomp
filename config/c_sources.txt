@@ -971,3 +971,4 @@
 012FC8 = src/cod/012FC8.c cc=29                   # SCE sifcmd sceSifWriteBackDCache; range alignment in C ($t9/$a4..$a7 register locals) + noreorder cache 0x18 loop (Session 48)
 00F360 = src/cod/00F360.c cc=29                   # SCE libkernl syscall 0x5A (Setupee) trampoline used by InitTLBFunctions (Session 48)
 00F3A8 = src/cod/00F3A8.c cc=29                   # SCE libkernl syscall 0x5B (GetSyscall) trampoline used by InitTLBFunctions (Session 48)
+00F3B8 = src/cod/00F3B8.c cc=29                   # SCE libkernl syscall 0x74 (SetSyscall) trampoline used by InitTLBFunctions (Session 48)
