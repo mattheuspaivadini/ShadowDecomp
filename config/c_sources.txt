@@ -986,3 +986,4 @@
 00FDC8 = src/cod/00FDC8.c cc=29                   # SCE libkernl syscall 0x74 (SetSyscall) trampoline used by func_0010FCC8 (Session 48)
 00FE30 = src/cod/00FE30.c cc=29                   # SCE libkernl syscall 0x74 (SetSyscall) trampoline used by InitExecPS2 (Session 48)
 00FE40 = src/cod/00FE40.c cc=29                   # SCE libkernl syscall 0x5A (Setupee) trampoline used by InitExecPS2 (Session 48)
+00FE88 = src/cod/00FE88.c cc=29                   # SCE libkernl syscall 0x5B (GetSyscall) trampoline used by InitExecPS2 (Session 48)
