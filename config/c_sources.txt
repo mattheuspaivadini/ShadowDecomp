@@ -982,3 +982,4 @@
 00F530 = src/cod/00F530.c cc=29                   # SCE libkernl syscall -0x58 (iProbeTLBEntry) trampoline (Session 48)
 00F540 = src/cod/00F540.c cc=29                   # SCE libkernl syscall 0x59 (ExpandScratchPad) trampoline (Session 48)
 00FBF8 = src/cod/00FBF8.c cc=29                   # SCE libkernl syscall 0x5A (Setupee) trampoline used by GetSystemCallEntry (Session 48)
+00FC80 = src/cod/00FC80.c cc=29                   # SCE libkernl syscall 0x83 (FindAddress) trampoline used by func_0010FCC8 (Session 48)
