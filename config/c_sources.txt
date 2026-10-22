@@ -974,3 +974,4 @@
 00F3B8 = src/cod/00F3B8.c cc=29                   # SCE libkernl syscall 0x74 (SetSyscall) trampoline used by InitTLBFunctions (Session 48)
 00F490 = src/cod/00F490.c cc=29                   # SCE libkernl syscall 0x55 (PutTLBEntry) trampoline (Session 48)
 00F4A0 = src/cod/00F4A0.c cc=29                   # SCE libkernl syscall -0x55 (iPutTLBEntry) trampoline (Session 48)
+00F4B0 = src/cod/00F4B0.c cc=29                   # SCE libkernl syscall 0x56 (_SetTLBEntry) trampoline used by SetTLBEntry/InitTLB32MB (Session 48)
