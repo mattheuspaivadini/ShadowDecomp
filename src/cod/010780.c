@@ -1,11 +1,7 @@
-/* STATUS (Session 42, 2026-10-21): NON_MATCHING. best score 6 (was 14; sw.py diff lines).
- * An empty asm ("+r") on t after t = k removes the stolen next-load; residual = loop tail inversion (ours bnezl top + b exit, image beql exit + b top). Tried: while/for/goto/&& loop shapes x fences, fence grids (two levels, 340 variants), shift computed before the loop.
- * timer compare re-arm over the sorted alarm list (struct N10910 keys f20+f10-f18). Residual =
- * loop tail: original ends the scan with beql exit + b top (t = k in the b slot), ours bnezl back
- * with the next-load stolen. Tried: while/for/goto loop shapes, key inline helper, nothrow SetT2
- * stubs, 991111a/dtls13010.
- * The original .s stays in the build (asm/cod/010780.s); this C
- * draft (Session 35) is kept for the record. */
+/* asm/cod/010780.s -> func_00110780.
+ * timer compare re-arm over the sorted alarm list; the redundant n == 0 exit and the dead k = 0 after t = k make
+ * expand_end_loop rotate the whole body (jump.c then duplicates it before the loop, as in the image) (Session 45)
+ * MATCHED. */
 #include "symbols.h"
 
 struct N10910 {
@@ -48,10 +44,10 @@ void func_00110780(unsigned long long now)
     t = n->f20 + n->f10 - n->f18;
     while ((n = n->next) != 0) {
         k = n->f20 + n->f10 - n->f18;
-        if (k >= t + 0x7333)
-            break;
+        if (k >= t + 0x7333) break;
         t = k;
-        asm("" : "+r"(t));
+        if (n == 0) break;
+        k = 0;
     }
     shift = mode & 3;
     if ((long long)(t - now) < 0x7333) {
