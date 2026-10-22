@@ -1,13 +1,6 @@
-/* STATUS (Session 42, 2026-10-21): NON_MATCHING. best score 57 (was 66; sw.py diff lines).
- * Fence grid (build/s42/fence_grid.py: empty asm "+r" / asm volatile "r" use of each local after each statement): best single fence.
- * Caller cp/cpi/&id locals assigned after load_conf (the image re-derives them from the same %hi), per-error printf + return 0. Residual: the image keeps %hi(D_0013D000) in s6 across memalign/load/free and adds the lo again for the caller; ours CSEs the full address. Manually inlined load_conf: same.
- * loader network bring-up (load_set_conf_only, interface id, address). CD branch assigns path/name
- * before PutStringS. Residual = the original keeps D_0013D000 and +0x40 in s-regs from before memalign
- * and re-derives them later from the same %hi register; error printf tails are cross-jumped.
- * Tried: msg variable, per-error printf+return 0, static inline load/up helpers, block-scoped
- * cp/cpi/id locals (all 408-416 bytes against 428).
- * The original .s stays in the build (asm/cod/004668.s); this C
- * draft (Session 34) is kept for the record. */
+/* asm/cod/004668.s -> func_00104668.
+ * loader net bring-up; load_conf returns early on memalign failure (no if-then block for CSE to skip, so the second D_0013D000 keeps only the hi() from gcse), interface id is its own .sbss word D_0013A184 (Session 46)
+ * MATCHED. */
 extern char D_00137080[];   /* "cdrom0:\SETTING\NET.DB;1" */
 extern char D_001370A0[];   /* "from CD default..." */
 extern char D_001370B8[];   /* "from memory card..." */
@@ -19,7 +12,7 @@ extern char D_00137140[];   /* "wait_get_addr_only() failed.\n" */
 extern char *D_00131FA0[];
 extern char *D_00131FB8[];
 extern char D_0013D000[];
-extern int D_0013A180[2];
+extern int D_0013A184;
 extern char myaddr[];
 
 void PutStringS(int color, const char *fmt, ...);
@@ -38,11 +31,10 @@ static inline int load_conf(char *path, char *name, int flag) {
     int r;
 
     buf = memalign(0x40, 0x1340);
-    r = -0x21F;
-    if (buf != 0) {
-        r = load_set_conf_only(cp, cpi, buf, path, name, flag);
-        free(buf);
-    }
+    if (buf == 0)
+        return -0x21F;
+    r = load_set_conf_only(cp, cpi, buf, path, name, flag);
+    free(buf);
     return r;
 }
 
@@ -71,13 +63,12 @@ int func_00104668(int from_mc, int idx) {
     }
     cp = D_0013D000;
     cpi = cp + 0x40;
-    asm volatile("" : : "r"(id));
-    id = &D_0013A180[1];
+    id = &D_0013A184;
     if (sceLibnetWaitGetInterfaceID(cp, cpi, id, 1) < 0) {
         func_001285C0(D_00137128);
         return 0;
     }
-    sceInetCtlUpInterface(cp, cpi, D_0013A180[1]);
+    sceInetCtlUpInterface(cp, cpi, D_0013A184);
     if (sceLibnetWaitGetAddress(cp, cpi, id, 1, myaddr, 0) < 0) {
         func_001285C0(D_00137140);
         return 0;

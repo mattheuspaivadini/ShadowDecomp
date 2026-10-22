@@ -965,3 +965,4 @@
 00B1C8 = src/cod/00B1C8.c cc=29               # SCE stdio sceLseek; else "m" fence orders the PRE luis, an "X"-operand empty asm adds hi() references to restore the s4/s5/s6 global-alloc order (Session 45)
 00D428 = src/cod/00D428.c cc=29               # SCE stdio sceLseek64; same fences as sceLseek (00B1C8) (Session 45)
 01EA78 = src/cod/01EA78.c cc=29                   # libmc FAT create; int mode, D_0015F080 entries through a walking pointer, a long copy of isdir for the ternaries (survives cprop: movn on s6), (unsigned)(n > 0) + free keeps the addu operand order (Session 46)
+004668 = src/cod/004668.c                         # loader net bring-up; load_conf returns early on memalign failure (no if-then block for CSE to skip, so the second D_0013D000 keeps only the hi() from gcse), interface id is its own .sbss word D_0013A184 (Session 46)
