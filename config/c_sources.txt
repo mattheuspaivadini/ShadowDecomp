@@ -990,3 +990,4 @@
 00FFB0 = src/cod/00FFB0.c cc=29                   # SCE libkernl syscall 0x5A (Setupee) trampoline used by func_00110000 (Session 48)
 00FFF0 = src/cod/00FFF0.c cc=29                   # SCE libkernl syscall 0x74 (SetSyscall) trampoline used by func_00110000 (Session 48)
 010250 = src/cod/010250.c cc=29                   # SCE libkernl syscall 0x74 (SetSyscall) trampoline used by InitAlarm (Session 48)
+010260 = src/cod/010260.c cc=29                   # SCE libkernl syscall 0x5A (Setupee) trampoline used by InitAlarm (Session 48)
