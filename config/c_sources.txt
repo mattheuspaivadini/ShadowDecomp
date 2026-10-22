@@ -969,3 +969,4 @@
 000D48 = src/cod/000D48.c                         # ld: module loader; stat and open failures as two separate PutString blocks (cross-jumped; the extra fd refs put fd in s0), the half rel count in i with its own loop counter j, checksum walks a copy of the pointer (Session 46)
 0225E8 = src/cod/0225E8.c cc=29                   # netcnfif load_entry_auto; separate counts per list, an int p reused as size copy and list walker, attach-name mismatch via continue in both type arms, two no-code X refs on dev (fp vs stack for ifc) (Session 46)
 012FC8 = src/cod/012FC8.c cc=29                   # SCE sifcmd sceSifWriteBackDCache; range alignment in C ($t9/$a4..$a7 register locals) + noreorder cache 0x18 loop (Session 48)
+00F360 = src/cod/00F360.c cc=29                   # SCE libkernl syscall 0x5A (Setupee) trampoline used by InitTLBFunctions (Session 48)
