@@ -1,13 +1,9 @@
-/* STATUS (Session 43, 2026-10-21): NON_MATCHING. best score 3 (was 3; sw.py diff lines).
- * PRE lever (Session 43): the else-branch luis are gcse PRE insertions appended after mode = 0 (t.c.gcse: PRE/HOIST edge (11,12) expressions 28/31, numbered by first occurrence, so a B-only fence flips the insertion order). An else fence asm volatile with "m"(D_001470C0[0]), "m"(D_00146600[0]) before mode = 0 gives the exact schedule but a pure s5/s6 rename: the fence adds a ref to the hi(D_001470C0) pseudo (6 refs/232 insns beats hi(D_00132324) 3/66 in greg). Tried: 228 fence position/order combos (build/s43/pre_grid.py), mode/async/sema pins, no-else and join forms (39+), "m"(D_00132324) uses to raise its priority (27+), 1008-variant fence grid on top (13).
- * sceLseek64: same template as the matched sceRead (00B408). Levers: a volatile asm with an "m"(_sceFs_q[0])
- * operand after i = 0 forces the hi() of the queue address before i = 0 and keeps the nowait copy after
- * it (the copy lands in the bne slot, as in the image). Residual = the else-branch `move s2,zero`,
- * which the image schedules after the two hi() luis. An asm "m" fence on D_001470C0/D_00146600 in the
- * else branch fixes the order but swaps s5/s6 (hi(D_00132324) is allocated last); extra references
- * to D_00132324, pins on sema, a join-side fence and swapped if/else layout all fail.
- * The original .s stays in the build (asm/cod/00D428.s); this C
- * draft (Session 40) is kept for the record. */
+/* asm/cod/00D428.s -> sceLseek64.
+ * SCE stdio sceLseek64 over SIF RPC (sceRead template, 00B408). The else-branch "m" fence puts the PRE-inserted
+ * hi(D_001470C0)/hi(D_00146600) before mode = 0; that adds a reference to hi(D_001470C0), so an empty asm with
+ * "X" operands (no code: the operands stay lo_sum memory references) adds references to hi(D_00132324) and
+ * hi(D_001459C0) to restore the image's global-alloc priority order (s4/s5/s6) (Session 45)
+ * MATCHED. */
 struct Fd {                     /* 16-byte EE fd records at D_00146EC0 */
     int iop_fd;                 /* 0x00 */
     int mode;                   /* 0x04 */
@@ -95,8 +91,10 @@ long sceLseek64(int fd, long offset, int whence) {
                 break;
             }
         }
+        __asm__ __volatile__ ("" : : "X" (D_00132324), "X" (D_001459C0), "X" (D_001459C0));
         SignalSema(D_00132324);
     } else {
+        __asm__ __volatile__ ("" : : "m" (D_001470C0[0]), "m" (D_00146600[0]));
         mode = 0;
     }
     if (func_0010A228((int)D_001470C0, 0x16, 0, (int)&D_001459C0, 0x20, (int)D_00146600, 4, 0, 0, mode) < 0) {
