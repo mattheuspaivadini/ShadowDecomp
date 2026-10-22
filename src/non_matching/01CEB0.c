@@ -1,5 +1,5 @@
-/* STATUS (Session 46, 2026-10-22): NON_MATCHING. best score 145 (was 361; sw.py diff lines).
- * Image register map read off the asm: the nfat loop counts down in i from k = nfat - 1 (k computed after the nifc clamp, copied into i), the in-loop FAT clear counts in j (then j = 0), fp/j zeroed before the two 255-entry clears, ifc = si->ifc_list right after the backup_block1 store: si now lands in s2 with no pins. Residual: sched1 still hoists ifc = si + 0x50 above memset/strcat (image keeps it last, spilled to 0x34(sp)), nfat lives in a temp instead of s4 and k in fp instead of s7, the IsSpeckOutClust movz arm order.
+/* STATUS (Session 46, 2026-10-22): NON_MATCHING. best score 117 (was 145; sw.py diff lines).
+ * The nfat loop counts in i from nfat - 1 directly (loop.c then keeps nfat - 1 in s7 like the image), the IsSpeckOutClust retry as do { r = ...; if (r == 1) clust++; } while (r != 0) (movz in the bnez slot). Residual: clust/nifc arithmetic schedule, i = 0 hoisted above the memset call, the hoisted ifc = si + 0x50, k/j/fp register roles.
  * libmc FAT format: reset the per-port FAT cache, read the card spec and superblock, rebuild the
  * superblock (magic + version, geometry, backup blocks skipping bad blocks, indirect FAT list),
  * write the empty FAT and indirect clusters, mark good/bad allocatable clusters, write the root
@@ -191,13 +191,13 @@ int _sceMcFatFormat(int port) {
         nifc = 32;
         nfat = 0x2000;
     }
-    k = nfat - 1;
     func_001283D0(ifc, 0, 0x80);
     for (i = r; i < nifc; i++) {
-        while ((r = _sceMcpIsSpeckOutClust(port, clust)) != 0) {
+        do {
+            r = _sceMcpIsSpeckOutClust(port, clust);
             if (r == 1)
                 clust++;
-        }
+        } while (r != 0);
         ifc[i] = clust;
         clust++;
     }
@@ -207,7 +207,7 @@ int _sceMcFatFormat(int port) {
         D_0015DF48[port].table[i] = -1;
     for (i = 255; i >= 0; i--)
         D_0015DF48[port].table[0x100 + i] = -1;
-    for (i = k; i >= 0; i--) {
+    for (i = nfat - 1; i >= 0; i--) {
         while (_sceMcpIsSpeckOutClust(port, clust) != 0)
             clust++;
         if (_sceMcpWriteClust(port, &D_0015DF48[port].table[0x100], clust, 1) == 0)
