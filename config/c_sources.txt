@@ -977,3 +977,4 @@
 00F4B0 = src/cod/00F4B0.c cc=29                   # SCE libkernl syscall 0x56 (_SetTLBEntry) trampoline used by SetTLBEntry/InitTLB32MB (Session 48)
 00F4F0 = src/cod/00F4F0.c cc=29                   # SCE libkernl syscall -0x56 (iSetTLBEntry) trampoline (Session 48)
 00F500 = src/cod/00F500.c cc=29                   # SCE libkernl syscall 0x57 (GetTLBEntry) trampoline (Session 48)
+00F510 = src/cod/00F510.c cc=29                   # SCE libkernl syscall -0x57 (iGetTLBEntry) trampoline (Session 48)
