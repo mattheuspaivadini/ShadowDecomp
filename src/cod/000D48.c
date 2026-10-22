@@ -1,12 +1,6 @@
-/* STATUS (Session 44, 2026-10-21): NON_MATCHING. best score 56 (was 80; sw.py diff lines).
- * LoaderSysPrintf and DecodeSection declared void as defined (002CF8, 000278): fixes most register roles after those calls. Residual: the loader's open result copy (move a0,v0; move s0,a0), the rel-count loops counting in s0 vs s3, and a few schedule ties.
- * Fence grid (build/s42/fence_grid.py: empty asm "+r" / asm volatile "r" use of each local after each statement): best single fence.
- * ld: module loader (stat/open/read, checksum inline helper, align_up inline so the /64 stays a
- * divu, RelocateSelfSymbol + RelocateCode inline, extra RelSet relocation walk). Residual =
- * fd/size register roles (s0/s1) and the rel-count loops counting in s0. Tried: decl orders, fd
- * reused as count, register pins (fd -> s0 best).
- * The original .s stays in the build (asm/cod/000D48.s); this C
- * draft (Session 35) is kept for the record. */
+/* asm/cod/000D48.s -> func_00100D48.
+ * ld: module loader; stat and open failures as two separate PutString blocks (cross-jumped; the extra fd refs put fd in s0), the half rel count in i with its own loop counter j, checksum walks a copy of the pointer (Session 46)
+ * MATCHED. */
 typedef struct {
     unsigned int st_name;
     unsigned int st_value;
@@ -133,10 +127,13 @@ static __inline__ int RelocateCode(struct ElfInfo *m)
 
 static __inline__ int checksum(unsigned char *p, int n)
 {
-    int sum = 0;
+    int sum;
+    unsigned char *q;
 
+    sum = 0;
+    q = p;
     while (n--)
-        sum += *p++;
+        sum += *q++;
     return sum;
 }
 
@@ -151,15 +148,19 @@ struct ElfInfo *func_00100D48(char *name)
     struct RelSet set;
     char buf[0x400];
     struct ElfInfo *e;
-    unsigned char *p;
     long size64;
-    int size, sum, i, n, tot;
-    register int fd asm("$16");
+    int size, j, i, n, tot;
+    int fd;
     struct Rel *r;
 
     LoaderSysPrintf(D_00136448, name);
     fd = LoaderSysGetstat(name, &st);
-    if (fd != 0 || (fd = LoaderSysFOpen(name, 1, 0)) < 0) {
+    if (fd != 0) {
+        PutString(0xFFFFFF00, D_00136460, name, fd);
+        return 0;
+    }
+    fd = LoaderSysFOpen(name, 1, 0);
+    if (fd < 0) {
         PutString(0xFFFFFF00, D_00136460, name, fd);
         return 0;
     }
@@ -169,7 +170,6 @@ struct ElfInfo *func_00100D48(char *name)
     e = (struct ElfInfo *)D_00139E04;
     D_00139E04 += size;
     LoaderSysFRead(fd, e, size);
-    asm("" : "+r"(fd));
     LoaderSysFClose(fd);
     LoaderSysPrintf(D_00136488, e, (char *)e + size, size64, checksum((unsigned char *)e, size));
     set.e = e;
@@ -178,13 +178,13 @@ struct ElfInfo *func_00100D48(char *name)
     set.dst = 0x1100000;
     RelocateElfInfoHeader(e);
     if (e->magic == D_00131CB8[0]) {
-        n = e->nrel >> 1;
+        i = e->nrel >> 1;
         tot = 0;
-        for (i = 0; i < n; i++)
-            tot += e->rel[i].count;
+        for (j = 0; j < i; j++)
+            tot += e->rel[j].count;
         func_00101B88(e, e->rel[0].f0C + tot * 8, &set);
-        for (i = 0; i < n; i++)
-            e->rel[n + i].count = 0;
+        for (j = 0; j < i; j++)
+            e->rel[i + j].count = 0;
     }
     DecodeSection(e, func_00101AC0, func_00101AF0, LoaderSysPrintf);
     RelocateSelfSymbol(e, (unsigned int)func_00101AA0);
