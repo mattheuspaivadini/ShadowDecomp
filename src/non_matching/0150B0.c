@@ -1,4 +1,6 @@
-/* STATUS (Session 29, 2026-10-18): NON_MATCHING. best score 7 [cc=29].
+/* STATUS (Session 42, 2026-10-21): NON_MATCHING. best score 2 (was 4; sw.py diff lines).
+ * Empty asm ("+r") on buf after the "m" fence moves move a0,s0 after the mult. Residual: addiu %lo(D_0014B598) before li 0x334/mult (image: after); the "m" fence makes the full address available before the multiply. Tried: second-level fence grid (168), offset temps with asm, int-sum address forms, base pointer local with asm.
+ * Volatile asm fence with an "m"(D_0014B598[0]) operand after the s < 0 return puts the base lui into the bltz slot like the image (7 -> 4 instructions). Residual: the lo addiu and move a0,s0 are scheduled before li 0x334/mult (image: after). Tried X/p/m operand forms, fence placement, if (s >= 0) block, 49 address-form pairs (base+off / off+base / int sums: CSE merges the two sums).
  * Residual = lui %hi(D_0014B598) comes before li 0x334 in the original (bltz delay slot holds the lui); ours puts the li first. Tried store order f00/f10, record pointer, (D + s)->f, s[D], table base local, unsigned s, if (s >= 0) block, D_0014B598[16], sharing the 1 constant.
  * The original .s stays in the build (asm/cod/0150B0.s); this C
  * draft (Session 29) is kept for the record. */
@@ -65,6 +67,8 @@ int scePad2CreateSocket(struct Pad2SockParam *param, int buf) {
     s = sceDbcCreateSocket(&req, buf, buf + 0x80);
     if (s < 0)
         return s;
+    __asm__ __volatile__ ("" : : "m" (D_0014B598[0]));
+    asm("" : "+r"(buf));
     D_0014B598[s].f10 = buf;
     D_0014B598[s].f00 = 1;
     func_001155D8(s);

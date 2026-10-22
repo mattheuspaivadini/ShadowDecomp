@@ -841,6 +841,7 @@
 021D58 = src/cod/021D58.c cc=29               # libmc2 _sceMcCoreBlockErase
 0215A8 = src/cod/0215A8.c cc=29               # libmc2 _sceMcCoreAuthentication
 021C20 = src/cod/021C20.c cc=29               # libmc2 _sceMcCoreWriteSameData
+0218D8 = src/cod/0218D8.c cc=29               # libmc2 _sceMcCoreReadPage2
 01BE48 = src/cod/01BE48.c cc=29                        # strtok-like tokenizer with "quoted" tokens (strcpy into D_0015DE48 first; .bss save pointer)
 01C6A8 = src/cod/01C6A8.c cc=29                        # libmc FAT free-cluster search from the per-unit hint (wraps once to 0); SysInfo pointer local as in 01C7D8
 01E858 = src/cod/01E858.c cc=29                        # libmc FAT: set an entry's modified time from a BCD sceCdCLOCK (static inline BCD helper; macro form misallocates the year)
@@ -879,3 +880,91 @@
 01B458 = src/cod/01B458.c cc=29                        # libmc2 server thread: wait for a command, switch dispatch to the _sceMcFat* calls (case order follows the code layout, 16..24 are empty), remap 0x81019FFF, signal completion (Session 34)
 015A88 = src/cod/015A88.c cc=29                        # libdbc init: bind loops with an empty busy-wait, module version check, sema + work area; bind-failure block placed inside the sema-failure branch (Session 34)
 0207F8 = src/cod/0207F8.c cc=29                        # libmc2 write-back cache: start, extend (next cluster, under 8, same block) or flush and restart; each path has its own count++ and return, cross-jumped into one tail (Session 34)
+013868 = src/cod/013868.c cc=29                        # sceGsSetDefDBuff; sceGsDBuff struct, GIF tag bitfields per tag, short half-zbuf local for DISPFB (Session 35)
+013BF8 = src/cod/013BF8.c cc=29                        # sceGsSyncPath; shared timeout counter, error labels in source order, msg pinned to a0, void scePrintf, register-pinned plain dump reads (Session 35)
+001190 = src/cod/001190.c                              # MoveElf; Elf32_Sym fix-up switch, RelocateCode body as a static inline, function addresses held in locals set between the calls (Session 35)
+001518 = src/cod/001518.c                              # LoaderSysRelocateOnlineElfInfo; MoveElf's symbol fix-up switch + RelocateCode static inline, caller-supplied callbacks (Session 35)
+001EC0 = src/cod/001EC0.c                              # exception register dump; switch on an unsigned mode (1/0/2 case tree), epc param reused as the row counter, u_long128 staging global (Session 35)
+004428 = src/cod/004428.c                              # load_set_conf_only; netcnfif sequence with an inline wait_result helper, second result kept in r (Session 35)
+004990 = src/cod/004990.c                              # LoaderSysInitTCP; ldnet init, retry via goto, func_00104668 nothrow (defined earlier in the TU) (Session 35)
+004090 = src/cod/004090.c                              # ldnet IOP module set per network type; LOAD macro, two switches (jtbl_00136FF0 + case tree) (Session 35)
+01F7F0 = src/cod/01F7F0.c cc=29                        # _sceMcFatDeleteFile; unsigned cluster chain walk, sign test written as & 0x80000000 so the xor constant is shared (Session 35)
+01F008 = src/cod/01F008.c cc=29                        # _sceMcFatReadFile; clust read before total = size (fixes the size/total register roles), asm lui/ori end marker (Session 35)
+006498 = src/cod/006498.c                              # InitDisp; ReinitDisp + ClearDisplay body expanded inline (template reloaded through gp per cell) + cursor reset (Session 35)
+005408 = src/cod/005408.c                              # PutFont; SetPrimColor body expanded inline (packet through a pointer local), glyph bits/positions set up after it, 8x8 XYZ2 pairs on a scratchpad VIF1 packet (Session 35)
+005E38 = src/cod/005E38.c                              # LoaderSysDrawSprite; SetPrimColorTex body expanded inline per branch, per-branch packet tail with a block-local DMA channel (Session 35)
+0033B0 = src/cod/0033B0.c                              # loader IOP bring-up; module-load and IOP-reboot helpers expanded inline, int-returning sceDmaReset (Session 35)
+000A58 = src/cod/000A58.c                              # loader thread restart: gp/sp register variables, loaderThreadJumpCode label + patched jal emitted by asm, la for its address (Session 35)
+01DC60 = src/cod/01DC60.c cc=29                        # libmc FAT path lookup: strtok walk with func_0011D9E8 per component, struct copies to the caller entry, (base + unit)->root index order, bad-entry return as a tail label (Session 35)
+01F210 = src/cod/01F210.c cc=29                        # _sceMcFatWriteFile; prev = clust right before the next-cluster call, separate mode-test returns, final stamp after the loop break, prev pinned to s4 (Session 36)
+00ADC0 = src/cod/00ADC0.c cc=29                        # SCE libkernel stdio sceOpen over SIF RPC; req pinned to s1, st reused as the fd return, iop_fd stored before the mode update (Session 36)
+00D668 = src/cod/00D668.c cc=29                        # SCE libkernel stdio sceDevctl over SIF RPC; one ret word (bufp spill sits above it), command 0x4601 block write-back, store order from a grid (Session 36)
+01FB48 = src/cod/01FB48.c cc=29                        # _sceMcFatGetDir; entries indexed as buffer[i] (two strength-reduced givs), nested filters with the skip count in the else arm, loop condition !done && length (Session 36)
+0253A0 = src/cod/0253A0.c                              # gcc fp-bit.c L_mul_df (SCE EE variant: 2.95.3 64x64 multiply, no rounding step)
+025080 = src/cod/025080.c                              # gcc fp-bit.c L_addsub_df _fpadd_parts (authentic source; out of line, dpadd/dpsub share it)
+026920 = src/cod/026920.c                              # GCC frame.c execute_cfa_insn (authentic source; def_cfa_expression revision, builtin memcpy)
+026D70 = src/cod/026D70.c                              # GCC frame.c __frame_state_for (authentic source; builtin memcpy, libc memset)
+02FBB0 = src/cod/02FBB0.c                              # Newlib 1.9.0 stdlib/strtod.c _strtod_r (authentic source; FLT_ROUNDS != 1, .rodata = jtbl + 3 literals at jtbl_00139C80)
+02C470 = src/cod/02C470.c                              # Newlib 1.9.0 stdlib/dtoa.c _dtoa_r (authentic source; strings by image label, .rodata = 3 literals + jtbl from 0x139AD0)
+0299A8 = src/cod/0299A8.c -G0                          # Newlib stdio/vfprintf.c _vfprintf_r (authentic source, older snapshot deltas; -G0 = literals in .rodata)
+02B2B8 = src/cod/02B2B8.c -G0                          # Newlib stdio/vfscanf.c __svfscanf (authentic source, older snapshot deltas; -G0 = literals in .rodata)
+0092F8 = src/cod/0092F8.c cc=29                        # SCE sifrpc _request_end; $gp swapped around end_function by a two-move asm (memory clobber); 3-node switch tree
+019AC0 = src/cod/019AC0.c cc=29                        # SCE libmrpc _request_end (ids 0x80000019..1D); $gp swap asm as 0092F8; own after-switch cd local
+011CA8 = src/cod/011CA8.c cc=29                        # SCE sif notify dispatcher; per-handler $gp via static inline get_gp/set_gp asm helpers
+007A08 = src/cod/007A08.c cc=29                        # SCE libkernl DelayThread; Status read by an mfc0 asm, timer-alarm semaphore
+00A878 = src/cod/00A878.c cc=29                        # power-off callback dispatcher; $gp save+load in one asm, sync/ei asm
+011FD0 = src/cod/011FD0.c cc=29                        # SCE libkernl sbrk; DI idiom (mfc0/di/sync.p as separate asm), ENOMEM past EndOfHeap
+007460 = src/cod/007460.c cc=29                        # SCE libkernl QueryIntrContext; Status read by an mfc0 asm
+007470 = src/cod/007470.c cc=29                        # SCE libkernl DisableIntc; Status read by an mfc0 asm
+0074D8 = src/cod/0074D8.c cc=29                        # SCE libkernl EnableIntc; Status read by an mfc0 asm
+007540 = src/cod/007540.c cc=29                        # SCE libkernl DisableDmac; Status read by an mfc0 asm
+0075A8 = src/cod/0075A8.c cc=29                        # SCE libkernl EnableDmac; Status read by an mfc0 asm
+00FB70 = src/cod/00FB70.c cc=29                        # SCE libkernl EIntr; Status read by an mfc0 asm, ei asm
+007858 = src/cod/007858.c cc=29                        # SCE libkernl iWakeupThread; inline iGetThreadId syscall asm, request ring
+007970 = src/cod/007970.c cc=29                        # SCE libkernl iSuspendThread; iWakeupThread twin (cmd 2)
+010390 = src/cod/010390.c cc=29                        # SCE libkernl SetT2; di/sync.p/mfc0 loop as one asm, eret via ErrorEPC
+031818 = src/cod/031818.c cc=29                        # SCE libkernl _sceSDC; dcache way walk, sync/cache/mfc0 TagLo as asm
+0318C0 = src/cod/0318C0.c cc=29                        # SCE libkernl SyncDCache; DIntr/EIntr bracket, tail j EIntr
+031958 = src/cod/031958.c cc=29                        # SCE libkernl _sceIDC; _sceSDC twin (cache 0x16)
+031A00 = src/cod/031A00.c cc=29                        # SCE libkernl InvalidDCache; SyncDCache twin
+0021D0 = src/cod/0021D0.c                              # loader setCop0Epc; mtc0 $14 asm
+00F590 = src/cod/00F590.c cc=29                        # SCE libkernl 32 MB TLB set-up; index as register asm $t9 local
+0109D0 = src/cod/0109D0.c cc=29                        # SCE libkernl timer alarm INTC handler; $gp per alarm as lw asm, volatile base read/plain store
+00B408 = src/cod/00B408.c cc=29               # SCE libkernel stdio sceRead over SIF RPC; volatile asm fences with an m operand order the hi() reloads before i = 0 / nowait = 0 (Session 40)
+002500 = src/cod/002500.c                         # loader: delete every external sema, list clear, then sema sweep with the loader-attribute search inline and found = 1 jumping past found = 0 (Session 41)
+015940 = src/cod/015940.c cc=29                   # SCE libvib sceVibSetActParam; size/n2 stores before the DbcParam bitfields, second memcpy destination as an int sum n2 + (int)&req + 8 (Session 41)
+017A00 = src/cod/017A00.c cc=29                   # SCE libcdvd _sceCdSC: linear id tests (goto dispatch), default jumps over the 0x8014 body, volatile _sceCd_scmd_semid keeps its load out of the slot (Session 41)
+016D88 = src/cod/016D88.c cc=29                   # SCE libcdvd _sceCd_cbLoop; $gp swap asm, volatile cb_sem, volatile read of sceCdCbfunc_number in the call test, empty asm fence after the exit-path semaphore store (Session 41)
+0000D0 = src/cod/0000D0.c                         # loader ResolveRelocation (R_MIPS_32/26/HI16/LO16): HI16 lookahead as a for(;;) with continue/break (error block ahead of the case), entry address as int sum (j << 3), s + (a << 16) in its own temp (Session 41)
+019F18 = src/cod/019F18.c cc=29                   # SCE libmrpc sceSifMCallRpc; int-typed record/client fields (self, recv, cd, gp, dest) fix the TBAA store order, $gp read by a volatile asm into a temp, plain sema field, has_end tested == 0 first (Session 41)
+017FB0 = src/cod/017FB0.c cc=29                   # SCE libcdvd sceCdDiskReady (0175A8 template): volatile rcmd semid, bind retry with continue, bound flag cleared on the break path, counter set before the bound test, non-gp request word (Session 41)
+017D98 = src/cod/017D98.c cc=29                   # SCE libcdvd sceCdDiskReady_old (twin of 017FB0 over the S-command semaphore): old-module flag under DIntr, sceCdSyncS gate, bind retry with continue (Session 41)
+017288 = src/cod/017288.c cc=29                   # SCE libcdvd sceCdLayerSearchFile (0175A8 bind template): name copy tests the stored byte, uncached sceCdlFILE result copied with the builtin memcpy, separate wait counter (Session 41)
+019DD8 = src/cod/019DD8.c cc=29                   # SCE libmrpc sceSifMUnBindRpc; int-typed record/sema fields (as 019F18) order the stores by TBAA, cd->f10 read before the r->cd store, volatile first csema read (Session 41)
+012918 = src/cod/012918.c cc=29                   # SCE sifcmd sceSifInitCmd: both clear loops indexed (the sregs loop is reversed by loop.c and its final i == 32 is reused for the D_STAT write), struct init in field order with sregs last, int-typed unused field (Session 41)
+01A188 = src/cod/01A188.c cc=29                   # SCE libmc2 sceMc2Init: three semaphores + server thread; each failure path written inline (CSE keeps the constant 1 in s2, jump2 cross-jumps them), handle -1 stores reordered for the sched tie (Session 41)
+000278 = src/cod/000278.c                         # loader DecodeSection: per-type log calls written out (no shared goto), misaligned-source branch first, first-address kept in a one-element stack array (Session 41)
+010D48 = src/cod/010D48.c cc=ee-gcc2.9-991111-01-dtls13010 -g0 -fno-delayed-branch -G0 # timer TU iAllocTimerCounter; volatile D.f0C, operand-only asm fence on the f10 increment (Session 42)
+010000 = src/cod/010000.c cc=29                   # ExecPS2 argv packer; a3-pinned D_00133168, empty asm on the end copy (Session 42)
+005CE0 = src/cod/005CE0.c                         # ReinitDisp; DMA/GS reset, mode argument through an empty asm (Session 42)
+0056D8 = src/cod/0056D8.c                         # console _putString; PutChar/ScrollDisplay inline, char-typed ternary join for the toupper store (Session 42)
+027390 = src/cod/027390.c                         # fp-bit pack_f (FLOAT); exp kept live at the normal-range entry by an asm use (beql slot) (Session 42)
+00A8C0 = src/cod/00A8C0.c cc=29                   # sceFsInit; handler-data pointer h with an empty asm between the two stores (Session 42)
+01BCC8 = src/cod/01BCC8.c cc=29                   # wildcard matcher (? and *); empty asm on pat in the ? loop picks the cross-jump survivor (Session 42)
+00F168 = src/cod/00F168.c cc=29                   # sceSifRebootIop; inline strlen/strcat loops, asm use of arg after sceSifExitRpc (Session 42)
+01E388 = src/cod/01E388.c cc=29                   # libmc FAT add-entry; fail blocks as labels at the end of the while body (loop.c moves them out), index path joins the update tail via goto, volatile dot.cluster read keeps it out of the bnel slot (Session 43)
+00B678 = src/cod/00B678.c cc=29                   # sceWrite; sceRead template, nowait pinned to s4, head copy with its own index, else-branch fence computes buf & 0xF before nowait = 0 (gcse PRE insertion order) (Session 43)
+007D90 = src/cod/007D90.c cc=ee-gcc2.9-991111-01-dtls13010 -g0 # %e helper: double bit pattern -> capped fixed-point mantissa; bits and mantissa share one variable (Session 44)
+007E20 = src/cod/007E20.c cc=ee-gcc2.9-991111-01-dtls13010 -g0 -G0 # %e formatter; -G0 TU: the 0.1/0.1/1e6 literals are GAS li.d pool entries (adopted .rodata at 0x137CF8) (Session 44)
+0127E0 = src/cod/0127E0.c cc=29                   # SCE DECI2 sceTtyInit; record words f00..f0C volatile (their zero stores keep source order 0xC/4/8 ahead of the uncached-address ORs) (Session 44)
+00FB20 = src/cod/00FB20.c cc=ee-gcc2.9-991111-01-dtls13010 -g0 # SCE libkernl DIntr; dtls13010 toolchain fills the final jr slot, the R5900 short-loop nop pair is explicit (Session 44)
+01CB18 = src/cod/01CB18.c cc=29                   # libmc FAT get-info; _sceMcCoreClearNewCardFlag/_sceMcCoreWriteBack declared int as defined (fixes the v0/v1 roles after both calls) (Session 44)
+010780 = src/cod/010780.c cc=29                   # timer compare re-arm; redundant exit + dead store after t = k make expand_end_loop rotate the whole loop body (Session 45)
+003110 = src/cod/003110.c                         # LoaderSysGetMemoryInfo; char * info fields (no TBAA alias with the int stack_size load), stores f10,f14,f1C,f04,f0C (Session 45)
+00B938 = src/cod/00B938.c cc=29               # SCE stdio sceIoctl; local one = 1 used by the compare tree (li s5,1 in the prologue), empty asm on the first queue test keeps i = 0 out of the bne slot (Session 45)
+00B1C8 = src/cod/00B1C8.c cc=29               # SCE stdio sceLseek; else "m" fence orders the PRE luis, an "X"-operand empty asm adds hi() references to restore the s4/s5/s6 global-alloc order (Session 45)
+00D428 = src/cod/00D428.c cc=29               # SCE stdio sceLseek64; same fences as sceLseek (00B1C8) (Session 45)
+01EA78 = src/cod/01EA78.c cc=29                   # libmc FAT create; int mode, D_0015F080 entries through a walking pointer, a long copy of isdir for the ternaries (survives cprop: movn on s6), (unsigned)(n > 0) + free keeps the addu operand order (Session 46)
+004668 = src/cod/004668.c                         # loader net bring-up; load_conf returns early on memalign failure (no if-then block for CSE to skip, so the second D_0013D000 keeps only the hi() from gcse), interface id is its own .sbss word D_0013A184 (Session 46)
+000D48 = src/cod/000D48.c                         # ld: module loader; stat and open failures as two separate PutString blocks (cross-jumped; the extra fd refs put fd in s0), the half rel count in i with its own loop counter j, checksum walks a copy of the pointer (Session 46)
+0225E8 = src/cod/0225E8.c cc=29                   # netcnfif load_entry_auto; separate counts per list, an int p reused as size copy and list walker, attach-name mismatch via continue in both type arms, two no-code X refs on dev (fp vs stack for ifc) (Session 46)

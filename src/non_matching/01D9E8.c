@@ -1,4 +1,5 @@
-/* STATUS (Session 34, 2026-10-19): NON_MATCHING. best score 123 [cc=29].
+/* STATUS (Session 44, 2026-10-21): NON_MATCHING. best score 11 (was 46; sw.py diff lines).
+ * Loop layout explained: stmt.c expand_end_loop moves everything up to the last jump to the loop end label (within 30 insns) to the bottom, so the image's for (;;) has 'if (strlen(buf[0].name) >= 0x20) break;' (break = the after-loop return 0x81019002) while the other dot/dotdot failures return directly; inner loop as for (i = 0; i < 2 && count != 0; i++); clust compared as (unsigned int)clust == 0xFFFFFFFF (lui/ori). Residual: the bne slot before ent = buf stays empty (image: move s0,sp) and the beqz first slot is filled from the fall-through (image: from the target), plus the return 0x81010002 block (image: last block, beq); a goto label after the loop places it but loop.c then moves the err/0x6F returns out as well.
  * FAT directory search by name (first cluster checks . and ..). Prologue/frame match with while (read)
  * and a plain -1 compare. Residual = block layout: the original starts the first-cluster strlen right
  * after the read at the loop bottom and branches back into the . compare.
@@ -24,39 +25,39 @@ int func_0011D9E8(int port, struct DirEnt *out, int *idx, const char *name, int 
     int i;
     unsigned int m1;
 
-    while (_sceMcpReadUserClust(port, buf, clust, 1) != 0) {
+    for (;;) {
+        if (_sceMcpReadUserClust(port, buf, clust, 1) == 0)
+            return 0x8101006F;
         if (first) {
             first = 0;
-            if (func_001290C4(buf[0].name) >= 0x20 || func_00128E6C(buf[0].name, D_00138CF0) != 0
-                || func_001290C4(buf[1].name) >= 0x20 || func_00128E6C(buf[1].name, D_00138CF8) != 0)
+            if (func_001290C4(buf[0].name) >= 0x20)
+                break;
+            if (func_00128E6C(buf[0].name, D_00138CF0) != 0 || func_001290C4(buf[1].name) >= 0x20
+                || func_00128E6C(buf[1].name, D_00138CF8) != 0)
                 return 0x81019002;
         }
         ent = buf;
-        if (count != 0) {
-            i = 0;
-            do {
-                if (ent->attr & 0x8000) {
-                    ent->name[0x1F] = '\0';
-                    if (func_00128E6C(name, ent->name) == 0) {
-                        if (out != 0)
-                            *out = *ent;
-                        if (idx != 0)
-                            *idx = n;
-                        return 0;
-                    }
+        for (i = 0; i < 2 && count != 0; i++) {
+            if (ent->attr & 0x8000) {
+                ent->name[0x1F] = '\0';
+                if (func_00128E6C(name, ent->name) == 0) {
+                    if (out != 0)
+                        *out = *ent;
+                    if (idx != 0)
+                        *idx = n;
+                    return 0;
                 }
-                i++;
-                count -= count > 0;
-                ent++;
-                n++;
-            } while (i < 2 && count != 0);
+            }
+            count -= count > 0;
+            ent++;
+            n++;
         }
         clust = func_0011C4C8(port, clust, &err);
         if (err != 0)
             return err;
-        if (clust == -1)
+        if ((unsigned int)clust == 0xFFFFFFFF)
             return 0x81010002;
         clust &= 0x7FFFFFFF;
     }
-    return 0x8101006F;
+    return 0x81019002;
 }

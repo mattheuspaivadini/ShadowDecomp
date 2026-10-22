@@ -56,8 +56,12 @@ def parse_asm(name: str) -> dict:
         if line.startswith("nonmatching "):
             rest = line[len("nonmatching "):]
             s, sz = rest.split(",")
-            sym = s.strip()
-            size = int(sz.strip(), 16)
+            # a file can hold a function plus an inner global label (000A58):
+            # keep the first symbol and span all of them
+            if size is None:
+                sym = s.strip()
+                size = 0
+            size += int(sz.strip(), 16)
         elif line.startswith("glabel ") and sym is None:
             sym = line.split()[1]
     return {"symbol": sym, "addr": int(name, 16) + ROM_BASE, "size": size}
