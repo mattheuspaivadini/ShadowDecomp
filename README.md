@@ -16,8 +16,8 @@ copyrighted game material: you must supply your own legally owned copy of the di
 | Flat load image | **237,952 bytes**, SHA-1 `6f853f64…` — **HASH MATCH** |
 | ELF container | `SCUS_974.72` (242,940 bytes, SHA-1 `b715b349…`) — **byte-identical** |
 | Functions in the image | 1,042 real functions (+ 2 raw `textbin` regions) |
-| Functions matched from C | **1,016 / 1,042** (97.50 %) |
-| Matched code bytes | **187,892 / 203,692** `.text` bytes (**92.24 %**) |
+| Functions matched from C | **1,025 / 1,042** (98.37 %) |
+| Matched code bytes | **190,188 / 203,692** `.text` bytes (**93.37 %**) |
 | Near-miss attempts | 12 drafts in `src/non_matching/` (diff lines range from 2 to 114) |
 | Named symbols | ~55 evidence-derived `.text` names, plus 840 SDK names imported from `KERNEL.XFF` |
 | Remaining real pool | 13 (12 near-miss + 1 untouched) |
@@ -55,12 +55,13 @@ function is caught immediately.
 - **Library provenance:** several libraries in the image are recognizable revisions:
   Newlib 1.9.0 (stdio, malloc, strtol, mprec, reent), GCC 2.95.3 `libgcc2`, and SCE SDK
   template families (SIF-RPC stdio, `sceMc2*` async, `sceVif1Pk*`, `sceDma*`).
-- **Hand-written assembly:** 13 functions remain `asm-permanent` in the ledger: the crt0
-  `entry` (128-bit `sq` .bss clear, raw syscalls), three kernel exception vectors (full
-  register saves with `mfhi1`/`mfsa`), and 9 MMI string routines. The syscall-stub table and
-  the `$gp`/Status-register functions once classed this way turned out to be C with inline asm.
-  The MMI routines look like Newlib C with inline asm built by ee-gcc 2.9-ee-990721
-  (`tools/cc/make_hybrid_990721.sh`); strlen, memcpy and memset are archived as near-misses.
+- **Hand-written assembly:** 4 functions remain `asm-permanent` in the ledger: the crt0
+  `entry` (128-bit `sq` .bss clear, raw syscalls that set `$gp`/`$sp`) and three kernel
+  exception vectors (`$k0`/`$at` full register saves with `mfhi1`/`mfsa`, `mtc0`, `eret`).
+  The syscall-stub table, the `$gp`/Status-register functions and the MMI string routines once
+  classed this way turned out to be C with inline asm. The MMI routines are Newlib C with
+  inline asm built by ee-gcc 2.9-ee-990721 + the 991111 assembler
+  (`tools/cc/make_hybrid_990721.sh`); 9 of 12 match, strcmp/strncmp/strncpy are near-misses.
 
 ---
 
