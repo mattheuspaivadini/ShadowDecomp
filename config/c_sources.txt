@@ -1052,3 +1052,4 @@
 006F40 = src/cod/006F40.c cc=29                    # SCE libkernl syscall -0x36 (iCancelWakeupThread) stub (Session 51)
 006F50 = src/cod/006F50.c cc=29                    # SCE libkernl syscall 0x37 (SuspendThread) stub (Session 51)
 006F60 = src/cod/006F60.c cc=29                    # SCE libkernl syscall -0x38 (_iSuspendThread) stub (Session 51)
+006F70 = src/cod/006F70.c cc=29                    # SCE libkernl syscall 0x39 (ResumeThread) stub (Session 51)
