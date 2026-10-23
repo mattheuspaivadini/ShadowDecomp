@@ -1024,3 +1024,4 @@
 006D80 = src/cod/006D80.c cc=29                    # SCE libkernl syscall -0x1A (_iEnableIntc) stub (Session 50)
 006D90 = src/cod/006D90.c cc=29                    # SCE libkernl syscall -0x1B (_iDisableIntc) stub (Session 50)
 006DA0 = src/cod/006DA0.c cc=29                    # SCE libkernl syscall -0x1C (_iEnableDmac) stub (Session 50)
+006DB0 = src/cod/006DB0.c cc=29                    # SCE libkernl syscall -0x1D (_iDisableDmac) stub (Session 50)
