@@ -1055,3 +1055,4 @@
 006F70 = src/cod/006F70.c cc=29                    # SCE libkernl syscall 0x39 (ResumeThread) stub (Session 51)
 006F80 = src/cod/006F80.c cc=29                    # SCE libkernl syscall -0x3A (iResumeThread) stub (Session 51)
 006F90 = src/cod/006F90.c cc=29                    # SCE libkernl syscall 0x3B (JoinThread) stub (Session 51)
+006FA0 = src/cod/006FA0.c cc=29                    # SCE libkernl syscall 0x3C (RFU060) stub (Session 51)
