@@ -994,3 +994,4 @@
 0102A8 = src/cod/0102A8.c cc=29                   # SCE libkernl syscall 0x5B (GetSyscall) trampoline used by InitAlarm (Session 48)
 0141A8 = src/cod/0141A8.c cc=29                   # SCE libgraph syscall 0x80 (GsGetCRTOffset) trampoline used by sceGsSetDefDispEnv (Session 48)
 006BC0 = src/cod/006BC0.c cc=29                    # SCE libkernl syscall 0x0 (RFU000_FullReset) stub (Session 49)
+006BD0 = src/cod/006BD0.c cc=29                    # SCE libkernl syscall 0x1 (ResetEE) stub (Session 49)
