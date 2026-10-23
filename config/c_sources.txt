@@ -1077,3 +1077,4 @@
 0070D0 = src/cod/0070D0.c cc=29                    # SCE libkernl syscall 0x4F (SetGsVParam) stub (Session 51)
 0070E0 = src/cod/0070E0.c cc=29                    # SCE libkernl syscall 0x50 (RFU080_CreateEventFlag) stub (Session 51)
 0070F0 = src/cod/0070F0.c cc=29                    # SCE libkernl syscall 0x51 (RFU081_DeleteEventFlag) stub (Session 51)
+007100 = src/cod/007100.c cc=29                    # SCE libkernl syscall 0x52 (RFU082_SetEventFlag) stub (Session 51)
