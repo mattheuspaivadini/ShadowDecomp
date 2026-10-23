@@ -1115,3 +1115,4 @@
 007340 = src/cod/007340.c cc=29                    # SCE libkernl syscall 0x72 (SetPgifHandler) stub (Session 53)
 007350 = src/cod/007350.c cc=29                    # SCE libkernl syscall 0x73 (SetVSyncFlag) stub (Session 53)
 007360 = src/cod/007360.c cc=29                    # SCE libkernl syscall 0x74 (RFU116) stub (Session 53)
+007370 = src/cod/007370.c cc=29                    # SCE libkernl syscall 0x75 (_print) stub (Session 53)
