@@ -1027,3 +1027,4 @@
 006DB0 = src/cod/006DB0.c cc=29                    # SCE libkernl syscall -0x1D (_iDisableDmac) stub (Session 50)
 006DC0 = src/cod/006DC0.c cc=29                    # SCE libkernl syscall -0xFE (iSetAlarm) stub (Session 50)
 006DD0 = src/cod/006DD0.c cc=29                    # SCE libkernl syscall -0xFF (iReleaseAlarm) stub (Session 50)
+006DE0 = src/cod/006DE0.c cc=29                    # SCE libkernl syscall 0x20 (CreateThread) stub (Session 50)
