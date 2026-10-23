@@ -14,6 +14,20 @@
  * declaration order (72-variant grid, floor 9 without the pin), register-asm pins on dst,
  * src, len, aligned_dst and the -1 bound, 12 byte-loop forms (!= 0, for, do-while, char temp,
  * named/pinned -1 bound).
+ * Tried (S57): pin the -1 sentinel to $v0 in a nested byte-loop scope and compare against it;
+ * GCC rematerializes it in earlier loop guards and changes the register allocation throughout.
+ * Also tied a fixed $a0 local to the $v0 sentinel through an empty asm output; same early
+ * register-allocation changes and no closer output. Both variants were worse than score 3.
+ * Tried (S58): volatile empty-asm fences after the byte copy (no operands, memory clobber,
+ * and a tied dst operand) prevent the dst bump from filling the bne slot, but make GCC rotate
+ * the loop and emit bnel with a load in its slot; register-input forms also change earlier
+ * allocations. A do-while form with the fence has the same result. A long -1 sentinel and an
+ * int sentinel held through an empty asm both disturb register allocation. The 991111-01 cc1
+ * leaves the byte-loop bne slot empty, but moves the 8-byte dst bump before its beqz instead
+ * of into the delay slot. No variant improved on the score-3 baseline.
+ * Tried (S59): `ee-gcc2.9-991111-01 -fno-schedule-insns` changes register allocation and
+ * instruction order across both vector loops; a block-local `long end = -1L` also changes the
+ * loop guards and register roles throughout. Neither is viable for the residual.
  * Tried (S55): all 198 dependency-respecting orders of the 8 load/store/bump statements,
  * const-qualified loads, -fargument-noalias(-global), -fstrict-aliasing, K&R definition,
  * wine ee-gcc2.9-991111 (15+), cc=29/dtls13010 (13+).
