@@ -1131,3 +1131,4 @@
 007440 = src/cod/007440.c cc=29                    # SCE libkernl syscall 0x7F (GetMemorySize) stub (Session 53)
 007450 = src/cod/007450.c cc=29                    # SCE libkernl syscall 0x82 (_InitTLB) stub (Session 53)
 
+0072F0 = src/cod/0072F0.c cc=29                    # SCE libkernl syscall 0x6F (GetOsdConfigParam2) stub (Session 53)
