@@ -1017,3 +1017,4 @@
 006D10 = src/cod/006D10.c cc=29                    # SCE libkernl syscall 0x13 (RemoveDmacHandler) stub (Session 49)
 006D20 = src/cod/006D20.c cc=29                    # SCE libkernl syscall 0x14 (_EnableIntc) stub (Session 49)
 006D30 = src/cod/006D30.c cc=29                    # SCE libkernl syscall 0x15 (_DisableIntc) stub (Session 49)
+006D40 = src/cod/006D40.c cc=29                    # SCE libkernl syscall 0x16 (_EnableDmac) stub (Session 49)
