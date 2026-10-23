@@ -1118,3 +1118,4 @@
 007370 = src/cod/007370.c cc=29                    # SCE libkernl syscall 0x75 (_print) stub (Session 53)
 007380 = src/cod/007380.c cc=29                    # SCE libkernl syscall 0x76 (sceSifDmaStat) stub (Session 53)
 007390 = src/cod/007390.c cc=29                    # SCE libkernl syscall -0x76 (isceSifDmaStat) stub (Session 53)
+0073A0 = src/cod/0073A0.c cc=29                    # SCE libkernl syscall 0x77 (sceSifSetDma) stub (Session 53)
