@@ -1039,3 +1039,4 @@
 006E70 = src/cod/006E70.c cc=29                    # SCE libkernl syscall 0x29 (ChangeThreadPriority) stub (Session 50)
 006E80 = src/cod/006E80.c cc=29                    # SCE libkernl syscall -0x2A (iChangeThreadPriority) stub (Session 50)
 006E90 = src/cod/006E90.c cc=29                    # SCE libkernl syscall 0x2B (RotateThreadReadyQueue) stub (Session 50)
+006EA0 = src/cod/006EA0.c cc=29                    # SCE libkernl syscall -0x2C (_iRotateThreadReadyQueue) stub (Session 50)
