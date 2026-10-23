@@ -1100,3 +1100,4 @@
 007240 = src/cod/007240.c cc=29                    # SCE libkernl syscall 0x62 (DisableCache) stub (Session 52)
 007250 = src/cod/007250.c cc=29                    # SCE libkernl syscall 0x63 (GetCop0) stub (Session 52)
 007260 = src/cod/007260.c cc=29                    # SCE libkernl syscall 0x64 (FlushCache) stub (Session 52)
+007270 = src/cod/007270.c cc=29                    # SCE libkernl syscall 0x66 (CpuConfig) stub (Session 52)
