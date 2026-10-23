@@ -1088,3 +1088,4 @@
 007180 = src/cod/007180.c cc=29                    # SCE libkernl syscall -0x5A (RFU090_iReferEventFlagStatus) stub (Session 52)
 007190 = src/cod/007190.c cc=29                    # SCE libkernl syscall 0x5B (RFU091) stub (Session 52)
 0071A0 = src/cod/0071A0.c cc=29                    # SCE libkernl syscall 0x5C (EnableIntcHandler) stub (Session 52)
+0071B0 = src/cod/0071B0.c cc=29                    # SCE libkernl syscall -0x5C (iEnableIntcHandler) stub (Session 52)
