@@ -1132,3 +1132,4 @@
 007450 = src/cod/007450.c cc=29                    # SCE libkernl syscall 0x82 (_InitTLB) stub (Session 53)
 
 0072F0 = src/cod/0072F0.c cc=29                    # SCE libkernl syscall 0x6F (GetOsdConfigParam2) stub (Session 53)
+0000C8 = src/cod/0000C8.c cc=29                    # SCE syscall 0x23 handler stub (Session 53)
