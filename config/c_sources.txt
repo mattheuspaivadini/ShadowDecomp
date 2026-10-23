@@ -1127,3 +1127,4 @@
 007400 = src/cod/007400.c cc=29                    # SCE libkernl syscall 0x7B (_ExecOSD) stub (Session 53)
 007410 = src/cod/007410.c cc=29                    # SCE libkernl syscall 0x7C (Deci2Call) stub (Session 53)
 007420 = src/cod/007420.c cc=29                    # SCE libkernl syscall 0x7D (PSMode) stub (Session 53)
+007430 = src/cod/007430.c cc=29                    # SCE libkernl syscall 0x7E (MachineType) stub (Session 53)
