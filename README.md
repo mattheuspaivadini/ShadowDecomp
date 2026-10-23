@@ -16,11 +16,11 @@ copyrighted game material: you must supply your own legally owned copy of the di
 | Flat load image | **237,952 bytes**, SHA-1 `6f853f64…` — **HASH MATCH** |
 | ELF container | `SCUS_974.72` (242,940 bytes, SHA-1 `b715b349…`) — **byte-identical** |
 | Functions in the image | 1,042 real functions (+ 2 raw `textbin` regions) |
-| Functions matched from C | **902 / 1,042** (86.56 %) |
-| Matched code bytes | **186,076 / 203,692** `.text` bytes (**91.35 %**) |
-| Near-miss attempts | 9 drafts in `src/non_matching/` (diff lines range from 2 to 114) |
+| Functions matched from C | **1,016 / 1,042** (97.50 %) |
+| Matched code bytes | **187,892 / 203,692** `.text` bytes (**92.24 %**) |
+| Near-miss attempts | 12 drafts in `src/non_matching/` (diff lines range from 2 to 114) |
 | Named symbols | ~55 evidence-derived `.text` names, plus 840 SDK names imported from `KERNEL.XFF` |
-| Remaining real pool | 10 (9 near-miss + 1 untouched) |
+| Remaining real pool | 13 (12 near-miss + 1 untouched) |
 
 Every matched function is gated by the image hash, so a change that breaks any
 function is caught immediately.
@@ -55,9 +55,12 @@ function is caught immediately.
 - **Library provenance:** several libraries in the image are recognizable revisions:
   Newlib 1.9.0 (stdio, malloc, strtol, mprec, reent), GCC 2.95.3 `libgcc2`, and SCE SDK
   template families (SIF-RPC stdio, `sceMc2*` async, `sceVif1Pk*`, `sceDma*`).
-- **Hand-written assembly:** 130 functions are classed `asm-permanent` in the ledger
-  (MMI string routines, syscall stubs and low-level kernel exception handlers). Many functions once classed this way
-  turned out to be C with inline asm syscall stubs, so the list continues to be decomposed.
+- **Hand-written assembly:** 13 functions remain `asm-permanent` in the ledger: the crt0
+  `entry` (128-bit `sq` .bss clear, raw syscalls), three kernel exception vectors (full
+  register saves with `mfhi1`/`mfsa`), and 9 MMI string routines. The syscall-stub table and
+  the `$gp`/Status-register functions once classed this way turned out to be C with inline asm.
+  The MMI routines look like Newlib C with inline asm built by ee-gcc 2.9-ee-990721
+  (`tools/cc/make_hybrid_990721.sh`); strlen, memcpy and memset are archived as near-misses.
 
 ---
 
