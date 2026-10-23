@@ -1023,3 +1023,4 @@
 006D70 = src/cod/006D70.c cc=29                    # SCE libkernl syscall 0xFD (ReleaseAlarm) stub (Session 50)
 006D80 = src/cod/006D80.c cc=29                    # SCE libkernl syscall -0x1A (_iEnableIntc) stub (Session 50)
 006D90 = src/cod/006D90.c cc=29                    # SCE libkernl syscall -0x1B (_iDisableIntc) stub (Session 50)
+006DA0 = src/cod/006DA0.c cc=29                    # SCE libkernl syscall -0x1C (_iEnableDmac) stub (Session 50)
