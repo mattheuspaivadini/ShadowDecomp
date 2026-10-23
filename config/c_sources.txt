@@ -1011,3 +1011,4 @@
 006CB0 = src/cod/006CB0.c cc=29                    # SCE libkernl syscall 0xF (SetVInterruptHandler) stub (Session 49)
 006CC0 = src/cod/006CC0.c cc=29                    # SCE libkernl syscall 0x10 (AddIntcHandler) stub (Session 49)
 006CD0 = src/cod/006CD0.c cc=29                    # SCE libkernl syscall 0x10 (AddIntcHandler2) stub (Session 49)
+006CE0 = src/cod/006CE0.c cc=29                    # SCE libkernl syscall 0x11 (RemoveIntcHandler) stub (Session 49)
