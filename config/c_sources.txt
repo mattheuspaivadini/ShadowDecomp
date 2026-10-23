@@ -1009,3 +1009,4 @@
 006C90 = src/cod/006C90.c cc=29                    # SCE libkernl syscall 0xD (SetVTLBRefillHandler) stub (Session 49)
 006CA0 = src/cod/006CA0.c cc=29                    # SCE libkernl syscall 0xE (SetVCommonHandler) stub (Session 49)
 006CB0 = src/cod/006CB0.c cc=29                    # SCE libkernl syscall 0xF (SetVInterruptHandler) stub (Session 49)
+006CC0 = src/cod/006CC0.c cc=29                    # SCE libkernl syscall 0x10 (AddIntcHandler) stub (Session 49)
