@@ -996,3 +996,4 @@
 006BC0 = src/cod/006BC0.c cc=29                    # SCE libkernl syscall 0x0 (RFU000_FullReset) stub (Session 49)
 006BD0 = src/cod/006BD0.c cc=29                    # SCE libkernl syscall 0x1 (ResetEE) stub (Session 49)
 006BE0 = src/cod/006BE0.c cc=29                    # SCE libkernl syscall 0x2 (SetGsCrt) stub (Session 49)
+006BF0 = src/cod/006BF0.c cc=29                    # SCE libkernl syscall 0x3 (RFU003) stub (Session 49)
