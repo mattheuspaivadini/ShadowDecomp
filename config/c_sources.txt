@@ -1107,3 +1107,4 @@
 0072B0 = src/cod/0072B0.c cc=29                    # SCE libkernl syscall 0x6B (sceSifStopDma) stub (Session 52)
 0072C0 = src/cod/0072C0.c cc=29                    # SCE libkernl syscall 0x6C (SetCPUTimerHandler) stub (Session 52)
 0072D0 = src/cod/0072D0.c cc=29                    # SCE libkernl syscall 0x6D (SetCPUTimer) stub (Session 52)
+0072E0 = src/cod/0072E0.c cc=29                    # SCE libkernl syscall 0x6E (SetOsdConfigParam2) stub (Session 52)
