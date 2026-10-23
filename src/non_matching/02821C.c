@@ -1,22 +1,23 @@
-/* STATUS (Session 55, 2026-10-23): NON_MATCHING. best score 9 [cc=ee-gcc2.9-990721-as991111 -malign-loops=2 -fno-strength-reduce] (was 23).
+/* STATUS (Session 56, 2026-10-23): NON_MATCHING. best score 3 [cc=ee-gcc2.9-990721-as991111 -malign-loops=2 -fno-strength-reduce] (was 9).
  * Newlib 1.9.0 string/memcpy.c with the 4x-long big block replaced by two 16-byte (TImode lq/sq)
  * copies and 16-byte alignment; no inline asm. Toolchain: see src/non_matching/0290C4.c.
- * Lever (Session 55): load both 16-byte words into temporaries before the two stores. The two
- * live TImode values then take v0/v1, local-alloc puts the loop flag in a0, and global-alloc
- * moves dst0 to t0 (the image's `move t0,a0` entry copy). With -fno-strength-reduce the loop
- * pointer bumps stay plain addiu like the image.
- * Residual (9 words, two spots): (1) big loop: the image orders lq1/sq1/lq2/sq2 with lq1 in v1 and
- * lq2 in v0; ours keeps the source order lq1/lq2/sq1/sq2 (v0/v1). sched2 does not move it
- * (-fno-schedule-insns2 is a no-op here). (2) byte loop: the image loads the -1 bound as
- * `move a0,v0` and leaves the bne slot empty; 990721's reorg fills it (991111-01 cc1s leave it
- * empty but miss the 8-byte loop fill the image has).
- * Tried: all 198 dependency-respecting orders of the 8 load/store/bump statements plus len -=
- * (none below 8 diff lines), const-qualified loads, -fargument-noalias(-global),
- * -fstrict-aliasing, K&R definition, casts, save/ret pointers, int len parameter, byte-loop
- * forms (len-- != 0, --len != -1, braces, char temporary, for loop, named -1 bound), wine
- * ee-gcc2.9-991111 (15+), cc=29/dtls13010 (13+).
- * The original .s stays in the build (asm/cod/02821C.s); this C
- * draft (Session 55) is kept for the record. */
+ * Lever (Session 56): source order load/store/load/store (as Ghidra shows) with the first
+ * temporary pinned by `register u_long128 a asm ("$3")`. The big loop and entry are then
+ * byte-exact (lq1 in v1, lq2 in v0, loop flag in a0, dst0 copied to t0). Without the pin the
+ * two temporaries do not overlap and both take v0 (flag v1, no t0 copy); Session 55's
+ * loads-first order got the registers but not the lq/sq order.
+ * Residual (3 words, byte loop): the image loads the -1 bound as `move a0,v0` in the beq slot
+ * and leaves the loop's bne slot empty (nop after `addiu v1,v1,1`); ours emits `li a0,-1` and
+ * 990721's reorg fills the slot with the dst bump (991111 as then pads the short loop with nop).
+ * Tried (S56): flag sweep (cse/gcse/loop/sched/regmove/peephole/thread-jumps, -O1/-O3),
+ * all 2.9 cc1s, const/non-const src, u_long128 pointers, int/size_t len, temp scope and
+ * declaration order (72-variant grid, floor 9 without the pin), register-asm pins on dst,
+ * src, len, aligned_dst and the -1 bound, 12 byte-loop forms (!= 0, for, do-while, char temp,
+ * named/pinned -1 bound).
+ * Tried (S55): all 198 dependency-respecting orders of the 8 load/store/bump statements,
+ * const-qualified loads, -fargument-noalias(-global), -fstrict-aliasing, K&R definition,
+ * wine ee-gcc2.9-991111 (15+), cc=29/dtls13010 (13+).
+ * The original .s stays in the build (asm/cod/02821C.s); this C draft is kept for the record. */
 typedef unsigned int size_t;
 typedef unsigned int u_long128 __attribute__((mode(TI)));
 
@@ -41,13 +42,13 @@ void *func_0012821C(void *dst0, const void *src0, size_t len0)
 
       while (len >= BIGBLOCKSIZE)
         {
-          u_long128 a, b;
+          register u_long128 a asm ("$3"), b;
           a = *(u_long128 *)aligned_src;
-          aligned_src += 2;
-          b = *(u_long128 *)aligned_src;
           aligned_src += 2;
           *(u_long128 *)aligned_dst = a;
           aligned_dst += 2;
+          b = *(u_long128 *)aligned_src;
+          aligned_src += 2;
           *(u_long128 *)aligned_dst = b;
           aligned_dst += 2;
           len -= BIGBLOCKSIZE;
