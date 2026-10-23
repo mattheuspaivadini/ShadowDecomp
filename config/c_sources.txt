@@ -1096,3 +1096,4 @@
 0000C8 = src/cod/0000C8.c cc=29                    # SCE syscall 0x23 handler stub, file-scope asm (Session 53)
 028188 = src/cod/028188.c -malign-loops=2 cc=ee-gcc2.9-990721-as991111   # MMI memcmp: register-asm roles, volatile pxor/pcpyud, asm movz, fix-up inside for(;;) (Session 60)
 02821C = src/cod/02821C.c -malign-loops=2 -fno-strength-reduce cc=ee-gcc2.9-990721-as991111   # MMI memcpy: $3 temp pin, asm() reorg stoppers in the byte loop, laundered -1 bound (Session 60)
+0282CC = src/cod/0282CC.c -malign-loops=2 -fno-strength-reduce cc=ee-gcc2.9-990721-as991111   # MMI memmove: memcpy levers + $5/$7 pins on src and src+len (Session 60)
