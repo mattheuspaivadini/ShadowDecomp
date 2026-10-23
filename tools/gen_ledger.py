@@ -43,8 +43,9 @@ LEDGER = ROOT / "docs" / "ledger.json"
 # save/restore family: no published EE-GCC generation emits the dance for a C
 # indirect call, and the EE `as` cannot assemble an inline-asm `$gp` read
 # (build/s8/probe_gp*.sh, sweep_gp*.sh, docs/session8-plan.md).  The MMI string
-# primitives are hand-vectorised for the R5900 (`lq`/`psubb`/`pnor`/`pcpyld`/
-# `pcpyud`), i.e. not expressible in pure C (project rule: no inline asm).
+# primitives (`lq`/`psubb`/`pnor`/`pcpyld`/`pcpyud`) looked hand-vectorised, but
+# Session 54 reproduced their shape as Newlib C + inline asm on ee-gcc 2.9-990721
+# (tools/cc/make_hybrid_990721.sh); archived drafts override these entries.
 ASM_PERMANENT_EXTRA = {
     "0092F8": "gp save/restore; no C spelling (probe build/s8/sweep_gp*)",
     "00A878": "gp save/restore; no C spelling (probe build/s8/sweep_gp*)",
@@ -53,18 +54,18 @@ ASM_PERMANENT_EXTRA = {
     "016D88": "gp save/restore; no C spelling (probe build/s8/sweep_gp*)",
     "019AC0": "gp save/restore; no C spelling (probe build/s8/sweep_gp*)",
     "0171B8": "gp save/restore; no C spelling (probe build/s8/sweep_gp*)",
-    "028188": "MMI memcmp: lq/pxor/pcpyud (hand-vectorised)",
-    "02821C": "MMI memcpy: lq/sq (hand-vectorised)",
-    "0282CC": "MMI memmove: lq/sq (hand-vectorised)",
-    "0283D0": "MMI memset: lq/sq (hand-vectorised)",
-    "028BB0": "MMI strcat: lq/psubb/pnor/pcpyld/pcpyud (hand-vectorised)",
-    "028CDC": "MMI strchr: lq/psubb/pnor/pcpyld/pcpyud/pxor (hand-vectorised)",
-    "028E6C": "MMI strcmp: lq/pxor/pcpyud (hand-vectorised)",
-    "028FB0": "MMI strcpy: lq/sq/psubb/pnor/pand/pcpyud (hand-vectorised)",
-    "0290C4": "MMI strlen: lq/psubb/pnor/pand/pcpyud (hand-vectorised)",
-    "029200": "MMI strncmp: lq/pxor/pcpyud (hand-vectorised)",
-    "0293B8": "MMI strncpy: lq/sq/psubb/pnor/pand/pcpyud (hand-vectorised)",
-    "02E704": "MMI memchr: lq/pxor/pcpyh/pcpyld (hand-vectorised)",
+    "028188": "MMI memcmp: lq/pxor/pcpyud (C + inline asm candidate, Session 54)",
+    "02821C": "MMI memcpy: lq/sq (C + inline asm candidate, Session 54)",
+    "0282CC": "MMI memmove: lq/sq (C + inline asm candidate, Session 54)",
+    "0283D0": "MMI memset: lq/sq (C + inline asm candidate, Session 54)",
+    "028BB0": "MMI strcat: lq/psubb/pnor/pcpyld/pcpyud (C + inline asm candidate, Session 54)",
+    "028CDC": "MMI strchr: lq/psubb/pnor/pcpyld/pcpyud/pxor (C + inline asm candidate, Session 54)",
+    "028E6C": "MMI strcmp: lq/pxor/pcpyud (C + inline asm candidate, Session 54)",
+    "028FB0": "MMI strcpy: lq/sq/psubb/pnor/pand/pcpyud (C + inline asm candidate, Session 54)",
+    "0290C4": "MMI strlen: lq/psubb/pnor/pand/pcpyud (C + inline asm candidate, Session 54)",
+    "029200": "MMI strncmp: lq/pxor/pcpyud (C + inline asm candidate, Session 54)",
+    "0293B8": "MMI strncpy: lq/sq/psubb/pnor/pand/pcpyud (C + inline asm candidate, Session 54)",
+    "02E704": "MMI memchr: lq/pxor/pcpyh/pcpyld (C + inline asm candidate, Session 54)",
 }
 
 # "best score 4 [cc=29, default]" / "best score 14"

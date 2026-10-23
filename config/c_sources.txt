@@ -11,7 +11,6 @@
 # The extra flags exist because the original binary is a mix: the EE-GCC `-g`
 # level changes delay-slot scheduling, and some translation units clearly used
 # `-g0` while others used `-g2` (see docs/compiler.md §4 / docs/decisions.md).
-
 # --- Phase 3 flag-pinning cases (docs/compiler.md) ---
 002FE0 = src/cod/002FE0.c
 011FB8 = src/cod/011FB8.c
@@ -24,7 +23,6 @@
 001A30 = src/cod/001A30.c
 011D50 = src/cod/011D50.c
 004E78 = src/cod/004E78.c
-
 # --- Phase 6 batch 1 ---
 001A48 = src/cod/001A48.c
 0032F8 = src/cod/0032F8.c
@@ -46,13 +44,10 @@
 012088 = src/cod/012088.c
 014FF0 = src/cod/014FF0.c
 0128A0 = src/cod/0128A0.c
-
 # --- matched with a per-TU debug level (evidence: tools/cc/probe_variants6.sh) ---
 014C30 = src/cod/014C30.c -g0
-
 # --- Phase 6 batch 2 ---
 013078 = src/cod/013078.c
-
 # --- Phase 6 batch 3 (Session 4) ---
 # .bss 256-entry int tables: -1 fill / key search (evidence: asm/data/cod/0013A200.bss.s)
 0028F0 = src/cod/0028F0.c
@@ -61,7 +56,6 @@
 002A40 = src/cod/002A40.c
 # guarded get-or-store with a local fallback
 02E6D0 = src/cod/02E6D0.c
-
 # --- Session 4: functions that pin the ALTERNATE EE-GCC revision ------------
 # The original image is a mixture of the 2.9-991111 and 2.96 EE-GCC
 # generations (docs/compiler.md section 4.3). These nine are byte-exact with
@@ -77,7 +71,6 @@
 014918 = src/cod/014918.c cc=29   # bounds-checked table lookup
 020F18 = src/cod/020F18.c cc=29   # R5900 `mult rd,rs,rt` constant stride (0x184)
 022018 = src/cod/022018.c cc=29   # R5900 `mult rd,rs,rt` constant stride (0x24)
-
 # --- Session 4, step 2: next leaf tier ---------------------------------------
 # The 2.9-991111 generation reproduces the scheduler's delay-slot choice (a
 # `nop` after the increment / block padding) and the R5900 shapes in this
@@ -101,7 +94,6 @@
 02D7F0 = src/cod/02D7F0.c         # handler-struct init (4 function pointers)
 014020 = src/cod/014020.c         # 64-bit transfer list + sync
 006B58 = src/cod/006B58.c         # 60-column table record store
-
 # --- Session 4, step 2: call wrappers ----------------------------------------
 # These translation units were compiled with sibling-call optimisation disabled:
 # the original emits `jal` + a real epilogue where ee-gcc would otherwise turn
@@ -109,7 +101,6 @@
 # reproduces the bytes; without it the object is 8-20 bytes shorter). The rest of
 # the image does use tail calls (107 `j func_*`), so this is a per-TU flag, like
 # the per-TU `-g` level.
-
 00DED8 = src/cod/00DED8.c -fno-optimize-sibling-calls   # call func_0010DE60
 020470 = src/cod/020470.c -fno-optimize-sibling-calls   # call func_001211F8
 020490 = src/cod/020490.c -fno-optimize-sibling-calls   # call func_001213D0
@@ -136,7 +127,6 @@
 00E9D0 = src/cod/00E9D0.c -fno-optimize-sibling-calls   # call with stack buffer
 00EC38 = src/cod/00EC38.c -fno-optimize-sibling-calls   # call with stack buffer
 0120A8 = src/cod/0120A8.c -fno-optimize-sibling-calls   # guarded call
-
 # --- Session 5, step 1: the twelve formerly "unexplained" functions ----------
 # Source-shape fixes found with tools/permute.py (evidence: docs/permute-log.md,
 # docs/non-matching-12.md). All twelve were unexplained by any of the 14 EE-GCC
@@ -153,7 +143,6 @@
 0262B8 = src/cod/0262B8.c         # while (p->field0) — no carried local (no bnezl)
 0131F8 = src/cod/0131F8.c         # staged `a = a - 1` before the pointer difference
 015008 = src/cod/015008.c cc=29   # store first, int addresses (signed `slt`)
-
 # --- Session 5, step 2: wrapper tier (2.9-991111 TUs) -------------------------
 # Guard/call wrappers: 10-12 instructions, `jal` + real epilogue; the 2.9
 # generation reproduces the copy/argument order (cc=29; ee-gcc2.96 differs).
@@ -165,7 +154,6 @@
 0121C0 = src/cod/0121C0.c cc=29   # func_00107410(4, &buf)
 012218 = src/cod/012218.c cc=29   # func_00107410(0x21, &buf)
 018358 = src/cod/018358.c cc=29   # sceCdChgSys (named from its own string)
-
 # --- Session 5, step 2: wrapper tier batch 2 ---------------------------------
 025870 = src/cod/025870.c         # pack (a0,a1,a2,a3:64) on stack -> func_001270D8
 0270A8 = src/cod/0270A8.c         # pack 4 words on stack -> func_00127390
@@ -175,7 +163,6 @@
 014F20 = src/cod/014F20.c cc=29   # branch on a2; sltu(p[4], a1)
 0093C8 = src/cod/0093C8.c cc=29   # forward struct fields 0x24/28/2C; 0x800 on fail
 009690 = src/cod/009690.c cc=29   # same with zero fields
-
 # --- Session 5, step 2: wrapper/leaf tier batch 3 -----------------------------
 012E00 = src/cod/012E00.c cc=29   # 7-arg shift, mode 0
 012E40 = src/cod/012E40.c cc=29   # 7-arg shift, mode 1
@@ -183,7 +170,6 @@
 0193D0 = src/cod/0193D0.c cc=29   # same with op 0x1E
 019410 = src/cod/019410.c cc=29   # same with op 0x1F
 023158 = src/cod/023158.c         # ~func_00107380() >> 31
-
 # --- Session 5, step 2: batch 4 (01B7xx error-fix-up family + 3) --------------
 # Family: v = callee(); if (v != 0) return v; func_0011B670(0, 0, &v); return v;
 # (the early return makes ee-gcc reload v into $v0 at the tail; cc=29).
@@ -202,18 +188,15 @@
 01BA68 = src/cod/01BA68.c cc=29
 01BAA8 = src/cod/01BAA8.c cc=29
 019808 = src/cod/019808.c -fno-optimize-sibling-calls   # dispatch on a5 & 2
-
 # --- Session 5, step 2: batch 5 (func_00107410 buffers) -----------------------
 0122E0 = src/cod/0122E0.c cc=29   # op -8,  one-word buffer
 012308 = src/cod/012308.c cc=29   # op -9,  one-word buffer
 012330 = src/cod/012330.c cc=29   # op 0x10, one-word buffer
 012190 = src/cod/012190.c cc=29   # op 3, (a0, (signed char)a1)
 0122B0 = src/cod/0122B0.c cc=29   # op -7, (a0, (signed char)a1)
-
 # --- Session 5, step 2: promoted permuter near-misses -------------------------
 014EE8 = src/cod/014EE8.c cc=29   # unsigned field (srl, not sra) + guard
 018578 = src/cod/018578.c cc=29   # early return keeps `daddu v0,zero` before ld ra
-
 # --- Session 6 (permuter re-attack of the non-matching backlog) ---
 010910 = src/cod/010910.c cc=29   # sorted-list insert (register roles: 2.9 revision)
 011F90 = src/cod/011F90.c cc=29   # store 5 through getter pointer; return -1
@@ -234,17 +217,14 @@
 00F0F0 = src/cod/00F0F0.c cc=29   # mask local before the call keeps `and` non-immediate
 01B718 = src/cod/01B718.c cc=29   # wrapper (1,a0,a1): 2.9 keeps jal+epilogue
 01B740 = src/cod/01B740.c cc=29   # wrapper (0,a0,a1): int-return shape
-
 # --- Session 6, step 3: tail-call wrappers (cc=29: no frame around the tail j) --
 0000C0 = src/cod/0000C0.c cc=29   # tail call g(0) -> j + move a0,zero (2 insns)
 010118 = src/cod/010118.c cc=29   # tail call g()  -> j + nop
-
 # --- Session 6, step 3: the 018xxx block-store family + 022D6x (cc=29) --------
 # All ten: Session-6 drafts that only needed the 2.9 revision (the 2.96
 # allocator picks a 0x10 frame / different store order; cc=29 reproduces the
 # original's 0x20 frame with $s0 = p and the a4-first argument setup).
 021E88 = src/cod/021E88.c cc=29   # record stride 0x24 -> addiu+mult; xori+sltu != 3
-
 # --- Session 6, step 3: tail-call trampolines ---------------------------------
 # Bare  trampolines are the cc=29 shape (no frame); the framed ones (the
 #  sequence) are cc=296. Both were generated from
@@ -268,7 +248,6 @@
 030AC8 = src/cod/030AC8.c        # g(D_00135C60[0], a0, a1) with frame
 030D48 = src/cod/030D48.c        # g(D_00135C60[0], a0, a1, a2) with frame
 # --- Session 6, step 3, wave 2 (parallel-session drafts, verified here) ------
-
 # --- Session 6, step 3: sceStdio trampolines + variadic register saves -------
 003008 = src/cod/003008.c        # tail call sceStdioOpen (frame + j)
 003020 = src/cod/003020.c        # tail call sceStdioClose
@@ -285,14 +264,12 @@
 004040 = src/cod/004040.c        # variadic register save (same shape)
 005948 = src/cod/005948.c        # variadic register save (2 fixed args)
 005990 = src/cod/005990.c        # variadic register save (same shape)
-
 # --- Session 6, step 3: func_00107010 + sync/ei family, 022DA0 ----------------
 022DA0 = src/cod/022DA0.c cc=29   # store + func_00123260(...,0x65) (2.9 shapes)
 023180 = src/cod/023180.c        # func_00107010(a0); sync; ei
 021058 = src/cod/021058.c        # func_00107010(D_00163CC0[0]); sync; ei
 007C48 = src/cod/007C48.c        # func_00107010(a3); sync; ei; return 0
 0289D0 = src/cod/0289D0.c        # tail call func_001120A0 (framed family)
-
 # --- Session 6, step 3: func_0010FB20-gated wrapper family (cc=29) -----------
 010EA0 = src/cod/010EA0.c cc=29   # a=guard(); b=target(a0); if(a) guard2(); return b
 011050 = src/cod/011050.c cc=29   # same family (func_00110FA0)
@@ -303,18 +280,15 @@
 00F118 = src/cod/00F118.c cc=29   # func_001073F0(4) & 0x40000 gate + two calls
 027500 = src/cod/027500.c        # 64-bit callee decl -> dsll32/dsra32 pair
 00A798 = src/cod/00A798.c cc=29   # void-callee decl frees v0 for the base
-
 # --- Session 7, wave 1a (subagent drafts, verified here) ---------------------
 001AC0 = src/cod/001AC0.c cc=29   # bump pointer: divu + 3-op mult (2.9 shapes)
 002FE8 = src/cod/002FE8.c        # printf("%s", a0) through the .sdata format
 0199A0 = src/cod/0199A0.c cc=29   # once-only guard + bare tail j (2.9)
 026298 = src/cod/026298.c        # node lookup by key, then framed tail call
-
 # --- Session 7, wave 1d (subagent drafts, verified here) ---------------------
 00FDD8 = src/cod/00FDD8.c        # timer start-up: 8 calls + framed tail call
 022E18 = src/cod/022E18.c cc=29   # D_00167F00 transfer (022D68/022DA0 family)
 025768 = src/cod/025768.c        # double compare: two part-block decompositions
-
 # --- Session 7, wave 1c (subagent drafts, verified here) ---------------------
 010190 = src/cod/010190.c cc=29   # loader helper + syscall 6 tail call
 010200 = src/cod/010200.c cc=29   # loader helper + syscall 0x7B tail call
@@ -323,7 +297,6 @@
 022E68 = src/cod/022E68.c cc=29   # init/deinit pair + flag clear, return first
 025040 = src/cod/025040.c        # float decompose + 64-bit 4th arg (<<30)
 0277C0 = src/cod/0277C0.c        # ref-counted stdio state acquire/release
-
 # --- Session 7, wave 1b (subagent drafts, verified here) ---------------------
 001AF0 = src/cod/001AF0.c cc=29   # bump pointer with fixed 0x100 alignment
 014BF8 = src/cod/014BF8.c cc=29   # 0x14-byte record copy-out (ldl/ldr pieces)
@@ -332,27 +305,22 @@
 0221D0 = src/cod/0221D0.c cc=29   # id + clear D_00167F00 tracking block
 025008 = src/cod/025008.c        # (framed family, 296)
 02F800 = src/cod/02F800.c        # (framed family, 296)
-
 # --- Session 7, targeted near-miss fixes -------------------------------------
 013228 = src/cod/013228.c cc=29   # quadword append; asm memory barrier keeps store order
-
 # --- Session 7, permuter-solved near-misses (cc=29) --------------------------
 0101D8 = src/cod/0101D8.c cc=29   # void prototypes -> cc=29 tail j (2.9 frame)
 0230B0 = src/cod/0230B0.c cc=29   # void wrapper+callee -> 0x30 frame + tail j
 022BD8 = src/cod/022BD8.c cc=29   # 022DA0 idiom + const-local +0x10 (command 7)
 022C30 = src/cod/022C30.c cc=29   # same, command 8
 022C88 = src/cod/022C88.c cc=29   # same, command 9
-
 # --- Session 7, wave 2c (subagent drafts, verified here) ---------------------
 0231A8 = src/cod/0231A8.c cc=29   # one-shot CreateSema for D_00135960
-
 # --- Session 7, wave 3a (subagent drafts, verified here) ---------------------
 006430 = src/cod/006430.c        # 40x60 8-byte-record table fill (BLKmode copy)
 00FE98 = src/cod/00FE98.c cc=29   # RMW through syscall stubs 0x4B/0x4A
 015048 = src/cod/015048.c cc=29   # 0x334-stride table init loop
 016C80 = src/cod/016C80.c cc=29   # $gp swap via inline asm + gate
 022048 = src/cod/022048.c cc=29   # delete socket for record field4, clear field0
-
 # --- Session 7, wave 3b (subagent drafts, verified here) ---------------------
 002A80 = src/cod/002A80.c        # table walk: skip -1 entries, call cb(v)
 002B68 = src/cod/002B68.c        # free loop over the table
@@ -362,22 +330,18 @@
 0260A8 = src/cod/0260A8.c -fno-optimize-sibling-calls   # list node init + push
 027538 = src/cod/027538.c        # D_00135C60 refcount, func_001275A0
 02FA40 = src/cod/02FA40.c        # worker + conditional field accumulate
-
 # --- Session 7, wave 3c (subagent drafts, verified here) ---------------------
 006518 = src/cod/006518.c        # two-way func_00114080 + sceGsPutDrawEnv arms
 00DD70 = src/cod/00DD70.c cc=29   # 9-arg SceSifrpcCall + return table word
-
 # --- Session 7, wave 4b (subagent drafts, verified here) ---------------------
 019068 = src/cod/019068.c cc=29   # record put + bounded copy + return field
 01C320 = src/cod/01C320.c cc=29   # 0x898-stride record gate
 021088 = src/cod/021088.c cc=29   # CreateSema + 2-record 0x24-stride fill
 023260 = src/cod/023260.c cc=29   # handler dispatch through SceSifrpcCall
-
 # --- Session 7, second permuter pass (stmt-order swaps) ----------------------
 006310 = src/cod/006310.c        # GS packet + sceGsSyncPath/PutDrawEnv
 00A0B0 = src/cod/00A0B0.c cc=29   # one-shot CreateSema pair
 026140 = src/cod/026140.c -fno-optimize-sibling-calls   # list node init twin
-
 # --- Session 7, wave 4a (subagent drafts, verified here) ---------------------
 003E98 = src/cod/003E98.c        # 3 variadic stubs + two poll spins + tail
 00E810 = src/cod/00E810.c cc=29   # two probes + 9-arg SceSifrpcCall dispatch
@@ -385,14 +349,12 @@
 010670 = src/cod/010670.c cc=29   # T2_MODE read + enable + epoch release
 011D60 = src/cod/011D60.c cc=29   # I_STAT write + poll + release
 0184E8 = src/cod/0184E8.c cc=29   # bounded string copy-in with length return
-
 # --- Session 7, wave 2a (subagent drafts, verified here) ---------------------
 0151B8 = src/cod/0151B8.c cc=29   # sceDbcDeleteSocket guard + 0x334-stride clear
 015650 = src/cod/015650.c cc=29   # sceDbcGetDepNumber guard + 0x334-stride record
 015A30 = src/cod/015A30.c cc=29   # 9-arg SceSifrpcCall call + return table word
 021000 = src/cod/021000.c cc=29   # D_00163CC0 init + 0x80-entry range clear
 023208 = src/cod/023208.c cc=29   # D_00135960 gate; -1 sentinel; syscall free
-
 # --- Session 7, wave 2b (subagent drafts, verified here) ---------------------
 003F98 = src/cod/003F98.c        # 10-entry wrap table + counter
 00F278 = src/cod/00F278.c cc=29   # store handler + AddDmacHandler syscall
@@ -968,3 +930,167 @@
 004668 = src/cod/004668.c                         # loader net bring-up; load_conf returns early on memalign failure (no if-then block for CSE to skip, so the second D_0013D000 keeps only the hi() from gcse), interface id is its own .sbss word D_0013A184 (Session 46)
 000D48 = src/cod/000D48.c                         # ld: module loader; stat and open failures as two separate PutString blocks (cross-jumped; the extra fd refs put fd in s0), the half rel count in i with its own loop counter j, checksum walks a copy of the pointer (Session 46)
 0225E8 = src/cod/0225E8.c cc=29                   # netcnfif load_entry_auto; separate counts per list, an int p reused as size copy and list walker, attach-name mismatch via continue in both type arms, two no-code X refs on dev (fp vs stack for ifc) (Session 46)
+012FC8 = src/cod/012FC8.c cc=29                   # SCE sifcmd sceSifWriteBackDCache; range alignment in C ($t9/$a4..$a7 register locals) + noreorder cache 0x18 loop (Session 48)
+00F360 = src/cod/00F360.c cc=29                   # SCE libkernl syscall 0x5A (Setupee) trampoline used by InitTLBFunctions (Session 48)
+00F3A8 = src/cod/00F3A8.c cc=29                   # SCE libkernl syscall 0x5B (GetSyscall) trampoline used by InitTLBFunctions (Session 48)
+00F3B8 = src/cod/00F3B8.c cc=29                   # SCE libkernl syscall 0x74 (SetSyscall) trampoline used by InitTLBFunctions (Session 48)
+00F490 = src/cod/00F490.c cc=29                   # SCE libkernl syscall 0x55 (PutTLBEntry) trampoline (Session 48)
+00F4A0 = src/cod/00F4A0.c cc=29                   # SCE libkernl syscall -0x55 (iPutTLBEntry) trampoline (Session 48)
+00F4B0 = src/cod/00F4B0.c cc=29                   # SCE libkernl syscall 0x56 (_SetTLBEntry) trampoline used by SetTLBEntry/InitTLB32MB (Session 48)
+00F4F0 = src/cod/00F4F0.c cc=29                   # SCE libkernl syscall -0x56 (iSetTLBEntry) trampoline (Session 48)
+00F500 = src/cod/00F500.c cc=29                   # SCE libkernl syscall 0x57 (GetTLBEntry) trampoline (Session 48)
+00F510 = src/cod/00F510.c cc=29                   # SCE libkernl syscall -0x57 (iGetTLBEntry) trampoline (Session 48)
+00F520 = src/cod/00F520.c cc=29                   # SCE libkernl syscall 0x58 (ProbeTLBEntry) trampoline (Session 48)
+00F530 = src/cod/00F530.c cc=29                   # SCE libkernl syscall -0x58 (iProbeTLBEntry) trampoline (Session 48)
+00F540 = src/cod/00F540.c cc=29                   # SCE libkernl syscall 0x59 (ExpandScratchPad) trampoline (Session 48)
+00FBF8 = src/cod/00FBF8.c cc=29                   # SCE libkernl syscall 0x5A (Setupee) trampoline used by GetSystemCallEntry (Session 48)
+00FC80 = src/cod/00FC80.c cc=29                   # SCE libkernl syscall 0x83 (FindAddress) trampoline used by func_0010FCC8 (Session 48)
+00FDC8 = src/cod/00FDC8.c cc=29                   # SCE libkernl syscall 0x74 (SetSyscall) trampoline used by func_0010FCC8 (Session 48)
+00FE30 = src/cod/00FE30.c cc=29                   # SCE libkernl syscall 0x74 (SetSyscall) trampoline used by InitExecPS2 (Session 48)
+00FE40 = src/cod/00FE40.c cc=29                   # SCE libkernl syscall 0x5A (Setupee) trampoline used by InitExecPS2 (Session 48)
+00FE88 = src/cod/00FE88.c cc=29                   # SCE libkernl syscall 0x5B (GetSyscall) trampoline used by InitExecPS2 (Session 48)
+00FFB0 = src/cod/00FFB0.c cc=29                   # SCE libkernl syscall 0x5A (Setupee) trampoline used by func_00110000 (Session 48)
+00FFF0 = src/cod/00FFF0.c cc=29                   # SCE libkernl syscall 0x74 (SetSyscall) trampoline used by func_00110000 (Session 48)
+010250 = src/cod/010250.c cc=29                   # SCE libkernl syscall 0x74 (SetSyscall) trampoline used by InitAlarm (Session 48)
+010260 = src/cod/010260.c cc=29                   # SCE libkernl syscall 0x5A (Setupee) trampoline used by InitAlarm (Session 48)
+0102A8 = src/cod/0102A8.c cc=29                   # SCE libkernl syscall 0x5B (GetSyscall) trampoline used by InitAlarm (Session 48)
+0141A8 = src/cod/0141A8.c cc=29                   # SCE libgraph syscall 0x80 (GsGetCRTOffset) trampoline used by sceGsSetDefDispEnv (Session 48)
+006BC0 = src/cod/006BC0.c cc=29                    # SCE libkernl syscall 0x0 (RFU000_FullReset) stub (Session 49)
+006BD0 = src/cod/006BD0.c cc=29                    # SCE libkernl syscall 0x1 (ResetEE) stub (Session 49)
+006BE0 = src/cod/006BE0.c cc=29                    # SCE libkernl syscall 0x2 (SetGsCrt) stub (Session 49)
+006BF0 = src/cod/006BF0.c cc=29                    # SCE libkernl syscall 0x3 (RFU003) stub (Session 49)
+006C00 = src/cod/006C00.c cc=29                    # SCE libkernl syscall 0x4 (_Exit) stub (Session 49)
+006C10 = src/cod/006C10.c cc=29                    # SCE libkernl syscall 0x5 (RFU005) stub (Session 49)
+006C20 = src/cod/006C20.c cc=29                    # SCE libkernl syscall 0x6 (_LoadExecPS2) stub (Session 49)
+006C30 = src/cod/006C30.c cc=29                    # SCE libkernl syscall 0x7 (_ExecPS2) stub (Session 49)
+006C40 = src/cod/006C40.c cc=29                    # SCE libkernl syscall 0x8 (RFU008) stub (Session 49)
+006C50 = src/cod/006C50.c cc=29                    # SCE libkernl syscall 0x9 (RFU009) stub (Session 49)
+006C60 = src/cod/006C60.c cc=29                    # SCE libkernl syscall 0xA (AddSbusIntcHandler) stub (Session 49)
+006C70 = src/cod/006C70.c cc=29                    # SCE libkernl syscall 0xB (RemoveSbusIntcHandler) stub (Session 49)
+006C80 = src/cod/006C80.c cc=29                    # SCE libkernl syscall 0xC (Interrupt2Iop) stub (Session 49)
+006C90 = src/cod/006C90.c cc=29                    # SCE libkernl syscall 0xD (SetVTLBRefillHandler) stub (Session 49)
+006CA0 = src/cod/006CA0.c cc=29                    # SCE libkernl syscall 0xE (SetVCommonHandler) stub (Session 49)
+006CB0 = src/cod/006CB0.c cc=29                    # SCE libkernl syscall 0xF (SetVInterruptHandler) stub (Session 49)
+006CC0 = src/cod/006CC0.c cc=29                    # SCE libkernl syscall 0x10 (AddIntcHandler) stub (Session 49)
+006CD0 = src/cod/006CD0.c cc=29                    # SCE libkernl syscall 0x10 (AddIntcHandler2) stub (Session 49)
+006CE0 = src/cod/006CE0.c cc=29                    # SCE libkernl syscall 0x11 (RemoveIntcHandler) stub (Session 49)
+006CF0 = src/cod/006CF0.c cc=29                    # SCE libkernl syscall 0x12 (AddDmacHandler) stub (Session 49)
+006D00 = src/cod/006D00.c cc=29                    # SCE libkernl syscall 0x12 (AddDmacHandler2) stub (Session 49)
+006D10 = src/cod/006D10.c cc=29                    # SCE libkernl syscall 0x13 (RemoveDmacHandler) stub (Session 49)
+006D20 = src/cod/006D20.c cc=29                    # SCE libkernl syscall 0x14 (_EnableIntc) stub (Session 49)
+006D30 = src/cod/006D30.c cc=29                    # SCE libkernl syscall 0x15 (_DisableIntc) stub (Session 49)
+006D40 = src/cod/006D40.c cc=29                    # SCE libkernl syscall 0x16 (_EnableDmac) stub (Session 49)
+006D50 = src/cod/006D50.c cc=29                    # SCE libkernl syscall 0x17 (_DisableDmac) stub (Session 50)
+006D60 = src/cod/006D60.c cc=29                    # SCE libkernl syscall 0xFC (SetAlarm) stub (Session 50)
+006D70 = src/cod/006D70.c cc=29                    # SCE libkernl syscall 0xFD (ReleaseAlarm) stub (Session 50)
+006D80 = src/cod/006D80.c cc=29                    # SCE libkernl syscall -0x1A (_iEnableIntc) stub (Session 50)
+006D90 = src/cod/006D90.c cc=29                    # SCE libkernl syscall -0x1B (_iDisableIntc) stub (Session 50)
+006DA0 = src/cod/006DA0.c cc=29                    # SCE libkernl syscall -0x1C (_iEnableDmac) stub (Session 50)
+006DB0 = src/cod/006DB0.c cc=29                    # SCE libkernl syscall -0x1D (_iDisableDmac) stub (Session 50)
+006DC0 = src/cod/006DC0.c cc=29                    # SCE libkernl syscall -0xFE (iSetAlarm) stub (Session 50)
+006DD0 = src/cod/006DD0.c cc=29                    # SCE libkernl syscall -0xFF (iReleaseAlarm) stub (Session 50)
+006DE0 = src/cod/006DE0.c cc=29                    # SCE libkernl syscall 0x20 (CreateThread) stub (Session 50)
+006DF0 = src/cod/006DF0.c cc=29                    # SCE libkernl syscall 0x21 (DeleteThread) stub (Session 50)
+006E00 = src/cod/006E00.c cc=29                    # SCE libkernl syscall 0x22 (_StartThread) stub (Session 50)
+006E10 = src/cod/006E10.c cc=29                    # SCE libkernl syscall 0x23 (ExitThread) stub (Session 50)
+006E20 = src/cod/006E20.c cc=29                    # SCE libkernl syscall 0x24 (ExitDeleteThread) stub (Session 50)
+006E30 = src/cod/006E30.c cc=29                    # SCE libkernl syscall 0x25 (TerminateThread) stub (Session 50)
+006E40 = src/cod/006E40.c cc=29                    # SCE libkernl syscall -0x26 (iTerminateThread) stub (Session 50)
+006E50 = src/cod/006E50.c cc=29                    # SCE libkernl syscall 0x27 (DisableDispatchThread) stub (Session 50)
+006E60 = src/cod/006E60.c cc=29                    # SCE libkernl syscall 0x28 (EnableDispatchThread) stub (Session 50)
+006E70 = src/cod/006E70.c cc=29                    # SCE libkernl syscall 0x29 (ChangeThreadPriority) stub (Session 50)
+006E80 = src/cod/006E80.c cc=29                    # SCE libkernl syscall -0x2A (iChangeThreadPriority) stub (Session 50)
+006E90 = src/cod/006E90.c cc=29                    # SCE libkernl syscall 0x2B (RotateThreadReadyQueue) stub (Session 50)
+006EA0 = src/cod/006EA0.c cc=29                    # SCE libkernl syscall -0x2C (_iRotateThreadReadyQueue) stub (Session 50)
+006EB0 = src/cod/006EB0.c cc=29                    # SCE libkernl syscall 0x2D (ReleaseWaitThread) stub (Session 50)
+006EC0 = src/cod/006EC0.c cc=29                    # SCE libkernl syscall -0x2E (iReleaseWaitThread) stub (Session 50)
+006ED0 = src/cod/006ED0.c cc=29                    # SCE libkernl syscall 0x2F (GetThreadId) stub (Session 50)
+006EE0 = src/cod/006EE0.c cc=29                    # SCE libkernl syscall 0x30 (ReferThreadStatus) stub (Session 50)
+006EF0 = src/cod/006EF0.c cc=29                    # SCE libkernl syscall -0x31 (iReferThreadStatus) stub (Session 50)
+006F00 = src/cod/006F00.c cc=29                    # SCE libkernl syscall 0x32 (SleepThread) stub (Session 50)
+006F10 = src/cod/006F10.c cc=29                    # SCE libkernl syscall 0x33 (WakeupThread) stub (Session 50)
+006F20 = src/cod/006F20.c cc=29                    # SCE libkernl syscall -0x34 (_iWakeupThread) stub (Session 50)
+006F30 = src/cod/006F30.c cc=29                    # SCE libkernl syscall 0x35 (CancelWakeupThread) stub (Session 51)
+006F40 = src/cod/006F40.c cc=29                    # SCE libkernl syscall -0x36 (iCancelWakeupThread) stub (Session 51)
+006F50 = src/cod/006F50.c cc=29                    # SCE libkernl syscall 0x37 (SuspendThread) stub (Session 51)
+006F60 = src/cod/006F60.c cc=29                    # SCE libkernl syscall -0x38 (_iSuspendThread) stub (Session 51)
+006F70 = src/cod/006F70.c cc=29                    # SCE libkernl syscall 0x39 (ResumeThread) stub (Session 51)
+006F80 = src/cod/006F80.c cc=29                    # SCE libkernl syscall -0x3A (iResumeThread) stub (Session 51)
+006F90 = src/cod/006F90.c cc=29                    # SCE libkernl syscall 0x3B (JoinThread) stub (Session 51)
+006FA0 = src/cod/006FA0.c cc=29                    # SCE libkernl syscall 0x3C (RFU060) stub (Session 51)
+006FB0 = src/cod/006FB0.c cc=29                    # SCE libkernl syscall 0x3D (RFU061) stub (Session 51)
+006FC0 = src/cod/006FC0.c cc=29                    # SCE libkernl syscall 0x3E (EndOfHeap) stub (Session 51)
+006FD0 = src/cod/006FD0.c cc=29                    # SCE libkernl syscall 0x3F (RFU063) stub (Session 51)
+006FE0 = src/cod/006FE0.c cc=29                    # SCE libkernl syscall 0x40 (CreateSema) stub (Session 51)
+006FF0 = src/cod/006FF0.c cc=29                    # SCE libkernl syscall 0x41 (DeleteSema) stub (Session 51)
+007000 = src/cod/007000.c cc=29                    # SCE libkernl syscall 0x42 (SignalSema) stub (Session 51)
+007010 = src/cod/007010.c cc=29                    # SCE libkernl syscall -0x43 (iSignalSema) stub (Session 51)
+007020 = src/cod/007020.c cc=29                    # SCE libkernl syscall 0x44 (WaitSema) stub (Session 51)
+007030 = src/cod/007030.c cc=29                    # SCE libkernl syscall 0x45 (PollSema) stub (Session 51)
+007040 = src/cod/007040.c cc=29                    # SCE libkernl syscall -0x46 (iPollSema) stub (Session 51)
+007050 = src/cod/007050.c cc=29                    # SCE libkernl syscall 0x47 (ReferSemaStatus) stub (Session 51)
+007060 = src/cod/007060.c cc=29                    # SCE libkernl syscall -0x48 (iReferSemaStatus) stub (Session 51)
+007070 = src/cod/007070.c cc=29                    # SCE libkernl syscall 0x49 (RFU073) stub (Session 51)
+007080 = src/cod/007080.c cc=29                    # SCE libkernl syscall 0x4A (SetOsdConfigParam) stub (Session 51)
+007090 = src/cod/007090.c cc=29                    # SCE libkernl syscall 0x4B (GetOsdConfigParam) stub (Session 51)
+0070A0 = src/cod/0070A0.c cc=29                    # SCE libkernl syscall 0x4C (GetGsHParam) stub (Session 51)
+0070B0 = src/cod/0070B0.c cc=29                    # SCE libkernl syscall 0x4D (GetGsVParam) stub (Session 51)
+0070C0 = src/cod/0070C0.c cc=29                    # SCE libkernl syscall 0x4E (SetGsHParam) stub (Session 51)
+0070D0 = src/cod/0070D0.c cc=29                    # SCE libkernl syscall 0x4F (SetGsVParam) stub (Session 51)
+0070E0 = src/cod/0070E0.c cc=29                    # SCE libkernl syscall 0x50 (RFU080_CreateEventFlag) stub (Session 51)
+0070F0 = src/cod/0070F0.c cc=29                    # SCE libkernl syscall 0x51 (RFU081_DeleteEventFlag) stub (Session 51)
+007100 = src/cod/007100.c cc=29                    # SCE libkernl syscall 0x52 (RFU082_SetEventFlag) stub (Session 51)
+007110 = src/cod/007110.c cc=29                    # SCE libkernl syscall -0x53 (RFU083_iSetEventFlag) stub (Session 52)
+007120 = src/cod/007120.c cc=29                    # SCE libkernl syscall 0x54 (RFU084_ClearEventFlag) stub (Session 52)
+007130 = src/cod/007130.c cc=29                    # SCE libkernl syscall -0x55 (RFU085_iClearEventFlag) stub (Session 52)
+007140 = src/cod/007140.c cc=29                    # SCE libkernl syscall 0x56 (RFU086_WaitEvnetFlag) stub (Session 52)
+007150 = src/cod/007150.c cc=29                    # SCE libkernl syscall 0x57 (RFU087_PollEvnetFlag) stub (Session 52)
+007160 = src/cod/007160.c cc=29                    # SCE libkernl syscall -0x58 (RFU088_iPollEvnetFlag) stub (Session 52)
+007170 = src/cod/007170.c cc=29                    # SCE libkernl syscall 0x59 (RFU089_ReferEventFlagStatus) stub (Session 52)
+007180 = src/cod/007180.c cc=29                    # SCE libkernl syscall -0x5A (RFU090_iReferEventFlagStatus) stub (Session 52)
+007190 = src/cod/007190.c cc=29                    # SCE libkernl syscall 0x5B (RFU091) stub (Session 52)
+0071A0 = src/cod/0071A0.c cc=29                    # SCE libkernl syscall 0x5C (EnableIntcHandler) stub (Session 52)
+0071B0 = src/cod/0071B0.c cc=29                    # SCE libkernl syscall -0x5C (iEnableIntcHandler) stub (Session 52)
+0071C0 = src/cod/0071C0.c cc=29                    # SCE libkernl syscall 0x5D (DisableIntcHandler) stub (Session 52)
+0071D0 = src/cod/0071D0.c cc=29                    # SCE libkernl syscall -0x5D (iDisableIntcHandler) stub (Session 52)
+0071E0 = src/cod/0071E0.c cc=29                    # SCE libkernl syscall 0x5E (EnableDmacHandler) stub (Session 52)
+0071F0 = src/cod/0071F0.c cc=29                    # SCE libkernl syscall -0x5E (iEnableDmacHandler) stub (Session 52)
+007200 = src/cod/007200.c cc=29                    # SCE libkernl syscall 0x5F (DisableDmacHandler) stub (Session 52)
+007210 = src/cod/007210.c cc=29                    # SCE libkernl syscall -0x5F (iDisableDmacHandler) stub (Session 52)
+007220 = src/cod/007220.c cc=29                    # SCE libkernl syscall 0x60 (KSeg0) stub (Session 52)
+007230 = src/cod/007230.c cc=29                    # SCE libkernl syscall 0x61 (EnableCache) stub (Session 52)
+007240 = src/cod/007240.c cc=29                    # SCE libkernl syscall 0x62 (DisableCache) stub (Session 52)
+007250 = src/cod/007250.c cc=29                    # SCE libkernl syscall 0x63 (GetCop0) stub (Session 52)
+007260 = src/cod/007260.c cc=29                    # SCE libkernl syscall 0x64 (FlushCache) stub (Session 52)
+007270 = src/cod/007270.c cc=29                    # SCE libkernl syscall 0x66 (CpuConfig) stub (Session 52)
+007280 = src/cod/007280.c cc=29                    # SCE libkernl syscall -0x67 (iGetCop0) stub (Session 52)
+007290 = src/cod/007290.c cc=29                    # SCE libkernl syscall -0x68 (iFlushCache) stub (Session 52)
+0072A0 = src/cod/0072A0.c cc=29                    # SCE libkernl syscall -0x6A (iCpuConfig) stub (Session 52)
+0072B0 = src/cod/0072B0.c cc=29                    # SCE libkernl syscall 0x6B (sceSifStopDma) stub (Session 52)
+0072C0 = src/cod/0072C0.c cc=29                    # SCE libkernl syscall 0x6C (SetCPUTimerHandler) stub (Session 52)
+0072D0 = src/cod/0072D0.c cc=29                    # SCE libkernl syscall 0x6D (SetCPUTimer) stub (Session 52)
+0072E0 = src/cod/0072E0.c cc=29                    # SCE libkernl syscall 0x6E (SetOsdConfigParam2) stub (Session 52)
+007300 = src/cod/007300.c cc=29                    # SCE libkernl syscall 0x70 (GsGetIMR) stub (Session 53)
+007310 = src/cod/007310.c cc=29                    # SCE libkernl syscall -0x70 (iGsGetIMR) stub (Session 53)
+007320 = src/cod/007320.c cc=29                    # SCE libkernl syscall 0x71 (GsPutIMR) stub (Session 53)
+007330 = src/cod/007330.c cc=29                    # SCE libkernl syscall -0x71 (iGsPutIMR) stub (Session 53)
+007340 = src/cod/007340.c cc=29                    # SCE libkernl syscall 0x72 (SetPgifHandler) stub (Session 53)
+007350 = src/cod/007350.c cc=29                    # SCE libkernl syscall 0x73 (SetVSyncFlag) stub (Session 53)
+007360 = src/cod/007360.c cc=29                    # SCE libkernl syscall 0x74 (RFU116) stub (Session 53)
+007370 = src/cod/007370.c cc=29                    # SCE libkernl syscall 0x75 (_print) stub (Session 53)
+007380 = src/cod/007380.c cc=29                    # SCE libkernl syscall 0x76 (sceSifDmaStat) stub (Session 53)
+007390 = src/cod/007390.c cc=29                    # SCE libkernl syscall -0x76 (isceSifDmaStat) stub (Session 53)
+0073A0 = src/cod/0073A0.c cc=29                    # SCE libkernl syscall 0x77 (sceSifSetDma) stub (Session 53)
+0073B0 = src/cod/0073B0.c cc=29                    # SCE libkernl syscall -0x77 (isceSifSetDma) stub (Session 53)
+0073C0 = src/cod/0073C0.c cc=29                    # SCE libkernl syscall 0x78 (sceSifSetDChain) stub (Session 53)
+0073D0 = src/cod/0073D0.c cc=29                    # SCE libkernl syscall -0x78 (isceSifSetDChain) stub (Session 53)
+0073E0 = src/cod/0073E0.c cc=29                    # SCE libkernl syscall 0x79 (sceSifSetReg) stub (Session 53)
+0073F0 = src/cod/0073F0.c cc=29                    # SCE libkernl syscall 0x7A (sceSifGetReg) stub (Session 53)
+007400 = src/cod/007400.c cc=29                    # SCE libkernl syscall 0x7B (_ExecOSD) stub (Session 53)
+007410 = src/cod/007410.c cc=29                    # SCE libkernl syscall 0x7C (Deci2Call) stub (Session 53)
+007420 = src/cod/007420.c cc=29                    # SCE libkernl syscall 0x7D (PSMode) stub (Session 53)
+007430 = src/cod/007430.c cc=29                    # SCE libkernl syscall 0x7E (MachineType) stub (Session 53)
+007440 = src/cod/007440.c cc=29                    # SCE libkernl syscall 0x7F (GetMemorySize) stub (Session 53)
+007450 = src/cod/007450.c cc=29                    # SCE libkernl syscall 0x82 (_InitTLB) stub (Session 53)
+0072F0 = src/cod/0072F0.c cc=29                    # SCE libkernl syscall 0x6F (GetOsdConfigParam2) stub (Session 53)
+0000C8 = src/cod/0000C8.c cc=29                    # SCE syscall 0x23 handler stub, file-scope asm (Session 53)
