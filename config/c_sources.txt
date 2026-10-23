@@ -1043,3 +1043,4 @@
 006EB0 = src/cod/006EB0.c cc=29                    # SCE libkernl syscall 0x2D (ReleaseWaitThread) stub (Session 50)
 006EC0 = src/cod/006EC0.c cc=29                    # SCE libkernl syscall -0x2E (iReleaseWaitThread) stub (Session 50)
 006ED0 = src/cod/006ED0.c cc=29                    # SCE libkernl syscall 0x2F (GetThreadId) stub (Session 50)
+006EE0 = src/cod/006EE0.c cc=29                    # SCE libkernl syscall 0x30 (ReferThreadStatus) stub (Session 50)
