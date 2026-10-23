@@ -1060,3 +1060,4 @@
 006FC0 = src/cod/006FC0.c cc=29                    # SCE libkernl syscall 0x3E (EndOfHeap) stub (Session 51)
 006FD0 = src/cod/006FD0.c cc=29                    # SCE libkernl syscall 0x3F (RFU063) stub (Session 51)
 006FE0 = src/cod/006FE0.c cc=29                    # SCE libkernl syscall 0x40 (CreateSema) stub (Session 51)
+006FF0 = src/cod/006FF0.c cc=29                    # SCE libkernl syscall 0x41 (DeleteSema) stub (Session 51)
