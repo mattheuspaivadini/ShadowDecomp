@@ -1082,3 +1082,4 @@
 007120 = src/cod/007120.c cc=29                    # SCE libkernl syscall 0x54 (RFU084_ClearEventFlag) stub (Session 52)
 007130 = src/cod/007130.c cc=29                    # SCE libkernl syscall -0x55 (RFU085_iClearEventFlag) stub (Session 52)
 007140 = src/cod/007140.c cc=29                    # SCE libkernl syscall 0x56 (RFU086_WaitEvnetFlag) stub (Session 52)
+007150 = src/cod/007150.c cc=29                    # SCE libkernl syscall 0x57 (RFU087_PollEvnetFlag) stub (Session 52)
