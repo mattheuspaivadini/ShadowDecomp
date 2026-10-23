@@ -1091,3 +1091,4 @@
 0071B0 = src/cod/0071B0.c cc=29                    # SCE libkernl syscall -0x5C (iEnableIntcHandler) stub (Session 52)
 0071C0 = src/cod/0071C0.c cc=29                    # SCE libkernl syscall 0x5D (DisableIntcHandler) stub (Session 52)
 0071D0 = src/cod/0071D0.c cc=29                    # SCE libkernl syscall -0x5D (iDisableIntcHandler) stub (Session 52)
+0071E0 = src/cod/0071E0.c cc=29                    # SCE libkernl syscall 0x5E (EnableDmacHandler) stub (Session 52)
