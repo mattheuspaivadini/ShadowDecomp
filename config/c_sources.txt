@@ -1084,3 +1084,4 @@
 007140 = src/cod/007140.c cc=29                    # SCE libkernl syscall 0x56 (RFU086_WaitEvnetFlag) stub (Session 52)
 007150 = src/cod/007150.c cc=29                    # SCE libkernl syscall 0x57 (RFU087_PollEvnetFlag) stub (Session 52)
 007160 = src/cod/007160.c cc=29                    # SCE libkernl syscall -0x58 (RFU088_iPollEvnetFlag) stub (Session 52)
+007170 = src/cod/007170.c cc=29                    # SCE libkernl syscall 0x59 (RFU089_ReferEventFlagStatus) stub (Session 52)
