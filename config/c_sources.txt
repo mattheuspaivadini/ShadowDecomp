@@ -1074,3 +1074,4 @@
 0070A0 = src/cod/0070A0.c cc=29                    # SCE libkernl syscall 0x4C (GetGsHParam) stub (Session 51)
 0070B0 = src/cod/0070B0.c cc=29                    # SCE libkernl syscall 0x4D (GetGsVParam) stub (Session 51)
 0070C0 = src/cod/0070C0.c cc=29                    # SCE libkernl syscall 0x4E (SetGsHParam) stub (Session 51)
+0070D0 = src/cod/0070D0.c cc=29                    # SCE libkernl syscall 0x4F (SetGsVParam) stub (Session 51)
