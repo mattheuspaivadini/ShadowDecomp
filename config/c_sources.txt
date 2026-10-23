@@ -1041,3 +1041,4 @@
 006E90 = src/cod/006E90.c cc=29                    # SCE libkernl syscall 0x2B (RotateThreadReadyQueue) stub (Session 50)
 006EA0 = src/cod/006EA0.c cc=29                    # SCE libkernl syscall -0x2C (_iRotateThreadReadyQueue) stub (Session 50)
 006EB0 = src/cod/006EB0.c cc=29                    # SCE libkernl syscall 0x2D (ReleaseWaitThread) stub (Session 50)
+006EC0 = src/cod/006EC0.c cc=29                    # SCE libkernl syscall -0x2E (iReleaseWaitThread) stub (Session 50)
