@@ -1066,3 +1066,4 @@
 007020 = src/cod/007020.c cc=29                    # SCE libkernl syscall 0x44 (WaitSema) stub (Session 51)
 007030 = src/cod/007030.c cc=29                    # SCE libkernl syscall 0x45 (PollSema) stub (Session 51)
 007040 = src/cod/007040.c cc=29                    # SCE libkernl syscall -0x46 (iPollSema) stub (Session 51)
+007050 = src/cod/007050.c cc=29                    # SCE libkernl syscall 0x47 (ReferSemaStatus) stub (Session 51)
