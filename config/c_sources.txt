@@ -1063,3 +1063,4 @@
 006FF0 = src/cod/006FF0.c cc=29                    # SCE libkernl syscall 0x41 (DeleteSema) stub (Session 51)
 007000 = src/cod/007000.c cc=29                    # SCE libkernl syscall 0x42 (SignalSema) stub (Session 51)
 007010 = src/cod/007010.c cc=29                    # SCE libkernl syscall -0x43 (iSignalSema) stub (Session 51)
+007020 = src/cod/007020.c cc=29                    # SCE libkernl syscall 0x44 (WaitSema) stub (Session 51)
