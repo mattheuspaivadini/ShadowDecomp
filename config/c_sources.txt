@@ -1036,3 +1036,4 @@
 006E40 = src/cod/006E40.c cc=29                    # SCE libkernl syscall -0x26 (iTerminateThread) stub (Session 50)
 006E50 = src/cod/006E50.c cc=29                    # SCE libkernl syscall 0x27 (DisableDispatchThread) stub (Session 50)
 006E60 = src/cod/006E60.c cc=29                    # SCE libkernl syscall 0x28 (EnableDispatchThread) stub (Session 50)
+006E70 = src/cod/006E70.c cc=29                    # SCE libkernl syscall 0x29 (ChangeThreadPriority) stub (Session 50)
