@@ -1112,3 +1112,4 @@
 007310 = src/cod/007310.c cc=29                    # SCE libkernl syscall -0x70 (iGsGetIMR) stub (Session 53)
 007320 = src/cod/007320.c cc=29                    # SCE libkernl syscall 0x71 (GsPutIMR) stub (Session 53)
 007330 = src/cod/007330.c cc=29                    # SCE libkernl syscall -0x71 (iGsPutIMR) stub (Session 53)
+007340 = src/cod/007340.c cc=29                    # SCE libkernl syscall 0x72 (SetPgifHandler) stub (Session 53)
