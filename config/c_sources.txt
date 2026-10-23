@@ -1007,3 +1007,4 @@
 006C70 = src/cod/006C70.c cc=29                    # SCE libkernl syscall 0xB (RemoveSbusIntcHandler) stub (Session 49)
 006C80 = src/cod/006C80.c cc=29                    # SCE libkernl syscall 0xC (Interrupt2Iop) stub (Session 49)
 006C90 = src/cod/006C90.c cc=29                    # SCE libkernl syscall 0xD (SetVTLBRefillHandler) stub (Session 49)
+006CA0 = src/cod/006CA0.c cc=29                    # SCE libkernl syscall 0xE (SetVCommonHandler) stub (Session 49)
