@@ -1019,3 +1019,4 @@
 006D30 = src/cod/006D30.c cc=29                    # SCE libkernl syscall 0x15 (_DisableIntc) stub (Session 49)
 006D40 = src/cod/006D40.c cc=29                    # SCE libkernl syscall 0x16 (_EnableDmac) stub (Session 49)
 006D50 = src/cod/006D50.c cc=29                    # SCE libkernl syscall 0x17 (_DisableDmac) stub (Session 50)
+006D60 = src/cod/006D60.c cc=29                    # SCE libkernl syscall 0xFC (SetAlarm) stub (Session 50)
