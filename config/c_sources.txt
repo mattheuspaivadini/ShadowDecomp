@@ -1079,3 +1079,4 @@
 0070F0 = src/cod/0070F0.c cc=29                    # SCE libkernl syscall 0x51 (RFU081_DeleteEventFlag) stub (Session 51)
 007100 = src/cod/007100.c cc=29                    # SCE libkernl syscall 0x52 (RFU082_SetEventFlag) stub (Session 51)
 007110 = src/cod/007110.c cc=29                    # SCE libkernl syscall -0x53 (RFU083_iSetEventFlag) stub (Session 52)
+007120 = src/cod/007120.c cc=29                    # SCE libkernl syscall 0x54 (RFU084_ClearEventFlag) stub (Session 52)
