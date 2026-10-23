@@ -1045,3 +1045,4 @@
 006ED0 = src/cod/006ED0.c cc=29                    # SCE libkernl syscall 0x2F (GetThreadId) stub (Session 50)
 006EE0 = src/cod/006EE0.c cc=29                    # SCE libkernl syscall 0x30 (ReferThreadStatus) stub (Session 50)
 006EF0 = src/cod/006EF0.c cc=29                    # SCE libkernl syscall -0x31 (iReferThreadStatus) stub (Session 50)
+006F00 = src/cod/006F00.c cc=29                    # SCE libkernl syscall 0x32 (SleepThread) stub (Session 50)
