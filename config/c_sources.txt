@@ -1004,3 +1004,4 @@
 006C40 = src/cod/006C40.c cc=29                    # SCE libkernl syscall 0x8 (RFU008) stub (Session 49)
 006C50 = src/cod/006C50.c cc=29                    # SCE libkernl syscall 0x9 (RFU009) stub (Session 49)
 006C60 = src/cod/006C60.c cc=29                    # SCE libkernl syscall 0xA (AddSbusIntcHandler) stub (Session 49)
+006C70 = src/cod/006C70.c cc=29                    # SCE libkernl syscall 0xB (RemoveSbusIntcHandler) stub (Session 49)
