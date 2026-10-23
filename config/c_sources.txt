@@ -1128,3 +1128,4 @@
 007410 = src/cod/007410.c cc=29                    # SCE libkernl syscall 0x7C (Deci2Call) stub (Session 53)
 007420 = src/cod/007420.c cc=29                    # SCE libkernl syscall 0x7D (PSMode) stub (Session 53)
 007430 = src/cod/007430.c cc=29                    # SCE libkernl syscall 0x7E (MachineType) stub (Session 53)
+007440 = src/cod/007440.c cc=29                    # SCE libkernl syscall 0x7F (GetMemorySize) stub (Session 53)
