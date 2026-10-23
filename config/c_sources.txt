@@ -1071,3 +1071,4 @@
 007070 = src/cod/007070.c cc=29                    # SCE libkernl syscall 0x49 (RFU073) stub (Session 51)
 007080 = src/cod/007080.c cc=29                    # SCE libkernl syscall 0x4A (SetOsdConfigParam) stub (Session 51)
 007090 = src/cod/007090.c cc=29                    # SCE libkernl syscall 0x4B (GetOsdConfigParam) stub (Session 51)
+0070A0 = src/cod/0070A0.c cc=29                    # SCE libkernl syscall 0x4C (GetGsHParam) stub (Session 51)
