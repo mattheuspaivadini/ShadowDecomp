@@ -1013,3 +1013,4 @@
 006CD0 = src/cod/006CD0.c cc=29                    # SCE libkernl syscall 0x10 (AddIntcHandler2) stub (Session 49)
 006CE0 = src/cod/006CE0.c cc=29                    # SCE libkernl syscall 0x11 (RemoveIntcHandler) stub (Session 49)
 006CF0 = src/cod/006CF0.c cc=29                    # SCE libkernl syscall 0x12 (AddDmacHandler) stub (Session 49)
+006D00 = src/cod/006D00.c cc=29                    # SCE libkernl syscall 0x12 (AddDmacHandler2) stub (Session 49)
