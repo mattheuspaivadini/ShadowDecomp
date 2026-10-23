@@ -1122,3 +1122,4 @@
 0073B0 = src/cod/0073B0.c cc=29                    # SCE libkernl syscall -0x77 (isceSifSetDma) stub (Session 53)
 0073C0 = src/cod/0073C0.c cc=29                    # SCE libkernl syscall 0x78 (sceSifSetDChain) stub (Session 53)
 0073D0 = src/cod/0073D0.c cc=29                    # SCE libkernl syscall -0x78 (isceSifSetDChain) stub (Session 53)
+0073E0 = src/cod/0073E0.c cc=29                    # SCE libkernl syscall 0x79 (sceSifSetReg) stub (Session 53)
