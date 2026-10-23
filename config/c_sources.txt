@@ -1103,3 +1103,4 @@
 007270 = src/cod/007270.c cc=29                    # SCE libkernl syscall 0x66 (CpuConfig) stub (Session 52)
 007280 = src/cod/007280.c cc=29                    # SCE libkernl syscall -0x67 (iGetCop0) stub (Session 52)
 007290 = src/cod/007290.c cc=29                    # SCE libkernl syscall -0x68 (iFlushCache) stub (Session 52)
+0072A0 = src/cod/0072A0.c cc=29                    # SCE libkernl syscall -0x6A (iCpuConfig) stub (Session 52)
