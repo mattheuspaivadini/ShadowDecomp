@@ -1034,3 +1034,4 @@
 006E20 = src/cod/006E20.c cc=29                    # SCE libkernl syscall 0x24 (ExitDeleteThread) stub (Session 50)
 006E30 = src/cod/006E30.c cc=29                    # SCE libkernl syscall 0x25 (TerminateThread) stub (Session 50)
 006E40 = src/cod/006E40.c cc=29                    # SCE libkernl syscall -0x26 (iTerminateThread) stub (Session 50)
+006E50 = src/cod/006E50.c cc=29                    # SCE libkernl syscall 0x27 (DisableDispatchThread) stub (Session 50)
