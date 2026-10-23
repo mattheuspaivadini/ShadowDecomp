@@ -1101,3 +1101,4 @@
 0290C4 = src/cod/0290C4.c -malign-loops=2 cc=ee-gcc2.9-990721-as991111   # MMI strlen: register pins, str in a0 so CSE keeps the aligned pseudo, volatile MMI asms (Session 60)
 028FB0 = src/cod/028FB0.c -malign-loops=2 cc=ee-gcc2.9-990721-as991111   # MMI strcpy: register pins, volatile MMI asms, asm() fences (Session 60)
 028BB0 = src/cod/028BB0.c -malign-loops=2 cc=ee-gcc2.9-990721-as991111   # MMI strcat: register_precision attribute for sq saves, pins, volatile asms, fences (Session 60)
+02E704 = src/cod/02E704.c -malign-loops=2 cc=ee-gcc2.9-990721-as991111   # MMI memchr: register pins, volatile MMI asms, laundered shift, goto found (Session 60)
