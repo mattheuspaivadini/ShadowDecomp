@@ -1048,3 +1048,4 @@
 006F00 = src/cod/006F00.c cc=29                    # SCE libkernl syscall 0x32 (SleepThread) stub (Session 50)
 006F10 = src/cod/006F10.c cc=29                    # SCE libkernl syscall 0x33 (WakeupThread) stub (Session 50)
 006F20 = src/cod/006F20.c cc=29                    # SCE libkernl syscall -0x34 (_iWakeupThread) stub (Session 50)
+006F30 = src/cod/006F30.c cc=29                    # SCE libkernl syscall 0x35 (CancelWakeupThread) stub (Session 51)
