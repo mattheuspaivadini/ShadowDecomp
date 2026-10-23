@@ -1096,3 +1096,4 @@
 007200 = src/cod/007200.c cc=29                    # SCE libkernl syscall 0x5F (DisableDmacHandler) stub (Session 52)
 007210 = src/cod/007210.c cc=29                    # SCE libkernl syscall -0x5F (iDisableDmacHandler) stub (Session 52)
 007220 = src/cod/007220.c cc=29                    # SCE libkernl syscall 0x60 (KSeg0) stub (Session 52)
+007230 = src/cod/007230.c cc=29                    # SCE libkernl syscall 0x61 (EnableCache) stub (Session 52)
