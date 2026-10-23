@@ -999,3 +999,4 @@
 006BF0 = src/cod/006BF0.c cc=29                    # SCE libkernl syscall 0x3 (RFU003) stub (Session 49)
 006C00 = src/cod/006C00.c cc=29                    # SCE libkernl syscall 0x4 (_Exit) stub (Session 49)
 006C10 = src/cod/006C10.c cc=29                    # SCE libkernl syscall 0x5 (RFU005) stub (Session 49)
+006C20 = src/cod/006C20.c cc=29                    # SCE libkernl syscall 0x6 (_LoadExecPS2) stub (Session 49)
