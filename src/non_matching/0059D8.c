@@ -4,6 +4,7 @@
  * per row, PutFont per non-space cell). Residual = the trailing-space scan loop shape (original:
  * test char, i-- in the bne slot, bgez back) and the caller-saved a4/a5 constants spilled with sq.
  * Tried: for/while/do forms of the scan, 2D array, unsigned color.
+ * Session 61 (2026-10-23): Ghidra dossier ev_cfa1d5f02063eb152123a1c99c405db4c5218c223d47c879ef644bb4aa95652b confirms the scan reads index 0, decrements, then exits before another read. Replaced the old `cell[i].c == ' ' && i >= 0` condition (which could read i == -1 due to C left-to-right evaluation) with a safe do/while in the same order. Under score_drafts, cc=296 changed 35 -> 51; still NON_MATCHING, and the original assembly remains in the build.
  * The original .s stays in the build (asm/cod/0059D8.s); this C
  * draft (Session 35) is kept for the record. */
 struct Cell { volatile int color; char c; char pad[3]; };
@@ -25,8 +26,11 @@ void func_001059D8(void)
     maxlen = 60;
     for (y = 0; y < 40; y++) {
         i = 59;
-        while (D_0013ED90[y * 60 + i].c == ' ' && i >= 0)
+        do {
+            if (D_0013ED90[y * 60 + i].c != ' ')
+                break;
             i--;
+        } while (i >= 0);
         i++;
         if (maxlen < i)
             maxlen = i;
