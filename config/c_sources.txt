@@ -1111,3 +1111,4 @@
 007300 = src/cod/007300.c cc=29                    # SCE libkernl syscall 0x70 (GsGetIMR) stub (Session 53)
 007310 = src/cod/007310.c cc=29                    # SCE libkernl syscall -0x70 (iGsGetIMR) stub (Session 53)
 007320 = src/cod/007320.c cc=29                    # SCE libkernl syscall 0x71 (GsPutIMR) stub (Session 53)
+007330 = src/cod/007330.c cc=29                    # SCE libkernl syscall -0x71 (iGsPutIMR) stub (Session 53)
