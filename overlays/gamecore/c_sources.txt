@@ -123,3 +123,4 @@
 0DBA50 = src/0DBA50.c -G0
 0DBBD8 = src/0DBBD8.c -G0
 0E0320 = src/0E0320.c -G0
+0E0388 = src/0E0388.c -G0
