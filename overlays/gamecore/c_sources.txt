@@ -130,3 +130,4 @@
 0E0C28 = src/0E0C28.c -G0
 0E2B48 = src/0E2B48.c -G0
 0E2F00 = src/0E2F00.c -G0
+0E2F08 = src/0E2F08.c -G0
