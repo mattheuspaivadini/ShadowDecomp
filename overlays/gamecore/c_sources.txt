@@ -15,3 +15,4 @@
 009E68 = src/009E68.c -G0
 009EB0 = src/009EB0.c -G0
 009FA8 = src/009FA8.c -G0
+00A080 = src/00A080.c -G0
