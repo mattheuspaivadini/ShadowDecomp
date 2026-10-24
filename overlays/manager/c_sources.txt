@@ -40,3 +40,4 @@
 01F208 = src/01F208.c -G0
 020BD0 = src/020BD0.c -G0
 022BE0 = src/022BE0.c -G0
+022BE8 = src/022BE8.c -G0
