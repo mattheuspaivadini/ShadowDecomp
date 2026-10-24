@@ -11,3 +11,4 @@
 #
 # Evidence: KERNEL.XFF .text bytes + .rel.text, KERNEL.XFF .symtab names, and the
 # Ghidra/R5900 export in build/plan/ghidra_out/KERNEL/ (see docs/README notes).
+000490 = src/000490.c -G0
