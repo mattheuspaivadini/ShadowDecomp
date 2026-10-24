@@ -17,3 +17,4 @@
 009FA8 = src/009FA8.c -G0
 00A080 = src/00A080.c -G0
 00A088 = src/00A088.c -G0
+00A3A0 = src/00A3A0.c -G0
