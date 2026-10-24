@@ -253,3 +253,4 @@
 12A9B8 = src/12A9B8.c -G0
 12AE48 = src/12AE48.c -G0
 00B638 = src/00B638.c -G0
+04B078 = src/04B078.c -G0
