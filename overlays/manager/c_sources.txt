@@ -88,3 +88,4 @@
 0C47D0 = src/0C47D0.c -G0
 0C5468 = src/0C5468.c -G0
 0C5470 = src/0C5470.c -G0
+0CC168 = src/0CC168.c -G0
