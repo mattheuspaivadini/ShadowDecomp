@@ -42,3 +42,4 @@
 00DA00 = src/00DA00.c -G0
 00DA08 = src/00DA08.c -G0
 0113F8 = src/0113F8.c -G0
+0124E0 = src/0124E0.c -G0
