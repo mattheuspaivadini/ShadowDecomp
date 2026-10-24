@@ -29,3 +29,4 @@
 00BF08 = src/00BF08.c -G0
 00D4F0 = src/00D4F0.c -G0
 00D4F8 = src/00D4F8.c -G0
+00D728 = src/00D728.c -G0
