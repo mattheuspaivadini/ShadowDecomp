@@ -107,3 +107,4 @@
 0E7C38 = src/0E7C38.c -G0
 0E7C40 = src/0E7C40.c -G0
 0E7C48 = src/0E7C48.c -G0
+0E7C50 = src/0E7C50.c -G0
