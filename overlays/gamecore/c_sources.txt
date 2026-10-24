@@ -154,3 +154,4 @@
 0F22A0 = src/0F22A0.c -G0
 0F22A8 = src/0F22A8.c -G0
 0F22B0 = src/0F22B0.c -G0
+0F22B8 = src/0F22B8.c -G0
