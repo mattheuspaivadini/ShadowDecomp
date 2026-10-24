@@ -1,4 +1,15 @@
-/* STATUS (Session 46, 2026-10-22): NON_MATCHING. best score 2 (was 296; sw.py diff lines).
+/* STATUS (Session 62, 2026-10-23): NON_MATCHING, still 2 diff instructions.
+ * REA/Ghidra dossier ev_fed12ce2efc901b492f2597a4f6b1f94d7024917bcfa486b40df6c77016c4ba8
+ * re-read. The sched2 dump of the entry block shows why the store cannot move
+ * earlier: insn 42 (`sw a1,0(v0)` = D_00132310) depends on insn 37, the
+ * asm("" : "+r"(idx)) bracket, and 37 has REG_DEP_ANTI on the mult (both
+ * write/read a1), so the store can only issue at t=4 while the %lo addiu of
+ * D_00146640 (insn 29, no dependency) issues at t=3. Removing the WAR with an
+ * input-only asm ("r"(idx)) lets the store issue earlier but breaks the global
+ * allocation the bracket exists for: the case blocks reallocate and the
+ * function is 8 bytes short (940 B). Moving the store or the bracket around
+ * `p = ...` is equally fatal (940 B); only the current order keeps 948 B.
+ * STATUS (Session 46, 2026-10-22): NON_MATCHING. best score 2 (was 296; sw.py diff lines).
  * Header copied as four 4-byte __builtin_memcpy calls (each expands to lwl/lwr+swl/swr; one 16-byte copy gives ldl/sdl); byte loops keep the destination in a local (d = r->dst1) and store u[i] then d[i] from one load (d[i] = u[i] = r->buf1[i]); the search loop compares against a copy (idx = hdr.sema; asm "+r") with an "m"(_sceFs_q[0]) fence first and a volatile -1 store (keeps it out of the b slot). An empty asm "+r"(idx) between the slot address and the D_00132310 store fixes the global allocation (idx -> a1; without it every case block reallocates). Residual: that asm costs sched2 one cycle, so the D_00132310 sw issues after addiu %lo(D_00146640) (image: before). Tried: asm before/after the store, untied asm, volatile store, barrier/"m" fence grids (1728), other compilers.
  * Session 61 (2026-10-23): REA-imported Ghidra dossier ev_fed12ce2efc901b492f2597a4f6b1f94d7024917bcfa486b40df6c77016c4ba8 confirms the receive-slot selection and queue logic; the target assembly stores D_00132310 before the low-half addiu for D_00146640. Freshly staged cc=29 trials (pinned $a0 lui/addiu around the store, an offset temporary with a +r fence, and moving the store ahead of pointer formation) scored 38, 77, and 40; restored the baseline draft (score 2). The full 29/296/2.95 matrix and the Ghidra pseudocode did not yield a match.
  * SIF fileio receive callback: 0x440-byte uncached slot, header copy, per-command fix-ups
