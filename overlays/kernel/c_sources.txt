@@ -44,3 +44,4 @@
 01B010 = src/01B010.c -G0
 01BB50 = src/01BB50.c -G0
 01BC00 = src/01BC00.c -G0
+01BC08 = src/01BC08.c -G0
