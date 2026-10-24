@@ -51,3 +51,4 @@
 01DB08 = src/01DB08.c -G0
 01DC08 = src/01DC08.c -G0
 01E7D0 = src/01E7D0.c -G0
+01F980 = src/01F980.c -G0
