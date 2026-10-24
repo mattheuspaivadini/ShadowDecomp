@@ -121,3 +121,4 @@
 0E99C8 = src/0E99C8.c -G0
 0E99D0 = src/0E99D0.c -G0
 0E99D8 = src/0E99D8.c -G0
+0E99F0 = src/0E99F0.c -G0
