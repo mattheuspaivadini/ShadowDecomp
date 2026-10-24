@@ -178,3 +178,4 @@
 0F8990 = src/0F8990.c -G0
 0F8998 = src/0F8998.c -G0
 0F89A0 = src/0F89A0.c -G0
+0F89A8 = src/0F89A8.c -G0
