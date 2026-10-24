@@ -142,3 +142,4 @@
 0E3000 = src/0E3000.c -G0
 0E3030 = src/0E3030.c -G0
 0E3680 = src/0E3680.c -G0
+0EAFC0 = src/0EAFC0.c -G0
