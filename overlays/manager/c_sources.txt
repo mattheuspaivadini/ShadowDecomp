@@ -97,3 +97,4 @@
 0DDDE8 = src/0DDDE8.c -G0
 0DEDF0 = src/0DEDF0.c -G0
 0E1CF8 = src/0E1CF8.c -G0
+0E4EF8 = src/0E4EF8.c -G0
