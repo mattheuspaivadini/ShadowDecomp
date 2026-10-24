@@ -108,3 +108,4 @@
 0B4600 = src/0B4600.c -G0
 0B4628 = src/0B4628.c -G0
 0B4650 = src/0B4650.c -G0
+0B6FE8 = src/0B6FE8.c -G0
