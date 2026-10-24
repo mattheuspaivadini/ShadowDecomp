@@ -101,3 +101,4 @@
 0E69B8 = src/0E69B8.c -G0
 0E6CA0 = src/0E6CA0.c -G0
 0E6CA8 = src/0E6CA8.c -G0
+0E7248 = src/0E7248.c -G0
