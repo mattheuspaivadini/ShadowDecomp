@@ -24,6 +24,20 @@ For every function:
    `src/cod/` (`020DA0` `_sceMcpMakeSpecoutBlock`, the `sceSif*` helpers,
    `0290C4` strlen, `0293B8` memcpy, `028E6C` strcmp).
 
+## Layout
+
+After Session 63 the readable C in this directory **is** the draft record for
+these twelve functions; the codegen-tuned variants (the closest C forms, scores
+2-130) moved to `src/non_matching/archive/<stem>.c` with an `ARCHIVED` header.
+`src/cod/<stem>.c` holds the instruction-stream transcription the build uses.
+Nothing was deleted: the three artefacts are, per function,
+
+| path | what it is |
+|---|---|
+| `src/cod/<stem>.c` | asm-encoded transcription (what the build compiles) |
+| `src/non_matching/equiv/<stem>.c` | readable C reconstruction (this directory) |
+| `src/non_matching/archive/<stem>.c` | codegen-tuned C attempt + STATUS history |
+
 ## Files
 
 | file | function | size | REA dossier | tuned draft score |

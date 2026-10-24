@@ -1,3 +1,9 @@
+/* ARCHIVED (Session 63, 2026-10-24): codegen-tuned attempt for 028E6C,
+ * kept as the matching reference (it is the closest C form: see the STATUS
+ * below).  The build now uses src/cod/028E6C.c, an instruction-stream
+ * transcription; the readable reconstruction is
+ * src/non_matching/equiv/028E6C.c.
+ */
 /* STATUS (Session 60, 2026-10-23): NON_MATCHING. best score 44 (was asm-permanent; diff lines,
  * 36 positional words) [cc=ee-gcc2.9-990721-as991111 -malign-loops=2].
  * strcmp (KERNEL.XFF symbol), Newlib 1.9.0 string/strcmp.c with a 16-byte MMI equality test

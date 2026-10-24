@@ -1,3 +1,9 @@
+/* ARCHIVED (Session 63, 2026-10-24): codegen-tuned attempt for 012E80,
+ * kept as the matching reference (it is the closest C form: see the STATUS
+ * below).  The build now uses src/cod/012E80.c, an instruction-stream
+ * transcription; the readable reconstruction is
+ * src/non_matching/equiv/012E80.c.
+ */
 /* STATUS (Session 47, 2026-10-22): NON_MATCHING. best score 18 (was 24; sw.py diff lines).
  * Copy loop rewritten from the image register map: an explicit source pointer (pktbuf = header, walked as *pktbuf++) gives the image's move a2,a3 before the sb (a loop.c giv init would land after the blez), packet[i] indexed as the destination giv (move v1,sp after the blez), a separate pktquads behind an empty asm "+r" (blocks nonzero_bits, so the guard stays blez instead of beqz) and the reversed counter copy in the blez slot; an asm volatile "r"(i) use before the loop (no code; i is still uninitialised there) fixes header -> a3. Residual: size/pktquads land in a0/v0 (image: both a1) with the counter in a1 (image: a0), and the size+30 addiu issues after the slt. Tried: size reuse, counter/pktquads live after the loop, division spellings, statement-order grids (96+240+312), two fence-grid levels.
  * Copy loop counts up (for i = 0; i < size; i++) with the quad count reusing size (size = (size + 15) / 16): loop.c reverses it to the image's bnez/blez shape. Dispatch v0/v1 roles fixed: the handler entry goes through an untied empty asm ("=r"(h) : "r"(&tbl[id])) so it is a local pseudo dying where the gp value is loaded (gp value -> v1, table reload -> v0); the old "r"(header) fence removed. Residual: copy prologue registers (image: header a3 with a separate a2 source copy made before the sb, size/quads in a1, count copy a0 in the blez slot; ours keeps header=a1 as the source and size in a0). Tried: statement orders of quads/sb/pktbuf, opaque pktbuf copy, asm on pktquads/size.

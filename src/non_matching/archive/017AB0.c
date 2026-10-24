@@ -1,3 +1,9 @@
+/* ARCHIVED (Session 63, 2026-10-24): codegen-tuned attempt for 017AB0,
+ * kept as the matching reference (it is the closest C form: see the STATUS
+ * below).  The build now uses src/cod/017AB0.c, an instruction-stream
+ * transcription; the readable reconstruction is
+ * src/non_matching/equiv/017AB0.c.
+ */
 /* STATUS (Session 42, 2026-10-21): NON_MATCHING. best score 64 (was 76; sw.py diff lines).
  * Fence grid (build/s42/fence_grid.py: empty asm "+r" / asm volatile "r" use of each local after each statement): best single fence.
  * Rewritten on the 0175A8/017FB0 bind template: WriteBack/CallRpc inside the server-found branch (image layout: wait block after the failure return), rdata pointer live across CallRpc, the failure-path D_00133A64 = 0 through a volatile cast (stops loop.c from hoisting its %hi so fp holds hi(_sceCd_scmdrdata)), init order from a 500-permutation grid (169 -> 56 instructions). Residual: hi(D_00133A9C)/hi(D_00133A98) swap s4/s5 (priority .0877 vs .0851) and the c/b/a temp registers in the reply decode.

@@ -1,3 +1,9 @@
+/* ARCHIVED (Session 63, 2026-10-24): codegen-tuned attempt for 0150B0,
+ * kept as the matching reference (it is the closest C form: see the STATUS
+ * below).  The build now uses src/cod/0150B0.c, an instruction-stream
+ * transcription; the readable reconstruction is
+ * src/non_matching/equiv/0150B0.c.
+ */
 /* STATUS (Session 62, 2026-10-23): NON_MATCHING, best 3 diff instructions with
  * -g2 (2 with -g0). REA/Ghidra dossier ev_77e41be23974c7514b0b38cd9ab226ddb73d844786c72d924e6ef9d649b1bbe4
  * re-read; sched2 dump of the tail block shows the base `addiu v1,v1,lo`

@@ -1,3 +1,9 @@
+/* ARCHIVED (Session 63, 2026-10-24): codegen-tuned attempt for 0293B8,
+ * kept as the matching reference (it is the closest C form: see the STATUS
+ * below).  The build now uses src/cod/0293B8.c, an instruction-stream
+ * transcription; the readable reconstruction is
+ * src/non_matching/equiv/0293B8.c.
+ */
 /* STATUS (Session 62, 2026-10-23): NON_MATCHING (45 diffs, cc=2.9-990721).
  * REA/Ghidra dossier ev_341c6d0bdc72ed984eac8ce6f29c6791330f7d3ba094d5c2057faa3d0c6d3862
  * re-read; the -malign-loops=3 hypothesis (8-byte alignment of L94E8/0x129520/

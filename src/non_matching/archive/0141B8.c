@@ -1,3 +1,9 @@
+/* ARCHIVED (Session 63, 2026-10-24): codegen-tuned attempt for 0141B8,
+ * kept as the matching reference (it is the closest C form: see the STATUS
+ * below).  The build now uses src/cod/0141B8.c, an instruction-stream
+ * transcription; the readable reconstruction is
+ * src/non_matching/equiv/0141B8.c.
+ */
 /* STATUS (Session 46, 2026-10-22): NON_MATCHING. best score 114 (was 160; sw.py diff lines).
  * SCE_GS_SET_DISPLAY terms ORed as magh, dh, dw, magv, dy, dx (a 120-order grid; the image tree is ((MAGH|DW)|(DX|DH))|DY, explicit trees score worse) and DISPFB written as (psm << 15) | (fbw << 9). Residual: the magh*w / dx*magh multiply order and the magh copy in the display arms; callee return types (void scePrintf) change nothing.
  * sceGsSetDefDispEnv; OutMode if-chain (NTSC/PAL/0x50/else scePrintf), smode2 via nested if with
