@@ -81,3 +81,4 @@
 0AF360 = src/0AF360.c -G0
 0BE628 = src/0BE628.c -G0
 0BE710 = src/0BE710.c -G0
+0C40A8 = src/0C40A8.c -G0
