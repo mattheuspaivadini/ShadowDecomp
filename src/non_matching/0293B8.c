@@ -1,4 +1,13 @@
-/* STATUS (Session 60, 2026-10-23): NON_MATCHING. best score 48 (was asm-permanent; diff lines,
+/* STATUS (Session 62, 2026-10-23): NON_MATCHING (45 diffs, cc=2.9-990721).
+ * REA/Ghidra dossier ev_341c6d0bdc72ed984eac8ce6f29c6791330f7d3ba094d5c2057faa3d0c6d3862
+ * re-read; the -malign-loops=3 hypothesis (8-byte alignment of L94E8/0x129520/
+ * 0x129550, target pad 0x1294E4) was tested and changes nothing (45 at =2 and
+ * =3; -malign-jumps=3 regresses to 66). LATENT UB, kept for codegen: copy8's
+ * haszero reads o8/h8, which are only assigned on the 8-byte path; on the
+ * reload16 path they were never assigned in C. At run time $9/$10 already hold
+ * the same constants from the 16-byte path (o/h), so the image's behaviour
+ * matches, but the C is undefined.
+ * STATUS (Session 60, 2026-10-23): NON_MATCHING. best score 48 (was asm-permanent; diff lines,
  * 46 positional words) [cc=ee-gcc2.9-990721-as991111 -malign-loops=2].
  * strncpy (KERNEL.XFF symbol), Newlib 1.9.0 string/strncpy.c shape with an alignment-dependent
  * block size (movz picks 16 or 8), a 16-byte path whose first null test runs psubb on ~x (as in
