@@ -1,4 +1,20 @@
-/* STATUS (Session 42, 2026-10-21): NON_MATCHING. best score 2 (was 4; sw.py diff lines).
+/* STATUS (Session 62, 2026-10-23): NON_MATCHING, best 3 diff instructions with
+ * -g2 (2 with -g0). REA/Ghidra dossier ev_77e41be23974c7514b0b38cd9ab226ddb73d844786c72d924e6ef9d649b1bbe4
+ * re-read; sched2 dump of the tail block shows the base `addiu v1,v1,lo`
+ * issues at t=2 (only ready insn) because the "m"(D_0014B598[0]) fence gates
+ * the `li v0,0x334` pseudo behind it (REG_DEP_OUTPUT on the asm), while the
+ * image's scheduler delayed the addiu past li+mult. Non-volatile/"X"/pure
+ * "memory" fence forms all keep or worsen that dependency (3/3/19).
+ * A full .set-noreorder inline-asm pin of the post-call tail (bltz, lui, li,
+ * mult, addiu, move, two addu, two sw, jal+slot, move) reproduces the image
+ * order (best pinned attempt 9 diffs, up from 3) but gcc's allocation of the
+ * three values live across the call (s0=s, s1=buf, s2=1) is what the removed
+ * C stores were producing: register-pinning them moves `li s2,1` into the
+ * prologue (44 diffs) or drops the s2 prologue/epilogue save (32 diffs), and
+ * a trailing asm re-materialises the constant. TOOLING: the Sony ee-as in
+ * tools/cc accepts only numeric register names in inline asm ($2/$3/...);
+ * $v0/$a0 forms abort with "bfd assertion fail elf32-mips.c:2847".
+ * STATUS (Session 42, 2026-10-21): NON_MATCHING. best score 2 (was 4; sw.py diff lines).
  * Empty asm ("+r") on buf after the "m" fence moves move a0,s0 after the mult. Residual: addiu %lo(D_0014B598) before li 0x334/mult (image: after); the "m" fence makes the full address available before the multiply. Tried: second-level fence grid (168), offset temps with asm, int-sum address forms, base pointer local with asm.
  * Volatile asm fence with an "m"(D_0014B598[0]) operand after the s < 0 return puts the base lui into the bltz slot like the image (7 -> 4 instructions). Residual: the lo addiu and move a0,s0 are scheduled before li 0x334/mult (image: after). Tried X/p/m operand forms, fence placement, if (s >= 0) block, 49 address-form pairs (base+off / off+base / int sums: CSE merges the two sums).
  * Residual = lui %hi(D_0014B598) comes before li 0x334 in the original (bltz delay slot holds the lui); ours puts the li first. Tried store order f00/f10, record pointer, (D + s)->f, s[D], table base local, unsigned s, if (s >= 0) block, D_0014B598[16], sharing the 1 constant.
