@@ -1,0 +1,12 @@
+# GAMECORE.XFF functions rebuilt from C.
+#
+#   <text-offset stem> = <C source> [cc=<token>] [extra flags]
+#
+# The stem is the function's offset inside GAMECORE.XFF `.text` (the module is a
+# relocatable overlay, so addresses are section offsets). Gate:
+#   wsl -d Ubuntu -u root -- bash -lc "cd <repo> && python3 tools/xffcheck.py GAMECORE --all"
+# The module is built with the small-data window disabled (58 `$gp`-relative
+# accesses in 1.2 MB of code), hence `-G0`.
+#
+# Evidence: GAMECORE.XFF .text bytes + .rel.text, GAMECORE.XFF .symtab names, and
+# the Ghidra/R5900 export in build/plan/ghidra_out/GAMECORE/.
