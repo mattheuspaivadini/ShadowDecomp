@@ -128,3 +128,4 @@
 0E0950 = src/0E0950.c -G0
 0E0958 = src/0E0958.c -G0
 0E0C28 = src/0E0C28.c -G0
+0E2B48 = src/0E2B48.c -G0
