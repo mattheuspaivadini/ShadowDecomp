@@ -234,3 +234,4 @@
 112ED0 = src/112ED0.c -G0
 112ED8 = src/112ED8.c -G0
 112EE0 = src/112EE0.c -G0
+112EE8 = src/112EE8.c -G0
