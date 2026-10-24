@@ -77,3 +77,4 @@
 087D10 = src/087D10.c -G0
 0990D8 = src/0990D8.c -G0
 0AE360 = src/0AE360.c -G0
+0AE838 = src/0AE838.c -G0
