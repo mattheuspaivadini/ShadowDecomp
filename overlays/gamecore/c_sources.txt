@@ -191,3 +191,4 @@
 0FDBF8 = src/0FDBF8.c -G0
 0FDC00 = src/0FDC00.c -G0
 0FDC08 = src/0FDC08.c -G0
+0FDC10 = src/0FDC10.c -G0
