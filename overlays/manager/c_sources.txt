@@ -25,3 +25,4 @@
 00A130 = src/00A130.c -G0
 00DE50 = src/00DE50.c -G0
 00DFA8 = src/00DFA8.c -G0
+013260 = src/013260.c -G0
