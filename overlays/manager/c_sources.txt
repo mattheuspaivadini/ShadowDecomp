@@ -1,0 +1,12 @@
+# MANAGER.XFF functions rebuilt from C.
+#
+#   <text-offset stem> = <C source> [cc=<token>] [extra flags]
+#
+# The stem is the function's offset inside MANAGER.XFF `.text` (the module is a
+# relocatable overlay, so addresses are section offsets). Gate:
+#   wsl -d Ubuntu -u root -- bash -lc "cd <repo> && python3 tools/xffcheck.py MANAGER --all"
+# The module is built with the small-data window disabled (7 `$gp`-relative
+# accesses in 982 KB of code), hence `-G0`.
+#
+# Evidence: MANAGER.XFF .text bytes + .rel.text (19,051 entries), MANAGER.XFF
+# .symtab names, and the Ghidra/R5900 export in build/plan/ghidra_out/MANAGER/.
