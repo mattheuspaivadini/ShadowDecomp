@@ -39,3 +39,4 @@
 00D9E8 = src/00D9E8.c -G0
 00D9F0 = src/00D9F0.c -G0
 00D9F8 = src/00D9F8.c -G0
+00DA00 = src/00DA00.c -G0
