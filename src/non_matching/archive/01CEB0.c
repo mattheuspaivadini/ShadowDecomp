@@ -2,7 +2,7 @@
  * kept as the matching reference (it is the closest C form: see the STATUS
  * below).  The build now uses src/cod/01CEB0.c, an instruction-stream
  * transcription; the readable reconstruction is
- * src/non_matching/equiv/01CEB0.c.
+ * src/non_matching/01CEB0.c.
  */
 /* STATUS (Session 62, 2026-10-23): NON_MATCHING, still 28 diffs (cc=29 -g0).
  * REA/Ghidra dossier ev_71747df916e24c22bdbd26c9c7524ad02447e76813ecfc2bed664c6bc476b696

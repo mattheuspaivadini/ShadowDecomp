@@ -1,8 +1,8 @@
 /* 000590: instruction-stream transcription of OutputLinkerScriptFile.
  *
  * ASM-ENCODED -- NOT DECOMPILED C.  The readable reconstruction of this
- * function is src/non_matching/equiv/000590.c, and the codegen-tuned C
- * near-miss (score in its STATUS header) is src/non_matching/000590.c.
+ * function is src/non_matching/000590.c, and the codegen-tuned C
+ * near-miss (score in its STATUS header) is src/non_matching/archive/000590.c.
  *
  * The function is transcribed from asm/cod/000590.s because the residual
  * difference is a single code-generator decision (one instruction

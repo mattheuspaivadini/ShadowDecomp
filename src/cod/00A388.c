@@ -1,8 +1,8 @@
 /* 00A388: instruction-stream transcription of func_0010A388.
  *
  * ASM-ENCODED -- NOT DECOMPILED C.  The readable reconstruction of this
- * function is src/non_matching/equiv/00A388.c, and the codegen-tuned C
- * near-miss (score in its STATUS header) is src/non_matching/00A388.c.
+ * function is src/non_matching/00A388.c, and the codegen-tuned C
+ * near-miss (score in its STATUS header) is src/non_matching/archive/00A388.c.
  *
  * The function is transcribed from asm/cod/00A388.s because the residual
  * difference is a single code-generator decision (one instruction

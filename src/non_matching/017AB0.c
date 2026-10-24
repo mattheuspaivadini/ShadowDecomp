@@ -5,7 +5,7 @@
  * prototypes follow the matched sceSif* helpers.  Readable reconstruction:
  * NOT byte-exact (40 diff instructions in the .bss/.data %hi priority and the
  * reply-decode temporaries), not part of the build.  The codegen-tuned
- * near-miss is src/non_matching/017AB0.c.
+ * near-miss is src/non_matching/archive/017AB0.c.
  *
  * sceCdInit: bind the CD/DVD SIF RPC service, read the drive configuration,
  * select the read mode and start the CD semaphores.

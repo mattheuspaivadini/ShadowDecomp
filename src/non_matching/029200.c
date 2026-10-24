@@ -5,7 +5,7 @@
  * cross-checked with 028E6C (strcmp) and the matched 0290C4 (strlen).  Readable
  * reconstruction: NOT byte-exact (42-74 diff instructions in the block-entry
  * predicates and pointer bumps), not part of the build.  The codegen-tuned
- * near-miss is src/non_matching/029200.c.
+ * near-miss is src/non_matching/archive/029200.c.
  *
  * Same strategy as strcmp, bounded by n: a 16-byte MMI compare when both
  * pointers are 16-aligned and n >= 16, an 8-byte word compare when 8-aligned,

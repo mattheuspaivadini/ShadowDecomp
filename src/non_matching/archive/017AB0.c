@@ -2,7 +2,7 @@
  * kept as the matching reference (it is the closest C form: see the STATUS
  * below).  The build now uses src/cod/017AB0.c, an instruction-stream
  * transcription; the readable reconstruction is
- * src/non_matching/equiv/017AB0.c.
+ * src/non_matching/017AB0.c.
  */
 /* STATUS (Session 42, 2026-10-21): NON_MATCHING. best score 64 (was 76; sw.py diff lines).
  * Fence grid (build/s42/fence_grid.py: empty asm "+r" / asm volatile "r" use of each local after each statement): best single fence.

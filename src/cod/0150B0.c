@@ -1,8 +1,8 @@
 /* 0150B0: instruction-stream transcription of scePad2CreateSocket.
  *
  * ASM-ENCODED -- NOT DECOMPILED C.  The readable reconstruction of this
- * function is src/non_matching/equiv/0150B0.c, and the codegen-tuned C
- * near-miss (score in its STATUS header) is src/non_matching/0150B0.c.
+ * function is src/non_matching/0150B0.c, and the codegen-tuned C
+ * near-miss (score in its STATUS header) is src/non_matching/archive/0150B0.c.
  *
  * The function is transcribed from asm/cod/0150B0.s because the residual
  * difference is a single code-generator decision (one instruction

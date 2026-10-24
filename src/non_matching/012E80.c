@@ -5,7 +5,7 @@
  * (pseudocode cross-checked against the matched SIF helpers sceSifExecNotifyHandler
  * 011CA8 and isceSifSetDChain in src/cod/).  Readable reconstruction: NOT
  * byte-exact (10 diff instructions), not part of the build.  The codegen-tuned
- * near-miss is src/non_matching/012E80.c.
+ * near-miss is src/non_matching/archive/012E80.c.
  *
  * SCE sifcmd interrupt handler: copy the packet out of the EE receive buffer,
  * re-arm the DMA chain, then dispatch the system (cid < 0) or user handler with

@@ -6,7 +6,7 @@
  * by the matched 014020/014FF0.  Readable reconstruction: NOT byte-exact (130
  * diff instructions in the OR-tree order and the PAL/NTSC register roles), not
  * part of the build.  The codegen-tuned near-miss is
- * src/non_matching/0141B8.c.
+ * src/non_matching/archive/0141B8.c.
  *
  * Builds a GS DISPFB/DISPLAY/SMODE2 environment for the current output mode.
  * The offsets returned by func_001141A8() are only fetched when the current

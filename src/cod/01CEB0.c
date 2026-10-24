@@ -1,8 +1,8 @@
 /* 01CEB0: instruction-stream transcription of _sceMcFatFormat.
  *
  * ASM-ENCODED -- NOT DECOMPILED C.  The readable reconstruction of this
- * function is src/non_matching/equiv/01CEB0.c, and the codegen-tuned C
- * near-miss (score in its STATUS header) is src/non_matching/01CEB0.c.
+ * function is src/non_matching/01CEB0.c, and the codegen-tuned C
+ * near-miss (score in its STATUS header) is src/non_matching/archive/01CEB0.c.
  *
  * The function is transcribed from asm/cod/01CEB0.s because the residual
  * difference is a single code-generator decision (one instruction

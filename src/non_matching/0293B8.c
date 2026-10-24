@@ -5,7 +5,7 @@
  * cross-checked with 028E6C/029200 (same MMI block helpers) and the matched
  * 0290C4.  Readable reconstruction: NOT byte-exact (28-45 diff instructions in
  * the block-entry predicates and the predicted 16->8 continuation), not part
- * of the build.  The codegen-tuned near-miss is src/non_matching/0293B8.c.
+ * of the build.  The codegen-tuned near-miss is src/non_matching/archive/0293B8.c.
  *
  * Newlib's strncpy with an alignment-dependent fast path: the block size is 16
  * when src|dst is 16-aligned, 8 when only 8-aligned.  Each block is tested for

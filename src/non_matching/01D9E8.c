@@ -5,7 +5,7 @@
  * the cluster/entry layout follows the matched libmc2 helpers.  Readable
  * reconstruction: NOT byte-exact (20 diff instructions in the block layout),
  * not part of the build.  The codegen-tuned near-miss is
- * src/non_matching/01D9E8.c.
+ * src/non_matching/archive/01D9E8.c.
  *
  * Case-insensitive search of a FAT directory cluster chain for `name`.
  * The first cluster of a directory holds "." and ".." and must be validated;

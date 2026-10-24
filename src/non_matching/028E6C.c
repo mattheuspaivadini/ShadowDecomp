@@ -6,7 +6,7 @@
  * same MMI null test.  Readable reconstruction: NOT byte-exact (the delay-slot
  * placement of the 16-byte `pnor` cannot be produced by any installed cc1),
  * not part of the build.  The codegen-tuned near-miss is
- * src/non_matching/028E6C.c.
+ * src/non_matching/archive/028E6C.c.
  *
  * The EE libc compares 16 bytes at a time when both pointers are 16-aligned,
  * 8 bytes when only 8-aligned, and falls back to a byte loop.  MMI has no C

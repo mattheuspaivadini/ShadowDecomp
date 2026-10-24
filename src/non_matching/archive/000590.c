@@ -2,7 +2,7 @@
  * kept as the matching reference (it is the closest C form: see the STATUS
  * below).  The build now uses src/cod/000590.c, an instruction-stream
  * transcription; the readable reconstruction is
- * src/non_matching/equiv/000590.c.
+ * src/non_matching/000590.c.
  */
 /* STATUS (Session 44, 2026-10-21): NON_MATCHING. best score 16 (was 28; sw.py diff lines).
  * is_section: the pre-test reads the table through a fresh zero (empty asm "+r" with an input from the outer index so loop.c cannot hoist it), the loop body loads the entry before i += 4 and the loop test reads it as int (a different TBAA type keeps gcse PRE from carrying it into the next iteration). Residual: the 2.96 ce pass (if-conversion, no -fno-if-conversion in this cc1) speculates the found flag = 1 above the strcmp test, so it cannot share v0 (image: li v0,1 in the beqz slot); return-style/branch-shape variants and two fence grids (210) did not avoid it.

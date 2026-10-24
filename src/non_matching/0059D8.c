@@ -4,7 +4,7 @@
  * REA/Ghidra Emotion Engine dossier ev_cfa1d5f02063eb152123a1c99c405db4c5218c223d47c879ef644bb4aa95652b.
  * Readable reconstruction: NOT byte-exact (51 diff instructions in the
  * per-row scan and the PutFont argument setup), not part of the build.  The
- * codegen-tuned near-miss is src/non_matching/0059D8.c.
+ * codegen-tuned near-miss is src/non_matching/archive/0059D8.c.
  *
  * Debug-console renderer over the 40x60 character screen at D_0013ED90:
  * for every row it trims trailing blanks, tracks the longest used row

@@ -4,7 +4,7 @@
  * dossier ev_fed12ce2efc901b492f2597a4f6b1f94d7024917bcfa486b40df6c77016c4ba8.
  * Readable reconstruction: NOT byte-exact (the D_00132310 store issues one slot
  * after the %lo addiu of D_00146640), not part of the build.  The codegen-tuned
- * near-miss is src/non_matching/00A388.c.
+ * near-miss is src/non_matching/archive/00A388.c.
  *
  * SIF file-I/O receive callback.  The IOP deposits each reply in one of the
  * 0x440-byte uncached slots at D_00146640; the callback publishes the slot

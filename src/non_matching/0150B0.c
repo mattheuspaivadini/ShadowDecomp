@@ -4,7 +4,7 @@
  * REA/Ghidra Emotion Engine dossier ev_77e41be23974c7514b0b38cd9ab226ddb73d844786c72d924e6ef9d649b1bbe4.
  * This is the readable reconstruction: it is NOT byte-exact and is not part of
  * the build.  The codegen-tuned near-miss (2 diff instructions) is
- * src/non_matching/0150B0.c.
+ * src/non_matching/archive/0150B0.c.
  *
  * Behaviour derived from the target:
  *   150C8  andi v0,s1,0x3F / beqz   -> the buffer must be 64-byte aligned

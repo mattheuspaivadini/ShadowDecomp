@@ -4,7 +4,7 @@
  * REA/Ghidra Emotion Engine dossier ev_02bcb3cbb016f32dac76c44164b37c9d4f4bd3f641673acf1e3b52f9f3300964.
  * Readable reconstruction: NOT byte-exact (9 diff instructions, all inside the
  * section-name scan), not part of the build.  The codegen-tuned near-miss is
- * src/non_matching/000590.c.
+ * src/non_matching/archive/000590.c.
  *
  * Writes a GNU ld script for the loaded modules:
  *   - a callback receives the banner format with the file name (150C8: the call

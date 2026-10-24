@@ -1,8 +1,8 @@
 /* 0059D8: instruction-stream transcription of func_001059D8.
  *
  * ASM-ENCODED -- NOT DECOMPILED C.  The readable reconstruction of this
- * function is src/non_matching/equiv/0059D8.c, and the codegen-tuned C
- * near-miss (score in its STATUS header) is src/non_matching/0059D8.c.
+ * function is src/non_matching/0059D8.c, and the codegen-tuned C
+ * near-miss (score in its STATUS header) is src/non_matching/archive/0059D8.c.
  *
  * The function is transcribed from asm/cod/0059D8.s because the residual
  * difference is a single code-generator decision (one instruction

@@ -6,7 +6,7 @@
  * 020DA0, the _sceMcp* RPC wrappers) and the struct layout from the image
  * offsets.  Readable reconstruction: NOT byte-exact (28 diff instructions in
  * register allocation and one constant pair), not part of the build.  The
- * codegen-tuned near-miss is src/non_matching/01CEB0.c.
+ * codegen-tuned near-miss is src/non_matching/archive/01CEB0.c.
  *
  * libmc FAT format:
  *   1. reset the per-port FAT cache, read the card spec and the superblock;

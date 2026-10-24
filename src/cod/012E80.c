@@ -1,8 +1,8 @@
 /* 012E80: instruction-stream transcription of func_00112E80.
  *
  * ASM-ENCODED -- NOT DECOMPILED C.  The readable reconstruction of this
- * function is src/non_matching/equiv/012E80.c, and the codegen-tuned C
- * near-miss (score in its STATUS header) is src/non_matching/012E80.c.
+ * function is src/non_matching/012E80.c, and the codegen-tuned C
+ * near-miss (score in its STATUS header) is src/non_matching/archive/012E80.c.
  *
  * The function is transcribed from asm/cod/012E80.s because the residual
  * difference is a single code-generator decision (one instruction

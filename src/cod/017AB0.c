@@ -1,8 +1,8 @@
 /* 017AB0: instruction-stream transcription of sceCdInit.
  *
  * ASM-ENCODED -- NOT DECOMPILED C.  The readable reconstruction of this
- * function is src/non_matching/equiv/017AB0.c, and the codegen-tuned C
- * near-miss (score in its STATUS header) is src/non_matching/017AB0.c.
+ * function is src/non_matching/017AB0.c, and the codegen-tuned C
+ * near-miss (score in its STATUS header) is src/non_matching/archive/017AB0.c.
  *
  * The function is transcribed from asm/cod/017AB0.s because the residual
  * difference is a single code-generator decision (one instruction

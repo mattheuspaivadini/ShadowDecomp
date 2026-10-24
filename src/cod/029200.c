@@ -1,8 +1,8 @@
 /* 029200: instruction-stream transcription of func_00129200.
  *
  * ASM-ENCODED -- NOT DECOMPILED C.  The readable reconstruction of this
- * function is src/non_matching/equiv/029200.c, and the codegen-tuned C
- * near-miss (score in its STATUS header) is src/non_matching/029200.c.
+ * function is src/non_matching/029200.c, and the codegen-tuned C
+ * near-miss (score in its STATUS header) is src/non_matching/archive/029200.c.
  *
  * The function is transcribed from asm/cod/029200.s because the residual
  * difference is a single code-generator decision (one instruction

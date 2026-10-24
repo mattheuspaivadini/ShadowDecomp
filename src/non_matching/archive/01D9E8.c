@@ -2,7 +2,7 @@
  * kept as the matching reference (it is the closest C form: see the STATUS
  * below).  The build now uses src/cod/01D9E8.c, an instruction-stream
  * transcription; the readable reconstruction is
- * src/non_matching/equiv/01D9E8.c.
+ * src/non_matching/01D9E8.c.
  */
 /* STATUS (Session 44, 2026-10-21): NON_MATCHING. best score 11 (was 46; sw.py diff lines).
  * Loop layout explained: stmt.c expand_end_loop moves everything up to the last jump to the loop end label (within 30 insns) to the bottom, so the image's for (;;) has 'if (strlen(buf[0].name) >= 0x20) break;' (break = the after-loop return 0x81019002) while the other dot/dotdot failures return directly; inner loop as for (i = 0; i < 2 && count != 0; i++); clust compared as (unsigned int)clust == 0xFFFFFFFF (lui/ori). Residual: the bne slot before ent = buf stays empty (image: move s0,sp) and the beqz first slot is filled from the fall-through (image: from the target), plus the return 0x81010002 block (image: last block, beq); a goto label after the loop places it but loop.c then moves the err/0x6F returns out as well.

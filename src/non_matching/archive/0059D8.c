@@ -2,7 +2,7 @@
  * kept as the matching reference (it is the closest C form: see the STATUS
  * below).  The build now uses src/cod/0059D8.c, an instruction-stream
  * transcription; the readable reconstruction is
- * src/non_matching/equiv/0059D8.c.
+ * src/non_matching/0059D8.c.
  */
 /* STATUS (Session 44, 2026-10-21): NON_MATCHING. best score 54 (was 77; sw.py diff lines).
  * Cell.color volatile and read once into a local (col = p->color): the image keeps one lw and extracts the bytes with sra/andi/srl (a plain field lets combine turn one extract into lbu). Residual: which y*60 site becomes its own giv (image: the scan pre-test uses a +60 giv and the render index uses (y*15)<<2; ours the reverse) and the 0x20 constant in t0 vs the y counter.

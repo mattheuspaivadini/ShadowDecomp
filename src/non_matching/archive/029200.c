@@ -2,7 +2,7 @@
  * kept as the matching reference (it is the closest C form: see the STATUS
  * below).  The build now uses src/cod/029200.c, an instruction-stream
  * transcription; the readable reconstruction is
- * src/non_matching/equiv/029200.c.
+ * src/non_matching/029200.c.
  */
 /* STATUS (Session 60, 2026-10-23): NON_MATCHING. best score 60 (was asm-permanent; diff lines
  * with -malign-jumps=3, 82 positional words) [cc=ee-gcc2.9-990721-as991111 -malign-loops=2].

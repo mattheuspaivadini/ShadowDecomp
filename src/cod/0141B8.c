@@ -1,8 +1,8 @@
 /* 0141B8: instruction-stream transcription of sceGsSetDefDispEnv.
  *
  * ASM-ENCODED -- NOT DECOMPILED C.  The readable reconstruction of this
- * function is src/non_matching/equiv/0141B8.c, and the codegen-tuned C
- * near-miss (score in its STATUS header) is src/non_matching/0141B8.c.
+ * function is src/non_matching/0141B8.c, and the codegen-tuned C
+ * near-miss (score in its STATUS header) is src/non_matching/archive/0141B8.c.
  *
  * The function is transcribed from asm/cod/0141B8.s because the residual
  * difference is a single code-generator decision (one instruction
