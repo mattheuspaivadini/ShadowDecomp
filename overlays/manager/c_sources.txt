@@ -51,3 +51,4 @@
 03DFE8 = src/03DFE8.c -G0
 03DFF0 = src/03DFF0.c -G0
 03EE70 = src/03EE70.c -G0
+03F308 = src/03F308.c -G0
