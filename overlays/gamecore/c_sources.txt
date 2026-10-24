@@ -163,3 +163,4 @@
 0F8070 = src/0F8070.c -G0
 0F80D0 = src/0F80D0.c -G0
 0F80D8 = src/0F80D8.c -G0
+0F80E0 = src/0F80E0.c -G0
