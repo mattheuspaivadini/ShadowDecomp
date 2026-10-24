@@ -27,3 +27,4 @@
 00B430 = src/00B430.c -G0
 00BE98 = src/00BE98.c -G0
 00BF08 = src/00BF08.c -G0
+00D4F0 = src/00D4F0.c -G0
