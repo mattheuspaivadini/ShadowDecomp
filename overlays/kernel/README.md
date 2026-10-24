@@ -25,6 +25,14 @@ python tools/xffcheck.py KERNEL --list --small 40
 # annotated R5900 disassembly with the relocation targets
 .venv/Scripts/python tools/xff_dis.py KERNEL 0005A8
 
+# scratch draft against the container (no manifest edit, fast loop)
+wsl -d Ubuntu -u root -- bash -lc "cd /mnt/c/.../ShadowDecomp && \
+  python3 tools/xff_try.py KERNEL 000638 /tmp/draft.c --verbose"
+
+# harvest the mechanically provable shapes (named + stripped functions)
+wsl -d Ubuntu -u root -- bash -lc "cd /mnt/c/.../ShadowDecomp && \
+  python3 tools/xff_shapes.py KERNEL --max-size 64 --jobs 4 --write"
+
 # verify (must run inside WSL, like make check)
 wsl -d Ubuntu -u root -- bash -lc "cd /mnt/c/.../ShadowDecomp && python3 tools/xffcheck.py KERNEL --all"
 ```
@@ -41,24 +49,54 @@ wsl -d Ubuntu -u root -- bash -lc "cd /mnt/c/.../ShadowDecomp && python3 tools/x
 | Ghidra EE export | 1,039 functions (`build/plan/ghidra_out/KERNEL/`) — it merges/undercounts the gap blocks, so it is a hint, not an inventory |
 | Compiler | `-G0`: only 10 `$gp`-relative accesses in the whole module, every global uses `lui`/`addiu` |
 
-## Status
+## Status (Session 65)
 
-44 functions, 476 B of `.text`, all byte-exact (`python3 tools/xffcheck.py KERNEL --all`
-→ `44/44`). These are the leaf batch from the plan (`docs/plan/tasks.tsv` X005-X007)
-plus three small routines with real logic (`0005A8`, `000620`, `0007D8`, `000AA0`).
+| Metric | Value |
+|---|---|
+| Functions in the lane | **109** (`python3 tools/xffcheck.py KERNEL --all` → `109/109`) |
+| Byte-exact `.text` | **1,516 B = 0.71 %** of the module |
+| Remaining named functions | 831 (154,120 B) |
+| Remaining stripped pool | 57,776 B (131 candidates from `tools/xff_inventory.py`) |
 
-Remaining: 896 named functions plus the unnamed static pool, i.e. ~99.8 % of the
-module. The function inventory for the static pool still has to be produced
-(Ghidra's 1,039 entries as a starting point, then a splat-style split).
+The 109 are: 45 leaf/wrapper functions from the earlier sessions (X005–X007),
+**62 recovered by the shape harvester** (`tools/xff_shapes.py`: `ret-addr`,
+`ret-load`, `ret-imm`, `ret-zero`, `empty`, `store-arg`, `tail-call`), and 2
+hand-written (`iosCdSetMode` 000638, `iosGetClock` 000858).
+
+## What the 50 % target actually costs
+
+Measured distribution of the 940 named functions (bytes per size bucket):
+
+| Size bucket | Functions | Bytes | Cumulative bytes | % of `.text` |
+|---|---:|---:|---:|---:|
+| ≤ 32 B | 216 | 3,888 | 3,888 | 1.8 % |
+| 33–64 B | 180 | 8,868 | 12,756 | 6.0 % |
+| 65–128 B | 214 | 20,472 | 33,228 | 15.6 % |
+| 129–256 B | 178 | 32,760 | 65,988 | 30.9 % |
+| 257–512 B | 93 | 33,884 | 99,872 | 46.8 % |
+| 513–1024 B | 42 | 30,300 | 130,172 | 61.0 % |
+| > 1024 B | 17 | 25,464 | 155,636 | 72.9 % |
+
+**Consequence:** 50 % of `.text` (106,706 B) is reached only after ~881
+functions plus a dozen from the 513–1024 B bucket — i.e. **≈ 95 % of the named
+functions (≈ 893 of 940)**. The target is not "half the work": the bytes are
+concentrated in the medium and large bodies. The stripped pool is not needed at
+all for 50 %.
+
+Observed throughput so far: the shape harvester proves ~60 functions (≈1 KB) per
+sweep; hand-written bodies cost one iteration loop each (000638 took 1 attempt,
+000748 was still 13/23 words off after three struct/order variants). The boot-ELF
+lane averaged ~16 functions per session over 64 sessions, so 50 % of `KERNEL.XFF`
+is a **dozens-of-sessions** target, not a single-session one.
 
 ## Layout
 
 ```
 overlays/kernel/
-  c_sources.txt     <text offset stem> = <C source> [-G0]
+  c_sources.txt     <text offset stem> = <C source> [-G0] [size=...]
   src/<STEM>.c      one function per file, stem = offset in .text
 ```
 
 Names in `src/*.c` come from the module's own `.symtab`. Data objects that have
-no name in the table stay numbered (`D_kernel_0000B8` = `.data + 0xB8`) and are
+no name in the table stay numbered (`D_kernel_bss_8050` = `.bss + 0x8050`) and are
 marked `UNCONFIRMED` in the file header.
