@@ -1113,3 +1113,4 @@
 01CEB0 = src/cod/01CEB0.c
 01D9E8 = src/cod/01D9E8.c
 028E6C = src/cod/028E6C.c
+029200 = src/cod/029200.c
