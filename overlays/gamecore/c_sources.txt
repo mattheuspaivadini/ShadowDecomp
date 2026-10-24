@@ -185,3 +185,4 @@
 0FBB60 = src/0FBB60.c -G0
 0FBB78 = src/0FBB78.c -G0
 0FBBE8 = src/0FBBE8.c -G0
+0FBBF0 = src/0FBBF0.c -G0
