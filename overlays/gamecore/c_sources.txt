@@ -100,3 +100,4 @@
 09BB28 = src/09BB28.c -G0
 09BB30 = src/09BB30.c -G0
 09BB38 = src/09BB38.c -G0
+09BB40 = src/09BB40.c -G0
