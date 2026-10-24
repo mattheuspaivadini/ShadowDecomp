@@ -132,3 +132,4 @@
 0E2F00 = src/0E2F00.c -G0
 0E2F08 = src/0E2F08.c -G0
 0E2F10 = src/0E2F10.c -G0
+0E2FC8 = src/0E2FC8.c -G0
