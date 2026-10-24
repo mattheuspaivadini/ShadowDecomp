@@ -93,3 +93,4 @@
 0CC8E0 = src/0CC8E0.c -G0
 0CC8E8 = src/0CC8E8.c -G0
 0CC900 = src/0CC900.c -G0
+0DD4E0 = src/0DD4E0.c -G0
