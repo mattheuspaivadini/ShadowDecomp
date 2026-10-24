@@ -112,3 +112,4 @@
 0D0FB0 = src/0D0FB0.c -G0
 0D0FB8 = src/0D0FB8.c -G0
 0D0FD0 = src/0D0FD0.c -G0
+0D0FE8 = src/0D0FE8.c -G0
