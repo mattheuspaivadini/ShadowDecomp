@@ -53,3 +53,4 @@
 02CE88 = src/02CE88.c -G0
 02CE90 = src/02CE90.c -G0
 02E1C8 = src/02E1C8.c -G0
+0305B8 = src/0305B8.c -G0
