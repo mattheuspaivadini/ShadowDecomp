@@ -151,3 +151,4 @@
 0EB430 = src/0EB430.c -G0
 0EB480 = src/0EB480.c -G0
 0EB7F8 = src/0EB7F8.c -G0
+0F22A0 = src/0F22A0.c -G0
