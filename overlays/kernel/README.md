@@ -53,15 +53,15 @@ wsl -d Ubuntu -u root -- bash -lc "cd /mnt/c/.../ShadowDecomp && python3 tools/x
 
 | Metric | Value |
 |---|---|
-| Functions in the lane | **109** (`python3 tools/xffcheck.py KERNEL --all` → `109/109`) |
-| Byte-exact `.text` | **1,516 B = 0.71 %** of the module |
-| Remaining named functions | 831 (154,120 B) |
+| Functions in the lane | **115** (`python3 tools/xffcheck.py KERNEL --all` → `115/115`) |
+| Byte-exact `.text` | **1,612 B = 0.76 %** of the module |
+| Remaining named functions | 825 (154,024 B) |
 | Remaining stripped pool | 57,776 B (131 candidates from `tools/xff_inventory.py`) |
 
-The 109 are: 45 leaf/wrapper functions from the earlier sessions (X005–X007),
-**62 recovered by the shape harvester** (`tools/xff_shapes.py`: `ret-addr`,
-`ret-load`, `ret-imm`, `ret-zero`, `empty`, `store-arg`, `tail-call`), and 2
-hand-written (`iosCdSetMode` 000638, `iosGetClock` 000858).
+The 115 are: 45 leaf/wrapper functions from the earlier sessions (X005–X007),
+**68 recovered by the shape harvester** (`tools/xff_shapes.py`: `ret-addr`,
+`ret-load`, `ret-imm`, `ret-zero`, `empty`, `store-arg`, `store-arg-ret`,
+`tail-call`), and 2 hand-written (`iosCdSetMode` 000638, `iosGetClock` 000858).
 
 ## What the 50 % target actually costs
 
