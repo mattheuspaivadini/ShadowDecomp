@@ -117,3 +117,4 @@
 0D7610 = src/0D7610.c -G0
 0D7648 = src/0D7648.c -G0
 0D94D8 = src/0D94D8.c -G0
+0D94E0 = src/0D94E0.c -G0
