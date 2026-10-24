@@ -24,3 +24,4 @@
 0092C0 = src/0092C0.c -G0
 00A130 = src/00A130.c -G0
 00DE50 = src/00DE50.c -G0
+00DFA8 = src/00DFA8.c -G0
