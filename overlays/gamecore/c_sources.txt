@@ -20,3 +20,4 @@
 00A3A0 = src/00A3A0.c -G0
 00A640 = src/00A640.c -G0
 00A7B8 = src/00A7B8.c -G0
+00A7E0 = src/00A7E0.c -G0
