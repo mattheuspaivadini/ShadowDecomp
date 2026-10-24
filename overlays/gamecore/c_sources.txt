@@ -228,3 +228,4 @@
 10F9C0 = src/10F9C0.c -G0
 10F9C8 = src/10F9C8.c -G0
 10F9D0 = src/10F9D0.c -G0
+10F9D8 = src/10F9D8.c -G0
