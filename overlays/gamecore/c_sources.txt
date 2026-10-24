@@ -104,3 +104,4 @@
 09BB48 = src/09BB48.c -G0
 09BB50 = src/09BB50.c -G0
 09BB58 = src/09BB58.c -G0
+0ADD98 = src/0ADD98.c -G0
