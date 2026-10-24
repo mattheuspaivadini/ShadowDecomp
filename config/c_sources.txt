@@ -1106,3 +1106,4 @@
 0150B0 = src/cod/0150B0.c
 000590 = src/cod/000590.c
 0059D8 = src/cod/0059D8.c
+00A388 = src/cod/00A388.c
