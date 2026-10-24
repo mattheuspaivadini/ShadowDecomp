@@ -95,3 +95,4 @@
 09BB00 = src/09BB00.c -G0
 09BB08 = src/09BB08.c -G0
 09BB10 = src/09BB10.c -G0
+09BB18 = src/09BB18.c -G0
