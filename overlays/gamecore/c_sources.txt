@@ -22,3 +22,4 @@
 00A7B8 = src/00A7B8.c -G0
 00A7E0 = src/00A7E0.c -G0
 00A7E8 = src/00A7E8.c -G0
+00A7F0 = src/00A7F0.c -G0
