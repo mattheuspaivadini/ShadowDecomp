@@ -144,3 +144,4 @@
 0E3680 = src/0E3680.c -G0
 0EAFC0 = src/0EAFC0.c -G0
 0EB1B8 = src/0EB1B8.c -G0
+0EB1C0 = src/0EB1C0.c -G0
