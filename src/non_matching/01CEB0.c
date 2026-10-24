@@ -1,4 +1,11 @@
-/* STATUS (Session 46, 2026-10-22): NON_MATCHING. best score 37 (was 117; sw.py diff lines).
+/* STATUS (Session 62, 2026-10-23): NON_MATCHING, still 28 diffs (cc=29 -g0).
+ * REA/Ghidra dossier ev_71747df916e24c22bdbd26c9c7524ad02447e76813ecfc2bed664c6bc476b696
+ * and the matched callee 020DA0 (_sceMcpMakeSpecoutBlock takes (port, spec, out))
+ * show that the 1CF94 `addiu a2,s2,0xD0` (in the strncmp beqz slot) is the
+ * callee's third argument, not a dead address: the call at 1CFC8 still has
+ * a2 = &si->bad_block_list. The call now passes it; codegen is unchanged
+ * because gcc already kept that base live for the 0xFFFFFFFF fill loop.
+ * STATUS (Session 46, 2026-10-22): NON_MATCHING. best score 37 (was 117; sw.py diff lines).
  * clust = spec.block * spec.page / 0x400 (no +0x3FF: the movn pair is the signed /1024), computed first into k and copied to clust after the nifc clamp (image: sra a1 + move s0,a1 in the bnez slot), an empty asm volatile after the backup_block1 store keeps sched1 from hoisting ifc = si + 0x50 above memset/strcat. Residual: the dead addiu a2 = &bad_block_list in the strncmp beqz slot, t0/t1 for the 43/256 constants, the f17C/f180 store order, i = 0 placement around the ifc memset, the ifc[i] addu operand order.
  * libmc FAT format: reset the per-port FAT cache, read the card spec and superblock, rebuild the
  * superblock (magic + version, geometry, backup blocks skipping bad blocks, indirect FAT list),
@@ -97,7 +104,8 @@ int _sceMcCoreGetConnection(int port);
 int _sceMcpGetCardSpec(int port, struct CardSpec *spec);
 int _sceMcpReadSysInfo(int port);
 int func_00129200(const char *a, const char *b, int n);   /* strncmp */
-int _sceMcpMakeSpecoutBlock(int port, struct CardSpec *spec);
+int _sceMcpMakeSpecoutBlock(int port, struct CardSpec *spec,
+                             unsigned int *bad_block_list);
 void *func_001283D0(void *dst, int c, int n);               /* memset */
 char *func_00128BB0(char *dst, const char *src);           /* strcat */
 int _sceMcpIsSpeckOutBlock(int port, int block);
@@ -149,7 +157,7 @@ int _sceMcFatFormat(int port) {
     if (func_00129200(si->magic, D_00138D10, 0x1B) != 0) {
         for (i = 31; i >= 0; i--)
             si->bad_block_list[i] = 0xFFFFFFFF;
-        if (_sceMcpMakeSpecoutBlock(port, &spec) == 0)
+        if (_sceMcpMakeSpecoutBlock(port, &spec, si->bad_block_list) == 0)
             goto fail;
     }
     func_001283D0(si->magic, 0, 0x28);
