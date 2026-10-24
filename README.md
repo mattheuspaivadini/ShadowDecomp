@@ -11,10 +11,13 @@ copyrighted game material: you must supply your own legally owned copy of the di
 
 ## Current status
 
+### Main executable `SCUS_974.72`
+
 | Metric | Value |
 |--------|-------|
 | Flat load image | **237,952 bytes**, SHA-1 `6f853f64…` — **HASH MATCH** |
 | ELF container | `SCUS_974.72` (242,940 bytes, SHA-1 `b715b349…`) — **byte-identical** |
+| Code bytes | **203,692** `.text` bytes, all attributed (no gaps, no overlaps) |
 | Functions in the image | 1,042 real functions (+ 2 raw `textbin` regions) |
 | Functions compiled from C | **1,037 / 1,042** (99.52 %) — of which **12 are asm transcriptions, not recovered C** |
 | Functions recovered as C | **1,025 / 1,042** (98.37 %) |
@@ -27,6 +30,19 @@ copyrighted game material: you must supply your own legally owned copy of the di
 Every matched function is gated by the image hash, so a change that breaks any
 function is caught immediately.
 
+### Overlay modules (`.XFF`)
+
+| Module | `.text` | Decompiled from C | Gate |
+|---|---:|---:|---|
+| `KERNEL.XFF` | 213,412 B (940 named + 57,776 B unnamed static code) | **44 functions, 476 B** (leaf batch) | `python3 tools/xffcheck.py KERNEL --all` → 44/44 byte-exact, reloc-masked |
+| `MANAGER.XFF` | 981,944 B (+110,192 B VU1 microcode) | 0 | split to ELF only |
+| `GAMECORE.XFF` | 1,226,112 B | 0 | split to ELF only |
+| IOP (`SG2IOPM1.IRX`, `PL2303.IRX`) | 20,448 B | 0 | inventoried |
+
+The overlays are relocatable images (no flat hash), so their gate is per-function:
+compile with the pinned EE-GCC and compare against the container bytes with the
+relocation fields masked (`overlays/kernel/README.md`).
+
 ### Phases
 
 | # | Phase | Status |
@@ -35,15 +51,60 @@ function is caught immediately.
 | 2 | Analyze the ELF (sections, segments, entry, strings) | Done |
 | 3 | Pin the compiler (EE-GCC revision and flags) | Done — `-O2 -g2 -G8`, mixed generations per translation unit |
 | 4 | Split and rebuild (per-function assembly, byte-exact link, container) | Done |
-| 5 | Name functions and data from evidence | In progress |
-| 6 | Decompile functions to C, byte-exact | In progress (1,025 / 1,042 recovered C; 1 function untouched) |
+| 5 | Name functions and data from evidence | In progress (210 automatic labels left) |
+| 6 | Decompile functions to C, byte-exact | In progress — main ELF 1,025 / 1,042; `KERNEL.XFF` 44 / 940 named |
+| 7 | Decompile the `.XFF` overlays | Started on `KERNEL.XFF` (lane + 44 functions) |
 
-The full accounting of what remains — bytes, functions, data, names and the
-`.XFF` overlays — is kept locally in `docs/completeness-audit.md` (analysis notes
-are not versioned). Short version: one function is still not decompiled
-(`func_00107FF8`, the SCE printf core), twelve `src/cod` files are byte-exact
-assembly transcriptions rather than recovered C, and the executable covered here
-is 7.4 % of the disc's code — the `.XFF` overlays are not decompiled.
+## What is still missing for "100 % decompiled"
+
+The executable's **bytes are complete** (hash-matched, container-identical). The
+*source* is not. In ascending order of effort:
+
+1. **`func_00107FF8` — 3,352 B (1.65 % of `.text`).** The SCE libc printf core: an
+   89-entry format switch (`jtbl_00137D40`), 22 callback `jalr`s, frame `0x120`.
+   All six callers (`sceVsnprintf`, `sceSnprintf`, `sceVprintf`, `scePrintf`,
+   `kprintf`, `008DB8`) and all seven callees are already matched, so it is a
+   pure reconstruction job (comparable engines already recovered: `_vfprintf_r`
+   5,744 B, `_dtoa_r` 4,712 B, `__svfscanf` 3,216 B).
+2. **12 asm transcriptions — 9,092 B (4.46 %).** `000590 0059D8 00A388 012E80
+   0141B8 0150B0 017AB0 01CEB0 01D9E8 028E6C 029200 0293B8` are byte-exact
+   `__asm__` copies of their `.s`; the readable C is in `src/non_matching/` but
+   still differs by one scheduler/register-allocation decision. Needs a compiler
+   build with the right `reorg`/allocation behaviour, or an explicit
+   "C-equivalent, not byte-exact" status.
+3. **Hand-written assembly — 1,040 B (0.51 %), legitimately not C.** `entry` (crt0:
+   `$gp`/`$sp` from syscalls, `sq` `.bss` clear, `EI`) and the three kernel
+   exception vectors (`00F7C0`, `00F900`, `00FA00`: `$k0`/`$at` saves, `mfhi1`,
+   `mfsa`, `mtc0`, `eret`). Plus 20 B of `textbin` (the `.text` header and a 4-byte
+   boundary artifact at `0x113074`).
+4. **Names — 210 of 1,044 `.text` labels are still `func_XXXXXXXX` (46,680 B).**
+   18 have an authoritative `KERNEL.XFF` name ready to apply (`abort`, `atexit`,
+   `memcpy`, `strlen`, `printf`, `vfprintf`, …); the other 192 are file-scope
+   statics that need string/caller evidence.
+5. **Data — 34,020 B recovered as bytes, not as source.** `.data` 17,612 B (265
+   labels), `.rodata` 15,448 B (366 labels, 483 strings, 106 relocated jump
+   tables), `.sdata` 896 B, plus 197,032 B of `.bss`. Only a handful of objects have
+   a declared type (`include/symbols.h`) or a documented layout (`docs/structs.md`);
+   the rest are labelled word dumps emitted by splat.
+6. **The rest of the game — 2,531,660 B of EE code + 20,448 B of IOP code, 0 %
+   decompiled.** The boot ELF is only **7.4 %** of the executable code on the disc:
+
+   | Binary | `.text` | Status |
+   |---|---:|---|
+   | `KERNEL.XFF` | 213,412 B | 44 functions recovered (0.2 %) |
+   | `MANAGER.XFF` | 981,944 B + 110,192 B VU1 | 0 % |
+   | `GAMECORE.XFF` | 1,226,112 B | 0 % |
+   | `SG2IOPM1.IRX`, `PL2303.IRX` | 20,448 B | 0 % |
+
+   Unlike the boot ELF, `KERNEL.XFF`'s shipped symbol table keeps **globals only**
+   (940 `STB_GLOBAL` functions, 155,636 B; 57,776 B of static functions were
+   stripped and still need an inventory). `MANAGER.XFF` (2,277) and `GAMECORE.XFF`
+   (2,755) ship complete symbol tables.
+
+So: **bytes 100 %, main-executable C 93.37 %, whole game ≈ 7 %.** Everything above
+is tracked with evidence in `docs/ledger.json` (main ELF), `overlays/kernel/c_sources.txt`
+(overlay lane) and the local notes (`docs/completeness-audit.md`, not versioned).
+
 
 ---
 
@@ -81,6 +142,7 @@ is 7.4 % of the disc's code — the `.XFF` overlays are not decompiled.
 asm/            Per-function split assembly (1,042 files under asm/cod/, plus data)
 src/cod/        Matched C sources (byte-exact)
 src/non_matching/  Near-miss attempts, each with a STATUS note
+overlays/       .XFF overlay decompilation lanes (overlays/kernel/: src/, c_sources.txt, README)
 include/        Headers, symbol macros, SDK stubs
 config/         Splat config, symbol_addrs.txt (single source of truth for names),
                 c_sources.txt (per-TU compiler selection), compiler flags
@@ -132,6 +194,10 @@ make report
 
 # Diff one function against the original
 make diff F=func_001128C0
+
+# Overlay lane (KERNEL.XFF): list functions and verify them byte-exactly
+python3 tools/xffcheck.py KERNEL --list
+python3 tools/xffcheck.py KERNEL --all     # inside WSL, like make check
 ```
 
 Run `make help` for the full target list.
@@ -163,7 +229,7 @@ Run `make help` for the full target list.
 ## Limitations and open issues
 
 - The REA MCP toolset cannot analyze R5900 ELFs on Windows (its native lane is PE-only). Analysis uses splat, rabbitizer, Ghidra with the EE extension, and local scripts.
-- Overlay modules (`.XFF`: `KERNEL`, `MANAGER`, `GAMECORE`) are split but mostly not decompiled.
+- Overlay modules (`.XFF`) are split; only `KERNEL.XFF` has a decompilation lane so far (44 functions byte-exact, `overlays/kernel/`). `MANAGER.XFF` and `GAMECORE.XFF` are not decompiled, and `KERNEL.XFF`'s shipped symbol table keeps globals only, so its 57,776 B of static code still needs an inventory.
 - The twelve former near-miss drafts were promoted as byte-exact **assembly transcriptions**; their recovered-C forms remain in `src/non_matching/` and differ only in register allocation, scheduling or branch layout. The single remaining undecompiled function is `func_00107FF8` (SCE printf core).
 - The `origin` remote points to `github.com/mattheuspaivadini/ShadowDecomp`; the ISO and the game-derived files are never pushed.
 
