@@ -1105,3 +1105,4 @@
 028CDC = src/cod/028CDC.c -malign-loops=2 cc=ee-gcc2.9-990721-as991111   # MMI strchr: register pins, volatile MMI asms, asm() fences, PAD8 against exit-test duplication (Session 60)
 0150B0 = src/cod/0150B0.c
 000590 = src/cod/000590.c
+0059D8 = src/cod/0059D8.c
