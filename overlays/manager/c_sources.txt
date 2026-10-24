@@ -123,3 +123,4 @@
 0E99D8 = src/0E99D8.c -G0
 0E99F0 = src/0E99F0.c -G0
 0E99F8 = src/0E99F8.c -G0
+0E9A00 = src/0E9A00.c -G0
