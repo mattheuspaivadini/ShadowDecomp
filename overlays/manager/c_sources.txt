@@ -47,3 +47,4 @@
 0311A8 = src/0311A8.c -G0
 03C1F0 = src/03C1F0.c -G0
 03DC88 = src/03DC88.c -G0
+03DFE0 = src/03DFE0.c -G0
