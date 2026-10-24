@@ -48,3 +48,4 @@
 01BC10 = src/01BC10.c -G0
 01BC18 = src/01BC18.c -G0
 01BF60 = src/01BF60.c -G0
+01DB08 = src/01DB08.c -G0
