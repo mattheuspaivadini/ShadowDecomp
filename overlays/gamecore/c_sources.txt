@@ -10,3 +10,4 @@
 #
 # Evidence: GAMECORE.XFF .text bytes + .rel.text, GAMECORE.XFF .symtab names, and
 # the Ghidra/R5900 export in build/plan/ghidra_out/GAMECORE/.
+007318 = src/007318.c -G0 -fno-optimize-sibling-calls
