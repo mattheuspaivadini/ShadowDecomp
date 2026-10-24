@@ -119,3 +119,4 @@
 0D94D8 = src/0D94D8.c -G0
 0D94E0 = src/0D94E0.c -G0
 0D95A0 = src/0D95A0.c -G0
+0DAFF8 = src/0DAFF8.c -G0
