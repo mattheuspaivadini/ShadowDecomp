@@ -95,3 +95,4 @@
 0CC900 = src/0CC900.c -G0
 0DD4E0 = src/0DD4E0.c -G0
 0DDDE8 = src/0DDDE8.c -G0
+0DEDF0 = src/0DEDF0.c -G0
