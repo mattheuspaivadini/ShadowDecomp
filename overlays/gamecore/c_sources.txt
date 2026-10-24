@@ -252,23 +252,23 @@
 128348 = src/128348.c -G0
 12A9B8 = src/12A9B8.c -G0
 12AE48 = src/12AE48.c -G0
-00B638 = src/00B638.c -G0
-04B078 = src/04B078.c -G0
-05D290 = src/05D290.c -G0
-0746D0 = src/0746D0.c -G0
-0746E8 = src/0746E8.c -G0
-074700 = src/074700.c -G0
-074718 = src/074718.c -G0
-074730 = src/074730.c -G0
-074748 = src/074748.c -G0
-074760 = src/074760.c -G0
-074778 = src/074778.c -G0
-074790 = src/074790.c -G0
-0747A8 = src/0747A8.c -G0
-0747C0 = src/0747C0.c -G0
-074A18 = src/074A18.c -G0
-07D5F8 = src/07D5F8.c -G0
-07D960 = src/07D960.c -G0
-08F328 = src/08F328.c -G0
-0BC4B8 = src/0BC4B8.c -G0
-12ADF0 = src/12ADF0.c -G0
+00B638 = src/00B638.c -G0 size=0x14
+04B078 = src/04B078.c -G0 size=0x18
+05D290 = src/05D290.c -G0 size=0x14
+0746D0 = src/0746D0.c -G0 size=0x18
+0746E8 = src/0746E8.c -G0 size=0x18
+074700 = src/074700.c -G0 size=0x18
+074718 = src/074718.c -G0 size=0x18
+074730 = src/074730.c -G0 size=0x18
+074748 = src/074748.c -G0 size=0x18
+074760 = src/074760.c -G0 size=0x18
+074778 = src/074778.c -G0 size=0x18
+074790 = src/074790.c -G0 size=0x18
+0747A8 = src/0747A8.c -G0 size=0x18
+0747C0 = src/0747C0.c -G0 size=0x18
+074A18 = src/074A18.c -G0 size=0x18
+07D5F8 = src/07D5F8.c -G0 size=0x14
+07D960 = src/07D960.c -G0 size=0x14
+08F328 = src/08F328.c -G0 size=0x14
+0BC4B8 = src/0BC4B8.c -G0 size=0x14
+12ADF0 = src/12ADF0.c -G0 size=0x14
