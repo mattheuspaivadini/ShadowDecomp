@@ -1,0 +1,13 @@
+# KERNEL.XFF functions rebuilt from C.
+#
+#   <text-offset stem> = <C source> [cc=<token>] [extra flags]
+#
+# The stem is the function's offset inside KERNEL.XFF `.text` (the module is a
+# relocatable overlay, so addresses are section offsets). Gate:
+#   python tools/xffcheck.py KERNEL
+# The module is built with the small-data window disabled: every global in the
+# image is addressed with `lui`/`addiu` (only 10 `$gp`-relative accesses in the
+# whole 213 KB module), hence `-G0`.
+#
+# Evidence: KERNEL.XFF .text bytes + .rel.text, KERNEL.XFF .symtab names, and the
+# Ghidra/R5900 export in build/plan/ghidra_out/KERNEL/ (see docs/README notes).
