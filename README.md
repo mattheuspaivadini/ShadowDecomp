@@ -16,11 +16,13 @@ copyrighted game material: you must supply your own legally owned copy of the di
 | Flat load image | **237,952 bytes**, SHA-1 `6f853f64…` — **HASH MATCH** |
 | ELF container | `SCUS_974.72` (242,940 bytes, SHA-1 `b715b349…`) — **byte-identical** |
 | Functions in the image | 1,042 real functions (+ 2 raw `textbin` regions) |
-| Functions matched from C | **1,025 / 1,042** (98.37 %) |
-| Matched code bytes | **190,188 / 203,692** `.text` bytes (**93.37 %**) |
-| Near-miss attempts | 12 drafts in `src/non_matching/` (diff lines range from 2 to 114) |
-| Named symbols | ~55 evidence-derived `.text` names, plus 840 SDK names imported from `KERNEL.XFF` |
-| Remaining real pool | 13 (12 near-miss + 1 untouched) |
+| Functions compiled from C | **1,037 / 1,042** (99.52 %) — of which **12 are asm transcriptions, not recovered C** |
+| Functions recovered as C | **1,025 / 1,042** (98.37 %) |
+| Recovered-C bytes | **190,188 / 203,692** `.text` bytes (**93.37 %**) |
+| Remaining real function | 1 untouched (`func_00107FF8`, the SCE printf core, 3,352 B) |
+| Hand-written assembly | 4 functions (crt0 `entry` + 3 exception vectors), 1,040 B |
+| Named `.text` labels | 834 / 1,044; 210 automatic (18 of them have an authoritative `KERNEL.XFF` name) |
+| Near-miss drafts | 12 readable and codegen-tuned attempts in `src/non_matching/` (plus `archive/`) |
 
 Every matched function is gated by the image hash, so a change that breaks any
 function is caught immediately.
@@ -34,7 +36,14 @@ function is caught immediately.
 | 3 | Pin the compiler (EE-GCC revision and flags) | Done — `-O2 -g2 -G8`, mixed generations per translation unit |
 | 4 | Split and rebuild (per-function assembly, byte-exact link, container) | Done |
 | 5 | Name functions and data from evidence | In progress |
-| 6 | Decompile functions to C, byte-exact | In progress (902 / 1,042) |
+| 6 | Decompile functions to C, byte-exact | In progress (1,025 / 1,042 recovered C; 1 function untouched) |
+
+The full accounting of what remains — bytes, functions, data, names and the
+`.XFF` overlays — is kept locally in `docs/completeness-audit.md` (analysis notes
+are not versioned). Short version: one function is still not decompiled
+(`func_00107FF8`, the SCE printf core), twelve `src/cod` files are byte-exact
+assembly transcriptions rather than recovered C, and the executable covered here
+is 7.4 % of the disc's code — the `.XFF` overlays are not decompiled.
 
 ---
 
@@ -61,7 +70,8 @@ function is caught immediately.
   The syscall-stub table, the `$gp`/Status-register functions and the MMI string routines once
   classed this way turned out to be C with inline asm. The MMI routines are Newlib C with
   inline asm built by ee-gcc 2.9-ee-990721 + the 991111 assembler
-  (`tools/cc/make_hybrid_990721.sh`); 9 of 12 match, strcmp/strncmp/strncpy are near-misses.
+  (`tools/cc/make_hybrid_990721.sh`); 9 of 12 match from recovered C, and
+  strcmp/strncmp/strncpy are byte-exact assembly transcriptions.
 
 ---
 
@@ -154,7 +164,7 @@ Run `make help` for the full target list.
 
 - The REA MCP toolset cannot analyze R5900 ELFs on Windows (its native lane is PE-only). Analysis uses splat, rabbitizer, Ghidra with the EE extension, and local scripts.
 - Overlay modules (`.XFF`: `KERNEL`, `MANAGER`, `GAMECORE`) are split but mostly not decompiled.
-- The remaining near-miss drafts are mostly register-allocation, scheduler or branch-layout differences. Some residual classes have no compiler flag that fixes them yet.
+- The twelve former near-miss drafts were promoted as byte-exact **assembly transcriptions**; their recovered-C forms remain in `src/non_matching/` and differ only in register allocation, scheduling or branch layout. The single remaining undecompiled function is `func_00107FF8` (SCE printf core).
 - The `origin` remote points to `github.com/mattheuspaivadini/ShadowDecomp`; the ISO and the game-derived files are never pushed.
 
 ---
