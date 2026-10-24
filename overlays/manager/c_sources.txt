@@ -115,3 +115,4 @@
 0E9230 = src/0E9230.c -G0
 0E9268 = src/0E9268.c -G0
 0E99A8 = src/0E99A8.c -G0
+0E99B0 = src/0E99B0.c -G0
