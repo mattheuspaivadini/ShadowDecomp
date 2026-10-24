@@ -42,3 +42,4 @@
 022BE0 = src/022BE0.c -G0
 022BE8 = src/022BE8.c -G0
 02A170 = src/02A170.c -G0
+02A208 = src/02A208.c -G0
