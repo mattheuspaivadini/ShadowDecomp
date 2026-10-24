@@ -110,3 +110,4 @@
 0E7C50 = src/0E7C50.c -G0
 0E7D08 = src/0E7D08.c -G0
 0E8EB8 = src/0E8EB8.c -G0
+0E9200 = src/0E9200.c -G0
