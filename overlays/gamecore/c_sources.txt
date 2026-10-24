@@ -180,3 +180,4 @@
 0F89A0 = src/0F89A0.c -G0
 0F89A8 = src/0F89A8.c -G0
 0F89B0 = src/0F89B0.c -G0
+0F89B8 = src/0F89B8.c -G0
