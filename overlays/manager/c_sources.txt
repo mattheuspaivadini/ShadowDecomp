@@ -79,3 +79,4 @@
 0AE360 = src/0AE360.c -G0
 0AE838 = src/0AE838.c -G0
 0AF360 = src/0AF360.c -G0
+0BE628 = src/0BE628.c -G0
