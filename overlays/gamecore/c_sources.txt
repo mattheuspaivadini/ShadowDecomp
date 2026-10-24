@@ -139,3 +139,4 @@
 0E2FE8 = src/0E2FE8.c -G0
 0E2FF0 = src/0E2FF0.c -G0
 0E2FF8 = src/0E2FF8.c -G0
+0E3000 = src/0E3000.c -G0
