@@ -94,3 +94,4 @@
 09BAF8 = src/09BAF8.c -G0
 09BB00 = src/09BB00.c -G0
 09BB08 = src/09BB08.c -G0
+09BB10 = src/09BB10.c -G0
