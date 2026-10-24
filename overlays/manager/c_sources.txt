@@ -83,3 +83,4 @@
 0BE710 = src/0BE710.c -G0
 0C40A8 = src/0C40A8.c -G0
 0C4758 = src/0C4758.c -G0
+0C47C0 = src/0C47C0.c -G0
