@@ -12,3 +12,4 @@
 # .symtab names, and the Ghidra/R5900 export in build/plan/ghidra_out/MANAGER/.
 003E88 = src/003E88.c -G0
 0058C8 = src/0058C8.c -G0
+007C08 = src/007C08.c -G0
