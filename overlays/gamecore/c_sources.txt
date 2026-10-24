@@ -13,3 +13,4 @@
 007318 = src/007318.c -G0 -fno-optimize-sibling-calls
 008BD8 = src/008BD8.c -G0
 009E68 = src/009E68.c -G0
+009EB0 = src/009EB0.c -G0
