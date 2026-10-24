@@ -270,3 +270,4 @@
 07D5F8 = src/07D5F8.c -G0
 07D960 = src/07D960.c -G0
 08F328 = src/08F328.c -G0
+0BC4B8 = src/0BC4B8.c -G0
