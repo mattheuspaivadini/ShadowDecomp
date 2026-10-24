@@ -165,6 +165,60 @@ def variants(a: dict, fname: str) -> list[tuple[str, str, str]]:
     if n == 2 and ws[0] == JR_RA and ws[1] == NOP:
         out.append(("empty", "`jr $ra; nop` - empty body", f"void {fname}(void) {{\n}}\n"))
         return out
+    # ---- 4-word leaves -------------------------------------------------
+    if n == 4:
+        w0, w1, w2, w3 = ws
+        r0 = rels.get(0, {})
+        # store-arg-ret: lui rX,hi ; addiu $v0,$zero,imm ; jr $ra ; sw $aN,lo(rX)
+        # a setter that also reports success
+        if (is_lui(w0) and is_addiu(w1) and rs(w1) == 0 and rt(w1) == 2
+                and w2 == JR_RA and is_store(w3) and rt(w0) == rs(w3) and r0
+                and 4 <= rt(w3) <= 7):
+            g = data_symbol(r0)
+            const = imm(w1)
+            for t in ("int", "unsigned int", "short", "char"):
+                out.append(("store-arg-ret",
+                            f"`lui` + `addiu $v0,$zero,{const}` + `jr $ra` + delay "
+                            f"`sw $a{rt(w3) - 4},lo(...)` - stores the argument in "
+                            f"{r0['section']}+{r0['value']:#x} and returns {const}",
+                            f"extern {t} {g};\n\nint {fname}({t} v) {{\n"
+                            f"    {g} = v;\n    return {const};\n}}\n"))
+            return out
+        return out
+    # ---- 5-word leaves -------------------------------------------------
+    if n == 5:
+        w0, w1, w2, w3, w4 = ws
+        r0 = rels.get(0, {})
+        # member-load: lui rX,hi ; addiu rX,rX,lo ; lw $v0,off(rX) ; jr $ra ; delay
+        # The explicit `addiu` means the base was materialised once, i.e. the source
+        # indexed a *member* of a structured object, not `*(T *)(base + off)`.
+        if (is_lui(w0) and is_addiu(w1) and rt(w1) == rs(w1) == rt(w0)
+                and is_load(w2) and rs(w2) == rt(w1) and rt(w2) == 2
+                and w3 == JR_RA and r0):
+            base = data_symbol(r0)
+            off = imm(w2)
+            ins = {0x20: "lb", 0x24: "lbu", 0x21: "lh", 0x25: "lhu",
+                   0x23: "lw", 0x37: "ld"}.get(op(w2), "lw")
+            if w4 == NOP:
+                form, tail = "returns the member", ""
+            elif op(w4) == 0x0B and rs(w4) == 2 and rt(w4) == 2 and imm(w4) == 1:
+                form, tail = "returns (member == 0)", " == 0"
+            else:
+                return out
+            for t in ("int", "unsigned int", "short", "unsigned short",
+                      "char", "unsigned char", "void *"):
+                cast = "int" if t == "void *" else t
+                struct = f"S_{base}"
+                out.append(("member-load",
+                            f"`lui`+`addiu` base {r0['section']}+{r0['value']:#x}, "
+                            f"`{ins} $v0,{off:#x}` - {form} as `{t}`",
+                            f"struct {struct} {{\n    char pad[{off:#x}];\n"
+                            f"    {t} member;\n}};\n\n"
+                            f"extern struct {struct} {base};\n\n"
+                            f"int {fname}(void) {{\n"
+                            f"    return {base}.member{tail};\n}}\n"))
+            return out
+        return out
     if n != 3 or ws[1] != JR_RA:
         return out
     w0, delay = ws[0], ws[2]
