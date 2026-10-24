@@ -194,3 +194,4 @@
 0FDC10 = src/0FDC10.c -G0
 0FDC18 = src/0FDC18.c -G0
 0FDD18 = src/0FDD18.c -G0
+0FDD20 = src/0FDD20.c -G0
