@@ -1,110 +1,97 @@
-/* STATUS (Session 60, 2026-10-23): NON_MATCHING. best score 44 (was asm-permanent; diff lines,
- * 36 positional words) [cc=ee-gcc2.9-990721-as991111 -malign-loops=2].
- * strcmp (KERNEL.XFF symbol), Newlib 1.9.0 string/strcmp.c with a 16-byte MMI equality test
- * (psubw/pcpyud/or) and null test, explicit first tests + goto loops. Prologue, both first
- * tests and the 16-byte loop body match (register pins, volatile MMI asms, an "or" asm on the
- * TImode difference, a memory-clobber fence so the 8-byte path reloads *s1, a laundered 0 so
- * the two `return 0` blocks are not cross-jumped).
- * BLOCKER: the image's 16-byte loop ends `beql a5,zero,L8EE4` with the loop-top `pnor` in its
- * delay slot. pnor only exists as inline asm (no cc1 here has TImode logic patterns: `~x` on
- * u_long128 is "unsupported wide integer operation"), and none of the installed cc1s
- * (990721, 991111/-01/a/dtls13010, 2.96) ever puts an asm into a delay slot (checked with a
- * minimal loop whose only slot candidate is the asm). With real loop notes (needed for the
- * likely prediction) loop.c also moves both `return 0` blocks out of line. Remaining after that:
- * the 8-byte loop beq vs beql (prediction), and the byte loop: the image tests *s1 at the
- * bottom and reuses the unsigned *s1 load (lbu in the bnez slot, sll/sra at the top).
- * Tried: do-while/goto/for(;;) loop forms, non-volatile pnor, empty do-while(0) loop notes
- * before the goto labels, asm volatile vs plain, explicit return-0 laundering.
- * The original .s stays in the build (asm/cod/028E6C.s); this C draft is kept for the record. */
+/* C equivalent of func_00128E6C (028E6C, 324 B @ 0x00128E6C) -- strcmp.
+ *
+ * Reconstructed from asm/cod/028E6C.s and the REA/Ghidra Emotion Engine
+ * dossier ev_762ecd6fd582ca6c9f25d841fc7713aed7033bd9e29847da2d71bd0fa17a1123,
+ * and cross-checked with the matched sibling 0290C4 (strlen), which uses the
+ * same MMI null test.  Readable reconstruction: NOT byte-exact (the delay-slot
+ * placement of the 16-byte `pnor` cannot be produced by any installed cc1),
+ * not part of the build.  The codegen-tuned near-miss is
+ * src/non_matching/archive/028E6C.c.
+ *
+ * The EE libc compares 16 bytes at a time when both pointers are 16-aligned,
+ * 8 bytes when only 8-aligned, and falls back to a byte loop.  MMI has no C
+ * operators in this compiler generation, so the three vector primitives are
+ * spelled out as asm, exactly as the original source must have done (P2).
+ *
+ * Behaviour derived from the target:
+ *   128E7C  lq/psubw/pcpyud/or   -> 16-byte lane difference test
+ *   128E88  bnel a5,zero         -> the first test is done before the loop
+ *   128EDC  psubb/pand/pcpyud/or-> 16-byte NUL test (0x0101.. / 0x8080..)
+ *   128F34  ld + bnel            -> 8-byte word compare
+ *   128F9C  lbu/lb/sll/sra       -> byte loop, unsigned difference on return
+ */
 typedef unsigned int u_long128 __attribute__((mode(TI)));
+
+/* non-zero when any 32-bit lane of the two 16-byte blocks differs */
+static __inline__ int neq16(const void *a, const void *b)
+{
+    u_long128 x = *(const u_long128 *)a;
+    u_long128 y = *(const u_long128 *)b;
+    u_long128 d, u;
+    unsigned long r;
+
+    __asm__("psubw %0,%1,%2" : "=r"(d) : "r"(x), "r"(y));
+    __asm__("pcpyud %0,%1,%2" : "=r"(u) : "r"(d), "r"(d));
+    __asm__("or %0,%1,%2" : "=r"(r) : "r"(u), "r"(d));
+    return r != 0;
+}
+
+/* non-zero when the 16-byte block contains a zero byte */
+static __inline__ int haszero16(const void *p)
+{
+    u_long128 x = *(const u_long128 *)p;
+    u_long128 o, h, z, m, u;
+    unsigned long ones = 0x0101010101010101;
+    unsigned long hi = 0x8080808080808080;
+    unsigned long r;
+
+    __asm__("pcpyld %0,%1,%1" : "=r"(o) : "r"(ones));
+    __asm__("pnor %0,$0,%1" : "=r"(z) : "r"(x));
+    __asm__("pcpyld %0,%1,%1" : "=r"(h) : "r"(hi));
+    __asm__("psubb %0,%1,%2" : "=r"(x) : "r"(x), "r"(o));
+    __asm__("pand %0,%1,%2" : "=r"(x) : "r"(x), "r"(z));
+    __asm__("pand %0,%1,%2" : "=r"(m) : "r"(x), "r"(h));
+    __asm__("pcpyud %0,%1,%2" : "=r"(u) : "r"(m), "r"(m));
+    __asm__("or %0,%1,%2" : "=r"(r) : "r"(u), "r"(m));
+    return r != 0;
+}
+
+/* non-zero when the 8-byte word contains a zero byte */
+static __inline__ int haszero8(unsigned long x)
+{
+    return (x - 0x0101010101010101UL) & ~x & 0x8080808080808080UL;
+}
 
 int func_00128E6C(const char *s1, const char *s2)
 {
-  register long al asm("$8") = (long)s1 | (long)s2;
-
-  if ((al & 7) == 0)
-    {
-      register long a15 asm("$9") = al & 15;
-      register unsigned long ones asm("$7") = 0x0101010101010101;
-      register unsigned long hi asm("$6") = 0x8080808080808080;
-      register unsigned long b8 asm("$2") = *(unsigned long *)s2;
-      if (a15 == 0)
-        {
-          register u_long128 o asm("$8"), h asm("$10");
-          register u_long128 A asm("$3"), B asm("$2"), D asm("$7"), X asm("$2"), Y asm("$3");
-          register unsigned long U asm("$6"), R asm("$3"), M asm("$2"), U2 asm("$3"),
-                                 R2 asm("$6"), R3 asm("$9");
-          A = *(u_long128 *)s1;
-          asm volatile("pcpyld %0,%1,%1" : "=r"(o) : "r"(ones));
-          B = *(u_long128 *)s2;
-          asm volatile("pcpyld %0,%1,%1" : "=r"(h) : "r"(hi));
-          asm volatile("psubw %0,%1,%2" : "=r"(D) : "r"(B), "r"(A));
-          asm volatile("pcpyud %0,%1,%2" : "=r"(U) : "r"(D), "r"(s1));
-          asm volatile("or %0,%1,%2" : "=r"(R) : "r"(U), "r"(D));
-          if (R == 0)
-            {
-              X = *(u_long128 *)s1;
-            top16:
-                {
-                  asm volatile("pnor %0,$0,%1" : "=r"(Y) : "r"(X));
-                  asm volatile("psubb %0,%1,%2" : "=r"(X) : "r"(X), "r"(o));
-                  asm volatile("pand %0,%1,%2" : "=r"(X) : "r"(X), "r"(Y));
-                  asm volatile("pand %0,%1,%2" : "=r"(M) : "r"(X), "r"(h));
-                  asm volatile("pcpyud %0,%1,%2" : "=r"(U2) : "r"(M), "r"(s1));
-                  R2 = U2 | M;
-                  if (R2 != 0)
-                    return 0;
-                  s1 += 16;
-                  s2 += 16;
-                  X = *(u_long128 *)s1;
-                  Y = *(u_long128 *)s2;
-                  asm volatile("psubw %0,%1,%2" : "=r"(D) : "r"(X), "r"(Y));
-                  asm volatile("pcpyud %0,%1,%2" : "=r"(U) : "r"(D), "r"(s1));
-                  asm volatile("or %0,%1,%2" : "=r"(R3) : "r"(U), "r"(D));
+    if ((((long)s1 | (long)s2) & 7) == 0) {
+        if ((((long)s1 | (long)s2) & 15) == 0) {
+            if (!neq16(s1, s2)) {
+                for (;;) {
+                    if (haszero16(s1))
+                        return 0;
+                    s1 += 16;
+                    s2 += 16;
+                    if (neq16(s1, s2))
+                        break;
                 }
-              if (R3 == 0)
-                goto top16;
             }
-        }
-      else
-        {
-          register unsigned long a8 asm("$3") = *(unsigned long *)s1;
-          if (a8 == b8)
-            {
-              register unsigned long x asm("$2"), n asm("$8"), y asm("$3");
-              asm volatile("" : : : "memory");
-              x = *(unsigned long *)s1;
-            top8:
-                {
-                  n = ~x;
-                  x = x - ones;
-                  x &= n;
-                  x &= hi;
-                  if (x != 0)
-                    {
-                      int z;
-                      asm("" : "=r"(z) : "0"(0));
-                      return z;
-                    }
-                  s1 += 8;
-                  s2 += 8;
-                  x = *(unsigned long *)s1;
-                  y = *(unsigned long *)s2;
-                }
-              if (y == x)
-                goto top8;
+        } else if (*(const unsigned long *)s1 == *(const unsigned long *)s2) {
+            for (;;) {
+                if (haszero8(*(const unsigned long *)s1))
+                    return 0;
+                s1 += 8;
+                s2 += 8;
+                if (*(const unsigned long *)s1 != *(const unsigned long *)s2)
+                    break;
             }
         }
     }
-  goto test;
-top:
-  if (*s1 != *s2)
-    goto out;
-  s1++;
-  s2++;
-test:
-  if (*s1 != '\0')
-    goto top;
-out:
-  return (*(unsigned char *) s1) - (*(unsigned char *) s2);
+    while (*s1 != '\0') {
+        if (*s1 != *s2)
+            break;
+        s1++;
+        s2++;
+    }
+    return (unsigned char)*s1 - (unsigned char)*s2;
 }

@@ -1,0 +1,57 @@
+# KERNEL.XFF functions rebuilt from C.
+#
+#   <text-offset stem> = <C source> [cc=<token>] [extra flags]
+#
+# The stem is the function's offset inside KERNEL.XFF `.text` (the module is a
+# relocatable overlay, so addresses are section offsets). Gate:
+#   python tools/xffcheck.py KERNEL
+# The module is built with the small-data window disabled: every global in the
+# image is addressed with `lui`/`addiu` (only 10 `$gp`-relative accesses in the
+# whole 213 KB module), hence `-G0`.
+#
+# Evidence: KERNEL.XFF .text bytes + .rel.text, KERNEL.XFF .symtab names, and the
+# Ghidra/R5900 export in build/plan/ghidra_out/KERNEL/ (see docs/README notes).
+000490 = src/000490.c -G0
+0005A8 = src/0005A8.c -G0
+000620 = src/000620.c -G0
+0007A8 = src/0007A8.c -G0
+0007B0 = src/0007B0.c -G0
+0007B8 = src/0007B8.c -G0
+0007C0 = src/0007C0.c -G0
+0007C8 = src/0007C8.c -G0
+0007D0 = src/0007D0.c -G0
+0007D8 = src/0007D8.c -G0
+000AA0 = src/000AA0.c -G0
+000FB0 = src/000FB0.c -G0
+000FB8 = src/000FB8.c -G0
+003D10 = src/003D10.c -G0
+004918 = src/004918.c -G0
+005E08 = src/005E08.c -G0
+006050 = src/006050.c -G0
+006058 = src/006058.c -G0
+006B58 = src/006B58.c -G0
+0073F0 = src/0073F0.c -G0
+009580 = src/009580.c -G0
+00A020 = src/00A020.c -G0
+00A030 = src/00A030.c -G0
+00B1C0 = src/00B1C0.c -G0
+011F48 = src/011F48.c -G0
+011F50 = src/011F50.c -G0
+015750 = src/015750.c -G0
+015758 = src/015758.c -G0
+0191C0 = src/0191C0.c -G0
+01ABA8 = src/01ABA8.c -G0
+01B010 = src/01B010.c -G0
+01BB50 = src/01BB50.c -G0
+01BC00 = src/01BC00.c -G0
+01BC08 = src/01BC08.c -G0
+01BC10 = src/01BC10.c -G0
+01BC18 = src/01BC18.c -G0
+01BF60 = src/01BF60.c -G0
+01DB08 = src/01DB08.c -G0
+01DC08 = src/01DC08.c -G0
+01E7D0 = src/01E7D0.c -G0
+01F980 = src/01F980.c -G0
+020548 = src/020548.c -G0
+020560 = src/020560.c -G0
+020590 = src/020590.c -G0

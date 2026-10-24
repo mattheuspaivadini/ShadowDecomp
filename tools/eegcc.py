@@ -128,8 +128,8 @@ def wine_dist_dir(sel: str) -> Path:
 
 
 def stage_sources(verbose: bool = False) -> None:
-    """Mirror src/ + include/ into the native work tree (drvfs workaround)."""
-    for name in ("src", "include"):
+    """Mirror src/ + include/ (+ overlay sources) into the native work tree."""
+    for name in ("src", "include", "overlays"):
         src_root = ROOT / name
         if not src_root.exists():
             continue
