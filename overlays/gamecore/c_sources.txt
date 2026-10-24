@@ -34,3 +34,4 @@
 00D9C0 = src/00D9C0.c -G0
 00D9C8 = src/00D9C8.c -G0
 00D9D0 = src/00D9D0.c -G0
+00D9D8 = src/00D9D8.c -G0
