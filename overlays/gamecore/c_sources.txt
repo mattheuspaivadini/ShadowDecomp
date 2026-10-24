@@ -223,3 +223,4 @@
 10B638 = src/10B638.c -G0
 10B640 = src/10B640.c -G0
 10F9A8 = src/10F9A8.c -G0
+10F9B0 = src/10F9B0.c -G0
