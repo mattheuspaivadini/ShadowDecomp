@@ -220,3 +220,4 @@
 00DA90 = src/00DA90.c -G0
 00EED0 = src/00EED0.c -G0
 00EEF0 = src/00EEF0.c -G0
+00EFC0 = src/00EFC0.c -G0
