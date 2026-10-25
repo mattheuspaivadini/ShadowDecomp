@@ -204,3 +204,4 @@
 007280 = src/007280.c -G0 -fno-strict-aliasing
 007378 = src/007378.c -G0
 009EE8 = src/009EE8.c -G0
+00B1E0 = src/00B1E0.c -G0
