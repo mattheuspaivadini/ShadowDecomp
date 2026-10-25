@@ -145,3 +145,4 @@
 00BCD0 = src/00BCD0.c -G0
 00BDD8 = src/00BDD8.c -G0
 00BEE0 = src/00BEE0.c -G0
+00BF00 = src/00BF00.c -G0
