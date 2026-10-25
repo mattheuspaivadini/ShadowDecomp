@@ -1,0 +1,15 @@
+/* KERNEL.XFF @ 0x02A978 (108 B) - Sg2SlotSetReverbOffBit
+ * Evidence: clears the bits in the per-core reverb word at .bss+0x97E10 under DIntr/EIntr (EIntr only if interrupts were on); the element address is computed before DIntr (GAS la with index). UNCONFIRMED: table names.
+ */
+extern unsigned int D_kernel_bss_97E10[2];
+int DIntr(void);
+int EIntr(void);
+
+void Sg2SlotSetReverbOffBit(int core, unsigned int bits) {
+    int intr = DIntr();
+
+    D_kernel_bss_97E10[core] &= ~bits;
+    if (intr) {
+        EIntr();
+    }
+}
