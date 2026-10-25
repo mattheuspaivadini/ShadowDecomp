@@ -190,3 +190,4 @@
 011EC0 = src/011EC0.c -G0
 011EE8 = src/011EE8.c -G0
 011F00 = src/011F00.c -G0
+011F18 = src/011F18.c -G0
