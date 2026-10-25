@@ -142,3 +142,4 @@
 00BC88 = src/00BC88.c -G0
 00BCA0 = src/00BCA0.c -G0
 00BCB8 = src/00BCB8.c -G0
+00BCD0 = src/00BCD0.c -G0
