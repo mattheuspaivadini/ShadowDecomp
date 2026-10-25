@@ -559,3 +559,4 @@
 026150 = src/026150.c -G0 -fno-strict-aliasing
 029510 = src/029510.c -G0 -fno-strict-aliasing
 029578 = src/029578.c -G0 -fno-strict-aliasing
+0296A0 = src/0296A0.c -G0 -fno-strict-aliasing
