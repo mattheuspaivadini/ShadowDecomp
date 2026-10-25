@@ -171,3 +171,4 @@
 00CC00 = src/00CC00.c -G0
 00CC38 = src/00CC38.c -G0
 00D338 = src/00D338.c -G0
+00D350 = src/00D350.c -G0
