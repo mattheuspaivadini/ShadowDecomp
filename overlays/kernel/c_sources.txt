@@ -186,3 +186,4 @@
 011DF8 = src/011DF8.c -G0
 011E30 = src/011E30.c -G0
 011E50 = src/011E50.c -G0
+011EA0 = src/011EA0.c -G0
