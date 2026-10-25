@@ -358,3 +358,4 @@
 01CC88 = src/01CC88.c -G0 -fno-strict-aliasing
 01CD70 = src/01CD70.c -G0 -fno-strict-aliasing
 01CD88 = src/01CD88.c -G0 -fno-strict-aliasing
+01CE90 = src/01CE90.c -G0 -fno-strict-aliasing
