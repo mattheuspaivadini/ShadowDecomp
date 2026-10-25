@@ -257,3 +257,4 @@
 013A20 = src/013A20.c -G0
 013AC0 = src/013AC0.c -G0
 013AE8 = src/013AE8.c -G0
+0156C0 = src/0156C0.c -G0
