@@ -297,3 +297,4 @@
 00A728 = src/00A728.c -G0
 00ABB8 = src/00ABB8.c -G0
 00B0A8 = src/00B0A8.c -G0
+00D2F0 = src/00D2F0.c -G0
