@@ -513,3 +513,4 @@
 00B380 = src/00B380.c -G0 -fno-strict-aliasing
 00D050 = src/00D050.c -G0 -fno-strict-aliasing
 00D0C0 = src/00D0C0.c -G0 -fno-strict-aliasing
+00D130 = src/00D130.c -G0 -fno-strict-aliasing
