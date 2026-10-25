@@ -424,3 +424,4 @@
 026200 = src/026200.c -G0 -fno-strict-aliasing
 026230 = src/026230.c -G0 -fno-strict-aliasing
 027170 = src/027170.c -G0 -fno-strict-aliasing
+029390 = src/029390.c -G0 -fno-strict-aliasing
