@@ -531,3 +531,4 @@
 013140 = src/013140.c -G0 -fno-strict-aliasing
 0136C0 = src/0136C0.c -G0 -fno-strict-aliasing
 013A58 = src/013A58.c -G0 -fno-strict-aliasing
+0158B0 = src/0158B0.c -G0 -fno-strict-aliasing
