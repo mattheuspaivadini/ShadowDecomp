@@ -496,3 +496,4 @@
 003AB8 = src/003AB8.c -G0 -fno-strict-aliasing
 003B28 = src/003B28.c -G0 -fno-strict-aliasing
 003C88 = src/003C88.c -G0 -fno-strict-aliasing
+004920 = src/004920.c -G0 -fno-strict-aliasing
