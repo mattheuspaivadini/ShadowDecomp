@@ -175,3 +175,4 @@
 00D380 = src/00D380.c -G0
 00D3E0 = src/00D3E0.c -G0
 00D3F0 = src/00D3F0.c -G0
+011D38 = src/011D38.c -G0
