@@ -30,7 +30,7 @@ except Exception:  # pragma: no cover
 def decode(word: int, pc: int) -> str:
     if R5900Instruction is None:
         return f".word 0x{word:08x}"
-    ins = R5900Instruction(word, pc)
+    ins = R5900Instruction(word, pc, category=InstrCategory.R5900)
     return ins.disassemble().replace("\t", " ")
 
 
@@ -59,6 +59,8 @@ def main() -> int:
         if r is not None:
             tgt = syms.get(r["sym"])
             tname = tgt["name"] if tgt else f"sym#{r['sym']}"
+            if tgt and not tname and tgt["shndx"] < len(mod["sections"]):
+                tname = f"<{mod['sections'][tgt['shndx']]['name']}>"  # section symbol
             note = f"   ; {r['field'][0]} {tname}"
         raw = f" {word:08x}" if args.raw else ""
         print(f"  /* {pc:06x}{raw} */  {decode(word, pc):<34}{note}")

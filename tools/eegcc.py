@@ -182,7 +182,7 @@ def compile_c(src_rel: str, out_obj: Path, extra: list[str] | None = None,
     r = subprocess.run(cmd, capture_output=True, text=True, cwd=str(WORK), env=env)
     if r.returncode != 0 or not out_obj.exists():
         lines = (r.stderr or r.stdout).strip().splitlines()
-        return lines[0] if lines else "ee-gcc failed"
+        return " | ".join(lines[:4]) if lines else "ee-gcc failed"
     return ""
 
 
