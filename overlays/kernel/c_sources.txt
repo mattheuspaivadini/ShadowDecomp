@@ -162,3 +162,4 @@
 00C7B0 = src/00C7B0.c -G0
 00C7D8 = src/00C7D8.c -G0
 00C808 = src/00C808.c -G0
+00C830 = src/00C830.c -G0
