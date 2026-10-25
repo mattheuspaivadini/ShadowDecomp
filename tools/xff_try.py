@@ -32,7 +32,7 @@ import xfflib  # noqa: E402
 
 
 def score(module: str, mod: dict, stem: str, c_text: str, *, flags: list[str],
-          size: int | None, symbol: str | None, verbose: bool) -> dict:
+          size: int | None, symbol: str | None, verbose: bool, cc: str | None = None) -> dict:
     off = int(stem, 16)
     fn = xfflib.func_bounds(mod, off)
     if fn is not None:
@@ -48,7 +48,7 @@ def score(module: str, mod: dict, stem: str, c_text: str, *, flags: list[str],
     src = tmp / "draft.c"
     src.write_text(c_text, encoding="utf-8")
     obj = tmp / "draft.o"
-    err = eegcc.compile_c(str(src), obj, flags, compiler=None, stage=False)
+    err = eegcc.compile_c(str(src), obj, flags, compiler=cc, stage=False)
     if err:
         return {"ok": False, "why": f"compile: {err}"}
 
@@ -100,6 +100,7 @@ def main() -> int:
     ap.add_argument("--symbol", default=None, help="symbol name for an unnamed one")
     ap.add_argument("--flags", default="-G0", help="extra compiler flags (quoted)")
     ap.add_argument("--verbose", action="store_true")
+    ap.add_argument("--cc", default=None, help="compiler token, as cc= in c_sources.txt")
     args = ap.parse_args()
     flags = args.flags.split()
 
@@ -109,7 +110,7 @@ def main() -> int:
     (Path(eegcc.WORK) / "xff_try").mkdir(parents=True, exist_ok=True)
     r = score(args.module.upper(), mod, args.stem.lower().lstrip("0x"), c_text,
               flags=flags, size=int(args.size, 0) if args.size else None,
-              symbol=args.symbol, verbose=args.verbose)
+              symbol=args.symbol, verbose=args.verbose, cc=args.cc)
     if r["ok"]:
         print(f"MATCH {args.stem} {r['name']} ({r['size']} B)")
         return 0
