@@ -499,3 +499,4 @@
 004920 = src/004920.c -G0 -fno-strict-aliasing
 005FE0 = src/005FE0.c -G0 -fno-strict-aliasing
 006080 = src/006080.c -G0 -fno-strict-aliasing
+0060E8 = src/0060E8.c -G0 -fno-strict-aliasing
