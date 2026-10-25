@@ -217,3 +217,4 @@
 00D8F8 = src/00D8F8.c -G0
 00D920 = src/00D920.c -G0
 00D948 = src/00D948.c -G0
+00DA90 = src/00DA90.c -G0
