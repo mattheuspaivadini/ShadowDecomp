@@ -539,3 +539,4 @@
 01C750 = src/01C750.c -G0 -fno-strict-aliasing
 01CCE0 = src/01CCE0.c -G0 -fno-strict-aliasing
 01CDA0 = src/01CDA0.c -G0 -fno-strict-aliasing
+01CF90 = src/01CF90.c -G0 -fno-strict-aliasing
