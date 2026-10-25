@@ -304,3 +304,4 @@
 00EF68 = src/00EF68.c -G0
 00F220 = src/00F220.c -G0
 00F2B0 = src/00F2B0.c -G0
+00F388 = src/00F388.c -G0
