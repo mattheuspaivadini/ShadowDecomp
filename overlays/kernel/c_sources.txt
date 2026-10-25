@@ -436,3 +436,4 @@
 029A78 = src/029A78.c -G0 -fno-strict-aliasing
 029B60 = src/029B60.c -G0 -fno-strict-aliasing
 029B90 = src/029B90.c -G0 -fno-strict-aliasing
+029BB0 = src/029BB0.c -G0 -fno-strict-aliasing
