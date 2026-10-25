@@ -139,3 +139,4 @@
 00B220 = src/00B220.c -G0
 00BC38 = src/00BC38.c -G0
 00BC68 = src/00BC68.c -G0
+00BC88 = src/00BC88.c -G0
