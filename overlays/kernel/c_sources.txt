@@ -401,3 +401,4 @@
 01FE60 = src/01FE60.c -G0 -fno-strict-aliasing
 01FF10 = src/01FF10.c -G0 -fno-strict-aliasing
 01FF30 = src/01FF30.c -G0 -fno-strict-aliasing
+020070 = src/020070.c -G0 -fno-strict-aliasing
