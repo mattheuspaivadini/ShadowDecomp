@@ -221,3 +221,4 @@
 00EED0 = src/00EED0.c -G0
 00EEF0 = src/00EEF0.c -G0
 00EFC0 = src/00EFC0.c -G0
+00EFF0 = src/00EFF0.c -G0
