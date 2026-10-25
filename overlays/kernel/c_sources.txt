@@ -372,3 +372,4 @@
 01E660 = src/01E660.c -G0 -fno-strict-aliasing
 01E7D8 = src/01E7D8.c -G0 -fno-strict-aliasing
 01EA38 = src/01EA38.c -G0 -fno-strict-aliasing
+01EA98 = src/01EA98.c -G0 -fno-strict-aliasing
