@@ -311,3 +311,4 @@
 011A48 = src/011A48.c -G0
 011B88 = src/011B88.c -G0
 011BD8 = src/011BD8.c -G0
+011FE8 = src/011FE8.c -G0
