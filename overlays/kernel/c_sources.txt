@@ -431,3 +431,4 @@
 0294B0 = src/0294B0.c -G0 -fno-strict-aliasing
 0295F0 = src/0295F0.c -G0 -fno-strict-aliasing
 029640 = src/029640.c -G0 -fno-strict-aliasing
+029870 = src/029870.c -G0 -fno-strict-aliasing
