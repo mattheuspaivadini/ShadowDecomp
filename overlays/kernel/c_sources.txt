@@ -350,3 +350,4 @@
 01BF68 = src/01BF68.c -G0 -fno-strict-aliasing
 01BFA0 = src/01BFA0.c -G0 -fno-strict-aliasing
 01C138 = src/01C138.c -G0 -fno-strict-aliasing
+01C158 = src/01C158.c -G0 -fno-strict-aliasing
