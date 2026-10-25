@@ -573,3 +573,4 @@
 02BDB8 = src/02BDB8.c -G0 -fno-strict-aliasing
 02BE20 = src/02BE20.c -G0 -fno-strict-aliasing
 02C7E0 = src/02C7E0.c -G0 -fno-strict-aliasing
+02D338 = src/02D338.c -G0 -fno-strict-aliasing
