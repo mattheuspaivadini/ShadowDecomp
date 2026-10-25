@@ -356,3 +356,4 @@
 01C738 = src/01C738.c -G0 -fno-strict-aliasing
 01CAD8 = src/01CAD8.c -G0 -fno-strict-aliasing
 01CC88 = src/01CC88.c -G0 -fno-strict-aliasing
+01CD70 = src/01CD70.c -G0 -fno-strict-aliasing
