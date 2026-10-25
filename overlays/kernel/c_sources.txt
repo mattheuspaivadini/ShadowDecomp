@@ -463,3 +463,4 @@
 02DA60 = src/02DA60.c -G0 -fno-strict-aliasing
 02DC00 = src/02DC00.c -G0 -fno-strict-aliasing
 02DD18 = src/02DD18.c -G0 -fno-strict-aliasing
+02EE80 = src/02EE80.c -G0 -fno-strict-aliasing
