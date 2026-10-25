@@ -223,3 +223,4 @@
 00EFC0 = src/00EFC0.c -G0
 00EFF0 = src/00EFF0.c -G0
 00F270 = src/00F270.c -G0
+00F290 = src/00F290.c -G0
