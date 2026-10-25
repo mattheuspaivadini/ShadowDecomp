@@ -504,3 +504,4 @@
 006A78 = src/006A78.c -G0 -fno-strict-aliasing
 009490 = src/009490.c -G0 -fno-strict-aliasing
 009518 = src/009518.c -G0 -fno-strict-aliasing
+009738 = src/009738.c -G0 -fno-strict-aliasing
