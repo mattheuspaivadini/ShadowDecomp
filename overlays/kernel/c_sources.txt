@@ -159,3 +159,4 @@
 00C468 = src/00C468.c -G0
 00C4B8 = src/00C4B8.c -G0
 00C4E8 = src/00C4E8.c -G0
+00C7B0 = src/00C7B0.c -G0
