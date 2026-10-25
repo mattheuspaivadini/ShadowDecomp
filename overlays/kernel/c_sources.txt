@@ -127,3 +127,4 @@
 016DD0 = src/016DD0.c -G0
 016DE0 = src/016DE0.c -G0
 000B78 = src/000B78.c -G0
+000B90 = src/000B90.c -G0
