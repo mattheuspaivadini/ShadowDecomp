@@ -60,7 +60,18 @@ def score(module: str, mod: dict, stem: str, c_text: str, *, flags: list[str],
     ostart = sym["value"]
     mine = objd["text"][ostart:ostart + fsize]
     orig = mod["text"][start:start + fsize]
-    if len(mine) != fsize:
+    msize = sym.get("size") or len(mine)
+    tail = objd["text"][ostart + fsize:ostart + msize]
+    if msize > fsize and not any(tail):
+        msize = fsize  # st_size counts trailing alignment nops
+    if verbose and msize != fsize:
+        # raw words of both sides (WSL has no rabbitizer; decode with tools/xff_dis.py's decoder)
+        whole = objd["text"][ostart:ostart + msize]
+        for i in range(0, max(fsize, msize), 4):
+            a = orig[i:i + 4].hex() if i < fsize else "--------"
+            b = whole[i:i + 4].hex() if i < msize else "--------"
+            print(f"    = +{i:#05x}  orig {a}  mine {b}")
+    if len(mine) != fsize or msize != fsize:
         return {"ok": False, "why": f"size differs: original {fsize} B, "
                                     f"compiled {len(mine)} B"}
 
