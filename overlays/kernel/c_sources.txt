@@ -487,3 +487,4 @@
 000868 = src/000868.c -G0 -fno-strict-aliasing
 000CC0 = src/000CC0.c -G0 -fno-strict-aliasing
 000D38 = src/000D38.c -G0 -fno-strict-aliasing
+000DB0 = src/000DB0.c -G0 -fno-strict-aliasing
