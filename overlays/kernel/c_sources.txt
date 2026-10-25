@@ -300,3 +300,4 @@
 00D2F0 = src/00D2F0.c -G0
 00DA48 = src/00DA48.c -G0
 00DAC0 = src/00DAC0.c -G0
+00EF10 = src/00EF10.c -G0
