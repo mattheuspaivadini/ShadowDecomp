@@ -278,3 +278,4 @@
 01ACE8 = src/01ACE8.c -G0
 01AD10 = src/01AD10.c -G0
 0005C8 = src/0005C8.c -G0
+000800 = src/000800.c -G0
