@@ -553,3 +553,4 @@
 020B60 = src/020B60.c -G0 -fno-strict-aliasing
 020CC8 = src/020CC8.c -G0 -fno-strict-aliasing
 021820 = src/021820.c -G0 -fno-strict-aliasing
+0218A8 = src/0218A8.c -G0 -fno-strict-aliasing
