@@ -306,3 +306,4 @@
 00F2B0 = src/00F2B0.c -G0
 00F388 = src/00F388.c -G0
 00F478 = src/00F478.c -G0
+00FF00 = src/00FF00.c -G0
