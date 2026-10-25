@@ -1,5 +1,5 @@
 /* KERNEL.XFF @ 0x00F3D0 (64 B) - SetQuaternionByAxisRotateVExact
- * Evidence: a volatile VU0 asm normalises the axis (vmul/vmula*/vrsqrt/vmulq)
+ * Evidence: a volatile VU0 asm normalises the axis (vmul, vmula*, vrsqrt, vmulq)
  * into a stack quad, then calls the stripped static at .text+0xFF00 with
  * ($a0 forwarded, &normalised, $f12 forwarded). UNCONFIRMED: func_00FF00's
  * prototype (the angle is inferred from the untouched $f12).
