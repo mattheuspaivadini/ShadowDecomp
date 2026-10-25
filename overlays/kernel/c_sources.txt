@@ -517,3 +517,4 @@
 00CC90 = src/00CC90.c -G0 -fno-strict-aliasing
 00F018 = src/00F018.c -G0 -fno-strict-aliasing
 00F0A0 = src/00F0A0.c -G0 -fno-strict-aliasing
+00F128 = src/00F128.c -G0 -fno-strict-aliasing
