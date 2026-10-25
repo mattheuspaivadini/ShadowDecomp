@@ -147,3 +147,4 @@
 00BEE0 = src/00BEE0.c -G0
 00BF00 = src/00BF00.c -G0
 00BF10 = src/00BF10.c -G0
+00C268 = src/00C268.c -G0
