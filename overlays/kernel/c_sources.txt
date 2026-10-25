@@ -276,3 +276,4 @@
 016F08 = src/016F08.c -G0
 01ACC0 = src/01ACC0.c -G0
 01ACE8 = src/01ACE8.c -G0
+01AD10 = src/01AD10.c -G0
