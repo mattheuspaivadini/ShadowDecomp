@@ -167,3 +167,4 @@
 00C8A0 = src/00C8A0.c -G0
 00C938 = src/00C938.c -G0
 00CAD0 = src/00CAD0.c -G0
+00CBC8 = src/00CBC8.c -G0
