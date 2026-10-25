@@ -541,3 +541,4 @@
 01CDA0 = src/01CDA0.c -G0 -fno-strict-aliasing
 01CF90 = src/01CF90.c -G0 -fno-strict-aliasing
 01E1E8 = src/01E1E8.c -G0 -fno-strict-aliasing
+01E270 = src/01E270.c -G0 -fno-strict-aliasing
