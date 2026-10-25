@@ -153,3 +153,4 @@
 00C320 = src/00C320.c -G0
 00C338 = src/00C338.c -G0
 00C3A0 = src/00C3A0.c -G0
+00C3F8 = src/00C3F8.c -G0
