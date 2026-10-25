@@ -398,3 +398,4 @@
 01FD58 = src/01FD58.c -G0 -fno-strict-aliasing
 01FE10 = src/01FE10.c -G0 -fno-strict-aliasing
 01FE40 = src/01FE40.c -G0 -fno-strict-aliasing
+01FE60 = src/01FE60.c -G0 -fno-strict-aliasing
