@@ -500,3 +500,4 @@
 005FE0 = src/005FE0.c -G0 -fno-strict-aliasing
 006080 = src/006080.c -G0 -fno-strict-aliasing
 0060E8 = src/0060E8.c -G0 -fno-strict-aliasing
+006830 = src/006830.c -G0 -fno-strict-aliasing
