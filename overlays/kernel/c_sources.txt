@@ -327,3 +327,4 @@
 019168 = src/019168.c -G0 -fno-strict-aliasing
 01AFB0 = src/01AFB0.c -G0 -fno-strict-aliasing
 01B048 = src/01B048.c -G0 -fno-strict-aliasing
+01B0F8 = src/01B0F8.c -G0 -fno-strict-aliasing
