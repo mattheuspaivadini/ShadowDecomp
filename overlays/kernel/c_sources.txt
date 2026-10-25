@@ -550,3 +550,4 @@
 01FAC0 = src/01FAC0.c -G0 -fno-strict-aliasing
 020000 = src/020000.c -G0 -fno-strict-aliasing
 020A20 = src/020A20.c -G0 -fno-strict-aliasing
+020B60 = src/020B60.c -G0 -fno-strict-aliasing
