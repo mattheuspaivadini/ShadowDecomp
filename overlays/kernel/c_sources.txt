@@ -302,3 +302,4 @@
 00DAC0 = src/00DAC0.c -G0
 00EF10 = src/00EF10.c -G0
 00EF68 = src/00EF68.c -G0
+00F220 = src/00F220.c -G0
