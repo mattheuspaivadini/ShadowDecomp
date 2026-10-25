@@ -481,3 +481,4 @@
 0303F8 = src/0303F8.c -G0 -fno-strict-aliasing
 030F08 = src/030F08.c -G0 -fno-strict-aliasing
 033818 = src/033818.c -G0 -fno-strict-aliasing
+033BC0 = src/033BC0.c -G0 -fno-strict-aliasing cc=29
