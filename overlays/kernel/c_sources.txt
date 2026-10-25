@@ -295,3 +295,4 @@
 009E90 = src/009E90.c -G0
 00A6C0 = src/00A6C0.c -G0
 00A728 = src/00A728.c -G0
+00ABB8 = src/00ABB8.c -G0
