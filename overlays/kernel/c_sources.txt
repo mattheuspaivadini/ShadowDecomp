@@ -470,3 +470,4 @@
 02F208 = src/02F208.c -G0 -fno-strict-aliasing
 02F230 = src/02F230.c -G0 -fno-strict-aliasing
 02F518 = src/02F518.c -G0 -fno-strict-aliasing
+02F6E0 = src/02F6E0.c -G0 -fno-strict-aliasing
