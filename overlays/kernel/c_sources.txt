@@ -521,3 +521,4 @@
 00F310 = src/00F310.c -G0 -fno-strict-aliasing
 00F410 = src/00F410.c -G0 -fno-strict-aliasing
 00FEB8 = src/00FEB8.c -G0 -fno-strict-aliasing
+00FF60 = src/00FF60.c -G0 -fno-strict-aliasing
