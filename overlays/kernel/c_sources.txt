@@ -645,3 +645,4 @@
 030BA0 = src/030BA0.c -G0 -fno-strict-aliasing -fno-builtin
 031BA8 = src/031BA8.c -G0 -fno-strict-aliasing -fno-builtin
 0313E0 = src/0313E0.c -G0 -fno-strict-aliasing -fno-builtin
+031808 = src/031808.c -G0 -fno-strict-aliasing -fno-builtin
