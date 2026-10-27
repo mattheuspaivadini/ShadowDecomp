@@ -1,0 +1,274 @@
+# GAMECORE.XFF functions rebuilt from C.
+#
+#   <text-offset stem> = <C source> [cc=<token>] [extra flags]
+#
+# The stem is the function's offset inside GAMECORE.XFF `.text` (the module is a
+# relocatable overlay, so addresses are section offsets). Gate:
+#   wsl -d Ubuntu -u root -- bash -lc "cd <repo> && python3 tools/xffcheck.py GAMECORE --all"
+# The module is built with the small-data window disabled (58 `$gp`-relative
+# accesses in 1.2 MB of code), hence `-G0`.
+#
+# Evidence: GAMECORE.XFF .text bytes + .rel.text, GAMECORE.XFF .symtab names, and
+# the Ghidra/R5900 export in build/plan/ghidra_out/GAMECORE/.
+007318 = src/007318.c -G0 -fno-optimize-sibling-calls
+008BD8 = src/008BD8.c -G0
+009E68 = src/009E68.c -G0
+009EB0 = src/009EB0.c -G0
+009FA8 = src/009FA8.c -G0
+00A080 = src/00A080.c -G0
+00A088 = src/00A088.c -G0
+00A3A0 = src/00A3A0.c -G0
+00A640 = src/00A640.c -G0
+00A7B8 = src/00A7B8.c -G0
+00A7E0 = src/00A7E0.c -G0
+00A7E8 = src/00A7E8.c -G0
+00A7F0 = src/00A7F0.c -G0
+00A7F8 = src/00A7F8.c -G0
+00B430 = src/00B430.c -G0
+00BE98 = src/00BE98.c -G0
+00BF08 = src/00BF08.c -G0
+00D4F0 = src/00D4F0.c -G0
+00D4F8 = src/00D4F8.c -G0
+00D728 = src/00D728.c -G0
+00D730 = src/00D730.c -G0
+00D9C0 = src/00D9C0.c -G0
+00D9C8 = src/00D9C8.c -G0
+00D9D0 = src/00D9D0.c -G0
+00D9D8 = src/00D9D8.c -G0
+00D9E0 = src/00D9E0.c -G0
+00D9E8 = src/00D9E8.c -G0
+00D9F0 = src/00D9F0.c -G0
+00D9F8 = src/00D9F8.c -G0
+00DA00 = src/00DA00.c -G0
+00DA08 = src/00DA08.c -G0
+0113F8 = src/0113F8.c -G0
+0124E0 = src/0124E0.c -G0
+0129E8 = src/0129E8.c -G0
+0140E8 = src/0140E8.c -G0
+019868 = src/019868.c -G0
+019870 = src/019870.c -G0
+01E590 = src/01E590.c -G0
+025148 = src/025148.c -G0
+02C020 = src/02C020.c -G0
+02CE88 = src/02CE88.c -G0
+02CE90 = src/02CE90.c -G0
+02E1C8 = src/02E1C8.c -G0
+0305B8 = src/0305B8.c -G0
+030C08 = src/030C08.c -G0
+030C80 = src/030C80.c -G0
+030C88 = src/030C88.c -G0
+030C90 = src/030C90.c -G0
+03B958 = src/03B958.c -G0
+03F238 = src/03F238.c -G0
+042458 = src/042458.c -G0
+042460 = src/042460.c -G0
+042468 = src/042468.c -G0
+042470 = src/042470.c -G0
+042478 = src/042478.c -G0
+042480 = src/042480.c -G0
+042488 = src/042488.c -G0
+042490 = src/042490.c -G0
+042498 = src/042498.c -G0
+0424A0 = src/0424A0.c -G0
+0424A8 = src/0424A8.c -G0
+0424B0 = src/0424B0.c -G0
+0424B8 = src/0424B8.c -G0
+0424C0 = src/0424C0.c -G0
+04C498 = src/04C498.c -G0
+060B90 = src/060B90.c -G0
+060DF8 = src/060DF8.c -G0
+06EB08 = src/06EB08.c -G0
+070528 = src/070528.c -G0
+070540 = src/070540.c -G0
+0705A0 = src/0705A0.c -G0
+070610 = src/070610.c -G0
+070618 = src/070618.c -G0
+07C330 = src/07C330.c -G0
+095CF8 = src/095CF8.c -G0
+099C00 = src/099C00.c -G0
+099C30 = src/099C30.c -G0
+09BAD8 = src/09BAD8.c -G0
+09BAE0 = src/09BAE0.c -G0
+09BAE8 = src/09BAE8.c -G0
+09BAF0 = src/09BAF0.c -G0
+09BAF8 = src/09BAF8.c -G0
+09BB00 = src/09BB00.c -G0
+09BB08 = src/09BB08.c -G0
+09BB10 = src/09BB10.c -G0
+09BB18 = src/09BB18.c -G0
+09BB20 = src/09BB20.c -G0
+09BB28 = src/09BB28.c -G0
+09BB30 = src/09BB30.c -G0
+09BB38 = src/09BB38.c -G0
+09BB40 = src/09BB40.c -G0
+09BB48 = src/09BB48.c -G0
+09BB50 = src/09BB50.c -G0
+09BB58 = src/09BB58.c -G0
+0ADD98 = src/0ADD98.c -G0
+0B4600 = src/0B4600.c -G0
+0B4628 = src/0B4628.c -G0
+0B4650 = src/0B4650.c -G0
+0B6FE8 = src/0B6FE8.c -G0
+0D0FB0 = src/0D0FB0.c -G0
+0D0FB8 = src/0D0FB8.c -G0
+0D0FD0 = src/0D0FD0.c -G0
+0D0FE8 = src/0D0FE8.c -G0
+0D7608 = src/0D7608.c -G0
+0D7610 = src/0D7610.c -G0
+0D7648 = src/0D7648.c -G0
+0D94D8 = src/0D94D8.c -G0
+0D94E0 = src/0D94E0.c -G0
+0D95A0 = src/0D95A0.c -G0
+0DAFF8 = src/0DAFF8.c -G0
+0DBA50 = src/0DBA50.c -G0
+0DBBD8 = src/0DBBD8.c -G0
+0E0320 = src/0E0320.c -G0
+0E0388 = src/0E0388.c -G0
+0E07B8 = src/0E07B8.c -G0
+0E0950 = src/0E0950.c -G0
+0E0958 = src/0E0958.c -G0
+0E0C28 = src/0E0C28.c -G0
+0E2B48 = src/0E2B48.c -G0
+0E2F00 = src/0E2F00.c -G0
+0E2F08 = src/0E2F08.c -G0
+0E2F10 = src/0E2F10.c -G0
+0E2FC8 = src/0E2FC8.c -G0
+0E2FD0 = src/0E2FD0.c -G0
+0E2FD8 = src/0E2FD8.c -G0
+0E2FE0 = src/0E2FE0.c -G0
+0E2FE8 = src/0E2FE8.c -G0
+0E2FF0 = src/0E2FF0.c -G0
+0E2FF8 = src/0E2FF8.c -G0
+0E3000 = src/0E3000.c -G0
+0E3030 = src/0E3030.c -G0
+0E3680 = src/0E3680.c -G0
+0EAFC0 = src/0EAFC0.c -G0
+0EB1B8 = src/0EB1B8.c -G0
+0EB1C0 = src/0EB1C0.c -G0
+0EB1C8 = src/0EB1C8.c -G0
+0EB1D0 = src/0EB1D0.c -G0
+0EB1E8 = src/0EB1E8.c -G0
+0EB430 = src/0EB430.c -G0
+0EB480 = src/0EB480.c -G0
+0EB7F8 = src/0EB7F8.c -G0
+0F22A0 = src/0F22A0.c -G0
+0F22A8 = src/0F22A8.c -G0
+0F22B0 = src/0F22B0.c -G0
+0F22B8 = src/0F22B8.c -G0
+0F2408 = src/0F2408.c -G0
+0F7DC8 = src/0F7DC8.c -G0
+0F7EB0 = src/0F7EB0.c -G0
+0F7F38 = src/0F7F38.c -G0
+0F8068 = src/0F8068.c -G0
+0F8070 = src/0F8070.c -G0
+0F80D0 = src/0F80D0.c -G0
+0F80D8 = src/0F80D8.c -G0
+0F80E0 = src/0F80E0.c -G0
+0F80E8 = src/0F80E8.c -G0
+0F80F0 = src/0F80F0.c -G0
+0F8140 = src/0F8140.c -G0
+0F8148 = src/0F8148.c -G0
+0F8150 = src/0F8150.c -G0
+0F8158 = src/0F8158.c -G0
+0F8160 = src/0F8160.c -G0
+0F81B0 = src/0F81B0.c -G0
+0F8248 = src/0F8248.c -G0
+0F8898 = src/0F8898.c -G0
+0F88A0 = src/0F88A0.c -G0
+0F8990 = src/0F8990.c -G0
+0F8998 = src/0F8998.c -G0
+0F89A0 = src/0F89A0.c -G0
+0F89A8 = src/0F89A8.c -G0
+0F89B0 = src/0F89B0.c -G0
+0F89B8 = src/0F89B8.c -G0
+0F92B8 = src/0F92B8.c -G0
+0FBB60 = src/0FBB60.c -G0
+0FBB78 = src/0FBB78.c -G0
+0FBBE8 = src/0FBBE8.c -G0
+0FBBF0 = src/0FBBF0.c -G0
+0FBBF8 = src/0FBBF8.c -G0
+0FBCE8 = src/0FBCE8.c -G0
+0FDBF8 = src/0FDBF8.c -G0
+0FDC00 = src/0FDC00.c -G0
+0FDC08 = src/0FDC08.c -G0
+0FDC10 = src/0FDC10.c -G0
+0FDC18 = src/0FDC18.c -G0
+0FDD18 = src/0FDD18.c -G0
+0FDD20 = src/0FDD20.c -G0
+1036E8 = src/1036E8.c -G0
+103770 = src/103770.c -G0
+103778 = src/103778.c -G0
+103780 = src/103780.c -G0
+107080 = src/107080.c -G0
+107088 = src/107088.c -G0
+107090 = src/107090.c -G0
+1070B0 = src/1070B0.c -G0
+1070B8 = src/1070B8.c -G0
+1070C0 = src/1070C0.c -G0
+1070C8 = src/1070C8.c -G0
+1070D0 = src/1070D0.c -G0
+1070D8 = src/1070D8.c -G0
+107A68 = src/107A68.c -G0
+107A70 = src/107A70.c -G0
+107A78 = src/107A78.c -G0
+107A80 = src/107A80.c -G0
+107B00 = src/107B00.c -G0
+107B08 = src/107B08.c -G0
+10A660 = src/10A660.c -G0
+10A668 = src/10A668.c -G0
+10A670 = src/10A670.c -G0
+10A678 = src/10A678.c -G0
+10A680 = src/10A680.c -G0
+10A6A8 = src/10A6A8.c -G0
+10B638 = src/10B638.c -G0
+10B640 = src/10B640.c -G0
+10F9A8 = src/10F9A8.c -G0
+10F9B0 = src/10F9B0.c -G0
+10F9B8 = src/10F9B8.c -G0
+10F9C0 = src/10F9C0.c -G0
+10F9C8 = src/10F9C8.c -G0
+10F9D0 = src/10F9D0.c -G0
+10F9D8 = src/10F9D8.c -G0
+112DF0 = src/112DF0.c -G0
+112E30 = src/112E30.c -G0
+112ED0 = src/112ED0.c -G0
+112ED8 = src/112ED8.c -G0
+112EE0 = src/112EE0.c -G0
+112EE8 = src/112EE8.c -G0
+112EF0 = src/112EF0.c -G0
+112EF8 = src/112EF8.c -G0
+112F00 = src/112F00.c -G0
+112F08 = src/112F08.c -G0
+112F10 = src/112F10.c -G0
+112F18 = src/112F18.c -G0
+112F80 = src/112F80.c -G0
+112F88 = src/112F88.c -G0
+11C550 = src/11C550.c -G0
+122B28 = src/122B28.c -G0
+123820 = src/123820.c -G0
+124160 = src/124160.c -G0
+125278 = src/125278.c -G0
+1252B0 = src/1252B0.c -G0
+128348 = src/128348.c -G0
+12A9B8 = src/12A9B8.c -G0
+12AE48 = src/12AE48.c -G0
+00B638 = src/00B638.c -G0 size=0x14
+04B078 = src/04B078.c -G0 size=0x18
+05D290 = src/05D290.c -G0 size=0x14
+0746D0 = src/0746D0.c -G0 size=0x18
+0746E8 = src/0746E8.c -G0 size=0x18
+074700 = src/074700.c -G0 size=0x18
+074718 = src/074718.c -G0 size=0x18
+074730 = src/074730.c -G0 size=0x18
+074748 = src/074748.c -G0 size=0x18
+074760 = src/074760.c -G0 size=0x18
+074778 = src/074778.c -G0 size=0x18
+074790 = src/074790.c -G0 size=0x18
+0747A8 = src/0747A8.c -G0 size=0x18
+0747C0 = src/0747C0.c -G0 size=0x18
+074A18 = src/074A18.c -G0 size=0x18
+07D5F8 = src/07D5F8.c -G0 size=0x14
+07D960 = src/07D960.c -G0 size=0x14
+08F328 = src/08F328.c -G0 size=0x14
+0BC4B8 = src/0BC4B8.c -G0 size=0x14
+12ADF0 = src/12ADF0.c -G0 size=0x14

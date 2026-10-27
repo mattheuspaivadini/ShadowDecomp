@@ -46,10 +46,12 @@ def parse_manifest(module: str) -> dict[str, dict]:
             continue
         stem, rest = line.split("=", 1)
         parts = rest.split()
-        entry = {"source": parts[0], "cc": None, "flags": []}
+        entry = {"source": parts[0], "cc": None, "flags": [], "size": None}
         for p in parts[1:]:
             if p.startswith("cc="):
                 entry["cc"] = p[3:]
+            elif p.startswith("size="):
+                entry["size"] = int(p[5:], 0)
             elif p:
                 entry["flags"].append(p)
         out[stem.strip().lower()] = entry
@@ -75,8 +77,17 @@ def compare(module: str, mod: dict, stem: str, entry: dict, *,
             verbose: bool = False) -> dict:
     fn = func_by_stem(mod, stem)
     if fn is None:
-        return {"stem": stem, "ok": False, "why": f"no function at 0x{int(stem, 16):06x}"}
-    start, size, name = fn["st_value"], fn["size"], fn["name"]
+        # unnamed (static) function: the size comes from the manifest, the C
+        # source must define `func_<STEM>`
+        if entry.get("size"):
+            start = int(stem, 16)
+            size = entry["size"]
+            name = f"func_{stem.upper()}"
+        else:
+            return {"stem": stem, "ok": False,
+                    "why": f"no function at 0x{int(stem, 16):06x} (and no size= in the manifest)"}
+    else:
+        start, size, name = fn["st_value"], fn["size"], fn["name"]
     orig = mod["text"][start:start + size]
 
     src = OVERLAYS / module.lower() / entry["source"]
