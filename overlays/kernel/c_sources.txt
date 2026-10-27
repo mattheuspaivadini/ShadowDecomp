@@ -638,3 +638,4 @@
 033750 = src/033750.c -G0 -fno-strict-aliasing
 032AE8 = src/032AE8.c -G0 -fno-strict-aliasing
 032BB8 = src/032BB8.c -G0 -fno-strict-aliasing
+033570 = src/033570.c -G0 -fno-strict-aliasing
