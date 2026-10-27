@@ -599,3 +599,4 @@
 0073B0 = src/0073B0.c -G0 -fno-strict-aliasing
 025E50 = src/025E50.c -G0 -fno-strict-aliasing
 025F08 = src/025F08.c -G0 -fno-strict-aliasing
+025FC0 = src/025FC0.c -G0 -fno-strict-aliasing
