@@ -108,7 +108,7 @@ def main() -> int:
               else Path(args.source).read_text(encoding="utf-8"))
     mod = xfflib.load_module(args.module.upper())
     (Path(eegcc.WORK) / "xff_try").mkdir(parents=True, exist_ok=True)
-    r = score(args.module.upper(), mod, args.stem.lower().lstrip("0x"), c_text,
+    r = score(args.module.upper(), mod, (args.stem.lower().removeprefix("0x") or "0"), c_text,
               flags=flags, size=int(args.size, 0) if args.size else None,
               symbol=args.symbol, verbose=args.verbose, cc=args.cc)
     if r["ok"]:

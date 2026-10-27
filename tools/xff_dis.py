@@ -42,7 +42,7 @@ def main() -> int:
     args = ap.parse_args()
 
     mod = xfflib.load_module(args.module)
-    stem = args.stem.lower().lstrip("0x")
+    stem = args.stem.lower().removeprefix("0x") or "0"
     off = int(stem, 16)
     fn = xfflib.func_bounds(mod, off)
     if fn is None:
