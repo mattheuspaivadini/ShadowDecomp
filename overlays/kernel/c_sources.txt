@@ -626,3 +626,4 @@
 016C90 = src/016C90.c -G0 -fno-strict-aliasing
 01B528 = src/01B528.c -G0 -fno-strict-aliasing
 0135B8 = src/0135B8.c -G0 -fno-strict-aliasing
+016270 = src/016270.c -G0 -fno-strict-aliasing
