@@ -613,3 +613,4 @@
 01F698 = src/01F698.c -G0 -fno-strict-aliasing
 01F770 = src/01F770.c -G0 -fno-strict-aliasing
 01FD80 = src/01FD80.c -G0 -fno-strict-aliasing
+0216D0 = src/0216D0.c -G0 -fno-strict-aliasing
