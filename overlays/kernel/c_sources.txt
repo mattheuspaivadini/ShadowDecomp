@@ -622,3 +622,4 @@
 01AAF0 = src/01AAF0.c -G0 -fno-strict-aliasing
 01AE20 = src/01AE20.c -G0 -fno-strict-aliasing
 016B20 = src/016B20.c -G0 -fno-strict-aliasing
+01E810 = src/01E810.c -G0 -fno-strict-aliasing
