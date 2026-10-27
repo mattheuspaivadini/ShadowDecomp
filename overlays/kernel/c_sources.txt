@@ -600,3 +600,4 @@
 025E50 = src/025E50.c -G0 -fno-strict-aliasing
 025F08 = src/025F08.c -G0 -fno-strict-aliasing
 025FC0 = src/025FC0.c -G0 -fno-strict-aliasing
+026098 = src/026098.c -G0 -fno-strict-aliasing
