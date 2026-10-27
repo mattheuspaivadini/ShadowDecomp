@@ -620,3 +620,4 @@
 013298 = src/013298.c -G0 -fno-strict-aliasing
 013428 = src/013428.c -G0 -fno-strict-aliasing
 01AAF0 = src/01AAF0.c -G0 -fno-strict-aliasing
+01AE20 = src/01AE20.c -G0 -fno-strict-aliasing
