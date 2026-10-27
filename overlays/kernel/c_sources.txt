@@ -642,3 +642,4 @@
 030E30 = src/030E30.c -G0 -fno-strict-aliasing
 030F30 = src/030F30.c -G0 -fno-strict-aliasing
 031D88 = src/031D88.c -G0 -fno-strict-aliasing
+030BA0 = src/030BA0.c -G0 -fno-strict-aliasing -fno-builtin
