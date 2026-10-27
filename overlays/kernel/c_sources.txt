@@ -647,3 +647,4 @@
 0313E0 = src/0313E0.c -G0 -fno-strict-aliasing -fno-builtin
 031808 = src/031808.c -G0 -fno-strict-aliasing -fno-builtin
 032738 = src/032738.c -G0 -fno-strict-aliasing -fno-builtin
+0310C0 = src/0310C0.c -G0 -fno-strict-aliasing -fno-builtin
