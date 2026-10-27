@@ -606,3 +606,4 @@
 029A20 = src/029A20.c -G0 -fno-strict-aliasing
 029AA8 = src/029AA8.c -G0 -fno-strict-aliasing
 029B08 = src/029B08.c -G0 -fno-strict-aliasing
+026408 = src/026408.c -G0 -fno-strict-aliasing
