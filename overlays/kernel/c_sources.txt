@@ -850,3 +850,4 @@
 010B00 = src/010B00.c -G0 -fno-strict-aliasing
 0110D8 = src/0110D8.c -G0 -fno-strict-aliasing
 010390 = src/010390.c -G0 -fno-strict-aliasing
+0108E8 = src/0108E8.c -G0 -fno-strict-aliasing
