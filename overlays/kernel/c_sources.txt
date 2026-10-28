@@ -884,3 +884,4 @@
 00D568 = src/00D568.c -G0 -fno-strict-aliasing
 00C9B0 = src/00C9B0.c -G0 -fno-strict-aliasing
 00D660 = src/00D660.c -G0 -fno-strict-aliasing
+000E20 = src/000E20.c -G0 -fno-strict-aliasing
