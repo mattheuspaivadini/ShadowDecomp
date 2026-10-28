@@ -769,3 +769,4 @@
 01D8F8 = src/01D8F8.c -G0 -fno-strict-aliasing
 0197E8 = src/0197E8.c -G0 -fno-strict-aliasing size=0x284
 019BB8 = src/019BB8.c -G0 -fno-strict-aliasing -fno-delete-null-pointer-checks
+019E18 = src/019E18.c -G0 -fno-strict-aliasing -fno-delete-null-pointer-checks
