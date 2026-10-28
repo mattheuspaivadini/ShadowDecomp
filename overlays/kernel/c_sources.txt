@@ -907,3 +907,4 @@
 011C20 = src/011C20.c -G0 -fno-strict-aliasing
 004220 = src/004220.c -G0
 004318 = src/004318.c -G0
+0009A0 = src/0009A0.c -G0
