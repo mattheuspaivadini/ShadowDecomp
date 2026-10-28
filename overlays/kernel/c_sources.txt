@@ -747,3 +747,4 @@
 02DDF8 = src/02DDF8.c -G0 -fno-strict-aliasing size=0xbc
 02DEB8 = src/02DEB8.c -G0 -fno-strict-aliasing size=0xa4
 02DF60 = src/02DF60.c -G0 -fno-strict-aliasing size=0xcc
+005E18 = src/005E18.c -G0 -fno-strict-aliasing
