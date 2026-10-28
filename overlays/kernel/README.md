@@ -53,9 +53,9 @@ wsl -d Ubuntu -u root -- bash -lc "cd /mnt/c/.../ShadowDecomp && python3 tools/x
 
 | Metric | Value |
 |---|---|
-| Functions in the lane | **888** (`python3 tools/xffcheck.py KERNEL --all` → `888/888`) |
-| Byte-exact `.text` | **104,600 B = 49.0 %** of the module (Session 69: 79,064 B = 37.0 %) |
-| Remaining named functions | 113 (60,604 B) |
+| Functions in the lane | **890** (`python3 tools/xffcheck.py KERNEL --all` → `890/890`) |
+| Byte-exact `.text` | **105,152 B = 49.3 %** of the module (Session 69: 79,064 B = 37.0 %) |
+| Remaining named functions | 111 (60,052 B) |
 | Remaining stripped pool | ~70 candidates from `tools/xff_inventory.py` (57,776 B of gaps, part of it padding) |
 | Blocked on sources | none for the float libm any more (fdlibm rebuilt in Session 67); the remaining large bodies are `Sg2Slot*Search*`, `Sg2ModSetParam`, `Sg2SlotTickProc`, `isysWakeupSubThread` |
 
