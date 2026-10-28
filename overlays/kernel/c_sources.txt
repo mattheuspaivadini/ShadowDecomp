@@ -714,3 +714,4 @@
 024E80 = src/024E80.c -G0 -fno-strict-aliasing size=0x38
 02DD58 = src/02DD58.c -G0 -fno-strict-aliasing size=0x20
 000EF0 = src/000EF0.c -G0 -fno-strict-aliasing size=0x50
+007788 = src/007788.c -G0 -fno-strict-aliasing size=0x4c
