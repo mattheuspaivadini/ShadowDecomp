@@ -299,3 +299,4 @@
 008D18 = src/008D18.c -G0
 008D28 = src/008D28.c -G0
 008DE8 = src/008DE8.c -G0
+008DF8 = src/008DF8.c -G0
