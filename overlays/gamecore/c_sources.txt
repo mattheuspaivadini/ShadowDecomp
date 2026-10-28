@@ -485,3 +485,4 @@
 12AC70 = src/12AC70.c -G0
 12B4A0 = src/12B4A0.c -G0
 12B4B0 = src/12B4B0.c -G0
+00A1B8 = src/00A1B8.c -G0
