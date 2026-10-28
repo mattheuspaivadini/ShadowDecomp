@@ -399,3 +399,4 @@
 05C4C0 = src/05C4C0.c -G0
 05F1B8 = src/05F1B8.c -G0
 064A10 = src/064A10.c -G0
+064B20 = src/064B20.c -G0
