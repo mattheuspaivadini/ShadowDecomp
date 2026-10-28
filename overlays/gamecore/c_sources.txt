@@ -458,3 +458,4 @@
 0E47F8 = src/0E47F8.c -G0
 0E4808 = src/0E4808.c -G0
 0EB288 = src/0EB288.c -G0
+0EB838 = src/0EB838.c -G0
