@@ -743,3 +743,4 @@
 01BB58 = src/01BB58.c -G0 -fno-strict-aliasing size=0x10
 01BFB0 = src/01BFB0.c -G0 -fno-strict-aliasing size=0x18
 02B8B8 = src/02B8B8.c -G0 -fno-strict-aliasing size=0x14
+02DD78 = src/02DD78.c -G0 -fno-strict-aliasing size=0x80
