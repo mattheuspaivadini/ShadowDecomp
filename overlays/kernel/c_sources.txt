@@ -755,3 +755,4 @@
 000748 = src/000748.c -G0 -fno-strict-aliasing
 005410 = src/005410.c -G0 -fno-strict-aliasing
 006600 = src/006600.c -G0 -fno-strict-aliasing
+00D5D8 = src/00D5D8.c -G0 -fno-strict-aliasing
