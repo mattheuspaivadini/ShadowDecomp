@@ -49,15 +49,28 @@ wsl -d Ubuntu -u root -- bash -lc "cd /mnt/c/.../ShadowDecomp && python3 tools/x
 | Ghidra EE export | 1,039 functions (`build/plan/ghidra_out/KERNEL/`) — it merges/undercounts the gap blocks, so it is a hint, not an inventory |
 | Compiler | `-G0 -fno-strict-aliasing`: only 10 `$gp`-relative accesses in the whole module, every global uses `lui`/`addiu`; loads stay after stores of unrelated types (007280, 019168, 01BB78). The SCE libgraph copies (`sceGsPutIMR` & co.) need `cc=29`; the Newlib libm/libc copies match verbatim with the default compiler |
 
-## Status (Session 70)
+## Status (Session 71)
 
 | Metric | Value |
 |---|---|
-| Functions in the lane | **891** (`python3 tools/xffcheck.py KERNEL --all` → `891/891`) |
-| Byte-exact `.text` | **105,304 B = 49.3 %** of the module (Session 69: 79,064 B = 37.0 %) |
-| Remaining named functions | 110 (59,900 B) |
-| Remaining stripped pool | ~70 candidates from `tools/xff_inventory.py` (57,776 B of gaps, part of it padding) |
-| Blocked on sources | none for the float libm any more (fdlibm rebuilt in Session 67); the remaining large bodies are `Sg2Slot*Search*`, `Sg2ModSetParam`, `Sg2SlotTickProc`, `isysWakeupSubThread` |
+| Functions in the lane | **903** (python3 tools/xffcheck.py KERNEL --all -> 903/903) |
+| Byte-exact .text | **107,176 B = 50.2 %** of the module (Session 70: 105,304 B = 49.3 %) |
+| Remaining named functions | 98 (58,500 B, all previously parked) |
+| Remaining stripped pool | ~70 candidates from 	ools/xff_inventory.py (57,776 B of gaps, part of it padding) |
+| Blocked on sources | none; the remaining bodies are parked on codegen tie-breaks, not on missing sources |
+
+Session 71 levers (all proved byte-exact, see the file headers): a tail
+j <callee> means the source wrote 
+eturn callee(...) (a plain call keeps the
+arguments live across earlier checks and grows the frame); table scans need
+unsigned int i + the search key first in the compare + **two** D[i] subscripts
+(one in the test, one at the hit) so loop.c strength-reduces the shipped pair of
+cursors; or (...) if (...) goto found; + 
+eturn &D[i]; for the rotated scan
+with a shared epilogue; adjacent 16-bit fields as an array member; exact decimal
+float literals (this compiler truncates); two D[i] subscripts in two arms to get
+two induction pointers from one base. Full list, measured residuals and the
+sub-agent batches: CONTEXT.md Session 71 and uild/s71/{a..e}/results.tsv.
 
 Session 70 levers (all proved byte-exact, see the file headers): per-TU
 `-g0` (the default `-g2` disables the delayed-branch scheduler) and
