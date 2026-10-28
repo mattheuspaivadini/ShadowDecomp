@@ -412,3 +412,4 @@
 0BC460 = src/0BC460.c -G0
 0BC488 = src/0BC488.c -G0
 0C06C8 = src/0C06C8.c -G0
+0C06D8 = src/0C06D8.c -G0
