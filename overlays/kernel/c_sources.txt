@@ -669,3 +669,4 @@
 02A358 = src/02A358.c -G0 -fno-strict-aliasing
 0160E0 = src/0160E0.c -G0 -fno-strict-aliasing
 01F560 = src/01F560.c -G0 -fno-strict-aliasing
+02DB10 = src/02DB10.c -G0 -fno-strict-aliasing
