@@ -374,3 +374,4 @@
 02CE78 = src/02CE78.c -G0
 02CE98 = src/02CE98.c -G0
 02DD10 = src/02DD10.c -G0
+02DD20 = src/02DD20.c -G0
