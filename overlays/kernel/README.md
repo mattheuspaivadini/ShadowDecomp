@@ -55,7 +55,7 @@ wsl -d Ubuntu -u root -- bash -lc "cd /mnt/c/.../ShadowDecomp && python3 tools/x
 |---|---|
 | Functions in the lane | **903** (python3 tools/xffcheck.py KERNEL --all -> 903/903) |
 | Byte-exact .text | **107,176 B = 50.2 %** of the module (Session 70: 105,304 B = 49.3 %) |
-| Remaining named functions | 98 (58,500 B, all previously parked) |
+| Remaining named functions | 97 (58,200 B, all previously parked) |
 | Remaining stripped pool | ~70 candidates from 	ools/xff_inventory.py (57,776 B of gaps, part of it padding) |
 | Blocked on sources | none; the remaining bodies are parked on codegen tie-breaks, not on missing sources |
 
@@ -69,7 +69,9 @@ cursors; or (...) if (...) goto found; +
 eturn &D[i]; for the rotated scan
 with a shared epilogue; adjacent 16-bit fields as an array member; exact decimal
 float literals (this compiler truncates); two D[i] subscripts in two arms to get
-two induction pointers from one base. Full list, measured residuals and the
+two induction pointers from one base; parentheses around the arms of a ternary
+fix the arm layout (`beqz` + fall-through); `-fno-gcse` can be worth 24 words
+even without an obvious CSE (`003d60` 26 -> 2). Full list, measured residuals and the
 sub-agent batches: CONTEXT.md Session 71 and uild/s71/{a..e}/results.tsv.
 
 Session 70 levers (all proved byte-exact, see the file headers): per-TU
