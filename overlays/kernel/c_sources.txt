@@ -911,3 +911,4 @@
 00D988 = src/00D988.c -G0
 015E60 = src/015E60.c -G0
 029D88 = src/029D88.c -G0
+00AAD8 = src/00AAD8.c -G0
