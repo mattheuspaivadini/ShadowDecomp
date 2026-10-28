@@ -290,3 +290,4 @@
 007AE8 = src/007AE8.c -G0
 007AF8 = src/007AF8.c -G0
 007BE0 = src/007BE0.c -G0
+007DA0 = src/007DA0.c -G0
