@@ -756,3 +756,4 @@
 005410 = src/005410.c -G0 -fno-strict-aliasing
 006600 = src/006600.c -G0 -fno-strict-aliasing
 00D5D8 = src/00D5D8.c -G0 -fno-strict-aliasing
+012590 = src/012590.c -G0 -fno-strict-aliasing
