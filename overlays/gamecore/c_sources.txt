@@ -273,3 +273,4 @@
 0BC4B8 = src/0BC4B8.c -G0 size=0x14
 12ADF0 = src/12ADF0.c -G0 size=0x14
 0074A8 = src/0074A8.c -G0
+0077E8 = src/0077E8.c -G0
