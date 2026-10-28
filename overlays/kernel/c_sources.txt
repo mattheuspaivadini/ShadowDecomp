@@ -829,3 +829,4 @@
 01E300 = src/01E300.c -G0 -fno-strict-aliasing
 0300B0 = src/0300B0.c -G0 -fno-strict-aliasing
 01E398 = src/01E398.c -G0 -fno-strict-aliasing
+00CD38 = src/00CD38.c -G0 -fno-strict-aliasing
