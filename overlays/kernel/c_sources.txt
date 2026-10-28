@@ -808,3 +808,4 @@
 02A298 = src/02A298.c -G0
 02A2D8 = src/02A2D8.c -G0
 02A318 = src/02A318.c -G0
+00D510 = src/00D510.c -G0 -fno-strict-aliasing
