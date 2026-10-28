@@ -482,3 +482,4 @@
 122C68 = src/122C68.c -G0
 12AC20 = src/12AC20.c -G0
 12AC58 = src/12AC58.c -G0
+12AC70 = src/12AC70.c -G0
