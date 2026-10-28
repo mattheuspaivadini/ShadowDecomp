@@ -301,3 +301,4 @@
 008DE8 = src/008DE8.c -G0
 008DF8 = src/008DF8.c -G0
 008E18 = src/008E18.c -G0
+008E28 = src/008E28.c -G0
