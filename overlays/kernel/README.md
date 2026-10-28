@@ -53,8 +53,8 @@ wsl -d Ubuntu -u root -- bash -lc "cd /mnt/c/.../ShadowDecomp && python3 tools/x
 
 | Metric | Value |
 |---|---|
-| Functions in the lane | **903** (python3 tools/xffcheck.py KERNEL --all -> 903/903) |
-| Byte-exact .text | **107,176 B = 50.2 %** of the module (Session 70: 105,304 B = 49.3 %) |
+| Functions in the lane | **904** (python3 tools/xffcheck.py KERNEL --all -> 904/904) |
+| Byte-exact .text | **107,444 B = 50.3 %** of the module (Session 70: 105,304 B = 49.3 %) |
 | Remaining named functions | 97 (58,200 B, all previously parked) |
 | Remaining stripped pool | ~70 candidates from 	ools/xff_inventory.py (57,776 B of gaps, part of it padding) |
 | Blocked on sources | none; the remaining bodies are parked on codegen tie-breaks, not on missing sources |
