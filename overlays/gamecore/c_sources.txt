@@ -441,3 +441,4 @@
 0C5520 = src/0C5520.c -G0
 0C8270 = src/0C8270.c -G0
 0CD490 = src/0CD490.c -G0
+0CD4A8 = src/0CD4A8.c -G0
