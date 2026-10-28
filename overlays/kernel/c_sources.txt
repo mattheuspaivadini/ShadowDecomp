@@ -778,3 +778,4 @@
 003518 = src/003518.c -G0 -fno-strict-aliasing
 003640 = src/003640.c -G0 -fno-strict-aliasing
 004628 = src/004628.c -G0 -fno-strict-aliasing
+0047A0 = src/0047A0.c -G0 -fno-strict-aliasing
