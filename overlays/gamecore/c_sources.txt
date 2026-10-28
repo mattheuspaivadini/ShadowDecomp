@@ -375,3 +375,4 @@
 02CE98 = src/02CE98.c -G0
 02DD10 = src/02DD10.c -G0
 02DD20 = src/02DD20.c -G0
+02E000 = src/02E000.c -G0
