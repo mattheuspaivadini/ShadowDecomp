@@ -681,3 +681,4 @@
 02D8E8 = src/02D8E8.c -G0 -fno-strict-aliasing
 01FF50 = src/01FF50.c -G0 -fno-strict-aliasing
 0206A0 = src/0206A0.c -G0 -fno-strict-aliasing
+0072B8 = src/0072B8.c -G0 -fno-strict-aliasing
