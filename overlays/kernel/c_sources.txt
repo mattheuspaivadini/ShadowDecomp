@@ -853,3 +853,4 @@
 0108E8 = src/0108E8.c -G0 -fno-strict-aliasing
 010D18 = src/010D18.c -G0 -fno-strict-aliasing
 0301B0 = src/0301B0.c -G0 -fno-strict-aliasing
+0120B8 = src/0120B8.c -G0 -fno-strict-aliasing -fno-schedule-insns2
