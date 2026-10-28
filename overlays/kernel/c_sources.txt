@@ -750,3 +750,4 @@
 005E18 = src/005E18.c -G0 -fno-strict-aliasing
 020920 = src/020920.c -G0 -fno-strict-aliasing
 017050 = src/017050.c -G0 -fno-strict-aliasing
+017528 = src/017528.c -G0 -fno-strict-aliasing
