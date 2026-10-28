@@ -810,3 +810,4 @@
 02A318 = src/02A318.c -G0
 00D510 = src/00D510.c -G0 -fno-strict-aliasing
 013730 = src/013730.c -G0 -fno-strict-aliasing
+015920 = src/015920.c -G0 -fno-strict-aliasing
