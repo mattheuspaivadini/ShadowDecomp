@@ -394,3 +394,4 @@
 04E830 = src/04E830.c -G0
 04E840 = src/04E840.c -G0
 04FC08 = src/04FC08.c -G0
+05BF98 = src/05BF98.c -G0
