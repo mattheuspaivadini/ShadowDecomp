@@ -857,3 +857,4 @@
 01F420 = src/01F420.c -G0
 024710 = src/024710.c -G0 -fno-strict-aliasing -g0 size=0x200
 0246A0 = src/0246A0.c -G0 size=0x70
+0245F8 = src/0245F8.c -G0 size=0xa4
