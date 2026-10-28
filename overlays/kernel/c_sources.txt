@@ -804,3 +804,4 @@
 00D410 = src/00D410.c -G0 -fno-strict-aliasing
 00D450 = src/00D450.c -G0 -fno-strict-aliasing
 00D490 = src/00D490.c -G0 -fno-strict-aliasing
+00D4D0 = src/00D4D0.c -G0 -fno-strict-aliasing
