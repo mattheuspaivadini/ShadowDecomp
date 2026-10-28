@@ -869,3 +869,4 @@
 01EF50 = src/01EF50.c -G0
 01E608 = src/01E608.c -G0
 011368 = src/011368.c -G0
+00FFD0 = src/00FFD0.c -G0
