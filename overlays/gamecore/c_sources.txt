@@ -463,3 +463,4 @@
 0EB858 = src/0EB858.c -G0
 0EB868 = src/0EB868.c -G0
 0EB878 = src/0EB878.c -G0
+0EB888 = src/0EB888.c -G0
