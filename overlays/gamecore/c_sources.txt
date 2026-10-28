@@ -396,3 +396,4 @@
 04FC08 = src/04FC08.c -G0
 05BF98 = src/05BF98.c -G0
 05BFA8 = src/05BFA8.c -G0
+05C4C0 = src/05C4C0.c -G0
