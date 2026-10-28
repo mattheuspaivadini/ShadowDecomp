@@ -897,3 +897,4 @@
 017138 = src/017138.c -G0 -fno-strict-aliasing
 017328 = src/017328.c -G0 -fno-strict-aliasing
 017610 = src/017610.c -G0 -fno-strict-aliasing
+0129A0 = src/0129A0.c -G0 -fno-strict-aliasing
