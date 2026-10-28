@@ -444,3 +444,4 @@
 0CD4A8 = src/0CD4A8.c -G0
 0D0FC0 = src/0D0FC0.c -G0
 0D0FD8 = src/0D0FD8.c -G0
+0D0FF0 = src/0D0FF0.c -G0
