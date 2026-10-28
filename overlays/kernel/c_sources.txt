@@ -708,3 +708,4 @@
 01F300 = src/01F300.c -G0 -fno-strict-aliasing size=0x1c
 003CF0 = src/003CF0.c -G0 -fno-strict-aliasing size=0x20
 00A040 = src/00A040.c -G0 -fno-strict-aliasing size=0x24
+00A260 = src/00A260.c -G0 -fno-strict-aliasing size=0x24
