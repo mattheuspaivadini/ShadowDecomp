@@ -839,3 +839,4 @@
 00D770 = src/00D770.c -G0 -fno-strict-aliasing
 02A150 = src/02A150.c -G0 -fno-strict-aliasing -g0
 02A000 = src/02A000.c -G0 -fno-strict-aliasing -g0
+0203D8 = src/0203D8.c -G0 -fno-strict-aliasing
