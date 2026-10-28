@@ -864,3 +864,4 @@
 008CA8 = src/008CA8.c -G0 size=0x1b4
 02CCC8 = src/02CCC8.c -G0 size=0x190
 02FD00 = src/02FD00.c -G0 -g0 size=0x1c4
+02FEC8 = src/02FEC8.c -G0 -g0 size=0x1c4
