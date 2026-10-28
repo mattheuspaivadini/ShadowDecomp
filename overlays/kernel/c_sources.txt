@@ -799,3 +799,4 @@
 02B668 = src/02B668.c -G0 -fno-strict-aliasing
 02B730 = src/02B730.c -G0 -fno-strict-aliasing
 02F9D8 = src/02F9D8.c -G0 -fno-strict-aliasing size=0xfc
+02FAD8 = src/02FAD8.c -G0 -fno-strict-aliasing size=0x100
