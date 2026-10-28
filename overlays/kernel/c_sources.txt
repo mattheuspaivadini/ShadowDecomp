@@ -677,3 +677,4 @@
 02C448 = src/02C448.c -G0 -fno-strict-aliasing
 02D850 = src/02D850.c -G0 -fno-strict-aliasing
 02D280 = src/02D280.c -G0 -fno-strict-aliasing
+02D788 = src/02D788.c -G0 -fno-strict-aliasing
