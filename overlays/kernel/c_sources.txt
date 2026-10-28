@@ -836,3 +836,4 @@
 00BFC8 = src/00BFC8.c -G0 -fno-strict-aliasing
 012198 = src/012198.c -G0 -fno-strict-aliasing
 012718 = src/012718.c -G0 -fno-strict-aliasing
+00D770 = src/00D770.c -G0 -fno-strict-aliasing
