@@ -866,3 +866,4 @@
 02FD00 = src/02FD00.c -G0 -g0 size=0x1c4
 02FEC8 = src/02FEC8.c -G0 -g0 size=0x1c4
 01F2B0 = src/01F2B0.c -G0
+01EF50 = src/01EF50.c -G0
