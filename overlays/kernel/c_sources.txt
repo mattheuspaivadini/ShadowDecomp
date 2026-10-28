@@ -702,3 +702,4 @@
 01C860 = src/01C860.c -G0 -fno-strict-aliasing
 02A4D8 = src/02A4D8.c -G0 -fno-strict-aliasing
 00A710 = src/00A710.c -G0 -fno-strict-aliasing size=0x18
+00B1C8 = src/00B1C8.c -G0 -fno-strict-aliasing size=0x18
