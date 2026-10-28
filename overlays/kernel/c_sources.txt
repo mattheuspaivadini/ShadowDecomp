@@ -880,3 +880,4 @@
 011418 = src/011418.c -G0
 00C538 = src/00C538.c -G0
 00C658 = src/00C658.c -G0
+0054D8 = src/0054D8.c -G0 -fno-strict-aliasing
