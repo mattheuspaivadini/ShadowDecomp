@@ -736,3 +736,4 @@
 02E118 = src/02E118.c -G0 -fno-strict-aliasing size=0x5c
 02E280 = src/02E280.c -G0 -fno-strict-aliasing size=0x38
 02E460 = src/02E460.c -G0 -fno-strict-aliasing size=0x108
+02EA30 = src/02EA30.c -G0 -fno-strict-aliasing size=0x50
