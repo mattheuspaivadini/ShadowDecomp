@@ -859,3 +859,4 @@
 0246A0 = src/0246A0.c -G0 size=0x70
 0245F8 = src/0245F8.c -G0 size=0xa4
 024F48 = src/024F48.c -G0 size=0xa8
+0249C8 = src/0249C8.c -G0 size=0x84
