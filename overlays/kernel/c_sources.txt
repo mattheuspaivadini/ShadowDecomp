@@ -764,3 +764,4 @@
 009D18 = src/009D18.c -G0 -fno-strict-aliasing
 014DD8 = src/014DD8.c -G0 -fno-strict-aliasing
 01A778 = src/01A778.c -G0 -fno-strict-aliasing
+01A8C8 = src/01A8C8.c -G0 -fno-strict-aliasing
