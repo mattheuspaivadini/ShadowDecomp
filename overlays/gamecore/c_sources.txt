@@ -435,3 +435,4 @@
 0C5410 = src/0C5410.c -G0
 0C5420 = src/0C5420.c -G0
 0C54E0 = src/0C54E0.c -G0
+0C54F0 = src/0C54F0.c -G0
