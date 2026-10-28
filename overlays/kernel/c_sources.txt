@@ -767,3 +767,4 @@
 01A8C8 = src/01A8C8.c -G0 -fno-strict-aliasing
 01A9C8 = src/01A9C8.c -G0 -fno-strict-aliasing
 01D8F8 = src/01D8F8.c -G0 -fno-strict-aliasing
+0197E8 = src/0197E8.c -G0 -fno-strict-aliasing size=0x284
