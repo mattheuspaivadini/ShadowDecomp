@@ -711,3 +711,4 @@
 00A260 = src/00A260.c -G0 -fno-strict-aliasing size=0x24
 01B6E0 = src/01B6E0.c -G0 -fno-strict-aliasing size=0x24
 023190 = src/023190.c -G0 -fno-strict-aliasing size=0x34
+024E80 = src/024E80.c -G0 -fno-strict-aliasing size=0x38
