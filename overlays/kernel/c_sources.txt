@@ -718,3 +718,4 @@
 00A170 = src/00A170.c -G0 -fno-strict-aliasing size=0x5c
 00A218 = src/00A218.c -G0 -fno-strict-aliasing size=0x48
 01BDF8 = src/01BDF8.c -G0 -fno-strict-aliasing size=0x78
+004BF8 = src/004BF8.c -G0 -fno-strict-aliasing size=0x88
