@@ -785,3 +785,4 @@
 029780 = src/029780.c -G0 -fno-strict-aliasing
 02A6F8 = src/02A6F8.c -G0 -fno-strict-aliasing
 000498 = src/000498.c -G0 -fno-strict-aliasing
+0074A0 = src/0074A0.c -G0 -fno-strict-aliasing
