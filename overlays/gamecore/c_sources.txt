@@ -285,3 +285,4 @@
 007940 = src/007940.c -G0
 007AA8 = src/007AA8.c -G0
 007AB8 = src/007AB8.c -G0
+007AC8 = src/007AC8.c -G0
