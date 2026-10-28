@@ -751,3 +751,4 @@
 020920 = src/020920.c -G0 -fno-strict-aliasing
 017050 = src/017050.c -G0 -fno-strict-aliasing
 017528 = src/017528.c -G0 -fno-strict-aliasing
+000668 = src/000668.c -G0 -fno-strict-aliasing
