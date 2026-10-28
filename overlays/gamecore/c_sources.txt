@@ -407,3 +407,4 @@
 07BC10 = src/07BC10.c -G0
 096C40 = src/096C40.c -G0
 0ADA98 = src/0ADA98.c -G0
+0B5120 = src/0B5120.c -G0
