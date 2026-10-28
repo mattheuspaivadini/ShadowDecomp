@@ -452,3 +452,4 @@
 0D6B90 = src/0D6B90.c -G0
 0DABE0 = src/0DABE0.c -G0
 0E3648 = src/0E3648.c -G0
+0E3670 = src/0E3670.c -G0
