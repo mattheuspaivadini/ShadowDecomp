@@ -466,3 +466,4 @@
 0EB888 = src/0EB888.c -G0
 0F7DD0 = src/0F7DD0.c -G0
 0F7DE0 = src/0F7DE0.c -G0
+0FBB48 = src/0FBB48.c -G0
