@@ -316,3 +316,4 @@
 00B348 = src/00B348.c -G0
 00BFF0 = src/00BFF0.c -G0
 00C000 = src/00C000.c -G0
+00C058 = src/00C058.c -G0
