@@ -355,3 +355,4 @@
 01C7B0 = src/01C7B0.c -G0
 01C810 = src/01C810.c -G0
 01D8A0 = src/01D8A0.c -G0
+01E798 = src/01E798.c -G0
