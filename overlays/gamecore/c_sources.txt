@@ -429,3 +429,4 @@
 0C53B0 = src/0C53B0.c -G0
 0C53C0 = src/0C53C0.c -G0
 0C53D0 = src/0C53D0.c -G0
+0C53E0 = src/0C53E0.c -G0
