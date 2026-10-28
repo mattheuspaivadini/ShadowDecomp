@@ -371,3 +371,4 @@
 02C7F8 = src/02C7F8.c -G0
 02CA70 = src/02CA70.c -G0
 02CCF8 = src/02CCF8.c -G0
+02CE78 = src/02CE78.c -G0
