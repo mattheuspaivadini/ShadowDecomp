@@ -39,12 +39,14 @@ def main() -> int:
     ap.add_argument("module")
     ap.add_argument("stem")
     ap.add_argument("--raw", action="store_true", help="also print the raw words")
+    ap.add_argument("--size", type=lambda v: int(v, 0), default=None,
+                    help="byte size of an unnamed (static) function")
     args = ap.parse_args()
 
     mod = xfflib.load_module(args.module)
     stem = args.stem.lower().removeprefix("0x") or "0"
     off = int(stem, 16)
-    fn = xfflib.func_bounds(mod, off)
+    fn = (off, off + args.size, f"func_{off:06X}") if args.size else xfflib.func_bounds(mod, off)
     if fn is None:
         print(f"no symbol at 0x{off:06x}")
         return 1
