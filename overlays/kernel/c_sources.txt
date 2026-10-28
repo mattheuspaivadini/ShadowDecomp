@@ -855,3 +855,4 @@
 0301B0 = src/0301B0.c -G0 -fno-strict-aliasing
 0120B8 = src/0120B8.c -G0 -fno-strict-aliasing -fno-schedule-insns2
 01F420 = src/01F420.c -G0
+024710 = src/024710.c -G0 -fno-strict-aliasing -g0 size=0x200
