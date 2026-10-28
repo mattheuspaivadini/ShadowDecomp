@@ -814,3 +814,4 @@
 015A08 = src/015A08.c -G0 -fno-strict-aliasing
 015AF0 = src/015AF0.c -G0 -fno-strict-aliasing
 015BD8 = src/015BD8.c -G0 -fno-strict-aliasing
+015CB0 = src/015CB0.c -G0 -fno-strict-aliasing
