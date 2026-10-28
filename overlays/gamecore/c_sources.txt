@@ -468,3 +468,4 @@
 0F7DE0 = src/0F7DE0.c -G0
 0FBB48 = src/0FBB48.c -G0
 107C00 = src/107C00.c -G0
+1177D8 = src/1177D8.c -G0
