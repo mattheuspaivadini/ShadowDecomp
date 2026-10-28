@@ -862,3 +862,4 @@
 0249C8 = src/0249C8.c -G0 size=0x84
 02B7F8 = src/02B7F8.c -G0 size=0xbc
 008CA8 = src/008CA8.c -G0 size=0x1b4
+02CCC8 = src/02CCC8.c -G0 size=0x190
