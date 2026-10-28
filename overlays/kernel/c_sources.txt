@@ -772,3 +772,4 @@
 019E18 = src/019E18.c -G0 -fno-strict-aliasing -fno-delete-null-pointer-checks
 01A060 = src/01A060.c -G0 -fno-strict-aliasing
 01A238 = src/01A238.c -G0 -fno-strict-aliasing
+01A420 = src/01A420.c -G0 -fno-strict-aliasing
