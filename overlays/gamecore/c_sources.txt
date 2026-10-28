@@ -478,3 +478,4 @@
 11C570 = src/11C570.c -G0
 11F950 = src/11F950.c -G0
 11FBB8 = src/11FBB8.c -G0
+11FC80 = src/11FC80.c -G0
