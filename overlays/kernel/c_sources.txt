@@ -888,3 +888,4 @@
 021770 = src/021770.c -G0 -fno-strict-aliasing
 0112E8 = src/0112E8.c -G0 -fno-strict-aliasing
 00F6D8 = src/00F6D8.c -G0 -fno-strict-aliasing
+00F790 = src/00F790.c -G0 -fno-strict-aliasing
