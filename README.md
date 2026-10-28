@@ -34,7 +34,7 @@ function is caught immediately.
 
 | Module | `.text` | Decompiled from C | Gate |
 |---|---:|---:|---|
-| `KERNEL.XFF` | 213,412 B (940 named + 57,776 B unnamed static code) | **45 functions, 496 B** (leaf batch + 1 static) | `python3 tools/xffcheck.py KERNEL --all` → 45/45 byte-exact, reloc-masked |
+| `KERNEL.XFF` | 213,412 B (940 named + 57,776 B unnamed static code) | **788 functions, 79,064 B** (37.0 %; 737 / 940 named + 51 static) | `python3 tools/xffcheck.py KERNEL --all` → 788/788 byte-exact, reloc-masked |
 | `MANAGER.XFF` | 981,944 B (2,277 named + 407,056 B unnamed static code) + 110,192 B VU1 | **127 functions, 1,176 B** (leaf batch + 7 static) | `python3 tools/xffcheck.py MANAGER --all` → 127/127 byte-exact, reloc-masked |
 | `GAMECORE.XFF` | 1,226,112 B (2,755 named + 681,196 B unnamed static code) | **262 functions, 2,512 B** (leaf batch + 20 static) | `python3 tools/xffcheck.py GAMECORE --all` → 262/262 byte-exact, reloc-masked |
 | IOP (`SG2IOPM1.IRX`, `PL2303.IRX`) | 20,448 B | 0 | inventoried |
@@ -52,8 +52,8 @@ relocation fields masked (`overlays/kernel/README.md`).
 | 3 | Pin the compiler (EE-GCC revision and flags) | Done — `-O2 -g2 -G8`, mixed generations per translation unit |
 | 4 | Split and rebuild (per-function assembly, byte-exact link, container) | Done |
 | 5 | Name functions and data from evidence | In progress (210 automatic labels left) |
-| 6 | Decompile functions to C, byte-exact | In progress — main ELF 1,025 / 1,042; `KERNEL.XFF` 44 / 940 named |
-| 7 | Decompile the `.XFF` overlays | Started: `KERNEL.XFF` 45, `MANAGER.XFF` 127, `GAMECORE.XFF` 262 functions (434 total, all byte-exact) |
+| 6 | Decompile functions to C, byte-exact | In progress — main ELF 1,025 / 1,042; `KERNEL.XFF` 737 / 940 named |
+| 7 | Decompile the `.XFF` overlays | In progress: `KERNEL.XFF` 788, `MANAGER.XFF` 127, `GAMECORE.XFF` 262 functions (1,177 total, all byte-exact) |
 
 ## What is still missing for "100 % decompiled"
 
@@ -86,12 +86,12 @@ The executable's **bytes are complete** (hash-matched, container-identical). The
    tables), `.sdata` 896 B, plus 197,032 B of `.bss`. Only a handful of objects have
    a declared type (`include/symbols.h`) or a documented layout (`docs/structs.md`);
    the rest are labelled word dumps emitted by splat.
-6. **The rest of the game — 2,531,660 B of EE code + 20,448 B of IOP code, ~0 %
+6. **The rest of the game — 2,531,660 B of EE code + 20,448 B of IOP code, ~3 %
    decompiled.** The boot ELF is only **7.4 %** of the executable code on the disc:
 
    | Binary | `.text` | Status |
    |---|---:|---|
-   | `KERNEL.XFF` | 213,412 B | 45 functions recovered (496 B) |
+   | `KERNEL.XFF` | 213,412 B | 788 functions recovered (79,064 B, 37.0 %) |
    | `MANAGER.XFF` | 981,944 B + 110,192 B VU1 | 127 functions recovered (1,176 B) |
    | `GAMECORE.XFF` | 1,226,112 B | 262 functions recovered (2,512 B) |
    | `SG2IOPM1.IRX`, `PL2303.IRX` | 20,448 B | 0 % |
@@ -99,12 +99,13 @@ The executable's **bytes are complete** (hash-matched, container-identical). The
    Unlike the boot ELF, the `.XFF` symbol tables keep **globals only**, so 47 % of
    the overlay code is unnamed static functions (1,146,028 B). Those gaps now have
    an evidence-based inventory (`tools/xff_inventory.py`): **1,455 candidate
-   functions / 873 KB**, built from Ghidra starts plus `jal` targets. 28 of them
-   are already decompiled byte-exactly by the template pass (`tools/xff_autotry.py`);
-   the other 1,427 are real functions (frames, loops, calls) and need the normal
-   per-function loop. Details in `docs/xff-statics.md` (local notes).
+   functions / 873 KB**, built from Ghidra starts plus `jal` targets. 78 of them
+   are already decompiled byte-exactly (28 by the template pass `tools/xff_autotry.py`,
+   the rest by hand; 51 are in `KERNEL.XFF`); the other 1,377 are real functions
+   (frames, loops, calls) and need the normal per-function loop. Details in `docs/xff-statics.md` (local notes).
 
-So: **bytes 100 %, main-executable C 93.37 %, whole game ≈ 7 %.** Everything above
+So: **bytes 100 %, main-executable C 93.37 %, whole game ≈ 9.9 %** (272,940 of
+2,755,800 B of code recovered as C). Everything above
 is tracked with evidence in `docs/ledger.json` (main ELF), `overlays/*/c_sources.txt`
 (overlay lanes) and the local notes (`docs/completeness-audit.md`, not versioned).
 
@@ -237,8 +238,9 @@ Run `make help` for the full target list.
 
 ## Limitations and open issues
 
-- The REA MCP toolset cannot analyze R5900 ELFs on Windows (its native lane is PE-only). Analysis uses splat, rabbitizer, Ghidra with the EE extension, and local scripts.
-- All three overlays have decompilation lanes: `KERNEL.XFF` 45, `MANAGER.XFF` 127, `GAMECORE.XFF` 262 functions, all byte-exact (`overlays/`). Their symbol tables keep globals only, so 47 % of the overlay code (1,146,028 B) is unnamed static functions; the gaps now have an evidence-based inventory of 1,455 candidates / 873 KB (`tools/xff_inventory.py`), of which 28 are decompiled mechanically (`tools/xff_autotry.py`) and 1,427 still need per-function work. `MANAGER.XFF` also carries 110,192 B of VU1 microcode (`.vutext`), which is not C.
+- The REA MCP toolset cannot analyze R5900 ELFs on Windows (its native lane is PE-only). Analysis uses splat, rabbitizer, Ghidra with the EE extension, and local scripts; the Ghidra-EE export is bridged into REA as an evidence bundle (`tools/rea_ghidra_evidence.mjs`).
+- Two `KERNEL.XFF` lane entries (019BB8, 019E18) add `-fno-delete-null-pointer-checks` to the module flags `-G0 -fno-strict-aliasing`; the original keeps NULL tests after dereferences there.
+- All three overlays have decompilation lanes: `KERNEL.XFF` 788, `MANAGER.XFF` 127, `GAMECORE.XFF` 262 functions, all byte-exact (`overlays/`). Their symbol tables keep globals only, so 47 % of the overlay code (1,146,028 B) is unnamed static functions; the gaps now have an evidence-based inventory of 1,455 candidates / 873 KB (`tools/xff_inventory.py`), of which 78 are decompiled (28 mechanically with `tools/xff_autotry.py`, the rest by hand) and 1,377 still need per-function work. `KERNEL.XFF` leftovers include hand-written VU0 statics (kept as asm), soft-float double code and a few parked near misses (see `CONTEXT.md`). `MANAGER.XFF` also carries 110,192 B of VU1 microcode (`.vutext`), which is not C.
 - The twelve former near-miss drafts were promoted as byte-exact **assembly transcriptions**; their recovered-C forms remain in `src/non_matching/` and differ only in register allocation, scheduling or branch layout. The single remaining undecompiled function is `func_00107FF8` (SCE printf core).
 - The `origin` remote points to `github.com/mattheuspaivadini/ShadowDecomp`; the ISO and the game-derived files are never pushed.
 
