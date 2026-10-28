@@ -368,3 +368,4 @@
 024AF8 = src/024AF8.c -G0
 02BEA0 = src/02BEA0.c -G0
 02C038 = src/02C038.c -G0
+02C7F8 = src/02C7F8.c -G0
