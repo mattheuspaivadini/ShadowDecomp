@@ -730,3 +730,4 @@
 002F48 = src/002F48.c -G0 -fno-strict-aliasing size=0xa8
 004588 = src/004588.c -G0 -fno-strict-aliasing size=0xa0
 02E568 = src/02E568.c -G0 -fno-strict-aliasing size=0xa0
+025590 = src/025590.c -G0 -fno-strict-aliasing size=0xe0
