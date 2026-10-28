@@ -295,3 +295,4 @@
 008CB8 = src/008CB8.c -G0
 008CC8 = src/008CC8.c -G0
 008CE8 = src/008CE8.c -G0
+008CF8 = src/008CF8.c -G0
