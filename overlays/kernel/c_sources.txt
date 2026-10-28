@@ -734,3 +734,4 @@
 00A318 = src/00A318.c -G0 -fno-strict-aliasing size=0xf0
 00A408 = src/00A408.c -G0 -fno-strict-aliasing size=0xfc
 02E118 = src/02E118.c -G0 -fno-strict-aliasing size=0x5c
+02E280 = src/02E280.c -G0 -fno-strict-aliasing size=0x38
