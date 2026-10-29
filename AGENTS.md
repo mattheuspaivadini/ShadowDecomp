@@ -47,6 +47,16 @@ Useful decompilation helpers: `tools/permute*.py` (source-shape/type/statement m
 - **Decisions:** non-obvious choices go in `docs/decisions.md` with date and reason. Don't ask for confirmation between phases unless a decision is irreversible.
 - **Failures:** diagnose, try at least two alternative approaches, then report the blocker with the exact error output.
 
+## 3b. KERNEL.XFF overlay lane (`overlays/kernel/`)
+
+`KERNEL.XFF` is a relocatable module (no flat image), so the gate is **per function**, relocation-masked, against the shipped module bytes. Details and measured status: `overlays/kernel/README.md`; session logs: `CONTEXT.md`.
+
+- **Gate:** `wsl -d Ubuntu -u root -- bash -lc "cd /mnt/c/Users/Matheus/Documents/ShadowDecomp && python3 tools/xffcheck.py KERNEL --all"` must report N/N byte-exact, N = entries in `overlays/kernel/c_sources.txt`. Also run `make check` (boot ELF must stay untouched).
+- **Loop:** `python tools/xffcheck.py KERNEL --list` (C = done) -> `tools/xff_dis.py KERNEL <stem>` (asm + reloc targets; authority) -> draft in `overlays/kernel/src/<stem>.c` -> `tools/xff_try.py KERNEL <stem> <draft.c> --verbose` (fast scratch compile+diff, `--cc` for compiler) -> add the line to `overlays/kernel/c_sources.txt` -> `xffcheck`. Helpers: `xff_shapes.py` (shape harvester), `xff_autotry.py` (static-function templates), `xff_m2c.py` (m2c shape drafts), `xff_asmbody.py` (VU0/MMI asm leaves), `xff_inventory.py` (stripped pool). Ghidra pseudo-C (`build/plan/ghidra_out/KERNEL/`) is a hint only.
+- **Flags:** module-wide `-G0 -fno-strict-aliasing`; per-TU `cc=29` for SCE libgraph/libcdvd copies, `-g0`, `-fno-schedule-insns2`, `-fno-gcse` as needed. Statics are unnamed (`.symtab` is globals-only): name from evidence or keep `func_XXXXXX`/offset stems.
+- **Near misses:** keep as `STATUS:` headers in the draft (not in `c_sources.txt`), never promote on score alone. Commits: `decomp: <name> (KERNEL <stem>) matching`, one function each, with its `c_sources.txt` line.
+- **Levers learned** are listed in `overlays/kernel/README.md` and memory files `shadowdecomp-s66..s71-kernel-levers`; read them before starting a parked function.
+
 ## 4. Test instructions
 
 There is no unit-test suite; correctness *is* byte-exactness. For every change:
