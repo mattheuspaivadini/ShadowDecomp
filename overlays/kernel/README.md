@@ -49,15 +49,24 @@ wsl -d Ubuntu -u root -- bash -lc "cd /mnt/c/.../ShadowDecomp && python3 tools/x
 | Ghidra EE export | 1,039 functions (`build/plan/ghidra_out/KERNEL/`) — it merges/undercounts the gap blocks, so it is a hint, not an inventory |
 | Compiler | `-G0 -fno-strict-aliasing`: only 10 `$gp`-relative accesses in the whole module, every global uses `lui`/`addiu`; loads stay after stores of unrelated types (007280, 019168, 01BB78). The SCE libgraph copies (`sceGsPutIMR` & co.) need `cc=29`; the Newlib libm/libc copies match verbatim with the default compiler |
 
-## Status (Session 71)
+## Status (Session 76)
 
 | Metric | Value |
 |---|---|
-| Functions in the lane | **905** (python3 tools/xffcheck.py KERNEL --all -> 905/905) |
-| Byte-exact .text | **107,668 B = 50.5 %** of the module (Session 70: 105,304 B = 49.3 %) |
+| Functions in the lane | **920** (python3 tools/xffcheck.py KERNEL --all -> 920/920) |
+| Byte-exact .text | **111,060 B = 52.0 %** of the module (Session 71: 107,668 B = 50.5 %) |
 | Remaining named functions | 96 (58,000 B, all previously parked) |
 | Remaining stripped pool | ~70 candidates from 	ools/xff_inventory.py (57,776 B of gaps, part of it padding) |
 | Blocked on sources | none; the remaining bodies are parked on codegen tie-breaks, not on missing sources |
+
+Session 76 levers (stripped statics, proved byte-exact): a final store written
+twice (early-return path + normal path) flips global-alloc roles - use one
+`goto out;` shared tail (`021160`); the scheduler emits the last store of a run
+first and reorg moves the last remaining store into the next `jal` slot, so the
+image's first store is the last one in the source (`02E608`); one-argument
+prototypes avoid spurious `a1/a2` zeroing; a divisor passed through a
+`static inline` helper keeps one `break 7` check for two divisions (`02F0A0`).
+Parks with measured residuals: `build/s76/*/results.tsv`.
 
 Session 71 levers (all proved byte-exact, see the file headers): a tail
 j <callee> means the source wrote 
