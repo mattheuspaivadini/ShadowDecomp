@@ -1,6 +1,6 @@
 /* KERNEL.XFF @ 0x029320 (108 B) - Sg2SlotBlock
  * STATUS: NOT MATCHING, 24/27 words differ. Image shares (base+4)/(base+8) across the +0x00 and +0x10 sub-blocks and adds i*0xE0 last; tried
- * flat fields, two T3 sub-structs, char* base + off, serial-first/last orders (S72). Not in c_sources.txt.
+ * flat fields, two T3 sub-structs, char* base + off, serial-first/last orders (S72). Not in c_sources.txt. S73: also tried char* base + p4/p8 split pointers (base+4,base+8 hoisted, 92 B vs 108 B): image keeps +8/+4 bases un-folded in regs (a1=v1+8,a2=v1+4,a3=idx+0x10) and adds idx afterwards; needs separate array-typed pointers per address, not found.
  * Evidence: on the 0xE0-byte Sg2 slot [i] (.bss+0x97E30): flags = 0, +4 = vab, +0xC = -1, +0x14/+0x18 = -1 (+0x10 untouched), +8 = serial number from the counter at .bss+0x97E20 (incremented before the stores). Sibling of Sg2SlotSetBasicParam. UNCONFIRMED: names.
  */
 struct Sg2SlotParam {
