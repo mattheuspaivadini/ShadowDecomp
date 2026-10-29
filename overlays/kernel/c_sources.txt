@@ -931,3 +931,4 @@
 016E58 = src/016E58.c -G0 -fno-strict-aliasing size=0x84
 02F0A0 = src/02F0A0.c -G0 -fno-strict-aliasing size=0x84
 01B818 = src/01B818.c -G0 -fno-strict-aliasing size=0xA4
+021160 = src/021160.c -G0 -fno-strict-aliasing size=0x128
