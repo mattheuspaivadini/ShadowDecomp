@@ -92,6 +92,7 @@
 02B8D0 = src/02B8D0.c -G0 -fno-strict-aliasing
 02C4E0 = src/02C4E0.c -G0 -fno-strict-aliasing
 02D4B8 = src/02D4B8.c -G0 -fno-strict-aliasing
+02E6F0 = src/02E6F0.c -G0 -fno-strict-aliasing size=0x1B0
 02F5F0 = src/02F5F0.c -G0 -fno-strict-aliasing
 02F608 = src/02F608.c -G0 -fno-strict-aliasing
 02F620 = src/02F620.c -G0 -fno-strict-aliasing
