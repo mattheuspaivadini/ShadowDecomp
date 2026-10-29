@@ -31,6 +31,7 @@
 005E08 = src/005E08.c -G0 -fno-strict-aliasing
 006050 = src/006050.c -G0 -fno-strict-aliasing
 006058 = src/006058.c -G0 -fno-strict-aliasing
+006308 = src/006308.c -G0 -fno-strict-aliasing size=0x164
 006B58 = src/006B58.c -G0 -fno-strict-aliasing
 0073F0 = src/0073F0.c -G0 -fno-strict-aliasing
 007F48 = src/007F48.c -G0 -fno-strict-aliasing size=0x188
