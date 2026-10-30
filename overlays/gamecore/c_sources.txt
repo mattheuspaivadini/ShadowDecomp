@@ -604,3 +604,4 @@
 03B990 = src/03B990.c -G0
 03E8F0 = src/03E8F0.c -G0
 03EC88 = src/03EC88.c -G0
+03F560 = src/03F560.c -G0
