@@ -1329,3 +1329,4 @@
 12AE20 = src/12AE20.c -G0
 12B180 = src/12B180.c -G0
 00D180 = src/00D180.c -G0 -fno-schedule-insns
+00D1C0 = src/00D1C0.c -G0 -fno-schedule-insns
