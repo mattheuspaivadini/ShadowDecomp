@@ -924,3 +924,4 @@
 00E7B0 = src/00E7B0.c -G0 -fno-strict-aliasing
 00EA58 = src/00EA58.c -G0
 00EAF0 = src/00EAF0.c -G0 -fno-strict-aliasing
+010930 = src/010930.c -G0
