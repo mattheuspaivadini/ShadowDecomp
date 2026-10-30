@@ -508,3 +508,4 @@
 00BEF8 = src/00BEF8.c -G0
 00BF10 = src/00BF10.c -G0
 00BF30 = src/00BF30.c -G0
+00BFD0 = src/00BFD0.c -G0
