@@ -560,3 +560,4 @@
 019F98 = src/019F98.c -G0
 01AB38 = src/01AB38.c -G0
 01AB48 = src/01AB48.c -G0
+01AB68 = src/01AB68.c -G0
