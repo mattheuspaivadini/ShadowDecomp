@@ -742,3 +742,4 @@
 09AB80 = src/09AB80.c -G0
 09ABA0 = src/09ABA0.c -G0
 09B688 = src/09B688.c -G0
+0ADB90 = src/0ADB90.c -G0
