@@ -1223,3 +1223,4 @@
 0E3590 = src/0E3590.c -G0
 0E3618 = src/0E3618.c -G0
 0E47A0 = src/0E47A0.c -G0
+0EADC8 = src/0EADC8.c -G0 -O1 -fschedule-insns2
