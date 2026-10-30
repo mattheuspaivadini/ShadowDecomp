@@ -880,3 +880,4 @@
 11DC40 = src/11DC40.c -G0
 11DC60 = src/11DC60.c -G0
 11DCF0 = src/11DCF0.c -G0
+11EDD8 = src/11EDD8.c -G0
