@@ -1018,3 +1018,4 @@
 04B090 = src/04B090.c -G0 -fno-strict-aliasing
 04B0C8 = src/04B0C8.c -G0
 04E1B0 = src/04E1B0.c -G0 -fno-strict-aliasing
+04E218 = src/04E218.c -G0
