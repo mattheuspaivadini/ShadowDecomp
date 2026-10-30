@@ -759,3 +759,4 @@
 0C0D00 = src/0C0D00.c -G0
 0C56A0 = src/0C56A0.c -G0
 0C56C0 = src/0C56C0.c -G0
+0C56F8 = src/0C56F8.c -G0
