@@ -1022,3 +1022,4 @@
 04EAA0 = src/04EAA0.c -G0 -fno-strict-aliasing
 04FBE0 = src/04FBE0.c -G0
 051FA0 = src/051FA0.c -G0
+052060 = src/052060.c -G0 -fno-strict-aliasing
