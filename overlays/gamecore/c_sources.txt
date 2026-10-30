@@ -762,3 +762,4 @@
 0C56F8 = src/0C56F8.c -G0
 0C8260 = src/0C8260.c -G0
 0C8280 = src/0C8280.c -G0
+0CAAA8 = src/0CAAA8.c -G0
