@@ -971,3 +971,4 @@
 01E950 = src/01E950.c -G0 -fno-strict-aliasing
 0241C0 = src/0241C0.c -G0 -fno-strict-aliasing
 024F40 = src/024F40.c -G0
+026070 = src/026070.c -G0
