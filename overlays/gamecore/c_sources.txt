@@ -510,3 +510,4 @@
 00BF30 = src/00BF30.c -G0
 00BFD0 = src/00BFD0.c -G0
 00BFE0 = src/00BFE0.c -G0
+00C010 = src/00C010.c -G0
