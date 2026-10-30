@@ -1067,3 +1067,4 @@
 06BCE8 = src/06BCE8.c -G0
 06BD98 = src/06BD98.c -G0
 06E6D0 = src/06E6D0.c -G0
+06E800 = src/06E800.c -G0 -fno-strict-aliasing
