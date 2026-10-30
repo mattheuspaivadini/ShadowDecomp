@@ -958,3 +958,4 @@
 019900 = src/019900.c -G0 -fno-strict-aliasing
 019D08 = src/019D08.c -G0 -fno-strict-aliasing
 019F30 = src/019F30.c -G0 -fno-strict-aliasing
+019F70 = src/019F70.c -G0
