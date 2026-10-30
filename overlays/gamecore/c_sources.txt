@@ -501,3 +501,4 @@
 00A7C0 = src/00A7C0.c -G0
 00B448 = src/00B448.c -G0
 00B460 = src/00B460.c -G0
+00BE78 = src/00BE78.c -G0
