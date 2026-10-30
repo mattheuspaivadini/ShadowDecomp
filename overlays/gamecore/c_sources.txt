@@ -659,3 +659,4 @@
 06BC80 = src/06BC80.c -G0
 06BCA0 = src/06BCA0.c -G0
 06BD18 = src/06BD18.c -G0
+06BD38 = src/06BD38.c -G0
