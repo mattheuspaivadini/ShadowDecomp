@@ -561,3 +561,4 @@
 01AB38 = src/01AB38.c -G0
 01AB48 = src/01AB48.c -G0
 01AB68 = src/01AB68.c -G0
+01C708 = src/01C708.c -G0
