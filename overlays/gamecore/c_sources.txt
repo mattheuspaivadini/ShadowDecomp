@@ -767,3 +767,4 @@
 0CAAE8 = src/0CAAE8.c -G0
 0CAB88 = src/0CAB88.c -G0
 0CACC0 = src/0CACC0.c -G0
+0CADD0 = src/0CADD0.c -G0
