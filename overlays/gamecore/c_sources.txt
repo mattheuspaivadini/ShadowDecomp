@@ -813,3 +813,4 @@
 0E0E50 = src/0E0E50.c -G0
 0E11A8 = src/0E11A8.c -G0
 0E11B8 = src/0E11B8.c -G0
+0E11C8 = src/0E11C8.c -G0
