@@ -756,3 +756,4 @@
 0B5108 = src/0B5108.c -G0
 0BC470 = src/0BC470.c -G0
 0C0C98 = src/0C0C98.c -G0
+0C0D00 = src/0C0D00.c -G0
