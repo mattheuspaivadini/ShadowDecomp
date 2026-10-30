@@ -945,3 +945,4 @@
 015B30 = src/015B30.c -G0 -fno-strict-aliasing
 015B70 = src/015B70.c -G0
 015BB0 = src/015BB0.c -G0 -fno-strict-aliasing
+015CC0 = src/015CC0.c -G0 -fno-strict-aliasing
