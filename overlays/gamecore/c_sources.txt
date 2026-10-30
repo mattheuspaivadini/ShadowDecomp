@@ -931,3 +931,4 @@
 0123F0 = src/0123F0.c -G0
 012460 = src/012460.c -G0 -fno-strict-aliasing
 0124A0 = src/0124A0.c -G0 -fno-strict-aliasing
+012880 = src/012880.c -G0
