@@ -789,3 +789,4 @@
 0D7650 = src/0D7650.c -G0
 0D8BF8 = src/0D8BF8.c -G0
 0D8C08 = src/0D8C08.c -G0
+0D8C18 = src/0D8C18.c -G0
