@@ -1257,3 +1257,4 @@
 115B40 = src/115B40.c -G0
 115B70 = src/115B70.c -G0
 115D20 = src/115D20.c -G0 -fno-strict-aliasing
+115FB0 = src/115FB0.c -G0
