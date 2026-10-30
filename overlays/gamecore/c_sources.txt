@@ -1056,3 +1056,4 @@
 063920 = src/063920.c -G0
 064270 = src/064270.c -G0
 064D40 = src/064D40.c -G0 -fno-strict-aliasing
+064D78 = src/064D78.c -G0 -fno-strict-aliasing
