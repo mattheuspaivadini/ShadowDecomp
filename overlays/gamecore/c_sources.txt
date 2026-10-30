@@ -1320,3 +1320,4 @@
 124190 = src/124190.c -G0
 125280 = src/125280.c -G0
 1279E8 = src/1279E8.c -G0
+1284A8 = src/1284A8.c -G0 -O1 -fschedule-insns2
