@@ -995,3 +995,4 @@
 03B960 = src/03B960.c -G0 -fno-strict-aliasing
 03B9B0 = src/03B9B0.c -G0 -fno-strict-aliasing
 03E9D0 = src/03E9D0.c -G0
+03ECA8 = src/03ECA8.c -G0
