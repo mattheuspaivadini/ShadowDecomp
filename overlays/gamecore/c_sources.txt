@@ -960,3 +960,4 @@
 019F30 = src/019F30.c -G0 -fno-strict-aliasing
 019F70 = src/019F70.c -G0
 01C998 = src/01C998.c -G0
+01D810 = src/01D810.c -G0
