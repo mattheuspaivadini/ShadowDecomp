@@ -702,3 +702,4 @@
 07C588 = src/07C588.c -G0
 07C5A8 = src/07C5A8.c -G0
 07C5C8 = src/07C5C8.c -G0
+07C5E8 = src/07C5E8.c -G0
