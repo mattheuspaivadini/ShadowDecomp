@@ -841,3 +841,4 @@
 0F2530 = src/0F2530.c -G0
 0F25C0 = src/0F25C0.c -G0
 0F7DF0 = src/0F7DF0.c -G0
+0F8078 = src/0F8078.c -G0
