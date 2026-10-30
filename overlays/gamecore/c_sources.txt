@@ -986,3 +986,4 @@
 031560 = src/031560.c -G0 -fno-strict-aliasing
 031630 = src/031630.c -G0
 031658 = src/031658.c -G0
+0344D8 = src/0344D8.c -G0 -fno-strict-aliasing
