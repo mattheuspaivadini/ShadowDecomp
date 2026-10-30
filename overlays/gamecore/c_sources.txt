@@ -653,3 +653,4 @@
 064318 = src/064318.c -G0
 06A9C8 = src/06A9C8.c -G0
 06A9E8 = src/06A9E8.c -G0
+06BBE0 = src/06BBE0.c -G0
