@@ -978,3 +978,4 @@
 02C9F0 = src/02C9F0.c -G0 -fno-strict-aliasing
 02CD88 = src/02CD88.c -G0
 02DB10 = src/02DB10.c -G0 -fno-strict-aliasing
+02DFD8 = src/02DFD8.c -G0
