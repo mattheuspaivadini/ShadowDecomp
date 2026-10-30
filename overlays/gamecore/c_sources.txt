@@ -885,3 +885,4 @@
 11F7E8 = src/11F7E8.c -G0
 11FBD0 = src/11FBD0.c -G0
 11FBE8 = src/11FBE8.c -G0
+11FD68 = src/11FD68.c -G0
