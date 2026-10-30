@@ -935,3 +935,4 @@
 013A40 = src/013A40.c -G0
 013D00 = src/013D00.c -G0 -fno-strict-aliasing
 013D80 = src/013D80.c -G0
+013DD0 = src/013DD0.c -G0 -fno-strict-aliasing
