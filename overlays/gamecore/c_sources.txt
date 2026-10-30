@@ -748,3 +748,4 @@
 0ADDD8 = src/0ADDD8.c -G0
 0ADDE8 = src/0ADDE8.c -G0
 0ADE00 = src/0ADE00.c -G0
+0ADE50 = src/0ADE50.c -G0
