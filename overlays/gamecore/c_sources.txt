@@ -1331,3 +1331,4 @@
 00D180 = src/00D180.c -G0 -fno-schedule-insns
 00D1C0 = src/00D1C0.c -G0 -fno-schedule-insns
 013CD8 = src/013CD8.c -G0
+0181C8 = src/0181C8.c -G0
