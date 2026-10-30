@@ -36,7 +36,22 @@ wsl -d Ubuntu -u root -- bash -lc "cd <repo> && python3 tools/xffcheck.py GAMECO
 
 ## Status
 
-242 functions, 2,060 B of `.text`, all byte-exact (`--all` → `242/242`):
+**Session 78 (2026-10-30):** 892 functions, 15,420 B of `.text`, all byte-exact
+(`--all` → `892/892`). Every named function ≤32 B is done (413 added this
+session by two Sonnet workers, `build/s78/`). Levers seen in that batch:
+
+- Store runs: 2.96 emits the last store first, then the rest in source order
+  (write the image's first store last).
+- `lq/sq` copies need `typedef unsigned int u_long128 __attribute__((mode(TI)))`;
+  a few of them also need `-fno-strict-aliasing`.
+- `x != 0` through a `static inline` helper keeps `andi` + `sltu` instead of a shift.
+- `RequestCharacterMotionShiftFunc(chr, func_XXXXXX)` wrappers: the callback is the
+  `lui/addiu` `.text` address of an unnamed static.
+- A few matches rely on compiler-artifact pins (`asm("" : "+r"(x))`, register asm,
+  `-fno-schedule-insns`, an unused local for the frame size): `0F25C0 12AC38 12A9C0
+  0E02D8 0D9638 0D9650`. They are byte-exact but may not be the original source shape.
+
+Earlier state (Session 64d): 242 functions, 2,060 B of `.text`, all byte-exact (`--all` → `242/242`):
 
 - **235 of the 8-byte functions** — the complete set at that size: empty bodies,
   one-field accessors (int/byte/short/float), one-field setters, constant and
