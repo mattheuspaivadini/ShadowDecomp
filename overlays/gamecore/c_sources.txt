@@ -999,3 +999,4 @@
 03ECD8 = src/03ECD8.c -G0
 03ED00 = src/03ED00.c -G0
 03F730 = src/03F730.c -G0
+041620 = src/041620.c -G0 -fno-strict-aliasing
