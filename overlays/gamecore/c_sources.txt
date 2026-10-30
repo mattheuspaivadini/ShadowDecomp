@@ -717,3 +717,4 @@
 07C9D0 = src/07C9D0.c -G0
 07C9F0 = src/07C9F0.c -G0
 07CA10 = src/07CA10.c -G0
+07CA30 = src/07CA30.c -G0
