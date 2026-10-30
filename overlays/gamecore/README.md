@@ -36,6 +36,35 @@ wsl -d Ubuntu -u root -- bash -lc "cd <repo> && python3 tools/xffcheck.py GAMECO
 
 ## Status
 
+**Session 79 (2026-10-30):** 1324 functions, 36,872 B of `.text` (3.01 %), all
+byte-exact. The whole **33-64 B named band** was attacked in one wave: 462
+functions, 432 matched, 30 parked (`build/s79/PARKS.md`). Every match was
+re-scored independently of the worker that wrote it (`build/s79/verify.sh`), and
+the block flag matrix (15 sets x 36 parks, `build/s79/sweep.tsv`) was run before
+any park was hand-edited.
+
+Levers found in this band:
+
+- **A `.text` address passed as a literal loses its relocation.** Writing
+  `f((void *)0x2D648, ...)` makes 2.96 emit `lui`/`ori` with no reloc; the image
+  has the `lui`/`addiu` `%hi`/`%lo` pair. Reference the unnamed static by name
+  (`void func_0002D648(void);`) even without a `.symtab` entry: the reloc comes
+  back and the masked comparison closes (`02C528`).
+- **EE argument registers:** args 5-8 travel in `$t0-$t3` (not on the stack), so
+  a forwarder that moves `$a3` to `$t0` is passing 5 arguments
+  (`0F9078` -> `f(a, b, c, ZeroVector, d, 0.0f)`).
+- **Recompute a data reference instead of reusing the pointer** when the image
+  keeps two address registers: `p = &D[0x7C4]` for the increment plus a second
+  `*(int *)(D + 0x7C4)` for the clamp reproduces `$a1`/`$a2` (`0181C8`).
+- **Store runs are `s3, s1, s2`:** the scheduler emits the source-last store
+  first, then the rest in order. For three stores the image order `p3, p2, p4`
+  means the C wrote `p[2]; p[4]; p[3];` (`013CD8`).
+- `-fno-schedule-insns` matches whole TUs of yaw/pitch parameter setters
+  (`00D180`, `00D1C0`); `sqrtf` needs `-fno-math-errno` to emit a bare `sqrt.s`.
+- `&&` / `?:` over a 0/1 result is folded to `xor` + `sltu`; when the image has
+  short-circuit branches with a live result register, write nested `if`s or
+  early `return` instead (`0FBCC0` still parks on this).
+
 **Session 78 (2026-10-30):** 892 functions, 15,420 B of `.text`, all byte-exact
 (`--all` → `892/892`). Every named function ≤32 B is done (413 added this
 session by two Sonnet workers, `build/s78/`). Levers seen in that batch:
