@@ -1138,3 +1138,4 @@
 0ADD70 = src/0ADD70.c -G0
 0ADE10 = src/0ADE10.c -G0 -O1 -fschedule-insns
 0B6EC8 = src/0B6EC8.c -G0
+0BBF08 = src/0BBF08.c -G0
