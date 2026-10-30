@@ -831,3 +831,4 @@
 0EB180 = src/0EB180.c -G0
 0EB1A0 = src/0EB1A0.c -G0
 0EB1D8 = src/0EB1D8.c -G0
+0EB228 = src/0EB228.c -G0
