@@ -916,3 +916,4 @@
 00A920 = src/00A920.c -G0 -fno-strict-aliasing
 00B230 = src/00B230.c -G0
 00B480 = src/00B480.c -G0
+00B568 = src/00B568.c -G0 -fno-strict-aliasing
