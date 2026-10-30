@@ -769,3 +769,4 @@
 0CACC0 = src/0CACC0.c -G0
 0CADD0 = src/0CADD0.c -G0
 0CADF0 = src/0CADF0.c -G0
+0CAE10 = src/0CAE10.c -G0
