@@ -939,3 +939,4 @@
 021160 = src/021160.c -G0 -fno-strict-aliasing size=0x128
 02E608 = src/02E608.c -G0 -fno-strict-aliasing size=0xE8
 030428 = src/030428.c -G0 size=0x3d0
+032D08 = src/032D08.c -G0 -fno-builtin
