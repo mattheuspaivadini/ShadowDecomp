@@ -1202,3 +1202,4 @@
 0D4648 = src/0D4648.c -G0 -fno-optimize-sibling-calls
 0D55B0 = src/0D55B0.c -G0
 0D5B80 = src/0D5B80.c -G0
+0D5BC0 = src/0D5BC0.c -G0
