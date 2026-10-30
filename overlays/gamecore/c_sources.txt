@@ -1069,3 +1069,4 @@
 06E6D0 = src/06E6D0.c -G0
 06E800 = src/06E800.c -G0 -fno-strict-aliasing
 06E830 = src/06E830.c -G0
+0704F0 = src/0704F0.c -G0
