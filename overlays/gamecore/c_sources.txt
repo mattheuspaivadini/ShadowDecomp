@@ -973,3 +973,4 @@
 024F40 = src/024F40.c -G0
 026070 = src/026070.c -G0
 02BEF0 = src/02BEF0.c -G0
+02C130 = src/02C130.c -G0 -fno-strict-aliasing
