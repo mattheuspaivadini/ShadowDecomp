@@ -672,3 +672,4 @@
 070630 = src/070630.c -G0 -fno-strict-aliasing
 07B028 = src/07B028.c -G0
 07B048 = src/07B048.c -G0
+07B210 = src/07B210.c -G0
