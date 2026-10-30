@@ -49,15 +49,24 @@ wsl -d Ubuntu -u root -- bash -lc "cd /mnt/c/.../ShadowDecomp && python3 tools/x
 | Ghidra EE export | 1,039 functions (`build/plan/ghidra_out/KERNEL/`) — it merges/undercounts the gap blocks, so it is a hint, not an inventory |
 | Compiler | `-G0 -fno-strict-aliasing`: only 10 `$gp`-relative accesses in the whole module, every global uses `lui`/`addiu`; loads stay after stores of unrelated types (007280, 019168, 01BB78). The SCE libgraph copies (`sceGsPutIMR` & co.) need `cc=29`; the Newlib libm/libc copies match verbatim with the default compiler |
 
-## Status (Session 76)
+## Status (Session 77)
 
 | Metric | Value |
 |---|---|
-| Functions in the lane | **920** (python3 tools/xffcheck.py KERNEL --all -> 920/920) |
-| Byte-exact .text | **111,060 B = 52.0 %** of the module (Session 71: 107,668 B = 50.5 %) |
-| Remaining named functions | 96 (58,000 B, all previously parked) |
+| Functions in the lane | **927** (python3 tools/xffcheck.py KERNEL --all -> 927/927) |
+| Byte-exact .text | **116,176 B = 54.4 %** of the module (Session 76: 111,060 B = 52.0 %) |
+| Remaining named functions | 85 (all previously parked; none left in SCE libm/libc, see below) |
 | Remaining stripped pool | ~70 candidates from 	ools/xff_inventory.py (57,776 B of gaps, part of it padding) |
 | Blocked on sources | none; the remaining bodies are parked on codegen tie-breaks, not on missing sources |
+
+Session 77 lever: the Newlib/fdlibm copies are separate library TUs built
+**without** `-fno-strict-aliasing`. `validate_structure` (030428, 976 B) and
+`__kernel_rem_pio2f` (032D08, 2148 B) were parked at 22/244 and 16/537 words with
+the module-wide flag and match verbatim without it. Identified with the SCE
+symbol DB shipped by PS2Recomp (`ps2xAnalyzer/include/ps2recomp/sce_symbol_database_data.h`,
+52 SCE libs / 5,323 functions, sha1 over reloc-masked bytes); scanning KERNEL,
+GAMECORE, MANAGER and STARTUP finds no other unnamed or unmatched library copy
+except `sceCdRead`/`sceCdReadIOPm` (libcdvd, SDK 2.x, gcc 2.4.1.01 tag).
 
 Session 76 levers (stripped statics, proved byte-exact): a final store written
 twice (early-return path + normal path) flips global-alloc roles - use one
