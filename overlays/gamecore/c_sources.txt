@@ -1011,3 +1011,4 @@
 042C38 = src/042C38.c -G0
 042C68 = src/042C68.c -G0 -fno-strict-aliasing
 042CA0 = src/042CA0.c -G0 -fno-strict-aliasing
+043900 = src/043900.c -G0
