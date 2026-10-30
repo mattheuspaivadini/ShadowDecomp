@@ -950,3 +950,4 @@
 015F70 = src/015F70.c -G0
 0185B0 = src/0185B0.c -G0
 018D98 = src/018D98.c -G0
+0195A8 = src/0195A8.c -G0 -fno-strict-aliasing
