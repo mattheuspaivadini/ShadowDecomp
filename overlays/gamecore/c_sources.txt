@@ -809,3 +809,4 @@
 0E0878 = src/0E0878.c -G0
 0E0960 = src/0E0960.c -G0
 0E0C18 = src/0E0C18.c -G0
+0E0E40 = src/0E0E40.c -G0
