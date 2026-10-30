@@ -638,3 +638,4 @@
 060CC8 = src/060CC8.c -G0
 060DA0 = src/060DA0.c -G0
 062D68 = src/062D68.c -G0
+062D88 = src/062D88.c -G0
