@@ -825,3 +825,4 @@
 0EAED8 = src/0EAED8.c -G0
 0EAFB0 = src/0EAFB0.c -G0
 0EAFC8 = src/0EAFC8.c -G0
+0EB100 = src/0EB100.c -G0
