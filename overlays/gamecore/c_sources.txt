@@ -1326,3 +1326,4 @@
 12A9D8 = src/12A9D8.c -G0
 12AA08 = src/12AA08.c -G0
 12ACF0 = src/12ACF0.c -G0 -fno-optimize-sibling-calls
+12AE20 = src/12AE20.c -G0
