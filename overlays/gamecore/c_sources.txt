@@ -1000,3 +1000,4 @@
 03ED00 = src/03ED00.c -G0
 03F730 = src/03F730.c -G0
 041620 = src/041620.c -G0 -fno-strict-aliasing
+0419A8 = src/0419A8.c -G0 -fno-strict-aliasing
