@@ -795,3 +795,4 @@
 0D9650 = src/0D9650.c -G0 -fno-schedule-insns
 0DA398 = src/0DA398.c -G0
 0DA980 = src/0DA980.c -G0
+0DB000 = src/0DB000.c -G0
