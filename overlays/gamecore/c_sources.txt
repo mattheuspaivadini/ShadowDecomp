@@ -953,3 +953,4 @@
 0195A8 = src/0195A8.c -G0 -fno-strict-aliasing
 019718 = src/019718.c -G0 -fno-strict-aliasing
 019878 = src/019878.c -G0
+0198A0 = src/0198A0.c -G0
