@@ -720,3 +720,4 @@
 07CA30 = src/07CA30.c -G0
 07CBD8 = src/07CBD8.c -G0
 07CC20 = src/07CC20.c -G0
+07EE70 = src/07EE70.c -G0
