@@ -753,3 +753,4 @@
 0ADE78 = src/0ADE78.c -G0
 0B4608 = src/0B4608.c -G0
 0B4630 = src/0B4630.c -G0
+0B5108 = src/0B5108.c -G0
