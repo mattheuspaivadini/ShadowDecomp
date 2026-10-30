@@ -1099,3 +1099,4 @@
 0805B0 = src/0805B0.c -G0 -fno-strict-aliasing
 0806F8 = src/0806F8.c -G0 -fno-strict-aliasing
 080738 = src/080738.c -G0 -fno-strict-aliasing
+0807C0 = src/0807C0.c -G0 -fno-strict-aliasing
