@@ -1029,3 +1029,4 @@
 05C2B0 = src/05C2B0.c -G0 -fno-strict-aliasing
 05C2E0 = src/05C2E0.c -G0
 05C310 = src/05C310.c -G0 -fno-strict-aliasing
+05C498 = src/05C498.c -G0
