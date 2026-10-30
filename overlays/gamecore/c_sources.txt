@@ -798,3 +798,4 @@
 0DB000 = src/0DB000.c -G0
 0E02D8 = src/0E02D8.c -G0
 0E02F8 = src/0E02F8.c -G0
+0E0308 = src/0E0308.c -G0
