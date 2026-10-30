@@ -1038,3 +1038,4 @@
 05C630 = src/05C630.c -G0
 05CA90 = src/05CA90.c -G0
 05CF60 = src/05CF60.c -G0 -fno-strict-aliasing
+05CFB8 = src/05CFB8.c -G0
