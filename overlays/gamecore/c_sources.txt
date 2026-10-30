@@ -975,3 +975,4 @@
 02BEF0 = src/02BEF0.c -G0
 02C130 = src/02C130.c -G0 -fno-strict-aliasing
 02C168 = src/02C168.c -G0
+02C9F0 = src/02C9F0.c -G0 -fno-strict-aliasing
