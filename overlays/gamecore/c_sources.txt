@@ -677,3 +677,4 @@
 07B2D0 = src/07B2D0.c -G0
 07B328 = src/07B328.c -G0
 07B4D8 = src/07B4D8.c -G0
+07B508 = src/07B508.c -G0
