@@ -1043,3 +1043,4 @@
 05D138 = src/05D138.c -G0 -fno-strict-aliasing
 05D178 = src/05D178.c -G0 -fno-strict-aliasing
 05D1B8 = src/05D1B8.c -G0 -fno-strict-aliasing
+05D1F8 = src/05D1F8.c -G0 -fno-strict-aliasing
