@@ -495,3 +495,4 @@
 008E38 = src/008E38.c -G0
 009CD0 = src/009CD0.c -G0
 00A240 = src/00A240.c -G0
+00A380 = src/00A380.c -G0 -fno-strict-aliasing
