@@ -1052,3 +1052,4 @@
 062F08 = src/062F08.c -G0
 063888 = src/063888.c -G0
 0638B0 = src/0638B0.c -G0 -fno-strict-aliasing
+0638E8 = src/0638E8.c -G0 -fno-strict-aliasing
