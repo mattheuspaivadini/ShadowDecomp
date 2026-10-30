@@ -998,3 +998,4 @@
 03ECA8 = src/03ECA8.c -G0
 03ECD8 = src/03ECD8.c -G0
 03ED00 = src/03ED00.c -G0
+03F730 = src/03F730.c -G0
