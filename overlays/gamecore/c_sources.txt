@@ -930,3 +930,4 @@
 012330 = src/012330.c -G0
 0123F0 = src/0123F0.c -G0
 012460 = src/012460.c -G0 -fno-strict-aliasing
+0124A0 = src/0124A0.c -G0 -fno-strict-aliasing
