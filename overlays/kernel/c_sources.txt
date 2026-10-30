@@ -31,11 +31,15 @@
 005E08 = src/005E08.c -G0 -fno-strict-aliasing
 006050 = src/006050.c -G0 -fno-strict-aliasing
 006058 = src/006058.c -G0 -fno-strict-aliasing
+006308 = src/006308.c -G0 -fno-strict-aliasing size=0x164
 006B58 = src/006B58.c -G0 -fno-strict-aliasing
 0073F0 = src/0073F0.c -G0 -fno-strict-aliasing
+007F48 = src/007F48.c -G0 -fno-strict-aliasing size=0x188
+008988 = src/008988.c -G0 -fno-strict-aliasing size=0x1EC
 009580 = src/009580.c -G0 -fno-strict-aliasing
 00A020 = src/00A020.c -G0 -fno-strict-aliasing
 00A030 = src/00A030.c -G0 -fno-strict-aliasing
+00AE00 = src/00AE00.c -G0 -fno-strict-aliasing size=0x140
 00B1C0 = src/00B1C0.c -G0 -fno-strict-aliasing
 011F48 = src/011F48.c -G0 -fno-strict-aliasing
 011F50 = src/011F50.c -G0 -fno-strict-aliasing
@@ -90,6 +94,7 @@
 02B8D0 = src/02B8D0.c -G0 -fno-strict-aliasing
 02C4E0 = src/02C4E0.c -G0 -fno-strict-aliasing
 02D4B8 = src/02D4B8.c -G0 -fno-strict-aliasing
+02E6F0 = src/02E6F0.c -G0 -fno-strict-aliasing size=0x1B0
 02F5F0 = src/02F5F0.c -G0 -fno-strict-aliasing
 02F608 = src/02F608.c -G0 -fno-strict-aliasing
 02F620 = src/02F620.c -G0 -fno-strict-aliasing
@@ -801,3 +806,137 @@
 02F9D8 = src/02F9D8.c -G0 -fno-strict-aliasing size=0xfc
 02FAD8 = src/02FAD8.c -G0 -fno-strict-aliasing size=0x100
 02FBD8 = src/02FBD8.c -G0 -fno-strict-aliasing size=0x128
+00D410 = src/00D410.c -G0 -fno-strict-aliasing
+00D450 = src/00D450.c -G0 -fno-strict-aliasing
+00D490 = src/00D490.c -G0 -fno-strict-aliasing
+00D4D0 = src/00D4D0.c -G0 -fno-strict-aliasing
+02A298 = src/02A298.c -G0
+02A2D8 = src/02A2D8.c -G0
+02A318 = src/02A318.c -G0
+00D510 = src/00D510.c -G0 -fno-strict-aliasing
+013730 = src/013730.c -G0 -fno-strict-aliasing
+015920 = src/015920.c -G0 -fno-strict-aliasing
+015A08 = src/015A08.c -G0 -fno-strict-aliasing
+015AF0 = src/015AF0.c -G0 -fno-strict-aliasing
+015BD8 = src/015BD8.c -G0 -fno-strict-aliasing
+015CB0 = src/015CB0.c -G0 -fno-strict-aliasing
+015D88 = src/015D88.c -G0 -fno-strict-aliasing
+022D50 = src/022D50.c -G0 -fno-strict-aliasing -g0
+02F3F8 = src/02F3F8.c -G0
+02F438 = src/02F438.c -G0
+02F878 = src/02F878.c -G0
+000BB8 = src/000BB8.c -G0 -fno-strict-aliasing
+00F1B0 = src/00F1B0.c -G0 -fno-strict-aliasing
+00F4C8 = src/00F4C8.c -G0 -fno-strict-aliasing
+00F560 = src/00F560.c -G0 -fno-strict-aliasing
+00F5F8 = src/00F5F8.c -G0 -fno-strict-aliasing
+011038 = src/011038.c -G0 -fno-strict-aliasing
+01E300 = src/01E300.c -G0 -fno-strict-aliasing
+0300B0 = src/0300B0.c -G0 -fno-strict-aliasing
+01E398 = src/01E398.c -G0 -fno-strict-aliasing
+00CD38 = src/00CD38.c -G0 -fno-strict-aliasing
+00CE40 = src/00CE40.c -G0 -fno-strict-aliasing
+00CF48 = src/00CF48.c -G0 -fno-strict-aliasing
+00BF20 = src/00BF20.c -G0 -fno-strict-aliasing
+00BFC8 = src/00BFC8.c -G0 -fno-strict-aliasing
+012198 = src/012198.c -G0 -fno-strict-aliasing
+012718 = src/012718.c -G0 -fno-strict-aliasing
+00D770 = src/00D770.c -G0 -fno-strict-aliasing
+02A150 = src/02A150.c -G0 -fno-strict-aliasing -g0
+02A000 = src/02A000.c -G0 -fno-strict-aliasing -g0
+0203D8 = src/0203D8.c -G0 -fno-strict-aliasing
+025C38 = src/025C38.c -G0 -fno-strict-aliasing -g0
+01E678 = src/01E678.c -G0
+0169A8 = src/0169A8.c -G0
+033858 = src/033858.c -G0 -fno-strict-aliasing cc=29
+033A40 = src/033A40.c -G0 -fno-strict-aliasing cc=29
+010178 = src/010178.c -G0 -fno-strict-aliasing
+0106D0 = src/0106D0.c -G0 -fno-strict-aliasing
+010B00 = src/010B00.c -G0 -fno-strict-aliasing
+0110D8 = src/0110D8.c -G0 -fno-strict-aliasing
+010390 = src/010390.c -G0 -fno-strict-aliasing
+0108E8 = src/0108E8.c -G0 -fno-strict-aliasing
+010D18 = src/010D18.c -G0 -fno-strict-aliasing
+0301B0 = src/0301B0.c -G0 -fno-strict-aliasing
+0120B8 = src/0120B8.c -G0 -fno-strict-aliasing -fno-schedule-insns2
+01F420 = src/01F420.c -G0
+024710 = src/024710.c -G0 -fno-strict-aliasing -g0 size=0x200
+0246A0 = src/0246A0.c -G0 size=0x70
+0245F8 = src/0245F8.c -G0 size=0xa4
+024F48 = src/024F48.c -G0 size=0xa8
+0249C8 = src/0249C8.c -G0 size=0x84
+02B7F8 = src/02B7F8.c -G0 size=0xbc
+008CA8 = src/008CA8.c -G0 size=0x1b4
+02CCC8 = src/02CCC8.c -G0 size=0x190
+02FD00 = src/02FD00.c -G0 -g0 size=0x1c4
+02FEC8 = src/02FEC8.c -G0 -g0 size=0x1c4
+01F2B0 = src/01F2B0.c -G0
+01EF50 = src/01EF50.c -G0
+01E608 = src/01E608.c -G0
+011368 = src/011368.c -G0
+00FFD0 = src/00FFD0.c -G0
+0100A8 = src/0100A8.c -G0
+01BF78 = src/01BF78.c -G0 -fno-strict-aliasing
+0127C8 = src/0127C8.c -G0
+014EB0 = src/014EB0.c -G0
+015510 = src/015510.c -G0
+011568 = src/011568.c -G0
+011688 = src/011688.c -G0
+011418 = src/011418.c -G0
+00C538 = src/00C538.c -G0
+00C658 = src/00C658.c -G0
+0054D8 = src/0054D8.c -G0 -fno-strict-aliasing
+00D568 = src/00D568.c -G0 -fno-strict-aliasing
+00C9B0 = src/00C9B0.c -G0 -fno-strict-aliasing
+00D660 = src/00D660.c -G0 -fno-strict-aliasing
+000E20 = src/000E20.c -G0 -fno-strict-aliasing
+021770 = src/021770.c -G0 -fno-strict-aliasing
+0112E8 = src/0112E8.c -G0 -fno-strict-aliasing
+00F6D8 = src/00F6D8.c -G0 -fno-strict-aliasing
+00F790 = src/00F790.c -G0 -fno-strict-aliasing
+00F848 = src/00F848.c -G0 -fno-strict-aliasing
+00D7E8 = src/00D7E8.c -G0 -fno-strict-aliasing
+02BE88 = src/02BE88.c -G0 -fno-strict-aliasing
+01FEA0 = src/01FEA0.c -G0 -fno-strict-aliasing
+009E28 = src/009E28.c -G0 -fno-strict-aliasing
+017138 = src/017138.c -G0 -fno-strict-aliasing
+017328 = src/017328.c -G0 -fno-strict-aliasing
+017610 = src/017610.c -G0 -fno-strict-aliasing
+0129A0 = src/0129A0.c -G0 -fno-strict-aliasing
+029E10 = src/029E10.c -G0 -fno-strict-aliasing
+013EB0 = src/013EB0.c -G0 -fno-strict-aliasing
+014250 = src/014250.c -G0 -fno-strict-aliasing
+010F30 = src/010F30.c -G0 -fno-strict-aliasing
+0105A8 = src/0105A8.c -G0 -fno-strict-aliasing
+014C60 = src/014C60.c -G0 -fno-strict-aliasing
+011C20 = src/011C20.c -G0 -fno-strict-aliasing
+004220 = src/004220.c -G0
+004318 = src/004318.c -G0
+0009A0 = src/0009A0.c -G0
+00D988 = src/00D988.c -G0
+015E60 = src/015E60.c -G0
+029D88 = src/029D88.c -G0
+00AAD8 = src/00AAD8.c -G0
+01E578 = src/01E578.c -G0
+02EEB8 = src/02EEB8.c -G0
+029F10 = src/029F10.c -G0 -fno-strict-aliasing
+01AEF8 = src/01AEF8.c -G0 -fno-strict-aliasing
+02A5E8 = src/02A5E8.c -G0 -fno-strict-aliasing
+01E928 = src/01E928.c -G0 -fno-strict-aliasing
+00AB68 = src/00AB68.c -G0 -fno-strict-aliasing
+00D9C8 = src/00D9C8.c -G0 -fno-strict-aliasing
+0056C0 = src/0056C0.c -G0 -fno-strict-aliasing
+0058B8 = src/0058B8.c -G0 -fno-strict-aliasing
+005AA0 = src/005AA0.c -G0 -fno-strict-aliasing
+00A5F8 = src/00A5F8.c -G0 -fno-strict-aliasing
+016DF0 = src/016DF0.c -G0 -fno-strict-aliasing
+01C530 = src/01C530.c -G0 -fno-strict-aliasing
+01DA30 = src/01DA30.c -G0 -fno-strict-aliasing
+026808 = src/026808.c -G0 -fno-strict-aliasing
+016E58 = src/016E58.c -G0 -fno-strict-aliasing size=0x84
+02F0A0 = src/02F0A0.c -G0 -fno-strict-aliasing size=0x84
+01B818 = src/01B818.c -G0 -fno-strict-aliasing size=0xA4
+021160 = src/021160.c -G0 -fno-strict-aliasing size=0x128
+02E608 = src/02E608.c -G0 -fno-strict-aliasing size=0xE8
+030428 = src/030428.c -G0 size=0x3d0
+032D08 = src/032D08.c -G0 -fno-builtin
