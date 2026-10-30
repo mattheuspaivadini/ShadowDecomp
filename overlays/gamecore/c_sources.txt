@@ -1136,3 +1136,4 @@
 09B498 = src/09B498.c -G0
 09B528 = src/09B528.c -G0
 0ADD70 = src/0ADD70.c -G0
+0ADE10 = src/0ADE10.c -G0 -O1 -fschedule-insns
