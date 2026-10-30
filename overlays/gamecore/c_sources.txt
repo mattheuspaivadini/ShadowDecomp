@@ -793,3 +793,4 @@
 0D8C28 = src/0D8C28.c -G0
 0D9638 = src/0D9638.c -G0 -fno-schedule-insns
 0D9650 = src/0D9650.c -G0 -fno-schedule-insns
+0DA398 = src/0DA398.c -G0
