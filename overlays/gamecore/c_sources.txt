@@ -852,3 +852,4 @@
 0F90C0 = src/0F90C0.c -G0
 0FBB68 = src/0FBB68.c -G0
 0FBBC8 = src/0FBBC8.c -G0
+0FDC20 = src/0FDC20.c -G0
