@@ -764,3 +764,4 @@
 0C8280 = src/0C8280.c -G0
 0CAAA8 = src/0CAAA8.c -G0
 0CAAC8 = src/0CAAC8.c -G0
+0CAAE8 = src/0CAAE8.c -G0
