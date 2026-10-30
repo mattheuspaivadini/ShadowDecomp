@@ -516,3 +516,4 @@
 00C368 = src/00C368.c -G0
 00C388 = src/00C388.c -G0
 00C3A8 = src/00C3A8.c -G0
+00C3B8 = src/00C3B8.c -G0
