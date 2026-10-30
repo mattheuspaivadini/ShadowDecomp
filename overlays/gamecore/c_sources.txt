@@ -835,3 +835,4 @@
 0EB298 = src/0EB298.c -G0
 0EB2B0 = src/0EB2B0.c -G0
 0EB470 = src/0EB470.c -G0
+0EB6E0 = src/0EB6E0.c -G0
