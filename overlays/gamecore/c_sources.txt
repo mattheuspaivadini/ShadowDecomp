@@ -815,3 +815,4 @@
 0E11B8 = src/0E11B8.c -G0
 0E11C8 = src/0E11C8.c -G0
 0E1290 = src/0E1290.c -G0
+0E3008 = src/0E3008.c -G0
