@@ -780,3 +780,4 @@
 0D29B8 = src/0D29B8.c -G0
 0D29D8 = src/0D29D8.c -G0
 0D29F8 = src/0D29F8.c -G0
+0D33A0 = src/0D33A0.c -G0
