@@ -752,3 +752,4 @@
 0ADE60 = src/0ADE60.c -G0
 0ADE78 = src/0ADE78.c -G0
 0B4608 = src/0B4608.c -G0
+0B4630 = src/0B4630.c -G0
