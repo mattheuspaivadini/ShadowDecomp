@@ -576,3 +576,4 @@
 01E930 = src/01E930.c -G0
 01E9D8 = src/01E9D8.c -G0
 01E9F0 = src/01E9F0.c -G0
+0238D8 = src/0238D8.c -G0
