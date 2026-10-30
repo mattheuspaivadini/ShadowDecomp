@@ -518,3 +518,4 @@
 00C3A8 = src/00C3A8.c -G0
 00C3B8 = src/00C3B8.c -G0
 00C478 = src/00C478.c -G0
+00C498 = src/00C498.c -G0
