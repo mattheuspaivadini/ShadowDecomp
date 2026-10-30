@@ -943,3 +943,4 @@
 015460 = src/015460.c -G0
 015990 = src/015990.c -G0
 015B30 = src/015B30.c -G0 -fno-strict-aliasing
+015B70 = src/015B70.c -G0
