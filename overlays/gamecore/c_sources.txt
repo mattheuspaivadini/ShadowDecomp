@@ -800,3 +800,4 @@
 0E02F8 = src/0E02F8.c -G0
 0E0308 = src/0E0308.c -G0
 0E04F0 = src/0E04F0.c -G0
+0E07C0 = src/0E07C0.c -G0
