@@ -906,3 +906,4 @@
 0078C0 = src/0078C0.c -G0
 007D00 = src/007D00.c -G0 -fno-strict-aliasing
 0092F8 = src/0092F8.c -G0 -fno-strict-aliasing
+009950 = src/009950.c -G0 -fno-strict-aliasing
