@@ -772,3 +772,4 @@
 0CAE10 = src/0CAE10.c -G0
 0CB1D0 = src/0CB1D0.c -G0
 0CB260 = src/0CB260.c -G0
+0CCC38 = src/0CCC38.c -G0
