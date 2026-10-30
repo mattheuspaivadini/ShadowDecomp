@@ -1333,3 +1333,4 @@
 013CD8 = src/013CD8.c -G0
 0181C8 = src/0181C8.c -G0
 02C528 = src/02C528.c -G0 -fno-optimize-sibling-calls
+0F9078 = src/0F9078.c -G0
