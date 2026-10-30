@@ -750,3 +750,4 @@
 0ADE00 = src/0ADE00.c -G0
 0ADE50 = src/0ADE50.c -G0
 0ADE60 = src/0ADE60.c -G0
+0ADE78 = src/0ADE78.c -G0
