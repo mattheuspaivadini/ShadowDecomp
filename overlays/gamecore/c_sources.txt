@@ -839,3 +839,4 @@
 0F22C0 = src/0F22C0.c -G0 -fno-schedule-insns
 0F2410 = src/0F2410.c -G0
 0F2530 = src/0F2530.c -G0
+0F25C0 = src/0F25C0.c -G0
