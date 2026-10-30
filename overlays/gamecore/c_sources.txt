@@ -927,3 +927,4 @@
 010930 = src/010930.c -G0
 012120 = src/012120.c -G0 -fno-strict-aliasing
 012158 = src/012158.c -G0 -fno-strict-aliasing
+012330 = src/012330.c -G0
