@@ -778,3 +778,4 @@
 0D1258 = src/0D1258.c -G0
 0D1268 = src/0D1268.c -G0
 0D29B8 = src/0D29B8.c -G0
+0D29D8 = src/0D29D8.c -G0
