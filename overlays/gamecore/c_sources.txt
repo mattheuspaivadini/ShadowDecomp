@@ -665,3 +665,4 @@
 06BDC0 = src/06BDC0.c -G0
 06BDE0 = src/06BDE0.c -G0
 06BE00 = src/06BE00.c -G0
+06D790 = src/06D790.c -G0
