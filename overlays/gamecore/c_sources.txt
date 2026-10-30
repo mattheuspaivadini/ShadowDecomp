@@ -565,3 +565,4 @@
 01D7E0 = src/01D7E0.c -G0
 01D7F8 = src/01D7F8.c -G0
 01D840 = src/01D840.c -G0
+01D858 = src/01D858.c -G0
