@@ -746,3 +746,4 @@
 0ADDA0 = src/0ADDA0.c -G0
 0ADDC0 = src/0ADDC0.c -G0
 0ADDD8 = src/0ADDD8.c -G0
+0ADDE8 = src/0ADDE8.c -G0
