@@ -1040,3 +1040,4 @@
 05CF60 = src/05CF60.c -G0 -fno-strict-aliasing
 05CFB8 = src/05CFB8.c -G0
 05D100 = src/05D100.c -G0 -fno-strict-aliasing
+05D138 = src/05D138.c -G0 -fno-strict-aliasing
