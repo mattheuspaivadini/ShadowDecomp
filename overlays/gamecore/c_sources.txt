@@ -593,3 +593,4 @@
 030BD0 = src/030BD0.c -G0
 030BE8 = src/030BE8.c -G0
 030C68 = src/030C68.c -G0
+0313C0 = src/0313C0.c -G0
