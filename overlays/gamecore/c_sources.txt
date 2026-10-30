@@ -881,3 +881,4 @@
 11DC60 = src/11DC60.c -G0
 11DCF0 = src/11DCF0.c -G0
 11EDD8 = src/11EDD8.c -G0
+11F7D0 = src/11F7D0.c -G0
