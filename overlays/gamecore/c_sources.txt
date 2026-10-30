@@ -775,3 +775,4 @@
 0CCC38 = src/0CCC38.c -G0
 0CD738 = src/0CD738.c -G0
 0D1100 = src/0D1100.c -G0
+0D1258 = src/0D1258.c -G0
