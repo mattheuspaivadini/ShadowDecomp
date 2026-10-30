@@ -904,3 +904,4 @@
 12B050 = src/12B050.c -G0
 007338 = src/007338.c -G0 -fno-strict-aliasing
 0078C0 = src/0078C0.c -G0
+007D00 = src/007D00.c -G0 -fno-strict-aliasing
