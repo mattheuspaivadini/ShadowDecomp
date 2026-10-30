@@ -980,3 +980,4 @@
 02DB10 = src/02DB10.c -G0 -fno-strict-aliasing
 02DFD8 = src/02DFD8.c -G0
 030350 = src/030350.c -G0 -fno-strict-aliasing
+030B90 = src/030B90.c -G0 -fno-strict-aliasing
