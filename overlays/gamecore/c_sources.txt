@@ -504,3 +504,4 @@
 00BE78 = src/00BE78.c -G0
 00BEB8 = src/00BEB8.c -G0
 00BED8 = src/00BED8.c -G0
+00BEE8 = src/00BEE8.c -G0
