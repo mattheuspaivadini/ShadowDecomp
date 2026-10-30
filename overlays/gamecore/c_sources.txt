@@ -912,3 +912,4 @@
 00A178 = src/00A178.c -G0
 00A348 = src/00A348.c -G0 -fno-strict-aliasing
 00A458 = src/00A458.c -G0 -fno-strict-aliasing
+00A720 = src/00A720.c -G0 -fno-strict-aliasing
