@@ -497,3 +497,4 @@
 00A240 = src/00A240.c -G0
 00A380 = src/00A380.c -G0 -fno-strict-aliasing
 00A548 = src/00A548.c -G0
+00A758 = src/00A758.c -G0
