@@ -1084,3 +1084,4 @@
 07B810 = src/07B810.c -G0
 07B880 = src/07B880.c -G0 -fno-strict-aliasing
 07B8C0 = src/07B8C0.c -G0 -fno-strict-aliasing
+07BC20 = src/07BC20.c -G0
