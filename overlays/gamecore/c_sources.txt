@@ -1013,3 +1013,4 @@
 042CA0 = src/042CA0.c -G0 -fno-strict-aliasing
 043900 = src/043900.c -G0
 044A00 = src/044A00.c -G0
+04AF78 = src/04AF78.c -G0
