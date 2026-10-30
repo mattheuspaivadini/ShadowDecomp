@@ -1226,3 +1226,4 @@
 0EADC8 = src/0EADC8.c -G0 -O1 -fschedule-insns2
 0EB438 = src/0EB438.c -G0
 0EB680 = src/0EB680.c -G0
+0EB6B0 = src/0EB6B0.c -G0
