@@ -1323,3 +1323,4 @@
 1284A8 = src/1284A8.c -G0 -O1 -fschedule-insns2
 12A950 = src/12A950.c -G0
 12A988 = src/12A988.c -G0
+12A9D8 = src/12A9D8.c -G0
